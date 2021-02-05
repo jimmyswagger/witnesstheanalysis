@@ -1,0 +1,45 @@
+name: "witnesstheanalysis"
+output_dir: "docs"
+navbar:
+  title:  "Witness the Analysis"
+  left:
+  - text:  "Home"
+    href: index.html
+    icon: fa-home
+ 
+
+  - text: "Matches"
+    href: matches.html
+    icon: fa-volleyball-ball
+   
+                  
+  - text: "Analysis App"
+    href: https://witnesstheanalysis.wordpress.com/2020/07/10/a-match-tracker-application-for-windows-version-3/
+    
+  - text: "Results"
+    href: https://witnesstheanalysis.shinyapps.io/Results/
+    icon: fas fa-book
+    
+  - text: "Codes and Apps"
+    menu:
+        - text: "Shiny Apps"
+          href: Trackers.html
+        - text: "Pitch Templates"
+          href: rPitch.html
+        
+  right:
+  - icon: fa-envelope fa-lg
+    href: contact.html
+  - icon: fa-github fa-lg
+    href: https://github.com/witnesstheanalysis/witnesstheanalysis
+  - icon: fa-twitter fa-lg
+    href: https://twitter.com/WtAnalysis
+  - icon: fa-wordpress fa-lg
+    href: https://witnesstheanalysis.wordpress.com
+ 
+output:
+  html_document:
+    theme: cosmo
+    highlight: pygments
+    include:
+    css: style.css

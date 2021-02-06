@@ -5,12 +5,12 @@ output: html_document
 
 ![](/Users/donagh/Documents/witnesstheanalysis/trackerpic.png)
 
-[Ko and Shot Tracker] (https://witnesstheanalysis.shinyapps.io/ishot/)
+<font size="6">[Ko and Shot Tracker](https://witnesstheanalysis.shinyapps.io/ishot/)<font>
 
-[Ko and Shot Tracker with Counters] https://witnesstheanalysis.shinyapps.io/gaa_track/
+<font size="6">[Ko and Shot Tracker with Counters](https://witnesstheanalysis.shinyapps.io/gaa_track/)<font>
 
-[Shot Tracker] (https://witnesstheanalysis.shinyapps.io/shottrack/)
+<font size="6">[Shot Tracker](https://witnesstheanalysis.shinyapps.io/shottrack/)<font>
 
-[Rugby Union Tracker] (https://witnesstheanalysis.shinyapps.io/runion/)
+<font size="6">[Rugby Union Tracker](https://witnesstheanalysis.shinyapps.io/runion/)<font>
 
-[Soccer Tracker] (https://witnesstheanalysis.shinyapps.io/soccer_track/)
+<font size="6">[Soccer Tracker](https://witnesstheanalysis.shinyapps.io/soccer_track/)<font>

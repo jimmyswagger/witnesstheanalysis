@@ -1,0 +1,45 @@
+---
+title: "rPitches"
+output: html_document
+---
+
+```{r setup, include=FALSE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE, options(knitr.kable.NA = ''))
+#Load packages
+library(flexdashboard)
+library(dplyr)
+library(deldir)
+library(ggplot2)
+library(ggrepel)
+library(ggpubr)
+library(knitr)
+library(rmarkdown)
+library(kableExtra)
+library(data.table)
+library(RColorBrewer)
+library(gridExtra)
+library(igraph)
+library(tidyverse)
+library(treemap)
+library(plotly)
+library(networkD3)
+library (curl)
+library(formattable)
+library(grid)
+library(yaml)
+```
+
+[GAA](https://github.com/witnesstheanalysis/witnesstheanalysis/blob/master/rGAA%20Pitch)
+
+[Netball](https://github.com/witnesstheanalysis/witnesstheanalysis/blob/master/rNetball%20Court)
+
+[League](https://github.com/witnesstheanalysis/witnesstheanalysis/blob/master/rLeague%20Pitch)
+
+[Union](https://github.com/witnesstheanalysis/witnesstheanalysis/blob/master/rUnion%20Pitch)
+
+[Soccer](https://github.com/witnesstheanalysis/witnesstheanalysis/blob/master/rSoccer)
+
+[AFL](https://github.com/witnesstheanalysis/witnesstheanalysis/blob/master/Australian_Rules_AFL)
+
+[Cricket](https://github.com/witnesstheanalysis/witnesstheanalysis/blob/master/Cricket_Pitch)
+

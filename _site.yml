@@ -11,35 +11,36 @@ navbar:
   - text: "Matches"
     href: matches.html
     icon: fa-volleyball-ball
-   
-                  
-  - text: "Analysis App"
-    href: https://witnesstheanalysis.wordpress.com/2020/07/10/a-match-tracker-application-for-windows-version-3/
     
   - text: "Results"
     href: https://witnesstheanalysis.shinyapps.io/Results/
     icon: fas fa-book
+   
+  - text: "Analysis App"
+    href: https://witnesstheanalysis.wordpress.com/2020/07/10/a-match-tracker-application-for-windows-version-3/
+    icon: fas fa-pen
     
-  - text: "Codes and Apps"
-    menu:
-        - text: "Shiny Apps"
-          href: Trackers.html
-        - text: "Pitch Templates"
-          href: rPitch.html
-        
-  right:
-  - icon: fa-envelope fa-lg
-    href: contact.html
-  - icon: fa-github fa-lg
+  - text: "Shiny Apps"
+    href: Trackers.html
+    icon: fas fa-desktop
+    
+    right:      
+  - text: "Codes"
     href: https://github.com/witnesstheanalysis/witnesstheanalysis
-  - icon: fa-twitter fa-lg
+    icon: fa-github fa-lg
+  - text: "Contact"
+    icon: fa-envelope fa-lg
+    href: contact.html
+  - text: "Twitter"
+    icon: fa-twitter fa-lg
     href: https://twitter.com/WtAnalysis
-  - icon: fa-wordpress fa-lg
+  - text: "Blog"
+    icon: fa-wordpress fa-lg
     href: https://witnesstheanalysis.wordpress.com
  
 output:
   html_document:
     theme: cosmo
-    highlight: pygments
+    highlight: tango
     include:
     css: style.css

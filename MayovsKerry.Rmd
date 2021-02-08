@@ -1,0 +1,2342 @@
+---
+title: "Mayo (3.11) vs Kerry (2.10)"
+output:
+  html_document:
+    toc: true
+    toc_float: true 
+    theme: cosmo
+---
+
+National League Final
+
+Croke Park
+
+31/03/2019
+
+```{r setup, include=FALSE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE, options(knitr.kable.NA = ''))
+#Load packages
+library(flexdashboard)
+library(dplyr)
+library(deldir)
+library(ggplot2)
+library(ggrepel)
+library(ggpubr)
+library(knitr)
+library(rmarkdown)
+library(kableExtra)
+library(data.table)
+library(RColorBrewer)
+library(gridExtra)
+library(igraph)
+library(tidyverse)
+library(treemap)
+library(plotly)
+library(networkD3)
+library (curl)
+library(formattable)
+library(grid)
+library(yaml)
+```
+
+```{r}
+
+pass <- read.csv(file="c:/Users/donagh/OneDrive/Spreadsheet fun/PA Analytics/PA Template/mayker/gamelogmayker.csv", header=TRUE, sep=";")
+attach (pass)
+
+glmayker <- read.csv(file="c:/Users/donagh/OneDrive/Spreadsheet fun/PA Analytics/PA Template/mayker/glfour.csv", header=TRUE, sep=";")
+attach (glmayker)
+
+position  <- read.csv(file="c:/Users/donagh/OneDrive/Spreadsheet fun/PA Analytics/PA Template/mayker/positionmayker.csv", header=TRUE, sep=";")
+attach (position)
+
+scorelist  <- read.csv(file="c:/Users/donagh/OneDrive/Spreadsheet fun/PA Analytics/PA Template/mayker/scorelistmayker.csv", header=TRUE, sep=";")
+attach (scorelist)
+
+summary  <- read.csv(file="c:/Users/donagh/OneDrive/Spreadsheet fun/PA Analytics/PA Template/mayker/summarymayker.csv", header=TRUE, sep=";")
+attach (summary)
+
+scores  <- read.csv(file="c:/Users/donagh/OneDrive/Spreadsheet fun/PA Analytics/PA Template/mayker/scoresmayker.csv", header=TRUE, sep=";")
+attach (scores)
+
+scrd  <- read.csv(file="c:/Users/donagh/OneDrive/Spreadsheet fun/PA Analytics/PA Template/mayker/scrdmayker.csv", header=TRUE, sep=";")
+attach (scrd)
+
+passtofrom  <- read.csv(file="c:/Users/donagh/OneDrive/Spreadsheet fun/PA Analytics/PA Template/mayker/passtofrommayker.csv", header=TRUE, sep=";")
+attach (passtofrom)
+
+passmap  <- read.csv(file="c:/Users/donagh/OneDrive/Spreadsheet fun/PA Analytics/PA Template/mayker/passmapmayker.csv", header=TRUE, sep=";")
+attach (passmap)
+
+plytree  <- read.csv(file="c:/Users/donagh/OneDrive/Spreadsheet fun/PA Analytics/PA Template/mayker/plytreemayker.csv", header=TRUE, sep=";")
+attach (plytree)
+
+plystats <- read.csv(file="c:/Users/donagh/OneDrive/Spreadsheet fun/PA Analytics/PA Template/mayker/plystatsmayker.csv", header=TRUE, sep=";")
+attach (plystats)
+
+
+
+```
+
+```{r}
+create_Stats_Pitch <- function(grass_colour, line_colour, background_colour, goala_colour,goalb_colour, BasicFeatures){
+  
+  theme_blankPitch = function(size=12) { 
+    theme(
+      #axis.line=element_blank(), 
+      axis.text.x=element_blank(), 
+      axis.text.y=element_blank(), 
+      #axis.ticks.y=element_text(size=size),
+      #   axis.ticks=element_blank(),
+      axis.ticks.length=unit(0, "lines"), 
+      #axis.ticks.margin=unit(0, "lines"), 
+      axis.title.x=element_blank(), 
+      axis.title.y=element_blank(), 
+      legend.background=element_rect(fill=background_colour, colour=NA), 
+      legend.key=element_rect(colour=background_colour,fill=background_colour), 
+      legend.key.size=unit(1.2, "lines"), 
+      legend.text=element_text(size=size), 
+      legend.title=element_text(size=size, face="bold",hjust=0),
+      strip.background = element_rect(colour = background_colour, fill = background_colour, size = .5),
+      panel.background=element_rect(fill=background_colour,colour=background_colour), 
+      #       panel.border=element_blank(), 
+      panel.grid.major=element_blank(), 
+      panel.grid.minor=element_blank(), 
+      panel.spacing=element_blank(), 
+      plot.background=element_blank(), 
+      plot.margin=unit(c(0, 0, 0, 0), "lines"), 
+      plot.title=element_text(size=size*1.2), 
+      strip.text.y=element_text(colour=background_colour,size=size,angle=270),   
+      strip.text.x=element_text(size=size*1))}
+  
+  ymin <- 0.5 # minimum width
+  ymax <- 5.5 # maximum width
+  xmin <- 0.5 # minimum length
+  xmax <- 7.5 # maximum length
+  
+  # Defining features along the length
+  defel <- 0.5
+  def14 <- 1.25
+  def21 <- 1.5
+  def45 <- 2.5
+  def65 <- 3.5
+  off65 <- 4.5
+  off45 <- 5.5
+  off21 <- 6.5
+  off14 <- 6.75
+  offel <- 7.5
+  
+  # Defining features along the width
+  srwing <- 1.5
+  frightwing <- 5
+  rhalfsp <- 2.5
+  ctre <- 3.5
+  lhspce <- 4.5
+  leftwing <- 5.5
+
+  #13 Square & small square
+  right14d <- 2.6
+  left14d <- 3.4
+  
+  boxEdgeOff <- 6.75  
+  boxEdgeLeft <- 2.6 
+  boxEdgeRight <- 3.4 
+  
+  sixYardDef <- 0.75
+  sixYardOff <- 7.25
+  sixYardLeft <- 2.70 
+  sixYardRight <- 3.3
+
+  sixlinest <- 2.7
+  sixlineend <- 3.3
+  sixdefx <- 0.75 
+  sixoffx <- 7.25 
+
+  #halfway
+  hwlinest <- 2.9
+  hwlineend <- 3.1
+  hwx <- 4
+
+
+ #Goals
+
+  goallinest <- 2.8
+  goallineend <- 3.25
+  goaldefx <- 0.5 
+  goaloffx <- 7.50 
+
+  
+
+circleFundef <- function(center=c(0,0), diameter=1, npoints=100, start=0, end=2)
+  {
+    tt <- seq(start*pi, end*pi, length.out=npoints)
+    data.frame(x = center[1] + diameter / 2 * cos(tt), 
+               y = center[2] + diameter / 2 * sin(tt))
+  }
+  
+  circleFunatt <- function(center=c(0,0), diameter=1, npoints=100, start=0, end=2)
+  {
+    tt <- seq(start*pi, end*pi, length.out=npoints)
+    data.frame(x = center[1] - diameter / 2 * cos(tt), 
+               y = center[2] - diameter / 2 * sin(tt))
+  }
+  #### create semi circle ####
+  def_circle <-  circleFundef(c(1.5,3), 1, start=1.5, end=2.5)
+  att_circle <-  circleFunatt(c(6.5,3), 1, start=1.5, end=2.5)
+  
+  
+  if(BasicFeatures == TRUE){
+    ## initiate the plot, set some boundries to the plot
+    p <- ggplot() + xlim(c(xmin,xmax)) + ylim(c(ymin,ymax)) +
+      # add the theme 
+      theme_blankPitch() +
+      # add halway line
+      geom_rect(aes(xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax), fill = grass_colour, colour = line_colour,size = 0.5) + 
+      geom_segment(aes(x = def14, y = ymin, xend = def14, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) +   
+      geom_segment(aes(x = def21, y = ymin, xend = def21, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) + 
+      geom_segment(aes(x = def45, y = ymin, xend = def45, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = def65, y = ymin, xend = def65, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = off65, y = ymin, xend = off65, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = off45, y = ymin, xend = off45, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = off21, y = ymin, xend = off21, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = off14, y = ymin, xend = off14, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) + 
+      geom_segment(aes(x = xmin, y = right14d, xend = def14, yend = right14d),colour = line_colour,linetype="solid",size = 0.5) + 
+      geom_segment(aes(x = xmin, y = left14d, xend = def14, yend = left14d),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = xmax, y = right14d, xend = off14, yend = right14d),colour = line_colour,linetype="solid",size = 0.5) + 
+      geom_segment(aes(x = xmax, y = left14d, xend = off14, yend = left14d),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x=xmin,y=sixYardLeft, xend= sixYardDef, yend=sixYardLeft),colour = line_colour,linetype="solid",size = 0.5) +  
+      geom_segment(aes(x=xmin,y=sixYardRight, xend= sixYardDef, yend=sixYardRight),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x=xmax, y=sixYardLeft, xend=sixYardOff, , yend=sixYardLeft),colour = line_colour,linetype="solid",size = 0.5) + 
+      geom_segment(aes(x=xmax, y=sixYardRight, xend=sixYardOff, , yend=sixYardRight),colour = line_colour,linetype="solid",size = 0.5) + 
+      geom_segment(aes(x=sixdefx, y=sixlinest, xend=sixdefx, , yend=sixlineend),colour = line_colour,linetype="solid",size = 0.5) + 
+      geom_segment(aes(x=sixoffx, y=sixlinest, xend=sixoffx, , yend=sixlineend),colour = line_colour,linetype="solid",size = 0.5) + 
+      geom_segment(aes(x = hwx, y = hwlinest, xend = hwx, yend = hwlineend),colour = line_colour) +
+      geom_segment(aes(x =goaldefx, y = goallinest, xend = goaldefx, yend = goallineend),colour = goala_colour, size = 1) +
+      geom_segment(aes(x =goaloffx, y = goallinest, xend = goaloffx, yend = goallineend),colour = goalb_colour, size = 1) +
+      geom_path(data=def_circle, aes(x,y), colour = line_colour,size = 0.5) +
+      geom_path(data=att_circle, aes(x,y), colour = line_colour,size = 0.5) + 
+      annotate(geom="text", x= 1.45, y=.57, label="20",color = "white") +
+      annotate(geom="text", x= 2.55, y=.57, label="45",color = "blue") +
+      annotate(geom="text", x= 3.55, y=.57, label="65",color = "white") +
+      annotate(geom="text", x= 4.55, y=.57, label="65",color = "white") +
+      annotate(geom="text", x=5.55, y=.57, label="45", color="red") +
+      annotate(geom="text", x=6.55, y=.57, label="20",color = "white") +
+      annotate(geom="text", x= 2, y=.65, label="witnesstheanalysis.com",color = "white",size = 4, alpha = 0.6) +
+      annotate(geom="text", x= 6, y=5.45, label="witnesstheanalysis.com",color = "white",size = 4, alpha = 0.6) +
+      annotate("segment", x = 3.5, xend = 4.5, y = 0.75, yend = 0.75, colour = "pink", size=3, alpha=0.6, arrow=arrow())
+    
+  }
+  
+  else{
+    ## initiate the plot, set some boundries to the plot
+       p <- ggplot() + xlim(c(xmin,xmax)) + ylim(c(ymin,ymax)) +
+      # add the theme 
+      theme_blankPitch() +
+      # add halway line
+      geom_rect(aes(xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax), fill = grass_colour, colour = line_colour) + 
+      geom_segment(aes(x = def14, y = ymin, xend = def14, yend = ymax),colour = "white",linetype="solid") +   
+      geom_segment(aes(x = def21, y = ymin, xend = def21, yend = ymax),colour = "white",linetype="solid") + 
+      geom_segment(aes(x = def45, y = ymin, xend = def45, yend = ymax),colour = "blue",linetype="solid") +
+      geom_segment(aes(x = def65, y = ymin, xend = def65, yend = ymax),colour = "white",linetype="solid") +
+      geom_segment(aes(x = off65, y = ymin, xend = off65, yend = ymax),colour = "white",linetype="solid") +
+      geom_segment(aes(x = off45, y = ymin, xend = off45, yend = ymax),colour = "red",linetype="solid") +
+      geom_segment(aes(x = off21, y = ymin, xend = off21, yend = ymax),colour = "white",linetype="solid") +
+      geom_segment(aes(x = off14, y = ymin, xend = off14, yend = ymax),colour = "white",linetype="solid") + 
+      geom_segment(aes(x = xmin, y = right14d, xend = def14, yend = right14d),colour = "white",linetype="solid") + 
+      geom_segment(aes(x = xmin, y = left14d, xend = def14, yend = left14d),colour = "white",linetype="solid") +
+      geom_segment(aes(x = xmin, y = srwing, xend = xmax, yend = srwing),colour = line_colour,linetype="dotted") + 
+      geom_segment(aes(x = xmin, y = srwing, xend = xmax, yend = srwing),colour = line_colour,linetype="dotted") +
+      geom_segment(aes(x = xmin, y = rhalfsp, xend = xmax, yend = rhalfsp),colour = line_colour,linetype="dotted") +
+      geom_segment(aes(x = xmin, y = ctre , xend = xmax, yend = ctre),colour = line_colour,linetype="dotted") +
+      geom_segment(aes(x = xmin, y = lhspce, xend = xmax, yend = lhspce),colour = line_colour,linetype="dotted") + 
+      geom_rect(aes(xmin=boxEdgeOff, xmax=xmax, ymin=boxEdgeLeft, ymax=boxEdgeRight), colour = "white", fill = grass_colour) + 
+      geom_rect(aes(xmin=xmin, xmax=sixYardDef, ymin=sixYardLeft, ymax=sixYardRight), fill = grass_colour, colour = "white") +  
+      geom_rect(aes(xmin=sixYardOff, xmax=xmax, ymin=sixYardLeft, ymax=sixYardRight), fill = grass_colour, colour = "white") + 
+      geom_segment(aes(x = 4, y = 2.90, xend = 4, yend = 3.10),colour = "white") +
+      geom_segment(aes(x =0.5, y = 2.75, xend = 0.5, yend = 3.25),colour = "blue", size = 2) +
+      geom_segment(aes(x =7.5, y = 2.75, xend = 7.5, yend = 3.25),colour = "red", size = 2) +
+      geom_path(data=def_circle, aes(x,y), colour = "white",size = 0.5) +
+      geom_path(data=att_circle, aes(x,y), colour = "white",size = 0.5) + 
+      annotate(geom="text", x= 1.50, y=.57, label="20",color = "white") +
+      annotate(geom="text", x= 2.50, y=.57, label="45",color = "blue") +
+      annotate(geom="text", x= 3.50, y=.57, label="65",color = "white") +
+      annotate(geom="text", x= 4.50, y=.57, label="65",color = "white") +
+      annotate(geom="text", x=5.50, y=.57, label="45", color="red") +
+      annotate(geom="text", x=6.50, y=.57, label="20",color = "white") +
+      annotate("segment", x = 3.5, xend = 4.5, y = 0.75, yend = 0.75, colour = "pink", size=3, alpha=0.6, arrow=arrow())
+    
+  
+  }
+  
+  return(p)}
+
+
+p <- create_Stats_Pitch("#A2CD5A", "white", "white", "blue","red", BasicFeatures=TRUE)
+
+```
+
+```{r}
+create_Stats_Pitch <- function(grass_colour, line_colour, background_colour, goal_colour, BasicFeatures){
+  
+  theme_blankPitch = function(size=12) { 
+    theme(
+      #axis.line=element_blank(), 
+      axis.text.x=element_blank(), 
+      axis.text.y=element_blank(), 
+      #axis.ticks.y=element_text(size=size),
+      #   axis.ticks=element_blank(),
+      axis.ticks.length=unit(0, "lines"), 
+      #axis.ticks.margin=unit(0, "lines"), 
+      axis.title.x=element_blank(), 
+      axis.title.y=element_blank(), 
+      legend.background=element_rect(fill=background_colour, colour=NA), 
+      legend.key=element_rect(colour=background_colour,fill=background_colour), 
+      legend.key.size=unit(1.2, "lines"), 
+      legend.text=element_text(size=size), 
+      legend.title=element_text(size=size, face="bold",hjust=0),
+      strip.background = element_rect(colour = background_colour, fill = background_colour, size = .5),
+      panel.background=element_rect(fill=background_colour,colour=background_colour), 
+      #       panel.border=element_blank(), 
+      panel.grid.major=element_blank(), 
+      panel.grid.minor=element_blank(), 
+      panel.spacing=element_blank(), 
+      plot.background=element_blank(), 
+      plot.margin=unit(c(0, 0, 0, 0), "lines"), 
+      plot.title=element_text(size=size*1.2), 
+      strip.text.y=element_text(colour=background_colour,size=size,angle=270),   
+      strip.text.x=element_text(size=size*1))}
+  
+  ymin <- 0.5 # minimum width
+  ymax <- 5.5 # maximum width
+  xmin <- 0.5 # minimum length
+  xmax <- 7.5 # maximum length
+  
+  # Defining features along the length
+  defel <- 0.5
+  def14 <- 1.25
+  def21 <- 1.5
+  def45 <- 2.5
+  def65 <- 3.5
+  off65 <- 4.5
+  off45 <- 5.5
+  off21 <- 6.5
+  off14 <- 6.75
+  offel <- 7.5
+  
+  
+  
+  # Defining features along the width
+  srwing <- 1.5
+  frightwing <- 5
+  rhalfsp <- 2.5
+  ctre <- 3.5
+  lhspce <- 4.5
+  leftwing <- 5.5
+  right14d <- 2.6
+  left14d <- 3.4
+  
+  
+  # Defining features along the width
+  
+  boxEdgeOff <- 6.75  
+  boxEdgeLeft <- 2.6 
+  boxEdgeRight <- 3.4 
+  
+  # small sqaure
+  
+  sixYardDef <- 0.75
+  sixYardOff <- 7.25
+  sixYardLeft <- 2.70 
+  sixYardRight <- 3.3
+  
+  
+  
+  if(BasicFeatures == TRUE){
+    ## initiate the plot, set some boundries to the plot
+    wp <- ggplot() + xlim(c(xmin,xmax)) + ylim(c(ymin,ymax)) +
+      # add the theme 
+      theme_blankPitch() +
+      # add halway line
+      geom_rect(aes(xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax), fill = grass_colour, colour = line_colour) + 
+      geom_segment(aes(x = def14, y = ymin, xend = def14, yend = ymax),colour = "black",linetype="solid") +   
+      geom_segment(aes(x = def21, y = ymin, xend = def21, yend = ymax),colour = "black",linetype="solid") + 
+      geom_segment(aes(x = def45, y = ymin, xend = def45, yend = ymax),colour = "black",linetype="solid") +
+      geom_segment(aes(x = def65, y = ymin, xend = def65, yend = ymax),colour = "black",linetype="solid") +
+      geom_segment(aes(x = off65, y = ymin, xend = off65, yend = ymax),colour = "black",linetype="solid") +
+      geom_segment(aes(x = off45, y = ymin, xend = off45, yend = ymax),colour = "black",linetype="solid") +
+      geom_segment(aes(x = off21, y = ymin, xend = off21, yend = ymax),colour = "black",linetype="solid") +
+      geom_segment(aes(x = off14, y = ymin, xend = off14, yend = ymax),colour = "black",linetype="solid") + 
+      geom_segment(aes(x = xmin, y = right14d, xend = def14, yend = right14d),colour = "black",linetype="solid") + 
+      geom_segment(aes(x = xmin, y = left14d, xend = def14, yend = left14d),colour = "black",linetype="solid") +
+      geom_segment(aes(x = xmin, y = srwing, xend = xmax, yend = srwing),colour = line_colour,linetype="dotted") + 
+      geom_segment(aes(x = xmin, y = srwing, xend = xmax, yend = srwing),colour = line_colour,linetype="dotted") +
+      geom_segment(aes(x = xmin, y = rhalfsp, xend = xmax, yend = rhalfsp),colour = line_colour,linetype="dotted") +
+      geom_segment(aes(x = xmin, y = ctre , xend = xmax, yend = ctre),colour = line_colour,linetype="dotted") +
+      geom_segment(aes(x = xmin, y = lhspce, xend = xmax, yend = lhspce),colour = line_colour,linetype="dotted") + 
+      geom_rect(aes(xmin=boxEdgeOff, xmax=xmax, ymin=boxEdgeLeft, ymax=boxEdgeRight), colour = "black", fill = grass_colour) + 
+      geom_rect(aes(xmin=xmin, xmax=sixYardDef, ymin=sixYardLeft, ymax=sixYardRight), fill = grass_colour, colour = "white") +  
+      geom_rect(aes(xmin=sixYardOff, xmax=xmax, ymin=sixYardLeft, ymax=sixYardRight), fill = grass_colour, colour = "white") + 
+      geom_segment(aes(x = 4, y = 2.90, xend = 4, yend = 3.10),colour = "black") +
+      geom_segment(aes(x =0.5, y = 2.75, xend = 0.5, yend = 3.25),colour = "blue", size = 2) +
+      geom_segment(aes(x =7.5, y = 2.75, xend = 7.5, yend = 3.25),colour = "black", size = 2) +
+      annotate(geom="text", x= 1.50, y=.57, label="21",color = "white") +
+      annotate(geom="text", x= 2.50, y=.57, label="45",color = "white") +
+      annotate(geom="text", x= 3.50, y=.57, label="65",color = "white") +
+      annotate(geom="text", x= 4.50, y=.57, label="65",color = "white") +
+      annotate(geom="text", x=5.50, y=.57, label="45", color="white") +
+      annotate(geom="text", x=6.50, y=.57, label="21",color = "white") 
+    
+  }
+  
+  else{
+    ## initiate the plot, set some boundries to the plot
+    wp <- ggplot() + xlim(c(xmin,xmax)) + ylim(c(ymin-0.5,ymax+0.5)) +
+      # add the theme 
+      theme_blankPitch() +
+      # add the base rectangle of the pitch 
+      geom_rect(aes(xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax), fill = grass_colour, colour = line_colour) +
+      geom_rect(aes(xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax), fill = grass_colour, colour = line_colour) +
+      geom_segment(aes(x = off65, y = ymin, xend = off65, yend = ymax),colour = line_colour) +
+      geom_segment(aes(x = off45, y = ymin, xend = off45, yend = ymax),colour = "Red",linetype="dotted")
+    
+  }
+  
+  return(wp)}
+
+
+wp <- create_Stats_Pitch("#ffffff", "#A9A9A9", "#ffffff", "#000000", BasicFeatures=TRUE)
+
+
+```
+
+```{r}
+create_Stats_Pitch <- function(grass_colour, line_colour, background_colour, goal_colour, BasicFeatures){
+  
+  theme_blankPitch = function(size=12) { 
+    theme(
+      #axis.line=element_blank(), 
+      axis.text.x=element_blank(), 
+      axis.text.y=element_blank(), 
+      #axis.ticks.y=element_text(size=size),
+      #   axis.ticks=element_blank(),
+      axis.ticks.length=unit(0, "lines"), 
+      #axis.ticks.margin=unit(0, "lines"), 
+      axis.title.x=element_blank(), 
+      axis.title.y=element_blank(), 
+      legend.background=element_rect(fill=background_colour, colour=NA), 
+      legend.key=element_rect(colour=background_colour,fill=background_colour), 
+      legend.key.size=unit(1.2, "lines"), 
+      legend.text=element_text(size=size), 
+      legend.title=element_text(size=size, face="bold",hjust=0),
+      strip.background = element_rect(colour = background_colour, fill = background_colour, size = .5),
+      panel.background=element_rect(fill=background_colour,colour=background_colour), 
+      #       panel.border=element_blank(), 
+      panel.grid.major=element_blank(), 
+      panel.grid.minor=element_blank(), 
+      panel.spacing=element_blank(), 
+      plot.background=element_blank(), 
+      plot.margin=unit(c(0, 0, 0, 0), "lines"), 
+      plot.title=element_text(size=size*1.2), 
+      strip.text.y=element_text(colour=background_colour,size=size,angle=270),   
+      strip.text.x=element_text(size=size*1))}
+  
+  ymin <- 0.5 # minimum width
+  ymax <- 3.5 # maximum width
+  xmin <- 0.5 # minimum length
+  xmax <- 5.5 # maximum length
+  
+  # Defining features along the length
+  srwing <- 1.5
+  rhalfsp <- 2.5
+  ctre <- 3.5
+  lhspce <- 4.5
+  sixYardLeft <- 2.75
+  sixYardRight <- 3.25
+  
+  # Defining features along the width
+  
+  off14 <- 2.7
+  off21 <- 2.5
+  off45 <- 1.5
+  left14 <- 2.65
+  right14 <- 3.35
+  
+  
+  if(BasicFeatures == TRUE){
+    ## initiate the plot, set some boundries to the plot
+    qp <- ggplot() + xlim(c(xmin,xmax)) + ylim(c(ymin,ymax)) +
+      # add the theme 
+      theme_blankPitch() +
+      # add halway line
+      geom_rect(aes(xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax), fill = grass_colour, colour = line_colour) +
+      geom_segment(aes(x = xmin, y = off21, xend = xmax, yend = off21),colour = "white",linetype="solid") +
+      geom_segment(aes(x = xmin, y = off45, xend = xmax, yend = off45),colour = "white",linetype="solid") +
+      geom_segment(aes(x = xmin, y = off14, xend = xmax, yend = off14),colour = "white",linetype="solid") +
+      geom_segment(aes(x = srwing, y = ymin, xend = srwing, yend = ymax),colour = line_colour,linetype="dotted") +
+      geom_segment(aes(x = rhalfsp, y = ymin, xend = rhalfsp, yend = ymax),colour = line_colour,linetype="dotted") +
+      geom_segment(aes(x = ctre, y = ymin, xend = ctre, yend = ymax),colour = line_colour,linetype="dotted") +
+      geom_segment(aes(x = lhspce, y = ymin, xend = lhspce, yend = ymax),colour = line_colour,linetype="dotted") +
+      geom_segment(aes(x = left14, y = ymax, xend = left14, yend = 2.7),colour = "white" ,linetype="solid") + 
+      geom_segment(aes(x = right14, y = ymax, xend = right14, yend = 2.7),colour = "white" ,linetype="solid") +
+      geom_segment(aes(x = sixYardLeft, y = ymax, xend = sixYardLeft, yend =3.25),colour = "white" ,linetype="solid") +
+      geom_segment(aes(x = sixYardRight, y = ymax, xend = sixYardRight, yend =3.25),colour = "white" ,linetype="solid") +
+      geom_segment(aes(x = 2.75, y = 3.25, xend = 3.25, yend =3.25),colour = "white" ,linetype="solid") +
+      geom_segment(aes(x =2.8, y = 3.5, xend = 3.20, yend = 3.5),colour = "black", size = 2) +
+      annotate(geom="text", x=0.57, y=1.45, label="45", color="white") +
+      annotate(geom="text", x=0.57, y=2.45, label="21",color = "white") 
+  }
+  
+  else{
+    ## initiate the plot, set some boundries to the plot
+    qp <- ggplot() + xlim(c(xmin,xmax)) + ylim(c(ymin-0.5,ymax+0.5)) +
+      # add the theme 
+      theme_blankPitch() +
+      # add the base rectangle of the pitch 
+      geom_rect(aes(xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax), fill = grass_colour, colour = line_colour) +
+      geom_rect(aes(xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax), fill = grass_colour, colour = line_colour) +
+      geom_segment(aes(x = off65, y = ymin, xend = off65, yend = ymax),colour = line_colour) +
+      geom_segment(aes(x = off45, y = ymin, xend = off45, yend = ymax),colour = "Red",linetype="dotted")
+    
+  }
+  
+  return(qp)}
+
+
+qp <- create_Stats_Pitch("#A2CD5A", "#6495ED", "#ffffff", "#000000", BasicFeatures=TRUE)
+```
+
+#Summary  
+
+```{r}
+ 
+kable (scorelist) %>% kable_styling()
+
+```
+
+```{r}
+ 
+kable (summary) %>%
+  kable_styling(bootstrap_options = c("striped"),full_width = F)
+
+```
+
+#Starting Line Up
+
+##Mayo
+
+```{r, fig.width = 16, fig.height = 10}
+#Starting Line up change to single team
+
+positionA <-position %>% filter (Teamnum == "A") 
+
+p + geom_point(data = positionA, aes(x=Areax, y=Areay, shape = Team), colour = "red",size = 6) +
+  theme(plot.title = element_text( size=32, hjust=0)) +
+  geom_text_repel(data = positionA, aes(x=Areax, y=Areay, label = Player), colour = "red", size = 8) +
+  theme(legend.position="none")
+```
+
+##Kerry
+
+```{r, fig.width = 16, fig.height = 10}
+positionB <-position %>% filter (Teamnum == "B") 
+
+p + geom_point(data = positionB, aes(x=Areax, y=Areay, shape = Team), colour = "gold",size = 6) +
+  theme(plot.title = element_text( size=32, hjust=0)) +
+  geom_text_repel(data = positionB, aes(x=Areax, y=Areay, label = Player), colour = "white", size = 8) +
+  theme(legend.position="none")
+
+```
+
+#Scoring Timeline
+
+```{r, fig.width = 16, fig.height = 10}
+wormA <-scores%>%filter(Teamnum == "A", octype =="Start"|octype =="Goal"|octype =="Point"|octype =="Fk Goal"|octype =="Fk Point"|octype =="45 Goal"|octype =="45 Point"|octype =="Mk Goal"|octype =="Mk Point"|octype =="45 Point"
+|octype =="Pen Goal"|octype =="Pen Point")%>%select(Team, octype,xend,yend,plylabrec,main,time,shotlab,score,direction,scorediff)
+
+wormB <-scores%>%filter(Teamnum == "B",octype =="Start"|octype =="Goal"|octype =="Point"|octype =="Fk Goal"|octype =="Fk Point"
+|octype =="45 Goal"|octype =="45 Point"|octype =="Mk Goal"|octype =="Mk Point"|octype =="45 Point"
+|octype =="Pen Goal"|octype =="Pen Point")%>%select(Team, octype,xend,yend,plylabrec,main,time,shotlab,score,direction,scorediff)
+ 
+ggplot(data=scores, aes(x=time, y=score, group=Team)) +
+    geom_step(data=wormA, aes(x=time, y=score), colour = "lightgreen", ,size=2) + 
+    geom_step(data=wormB, aes(x=time, y=score), colour = "gold", size=2) + 
+    geom_point(data = wormA, shape = 1, size = 4, stroke = 2, colour = "red") +
+    geom_point(data = wormB, shape = 1, size = 4, stroke = 2, colour = "green") +
+    theme_classic() + 
+    theme(plot.background = element_blank(),
+    legend.position="bottom",
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    axis.line.x = element_blank(),
+    axis.text.x = element_blank(),
+    axis.ticks.x = element_blank(), 
+    axis.title.x = element_blank()) +
+    geom_text_repel(data = wormA, aes(x=time, y=score, label = shotlab), size = 6, colour = "red",  
+    segment.size  = 0.2,  direction = "x", hjust = 1 ) + 
+    geom_text_repel(data = wormB, aes(x=time, y=score, label = shotlab), size = 6, colour = "green",  
+    segment.size  = 0.2,  direction = "y", hjust = 1) + 
+    guides(size = FALSE) +
+   geom_vline(xintercept=17.5, linetype="dotted", color = "black") +
+   geom_vline(xintercept=35, linetype="dotted", color = "black") +
+   geom_vline(xintercept=52.5, linetype="dotted", color = "black") +
+   geom_vline(xintercept=77, linetype="dotted", color = "black") +  
+      annotate(geom="text", x= 17.50, y=-0.25, label="1Qtr",color = "black") +
+      annotate(geom="text", x= 35, y=-0.25, label="HT",color = "black") +
+      annotate(geom="text", x= 52.50, y=-0.25, label="3Qtr",color = "black") +
+      annotate(geom="text", x= 77, y=-0.25, label="FT",color = "black") +
+  theme(axis.text.y =element_text(size=16),
+        axis.title.y =element_text(size=16,face="bold"))
+
+ 
+```
+
+#Score Differential
+
+```{r, fig.width = 16, fig.height = 10}
+scores <- scores%>%filter(octype =="Start"|octype =="Goal"|octype =="Point"|octype =="Fk Goal"|octype =="Fk Point"|octype =="45 Goal"|octype =="45 Point"|octype =="Mk Goal"|octype =="Mk Point"|octype =="45 Point"
+|octype =="Pen Goal"|octype =="Pen Point")%>%select(Team,octype,xend,yend,plylabrec,main,time,shotlab,score,direction,scorediff,scrd)
+
+#margins
+
+ggplot(data=scores, aes(x=time, y=scorediff )) +
+  geom_step(size=2) +
+  geom_point() +
+geom_hline(yintercept=0, linetype="dashed", color = "orange") +
+theme_classic() +
+geom_text_repel(data = scores, aes(x=time, y=scorediff, label = scrd),  size = 8) + 
+geom_vline(xintercept=17.5, linetype="dotted", color = "black") +
+ geom_vline(xintercept=35, linetype="dotted", color = "black") +
+ geom_vline(xintercept=52.5, linetype="dotted", color = "black") + 
+ geom_vline(xintercept=77, linetype="dotted", color = "black") +
+    annotate(geom="text", x=1.5, y=4.5, label="Mayo", color="Red", size = 16) +
+    annotate(geom="text", x=1.5, y=-4.5, label="Kerry", color="darkblue", size = 16) +
+    theme(plot.background = element_blank(),
+    legend.position="none",
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    axis.line = element_blank(),
+    axis.text.x = element_blank(),
+    axis.text.y = element_blank(),
+    axis.ticks = element_blank(), 
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank()) +
+annotate(geom="text", x= 17.50, y=-0.25, label="1Qtr",color = "black") +
+      annotate(geom="text", x= 35, y=-0.25, label="HT",color = "black") +
+      annotate(geom="text", x= 52.50, y=-0.25, label="3Qtr",color = "black") +
+      annotate(geom="text", x= 77, y=-0.25, label="FT",color = "black") 
+
+
+```
+
+#Average Position by Possession
+
+##Mayo
+
+```{r, fig.width = 16, fig.height = 10}
+
+aveposA <- pass %>% group_by(Player, Action) %>% filter(Teamnum == "A",main == "ToW"| main == "Rec Op"| main == "Ko Rec"|main == "Rec Rs")
+
+AreaxA <- aveposA %>%
+    group_by(Player) %>%
+    summarise(AreaxA = mean(Areax,na.rm = TRUE)) 
+
+AreayA <- aveposA%>%
+    group_by(Player) %>%
+    summarise(AreayA = mean(Areay,na.rm = TRUE))
+
+avgposA <- left_join(AreaxA, AreayA, by ="Player")
+
+p + geom_point(data = avgposA, aes(x=AreaxA, y=AreayA), colour = "red", size = 6) +
+geom_text_repel(data = avgposA, aes(x=AreaxA, y=AreayA, label = Player), size = 8, colour = "white") +
+theme(legend.position="none")
+```
+
+##Kerry
+
+```{r, fig.width = 16, fig.height = 10}
+
+aveposB <- pass %>% group_by(Player, Action) %>% filter(Teamnum == "B",main == "ToW"| main == "Rec Op"| main == "Ko Rec"|main == "Rec Rs")
+
+AreaxB <- aveposB %>%
+    group_by(Player) %>%
+    summarise(AreaxB = mean(Areax,na.rm = TRUE)) 
+
+AreayB <- aveposB%>%
+    group_by(Player) %>%
+    summarise(AreayB = mean(Areay,na.rm = TRUE))
+
+avgposB <- left_join(AreaxB, AreayB, by ="Player")
+
+p + geom_point(data = avgposB, aes(x=AreaxB, y=AreayB), colour = "yellow", size = 6) +
+geom_text_repel(data = avgposB, aes(x=AreaxB, y=AreayB, label = Player), size = 8, colour = "white") +
+theme(legend.position="none")
+```
+
+#Areas of Play by Possession
+
+##Mayo
+
+```{r, fig.width = 16, fig.height = 10}
+heatmapA <- passmap %>%filter(plyr == "A")
+
+
+p + geom_raster(data = heatmapA, aes(x=Areax, y=Areay, fill=value, alpha = value), interpolate = T) +
+scale_fill_gradient(low = "gray95", high = "red") + 
+ theme(legend.position="none")
+```
+
+##Kerry
+
+```{r, fig.width = 16, fig.height = 10}
+heatmapB <- passmap %>%filter(plyr == "B")
+
+p + geom_raster(data = heatmapB, aes(x=Areax, y=Areay, fill=value, alpha = value), interpolate = T) +
+scale_fill_gradient(low = "gray95", high = "gold") + 
+ theme(legend.position="none")
+
+```
+
+#Path of Possession
+
+##Mayo
+
+```{r, fig.width = 16, fig.height = 10}
+A1 <- pass %>% filter(Teamnum == "A" & possno == "A1") 
+A2 <- pass %>% filter(Teamnum == "A" & possno == "A2") 
+A3 <- pass %>% filter(Teamnum == "A" & possno == "A3") 
+A4 <- pass %>% filter(Teamnum == "A" & possno == "A4") 
+A5 <- pass %>% filter(Teamnum == "A" & possno == "A5") 
+A6 <- pass %>% filter(Teamnum == "A" & possno == "A6") 
+A7 <- pass %>% filter(Teamnum == "A" & possno == "A7") 
+A8 <- pass %>% filter(Teamnum == "A" & possno == "A8") 
+A9 <- pass %>% filter(Teamnum == "A" & possno == "A9") 
+A10 <- pass %>% filter(Teamnum == "A" & possno == "A10") 
+A11 <- pass %>% filter(Teamnum == "A" & possno == "A11") 
+A12 <- pass %>% filter(Teamnum == "A" & possno == "A12") 
+A13 <- pass %>% filter(Teamnum == "A" & possno == "A13") 
+A14 <- pass %>% filter(Teamnum == "A" & possno == "A14") 
+A15 <- pass %>% filter(Teamnum == "A" & possno == "A15") 
+A16 <- pass %>% filter(Teamnum == "A" & possno == "A16") 
+A17 <- pass %>% filter(Teamnum == "A" & possno == "A17") 
+A18 <- pass %>% filter(Teamnum == "A" & possno == "A18") 
+A19 <- pass %>% filter(Teamnum == "A" & possno == "A19") 
+A20 <- pass %>% filter(Teamnum == "A" & possno == "A20") 
+A21 <- pass %>% filter(Teamnum == "A" & possno == "A21") 
+A22 <- pass %>% filter(Teamnum == "A" & possno == "A22") 
+A23 <- pass %>% filter(Teamnum == "A" & possno == "A23") 
+A24 <- pass %>% filter(Teamnum == "A" & possno == "A24") 
+A25 <- pass %>% filter(Teamnum == "A" & possno == "A25") 
+A26 <- pass %>% filter(Teamnum == "A" & possno == "A26") 
+A27 <- pass %>% filter(Teamnum == "A" & possno == "A27") 
+A28 <- pass %>% filter(Teamnum == "A" & possno == "A28") 
+A29 <- pass %>% filter(Teamnum == "A" & possno == "A29") 
+A30 <- pass %>% filter(Teamnum == "A" & possno == "A30") 
+A31 <- pass %>% filter(Teamnum == "A" & possno == "A31") 
+A32 <- pass %>% filter(Teamnum == "A" & possno == "A32") 
+A33 <- pass %>% filter(Teamnum == "A" & possno == "A33") 
+A34 <- pass %>% filter(Teamnum == "A" & possno == "A34") 
+A35 <- pass %>% filter(Teamnum == "A" & possno == "A35") 
+A36 <- pass %>% filter(Teamnum == "A" & possno == "A36") 
+A37 <- pass %>% filter(Teamnum == "A" & possno == "A37") 
+A38 <- pass %>% filter(Teamnum == "A" & possno == "A38") 
+A39 <- pass %>% filter(Teamnum == "A" & possno == "A39") 
+A40 <- pass %>% filter(Teamnum == "A" & possno == "A40") 
+A41 <- pass %>% filter(Teamnum == "A" & possno == "A41") 
+A42 <- pass %>% filter(Teamnum == "A" & possno == "A42") 
+A43 <- pass %>% filter(Teamnum == "A" & possno == "A43") 
+A44 <- pass %>% filter(Teamnum == "A" & possno == "A44") 
+A45 <- pass %>% filter(Teamnum == "A" & possno == "A45") 
+A46 <- pass %>% filter(Teamnum == "A" & possno == "A46") 
+A47 <- pass %>% filter(Teamnum == "A" & possno == "A47") 
+A48 <- pass %>% filter(Teamnum == "A" & possno == "A48")
+A49 <- pass %>% filter(Teamnum == "A" & possno == "A49")
+A50 <- pass %>% filter(Teamnum == "A" & possno == "A50")
+A51 <- pass %>% filter(Teamnum == "A" & possno == "A51")
+A52 <- pass %>% filter(Teamnum == "A" & possno == "A52")
+A53 <- pass %>% filter(Teamnum == "A" & possno == "A53")
+A54 <- pass %>% filter(Teamnum == "A" & possno == "A54")
+A55 <- pass %>% filter(Teamnum == "A" & possno == "A55")
+A56 <- pass %>% filter(Teamnum == "A" & possno == "A56")
+A57 <- pass %>% filter(Teamnum == "A" & possno == "A57")
+
+p + geom_path(data = A1, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A2, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A3, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A4, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A5, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A6, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A7, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A8, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A9, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A10, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A11, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A12, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A13, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A14, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A15, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A16, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A17, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A18, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A19, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A20, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A21, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A22, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A23, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A24, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A25, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A26, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A27, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A28, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A29, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A30, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A31, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A32, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A33, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A34, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A35, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A36, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A37, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A38, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A39, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A40, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A41, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A42, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A43, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A44, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A45, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A46, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A47, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") +
+geom_path(data = A48, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") +
+geom_path(data = A49, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") +
+geom_path(data = A50, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") +
+geom_path(data = A51, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") +   
+geom_path(data = A52, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A53, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A54, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A55, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A56, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = A57, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black")
+
+```
+
+##Kerry
+
+```{r, fig.width = 16, fig.height = 10}
+B1 <- pass %>% filter(Teamnum == "B" & possno == "B1") 
+B2 <- pass %>% filter(Teamnum == "B" & possno == "B2") 
+B3 <- pass %>% filter(Teamnum == "B" & possno == "B3") 
+B4 <- pass %>% filter(Teamnum == "B" & possno == "B4") 
+B5 <- pass %>% filter(Teamnum == "B" & possno == "B5") 
+B6 <- pass %>% filter(Teamnum == "B" & possno == "B6") 
+B7 <- pass %>% filter(Teamnum == "B" & possno == "B7") 
+B8 <- pass %>% filter(Teamnum == "B" & possno == "B8") 
+B9 <- pass %>% filter(Teamnum == "B" & possno == "B9") 
+B10 <- pass %>% filter(Teamnum == "B" & possno == "B10") 
+B11 <- pass %>% filter(Teamnum == "B" & possno == "B11") 
+B12 <- pass %>% filter(Teamnum == "B" & possno == "B12") 
+B13 <- pass %>% filter(Teamnum == "B" & possno == "B13") 
+B14 <- pass %>% filter(Teamnum == "B" & possno == "B14") 
+B15 <- pass %>% filter(Teamnum == "B" & possno == "B15") 
+B16 <- pass %>% filter(Teamnum == "B" & possno == "B16") 
+B17 <- pass %>% filter(Teamnum == "B" & possno == "B17") 
+B18 <- pass %>% filter(Teamnum == "B" & possno == "B18") 
+B19 <- pass %>% filter(Teamnum == "B" & possno == "B19") 
+B20 <- pass %>% filter(Teamnum == "B" & possno == "B20") 
+B21 <- pass %>% filter(Teamnum == "B" & possno == "B21") 
+B22 <- pass %>% filter(Teamnum == "B" & possno == "B22") 
+B23 <- pass %>% filter(Teamnum == "B" & possno == "B23") 
+B24 <- pass %>% filter(Teamnum == "B" & possno == "B24") 
+B25 <- pass %>% filter(Teamnum == "B" & possno == "B25") 
+B26 <- pass %>% filter(Teamnum == "B" & possno == "B26") 
+B27 <- pass %>% filter(Teamnum == "B" & possno == "B27") 
+B28 <- pass %>% filter(Teamnum == "B" & possno == "B28") 
+B29 <- pass %>% filter(Teamnum == "B" & possno == "B29") 
+B30 <- pass %>% filter(Teamnum == "B" & possno == "B30") 
+B31 <- pass %>% filter(Teamnum == "B" & possno == "B31") 
+B32 <- pass %>% filter(Teamnum == "B" & possno == "B32") 
+B33 <- pass %>% filter(Teamnum == "B" & possno == "B33") 
+B34 <- pass %>% filter(Teamnum == "B" & possno == "B34") 
+B35 <- pass %>% filter(Teamnum == "B" & possno == "B35") 
+B36 <- pass %>% filter(Teamnum == "B" & possno == "B36") 
+B37 <- pass %>% filter(Teamnum == "B" & possno == "B37") 
+B38 <- pass %>% filter(Teamnum == "B" & possno == "B38") 
+B39 <- pass %>% filter(Teamnum == "B" & possno == "B39") 
+B40 <- pass %>% filter(Teamnum == "B" & possno == "B40") 
+B41 <- pass %>% filter(Teamnum == "B" & possno == "B41") 
+B42 <- pass %>% filter(Teamnum == "B" & possno == "B42") 
+B43 <- pass %>% filter(Teamnum == "B" & possno == "B43") 
+B44 <- pass %>% filter(Teamnum == "B" & possno == "B44") 
+B45 <- pass %>% filter(Teamnum == "B" & possno == "B45") 
+B46 <- pass %>% filter(Teamnum == "B" & possno == "B46") 
+B47 <- pass %>% filter(Teamnum == "B" & possno == "B47") 
+B48 <- pass %>% filter(Teamnum == "B" & possno == "B48") 
+B49 <- pass %>% filter(Teamnum == "B" & possno == "B49") 
+B50 <- pass %>% filter(Teamnum == "B" & possno == "B50")
+B51 <- pass %>% filter(Teamnum == "B" & possno == "B51")
+B52 <- pass %>% filter(Teamnum == "B" & possno == "B52")
+B53 <- pass %>% filter(Teamnum == "B" & possno == "B52")
+B54 <- pass %>% filter(Teamnum == "B" & possno == "B52")
+B55 <- pass %>% filter(Teamnum == "B" & possno == "B52")
+B56 <- pass %>% filter(Teamnum == "B" & possno == "B52")
+
+
+p + geom_path(data = B1, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B2, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B3, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B4, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B5, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B6, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B7, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B8, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B9, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B10, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B11, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B12, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B13, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B14, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B15, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B16, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B17, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B18, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B19, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B20, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B21, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B22, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B23, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B24, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B25, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B26, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B27, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B28, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B29, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B30, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B31, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B32, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B33, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B34, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B35, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B36, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B37, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B38, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B39, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B40, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B41, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B42, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B43, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B44, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B45, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B46, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B47, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B48, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") + 
+geom_path(data = B49, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") +
+geom_path(data = B50, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") +
+geom_path(data = B51, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") +  
+geom_path(data = B52, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") +
+geom_path(data = B53, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") +
+  geom_path(data = B54, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") +
+  geom_path(data = B55, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black") +
+  geom_path(data = B56, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "black")
+
+```
+
+
+#All Shots Origin by Possession
+
+##Mayo (Blue = Score)
+
+```{r, fig.width = 16, fig.height = 10}
+
+#Finds all shots oc
+
+TeamAPAScr <- pass %>%group_by(Team, Action) %>% filter(Teamnum == "A", Action== "Goal"|Action== "Point"|Action== "Fk Goal"|
+Action== "Fk Point"|Action== "Mk Goal"|Action== "Mk Point"|Action== "45 goal"|Action== "45 Point")
+
+TeamAPAScr <- pass %>%group_by(Team, Action) %>% filter(Teamnum == "A", Action== "Goal"|Action== "Point"|Action== "Fk Goal"|
+Action== "Fk Point"|Action== "Mk Goal"|Action== "Mk Point"|Action== "45 goal"|Action== "45 Point")
+
+TeamAPAMis <- pass %>%group_by(Team, Action) %>% filter(Teamnum == "A", Action== "Wide Left"|Action== "Wide Right"|Action== "Save"|Action== "Shot Blk"|Action== "Short"|Action== "Fk Short"|Action== "Fk Wide Left"|Action== "Fk Wide Right"|
+Action== "Fk Save"|Action== "Mk Short"|Action== "Mk Wide Left"|Action== "Mk Wide Right"|Action== "Mk Save"|Action== "Mk Pass")
+
+#Pulls out all scores from main TeamA
+TeamAPASc <- subset(pass, possno %in% TeamAPAScr$possno)
+#Pulls out all miss from main TeamA
+TeamAPAMi <- subset(pass, possno %in% TeamAPAMis$possno)
+
+#Ones that start from turnover
+TeamAphasePASccq <- TeamAPASc %>% filter(main == "ToW"|Action=="Rebnd Off")
+
+TeamAphasePAMicq <- TeamAPAMi %>% filter(main == "ToW"|Action=="Rebnd Off")
+
+#Ones that start from kickout
+
+TeamAphasePAScko <- TeamAPASc %>% filter(main == "Ko Rec")
+
+TeamAphasePAMiko <- TeamAPAMi %>% filter(main == "Ko Rec")
+
+p + geom_point(data = TeamAphasePASccq , aes(x=Areax, y=Areay), colour = "blue", size = 6, shape = 17) +
+geom_point(data = TeamAphasePAMicq, aes(x=Areax, y=Areay), colour = "white", size = 6,shape = 4, stroke = 2) +
+geom_point(data = TeamAphasePAScko, aes(x=Areax, y=Areay), colour = "blue", size = 6, shape = 17) +
+geom_point(data = TeamAphasePAMiko, aes(x=Areax, y=Areay), colour = "white", size = 6,shape = 4, stroke = 2) +
+theme(legend.position = "bottom") + 
+geom_text_repel(data = TeamAphasePASccq , aes(x=Areax, y=Areay, label = plylab), colour = "blue", size = 8) +
+geom_text_repel(data = TeamAphasePAMicq, aes(x=Areax, y=Areay, label = plylab), col = "white", size = 8) +
+geom_text_repel(data = TeamAphasePAScko, aes(x=Areax, y=Areay, label = plylab), colour = "blue", size = 8) + 
+geom_text_repel(data = TeamAphasePAMiko, aes(x=Areax, y=Areay, label = plylab), col = "white", size = 8) 
+
+
+```
+
+##Kerry (Blue = Score)
+
+```{r, fig.width = 16, fig.height = 10}
+#Finds all shots
+
+TeamBPAScr <- pass %>%group_by(Team, Action) %>% filter(Teamnum == "B", Action== "Goal"|Action== "Point"|Action== "Fk Goal"|
+Action== "Fk Point"|Action== "Mk Goal"|Action== "Mk Point"|Action== "45 goal"|Action== "45 Point")
+
+TeamBPAMis <- pass %>%group_by(Team, Action) %>% filter(Teamnum == "B", Action== "Wide Left"|Action== "Wide Right"|Action== "Save"|Action== "Shot Blk"|
+Action== "Short"|Action== "Fk Short"|Action== "Fk Wide Left"|Action== "Fk Wide Right"|
+Action== "Fk Save"|Action== "Mk Short"|Action== "Mk Wide Left"|Action== "Mk Wide Right"|Action== "Mk Save"|Action== "Mk Pass")
+
+#Pulls out all shots from main TeamB
+TeamBPASc <- subset(pass, possno %in% TeamBPAScr$possno)
+
+TeamBPAMi <- subset(pass, possno %in% TeamBPAMis$possno)
+
+#Ones that start from turnover
+TeamBphasePASccq <- TeamBPASc %>% filter(main == "ToW"|main =="Rebnd Off")
+
+TeamBphasePAMicq <- TeamBPAMi %>% filter(main == "ToW"|main=="Rebnd Off")
+
+#Ones that start from kickout
+
+TeamBphasePAScko <- TeamBPASc %>% filter(main =="Ko Rec")
+
+TeamBphasePAMiko <- TeamBPAMi %>% filter(main =="Ko Rec")
+
+p + geom_point(data = TeamBphasePASccq , aes(x=Areax, y=Areay), colour = "blue", size = 6, shape = 17) +
+geom_point(data = TeamBphasePAMicq, aes(x=Areax, y=Areay), colour = "white", size = 6,shape = 4, stroke = 2) +
+geom_point(data = TeamBphasePAScko, aes(x=Areax, y=Areay), colour = "blue", size = 6, shape = 17) +
+geom_point(data = TeamBphasePAMiko, aes(x=Areax, y=Areay), colour = "white", size = 6,shape = 4, stroke = 2) +
+theme(legend.position = "bottom") + 
+geom_text_repel(data = TeamBphasePASccq , aes(x=Areax, y=Areay, label = plylab), colour = "blue", size = 8) +
+geom_text_repel(data = TeamBphasePAMicq, aes(x=Areax, y=Areay, label = plylab), col = "white", size = 8) +
+geom_text_repel(data = TeamBphasePAScko, aes(x=Areax, y=Areay, label = plylab), colour = "blue", size = 8) + 
+geom_text_repel(data = TeamBphasePAMiko, aes(x=Areax, y=Areay, label = plylab), col = "white", size = 8)
+
+```
+
+#Open Play Shot Origin by Phase
+
+##Mayo (Blue = Score)
+
+```{r, fig.width = 16, fig.height = 10}
+#change from shot to coutcomes
+TeamAPhScr <- pass %>%group_by(Team, Action) %>% filter(Teamnum == "A", Action== "Goal"|Action== "Point")
+
+TeamAPhAMis <- pass %>%group_by(Team, Action) %>% filter(Teamnum == "A", Action== "Wide Left"|Action== "Wide Right"|Action== "Save"|Action== "Shot Blk"|
+Action== "Short")
+
+#Pulls out all shots from main TeamB
+TeamAPhASc <- subset(pass, Phase %in% TeamAPhScr$Phase)
+
+TeamAPhAMi <- subset(pass, Phase %in% TeamAPhAMis$Phase)
+
+#Score
+TeamAphasecq <- TeamAPhASc %>% filter(main == "ToW"|Action=="Rebnd Off")
+
+TeamAphaseRs <- TeamAPhASc%>% filter(Action=="Sl Pass"|Action == "Fk Pass"|Action == "Mk Kp"|Action =="Mk Hp")
+
+TeamAphaseko <- TeamAPhASc %>% filter(main =="Ko Rec")
+
+#Add in Miss
+TeamAphasecqMi <- TeamAPhAMi %>% filter(main == "ToW"|Action=="Rebnd Off")
+
+TeamAphaseRsMi <- TeamAPhAMi%>% filter(Action=="Sl Pass"|Action == "Fk Pass"|Action == "Mk Kp"|Action =="Mk Hp")
+
+TeamAphasekoMi <- TeamAPhAMi %>% filter(main =="Ko Rec")
+
+#Add in Miss
+
+p + geom_point(data = TeamAphasecq, aes(x=Areax, y=Areay), colour = "blue", size = 6, shape = 17) +
+geom_point(data = TeamAphaseRs, aes(x=Areax, y=Areay), colour = "blue", size = 6, shape = 17) +
+geom_point(data = TeamAphaseko, aes(x=Areax, y=Areay), colour = "blue", size = 6, shape = 17) +
+  geom_point(data = TeamAphasecqMi, aes(x=Areax, y=Areay), colour = "white", size = 6,shape = 4, stroke = 2) +
+geom_point(data = TeamAphaseRsMi, aes(x=Areax, y=Areay), colour = "white", size = 6,shape = 4, stroke = 2) +
+geom_point(data = TeamAphasekoMi, aes(x=Areax, y=Areay), colour = "white", size = 6,shape = 4, stroke = 2) +
+geom_text_repel(data = TeamAphasecq, aes(x=Areax, y=Areay, label = plylab), colour = "blue", size = 8) +
+geom_text_repel(data = TeamAphaseRs, aes(x=Areax, y=Areay, label = plylab), col = "blue", size = 8) +
+geom_text_repel(data = TeamAphaseko, aes(x=Areax, y=Areay, label = plylab), col = "blue", size = 8) +
+  geom_text_repel(data = TeamAphasecqMi, aes(x=Areax, y=Areay, label = plylab), colour = "white", size = 8) +
+geom_text_repel(data = TeamAphaseRsMi, aes(x=Areax, y=Areay, label = plylab), col = "white", size = 8) +
+geom_text_repel(data = TeamAphasekoMi, aes(x=Areax, y=Areay, label = plylab), col = "white", size = 8)
+```
+
+##Kerry (Blue = Score)
+
+```{r, fig.width = 16, fig.height = 10}
+
+#change from shot to coutcomes
+TeamBPhScr <- pass %>%group_by(Team, Action) %>% filter(Teamnum == "B", Action== "Goal"|Action== "Point")
+
+TeamBPhAMis <- pass %>%group_by(Team, Action) %>% filter(Teamnum == "B", Action== "Wide Left"|Action== "Wide Right"|Action== "Save"|Action== "Shot Blk"|
+Action== "Short")
+
+#Pulls out all shots from main TeamB
+TeamBPhASc <- subset(pass, Phase %in% TeamBPhScr$Phase)
+
+TeamBPhAMi <- subset(pass, Phase %in% TeamBPhAMis$Phase)
+
+#Score
+TeamBphasecq <- TeamBPhASc %>% filter(main  == "ToW"|Action=="Rebnd Off")
+
+TeamBphaseRs <- TeamBPhASc%>% filter(Action=="Sl Pass"|Action == "Fk Pass"|Action == "Mk Kp"|Action =="Mk Hp")
+
+TeamBphaseko <- TeamBPhASc %>% filter(main=="Ko Rec")
+
+#Add in Miss
+TeamBphasecqMi <- TeamBPhAMi %>% filter(main == "ToW"|Action=="Rebnd Off")
+
+TeamBphaseRsMi <- TeamBPhAMi%>% filter(Action=="Sl Pass"|Action == "Fk Pass"|Action == "Mk Kp"|Action =="Mk Hp")
+
+TeamBphasekoMi <- TeamBPhAMi %>% filter(main =="Ko Rec")
+
+#Add in Miss
+
+p + geom_point(data = TeamBphasecq, aes(x=Areax, y=Areay), colour = "blue", size = 6, shape = 17) +
+geom_point(data = TeamBphaseRs, aes(x=Areax, y=Areay), colour = "blue", size = 6, shape = 17) +
+geom_point(data = TeamBphaseko, aes(x=Areax, y=Areay), colour = "blue", size = 6, shape = 17) +
+  geom_point(data = TeamBphasecqMi, aes(x=Areax, y=Areay), colour = "white", size = 6,shape = 4, stroke = 2) +
+geom_point(data = TeamBphaseRsMi, aes(x=Areax, y=Areay), colour = "white", size = 6,shape = 4, stroke = 2) +
+geom_point(data = TeamBphasekoMi, aes(x=Areax, y=Areay), colour = "white", size = 6,shape = 4, stroke = 2) +
+geom_text_repel(data = TeamBphasecq, aes(x=Areax, y=Areay, label = plylab), colour = "blue", size = 8) +
+geom_text_repel(data = TeamBphaseRs, aes(x=Areax, y=Areay, label = plylab), col = "blue", size = 8) +
+geom_text_repel(data = TeamBphaseko, aes(x=Areax, y=Areay, label = plylab), col = "blue", size = 8) +
+geom_text_repel(data = TeamBphasecqMi, aes(x=Areax, y=Areay, label = plylab), colour = "white",size = 8) +
+geom_text_repel(data = TeamBphaseRsMi, aes(x=Areax, y=Areay, label = plylab), col = "white", size = 8) +
+geom_text_repel(data = TeamBphasekoMi, aes(x=Areax, y=Areay, label = plylab), col = "white", size = 8)
+```
+
+#Open Play Shots - Location & Outcome 
+
+
+```{r, include=FALSE, message=FALSE, warning=FALSE}
+colshotvertpal <- c(
+"Goal"= "white",
+"Point"= "black",
+"Wide Left"="purple",
+"Wide Right"="#FF6347",
+"Save"="#FFFF00",
+"Blkd"="#00FFFF",
+"Short"="#FF00FF",
+"Post"="darkblue",
+"Fk Goal"= "#FFFFFF",
+"Fk Point"="#800000",
+"Fk Wide Left"="#808000",
+"Fk Wide Right"="#D2691E",
+"Fk Save"="#800080",
+"Fk Short"="#008080",
+"Fk Post"="#000080",
+"45 Goal"="#FFFFFF",
+"45 Point"="darkred",
+"45 Wide Left"="#808080",
+"45 Wide Right"="#000000",
+"45 Save"="#FF0000",
+"45 Short"="#800000",
+"45 Post"="yellow",
+"Pen Goal" ="#619CFF",
+"Pen Point"="#00BA38",
+"Pen Wide Left"="#F8766D",
+"Pen Wide Right"="#FF9326",
+"Pen Save"="#FFFF4D",
+"Pen Post"="#21D921",
+"Mk Goal"="#D92121",
+"Mk Point"="blue",
+"Mk Wide Left"="gold",
+"Mk Wide Right"="orange",
+"Mk Short"="red",
+"Mk Save"="#2121D9")
+
+```
+
+##Mayo
+
+```{r}
+
+OPA <- pass %>%group_by(Team, Action) %>% filter(Teamnum == "A", main =="Shot Oc")%>%summarize(count=n())
+
+my_theme <- function(){
+  theme_light() +
+    theme(text = element_text(),  
+          panel.grid = element_blank(),
+          panel.border = element_blank(),
+          axis.title = element_blank(),
+          axis.ticks = element_blank(),
+          axis.text.x = element_blank(),
+          axis.text.y = element_text(size = 15, color = "gray10"),
+          plot.title =  element_text(size = 20, color = "black"))
+  }
+
+final_data <- OPA %>% 
+  # Calculate -- and format -- the percentage for each channel
+  mutate(bar_percentage = sprintf("%.1f%%", 100*(count / sum(.$count)))) %>% 
+  # Combine that percentage with the actual value
+  mutate(bar_label = paste0(format(count, big.mark = ","), ", ", bar_percentage)) %>% 
+  # Remove the "just the percentage" column
+  select(-bar_percentage)
+
+
+total_OPA <- paste0("Total Op Shots: ",
+                      format(sum(final_data$count), big.mark = ","))
+
+
+ggplot(final_data, aes(x = Action, y = count)) +
+ggtitle("Open Play Shots",  # Add the title and subtitle
+          subtitle = total_OPA) +   
+  geom_bar(stat = "identity", 
+           fill = "lightgreen",    
+           width = 0.50) +  
+geom_text(aes(label = bar_label, size = 5.5, hjust = 0)) +
+  coord_flip() +
+  scale_y_continuous(expand = c(0, 0),
+                     limits = c(0, max(final_data$count) * 1.3)) +
+  my_theme() +
+theme(legend.position="none", plot.title =  element_text(size = 20, color = "black"),plot.subtitle =  element_text(size = 18, color = "black"))
+```
+
+```{r, fig.width = 16, fig.height = 14}
+shotsA <- scrd  %>%group_by(Team, Action) %>% filter(Teamnum == "A", Action=="Shot Right"| Action =="Shot Left"| Action =="Hp Shot"| Action =="Punch")
+
+p + geom_point(data = shotsA, aes(x=Areax, y=Areay, colour = octype, size = 8, shape = Action, stroke = 1.5)) + 
+ scale_colour_manual(values = colshotvertpal) +
+  geom_text_repel(data = shotsA, aes(x=Areax, y=Areay, label = plylabrec, col = octype), size = 8) +
+    scale_shape_manual(values = 0:18) +
+    theme(legend.position="bottom", legend.title=element_text(size=15), 
+          legend.text=element_text(size=20)) +
+    theme(plot.title = element_text(hjust=0.5)) +
+    theme(plot.subtitle = element_text(hjust=0.5)) +
+    guides(color = FALSE, size = FALSE) +
+    guides(shape = guide_legend(override.aes = list(size = 12)))
+```
+
+##Kerry
+
+```{r}
+
+OPB <- pass %>%group_by(Team, Action) %>% filter(Teamnum == "B", main =="Shot Oc")%>%summarize(count=n())
+
+my_theme <- function(){
+  theme_light() +
+    theme(text = element_text(),  
+          panel.grid = element_blank(),
+          panel.border = element_blank(),
+          axis.title = element_blank(),
+          axis.ticks = element_blank(),
+          axis.text.x = element_blank(),
+          axis.text.y = element_text(size = 15, color = "gray10"),
+          plot.title =  element_text(size = 20, color = "black"))
+  }
+
+final_data <- OPB %>% 
+  # Calculate -- and format -- the percentage for each channel
+  mutate(bar_percentage = sprintf("%.1f%%", 100*(count / sum(.$count)))) %>% 
+  # Combine that percentage with the actual value
+  mutate(bar_label = paste0(format(count, big.mark = ","), ", ", bar_percentage)) %>% 
+  # Remove the "just the percentage" column
+  select(-bar_percentage)
+
+
+total_OPB <- paste0("Total Op Shots: ",
+                      format(sum(final_data$count), big.mark = ","))
+
+
+ggplot(final_data, aes(x = Action, y = count)) +
+ggtitle("Open Play Shots",  # Add the title and subtitle
+          subtitle = total_OPB) +   
+  geom_bar(stat = "identity", 
+           fill = "lightgreen",    
+           width = 0.50) +  
+geom_text(aes(label = bar_label, size = 5.5, hjust = 0)) +
+  coord_flip() +
+  scale_y_continuous(expand = c(0, 0),
+                     limits = c(0, max(final_data$count) * 1.3)) +
+  my_theme() +
+theme(legend.position="none", plot.title =  element_text(size = 20, color = "black"),plot.subtitle =  element_text(size = 18, color = "black"))
+```
+
+```{r, fig.width = 16, fig.height = 14}
+
+shotsB <- scrd  %>%group_by(Team, Action) %>% filter(Teamnum == "B", Action=="Shot Right"|Action =="Shot Left"| Action =="Hp Shot"| Action =="Punch")
+
+p + geom_point(data = shotsB, aes(x=Areax, y=Areay, colour =octype , size = 8, shape = Action, stroke = 1.5)) + 
+   scale_colour_manual(values = colshotvertpal) +
+  geom_text_repel(data = shotsB, aes(x=Areax, y=Areay, label = plylabrec, col = octype), size = 8) +
+    scale_shape_manual(values = 0:18) +
+    theme(legend.position="bottom", legend.title=element_text(size=15), 
+          legend.text=element_text(size=20)) +
+    theme(plot.title = element_text(hjust=0.5)) +
+    theme(plot.subtitle = element_text(hjust=0.5)) +
+    guides(color = FALSE, size = FALSE) +
+    guides(shape = guide_legend(override.aes = list(size = 12)))
+
+```
+
+#All Shots - Location & Outcome 
+
+##Mayo
+
+```{r}
+
+ASA <- pass %>%group_by(Team, Action) %>% filter(Teamnum == "A", main =="Shot Oc"| main == "Shot Oc Rs")%>%summarize(count=n())
+
+my_theme <- function(){
+  theme_light() +
+    theme(text = element_text(),  
+          panel.grid = element_blank(),
+          panel.border = element_blank(),
+          axis.title = element_blank(),
+          axis.ticks = element_blank(),
+          axis.text.x = element_blank(),
+          axis.text.y = element_text(size = 15, color = "gray10"),
+          plot.title =  element_text(size = 20, color = "black"))
+  }
+
+final_data <- ASA %>% 
+  # Calculate -- and format -- the percentage for each channel
+  mutate(bar_percentage = sprintf("%.1f%%", 100*(count / sum(.$count)))) %>% 
+  # Combine that percentage with the actual value
+  mutate(bar_label = paste0(format(count, big.mark = ","), ", ", bar_percentage)) %>% 
+  # Remove the "just the percentage" column
+  select(-bar_percentage)
+
+
+total_ASA <- paste0("All Shots: ",
+                      format(sum(final_data$count), big.mark = ","))
+
+
+ggplot(final_data, aes(x = Action, y = count)) +
+ggtitle("All Shots",  # Add the title and subtitle
+          subtitle = total_ASA) +   
+  geom_bar(stat = "identity", 
+           fill = "lightgreen",    
+           width = 0.50) +  
+geom_text(aes(label = bar_label, size = 5.5, hjust = 0)) +
+  coord_flip() +
+  scale_y_continuous(expand = c(0, 0),
+                     limits = c(0, max(final_data$count) * 1.3)) +
+  my_theme() +
+theme(legend.position="none", plot.title =  element_text(size = 20, color = "black"),plot.subtitle =  element_text(size = 18, color = "black"))
+```
+
+```{r, fig.width = 16, fig.height = 14}
+shotsA <- scrd %>%group_by(Team, Action) %>% filter(Teamnum == "A", Action=="Shot Right"| Action =="Shot Left"| Action =="Hp Shot"| Action =="Punch"|Action =="Fk Shot Right"| Action =="Fk Shot Left"
+|Action=="Mk Shot Right"| Action =="Mk Shot Left"|Action =="45 Shot Right"| Action =="45 Shot Left")
+
+p + geom_point(data = shotsA, aes(x=Areax, y=Areay, colour = octype, size = 8, shape = Action, stroke = 1.5)) + 
+   scale_colour_manual(values = colshotvertpal) +
+  geom_text_repel(data = shotsA, aes(x=Areax, y=Areay, label = plylabrec, col = octype), size = 8) +
+    scale_shape_manual(values = 0:18) +
+    theme(legend.position="bottom", legend.title=element_text(size=15), 
+          legend.text=element_text(size=20)) +
+    theme(plot.title = element_text(hjust=0.5)) +
+    theme(plot.subtitle = element_text(hjust=0.5)) +
+    guides(color = FALSE, size = FALSE) +
+    guides(shape = guide_legend(override.aes = list(size = 12)))
+```
+
+
+##Kerry
+
+```{r}
+
+ASB<- pass %>%group_by(Team, Action) %>% filter(Teamnum == "B", main =="Shot Oc"| main == "Shot Oc Rs")%>%summarize(count=n())
+
+my_theme <- function(){
+  theme_light() +
+    theme(text = element_text(),  
+          panel.grid = element_blank(),
+          panel.border = element_blank(),
+          axis.title = element_blank(),
+          axis.ticks = element_blank(),
+          axis.text.x = element_blank(),
+          axis.text.y = element_text(size = 15, color = "gray10"),
+          plot.title =  element_text(size = 20, color = "black"))
+  }
+
+final_data <- ASB%>% 
+  # Calculate -- and format -- the percentage for each channel
+  mutate(bar_percentage = sprintf("%.1f%%", 100*(count / sum(.$count)))) %>% 
+  # Combine that percentage with the actual value
+  mutate(bar_label = paste0(format(count, big.mark = ","), ", ", bar_percentage)) %>% 
+  # Remove the "just the percentage" column
+  select(-bar_percentage)
+
+
+total_ASB<- paste0("All Shots: ",
+                      format(sum(final_data$count), big.mark = ","))
+
+
+ggplot(final_data, aes(x = Action, y = count)) +
+ggtitle("All Shots",  # Add the title and subtitle
+          subtitle = total_ASB)+   
+  geom_bar(stat = "identity", 
+           fill = "lightgreen",    
+           width = 0.50) +  
+geom_text(aes(label = bar_label, size = 5.5, hjust = 0)) +
+  coord_flip() +
+  scale_y_continuous(expand = c(0, 0),
+                     limits = c(0, max(final_data$count) * 1.3)) +
+  my_theme() + theme(legend.position="none", plot.title =  element_text(size = 20, color = "black"),plot.subtitle =  element_text(size = 18, color = "black"))
+```
+
+```{r, fig.width = 16, fig.height = 14}
+
+shotsB <- scrd  %>%group_by(Team, Action) %>% filter(Teamnum == "B", Action=="Shot Right"| Action =="Shot Left"| Action =="Hp Shot"| Action =="Punch"|Action =="Fk Shot Right"| Action =="Fk Shot Left"
+|Action =="Mk Shot Right"| Action =="Mk Shot Left"|Action =="45 Shot Right"| Action =="45 Shot Left")
+
+p + geom_point(data = shotsB, aes(x=Areax, y=Areay, colour =octype , size = 8, shape = Action, stroke = 1.5)) + 
+   scale_colour_manual(values = colshotvertpal) +
+  geom_text_repel(data = shotsB, aes(x=Areax, y=Areay, label = plylabrec, col = octype), size = 8) +
+    scale_shape_manual(values = 0:18) +
+    theme(legend.position="bottom", legend.title=element_text(size=15), 
+          legend.text=element_text(size=20)) +
+    theme(plot.title = element_text(hjust=0.5)) +
+    theme(plot.subtitle = element_text(hjust=0.5)) +
+    guides(color = FALSE, size = FALSE) +
+    guides(shape = guide_legend(override.aes = list(size = 12)))
+
+```
+
+#Kick Outs
+
+##Mayo
+
+
+```{r}
+
+ko <- pass %>%group_by(Team, Action) %>% filter(Teamnum == "A", subset=="Ko Rec"| subset =="Ko ToL")%>%summarize(count=n())
+
+my_theme <- function(){
+  theme_light() +
+    theme(text = element_text(),  
+          panel.grid = element_blank(),
+          panel.border = element_blank(),
+          axis.title = element_blank(),
+          axis.ticks = element_blank(),
+          axis.text.x = element_blank(),
+          axis.text.y = element_text(size = 20, color = "gray10"))
+  }
+
+final_data <- ko %>% 
+  # Calculate -- and format -- the percentage for each channel
+  mutate(bar_percentage = sprintf("%.1f%%", 100*(count / sum(.$count)))) %>% 
+  # Combine that percentage with the actual value
+  mutate(bar_label = paste0(format(count, big.mark = ","), ", ", bar_percentage)) %>% 
+  # Remove the "just the percentage" column
+  select(-bar_percentage)
+
+
+total_ko <- paste0("Total Kickouts: ",
+                      format(sum(final_data$count), big.mark = ","))
+
+
+ggplot(final_data, aes(x = Action, y = count)) +
+ggtitle("Kickout Outcomes", 
+          subtitle = total_ko) +   
+  geom_bar(stat = "identity", 
+           fill = "lightgreen",    
+           width = 0.50) +  
+geom_text(aes(label = bar_label, size = 16, hjust = 0)) +
+  coord_flip() +
+  scale_y_continuous(expand = c(0, 0),
+                     limits = c(0, max(final_data$count) * 1.3)) +
+  my_theme() +
+theme(legend.position="none", plot.title =  element_text(size = 20, color = "black"),plot.subtitle =  element_text(size = 18, color = "black"))
+
+
+
+
+```
+
+```{r, fig.width = 16, fig.height = 10}
+
+pal <- c("Ko Rec" = "blue",
+"Ko Lost"  = "red",
+"KoBrk Rec" = "purple",
+"KoBrk Lost"  = "red",
+"Ko Mk Won"  = "black",
+"Ko Lost Mk" = "red",
+"Ko Unc Rec" = "white")
+
+pals <- c("Ko Rec" = 19,
+"Ko Lost"  = 4,
+"KoBrk Rec" = 19,
+"KoBrk Lost"  = 4,
+"Ko Mk Won"  = 19,
+"Ko Lost Mk" = 4,
+"Ko Unc Rec" = 19)
+
+
+
+#Map Team A
+komapA <-filter(pass, Teamnum == "A",subset =="Ko Rec"| subset =="Ko ToL")
+
+p + geom_point(data = komapA, aes(x=Areax, y=Areay, colour = Action, shape = Action, size = 6, stroke = 2))+
+geom_text_repel(data = komapA, aes(x=Areax, y=Areay, label = plylab, col = Action), size = 8) +
+theme(plot.title = element_text(hjust=0.5)) +
+theme(plot.subtitle = element_text(hjust=0.5)) +
+theme(legend.position="none") +
+scale_shape_manual(values= pals) +
+  scale_colour_manual(values = pal)
+
+```
+
+##Kerry
+
+```{r}
+
+ko <- pass %>%group_by(Team, Action) %>% filter(Teamnum == "B", subset=="Ko Rec"| subset =="Ko ToL")%>%summarize(count=n())
+
+my_theme <- function(){
+  theme_light() +
+    theme(text = element_text(),  
+          panel.grid = element_blank(),
+          panel.border = element_blank(),
+          axis.title = element_blank(),
+          axis.ticks = element_blank(),
+          axis.text.x = element_blank(),
+          axis.text.y = element_text(size = 20, color = "gray10"))
+  }
+
+final_data <- ko %>% 
+  # Calculate -- and format -- the percentage for each channel
+  mutate(bar_percentage = sprintf("%.1f%%", 100*(count / sum(.$count)))) %>% 
+  # Combine that percentage with the actual value
+  mutate(bar_label = paste0(format(count, big.mark = ","), ", ", bar_percentage)) %>% 
+  # Remove the "just the percentage" column
+  select(-bar_percentage)
+
+
+total_ko <- paste0("Total Kickouts: ",
+                      format(sum(final_data$count), big.mark = ","))
+
+
+ggplot(final_data, aes(x = Action, y = count)) +
+ggtitle("Kickout Outcomes", 
+          subtitle = total_ko) +   
+  geom_bar(stat = "identity", 
+           fill = "lightgreen",    
+           width = 0.50) +  
+geom_text(aes(label = bar_label, size = 16, hjust = 0)) +
+  coord_flip() +
+  scale_y_continuous(expand = c(0, 0),
+                     limits = c(0, max(final_data$count) * 1.3)) +
+  my_theme() +
+theme(legend.position="none", plot.title =  element_text(size = 20, color = "black"),plot.subtitle =  element_text(size = 18, color = "black"))
+
+
+```
+
+```{r, fig.width = 16, fig.height = 10}
+
+pal <- c("Ko Rec" = "blue",
+"Ko Lost"  = "red",
+"KoBrk Rec" = "purple",
+"KoBrk Lost"  = "red",
+"Ko Mk Won"  = "black",
+"Ko Lost Mk" = "red",
+"Ko Unc Rec" = "white")
+
+pals <- c("Ko Rec" = 19,
+"Ko Lost"  = 4,
+"KoBrk Rec" = 19,
+"KoBrk Lost"  = 4,
+"Ko Mk Won"  = 19,
+"Ko Lost Mk" = 4,
+"Ko Unc Rec" = 19)
+
+#Map Team B
+komapB <-filter(pass, Teamnum == "B", subset =="Ko Rec"| subset =="Ko ToL")
+
+p + geom_point(data = komapB, aes(x=Areax, y=Areay, colour = Action, shape = Action, size = 6, stroke = 2))+
+geom_text_repel(data = komapB, aes(x=Areax, y=Areay, label = plylab, col = Action), size = 8) +
+theme(plot.title = element_text(hjust=0.5)) +
+theme(plot.subtitle = element_text(hjust=0.5)) +
+theme(legend.position="none") +
+scale_shape_manual(values= pals) +
+  scale_colour_manual(values = pal)
+```
+
+#Turn overs/Possession Won
+
+```{r}
+paltow <- c("Tack W"="#000000",
+"KP Int"="#FFFFFF",
+"HP Int"="purple",
+"Kp Brk Int"="#FF6347",
+"Hp Brk Int"="#0000FF",
+"Kp Free Int"="#FFFF00",
+"Fk Brk Int"="#00FFFF",
+"Mk Kp Int"="#FF00FF",
+"Sl Int"="darkblue",
+"Sl Brk Int"=" black",
+"Ko Int"="#800000",
+"KoBrk Int"="#808000",
+"Ko Int Mk"="#D2691E",
+"Fk Short Gk"="#800080",
+"Short Gk"="#008080",
+"Loose TBW"="#000080",
+"Free Won Def"="#FFFFFF",
+"Sl Kp Won To"="darkred",
+"Rebnd Def"="#808080",
+"Loss BW"="#000000",
+"Brk Won"="#FF0000",
+"Loose RBW"="#800000")
+
+```
+##Mayo
+
+```{r}
+
+ToWA <- pass %>%group_by(Team, Action) %>% filter(Teamnum == "A", main =="ToW"| main == "Rbd Off")%>%summarize(count=n())
+
+my_theme <- function(){
+  theme_light() +
+    theme(text = element_text(),  
+          panel.grid = element_blank(),
+          panel.border = element_blank(),
+          axis.title = element_blank(),
+          axis.ticks = element_blank(),
+          axis.text.x = element_blank(),
+          axis.text.y = element_text(size = 15, color = "gray10"),
+          plot.title =  element_text(size = 20, color = "black"))
+  }
+
+final_data <- ToWA %>% 
+  # Calculate -- and format -- the percentage for each channel
+  mutate(bar_percentage = sprintf("%.1f%%", 100*(count / sum(.$count)))) %>% 
+  # Combine that percentage with the actual value
+  mutate(bar_label = paste0(format(count, big.mark = ","), ", ", bar_percentage)) %>% 
+  # Remove the "just the percentage" column
+  select(-bar_percentage)
+
+
+total_ToWA <- paste0("Total Possession Won: ",
+                      format(sum(final_data$count), big.mark = ","))
+
+
+ggplot(final_data, aes(x = Action, y = count)) +
+ggtitle("Possession Won",  # Add the title and subtitle
+          subtitle = total_ToWA) +   
+  geom_bar(stat = "identity", 
+           fill = "lightgreen",    
+           width = 0.50) +  
+geom_text(aes(label = bar_label, size = 5.5, hjust = 0)) +
+  coord_flip() +
+  scale_y_continuous(expand = c(0, 0),
+                     limits = c(0, max(final_data$count) * 1.3)) +
+  my_theme() +
+theme(legend.position="none", plot.title =  element_text(size = 20, color = "black"),plot.subtitle =  element_text(size = 18, color = "black"))
+```
+
+```{r, fig.width = 16, fig.height = 10}
+conqmapA <- filter(pass, Teamnum == "A", main == "ToW"| main == "Rbd Off")
+
+
+p + geom_point(data = conqmapA, aes(x=Areax, y=Areay, colour = Action, shape = main), size = 6)+
+geom_text_repel(data = conqmapA, aes(x=Areax, y=Areay, label = plylab, col = Action), size = 8) +
+theme(legend.position="none") + scale_colour_manual(
+    values = paltow)
+
+```
+
+##Kerry
+
+```{r}
+
+ToWA <- pass %>%group_by(Team, Action) %>% filter(Teamnum == "B", main =="ToW"| main == "Rbd Off")%>%summarize(count=n())
+
+my_theme <- function(){
+  theme_light() +
+    theme(text = element_text(),  
+          panel.grid = element_blank(),
+          panel.border = element_blank(),
+          axis.title = element_blank(),
+          axis.ticks = element_blank(),
+          axis.text.x = element_blank(),
+          axis.text.y = element_text(size = 15, color = "gray10"),
+          plot.title =  element_text(size = 20, color = "black"))
+  }
+
+final_data <- ToWA %>% 
+  # Calculate -- and format -- the percentage for each channel
+  mutate(bar_percentage = sprintf("%.1f%%", 100*(count / sum(.$count)))) %>% 
+  # Combine that percentage with the actual value
+  mutate(bar_label = paste0(format(count, big.mark = ","), ", ", bar_percentage)) %>% 
+  # Remove the "just the percentage" column
+  select(-bar_percentage)
+
+
+total_ToWA <- paste0("Total Possession Won: ",
+                      format(sum(final_data$count), big.mark = ","))
+
+
+ggplot(final_data, aes(x = Action, y = count)) +
+ggtitle("Possession Won",  # Add the title and subtitle
+          subtitle = total_ToWA) +   
+  geom_bar(stat = "identity", 
+           fill = "lightgreen",    
+           width = 0.50) +  
+geom_text(aes(label = bar_label, size = 5.5, hjust = 0)) +
+  coord_flip() +
+  scale_y_continuous(expand = c(0, 0),
+                     limits = c(0, max(final_data$count) * 1.3)) +
+  my_theme() +
+theme(legend.position="none", plot.title =  element_text(size = 20, color = "black"),plot.subtitle =  element_text(size = 18, color = "black"))
+```
+
+```{r, fig.width = 16, fig.height = 10}
+conqmapB <-filter(pass, Teamnum == "B", main == "ToW"| main == "Rbd Off")
+
+
+p + geom_point(data = conqmapB, aes(x=Areax, y=Areay, colour = Action, shape = Team ), size = 6)+
+geom_text_repel(data = conqmapB, aes(x=Areax, y=Areay, label = plylab, col = Action), size = 8) +
+theme(legend.position="none")+ scale_colour_manual(
+    values = paltow)
+
+  
+```
+
+#Frees Won
+
+##Mayo
+
+```{r}
+
+FKA <- pass %>%group_by(Team, Action) %>% filter(Teamnum == "A", main =="Fkw"| Action == "Free Won Def")%>%summarize(count=n())
+
+my_theme <- function(){
+  theme_light() +
+    theme(text = element_text(),  
+          panel.grid = element_blank(),
+          panel.border = element_blank(),
+          axis.title = element_blank(),
+          axis.ticks = element_blank(),
+          axis.text.x = element_blank(),
+          axis.text.y = element_text(size = 15, color = "gray10"),
+          plot.title =  element_text(size = 20, color = "black"))
+  }
+
+final_data <- FKA %>% 
+  # Calculate -- and format -- the percentage for each channel
+  mutate(bar_percentage = sprintf("%.1f%%", 100*(count / sum(.$count)))) %>% 
+  # Combine that percentage with the actual value
+  mutate(bar_label = paste0(format(count, big.mark = ","), ", ", bar_percentage)) %>% 
+  # Remove the "just the percentage" column
+  select(-bar_percentage)
+
+
+total_FKA <- paste0("Total Fk Won: ",
+                      format(sum(final_data$count), big.mark = ","))
+
+
+ggplot(final_data, aes(x = Action, y = count)) +
+ggtitle("Free Kicks Won",  # Add the title and subtitle
+          subtitle = total_FKA) +   
+  geom_bar(stat = "identity", 
+           fill = "lightgreen",    
+           width = 0.50) +  
+geom_text(aes(label = bar_label, size = 5.5, hjust = 0)) +
+  coord_flip() +
+  scale_y_continuous(expand = c(0, 0),
+                     limits = c(0, max(final_data$count) * 1.3)) +
+  my_theme() +
+theme(legend.position="none", plot.title =  element_text(size = 20, color = "black"),plot.subtitle =  element_text(size = 18, color = "black"))
+```
+
+```{r, fig.width = 16, fig.height = 10}
+
+freeAmap <- filter(pass, Teamnum == "A", Action == "Free Won"|Action == "Free Won Def")
+
+p + geom_point(data = freeAmap, aes(x=Areax, y=Areay, colour = Action, shape = Action, size = 6)) +
+geom_text_repel(data = freeAmap, aes(x=Areax, y=Areay, label = plylab, col = Action), size = 8) +
+theme(plot.title = element_text(hjust=0.5)) +
+theme(plot.subtitle = element_text(hjust=0.5)) +
+theme(legend.position="none")  +
+scale_shape_manual(values=c(15, 16)) +
+    scale_color_manual(values=c("white","blue"))
+```
+
+##Kerry
+
+```{r}
+
+FKB <- pass %>%group_by(Team, Action) %>% filter(Teamnum == "B", main =="Fkw"| Action == "Free Won Def")%>%summarize(count=n())
+
+my_theme <- function(){
+  theme_light() +
+    theme(text = element_text(),  
+          panel.grid = element_blank(),
+          panel.border = element_blank(),
+          axis.title = element_blank(),
+          axis.ticks = element_blank(),
+          axis.text.x = element_blank(),
+          axis.text.y = element_text(size = 15, color = "gray10"),
+          plot.title =  element_text(size = 20, color = "black"))
+  }
+
+final_data <- FKB %>% 
+  # Calculate -- and format -- the percentage for each channel
+  mutate(bar_percentage = sprintf("%.1f%%", 100*(count / sum(.$count)))) %>% 
+  # Combine that percentage with the actual value
+  mutate(bar_label = paste0(format(count, big.mark = ","), ", ", bar_percentage)) %>% 
+  # Remove the "just the percentage" column
+  select(-bar_percentage)
+
+
+total_FKB <- paste0("Total Fk Won: ",
+                      format(sum(final_data$count), big.mark = ","))
+
+
+ggplot(final_data, aes(x = Action, y = count)) +
+ggtitle("Free Kicks Won",  # Add the title and subtitle
+          subtitle = total_FKB) +   
+  geom_bar(stat = "identity", 
+           fill = "lightgreen",    
+           width = 0.50) +  
+geom_text(aes(label = bar_label, size = 5.5, hjust = 0)) +
+  coord_flip() +
+  scale_y_continuous(expand = c(0, 0),
+                     limits = c(0, max(final_data$count) * 1.3)) +
+  my_theme() +
+theme(legend.position="none", plot.title =  element_text(size = 20, color = "black"),plot.subtitle =  element_text(size = 18, color = "black"))
+```
+
+```{r, fig.width = 16, fig.height = 10}
+
+#Map Team B
+
+freeBmap <-filter(pass, Teamnum == "B", Action == "Free Won"|Action == "Free Won Def")
+
+p + geom_point(data = freeBmap, aes(x=Areax, y=Areay, colour = Action, shape = Action, size = 6)) +
+geom_text_repel(data = freeBmap, aes(x=Areax, y=Areay, label = plylab, col = Action), size = 8) +
+theme(plot.title = element_text(hjust=0.5)) +
+theme(plot.subtitle = element_text(hjust=0.5)) +
+theme(legend.position="none") +
+scale_shape_manual(values=c(15, 16)) +
+    scale_color_manual(values=c("white","blue"))
+```
+
+#Frees Loss
+
+##Mayo
+
+```{r}
+
+FKLA <- pass %>%group_by(Team, Action) %>% filter(Teamnum == "A",  Action == "Free Loss"|Action == "Free Loss Off")%>%summarize(count=n())
+
+my_theme <- function(){
+  theme_light() +
+    theme(text = element_text(),  
+          panel.grid = element_blank(),
+          panel.border = element_blank(),
+          axis.title = element_blank(),
+          axis.ticks = element_blank(),
+          axis.text.x = element_blank(),
+          axis.text.y = element_text(size = 15, color = "gray10"),
+          plot.title =  element_text(size = 20, color = "black"))
+  }
+
+final_data <- FKLA %>% 
+  # Calculate -- and format -- the percentage for each channel
+  mutate(bar_percentage = sprintf("%.1f%%", 100*(count / sum(.$count)))) %>% 
+  # Combine that percentage with the actual value
+  mutate(bar_label = paste0(format(count, big.mark = ","), ", ", bar_percentage)) %>% 
+  # Remove the "just the percentage" column
+  select(-bar_percentage)
+
+
+total_FKLA  <- paste0("Total Fk Loss: ",
+                      format(sum(final_data$count), big.mark = ","))
+
+
+ggplot(final_data, aes(x = Action, y = count)) +
+ggtitle("Free Kicks Loss",  # Add the title and subtitle
+          subtitle = total_FKLA) +   
+  geom_bar(stat = "identity", 
+           fill = "lightgreen",    
+           width = 0.50) +  
+geom_text(aes(label = bar_label, size = 5.5, hjust = 0)) +
+  coord_flip() +
+  scale_y_continuous(expand = c(0, 0),
+                     limits = c(0, max(final_data$count) * 1.3)) +
+  my_theme() +
+theme(legend.position="none", plot.title =  element_text(size = 20, color = "black"),plot.subtitle =  element_text(size = 18, color = "black"))
+```
+
+```{r, fig.width = 16, fig.height = 10}
+#Map Team A
+
+freeAmap <- filter(pass, Teamnum == "A", Action == "Free Loss"|Action == "Free Loss Off")
+
+p + geom_point(data = freeAmap, aes(x=Areax, y=Areay, colour = Action, shape = Action, size = 6)) +
+geom_text_repel(data = freeAmap, aes(x=Areax, y=Areay, label = plylab, col = Action), size = 8) +
+theme(plot.title = element_text(hjust=0.5)) +
+theme(plot.subtitle = element_text(hjust=0.5)) +
+theme(legend.position="none") +
+scale_shape_manual(values=c(15, 16)) +
+    scale_color_manual(values=c("red","red"))
+```
+
+##Kerry
+
+```{r}
+
+FKLB <- pass %>%group_by(Team, Action) %>% filter(Teamnum == "B", Action == "Free Loss"|Action == "Free Loss Off")%>%summarize(count=n())
+
+my_theme <- function(){
+  theme_light() +
+    theme(text = element_text(),  
+          panel.grid = element_blank(),
+          panel.border = element_blank(),
+          axis.title = element_blank(),
+          axis.ticks = element_blank(),
+          axis.text.x = element_blank(),
+          axis.text.y = element_text(size = 15, color = "gray10"),
+          plot.title =  element_text(size = 20, color = "black"))
+  }
+
+final_data <- FKLB %>% 
+  # Calculate -- and format -- the percentage for each channel
+  mutate(bar_percentage = sprintf("%.1f%%", 100*(count / sum(.$count)))) %>% 
+  # Combine that percentage with the actual value
+  mutate(bar_label = paste0(format(count, big.mark = ","), ", ", bar_percentage)) %>% 
+  # Remove the "just the percentage" column
+  select(-bar_percentage)
+
+
+total_FKLB <- paste0("Total Fk Loss: ",
+                      format(sum(final_data$count), big.mark = ","))
+
+
+ggplot(final_data, aes(x = Action, y = count)) +
+ggtitle("Free Kicks Loss",  # Add the title and subtitle
+          subtitle = total_FKLB) +   
+  geom_bar(stat = "identity", 
+           fill = "lightgreen",    
+           width = 0.50) +  
+geom_text(aes(label = bar_label, size = 5.5, hjust = 0)) +
+  coord_flip() +
+  scale_y_continuous(expand = c(0, 0),
+                     limits = c(0, max(final_data$count) * 1.3)) +
+  my_theme() +
+theme(legend.position="none", plot.title =  element_text(size = 20, color = "black"),plot.subtitle =  element_text(size = 18, color = "black"))
+```
+
+```{r, fig.width = 16, fig.height = 10}
+
+freeBmap <-filter(pass, Teamnum == "B", Action == "Free Loss"|Action == "Free Loss Off")
+
+p + geom_point(data = freeBmap, aes(x=Areax, y=Areay, colour = Action, shape = Action, size = 6)) +
+geom_text_repel(data = freeBmap, aes(x=Areax, y=Areay, label = plylab, col = Action), size = 8) +
+theme(plot.title = element_text(hjust=0.5)) +
+theme(plot.subtitle = element_text(hjust=0.5)) +
+theme(legend.position="none") +
+scale_shape_manual(values=c(15, 16)) +
+    scale_color_manual(values=c("red","red"))
+```
+
+#Passing
+
+```{r}
+
+palpatt<- c("Rec Op"="blue",
+"Rec Rs"="blue",
+"Pass ToL"="red",
+"Fk Loss ToL"="red",
+"Rs ToL"="red")
+
+palspatt <- c("Rec Op" = 1,
+"Rec Rs"  = 1,
+"Pass ToL" = 4,
+"Fk Loss ToL" = 4,
+"Rs ToL"= 4,
+"Hp"= 0,
+"Kp"= 5,
+"Mk Kp"= 2,
+"Mk Hp"= 6,
+"Fk Pass"= 10,
+"Sl Pass"= 9)
+
+```
+##All Passes - Mayo
+
+```{r, fig.width = 16, fig.height = 10}
+
+#All Pass
+
+passA <- passtofrom %>% filter(Teamnum == "A")
+
+p + geom_segment(data = passA, aes(x = Areax, y = Areay, xend = xend, yend = yend, colour = subrec)) +
+    geom_point(data = passA, aes(x = Areax, y = Areay, colour = subrec, shape = Action, size = 1,stroke = 2)) +
+    geom_point (data = passA, aes(x=xend, y=yend, colour = subrec, shape = subrec, size = 1,stroke = 2)) +   
+    theme(legend.position="bottom", legend.title=element_text(size=14), 
+          legend.text=element_text(size=16)) +
+    guides(color = FALSE, size = FALSE) +
+    guides(shape = guide_legend(override.aes = list(size = 14))) +
+scale_shape_manual(values= palspatt) +
+  scale_colour_manual(values = palpatt)
+```
+
+##All Passes - Kerry
+
+```{r, fig.width = 16, fig.height = 10}
+
+#All Pass
+
+passB <- passtofrom %>% filter(Teamnum == "B")
+
+p + geom_segment(data = passB, aes(x = Areax, y = Areay, xend = xend, yend = yend, colour = subrec)) +
+    geom_point(data = passB, aes(x = Areax, y = Areay, colour = subrec, shape = Action, size = 1,stroke = 2)) +
+    geom_point (data = passB, aes(x=xend, y=yend, colour = subrec, shape = subrec, size = 1,stroke = 2)) +   
+    theme(legend.position="bottom", legend.title=element_text(size=18), 
+          legend.text=element_text(size=20)) +
+    guides(color = FALSE, size = FALSE) +
+    guides(shape = guide_legend(override.aes = list(size = 18))) +
+scale_shape_manual(values= palspatt) +
+  scale_colour_manual(values = palpatt)
+
+```
+
+#Passes into 45
+
+##Mayo
+
+```{r, fig.width = 16, fig.height = 10}
+
+#passing to from
+advpassA <- passtofrom %>% filter(Areax <5.5 & xend > 5.5 , Teamnum == "A")
+
+p + geom_segment(data = advpassA, aes(x = Areax, y = Areay, xend = xend, yend = yend, colour = subrec)) +
+    geom_point(data = advpassA, aes(x = Areax, y = Areay, colour = subrec, shape = Action, size = 1,stroke = 2)) +
+    geom_point (data = advpassA, aes(x=xend, y=yend, colour = subrec, shape = subrec, size = 1,stroke = 2)) +   
+    theme(legend.position="bottom", legend.title=element_text(size=18), 
+          legend.text=element_text(size=20)) +
+    guides(color = FALSE, size = FALSE) +
+    guides(shape = guide_legend(override.aes = list(size = 18))) +
+scale_shape_manual(values= palspatt) +
+  scale_colour_manual(values = palpatt)
+
+```
+
+##Kerry
+
+```{r, fig.width = 16, fig.height = 10}
+advpassB <- passtofrom %>% filter(Areax <5.5 & xend > 5.5 , Teamnum == "B")
+
+p + geom_segment(data = advpassB, aes(x = Areax, y = Areay, xend = xend, yend = yend, colour = subrec)) +
+    geom_point(data = advpassB, aes(x = Areax, y = Areay, colour = subrec, shape = Action, size = 1,stroke = 2)) +
+    geom_point (data = advpassB, aes(x=xend, y=yend, colour = subrec, shape = subrec, size = 1,stroke = 2)) +   
+    theme(legend.position="bottom", legend.title=element_text(size=18), 
+          legend.text=element_text(size=20)) +
+    guides(color = FALSE, size = FALSE) +
+    guides(shape = guide_legend(override.aes = list(size = 18))) +
+    scale_shape_manual(values= palspatt) +
+    scale_colour_manual(values = palpatt)
+```
+
+#Passes Inside Opp 65
+
+##Mayo
+
+```{r, fig.width = 16, fig.height = 10}
+
+#passing to from
+advpassA <- passtofrom %>% filter(Areax >4.5, Teamnum == "A")
+
+p + geom_segment(data = advpassA, aes(x = Areax, y = Areay, xend = xend, yend = yend, colour = subrec)) +
+    geom_point(data = advpassA, aes(x = Areax, y = Areay, colour = subrec, shape = Action, size = 1,stroke = 2)) +
+    geom_point (data = advpassA, aes(x=xend, y=yend, colour = subrec, shape = subrec, size = 1,stroke = 2)) +   
+    theme(legend.position="bottom", legend.title=element_text(size=18), 
+          legend.text=element_text(size=20)) +
+    guides(color = FALSE, size = FALSE) +
+    guides(shape = guide_legend(override.aes = list(size = 18))) +
+scale_shape_manual(values= palspatt) +
+  scale_colour_manual(values = palpatt)
+
+```
+
+##Kerry
+
+```{r, fig.width = 16, fig.height = 10}
+advpassB <- passtofrom %>% filter(Areax >4.5, Teamnum == "B")
+
+p + geom_segment(data = advpassB, aes(x = Areax, y = Areay, xend = xend, yend = yend, colour = subrec)) +
+    geom_point(data = advpassB, aes(x = Areax, y = Areay, colour = subrec, shape = Action, size = 1,stroke = 2)) +
+    geom_point (data = advpassB, aes(x=xend, y=yend, colour = subrec, shape = subrec, size = 1,stroke = 2)) +   
+    theme(legend.position="bottom", legend.title=element_text(size=18), 
+          legend.text=element_text(size=20)) +
+    guides(color = FALSE, size = FALSE) +
+    guides(shape = guide_legend(override.aes = list(size = 18))) +
+    scale_shape_manual(values= palspatt) +
+    scale_colour_manual(values = palpatt)
+```
+
+
+#Pass Network 
+
+##Mayo
+
+```{r, fig.width = 20, fig.height = 20}
+linksAB <- read.csv(file="c:/Users/donagh/OneDrive/Spreadsheet fun/PA Analytics/PA Template/mayker/linksmayker.csv", header=TRUE, sep=";")
+attach (linksAB)
+
+nodesteamA <- read.csv(file="c:/Users/donagh/OneDrive/Spreadsheet fun/PA Analytics/PA Template/mayker/nodesmayker.csv", header=TRUE, sep=";")
+attach (nodesteamA)
+
+linksA <- linksAB %>% filter( Teamnum == "A") %>% select(Teamnum,plypass, plyrec)
+
+linksA <- rename(count(linksA, plypass, plyrec), weight = n)
+
+netA <- graph_from_data_frame(d=linksA, vertices=nodesteamA, directed=T) 
+
+# Generate colors based on number of position (ie gk back mf for) type:
+colrs <- c("lightgreen", "lightgreen", "lightgreen", "lightgreen")
+V(netA)$color <- colrs[V(netA)$posn]
+
+# Compute node degrees (#links) and use that to set node size:
+deg <- degree(netA, mode="all")
+V(netA)$size <- deg*2 #size of node 
+
+nodes.coordA <- data.frame(data = nodesteamA,
+    x= Areax,
+    y=Areay)
+
+plot(netA, edge.arrow.size=.4, edge.color="tomato",edge.arrow.width=.4,
+      edge.width=E(netA)$weight*5, layout=as.matrix(nodes.coordA[,c("x","y")]), vertex.label.color="tomato", vertex.label = labelA, vertex.label.cex = 5)
+```
+
+###In Degree (Number of Players a Player Received a Pass from)
+
+```{r}
+-sort(-degree(netA, mode="in"))
+```
+###Out Degree (Number of Players a Player Made a Pass to)
+
+```{r}
+-sort(-degree(netA, mode="out"))
+```
+
+###Strength in (Number of Passes Received by a Player)
+
+```{r}
+-sort(-strength(netA, mode="in"))
+```
+
+###Strength Out (Number of Passes/Shots Made by a Player)
+
+```{r}
+-sort(-strength(netA, mode="out"))
+```
+
+###Betweenness Centrality (Flow of Passes through a Player)
+
+```{r}
+-sort(-betweenness(netA, directed=F, weights=NA, normalized = T))
+```
+
+###Closeness Centrality (How Well connected and central a Player is within the Teams Network)
+
+```{r}
+-sort(-closeness(netA, mode="all", weights=NA, normalized=T))
+```
+
+###Entropy (The Unpredictability in who a Player Passes to/Takes shot)
+
+```{r}
+sort(diversity(netA))
+```
+
+###Global clustering coefficient (Groups of Players who pass to each other)
+
+```{r}
+transitivity(netA)
+```
+###eigen_centrality (How well connected the well connected are)
+```{r}
+-sort(-eigen_centrality(netA)$vector)
+```
+
+##Kerry
+
+```{r, fig.width = 20, fig.height = 20}
+
+linksAB <- read.csv(file="c:/Users/donagh/OneDrive/Spreadsheet fun/PA Analytics/PA Template/mayker/linksmayker.csv", header=TRUE, sep=";")
+attach (linksAB)
+
+
+nodesteamB <- read.csv(file="c:/Users/donagh/OneDrive/Spreadsheet fun/PA Analytics/PA Template/mayker/nodeskermay.csv", header=TRUE, sep=";")
+attach (nodesteamB)
+
+linksB <- linksAB %>% filter( Teamnum == "B") %>% select(Teamnum,plypass, plyrec)
+
+linksB <- rename(count(linksB, plypass, plyrec), weight = n)
+
+netB <- graph_from_data_frame(d=linksB, vertices=nodesteamB, directed=T) 
+
+# Generate colors based on number of position (ie gk back mf for) type:
+colrs <- c("darkgreen", "gold", "gold", "gold")
+V(netB)$color <- colrs[V(netB)$posn]
+
+# Compute node degrees (#links) and use that to set node size:
+deg <- degree(netB, mode="all")
+V(netB)$size <- deg*2 #size of node 
+
+nodes.coordB <- data.frame(data = nodesteamB,
+    x= Areax,
+    y=Areay)
+
+plot(netB, edge.arrow.size=.4, edge.color="gold",edge.arrow.width=.4,
+      edge.width=E(netB)$weight*5, layout=as.matrix(nodes.coordB[,c("x","y")]), vertex.label.color="gold",  vertex.label = labelB, vertex.label.cex = 5)
+
+
+```
+
+###In Degree (Number of Players a Player Received a Pass from)
+
+```{r}
+-sort(-degree(netB, mode="in"))
+```
+###Out Degree (Number of Players a Player Made a Pass to)
+
+```{r}
+-sort(-degree(netB, mode="out"))
+```
+
+###Strength in (Number of Passes Received by a Player)
+
+```{r}
+-sort(-strength(netB, mode="in"))
+```
+
+###Strength Out (Number of Passes/Shots Made by a Player)
+
+```{r}
+-sort(-strength(netB, mode="out"))
+```
+###Betweenness Centrality (Flow of Passes through a Player)
+
+```{r}
+-sort(-betweenness(netB, directed=F, weights=NA, normalized = T))
+```
+
+###Closeness Centrality (How Well connected and central a Player is within the Teams Network)
+
+```{r}
+-sort(-closeness(netB, mode="all", weights=NA, normalized=T))
+```
+
+###Entropy (The Unpredictability in who a Player Passes to/Takes shot)
+
+```{r}
+sort(diversity(netB))
+```
+
+###Global clustering coefficient (Groups of Players who pass to each other)
+
+```{r}
+transitivity(netB)
+```
+###eigen_centrality (How well connected the well connected are)
+```{r}
+-sort(-eigen_centrality(netB)$vector)
+```
+
+#Total Posessions per Player
+
+##Mayo
+
+```{r, fig.width = 16, fig.height = 10}
+
+plyA <- plytree%>% filter(Teamnum == "A")
+
+treemap(dtf = plyA,
+        index=c("plylab"),
+        vSize="possessions",
+        vColor="possessions",
+        palette="Spectral",
+        type="value",
+        border.col=c("grey70", "grey90"),
+        fontsize.title = 36,
+        algorithm="pivotSize",
+        title ="On Ball",
+        title.legend="Possessions",
+        fontsize.labels= 25)
+```
+
+##Kerry
+
+```{r, fig.width = 16, fig.height = 10}
+
+plyB<- plytree%>% filter(Teamnum == "B")
+treemap(dtf = plyB,
+        index=c("plylab"),
+        vSize="possessions",
+        vColor="possessions",
+        palette="Spectral",
+        type="value",
+        border.col=c("grey70", "grey90"),
+        fontsize.title = 26,
+        algorithm="pivotSize",
+        title ="On Ball",
+        title.legend="Possessions",
+        fontsize.labels= 25,
+         inflate.labels=F)
+
+```
+
+##Posessions Per Playing Time
+
+```{r}
+ggplot(data = plystats , aes(x = plytime, y = vop)) + 
+geom_point(data = plystats , aes(x = plytime, y = vop, colour = Team), size =2) +
+geom_text_repel(data = plystats , aes(x = plytime, y = vop, colour = Team, label = ply), size = 4) +
+theme_classic () +
+guides(size = FALSE) + 
+  theme(legend.position="bottom")
+```
+
+##Open Play Shots vs Play Time
+
+```{r}
+ggplot(data = plystats , aes(x = plytime, y = opshots)) + 
+geom_point(data = plystats , aes(x = plytime, y = opshots, colour = Team), size = 2) +
+geom_text_repel(data = plystats , aes(x = plytime, y = opshots, colour = Team, label = ply), size = 4) +
+theme_classic () +
+guides(color = FALSE, size = FALSE) + 
+  theme(legend.position="bottom")
+```
+
+##Open Play Scores vs Play Time
+
+```{r}
+ggplot(data = plystats , aes(x = plytime, y = opscr)) + 
+geom_point(data = plystats , aes(x = plytime, y = opscr, colour = Team), size = 2) +
+geom_text_repel(data = plystats , aes(x = plytime, y = opscr, colour = Team, label = ply), size = 4) +
+theme_classic () +
+guides(color = FALSE, size = FALSE) + 
+  theme(legend.position="bottom")
+```
+
+##Open Play Shots vs Open Play Score
+
+```{r}
+plystatsscr <- plystats %>% filter(opscr >0)
+
+ggplot(data = plystatsscr , aes(x = opshots, y = opscr)) + 
+geom_point(data = plystatsscr , aes(x = opshots, y = opscr, colour = Team), size = 2) +
+geom_text_repel(data = plystatsscr , aes(x = opshots, y = opscr, colour = Team, label = ply), size = 4) +
+theme_classic () +
+guides(color = FALSE, size = FALSE) + 
+  theme(legend.position="bottom")
+```

@@ -1,0 +1,3866 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>St Judes (0.11) vs St Vincents (0.04)</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Witness the Analysis</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Home
+  </a>
+</li>
+<li>
+  <a href="matches.html">
+    <span class="fa fa-volleyball-ball"></span>
+     
+    Matches
+  </a>
+</li>
+<li>
+  <a href="https://witnesstheanalysis.shinyapps.io/Results/">
+    <span class="fas fa fas fa-book"></span>
+     
+    Results
+  </a>
+</li>
+<li>
+  <a href="https://witnesstheanalysis.wordpress.com/2020/07/10/a-match-tracker-application-for-windows-version-3/">
+    <span class="fas fa fas fa-pen"></span>
+     
+    Analysis App
+  </a>
+</li>
+<li>
+  <a href="Trackers.html">
+    <span class="fas fa fas fa-desktop"></span>
+     
+    Shiny Apps
+  </a>
+</li>
+<li>
+  <a href="https://github.com/witnesstheanalysis/witnesstheanalysis">
+    <span class="fa fa-github fa-lg"></span>
+     
+    Codes
+  </a>
+</li>
+<li>
+  <a href="contact.html">
+    <span class="fa fa-envelope fa-lg"></span>
+     
+    Contact
+  </a>
+</li>
+<li>
+  <a href="https://twitter.com/WtAnalysis">
+    <span class="fa fa-twitter fa-lg"></span>
+     
+    Twitter
+  </a>
+</li>
+<li>
+  <a href="https://witnesstheanalysis.wordpress.com">
+    <span class="fa fa-wordpress fa-lg"></span>
+     
+    Blog
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">St Judes (0.11) vs St Vincents (0.04)</h1>
+
+</div>
+
+
+<p>Dublin Senior Football Championship QF - 2019</p>
+<p>#Summary ##Starting Line Up (Number, Player, Playing time) ###St Judes <img src="judvin_files/figure-html/unnamed-chunk-6-1.png" width="1536" /></p>
+<p>###St Vincents <img src="judvin_files/figure-html/unnamed-chunk-7-1.png" width="1536" /></p>
+##Scores
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+St.Judes
+</th>
+<th style="text-align:left;">
+St.Vincents
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Clarke 0-4 (4f),
+</td>
+<td style="text-align:left;">
+Ca Diamond 0-1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+McManamon 0-3 (1f),
+</td>
+<td style="text-align:left;">
+Baxter 0-1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Joyce 0-1
+</td>
+<td style="text-align:left;">
+Quinn 0-1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Devlin 0-1
+</td>
+<td style="text-align:left;">
+Feeney 0-1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+McLoughlin 0-1
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Coakley 0-1 (1f)
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="judvin_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+##Efficiency
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Team
+</th>
+<th style="text-align:left;">
+Score.Eff..
+</th>
+<th style="text-align:left;">
+Shots.PerPoss
+</th>
+<th style="text-align:left;">
+Scores.PP
+</th>
+<th style="text-align:left;">
+Op.Scores.PP
+</th>
+<th style="text-align:left;">
+Fk.Score.
+</th>
+<th style="text-align:left;">
+Ko.
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+St Judes
+</td>
+<td style="text-align:left;">
+42%
+</td>
+<td style="text-align:left;">
+41%
+</td>
+<td style="text-align:left;">
+10%
+</td>
+<td style="text-align:left;">
+10%
+</td>
+<td style="text-align:left;">
+75%
+</td>
+<td style="text-align:left;">
+79%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St Vincents
+</td>
+<td style="text-align:left;">
+25%
+</td>
+<td style="text-align:left;">
+45%
+</td>
+<td style="text-align:left;">
+8%
+</td>
+<td style="text-align:left;">
+8%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+63%
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="judvin_files/figure-html/unnamed-chunk-11-1.png" width="50%" /><img src="judvin_files/figure-html/unnamed-chunk-11-2.png" width="50%" /></p>
+<p>##Scoring Timeline <img src="judvin_files/figure-html/unnamed-chunk-12-1.png" width="1536" /></p>
+<p>##Score Differential <img src="judvin_files/figure-html/unnamed-chunk-13-1.png" width="1536" /></p>
+<p>#Positioning &amp; Possessions ##Average Position by Action ###St Judes ###Game <img src="judvin_files/figure-html/unnamed-chunk-14-1.png" width="1536" /></p>
+<p>###Period <img src="judvin_files/figure-html/unnamed-chunk-15-1.png" width="50%" /><img src="judvin_files/figure-html/unnamed-chunk-15-2.png" width="50%" /><img src="judvin_files/figure-html/unnamed-chunk-15-3.png" width="50%" /><img src="judvin_files/figure-html/unnamed-chunk-15-4.png" width="50%" /></p>
+<p>###St Vincents ###Game <img src="judvin_files/figure-html/unnamed-chunk-16-1.png" width="1536" /></p>
+<p>###Period <img src="judvin_files/figure-html/unnamed-chunk-17-1.png" width="50%" /><img src="judvin_files/figure-html/unnamed-chunk-17-2.png" width="50%" /><img src="judvin_files/figure-html/unnamed-chunk-17-3.png" width="50%" /><img src="judvin_files/figure-html/unnamed-chunk-17-4.png" width="50%" /></p>
+<p>##Areas of Play by Possession ###St Judes <img src="judvin_files/figure-html/unnamed-chunk-18-1.png" width="1536" /></p>
+<p>###St Vincents <img src="judvin_files/figure-html/unnamed-chunk-19-1.png" width="1536" /></p>
+<p>##Denisty Map (All Actions) ###St Judes <img src="judvin_files/figure-html/unnamed-chunk-20-1.png" width="1536" /></p>
+<p>###St Vincents <img src="judvin_files/figure-html/unnamed-chunk-21-1.png" width="1536" /></p>
+<p>##Path of Possession</p>
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Lines
+</th>
+<th style="text-align:left;">
+X
+</th>
+<th style="text-align:left;">
+X.1
+</th>
+<th style="text-align:left;">
+X.2
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Action
+</td>
+<td style="text-align:left;">
+Colour
+</td>
+<td style="text-align:left;">
+Action
+</td>
+<td style="text-align:left;">
+Colour
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hand Pass
+</td>
+<td style="text-align:left;">
+Black
+</td>
+<td style="text-align:left;">
+Kickout Lost
+</td>
+<td style="text-align:left;">
+Dark Red
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Run
+</td>
+<td style="text-align:left;">
+Blue
+</td>
+<td style="text-align:left;">
+Kick Pass Left
+</td>
+<td style="text-align:left;">
+Pink
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Score
+</td>
+<td style="text-align:left;">
+Yellow
+</td>
+<td style="text-align:left;">
+Kick Pass Right
+</td>
+<td style="text-align:left;">
+White
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Miss shot
+</td>
+<td style="text-align:left;">
+Red
+</td>
+<td style="text-align:left;">
+Fk/Mk/Sl Pass
+</td>
+<td style="text-align:left;">
+Light Blue
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Kickout
+</td>
+<td style="text-align:left;font-weight: bold;">
+Gold
+</td>
+<td style="text-align:left;font-weight: bold;">
+Pass Loss
+</td>
+<td style="text-align:left;font-weight: bold;">
+Red
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Dots
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Action
+</td>
+<td style="text-align:left;">
+Colour
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Possession Won
+</td>
+<td style="text-align:left;">
+Purple
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Ko/Pass Lost
+</td>
+<td style="text-align:left;">
+Red
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Fk Won
+</td>
+<td style="text-align:left;">
+Blue
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Fk Won (in 45)
+</td>
+<td style="text-align:left;">
+Orange
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Kickout Won
+</td>
+<td style="text-align:left;">
+Black
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+</tbody>
+</table>
+<p>###St Judes - Game <img src="judvin_files/figure-html/unnamed-chunk-24-1.png" width="1536" /></p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-25-1.png" width="1536" /></p>
+<p>###Pop Starting from Possession Won <img src="judvin_files/figure-html/unnamed-chunk-26-1.png" width="1536" /></p>
+<p>###Pop Starting from Kick Out <img src="judvin_files/figure-html/unnamed-chunk-27-1.png" width="1536" /></p>
+<p>###St Judes - Period 1 <img src="judvin_files/figure-html/unnamed-chunk-28-1.png" width="1536" /></p>
+<p>###St Judes - Period 2 <img src="judvin_files/figure-html/unnamed-chunk-29-1.png" width="1536" /></p>
+<p>###St Judes - Period 3 <img src="judvin_files/figure-html/unnamed-chunk-30-1.png" width="1536" /></p>
+<p>###St Judes - Period 4 <img src="judvin_files/figure-html/unnamed-chunk-31-1.png" width="1536" /></p>
+<p>###St Vincents - Game <img src="judvin_files/figure-html/unnamed-chunk-32-1.png" width="1536" /></p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-33-1.png" width="1536" /></p>
+<p>###Pop Starting from Possession Won</p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-34-1.png" width="1536" /></p>
+<p>###Pop Starting from Kick Out</p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-35-1.png" width="1536" /></p>
+<p>###St Vincents Period - 1 <img src="judvin_files/figure-html/unnamed-chunk-36-1.png" width="1536" /></p>
+<p>###St Vincents Period - 2 <img src="judvin_files/figure-html/unnamed-chunk-37-1.png" width="1536" /></p>
+<p>###St Vincents Period - 3 <img src="judvin_files/figure-html/unnamed-chunk-38-1.png" width="1536" /></p>
+<p>###St Vincents Period - 4 <img src="judvin_files/figure-html/unnamed-chunk-39-1.png" width="1536" /></p>
+<p>##45 Entries ###St Judes - Game</p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-40-1.png" width="1536" /></p>
+<p>###St Judes - Period 1</p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-41-1.png" width="1536" /></p>
+<p>###St Judes - Period 2</p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-42-1.png" width="1536" /></p>
+<p>###St Judes - Period 3</p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-43-1.png" width="1536" /></p>
+<p>###St Judes - Period 4</p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-44-1.png" width="1536" /></p>
+<p>###St Vincents - Game</p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-45-1.png" width="1536" /></p>
+<p>###St Vincents - Period 1</p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-46-1.png" width="1536" /></p>
+<p>###St Vincents- Period 2</p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-47-1.png" width="1536" /></p>
+<p>###St Vincents - Period 3</p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-48-1.png" width="1536" /></p>
+<p>###St Vincents - Period 4</p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-49-1.png" width="1536" /></p>
+<p>###St Judes Total</p>
+<pre><code>##   count
+## 1    41</code></pre>
+<p>###St Judes Handpass</p>
+<pre><code>##   count
+## 1     6</code></pre>
+<p>###St Judes Run</p>
+<pre><code>##   count
+## 1    18</code></pre>
+<p>###St Judes Kick Pass Right</p>
+<pre><code>##   count
+## 1     6</code></pre>
+<p>###St Judes Pass Lost</p>
+<pre><code>##   count
+## 1     3</code></pre>
+<p>###St Judes Kick Pass Left</p>
+<pre><code>##   count
+## 1     7</code></pre>
+<p>###St Judes Fk/Mk/Sl Pass</p>
+<pre><code>##   count
+## 1     1</code></pre>
+<p>###St Vincents Total</p>
+<pre><code>##   count
+## 1    33</code></pre>
+<p>###St Vincents Handpass</p>
+<pre><code>##   count
+## 1     9</code></pre>
+<p>###St Vincents Run</p>
+<pre><code>##   count
+## 1     9</code></pre>
+<p>###St Vincents Kick Pass Right</p>
+<pre><code>##   count
+## 1     6</code></pre>
+<p>###St Vincents Pass Lost</p>
+<pre><code>##   count
+## 1     6</code></pre>
+<p>###St Vincents Kick Pass Left</p>
+<pre><code>##   count
+## 1     1</code></pre>
+<p>###St Vincents Fk/Mk/Sl Pass</p>
+<pre><code>##   count
+## 1     1</code></pre>
+<p>#General ##Kick Outs ###St Judes</p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-64-1.png" width="672" /></p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-65-1.png" width="1536" /></p>
+<p>###Period 1 <img src="judvin_files/figure-html/unnamed-chunk-66-1.png" width="1536" /></p>
+<p>###Period 2 <img src="judvin_files/figure-html/unnamed-chunk-67-1.png" width="1536" /></p>
+<p>###Period 3</p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-68-1.png" width="1536" /></p>
+<p>###Period 4</p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-69-1.png" width="1536" /></p>
+<p>###Kickout Efficiency <img src="judvin_files/figure-html/unnamed-chunk-70-1.png" width="1536" /></p>
+<p>###Kickout Network - St Judes <img src="judvin_files/figure-html/unnamed-chunk-71-1.png" width="1920" /></p>
+<p>###Kickout Density <img src="judvin_files/figure-html/unnamed-chunk-72-1.png" width="1536" /></p>
+<p>###St Vincents</p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-73-1.png" width="672" /></p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-74-1.png" width="1536" /></p>
+<p>###Period 1 <img src="judvin_files/figure-html/unnamed-chunk-75-1.png" width="1536" /></p>
+<p>###Period 2 <img src="judvin_files/figure-html/unnamed-chunk-76-1.png" width="1536" /></p>
+<p>###Period 3</p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-77-1.png" width="1536" /></p>
+<p>###Period 4</p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-78-1.png" width="1536" /></p>
+<p>###Kickout Efficiency</p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-79-1.png" width="1536" /></p>
+<p>###Kickout Network - St Vincents <img src="judvin_files/figure-html/unnamed-chunk-80-1.png" width="1920" /></p>
+<p>###Kickout Density <img src="judvin_files/figure-html/unnamed-chunk-81-1.png" width="1536" /></p>
+<p>##Turn overs/Possession Won</p>
+<p>###St Judes</p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-83-1.png" width="672" /></p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-84-1.png" width="1536" /></p>
+<p>###St Vincents</p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-85-1.png" width="672" /></p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-86-1.png" width="1536" /></p>
+<p>##Frees Won ###St Judes</p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-87-1.png" width="672" /></p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-88-1.png" width="1536" /></p>
+<p>###St Vincents</p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-89-1.png" width="672" /></p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-90-1.png" width="1536" /></p>
+<p>##Frees Loss ###St Judes</p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-91-1.png" width="672" /></p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-92-1.png" width="1536" /></p>
+<p>###St Vincents</p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-93-1.png" width="672" /></p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-94-1.png" width="1536" /></p>
+<p>#Attacking</p>
+##Attacking Stats
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1">
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+St Judes
+</div>
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+St Vincents
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+X
+</th>
+<th style="text-align:left;">
+Shot
+</th>
+<th style="text-align:left;">
+Score
+</th>
+<th style="text-align:left;">
+shot
+</th>
+<th style="text-align:left;">
+score
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+AttTime
+</td>
+<td style="text-align:left;">
+00:09:38
+</td>
+<td style="text-align:left;">
+00:06:18
+</td>
+<td style="text-align:left;">
+00:00:00
+</td>
+<td style="text-align:left;">
+00:01:58
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+possave
+</td>
+<td style="text-align:left;">
+00:00:29
+</td>
+<td style="text-align:left;">
+00:00:34
+</td>
+<td style="text-align:left;">
+00:00:26
+</td>
+<td style="text-align:left;">
+00:00:30
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+phaseave
+</td>
+<td style="text-align:left;">
+00:00:19
+</td>
+<td style="text-align:left;">
+00:00:20
+</td>
+<td style="text-align:left;">
+00:00:15
+</td>
+<td style="text-align:left;">
+00:00:30
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+</td>
+<td style="text-align:left;">
+Origin Type
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+</td>
+<td style="text-align:left;">
+Shot
+</td>
+<td style="text-align:left;">
+Score
+</td>
+<td style="text-align:left;">
+shot
+</td>
+<td style="text-align:left;">
+score
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+PW
+</td>
+<td style="text-align:left;">
+15
+</td>
+<td style="text-align:left;">
+9
+</td>
+<td style="text-align:left;">
+14
+</td>
+<td style="text-align:left;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Ko
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+</td>
+<td style="text-align:left;">
+Pitch Area Origin
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+</td>
+<td style="text-align:left;">
+Shot
+</td>
+<td style="text-align:left;">
+Score
+</td>
+<td style="text-align:left;">
+shot
+</td>
+<td style="text-align:left;">
+score
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Def
+</td>
+<td style="text-align:left;">
+11
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+11
+</td>
+<td style="text-align:left;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Def Mid
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Att Mid
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Att
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+</td>
+<td style="text-align:left;">
+Poss Duration
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+secs
+</td>
+<td style="text-align:left;">
+Shot
+</td>
+<td style="text-align:left;">
+Score
+</td>
+<td style="text-align:left;">
+shot
+</td>
+<td style="text-align:left;">
+score
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+0-9
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+10-19
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+20-29
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:left;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+30-39
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+40-49
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+50-59
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+60-69
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+70+
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+</tr>
+</tbody>
+</table>
+##Shot Stats
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Team
+</th>
+<th style="text-align:left;">
+Poss
+</th>
+<th style="text-align:left;">
+Phase
+</th>
+<th style="text-align:left;">
+All.Shots
+</th>
+<th style="text-align:left;">
+All.Scores
+</th>
+<th style="text-align:left;">
+Shots.Per.Poss
+</th>
+<th style="text-align:left;">
+Scores.PP
+</th>
+<th style="text-align:left;">
+Shots.Op
+</th>
+<th style="text-align:left;">
+Scores.Op
+</th>
+<th style="text-align:left;">
+Score.Eff..
+</th>
+<th style="text-align:left;">
+Op.Scores.PP
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+St Judes
+</td>
+<td style="text-align:left;">
+49
+</td>
+<td style="text-align:left;">
+65
+</td>
+<td style="text-align:left;">
+20
+</td>
+<td style="text-align:left;">
+11
+</td>
+<td style="text-align:left;">
+41%
+</td>
+<td style="text-align:left;">
+22%
+</td>
+<td style="text-align:left;">
+12
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+42%
+</td>
+<td style="text-align:left;">
+10%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+St Vincents
+</td>
+<td style="text-align:left;">
+49
+</td>
+<td style="text-align:left;">
+65
+</td>
+<td style="text-align:left;">
+22
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+45%
+</td>
+<td style="text-align:left;">
+8%
+</td>
+<td style="text-align:left;">
+16
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+25%
+</td>
+<td style="text-align:left;">
+8%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;font-weight: bold;">
+Team
+</td>
+<td style="text-align:left;font-weight: bold;">
+Poss Time
+</td>
+<td style="text-align:left;font-weight: bold;">
+Ave Poss Shot
+</td>
+<td style="text-align:left;font-weight: bold;">
+Ave Phase Shot
+</td>
+<td style="text-align:left;font-weight: bold;">
+Ave Poss Scr
+</td>
+<td style="text-align:left;font-weight: bold;">
+Ave Phase Scr
+</td>
+<td style="text-align:left;font-weight: bold;">
+Ave Act Poss
+</td>
+<td style="text-align:left;font-weight: bold;">
+Ave Act Sht
+</td>
+<td style="text-align:left;font-weight: bold;">
+Ave Act Scr
+</td>
+<td style="text-align:left;font-weight: bold;">
+</td>
+<td style="text-align:left;font-weight: bold;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+St Judes
+</td>
+<td style="text-align:left;">
+00:20:13
+</td>
+<td style="text-align:left;">
+00:00:29
+</td>
+<td style="text-align:left;">
+00:00:19
+</td>
+<td style="text-align:left;">
+00:00:34
+</td>
+<td style="text-align:left;">
+00:00:20
+</td>
+<td style="text-align:left;">
+13.53
+</td>
+<td style="text-align:left;">
+16.80
+</td>
+<td style="text-align:left;">
+19.09
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+St Vincents
+</td>
+<td style="text-align:left;">
+00:15:43
+</td>
+<td style="text-align:left;">
+00:00:26
+</td>
+<td style="text-align:left;">
+00:00:15
+</td>
+<td style="text-align:left;">
+00:00:30
+</td>
+<td style="text-align:left;">
+00:00:30
+</td>
+<td style="text-align:left;">
+11.16
+</td>
+<td style="text-align:left;">
+15.16
+</td>
+<td style="text-align:left;">
+19.25
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+</tbody>
+</table>
+##Shot Origin &amp; Time
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<tbody>
+<tr>
+<td style="text-align:left;">
+St Judes
+</td>
+<td style="text-align:left;">
+Shots
+</td>
+<td style="text-align:left;">
+Time (secs)
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Area
+</td>
+<td style="text-align:left;">
+0-9
+</td>
+<td style="text-align:left;">
+10-19
+</td>
+<td style="text-align:left;">
+20-29
+</td>
+<td style="text-align:left;">
+30-39
+</td>
+<td style="text-align:left;">
+40-49
+</td>
+<td style="text-align:left;">
+50-59
+</td>
+<td style="text-align:left;">
+60-69
+</td>
+<td style="text-align:left;">
+70+
+</td>
+<td style="text-align:left;">
+Total
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Def
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Def Mid
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Att Mid
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Att
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St Judes
+</td>
+<td style="text-align:left;">
+Scores
+</td>
+<td style="text-align:left;">
+Time (secs)
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Area
+</td>
+<td style="text-align:left;">
+0-9
+</td>
+<td style="text-align:left;">
+10-19
+</td>
+<td style="text-align:left;">
+20-29
+</td>
+<td style="text-align:left;">
+30-39
+</td>
+<td style="text-align:left;">
+40-49
+</td>
+<td style="text-align:left;">
+50-59
+</td>
+<td style="text-align:left;">
+60-69
+</td>
+<td style="text-align:left;">
+70+
+</td>
+<td style="text-align:left;">
+Total
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Def
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Def Mid
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Att Mid
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Att
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St Vincents
+</td>
+<td style="text-align:left;">
+Shots
+</td>
+<td style="text-align:left;">
+Time (secs)
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Area
+</td>
+<td style="text-align:left;">
+0-9
+</td>
+<td style="text-align:left;">
+10-19
+</td>
+<td style="text-align:left;">
+20-29
+</td>
+<td style="text-align:left;">
+30-39
+</td>
+<td style="text-align:left;">
+40-49
+</td>
+<td style="text-align:left;">
+50-59
+</td>
+<td style="text-align:left;">
+60-69
+</td>
+<td style="text-align:left;">
+70+
+</td>
+<td style="text-align:left;">
+Total
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Def
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Def Mid
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Att Mid
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Att
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St Vincents
+</td>
+<td style="text-align:left;">
+Scores
+</td>
+<td style="text-align:left;">
+Time (secs)
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Area
+</td>
+<td style="text-align:left;">
+0-9
+</td>
+<td style="text-align:left;">
+10-19
+</td>
+<td style="text-align:left;">
+20-29
+</td>
+<td style="text-align:left;">
+30-39
+</td>
+<td style="text-align:left;">
+40-49
+</td>
+<td style="text-align:left;">
+50-59
+</td>
+<td style="text-align:left;">
+60-69
+</td>
+<td style="text-align:left;">
+70+
+</td>
+<td style="text-align:left;">
+Total
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Def
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Def Mid
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Att Mid
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Att
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+</tr>
+</tbody>
+</table>
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Line.Colour
+</th>
+<th style="text-align:left;">
+Time.secs
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+black
+</td>
+<td style="text-align:left;">
+1-9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+blue
+</td>
+<td style="text-align:left;">
+10-19
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+red
+</td>
+<td style="text-align:left;">
+20-29
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+purple
+</td>
+<td style="text-align:left;">
+30-39
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+yellow
+</td>
+<td style="text-align:left;">
+40-49
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+white
+</td>
+<td style="text-align:left;">
+50-59
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+orange
+</td>
+<td style="text-align:left;">
+60-69
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pink
+</td>
+<td style="text-align:left;">
+70+
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Dot Colours
+</td>
+<td style="text-align:left;font-weight: bold;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Black &amp; White
+</td>
+<td style="text-align:left;">
+Ko Rec’d
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+White &amp; Black
+</td>
+<td style="text-align:left;">
+PW
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Blue &amp; White
+</td>
+<td style="text-align:left;">
+Fk Pass
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Red &amp; White
+</td>
+<td style="text-align:left;">
+Op Shot
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Purple &amp; White
+</td>
+<td style="text-align:left;">
+Fk Shot
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Green &amp; White
+</td>
+<td style="text-align:left;">
+45
+</td>
+</tr>
+</tbody>
+</table>
+<p>##Shot Possessions ###St Judes <img src="judvin_files/figure-html/unnamed-chunk-99-1.png" width="1536" /></p>
+<p>###Period 1 <img src="judvin_files/figure-html/unnamed-chunk-100-1.png" width="1536" /></p>
+<p>###St Vincents <img src="judvin_files/figure-html/unnamed-chunk-101-1.png" width="1536" /></p>
+<p>##Score Possessions ###St Judes <img src="judvin_files/figure-html/unnamed-chunk-102-1.png" width="1536" /></p>
+<p>###St Vincents <img src="judvin_files/figure-html/unnamed-chunk-103-1.png" width="1536" /></p>
+<p>##Open Play Shots - Location &amp; Outcome</p>
+<p>###St Judes</p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-105-1.png" width="672" /></p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-106-1.png" width="1536" /></p>
+<p>###Shot Efficiency - St Judes <img src="judvin_files/figure-html/unnamed-chunk-107-1.png" width="1536" /></p>
+<p>###Shot Pressure - St Judes</p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-108-1.png" width="1536" /></p>
+<p>###Shot Density <img src="judvin_files/figure-html/unnamed-chunk-109-1.png" width="1536" /></p>
+<p>###St Vincents <img src="judvin_files/figure-html/unnamed-chunk-110-1.png" width="672" /></p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-111-1.png" width="1536" /></p>
+<p>###Shot Efficiency - St Vincents <img src="judvin_files/figure-html/unnamed-chunk-112-1.png" width="1536" /></p>
+<p>###Shot Density <img src="judvin_files/figure-html/unnamed-chunk-113-1.png" width="1536" /></p>
+<p>###Shot Pressure - St Vincents</p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-114-1.png" width="1536" /></p>
+<p>##All Shots - Location &amp; Outcome ###St Judes <img src="judvin_files/figure-html/unnamed-chunk-115-1.png" width="672" /></p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-116-1.png" width="1536" /></p>
+<p>###All Shot Density <img src="judvin_files/figure-html/unnamed-chunk-117-1.png" width="1536" /></p>
+<p>###Free Kick Shot Efficiency - St Judes <img src="judvin_files/figure-html/unnamed-chunk-118-1.png" width="1536" /></p>
+<p>###St Vincents <img src="judvin_files/figure-html/unnamed-chunk-119-1.png" width="672" /></p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-120-1.png" width="1536" /></p>
+<p>###All Shot Density <img src="judvin_files/figure-html/unnamed-chunk-121-1.png" width="1536" /></p>
+<p>###Free Kick Shot Efficiency - St Vincents <img src="judvin_files/figure-html/unnamed-chunk-122-1.png" width="1536" /></p>
+<p>##All Shots Origin by Possession ###St Judes (Blue = Score) <img src="judvin_files/figure-html/unnamed-chunk-123-1.png" width="1536" /></p>
+<p>###St Vincents (Blue = Score) <img src="judvin_files/figure-html/unnamed-chunk-124-1.png" width="1536" /></p>
+<p>##Open Play Shot Origin by Phase ###St Judes (Blue = Score) <img src="judvin_files/figure-html/unnamed-chunk-125-1.png" width="1536" /></p>
+<p>###St Vincents (Blue = Score) <img src="judvin_files/figure-html/unnamed-chunk-126-1.png" width="1536" /></p>
+<p>##Shot Network ###St Judes <img src="judvin_files/figure-html/unnamed-chunk-127-1.png" width="1920" /></p>
+<p>###St Vincents <img src="judvin_files/figure-html/unnamed-chunk-128-1.png" width="1920" /></p>
+<p>##Score Network ###St Judes <img src="judvin_files/figure-html/unnamed-chunk-129-1.png" width="1920" /></p>
+<p>###St Vincents <img src="judvin_files/figure-html/unnamed-chunk-130-1.png" width="1920" /></p>
+<p>#Passing</p>
+##Pass Breakdown
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+X
+</th>
+<th style="text-align:right;">
+St.Judes
+</th>
+<th style="text-align:right;">
+St.Vincents
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Hp
+</td>
+<td style="text-align:right;">
+183
+</td>
+<td style="text-align:right;">
+139
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Kp
+</td>
+<td style="text-align:right;">
+63
+</td>
+<td style="text-align:right;">
+46
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Kp Left
+</td>
+<td style="text-align:right;">
+32
+</td>
+<td style="text-align:right;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Kp Right
+</td>
+<td style="text-align:right;">
+31
+</td>
+<td style="text-align:right;">
+37
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Fk Pass
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sl Pass
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mk Kp
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mk Hp
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sl Kp Won To
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+45 Pass
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hp Assist
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Kp L Assist
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Kp R Assist
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hp Key
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Kp L Key
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Kp R Key
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mk Kp Key
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+</tbody>
+</table>
+<p>##All Passes ###St Judes</p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-133-1.png" width="1536" /></p>
+<p>###St Vincents</p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-134-1.png" width="1536" /></p>
+<p>##Passes into 45 ###St Judes</p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-135-1.png" width="1536" /></p>
+<p>###St Vincents</p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-136-1.png" width="1536" /></p>
+<p>##Passes Inside Opp 65 ###St Judes</p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-137-1.png" width="1536" /></p>
+<p>###St Vincents</p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-138-1.png" width="1536" /></p>
+<p>##Pass Network ###St Judes</p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-139-1.png" width="1920" /></p>
+<p>###In Degree (Number of Players a Player Received a Pass from)</p>
+<pre><code>##     Doherty      Devlin   McManamon      Lahiff     Sweeney Fitzpatrick       Joyce     Guckian     Coakley        Lost     Manning     Martina  McLoughlin      Clarke 
+##          15          13          13          12          10           9           9           8           8           8           7           7           7           6 
+##     McGuire      Sheehy    Copeland        Ryan  Cunningham     Wallace    Kavanagh 
+##           5           3           2           2           1           1           0</code></pre>
+<p>###Out Degree (Number of Players a Player Made a Pass to)</p>
+<pre><code>##      Devlin      Lahiff     Doherty       Joyce   McManamon     McGuire     Guckian     Martina Fitzpatrick     Sweeney     Coakley     Manning  McLoughlin    Copeland 
+##          13          12          12          11          11          10          10          10           8           8           8           7           7           6 
+##      Clarke        Ryan      Sheehy  Cunningham    Kavanagh     Wallace        Lost 
+##           6           3           2           2           0           0           0</code></pre>
+<p>###Strength in (Number of Passes Received by a Player)</p>
+<pre><code>##     Doherty      Lahiff   McManamon      Devlin       Joyce     Sweeney Fitzpatrick        Lost     Manning     McGuire     Guckian     Martina  McLoughlin     Coakley 
+##          32          27          25          23          23          16          13          13          11          11          11          11          11          10 
+##      Clarke        Ryan      Sheehy    Copeland  Cunningham     Wallace    Kavanagh 
+##          10           3           3           2           1           1           0</code></pre>
+<p>###Strength Out (Number of Passes/Shots Made by a Player)</p>
+<pre><code>##     Doherty      Lahiff      Devlin       Joyce   McManamon     Sweeney Fitzpatrick     Martina     McGuire     Manning     Guckian    Copeland  McLoughlin     Coakley 
+##          34          27          25          22          19          18          16          15          13          12          12           9           9           9 
+##      Clarke      Sheehy        Ryan  Cunningham    Kavanagh     Wallace        Lost 
+##           8           4           3           2           0           0           0</code></pre>
+<p>###Betweenness Centrality (Flow of Passes through a Player)</p>
+<pre><code>##       Lahiff       Devlin    McManamon      Doherty      Sweeney      Coakley  Fitzpatrick      McGuire      Martina        Joyce      Guckian         Lost     Copeland 
+## 0.1198191083 0.1044162707 0.0638677480 0.0519291377 0.0272329142 0.0270109636 0.0227302645 0.0118542045 0.0095240020 0.0091331386 0.0073579259 0.0067230576 0.0064014202 
+##      Manning   McLoughlin         Ryan       Clarke       Sheehy   Cunningham     Kavanagh      Wallace 
+## 0.0054636128 0.0048904793 0.0034901648 0.0019901739 0.0003759398 0.0000000000 0.0000000000 0.0000000000</code></pre>
+<p>###Closeness Centrality (How Well connected and central a Player is within the Teams Network)</p>
+<pre><code>##      Devlin      Lahiff     Doherty   McManamon Fitzpatrick     Sweeney     Guckian     Martina       Joyce     Coakley     Manning     McGuire  McLoughlin      Clarke 
+##  0.48780488  0.46511628  0.46511628  0.45454545  0.42553191  0.42553191  0.41666667  0.41666667  0.41666667  0.41666667  0.40816327  0.40816327  0.40816327  0.40000000 
+##    Copeland        Lost        Ryan      Sheehy  Cunningham     Wallace    Kavanagh 
+##  0.39215686  0.39215686  0.36363636  0.36363636  0.35087719  0.32786885  0.04761905</code></pre>
+<p>###Entropy (The Unpredictability in who a Player Passes to/Takes shot)</p>
+<pre><code>##      Sheehy Fitzpatrick      Devlin    Copeland      Lahiff   McManamon        Lost     Doherty     Manning     McGuire       Joyce      Clarke     Martina  McLoughlin 
+##   0.9165164   0.9428497   0.9434353   0.9484503   0.9496228   0.9571585   0.9577136   0.9588754   0.9597205   0.9602596   0.9614763   0.9655108   0.9663852   0.9676491 
+##     Sweeney        Ryan     Guckian     Coakley  Cunningham 
+##   0.9677089   0.9697239   0.9726693   0.9830345   1.0000000</code></pre>
+<p>###Global clustering coefficient (Groups of Players who pass to each other)</p>
+<pre><code>## [1] 0.6790909</code></pre>
+<p>###eigen_centrality (How well connected the well connected are)</p>
+<pre><code>##     Doherty      Lahiff       Joyce      Devlin   McManamon     Sweeney Fitzpatrick     Martina     McGuire     Manning     Guckian  McLoughlin     Coakley      Clarke 
+##  1.00000000  0.88647310  0.81443904  0.80199666  0.70243570  0.62253291  0.48959438  0.43512184  0.43504061  0.40353782  0.39593974  0.34436760  0.31429781  0.29642940 
+##        Lost    Copeland      Sheehy    Kavanagh        Ryan  Cunningham     Wallace 
+##  0.22722370  0.15424399  0.14134260  0.09539531  0.05761239  0.05721795  0.02384664</code></pre>
+<p>##St Vincents <img src="judvin_files/figure-html/unnamed-chunk-149-1.png" width="1920" /></p>
+<p>###In Degree (Number of Players a Player Received a Pass from)</p>
+<pre><code>##       Burke     Concarr       Lambe        Lost    McCusker    Connolly Co. Diamond      Martin     Mullins      Giblin Ca. Diamond       Lowry       Quinn      Curley 
+##          13          11          11          10           9           8           8           7           7           7           6           6           6           5 
+##      Feeney     O Meara      Varley      Baxter  Breathnach     Fennell      Murphy      Savage 
+##           5           5           4           4           4           4           3           2</code></pre>
+<p>###Out Degree (Number of Players a Player Made a Pass to)</p>
+<pre><code>##       Burke     Concarr       Lambe    McCusker Ca. Diamond Co. Diamond      Curley      Martin    Connolly     Mullins      Giblin       Lowry      Feeney     Fennell 
+##          14          12          12          10          10          10           9           8           8           7           6           5           5           5 
+##      Savage       Quinn  Breathnach     O Meara      Varley      Baxter      Murphy        Lost 
+##           4           4           4           4           3           3           2           0</code></pre>
+<p>###Strength in (Number of Passes Received by a Player)</p>
+<pre><code>##       Burke        Lost    McCusker       Lambe     Concarr Ca. Diamond Co. Diamond      Martin    Connolly      Giblin       Quinn     Mullins       Lowry      Feeney 
+##          21          18          17          16          14          12          11          10           9           9           8           7           6           6 
+##      Curley      Varley      Baxter     O Meara     Fennell  Breathnach      Savage      Murphy 
+##           5           5           5           5           5           4           3           3</code></pre>
+<p>###Strength Out (Number of Passes/Shots Made by a Player)</p>
+<pre><code>##       Burke    McCusker       Lambe     Concarr Ca. Diamond      Curley Co. Diamond    Connolly      Martin      Savage     Mullins      Giblin       Quinn       Lowry 
+##          23          20          20          18          15          13          13          10           9           7           7           7           6           5 
+##      Feeney     Fennell  Breathnach     O Meara      Varley      Baxter      Murphy        Lost 
+##           5           5           4           4           3           3           2           0</code></pre>
+<p>###Betweenness Centrality (Flow of Passes through a Player)</p>
+<pre><code>##     Concarr       Burke    McCusker       Lambe    Connolly Co. Diamond      Giblin      Curley      Martin     Mullins Ca. Diamond        Lost       Lowry      Feeney 
+## 0.105330480 0.100529488 0.076138154 0.076076635 0.039732688 0.034725900 0.028107607 0.027967680 0.024205426 0.021005101 0.017065507 0.015644082 0.012894579 0.011180112 
+##     O Meara       Quinn  Breathnach     Fennell      Varley      Baxter      Murphy      Savage 
+## 0.011080877 0.010622151 0.005247715 0.003924437 0.003827839 0.002056178 0.001208791 0.000000000</code></pre>
+<p>###Closeness Centrality (How Well connected and central a Player is within the Teams Network)</p>
+<pre><code>##     Concarr       Burke       Lambe    McCusker Co. Diamond      Curley Ca. Diamond      Martin    Connolly        Lost     Mullins       Lowry      Giblin       Quinn 
+##   0.8076923   0.8076923   0.8076923   0.7500000   0.7000000   0.6774194   0.6774194   0.6774194   0.6562500   0.6562500   0.6363636   0.6363636   0.6363636   0.6176471 
+##      Feeney     Fennell      Varley  Breathnach     O Meara      Savage      Murphy      Baxter 
+##   0.6000000   0.5833333   0.5675676   0.5675676   0.5675676   0.5384615   0.5384615   0.5250000</code></pre>
+<p>###Entropy (The Unpredictability in who a Player Passes to/Takes shot)</p>
+<pre><code>##    McCusker       Burke        Lost       Lambe      Curley Ca. Diamond      Martin     Concarr Co. Diamond       Quinn      Savage      Varley      Baxter      Giblin 
+##   0.9160516   0.9323121   0.9416179   0.9517935   0.9564656   0.9640491   0.9693499   0.9705448   0.9720820   0.9741109   0.9756150   0.9795698   0.9795698   0.9796133 
+##    Connolly     Fennell      Feeney     Mullins       Lowry  Breathnach      Murphy     O Meara 
+##   0.9830345   0.9848587   0.9866600   1.0000000   1.0000000   1.0000000   1.0000000   1.0000000</code></pre>
+<p>###Global clustering coefficient (Groups of Players who pass to each other)</p>
+<pre><code>## [1] 0.5489614</code></pre>
+<p>###eigen_centrality (How well connected the well connected are)</p>
+<pre><code>##       Burke    McCusker       Lambe Ca. Diamond     Concarr Co. Diamond        Lost      Martin      Curley      Giblin    Connolly       Quinn     Mullins      Savage 
+##   1.0000000   0.9564057   0.8392084   0.7417526   0.6778897   0.5940155   0.5108634   0.4759575   0.4513584   0.3735328   0.3498196   0.3398769   0.3205086   0.2946884 
+##      Feeney     Fennell       Lowry  Breathnach     O Meara      Varley      Murphy      Baxter 
+##   0.2699658   0.2454713   0.2335610   0.1849525   0.1736792   0.1547449   0.1240977   0.1184855</code></pre>
+<p>#Player Stats ##Player On Ball Possession (Number, Player, Total) ###St Judes</p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-159-1.png" width="1536" /></p>
+<p>###St Vincents</p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-160-1.png" width="1536" /></p>
+<p>##Posessions Per Playing Time</p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-161-1.png" width="672" /></p>
+##Player % involvement and shot efficiency
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Team
+</th>
+<th style="text-align:left;">
+ply
+</th>
+<th style="text-align:right;">
+opshots
+</th>
+<th style="text-align:left;">
+Totteamshot
+</th>
+<th style="text-align:right;">
+opscr
+</th>
+<th style="text-align:left;">
+Totteamscr
+</th>
+<th style="text-align:left;">
+convrate
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+St Judes
+</td>
+<td style="text-align:left;">
+Copeland
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St Judes
+</td>
+<td style="text-align:left;">
+Manning
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St Judes
+</td>
+<td style="text-align:left;">
+McGuire
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St Judes
+</td>
+<td style="text-align:left;">
+Fitzpatrick
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St Judes
+</td>
+<td style="text-align:left;">
+Lahiff
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+8%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St Judes
+</td>
+<td style="text-align:left;">
+Guckian
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St Judes
+</td>
+<td style="text-align:left;">
+Martina
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St Judes
+</td>
+<td style="text-align:left;">
+Sweeney
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St Judes
+</td>
+<td style="text-align:left;">
+Doherty
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St Judes
+</td>
+<td style="text-align:left;">
+Devlin
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+17%
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+20%
+</td>
+<td style="text-align:left;">
+50%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St Judes
+</td>
+<td style="text-align:left;">
+McLoughlin
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+17%
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+20%
+</td>
+<td style="text-align:left;">
+50%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St Judes
+</td>
+<td style="text-align:left;">
+Joyce
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+8%
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+20%
+</td>
+<td style="text-align:left;">
+100%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St Judes
+</td>
+<td style="text-align:left;">
+Coakley
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St Judes
+</td>
+<td style="text-align:left;">
+McManamon
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+50%
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+40%
+</td>
+<td style="text-align:left;">
+33%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St Judes
+</td>
+<td style="text-align:left;">
+Clarke
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St Judes
+</td>
+<td style="text-align:left;">
+Ryan
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St Judes
+</td>
+<td style="text-align:left;">
+Sheehy
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St Judes
+</td>
+<td style="text-align:left;">
+Cunningham
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St Judes
+</td>
+<td style="text-align:left;">
+Kavanagh
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St Judes
+</td>
+<td style="text-align:left;">
+Wallace
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+</tbody>
+</table></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Team
+</th>
+<th style="text-align:left;">
+ply
+</th>
+<th style="text-align:right;">
+opshots
+</th>
+<th style="text-align:left;">
+Totteamshot
+</th>
+<th style="text-align:right;">
+opscr
+</th>
+<th style="text-align:left;">
+Totteamscr
+</th>
+<th style="text-align:left;">
+convrate
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+St Vincents
+</td>
+<td style="text-align:left;">
+Savage
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St Vincents
+</td>
+<td style="text-align:left;">
+McCusker
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St Vincents
+</td>
+<td style="text-align:left;">
+Curley
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St Vincents
+</td>
+<td style="text-align:left;">
+Concarr
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+6%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St Vincents
+</td>
+<td style="text-align:left;">
+Burke
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St Vincents
+</td>
+<td style="text-align:left;">
+Ca. Diamond
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+6%
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+33%
+</td>
+<td style="text-align:left;">
+100%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St Vincents
+</td>
+<td style="text-align:left;">
+Lambe
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St Vincents
+</td>
+<td style="text-align:left;">
+Martin
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St Vincents
+</td>
+<td style="text-align:left;">
+Mullins
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+6%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St Vincents
+</td>
+<td style="text-align:left;">
+Lowry
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+13%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St Vincents
+</td>
+<td style="text-align:left;">
+Connolly
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+6%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St Vincents
+</td>
+<td style="text-align:left;">
+Co. Diamond
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St Vincents
+</td>
+<td style="text-align:left;">
+Varley
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+6%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St Vincents
+</td>
+<td style="text-align:left;">
+Baxter
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+13%
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+33%
+</td>
+<td style="text-align:left;">
+50%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St Vincents
+</td>
+<td style="text-align:left;">
+Quinn
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+19%
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+33%
+</td>
+<td style="text-align:left;">
+33%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St Vincents
+</td>
+<td style="text-align:left;">
+Feeney
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+6%
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+33%
+</td>
+<td style="text-align:left;">
+100%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St Vincents
+</td>
+<td style="text-align:left;">
+Breathnach
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St Vincents
+</td>
+<td style="text-align:left;">
+Giblin
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+6%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St Vincents
+</td>
+<td style="text-align:left;">
+Murphy
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+6%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St Vincents
+</td>
+<td style="text-align:left;">
+O Meara
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+6%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St Vincents
+</td>
+<td style="text-align:left;">
+Fennell
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+</tbody>
+</table></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<p>##Open Play Shots vs Playing Time <img src="judvin_files/figure-html/unnamed-chunk-163-1.png" width="672" /></p>
+<p>##Open Play Scores vs Playing Time <img src="judvin_files/figure-html/unnamed-chunk-164-1.png" width="672" /></p>
+<p>##Open Play Shots vs Open Play Score <img src="judvin_files/figure-html/unnamed-chunk-165-1.png" width="672" /></p>
+<p>##Open Play Assists vs Playing Time</p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-166-1.png" width="672" /></p>
+<p>##Open Play Key Passes vs Playing time</p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-167-1.png" width="672" /></p>
+<p>##Player Possession Involvement ###St Judes <img src="judvin_files/figure-html/unnamed-chunk-168-1.png" width="672" /></p>
+<p>###St Vincents <img src="judvin_files/figure-html/unnamed-chunk-169-1.png" width="672" /></p>
+<p>##Player Shot Involvement ###St Judes <img src="judvin_files/figure-html/unnamed-chunk-170-1.png" width="672" /></p>
+<p>###St Vincents <img src="judvin_files/figure-html/unnamed-chunk-171-1.png" width="672" /></p>
+<p>##Player Score Involvement ###St Judes <img src="judvin_files/figure-html/unnamed-chunk-172-1.png" width="672" /></p>
+<p>###St Vincents <img src="judvin_files/figure-html/unnamed-chunk-173-1.png" width="672" /></p>
+<p>##Actions and Zones ##By Period ###St Judes <img src="judvin_files/figure-html/unnamed-chunk-174-1.png" width="672" /></p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-175-1.png" width="672" /></p>
+<p>###St Vincents <img src="judvin_files/figure-html/unnamed-chunk-176-1.png" width="672" /></p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-177-1.png" width="672" /></p>
+<p>##Zones Frequency ###St Judes</p>
+<p><img src="judvin_files/figure-html/unnamed-chunk-178-1.png" width="672" /></p>
+<p>###St Vincents <img src="judvin_files/figure-html/unnamed-chunk-179-1.png" width="672" /></p>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

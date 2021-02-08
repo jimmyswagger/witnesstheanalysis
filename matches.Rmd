@@ -8,63 +8,89 @@ output: html_document
 
 ### 60's 
 
+**1968**
+
+<font size="3">[Down vs Kerry](https://witnesstheanalysis.com/dowkeraif68.html)</font>| [Player Stats](plystatsdowkeraif68.html)</font>  
+
 ### 70's
-
-**1975**
-
-
-[Dublin vs Kerry](https://witnesstheanalysis.com/dubkeraif75.html) | [Player Stats](plystatsdubkeraif75.html)
 
 
 **1976**
 
 
-[Dublin vs Kerry](https://witnesstheanalysis.com/dubkeraif76.html) | [Player Stats](plystatsdubkeraif76.html)
+<font size="3">[Dublin vs Kerry](https://witnesstheanalysis.com/dubkeraif76.html)
 
 ### 80's
+
+**1980**
+
+<font size="3">[Kerry vs Roscommon](https://witnesstheanalysis.com/kerrosaif80.html)</font> 
 
 **1982**
 
 
-[Kerry vs Offaly](https://witnesstheanalysis.com/keroffaif82.html) | [Player Stats](plystatskeroffaif82.html)
+<font size="3">[Kerry vs Offaly](https://witnesstheanalysis.com/keroffaif82.html) | [Player Stats](plystatskeroffaif82.html)</font> 
 
 ### 90's
 
 **1990**
 
+<font size="3">[Cork vs Meath](https://witnesstheanalysis.com/cormeaaif90.html) | [Player Stats](plystatscormeaaif90.html)</font> 
 
-[Cork vs Meath](https://witnesstheanalysis.com/cormeaaif90.html) | [Player Stats](plystatscormeaaif90.html)
+**1998**
+
+<font size="3">[Galway vs Kildare](https://witnesstheanalysis.com/galkilaif98.html)</font>  
 
 ### 2000's
+
+**2002** 
+
+<font size="3">[Armagh vs Kerry](https://witnesstheanalysis.com/armkeraif02.html)</font> 
+
+**2003**
+
+<font size="3">[Armagh vs Tyrone](https://witnesstheanalysis.com/armtyraif03.html)</font> 
+
+**2005**
+
+<font size="3">[Tyrone vs Kerry](https://witnesstheanalysis.com/tyrkeraif05.html)</font> 
 
 
 ### 2010
 
+**2011**
+
+<font size="3">[Dublin vs Kerry](https://witnesstheanalysis.com/dubkeraif11.html)</font>  
+
 **2012**
 
 
-[Donegal vs Mayo](https://witnesstheanalysis.com/donmayaif12.html) | [Player Stats](plystatsdonmayaif12.html)
+<font size="3">[Donegal vs Mayo](https://witnesstheanalysis.com/donmayaif12.html) | [Player Stats](plystatsdonmayaif12.html)</font> 
 
 **2013**
 
 
-[Dublin vs Mayo](https://witnesstheanalysis.com/dubmayaif13.html) | [Player Stats](plystatsdubmayaif13.html)
+<font size="3">[Dublin vs Mayo](https://witnesstheanalysis.com/dubmayaif13.html) | [Player Stats](plystatsdubmayaif13.html)</font> 
 
 
 **2015**
 
 
-[Dublin vs Kerry](https://witnesstheanalysis.com/dubkeraif15.html) | [Player Stats](plystatsdubkeraif15.html)
+<font size="3">[Dublin vs Kerry](https://witnesstheanalysis.com/dubkeraif15.html) | [Player Stats](plystatsdubkeraif15.html)</font> 
 
 **2016 Replay**
 
 
-[Dublin vs Mayo](https://witnesstheanalysis.com/dubmayaifr16.html) | [Player Stats](plystatsdubmayaifr16.html)
+<font size="3">[Dublin vs Mayo](https://witnesstheanalysis.com/dubmayaifr16.html)
 
 **2017**
 
 
-[Dublin vs Mayo](https://witnesstheanalysis.com/dubmayaif17.html) | [Player Stats](plystatsdubmayaif17.html)
+<font size="3">[Dublin vs Mayo](https://witnesstheanalysis.com/dubmayaif17.html) 
+
+**2019**
+
+<font size="3">[Dublin vs Kerry](https://witnesstheanalysis.com/dubkeraifr19.html)</font> 
 
 
 ## 2020 {.tabset .tabset-fade .tabset-pills}
@@ -73,22 +99,26 @@ output: html_document
 
 **Round 1 Dublin Senior Football Championship**
 
-[St Judes vs Na Fianna](https://witnesstheanalysis.com/judnafdsfc20.html) | [Player Stats](plystatsjudnafdsfc20.html)
+<font size="3">[St Judes vs Na Fianna](https://witnesstheanalysis.com/judnafdsfc20.html)
+
+**Westmeath Inter Football Final**
+
+<font size="3">[Tang vs Moate](https://witnesstheanalysis.com/tanmoawmiff20.html)</font> 
 
 ### National League 2020
 
 
 **Round 3 08/02/2020**
 
-[Dublin vs Monaghan](https://witnesstheanalysis.com/dubmonnfl20.html) | [Player Stats](plystatsdubmonnfl20.html)
+<font size="3">[Dublin vs Monaghan](https://witnesstheanalysis.com/dubmonnfl20.html) | [Player Stats](plystatsdubmonnfl20.html)</font> 
 
 **Round 2 01/02/2020**
 
-[Mayo vs Dublin](https://witnesstheanalysis.com/maydubnfl20.html) | [Player Stats](plystatsmaydubnfl20.html)
+<font size="3">[Mayo vs Dublin](https://witnesstheanalysis.com/maydubnfl20.html) | [Player Stats](plystatsmaydubnfl20.html)</font> 
 
 **Round 1 25/01/2020**
 
-[Dublin vs Kerry](https://witnesstheanalysis.com/dubkernfl20.html) | [Player Stats](plystatsdubkernfl20.html)
+<font size="3">[Dublin vs Kerry](https://witnesstheanalysis.com/dubkernfl20.html) | [Player Stats](plystatsdubkernfl20.html)</font> 
 
 
 ## 2019 {.tabset .tabset-fade .tabset-pills}
@@ -99,64 +129,64 @@ output: html_document
 **AI Final Replay 2019**
 
 
-[Dublin vs Kerry](https://witnesstheanalysis.com/dubkerfr.html) | [Player Stats](plystatsdubkerfr.html)
+<font size="3">[Dublin vs Kerry](https://witnesstheanalysis.com/dubkerfr.html) | [Player Stats](plystatsdubkerfr.html)</font> 
 
 **AI Final 2019**
 
 
-[Dublin vs Kerry](https://witnesstheanalysis.com/dubkerfa.html) | [Player Stats](plystatsdubkerfa.html)
+<font size="3">[Dublin vs Kerry](https://witnesstheanalysis.com/dubkerfa.html) | [Player Stats](plystatsdubkerfa.html)</font> 
 
 **AI Semi-Finals 2019**
 
-[Dublin vs Mayo - Semi-Final](https://witnesstheanalysis.com/dubmaysf.html) | [Player Stats](plystatsdubmaysf.html)
+<font size="3">[Dublin vs Mayo - Semi-Final](https://witnesstheanalysis.com/dubmaysf.html) | [Player Stats](plystatsdubmaysf.html)</font> 
 
 **Super 8s 2019**
 
-[Mayo vs Donegal](https://witnesstheanalysis.com/maydon.html) | [Player Stats](plystatsmaydon.html)
+<font size="3">[Mayo vs Donegal](https://witnesstheanalysis.com/maydon.html) | [Player Stats](plystatsmaydon.html)</font> 
 
-[Kerry vs Donegal](https://witnesstheanalysis.com/kerdon.html) | [Player Stats](plystatskerdon.html) 
+<font size="3">[Kerry vs Donegal](https://witnesstheanalysis.com/kerdon.html) | [Player Stats](plystatskerdon.html)</font>  
 
 **Championship Provincial Finals 2019**
 
-[Galway vs Roscommon](https://witnesstheanalysis.com/galros.html) | [Player Stats](plystatsgalros.html)
+<font size="3">[Galway vs Roscommon](https://witnesstheanalysis.com/galros.html) | [Player Stats](plystatsgalros.html)</font> 
 
-[Cavan vs Donegal](https://witnesstheanalysis.com/cavdon.html) | [Player Stats](plystatscavdon.html)
+<font size="3">[Cavan vs Donegal](https://witnesstheanalysis.com/cavdon.html) | [Player Stats](plystatscavdon.html)</font> 
 
-[Dublin vs Meath](https://witnesstheanalysis.com/dubmth.html) | [Player Stats](plystatsdubmth.html)
+<font size="3">[Dublin vs Meath](https://witnesstheanalysis.com/dubmth.html) | [Player Stats](plystatsdubmth.html)</font> 
 
 **Championship 2019**
 
-[Mayo vs Roscommon](https://witnesstheanalysis.com/mayros.html) | [Player Stats](plystatsmayros.html)
+<font size="3">[Mayo vs Roscommon](https://witnesstheanalysis.com/mayros.html) | [Player Stats](plystatsmayros.html)</font> 
 
-[Tyrone vs Donegal](https://witnesstheanalysis.com/tyrdon.html) | [Player Stats](plystatstyrdon.html)
+<font size="3">[Tyrone vs Donegal](https://witnesstheanalysis.com/tyrdon.html) | [Player Stats](plystatstyrdon.html)</font> 
 
 ### National League 2019
 
-[Kerry vs Dublin](https://witnesstheanalysis.com/kervsdub.html) 
+<font size="3">[Kerry vs Dublin](https://witnesstheanalysis.com/kervsdub.html)</font> 
 
-[Dublin vs Mayo](https://witnesstheanalysis.com/dubvsmayo.html)
+<font size="3">[Dublin vs Mayo](https://witnesstheanalysis.com/dubvsmayo.html)</font> 
 
-[Mayo vs Kerry](https://witnesstheanalysis.com/MayovsKerry.html) | [Player Stats](maykerplyrstats.html)
+<font size="3">[Mayo vs Kerry](https://witnesstheanalysis.com/MayovsKerry.html)
 
 ### Club 2019
 
 **All-Ireland Club ** 
 
-[Ballyboden vs Eire Og](https://witnesstheanalysis.com/bodeir.html)  | [Player Stats](plystatsbodeir.html)
+<font size="3">[Ballyboden vs Eire Og](https://witnesstheanalysis.com/bodeir.html)  | [Player Stats](plystatsbodeir.html)</font> 
 
-[Corofin vs Padraig Pearses](https://witnesstheanalysis.com/corpad.html) | [Player Stats](plystatscorpad.html)
+<font size="3">[Corofin vs Padraig Pearses](https://witnesstheanalysis.com/corpad.html) | [Player Stats](plystatscorpad.html)</font> 
 
 **Dublin Senior Football Championship**
 
-[Thomas Davis vs Ballyboden](https://witnesstheanalysis.com/davbod.html) | [Player Stats](plystatsdavbod.html)
+<font size="3">[Thomas Davis vs Ballyboden](https://witnesstheanalysis.com/davbod.html) | [Player Stats](plystatsdavbod.html)</font> 
 
-[St Judes vs Ballyboden](https://witnesstheanalysis.com/judbod.html) | [Player Stats](plystatsjudbod.html)
+<font size="3">[St Judes vs Ballyboden](https://witnesstheanalysis.com/judbod.html) | [Player Stats](plystatsjudbod.html)</font> 
 
-[St Judes vs St Vincents](https://witnesstheanalysis.com/judvin.html) | [Player Stats](plystatsjudvin.html)
+<font size="3">[St Judes vs St Vincents](https://witnesstheanalysis.com/judvin.html) | [Player Stats](plystatsjudvin.html)</font> 
 
-[Ballymun vs Crokes](https://witnesstheanalysis.com/muncrk.html) | [Player Stats](plystatmuncrk.html)
+<font size="3">[Ballymun vs Crokes](https://witnesstheanalysis.com/muncrk.html) | [Player Stats](plystatmuncrk.html)</font> 
 
 **Kildare Senior Football Championship**
 
-[Carbury vs Johnstown](https://witnesstheanalysis.com/carbjohn.html) | [Player Stats](plystatcarbjohn.html)
+<font size="3">[Carbury vs Johnstown](https://witnesstheanalysis.com/carbjohn.html) | [Player Stats](plystatcarbjohn.html)</font> 
 

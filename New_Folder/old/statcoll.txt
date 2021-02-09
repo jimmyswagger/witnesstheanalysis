@@ -1,0 +1,60 @@
+All_Time <- pass %>%group_by(Team) %>%summarize(Poss =sum(main == "PW"|main=="Ko"), Shots = sum(main == "Shot Op"|main == "Shot Rs"),Shot_Perc =(Shots/Poss*100))
+All_Time
+
+#Player % involvement and shot efficiency
+All_Poss <- pass %>%group_by(Team) %>%filter(Teamnum == "A")%>%summarize(ShotOpTeam =sum(main == "Shot Op"),ScoreOpTeam = sum(subset == "Scr Op"))
+All_Shot<- pass %>%group_by(Team,Player) %>%filter(Teamnum== "A")%>%summarize(Poss =sum(main == "PW"), ShotsOp = sum(main == "Shot Op"),ScoreOp = sum(subset == "Scr Op"))
+All_Tab <- full_join(All_Shot,All_Poss)
+All_Tabs <- All_Tab%>%group_by(Team,Player) %>%summarize(TotTeamOpShot = (ShotsOp/ShotOpTeam*100), TotTeamOpScore = sum(ScoreOp/ScoreOpTeam *100))%>%select(TotTeamOpShot,TotTeamOpScore)
+All_Tabs 
+ply <- bind_cols(All_Tab,All_Tabs)
+TotTeamA <- ply%>%select(Team, Player,ShotsOp,TotTeamOpShot,ScoreOp,TotTeamOpScore)
+
+TotTeamA 
+
+
+sop %>%group_by(Team)%>%summarize(Possession_Won =sum(main == "PW"), Scores = sum(subsetoc == "Scr Op"),Total_Possessions = sum(Possession_Won +Scores ),Ms= sum(subsetoc == "Ms Op")
+, Open_Play_Shots = sum(Scores +Ms)) %>% select (Total_Possessions,Possession_Won, Open_Play_Shots, Scores )
+
+
+Open_Play  <-sop %>%group_by(Pitch_Area)%>% filter (Entry_45 == "Y", main == "PW", Teamnum == "A")%>%
+summarize(Possession_Won =sum(main == "PW"), Scores = sum(subsetoc == "Scr Op"),Ms= sum(subsetoc == "Ms Op"),
+ Open_Play_Shots = sum(Scores +Ms)) %>% select (Team,Possession_Won, Open_Play_Shots, Scores, Ms )
+
+All_Poss  <- sop %>%group_by(Team) %>%summarize(Poss =sum(main %in% c("PW","Ko")), Poss_time =sum (secs), Entry_45 = sum (Entry_45 == "Y"), Shots = sum(mainoc %in% c("Shot Op Oc","Shot Rs Oc")),
+Shot_PP =(Shots/Poss*100), Shot_time = (Poss_time/Shots), Score = sum(subsetoc %in% c("Scr Op","Scr Rs")))
+
+Ko <- sop %>%group_by(Team) %>% filter (main == "Ko")%>%summarize(Poss_Ko =sum(main %in% c("Ko")), Poss_time =sum (secs), Shots = sum(mainoc %in% c("Shot Op Oc","Shot Rs Oc")),
+Shot_PP =(Shots/Poss_Ko*100), Shot_time = (Poss_time/Shots), Score = sum(subsetoc %in% c("Scr Op","Scr Rs")), Ko_Time = mean (Ko_Time))
+
+PW <- sop %>%group_by(Team) %>% filter (main == "PW")%>%summarize(Poss_PW =sum(main %in% c("PW")), Poss_time =sum (secs), Shots = sum(mainoc %in% c("Shot Op Oc","Shot Rs Oc")),
+Shot_PP =(Shots/Poss_PW*100), Shot_time = (Poss_time/Shots), Score = sum(subsetoc %in% c("Scr Op","Scr Rs")))
+
+
+Shots <- sop %>%group_by(Team)%>%filter(mainoc %in% c("Shot Op Oc","Shot Rs Oc")) %>%summarize(Shots = sum(mainoc %in% c("Shot Op Oc","Shot Rs Oc")), Score = sum(subsetoc %in% c("Scr Op","Scr Rs")), Shot_dist = mean (Shot_Dist))
+
+
+zonesA1 <- sop%>%group_by (Team,Pitch_Area_Rec)%>% summarize(PW =sum(main == "PW"),Ko =sum(Ko_Oc == "Ko Rec"), Ave_Time = mean(secs),Att_Time =sum(secs))
+
+time <-sop%>% group_by (Team,Pitch_Area_Rec)%>%summarize("0-9" = sum (line_col== 1) , "10-19"= sum (line_col == 2),"20-29"= sum (line_col == 3) ,"30-39"= sum (line_col == 4) ,"40-49"= sum (line_col == 5) ,"50-59"= sum (line_col == 6), "60-69"= sum (line_col == 7), "70+"= sum (line_col == 8))
+
+scrms <-sop%>% group_by (Team,Pitch_Area_Rec,subsetoc)%>%filter(subsetoc %in% c("Scr Op","Scr Rs", "Ms Op", "Ms Rs"))%>%summarize("0-9" = sum (line_col== 1) , "10-19"= sum (line_col == 2),"20-29"= sum (line_col == 3) ,"30-39"= sum (line_col == 4) ,"40-49"= sum (line_col == 5) ,"50-59"= sum (line_col == 6), "60-69"= sum (line_col == 7), "70+"= sum (line_col == 8))
+
+
+Entry_45 <- sop %>%group_by(Team) %>%summarize(Entry_45 = sum (Entry_45 == "Y"), Shots = sum(mainoc %in% c("Shot Op Oc","Shot Rs Oc")),
+Shot_PP =(Shots/Entry_45 *100), Score = sum(subsetoc %in% c("Scr Op","Scr Rs")))
+
+
+totstats <- pass %>%group_by(period,Team)%>%summarize(PW =sum(main == "PW"),Pass =sum(main == "Pass Op"),Rec =sum(main == "Rec Op"),OpShot =sum(main == "Shot Op"), Score = sum(subset %in% c("Scr Op","Scr Rs")),Poss_Lost =sum(main == "ToL"),Fk_Won =sum(main == "Free Won"),Fk_Lost =sum(main == "Free Loss"),Spoils =sum(main == "Def Act"))
+
+totstatsper <- pass %>%group_by(period,Team,main)%>% filter (main %in% c("PW","Pass Op","Rec Op","Shot Op","ToL","Free Won","Free Loss","Def Act")|(subset %in% c("Scr Op","Scr Rs"))) %>%summarize (count = n())
+
+
+q <- ggplot(data = totstatsper, aes(x = main, y = count, fill = Team))
+
+q +geom_bar(width=.7, stat = "identity", aes(x = main, y = count, fill = Team), position = "dodge") +
+  xlab("Player") + ylab("count") +
+scale_x_continuous("Player", labels = as.character(Player), breaks = Player) +
+  ggtitle("On ball Action") +
+  theme_bw() + theme (panel.grid.major = element_blank(),
+panel.grid.minor = element_blank())

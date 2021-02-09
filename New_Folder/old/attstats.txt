@@ -1,0 +1,161 @@
+a <- sop %>% group_by(Team) %>% filter (main %in%c("PW"),subsetoc %in%c("Scr Op")) %>% summarise(count = n())
+
+#sop first
+
+timestest <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/anyallss.csv", header=TRUE, sep=";")
+attach (timestest)
+
+#Pitch Area - pw ko ave_time tot_time
+
+zones <-timestest %>% mutate(Pitch_Area =ifelse(Zone >0 & Zone  <19.9 ,"In-Def", ifelse(Zone >20 & Zone  <44.5 ,"Out-Def", ifelse(Zone >45 & Zone <71.9, "Mid_Def",ifelse(Zone  >72 & Zone <98.9,ifelse(Zone  >99 & Zone <123.9, "Out_Att",ifelse(Zone >124 & Zone <146, "In-Att","Draw")))))
+
+zones <-zones %>% mutate(Pitch_Area =ifelse(Zone >0 & Zone  <19.9 ,"In-Def", ifelse(Zone >20 & Zone  <44.5 ,"Out-Def", ifelse(Zone >45 & Zone <71.9, "Mid_Def",ifelse(Zone  >72 & Zone <98.9,ifelse(Zone  >99 & Zone <123.9, "Out_Att",ifelse(Zone >124 & Zone <146, "In-Att","Draw")))))
+
+zones <-zones %>% mutate(Tot_Time = ifelse(secs >0 & secs  <9.4 ,"0-9", ifelse(secs  >9.5 & secs  <19.4, "10-19",ifelse(secs >19.5 & secs  <29.4, "20-29",ifelse(secs >29.5 & secs  <39.4, "30-39",ifelse(secs >39.5 & secs  <50.4, "40-49",ifelse(secs >49.5 & secs  <60.4, "50-59",ifelse(secs >59.5 & secs  <70.4, "60-70",ifelse(secs >70.5, "70+","Draw")))))))))
+
+zones <-zones %>% mutate(Entry_45 = ifelse(origin <99.5 & end >99.6 ,"Y", "N"))
+
+zones
+
+
+All_Time <- reee %>%group_by(Team) %>%summarize(Poss =sum(type == "PW"|type=="Ko Rec"|type=="ToL"), Shots = sum(Sht == "Shot Op"|Sht == "Shot Rs"),Shot_Perc =(Shots/Poss*100))
+All_Time
+
+All_Time1 <- zones %>%group_by(Team,Pitch_Area)%>% filter(Pitch_Area == "Def") %>%summarize(Poss =sum(type == "PW"|type=="Ko Rec"|type=="ToL"), Ko_Rec =sum(type=="Ko Rec"),PW =sum(type=="PW"),  Shots = sum(Sht == "Shot Op"|Sht == "Shot Rs"), Scored = sum(Scr == "Scr Op"|Sht == "Scr Rs"),Shot_Perc =(Shots/Poss*100), Ave_Time = mean(secs),Att_Time =sum(secs))
+All_Time1
+
+All_Time2 <- zones %>%group_by(Team)%>% filter(Pitch_Area == "Mid_Def") %>%summarize(Poss =sum(type == "PW"|type=="Ko Rec"|type=="ToL"), Shots = sum(Sht == "Shot Op"|Sht == "Shot Rs"),Shot_Perc =(Shots/Poss*100), Ave_Time = mean(secs),Att_Time =sum(secs))
+All_Time2
+
+
+zones%>%group_by(Tot_Time)%>%summarize(PW =sum(type == "PW"),Ko_Rec =sum(type=="Ko Rec"))
+
+zones%>%group_by(Tot_Time,Pitch_Area)%>%summarize(PW =sum(type == "PW"),Ko_Rec =sum(type=="Ko Rec"))
+
+
+zones%>%group_by(Tot_Time)%>% filter(Teamnum == "A",Sht == "Shot Op"|Sht == "Shot Rs")%>%summarize(Def =sum(Pitch_Area == "Def"),Mid_Def =sum(Pitch_Area == "Mid_Def"),Mid_Att =sum(Pitch_Area == "Mid_Att"),Att =sum(Pitch_Area == "Att"))
+
+zones%>%group_by(Pitch_Area)%>% filter(Teamnum == "A",Sht == "Shot Op"|Sht == "Shot Rs")%>%summarize(A =sum(Tot_Time == "0-9"),B =sum(Tot_Time== "10-19"),C =sum(Tot_Time== "20-29"))
+
+
+
+#sop first
+#change to new pitch areas
+timestest <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/anyallss.csv", header=TRUE, sep=";")
+attach (timestest)
+
+#Pitch Area - pw ko ave_time tot_time
+
+zones <-timestest %>% mutate(Pitch_Area = ifelse(origin >0 & origin  <40 ,"Def", ifelse(origin  >39.5 & origin  <70, "Mid_Def",ifelse(origin  >69.5 & origin  <100, "Mid_Att",ifelse(origin >99.5 & origin <139, "Att","Draw")))))
+
+zones <-zones %>% mutate(Pitch_End = ifelse(end >0 & end  <40 ,"Def", ifelse(end  >39.5 & end  <70, "Mid_Def",ifelse(end  >69.5 & end  <100, "Mid_Att",ifelse(end >99.5 & end <139, "Att","Draw")))))
+
+zones <-zones %>% mutate(Tot_Time = ifelse(secs >0 & secs  <9.4 ,"0-9", ifelse(secs  >9.5 & secs  <19.4, "10-19",ifelse(secs >19.5 & secs  <29.4, "20-29",ifelse(secs >29.5 & secs  <39.4, "30-39",ifelse(secs >39.5 & secs  <50.4, "40-49",ifelse(secs >49.5 & secs  <60.4, "50-59",ifelse(secs >59.5 & secs  <70.4, "60-70",ifelse(secs >70.5, "70+","Draw")))))))))
+
+zones <-zones %>% mutate(Entry_45 = ifelse(origin <99.5 & end >99.6 ,"Y", "N"))
+
+shtorg <-zones%>%group_by(Tot_Time)%>% filter(Teamnum == "A",Sht == "Shot Op"|Sht == "Shot Rs")%>%summarize(Def =sum(Pitch_Area == "Def"),Mid_Def =sum(Pitch_Area == "Mid_Def"),Mid_Att =sum(Pitch_Area == "Mid_Att"),Att =sum(Pitch_Area == "Att"))
+
+
+
+#All
+zonesA1 <- zones%>% filter(Pitch_Area == "Def")
+
+#zonesA1s <- zonesA1%>%group_by (Pitch_Area)%>% summarize(PA = mean(secs))
+
+zonesA1o <- zonesA1%>%group_by (Pitch_Area)%>% summarize(PW =sum(type == "PW"),Ko =sum(type == "Ko Rec"), Ave_Time = mean(secs),Att_Time =sum(secs))
+
+zonesA2 <- zones%>% filter(Pitch_Area == "Mid_Def")
+
+zonesA2o <- zonesA2%>%group_by (Pitch_Area)%>% summarize(PW =sum(type == "PW"),Ko =sum(type == "Ko Rec"), Ave_Time = mean(secs),Att_Time =sum(secs))
+
+ply <- bind_rows(zonesA1o ,zonesA2o)
+
+formattable (ply)
+
+ply
+
+#Shots
+zonesAsht <- zones%>% filter(Pitch_Area == "Def",Sht =="Shot Op", Team == "A")
+
+zones1osht <- zonesAsht%>%group_by (Pitch_Area)%>% summarize(PW =sum(type == "PW"),Ko =sum(type == "Ko"), Ave_Time = mean(secs),Att_Time =sum(secs))
+
+zonesA2Sht <- zones%>% filter(Pitch_Area == "Mid_Def",Sht =="Shot Op", Team == "A")
+
+zonesA2oSht <- zonesA2Sht%>%group_by (Pitch_Area)%>% summarize(PW =sum(type == "PW"),Ko =sum(type == "Ko Rec"), Ave_Time = mean(secs),Att_Time =sum(secs))
+
+zonesA3Sht <- zones%>% filter(Pitch_Area == "Mid_Att",Sht =="Shot Op", Team == "A")
+
+zonesA3oSht <- zonesA3Sht%>%group_by (Pitch_Area)%>% summarize(PW =sum(type == "PW"),Ko =sum(type == "Ko Rec"), Ave_Time = mean(secs),Att_Time =sum(secs))
+
+zonesA4Sht <- zones%>% filter(Pitch_Area == "Att",Sht =="Shot Op", Team == "A")
+
+zonesA4oSht <- zonesA4Sht%>%group_by (Pitch_Area)%>% summarize(PW =sum(type == "PW"),Ko =sum(type == "Ko Rec"), Ave_Time = mean(secs),Att_Time =sum(secs))
+
+
+
+plySht <- bind_rows(zones1osht ,zonesA2oSht,zonesA3oSht,zonesA4oSht)
+
+formattable (plySht)
+
+plySht
+
+#Scrs - change sht to scr
+zonesAScr <- sop%>% filter(Pitch_Area == "Def",Scr =="Scr Op", Team == "A")
+
+zones1oScr<- zonesAScr%>%group_by (Pitch_Area)%>% summarize(PW =sum(type == "PW"),Ko =sum(type == "Ko Rec"), Ave_Time = mean(secs),Att_Time =sum(secs))
+
+zonesA2Scr <- zones%>% filter(Pitch_Area == "Mid_Def",Scr =="Scr Op", Team == "A")
+
+zonesA2oScr <- zonesA2Scr%>%group_by (Pitch_Area)%>% summarize(PW =sum(type == "PW"),Ko =sum(type == "Ko Rec"), Ave_Time = mean(secs),Att_Time =sum(secs))
+
+zonesA3Scr <- zones%>% filter(Pitch_Area == "Mid_Att",Scr =="Scr Op", Team == "A")
+
+zonesA3oScr <- zonesA3Scr%>%group_by (Pitch_Area)%>% summarize(PW =sum(type == "PW"),Ko =sum(type == "Ko Rec"), Ave_Time = mean(secs),Att_Time =sum(secs))
+
+#plySht <- bind_cols(zones1oScr ,zonesA2oScr)
+
+plyScr <- bind_rows(zones1oScr ,zonesA2oScr,zonesA3oScr)
+
+formattable (plyScr)
+
+plyScr
+
+TeamA <- bind_cols(plySht, plyScr)
+TeamA
+
+
+.drop = FALSE
+
+
+#time 
+
+timeA <- timestest %>% mutate(Tot_Time = ifelse(secs >0 & secs  <9.4 ,1, ifelse(secs  >9.5 & secs  <19.4, 2,ifelse(secs >19.5 & secs  <29.4, 3,ifelse(secs >29.5 & secs  <39.4, 4,ifelse(secs >39.5 & secs  <50.4, 5,ifelse(secs >49.5 & secs  <60.4, 6,ifelse(secs >59.5 & secs  <70.4, 7,ifelse(secs >70.5, 8,"Draw")))))))))
+
+timeAa <- timeA %>% group_by(Tot_Time)%>%  summarize(count = n())
+
+timeAa <- timeA %>% group_by(Tot_Time)%>%  summarize(count = n())
+
+timeA %>% group_by(Tot_Time) %>% filter(type== "PW") %>% summarize(count = n())
+
+timeA %>% group_by(Tot_Time)%>%summarize(PW =sum(type == "PW"),Ko Rec =sum(type == "Ko Rec"))
+
+
+
+
+
+---
+zonesA <- zones%>% filter( Teamnum == "A",Scr == "Scr Op"|Scr == "Ms Op")
+
+zonesA <- zonesA%>%group_by (Scr)%>% summarize(Scr_Op =sum(Scr == "Scr Op"),Ms_Op =sum(Scr == "Ms Op"),Total =sum(Scr == "Scr Op"| Scr == "Ms Op"), Ave_Time = mean(secs),Att_Time =sum(secs))
+
+zonesA
+
+
+zones <-pass %>% mutate(Pitch_Area = ifelse(Zone >0 & Zone <40 ,1, ifelse(Zone >39.5 & Zone <70, 2,ifelse(Zone >69.5 & Zone <100, 3,ifelse(Zone >99.5 & Zone <139.5, 4,"Draw")))))
+
+sop <- zones %>%filter(subset == "Ko Rec"|subset == "Ko ToL"|main == "PW"|main == "ToL"|main == "Shot Op"|main == "Shot Rs")%>%select(possno,Zone,main,Pitch_Area)
+
+sop
+
+write.csv2(sop, "sop.csv")

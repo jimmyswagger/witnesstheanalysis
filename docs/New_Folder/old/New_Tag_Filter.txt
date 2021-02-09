@@ -1,0 +1,55 @@
+match <- read.csv(file="c:/Users/donagh/OneDrive/Spreadsheet fun/PA Analytics/PA Template/repltest.csv", header=TRUE, sep=";")
+attach (match)
+
+match$Team<- as.character(match$Team)
+
+#sapply(match, class)
+
+#will need more closing brackets
+
+match %>% mutate(Team =
+ifelse(Team == "Kerry" & Action == "Tck Def Ndp A", "Dublin", 
+ifelse(Team == "Kerry" & Action == "Tck Dp Def A", "Dublin",
+ifelse(Team == "Kerry" & Action == "Tck Prs A", "Dublin",
+ifelse(Team == "Kerry" & Action == "Fk Loss Tck A", "Dublin",
+ifelse(Team == "Kerry" & Action == "Tck Def Ndp GA", "Dublin", 
+ifelse(Team == "Kerry" & Action == "Tck Dp Def GA", "Dublin",
+ifelse(Team == "Kerry" & Action == "Tck Prs GA", "Dublin",
+ifelse(Team == "Kerry" & Action == "Fk Loss Tck GA", "Dublin",
+ifelse(Team == "Kerry" & Action == "KoBrk Opp A", "Dublin",
+ifelse(Team == "Kerry" & Action == "Brk Opp A", "Dublin",
+ifelse(Team == "Dublin" & Action == "Tck Def Ndp B", "Kerry",
+ifelse(Team == "Dublin" & Action == "Tck Dp Def B", "Kerry",
+ifelse(Team == "Dublin" & Action == "Tck Prs B", "Kerry",
+ifelse(Team == "Dublin" & Action == "Fk Loss Tck B", "Kerry",
+ifelse(Team == "Dublin" & Action == "Tck Def Ndp GB", "Kerry",
+ifelse(Team == "Dublin" & Action == "Tck Dp Def GB", "Kerry",
+ifelse(Team == "Dublin" & Action == "Tck Prs GB", "Kerry",
+ifelse(Team == "Dublin" & Action == "Fk Loss Tck GB", "Kerry",
+ifelse(Team == "Dublin" & Action == "KoBrk Opp B", "Kerry",
+ifelse(Team == "Dublin" & Action == "Brk Opp B", "Kerry",
+ match$Team)))))))))
+
+
+
+Tck Def Ndp A
+Tck Dp Def A 
+Tck Prs A
+Fk Loss Tck A
+Tck Def Ndp GA
+Tck Dp Def GA 
+Tck Prs GA
+Fk Loss Tck GA
+KoBrk Opp A
+Brk Opp A
+
+Tck Def Ndp B
+Tck Dp Def B
+Tck Prs B
+Fk Loss Tck B
+Tck Def Ndp GB
+Tck Dp Def GB
+Tck Prs GB
+Fk Loss Tck GB
+KoBrk Opp B
+Brk Opp B

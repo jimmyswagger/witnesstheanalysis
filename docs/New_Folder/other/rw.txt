@@ -1,0 +1,144 @@
+points (Areax[Teamnum=="A" & Action=="Shot Right" & Phase=="A11"], Areay[Teamnum=="A" & Action=="Shot Right" & Phase=="A11"], pch=12, col="green", cex=1)
+points (Areax[Teamnum=="A" & Action=="Point" & Phase=="A11"], Areay[Teamnum=="A" & Action=="Point" & Phase=="A11"], pch=3, col="red", cex=1)
+
+
+points (Areax[Teamnum=="A" & Action=="Shot Left"], Areay[Teamnum=="A" & Action=="Shot Left"], pch=12, col="blue", cex=1)
+points (Areax[Teamnum=="A" & Action=="Point"], Areay[Teamnum=="A" & Action=="Point"], pch=3, col="green", cex=1)
+
+segments(x0 = Areax[Teamnum=="A" & Action=="Kick Pass"], 
+          y0 = Areay[Teamnum=="A" & Action=="Kick Pass"], 
+          x1 = Areax[Teamnum=="A" & Action=="Rec"], 
+          y1 = Areay[Teamnum=="A" & Action=="Rec"], 
+          col = gray(0, .5),
+          lty = "dotted")
+
+points (Areax[Teamnum=="A" & Action=="Kick Pass"], Areay[Teamnum=="A" & Action=="Kick Pass"], pch=2, col="orange", cex=.5)
+points (Areax[Teamnum=="A" & Action=="Hand Pass"], Areay[Teamnum=="A" & Action=="Hand Pass"], pch=6, col="green", cex=.5)
+points (Areax[Teamnum=="A" & Action=="Rec"], Areay[Teamnum=="A" & Action=="Rec"], pch=1, col="blue", cex=.5)
+
+segments(x0 = Areax[Teamnum=="A" & Action=="Kick Pass"], 
+          y0 = Areay[Teamnum=="A" & Action=="Kick Pass"], 
+          x1 = Areax[Teamnum=="A" & Action=="Rec"], 
+          y1 = Areay[Teamnum=="A" & Action=="Rec"], 
+          col = gray(0, .1),
+          lty = "dotted")
+
+segments(x0 = Areax[Teamnum=="A" & Action=="Hand Pass"], 
+          y0 = Areay[Teamnum=="A" & Action=="Hand Pass"], 
+          x1 = Areax[Teamnum=="A" & Action=="Rec"], 
+          y1 = Areay[Teamnum=="A" & Action=="Rec"], 
+          col = gray(0, .1),
+          lty = "dotted")
+
+
+kick <- pass %>% filter(Teamnum == "A" & Action == "Hand Pass",Action == "Kick Pass", Action == "Rec" ) %>% select(Player, Areax, Areay)
+
+kick %>%
+  group_by(Player) %>%
+  summarize(Areax = mean(Areax, na.rm = TRUE))
+
+kick %>% group_by(Player) %>% summarize(count=n())
+
+kplayer <-kick %>% group_by(Player) %>% summarize(count=n())
+
+p<-ggplot(data=kplayer, aes(x=Player, y=count)) +
+  geom_bar(stat="identity",color="blue", fill="white")+
+title ("Kicks to Player")
+p
+
+kplayer <-pass %>% group_by(Player) %>% filter(Teamnum == "A")
+
+passes <- pass %>% filter(Teamnum == "A" & Action == "Shot Right" & Action == "Point" ) %>% select(Player, Action, Areax, Areay)
+
+passes %>% group_by(Player) %>% summarize(count=n())
+
+passcount <- passes %>% group_by(Player) %>% summarize(count=n())
+
+p<-ggplot(data=passcount, aes(x=Player, y=count)) +
+  geom_bar(stat="identity",color="blue", fill="white")
+
+p
+
+pass %>% filter(Teamnum == "A" & Action == "Shot Right" | Action == "Shot Left" | Action == "Point" |Action == "Goal" ) %>% select(Player,Action, Areax, Areay)
+shots <-pass %>% filter(Teamnum == "A" & Action == "Shot Right" | Action == "Shot Left" | Action == "Point" |Action == "Goal" ) %>% select(Player,Action, Areax, Areay)
+shots %>% group_by(Player) %>% summarize(count=n(Shot Right))
+
+
+
+kick %>%
+  group_by(Action) %>%
+  summarize(Areay = mean(Areay, na.rm = TRUE))
+
+kick %>% group_by(Player) %>%
+  mutate(Areay = mean(Areay,na.rm = TRUE) %>%
+  head())
+
+pass %>% group_by(Player) %>% filter(Teamnum == "A")%>%
+  mutate(Areax = mean(Areax,na.rm = TRUE)) %>%
+  mutate(Areay = mean(Areay,na.rm = TRUE) %>%
+  head())
+
+p + ggplot( kicks, aes( x = Areax, y = Areax ) ) +
+  geom_point()
+
+X <- kicks
+chull(X)
+plot(X, cex = 0.5)
+hpts <- chull(X)
+hpts <- c(hpts, hpts[1])
+lines(X[hpts, ])
+
+
+
+
+library(tidyverse)
+
+# Find the convex hull of the points being plotted
+hull <- kicks %>%
+  slice(chull(Areax, Areay))
+
+# Define the scatterplot
+p <- ggplot(mtcars, aes(mpg, wt)) + geom_point(shape = 21)
+
+s<- p + geom_point(data = kicks, aes(x = Areax, y = Areay))
+# Overlay the convex hull
+s + geom_polygon(data = hull, alpha = 0.2)
+
+p + geom_point(data = kicks, aes(x = Areax, y = Areay)) + geom_label(data=kicks[Areax & Areay], aes(Areax & Areay))
+
+p + geom_point(data = dat, aes(x=location.y, y=location.x), colour = "#DF5058")
+
+find_hull <- function(kicks) df[chull(kicks$Areax, kicks$Areay), ]
+library(plyr)
+hulls <- ddply(somedata, “kicks”, find_hull)
+
++ geom_label(data=kicks[Areax & Areay], aes(Areax & Areay))
+
+{hpts <- kicks(x = (Areax), y = (Areay))
+  hpts <- c(hpts,hpts[1])
+  lines(Areax[hpts], Areay[hpts], col = "blue", lty= "dotted")} 
+
+mutate(kick, Areax = mean(Areax),(Areay = mean(Areay))
+
+kick %>%
+  group_by(Action) %>%
+  summarize(Areay = mean(Areay, na.rm = TRUE))
+
+
+
+#getting the convex hull of each unique point set
+
+find_hull <- function(posit) df[chull(posit$Areax, posit$Areay), ]
+hulls <- ddply(posit, "issue", find_hull)
+
+plot <- ggplot(data = nomissing, aes(x = eff, y = man, colour=issue, fill = issue)) +
+geom_point() + 
+geom_polygon(data = hulls, alpha = 0.5) +
+labs(x = "Efficiency", y = "Mandate")
+plot
+
+
+X <- posit, (x = Areax, y = Areay)
+hull <- chull(X)
+hull <- c(hull, hull[1])
+p + geom_polygon(data=X[hull,], fill="red") + geom_point(data = posit, aes(x = Areax, y = Areay)

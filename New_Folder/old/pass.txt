@@ -1,0 +1,51 @@
+#flip opp taclkes/def actions to show where happened
+
+run <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/bodeir/passlinebodeir.csv", header=TRUE, sep=";")
+attach (run)
+
+runA <- run%>%filter(Teamnum=="A",keep=="Y",main == "Pass Op"|main=="Pass Rs")
+
+advpassA <- run%>%filter (Teamnum == "A",keep=="Y",seg == "0"|seg == "2", dist > 9.99)
+
+actToL<- runA%>% filter(Teamnum == "A", mainoc == "ToL")
+
+passRs <- runA%>%group_by(Team, Action) %>% filter(Teamnum == "A",main=="Pass Rs")
+
+p + geom_segment(data = runA, aes(x = Areax, y = Areay, xend = xend, yend = yend, colour = as.factor(seg),linetype= as.factor(seg)),size = .5,arrow = arrow(length = unit(0.3, "cm"))) +
+    geom_point(data = runA, aes(x = Areax, y = Areay, colour = as.factor(seg)), size = 6, shape = 15) +
+    geom_text(data = runA, aes(x = Areax, y = Areay, label = Player), size = 4,colour = "orange") +
+    theme(legend.position="none") + scale_colour_manual(values = runcolpal) +
+    scale_linetype_manual(values = runlinepal) +
+    geom_point(data = passRs, aes(x=Areax, y=Areay, stroke = 1), size = 6, colour = "lightblue", shape = 15) +
+    geom_text(data = passRs, aes(x=Areax, y=Areay, label = Player), size = 4, colour = "white") +
+    geom_point(data = actToL, aes(x=xend, y=yend), colour = "red" ,size = 3, shape = 4) +
+    geom_segment(data = advpassA, aes(x = Areax, y = Areay, xend = xend, yend = yend), colour = "blue",arrow = arrow(length = unit(0.3, "cm"))) +
+    geom_point(data = advpassA, aes(x = Areax, y = Areay), colour = "blue", shape = 15, size = 6) +
+    geom_text(data = advpassA, aes(x = Areax, y = Areay, label = Player), colour = "white", size = 4) 
+
+
+run <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/bodeir/passlinebodeir.csv", header=TRUE, sep=";")
+attach (run)
+
+runA <- run%>%filter(Teamnum=="A",keep=="Y",main == "Pass Op"|main=="Pass Rs", Areax >99 & xend >99, Areay >78.4 & yend <78.3)
+runAA <- run%>%filter(Teamnum=="A",keep=="Y",main == "Pass Op"|main=="Pass Rs", Areax >71.9 & xend >72,Areay <62 & yend >62)
+
+
+advpassA <- run%>%filter (Teamnum == "A",keep=="Y",seg == "0"|seg == "2", dist > 9.99,  Areay >78.4 & yend <78.3)
+
+#actToL<- runA%>% filter(Teamnum == "A", mainoc == "ToL")
+
+#passRs <- runA%>%group_by(Team, Action) %>% filter(Teamnum == "A",main=="Pass Rs")
+
+p + geom_segment(data = runA, aes(x = Areax, y = Areay, xend = xend, yend = yend,linetype= as.factor(seg)), colour = "white",size = .5,arrow = arrow(length = unit(0.3, "cm"))) +
+    geom_segment(data = runAA, aes(x = Areax, y = Areay, xend = xend, yend = yend,linetype= as.factor(seg)), colour = "orange",size = .5,arrow = arrow(length = unit(0.3, "cm"))) +
+    #geom_point(data = runA, aes(x = Areax, y = Areay, colour = as.factor(seg)), size = 6, shape = 15) +
+    #geom_text(data = runA, aes(x = Areax, y = Areay, label = Player), size = 4,colour = "orange") +
+    theme(legend.position="none") + scale_colour_manual(values = runcolpal) +
+    scale_linetype_manual(values = runlinepal) +
+    #geom_point(data = passRs, aes(x=Areax, y=Areay, stroke = 1), size = 6, colour = "lightblue", shape = 15) +
+    #geom_text(data = passRs, aes(x=Areax, y=Areay, label = Player), size = 4, colour = "white") +
+    #geom_point(data = actToL, aes(x=xend, y=yend), colour = "red" ,size = 3, shape = 4) +
+    geom_segment(data = advpassA, aes(x = Areax, y = Areay, xend = xend, yend = yend), colour = "blue",arrow = arrow(length = unit(0.3, "cm"))) 
+    #geom_point(data = advpassA, aes(x = Areax, y = Areay), colour = "blue", shape = 15, size = 6) +
+    #geom_text(data = advpassA, aes(x = Areax, y = Areay, label = Player), colour = "white", size = 4) 

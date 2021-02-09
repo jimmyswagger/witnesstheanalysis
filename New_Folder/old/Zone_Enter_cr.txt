@@ -1,0 +1,45 @@
+#0 point is strictly exterior to polygon
+#1 point is strictly interior to polygon
+#2 point lies on the relative interior of an edge of polygon
+#3 point is a vertex of polygon
+
+
+#looking at poss that started in in_def and see if they ended in inzone
+#creating the hull
+#Finds the shots
+
+scoresAarea <- scores %>%ungroup() %>%filter (Teamnum == "A") %>% select(Areax, Areay)
+
+#creates the hull for all shots - think about changing this to scores only
+hull <- scoresAarea %>%slice(chull(Areax, Areay))
+
+#filters end of possessions
+TeamAEnd  <- run %>%group_by(Team, Action) %>% filter(keep=="Y",Teamnum == "A", mainoc == "ToL"|subsetoc %in% c ("Scr Op","Ms Op", "Scr Rs","Ms Rs"))
+
+#finds which are inside 
+#point.in.polygon( TeamAEnd$Areax, TeamAEnd$Areay,hull$Areax, hull$Areay, mode.checked=FALSE)
+
+#creates a dataframe of oc 
+inzone <- data.frame(inzone = point.in.polygon(TeamAEnd$Areax, TeamAEnd$Areay,hull$Areax, hull$Areay, mode.checked=FALSE))
+
+#creates a df of all oc - allows to create other things
+ zoned <-bind_cols(TeamAEnd,inzone)
+
+
+# looking at oc of poss that entered
+#find poss that entered zone
+EnterZone  <- zoned %>%group_by(Team, Action) %>% filter(Teamnum == "A", inzone %in% c ("1"))
+
+#pull out those possessions - from run
+runEnterZone <- subset(run, poss %in% EnterZone$poss)
+
+#filter for origin
+TeamAEnter  <- runEnterZone %>%group_by(Team, Action) %>% filter(Teamnum == "A", main %in% c ("PW","Ko Rec"), zone < 10)
+
+#pull out those ones
+runAEnter <- subset(run, poss %in% TeamAEnter$poss)
+
+# count from zone enries
+lpop <- runAEnter %>%group_by(Team)%>%summarize(Possession_Won =sum(main == "PW"), Ko_Won = sum(main == "Ko Rec"),Total_Possessions = sum(Possession_Won + Ko_Won),
+Open_Play_Shots = sum(main == "Shot Op"),Open_Play_Score = sum(subset == "Scr Op"),Shot_Perc =(Open_Play_Score/Open_Play_Shots*100),
+Fk_Shots = sum(main == "Shot Rs"),Fk_Score = sum(subset == "Scr Rs"),ToL = sum(main == "ToL"))

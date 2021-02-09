@@ -1,0 +1,32 @@
+zonedA %>% group_by (Team) %>%filter (Teamnum == "A") %>%summarize(Possessions =sum(main %in% c("PW","Ko")),
+entcarry = COUNT_IFS(oczone,segtype %in% c("Carry"), inzone %in% c("0"), oczone %in% c("1","3")),
+enthp = COUNT_IFS(oczone,segtype %in% c("Hp"), inzone %in% c("0"), oczone %in% c("1","3")),
+entkpr = COUNT_IFS(oczone,segtype %in% c("Kp Right"), inzone %in% c("0"), oczone %in% c("1","3")),
+entkpl = COUNT_IFS(oczone,segtype %in% c("Kp Left"), inzone %in% c("0"), oczone %in% c("1","3")),
+entfkp = COUNT_IFS(oczone,segtype %in% c("Fk Pass"), inzone %in% c("0"), oczone %in% c("1","3")),
+entslp = COUNT_IFS(oczone,segtype %in% c("Sl Pass"), inzone %in% c("0"), oczone %in% c("1","3")),
+entkp = sum(entkpr + entkpl),
+entrs = sum(entfkp + entslp),
+entoptol = COUNT_IFS(oczone,segtype %in% c("Pass ToL"), inzone %in% c("0"), oczone %in% c("1","3")),
+entfktol = COUNT_IFS(oczone,segtype %in% c("Fk Loss ToL"), inzone %in% c("0"), oczone %in% c("1","3")),
+entsltol = COUNT_IFS(oczone,segtype %in% c("Sl ToL"), inzone %in% c("0"), oczone %in% c("1","3")),
+intcklost = COUNT_IFS(oczone,subsetoc %in% c("Tck ToL"),oczone %in% c("1","3")),
+inlost = sum(entoptol + entfktol + entsltol +intcklost),
+inpw = COUNT_IFS(inzone,main %in% c("PW"), inzone %in% c("1","3")),
+inentry = COUNT_IFS(inzone,main %in% c("Shot Op","Shot Rs"), inzone %in% c("1","3")),
+ocentry = COUNT_IFS(oczone,mainoc %in% c("ToL"), oczone %in% c("1","3")), 
+entry = (inentry + ocentry), shots =sum(main %in% c("Shot Op","Shot Rs")), 
+scores = sum(subsetoc %in% c("Scr Op","Scr Rs"))) %>% select (Team,Possessions, inpw, entry, shots,scores,inlost)   
+
+
+
+
+%>% select (Team,Possessions,entcarry, enthp,entkp, entrs,inpslost,intcklost, inpw, entry, shots,scores) 
+
+zonedA %>% group_by (poss) %>%filter (Teamnum == "A") %>%summarize(Possessions =sum(main %in% c("PW","Ko")),
+inentry = COUNT_IFS(inzone,main %in% c("Shot Op","Shot Rs"), inzone %in% c("1","3")),
+ocentry = COUNT_IFS(oczone,mainoc %in% c("ToL"), oczone %in% c("1","3")), entry = (inentry + ocentry), shots =sum(main %in% c("Shot Op","Shot Rs")), 
+scores = sum(subsetoc %in% c("Scr Op","Scr Rs")))
+
+
+

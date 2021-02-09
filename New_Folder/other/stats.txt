@@ -1,0 +1,55 @@
+#For each group of stats
+
+#Both Teams
+#filter & create dataframe 
+kickouts <- pass %>% group_by(Teamnum, Action) %>% filter(Action == "Kickout" | Action == "Kickout" |Action == "Ko Rec" |Action == "Ko Lost" |Action == "Ko Brk" |Action == "KoBr Rec"|Action == "KoBr Lost") %>% summarize(count=n())
+
+#barchart with count labels - Both Teams
+q <- ggplot(data = kickouts, aes(x = Team, y = count, fill = Action))
+
+q +geom_bar(width=.7, stat = "identity", aes(x = Teamnum, y=count, fill = Action), position = "dodge") +
+  xlab("Teamnum") + ylab("count") +
+  ggtitle("Kickouts") +
+  theme_bw() + theme (panel.grid.major = element_blank(),
+panel.grid.minor = element_blank()) +
+ geom_text(aes(x = Teamnum, y=count, label=count)) +
+scale_fill_manual("legend", values = c("Kickout" = "blue", "Ko Lost" = "red", "Ko Rec" = "green"))
+
+#Pitch map - Both Teams (not working)
+
+kickoutsAB  <-filter(pass, Action=="Ko Rec"| Action =="Ko Lost"|Action=="KoBr Rec"|Action=="KoBr Lost")
+
+p + geom_point(data = kickoutsAB, aes(x=Areax, y=Areay, colour = Action, shape = Action, size = 8)) +
+labs(title = "Kickouts", subtitle = "Total, lost, rec", size = 8) +
+labs(caption = "(Team A vs Team B 25/01/2018)") +
+geom_text_repel(data = kickoutsAB, aes(x=Areax, y=Areay, label = Player, col = Action)) +
+theme(plot.title = element_text(hjust=0.5)) +
+theme(plot.subtitle = element_text(hjust=0.5)) 
+
+#Single Team
+#filter & create dataframe
+ko <- pass %>% group_by(Teamnum, Action) %>% filter(Teamnum == "A", subsets == "Ko" | subsets == "Ko Rec" |subsets == "Ko ToL") %>% summarize(count=n())
+head (ko)
+
+#barchart with count labels - Single Team
+q <- ggplot(data = ko, aes(x = Team, y = count, fill = Action))
+
+q +geom_bar(width=.7, stat = "identity", aes(x = Teamnum, y=count, fill = Action), position = "dodge") +
+  xlab("Teamnum") + ylab("count") +
+  ggtitle("Kickouts") +
+  theme_bw() + theme (panel.grid.major = element_blank(),
+panel.grid.minor = element_blank()) +
+ geom_text(aes(x = Teamnum, y=count, label=count)) +
+scale_fill_manual("legend", values = c("Ko" = "blue", "Ko ToL" = "red", "Ko Rec" = "green"))
+
+#Pitch map - Single Team
+
+koA <-filter(pass, Teamnum == "A", Action=="Ko Rec"| Action =="Ko Lost"|Action=="KoBr Rec"|Action=="KoBr Lost")
+
+p + geom_point(data = koA, aes(x=Areax, y=Areay, colour = Action, shape = Action, size = 8)) +
+labs(title = "Kickouts", subtitle = "Total, lost, rec") +
+labs(caption = "(Team A vs Team B 25/01/2018)") +
+geom_text_repel(data = koA, aes(x=Areax, y=Areay, label = Player, col = Action), size = 8) +
+theme(plot.title = element_text(hjust=0.5)) +
+theme(plot.subtitle = element_text(hjust=0.5)) 
+

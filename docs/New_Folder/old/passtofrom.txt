@@ -1,0 +1,19 @@
+run <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/bodeir/runbodeir.csv", header=TRUE, sep=";")
+attach (run)
+
+run <- run%>%filter (main == "Pass Op")
+
+passA <- run %>% filter(Teamnum == "A",keep=="Y")
+
+p + geom_segment(data = passA, aes(x = Areax, y = Areay, xend = xend, yend = yend, colour = subrec)) +
+    geom_point(data = passA, aes(x = Areax, y = Areay, colour = subrec, shape = subset, size = 1,stroke = 1)) +
+    geom_point (data = passA, aes(x=xend, y=yend, colour = subrec, shape = subrec, size = .5,stroke = 2)) +   
+   theme(legend.position="none", legend.title=element_text(size=14), 
+          legend.text=element_text(size=16)) +
+    guides(color = FALSE, size = FALSE) +
+    guides(shape = guide_legend(override.aes = list(size = 14))) +
+scale_shape_manual(values= palspatts) +
+  scale_colour_manual(values = palpatt) + 
+geom_text(data = passA, aes(x = Areax, y = Areay, label = Player), colour = "white", size = 4) +
+  ggtitle("blue = Pass, red = lost pass, green = assist(score), black = key pass(shot attempt)")
+

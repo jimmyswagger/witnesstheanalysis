@@ -1,0 +1,142 @@
+
+-------------------------------------------------------------------------------------------------------------------------------------
+#create new data frame
+
+pass %>% group_by(Player) %>% filter(Teamnum == "A",Player >1 & Player <= 10, Action=="Hand Pass"| Action =="Kick Pass"| Action=="Rec")%>%
+  mutate(Areax = mean(Areax,na.rm = TRUE)) %>%
+  mutate(Areay = mean(Areay,na.rm = TRUE)) %>%
+  head())
+
+#Voronoi
+voronoi <- deldir(postA$Areax, postA$Areay)
+p + geom_point(data = postA, aes(x=Areax, y=Areay, colour = Teamnum)) +
+labs(title = "Average Positions", subtitle = "+ voronoi") +
+labs(caption = "(Team A vs Team B 25/01/2018)") +
+geom_text_repel(data = postA, aes(x=Areax, y=Areay, label = Player), size = 3)+
+geom_segment(
+    aes(x = x1, y = y1, xend = x2, yend = y2),
+    size = .5,
+    data = voronoi$dirsgs,
+    linetype = 2,
+    color= "white")
+
+#Delaunay triangulation
+
+voronoi <- deldir(postA$Areax, postA$Areay)
+
+p + geom_point(data = postA, aes(x=Areax, y=Areay, colour = Teamnum)) +
+labs(title = "Average Positions", subtitle = "+ voronoi") +
+labs(caption = "(Team A vs Team B 25/01/2018)") +
+geom_text_repel(data = postA, aes(x=Areax, y=Areay, label = Player), size = 3)+
+geom_segment(
+    aes(x = x1, y = y1, xend = x2, yend = y2),
+    size = .5,
+    data =  voronoi$delsgs,
+    linetype = 1,
+    color= "blue")
+
+#both teams 
+
+voronoi <- deldir(posit$Areax, posit$Areay)
+
+p + geom_point(data = posit, aes(x=Areax, y=Areay, colour = Teamnum)) +
+labs(title = "Average Positions", subtitle = "+ voronoi") +
+labs(caption = "(Team A vs Team B 25/01/2018)") +
+geom_text_repel(data = posit, aes(x=Areax, y=Areay, label = Player, col = Teamnum), size = 3)+
+geom_segment(
+    aes(x = x1, y = y1, xend = x2, yend = y2),
+    size = .5,
+    data =  voronoi$dirsgs,
+    linetype = 2,
+    color= "#FFB958")
+----------------------------------------------------------------------------------------------------------------
+#create new data frame
+
+pass %>% group_by(Player) %>% filter(Teamnum == "A",Player >1 & Player <= 10, Action=="Hand Pass"| Action =="Kick Pass"| Action=="Rec")%>%
+  mutate(Areax = mean(Areax,na.rm = TRUE)) %>%
+  mutate(Areay = mean(Areay,na.rm = TRUE) %>%
+  head())
+
+#Surface Area
+
+library(ggpubr)
+
+p + geom_point(data = postA, aes(x=Areax, y=Areay, colour = Teamnum, shape = Teamnum)) +
+ stat_chull(data = postA,aes(x=Areax, y=Areay,color = Teamnum, fill = Teamnum), alpha = 0.1, geom = "polygon")
+
+#Both teams 
+p + geom_point(data = posit, aes(x=Areax, y=Areay, colour = Teamnum, shape = Teamnum)) +
+ stat_chull(data = posit,aes(x=Areax, y=Areay,color = Teamnum, fill = Teamnum), alpha = 0.1, geom = "polygon")
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+#Starting Positions 
+
+position <- read.csv (file.choose(),sep=";",header=TRUE,check.names=FALSE)
+attach (position)
+head (position, n = 1)
+
+p + geom_point(data = position, aes(x=Areax, y=Areay, colour = Teamnum, shape = Teamnum)) +
+  labs(title = "Starting Line Up") +
+  labs(caption = "(Team A vs Team B 25/01/2018)") +
+  geom_text_repel(data = position, aes(x=Areax, y=Areay, label = Player), size = 3) 
+
+
+#Average Positions 
+
+aveposA <- pass %>% group_by(Player) %>% filter(Teamnum == "A")
+
+AreaxA <- avepos %>%
+    group_by(Player) %>%
+    summarise(Areax = mean(Areax,na.rm = TRUE)) 
+
+AreayA <- avepos%>%
+    group_by(Player) %>%
+    summarise(Areay = mean(Areay,na.rm = TRUE))
+
+avgpos <- left_join(Areax2, Areay2, by ="Player")
+
+p + geom_point(data = avgpos, aes(x=Areax, y=Areay, colour = Player)) +
+labs(title = "Average Positions") +
+labs(caption = "(Team A vs Team B 25/01/2018)") +
+geom_text_repel(data = avgpos, aes(x=Areax, y=Areay, label = Player), size = 3)+
+theme(plot.title = element_text(hjust=0.5)) +
+theme(plot.subtitle = element_text(hjust=0.5)) +
+ + theme(legend.position="none")
+
+p + geom_point(data = frees, aes(x=Areax, y=Areay, colour = Player)) +
+labs(title = "Average Positions") +
+labs(caption = "(Team A vs Team B 25/01/2018)") +
+geom_text_repel(data = avgpos, aes(x=Areax, y=Areay, label = Player), size = 3)+
+theme(plot.title = element_text(hjust=0.5)) +
+theme(plot.subtitle = element_text(hjust=0.5)) +
+ + theme(legend.position="none")
+-------------------------------------------------------------------------------------------------------------------------------------
+#Surface Area
+
+p + geom_point(data = fcuk, aes(x=Areax, y=Areay, colour = Player)) +
+ stat_chull(data = fcuk,aes(x=Areax, y=Areay,color = Player, fill = Player), alpha = 0.1, geom = "polygon") +
+labs(title = "Average Positions", subtitle = "+ Surface Area") +
+labs(caption = "(Team A vs Team B 25/01/2018)") +
+geom_text_repel(data = fcuk, aes(x=Areax, y=Areay, label = Player), size = 3)+
+theme(plot.title = element_text(hjust=0.5)) +
+theme(plot.subtitle = element_text(hjust=0.5))
+
+----------------------------------------
+********************************************************************
+passA <- pass %>%group_by(Team, Action) %>% filter(Teamnum == "A")
+
+mean(passA[["Areax"]])
+mean(passA[["Areay"]])
+
+p + geom_point(data = passA, aes(x= Areax, y=Areay, colour = "Team", size = 2)) +
+geom_point(data = passA, aes(x=mean(passA[["Areax"]]), y=mean(passA[["Areay"]])), size = 4, colour = "white", shape = 3, stroke = 2) 
+
+
+
+p + geom_point(data = passA, aes(x= Areax, y=Areay, colour = "Team", size = 2)) +
+geom_point(data = passA, aes(x=mean(passA[["Areax"]]), y=mean(passA[["Areay"]])), size = 4, colour = "white", shape = 3, stroke = 2) +
+geom_segment(aes(x = 4.9, y = 3, xend = 7.5 , yend = 3),colour = "white",linetype="dotted")
+
+
+p + geom_point(data = passA, aes(x= Areax, y=Areay, colour = "Team", size = 2)) +
+geom_curve(aes(x = 5.7, y = 1.5, xend = 5.7, yend = 4.5),curvature = -.5, colour = "orange", stroke = 1) 

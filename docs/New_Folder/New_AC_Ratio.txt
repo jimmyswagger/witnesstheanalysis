@@ -1,0 +1,27 @@
+#theme
+#sec scale to match values 
+running <- read.csv(file="c:/Users/donagh/OneDrive/Spreadsheet fun/PA Analytics/PA Template/running.csv", header=TRUE, sep=";")
+attach (running)
+
+running <- running %>% 
+  mutate(Training_Load = (RPE*Duration),EWMA_28 =(Training_Load *(2/(28+1))+((1-(2/(28+1)))*lag(Training_Load))),EWMA_7 =(Training_Load *(2/(7+1))+((1-(2/(7+1)))*lag(Training_Load))), EWMA_ACWR = (EWMA_7/EWMA_28))
+
+mean_5 <- rollify(mean, window = 7) 
+sum_5 <- rollify(sum, window = 7) 
+sd_5   <- rollify(sd,   window = 7) 
+
+running <- running %>% 
+  mutate(rolling_mean = mean_5(Training_Load),
+         rolling_sum = sum_5(Training_Load),
+         rolling_std  = sd_5(Training_Load), mono = (rolling_mean/rolling_std),strain = (rolling_sum*mono))
+
+running
+
+ggplot (running) + geom_bar(width=.7, stat = "identity", aes(x = Date, y = Training_Load),fill = "lightgreen") +  
+geom_area(aes(x = Date, y = strain,group = 1), fill = "grey", alpha=0.2) +
+geom_line(aes(x = Date, y = EWMA_7,group = 1)) +
+geom_line(aes(x = Date, y = mono,group = 1)) +
+scale_y_continuous(sec.axis = sec_axis(~./5, name = "Relative humidity [%]")) +
+theme(legend.position="bottom",axis.text.x = element_text(angle = 90, hjust = 1))
+
+

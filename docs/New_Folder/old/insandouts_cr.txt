@@ -1,0 +1,60 @@
+## In ##
+
+# lost in 
+tol_in <- zonedAA %>% group_by (Team, Actionoc) %>% filter (mainoc == "ToL", oczone %in% c("1","3")) %>% summarise(count = n ())
+
+tol_in <-spread(tol_in,Actionoc,count)
+
+formattable (tol_in, align = c("l", rep("c", NCOL(tol_in) - 1)))
+
+# entry in 
+entry_in <- zonedAA %>% group_by (Team, segtype) %>% filter (segtype %in% c ( "Hp", "Kp Left", "Kp Right", "Carry", "FK Pass", 
+"Sl Pass", "Hp Prs", "Kp Left Prs", "Kp Right Prs"),
+inzone %in% c("0"), oczone %in% c("1","3")) %>% summarise(count = n ())
+
+entry_in <-spread(entry_in,segtype,count)
+
+formattable (entry_in, align = c("l", rep("c", NCOL(entry_in) - 1)))
+
+# Lost entry in
+
+Lost_entry_in <-zonedAA %>% group_by (Team,Actionoc) %>% filter (Actionoc %in% c ("Brk Hp Loss", "Brk Kp Loss", "Loss Hp Int", "Loss Kp Int")),
+inzone %in% c("0"), oczone %in% c("1","3")) %>% summarise(count = n ())
+
+Lost_entry_in <-spread(Lost_entry_in,Actionoc,count)
+
+formattable (Lost_entry_in, align = c("l", rep("c", NCOL(Lost_entry_in) - 1)))
+
+## In scr ##
+
+# lost inscr
+lost_inscr <-zonedAA %>% group_by (Team, Actionoc) %>% filter (mainoc == "ToL", oczonescr %in% c("1","3")) %>% summarise(count = n ())
+
+lost_inscr <-spread(lost_inscr,Actionoc,count)
+
+formattable (lost_inscr, align = c("l", rep("c", NCOL(lost_inscr) - 1)))
+
+# entry inscr
+
+entry_inscr <-zonedAA %>% group_by (Team, segtype) %>% filter (segtype %in% c ( "Hp", "Kp Left", "Kp Right", "Carry", "FK Pass", 
+"Sl Pass", "Hp Prs", "Kp Left Prs", "Kp Right Prs"),
+inzonescr %in% c("0"), oczonescr %in% c("1","3")) %>% summarise(count = n ())
+
+entry_inscr <-spread(entry_inscr,segtype,count)
+
+formattable (entry_inscr, align = c("l", rep("c", NCOL(entry_inscr) - 1)))
+
+# Lost entry scr 
+
+#Lost_entry_scr <-zonedAA %>% group_by (Team, segtype) %>% filter (segtype %in% c ( "Pass ToL"),
+#inzonescr %in% c("0"), oczonescr %in% c("1","3")) %>% summarise(count = n ())
+
+Lost_entry_scr <-zonedAA %>% group_by (Team, Actionoc) %>% filter (Actionoc %in% c ("Brk Hp Loss", "Brk Kp Loss", "Loss Hp Int", "Loss Kp Int"),
+inzonescr %in% c("0"), oczonescr %in% c("1","3")) %>% summarise(count = n ())
+
+#Lost_entry_scr <-spread(Lost_entry_scr,segtype,count)
+
+Lost_entry_scr <-spread(Lost_entry_scr,Actionoc,count)
+
+formattable (Lost_entry_scr, align = c("l", rep("c", NCOL(Lost_entry_scr) - 1)))
+

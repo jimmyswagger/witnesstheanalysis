@@ -1,0 +1,156 @@
+ggplot(data = plystats , aes(x = plytime, y = vop)) + 
+geom_point(data = plystats , aes(x = plytime, y = vop, colour = Team), size = 3) +
+geom_text_repel(data = plystats , aes(x = plytime, y = vop, colour = Team, label = ply), size = 5) +
+theme_classic () +
+guides(color = FALSE, size = FALSE)
+
+ggplot(data = plystats , aes(x = plytime, y = opshots)) + 
+geom_point(data = plystats , aes(x = plytime, y = opshots, colour = Team), size = 3) +
+geom_text_repel(data = plystats , aes(x = plytime, y = opshots, colour = Team, label = ply), size = 5) +
+theme_classic () +
+guides(color = FALSE, size = FALSE)
+
+ggplot(data = plystats , aes(x = plytime, y = OPScore)) + 
+geom_point(data = plystats , aes(x = plytime, y = OPScore, colour = Team), size = 3) +
+geom_text_repel(data = plystats , aes(x = plytime, y = OPScore, colour = Team, label = ply), size = 5) +
+theme_classic () +
+guides(color = FALSE, size = FALSE)
+
+ggplot(data = plystats , aes(x = opshots, y = OPScore)) + 
+geom_point(data = plystats , aes(x = opshots, y = OPScore, colour = Team), size = 3) +
+geom_text_repel(data = plystats , aes(x = opshots, y = OPScore, colour = Team, label = ply), size = 5) +
+theme_classic () +
+guides(color = FALSE, size = FALSE)
+
+
+
+shotscr <- plystats%>% filter(Teamnum == "A")%>%select(
+
+
+ggplot(data = plystats , aes(x = plytime, y = vop)) + 
+geom_point(data = plystats , aes(x = plytime, y = vop, colour = Team), size = 5) +
+geom_text_repel(data = plystats , aes(x = plytime, y = vop, colour = Team, label = ply), size = 6) +
+theme_classic () +
+guides(color = FALSE, size = FALSE)
+
+
+#Single Team
+#filter & create dataframe
+ko <- pass %>% group_by(Teamnum, Action) %>% filter(Teamnum == "A", subsets == "Ko" | subsets == "Ko Rec" |subsets == "Ko ToL") %>% summarize(count=n())
+head (ko)
+
+
+ko <- ko %>% arrange(-count)
+
+kot<- ggplot(ko, aes(x = reorder(Action, count), y = count , fill = count)) +
+         geom_bar(stat = "identity") + 
+geom_text(aes(label=count),color="white", position=position_dodge(width=0.9), vjust=-0.25,hjust=1.4, size=4.5 ) + 
+   coord_flip() + 
+theme_bw () +
+theme(element_blank()) +
+theme(axis.text.x = element_text(angle = 360, hjust = 1)) + 
+theme(axis.text.y = element_text(angle = 360, hjust = 1))  + 
+theme(legend.position="none") +  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.title.y=element_blank()) 
+
+
+grid.arrange(arrangeGrob(kot))
+
+
+#Single Team
+#filter & create dataframe
+ToW <- pass %>% group_by(Teamnum, Action) %>% filter(Teamnum == "A", subsets == "ToW") %>% summarize(count=n())
+
+
+ToW <- ToW %>% arrange(-count)
+
+ToWt <- ggplot(ToW, aes(x = reorder(Action, count), y = count , fill = count)) +
+         geom_bar(stat = "identity") + 
+geom_text(aes(label=count),color="white", position=position_dodge(width=0.9), vjust=-0.25,hjust=1.4, size=4.5 ) + 
+   coord_flip() + 
+theme_bw () +
+theme(element_blank()) +
+theme(axis.text.x = element_text(angle = 360, hjust = 1)) + 
+theme(axis.text.y = element_text(angle = 360, hjust = 1))  + 
+theme(legend.position="none") +  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.title.y=element_blank()) 
+
+
+grid.arrange(arrangeGrob(ToWt))
+
+
+ggplot(ko, aes(x = Action, y = count)) +
+         geom_bar(stat = "identity") +
+         coord_flip() +
+  theme_light() +
+  theme(text = element_text(family = "Open Sans"),               # DOMO APPEARS TO USE 'OPEN SANS'
+        panel.grid = element_blank(),
+        panel.border = element_blank(),
+        axis.title = element_blank(),
+        axis.ticks = element_blank(),
+        axis.text.x = element_blank(),
+        axis.text.y = element_text(size = 9, color = "gray10"))  # SET THE AXIS TEXT SIZE AND COLOR
+
+
+ko <- ko %>% arrange(-count)%>% head(3)
+
+
+my_theme <- function(){
+  theme_light() +
+    theme(text = element_text(family = "Open Sans"),  
+          panel.grid = element_blank(),
+          panel.border = element_blank(),
+          axis.title = element_blank(),
+          axis.ticks = element_blank(),
+          axis.text.x = element_blank(),
+          axis.text.y = element_text(size = 9, color = "gray10"))
+  }
+ggplot(ko, aes(x = Action, y = count)) +
+  geom_bar(stat = "identity", 
+           fill = "gray90",     
+           width = 0.75) +
+  geom_text(aes(label = count),
+            family = "Open Sans",
+            size = 3.5,                 
+            hjust = 1) +  # x AND y INHERITED. WE JUST NEED TO SPECIFY "label"
+  coord_flip() +
+  scale_y_continuous(expand = c(0, 0)) +
+my_theme()
+
+
+
+
+
+my_theme <- function(){
+  theme_light() +
+    theme(text = element_text(family = "Open Sans"),  
+          plot.title = element_text(size = 13, color = "gray30"),   # Set up the title style
+          plot.subtitle = element_text(size = 11, color = "black"), # Set up the subtitle style
+          plot.margin = unit(c(0.5,0,0,2.5), "cm"),                 # Add white space at the top and left
+          panel.grid = element_blank(),
+          panel.border = element_blank(),
+          axis.title = element_blank(),
+          axis.ticks = element_blank(),
+          axis.text.x = element_blank(),
+          axis.text.y = element_text(size = 9, color = "gray10"))
+  }
+# Calculate the total sales and make it nicely formatted. This could be embedded
+# in the ggtitle() call, but it gets a little messy
+total_sales <- paste0("Total Kickouts: 13", big.mark = ","))
+# Create the actual plot
+ggplot(ko, aes(x = Action, y = count)) +  
+ggtitle("What Is Our Count of Sales per Marketing Channel?") +         
+  geom_bar(stat = "identity", 
+           fill = "gray90",     
+           width = 0.75) +
+  geom_text(aes(label = count),
+            family = "Open Sans",
+            size = 3.5,                 
+            hjust = 1) + 
+  coord_flip() +
+  scale_y_continuous(expand = c(0, 0)) +
+  my_theme()

@@ -1,0 +1,60 @@
+run <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/Testnewplan/bup.csv", header=TRUE, sep=";")
+attach (run)
+
+run <-run %>% mutate(segtype = ifelse(seg == 0 ,"Carry", ifelse(seg == 1, "Hp",ifelse(seg == 2,"Carry" ,ifelse(seg == 3, "Kp Right",
+ifelse(seg == 4, "Score" ,ifelse(seg == 5, "Ko",ifelse(seg == 6, "Ko ToL",ifelse(seg == 7, "Pass ToL",ifelse(seg == 8, "Miss",ifelse(seg == 9, "Kp Left",ifelse(seg == 10, "Pass Rs",
+ifelse(seg == 11, "Score Rs",ifelse(seg == 12, "Miss Rs",NA))))))))))))))
+
+run <-run %>% mutate(same = ifelse(zone == zoneoc ,"Y", "N"))
+
+run <-run %>% mutate(time_diff = (timeoc-time))
+
+run <- run %>% mutate (dist =(sqrt((xend - Areax)^2+ (yend - Areay)^2)))
+
+run <-run %>% mutate(ms = (dist/time_diff))
+
+write.csv(run,"runend.csv")
+
+-----
+run <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/newplan/runnewplan.csv", header=TRUE, sep=";")
+attach (run)
+
+#centre of goal is 0 for this not 49??
+run <-run %>% mutate(ang = (asin(Areay/sqrt((144 - Areax)^2+ (49-Areay)^2)))* 180/3.14)
+
+run$vec <- ifelse((Areax) > 144, 
+90 + (180-(90 + run$vec)),run$vec)
+
+
+passlineAllA <- run%>% mutate(ang_col =ifelse(ang > -180 & ang < -143.9 ,1, ifelse(ang > -144 & ang < -107.9,2, ifelse(ang > -108 & ang < -71.9, 3,ifelse(ang > -72 & ang < -35.9,4,ifelse(ang > -36 & ang <0.1, 5,ifelse(ang >0.1 & ang <35.9, 6,
+ifelse(ang > 36 & ang < 71.9, 7,ifelse(ang > 72 & ang < 107.9, 8,ifelse(ang > 108 & ang < 143.9, 9,ifelse(ang > 144 & ang < 180, 10,"Draw")))))))))))
+
+
+passline <-passlineAllA%>%filter(Teamnum == "A",keep=="Y",same == "N")
+
+passlineA <- passline%>%filter(main == "Pass Op"| seg == "0"|seg == "2",  Areax <45, xend > Areax)
+passlineB <- passline%>%filter(main == "Pass Op"| seg == "0"|seg == "2",  Areax >45,Areax <71.9, xend > Areax)
+passlineC <- passline%>%filter(main == "Pass Op"| seg == "0"|seg == "2",  Areax >72,Areax <99.9, xend > Areax)
+passlineD <- passline%>%filter(main == "Pass Op"| seg == "0"|seg == "2",  Areax >100, xend > Areax)
+
+p +  geom_segment(data = passlineA, aes(x = Areax, y = Areay, xend = xend, yend = yend, colour = as.factor(ang_col)),size = 1,arrow = arrow(length = unit(0.3,"cm")))+
+geom_segment(data = passlineB, aes(x = Areax, y = Areay, xend = xend, yend = yend, colour = as.factor(ang_col)),size = 1,arrow = arrow(length = unit(0.3,"cm"))) +
+geom_segment(data = passlineC, aes(x = Areax, y = Areay, xend = xend, yend = yend, colour = as.factor(ang_col)), size = 1,arrow = arrow(length = unit(0.3,"cm"))) +
+geom_segment(data = passlineD, aes(x = Areax, y = Areay, xend = xend, yend = yend, colour = as.factor(ang_col)), size = 1,arrow = arrow(length = unit(0.3,"cm"))) +
+theme(legend.position="none") +
+scale_colour_manual(values = runcolpals)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

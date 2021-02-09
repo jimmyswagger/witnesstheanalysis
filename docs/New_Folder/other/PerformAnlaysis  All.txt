@@ -1,0 +1,1286 @@
+pass <- read.csv (file.choose(),sep=";",header=TRUE,check.names=FALSE)
+attach (pass)
+head (pass, n = 1)
+
+# Pitch 
+par(xpd=F)
+plot(Areax,Areay,type="n",xlab="",ylab="",ylim = c(0,5.5),xlim = c(0.5,8), xaxt='n', yaxt='n', bty='n')
+abline (v=0.5, col="black", cex=.2)
+abline (v=1.5, col="grey", lty = "dotted", cex=.2)
+abline (v=2.5, col="grey", lty = "dotted", cex=.2)
+abline (v=3.5, col="grey", lty = "dotted", cex=.2)
+abline (v=4.5, col="grey", lty = "dotted", cex=.2)
+abline (v=5.5, col="grey", lty = "dotted", cex=.2)
+abline (v=6.5, col="grey", lty = "dotted", cex=.2)
+abline (v=7.5, col="black", cex=.2)
+abline (h=0.25, col="black", cex=.2)
+abline(h=1.5, col="grey", lty = "dotted", cex=.2)
+abline(h=2.5, col="grey", lty = "dotted", cex=.2)
+abline(h=3.5, col="grey", lty = "dotted", cex=.2)
+abline(h=4.5, col="grey", lty = "dotted", cex=.2)
+abline(h=5.5, col="black", cex=.2)
+abline (v=8, col="grey", lty = "dotted", cex=.2)
+points (x=7.5,y=2.5, cex=.5)
+points (x=7.5,y=3.5, cex=.5)
+points (x=0.5,y=3.5, cex=.5)
+points (x=0.5,y=2.5, cex=.5)
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+#Pass
+
+title ("Pass Areas - Team A")
+
+points (Areax[Teamnum=="A" & Action=="Hand Pass"], Areay[Teamnum=="A" & Action=="Hand Pass"], pch=6, col="green", cex=.5)
+points (Areax[Teamnum=="A" & Action=="Kick Pass"], Areay[Teamnum=="A" & Action=="Kick Pass"], pch=2, col="orange", cex=.5)
+
+#Legend
+
+legend("bottomleft",
+       inset = c(0, -0.2), bty = "n", x.intersp=2.5,
+       xjust=2.4, yjust=2.4,
+       legend=c("Hand Pass" , "Kick Pass"),
+       col=c("green","orange"), 
+       pch = c(6,2),
+       cex = 0.6, xpd = TRUE, ncol = 1)
+
+
+
+points (Areax[Teamnum=="A" & Action=="Loss KP Int"], Areay[Teamnum=="A" & Action=="Loss KP Int"], pch=2, col="red", cex=.5)
+points (Areax[Teamnum=="A" & Action=="UnF Int KP Loss"], Areay[Teamnum=="A" & Action=="UnF Int KP Loss"], pch=2, col="blue", cex=.5)
+points (Areax[Teamnum=="A" & Action=="UnF Int HP Loss"], Areay[Teamnum=="A" & Action=="UnF Int HP Loss"], pch=6, col="blue", cex=.5)
+points (Areax[Teamnum=="A" & Action=="Loss HP Int"], Areay[Teamnum=="A" & Action=="Loss HP Int"], pch=6, col="red", cex=.5)
+
+
+points (Areax[Teamnum=="B" & Action=="Hand Pass"], Areay[Teamnum=="B" & Action=="Hand Pass"], pch=6, col="green", cex=.6)
+points (Areax[Teamnum=="B" & Action=="Kick Pass"], Areay[Teamnum=="B" & Action=="Kick Pass"], pch=2, col="orange", cex=.6)
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+#Rec
+
+title ("Passes Received")
+
+points (Areax[Teamnum=="A" & Action=="Rec"], Areay[Teamnum=="A" & Action=="Rec"], pch=4, col="blue", cex=.5)
+points (Areax[Teamnum=="B" & Action=="Rec"], Areay[Teamnum=="B" & Action=="Rec"], pch=0, col="red", cex=.5)
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+#Kick Outs
+
+title ("Kick Outs")
+
+points (Areax[Teamnum=="A" & Action=="Ko Rec"], Areay[Teamnum=="A" & Action=="Ko Rec"], pch=3, col="green", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Ko Lost"], Areay[Teamnum=="A" & Action=="Ko Lost"], pch=4, col="red", cex=.8)
+points (Areax[Teamnum=="A" & Action=="KoBr Rec"], Areay[Teamnum=="A" & Action=="KoBr Rec"], pch=1, col="blue", cex=.8)
+points (Areax[Teamnum=="A" & Action=="KoBr Lost"], Areay[Teamnum=="A" & Action=="KoBr Lost"], pch=2, col="Orange", cex=.8)
+
+points (Areax[Teamnum=="B" & Action=="Ko Rec"], Areay[Teamnum=="B" & Action=="Ko Rec"], pch=3, col="green", cex=.8)
+points (Areax[Teamnum=="B" & Action=="Ko Lost"], Areay[Teamnum=="B" & Action=="Ko Lost"], pch=4, col="red", cex=.8)
+points (Areax[Teamnum=="B" & Action=="KoBr Rec"], Areay[Teamnum=="B" & Action=="KoBr Rec"], pch=1, col="blue", cex=.8)
+points (Areax[Teamnum=="B" & Action=="KoBr Lost"], Areay[Teamnum=="B" & Action=="KoBr Lost"], pch=2, col="Orange", cex=.8)
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+#Lost
+
+title ("Possession Lost")
+
+points (Areax[Teamnum=="A" & Action=="Break Loss"], Areay[Teamnum=="A" & Action=="Break Loss"], pch=0, col="red", cex=.5)
+points (Areax[Teamnum=="A" & Action=="Loss Tack"], Areay[Teamnum=="A" & Action=="Loss Tack"], pch=1, col="red", cex=.5)
+points (Areax[Teamnum=="A" & Action=="Loss Ball"], Areay[Teamnum=="A" & Action=="Loss Ball"], pch=3, col="red", cex=.5)
+
+points (Areax[Teamnum=="A" & Action=="Loss KP Int"], Areay[Teamnum=="A" & Action=="Loss KP Int"], pch=3, col="red", cex=.8)
+points (Areax[Teamnum=="A" & Action=="UnF Int KP Loss"], Areay[Teamnum=="A" & Action=="UnF Int KP Loss"], pch=4, col="red", cex=.8)
+points (Areax[Teamnum=="A" & Action=="UnF Int HP Loss"], Areay[Teamnum=="A" & Action=="UnF Int HP Loss"], pch=8, col="red", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Loss HP Int"], Areay[Teamnum=="A" & Action=="Loss HP Int"], pch=6, col="red", cex=.8)
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+#Frees
+
+title ("Frees Won & Lost")
+
+points (Areax[Teamnum=="A" & Action=="Free Loss"], Areay[Teamnum=="A" & Action=="Free Loss"], pch=3, col="red", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Free Won"], Areay[Teamnum=="A" & Action=="Free Won"], pch=4, col="green", cex=.8)
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+#Conquer
+
+title ("Possession Gained")
+
+points (Areax[Teamnum=="A" & Action=="Tack W"], Areay[Teamnum=="A" & Action=="Tack W"], pch=0, col="green", cex=.8)
+points (Areax[Teamnum=="A" & Action=="KP Int"], Areay[Teamnum=="A" & Action=="KP Int"], pch=1, col="blue", cex=.8)
+points (Areax[Teamnum=="A" & Action=="HP Int"], Areay[Teamnum=="A" & Action=="HP Int"], pch=2, col="black", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Loose BW"], Areay[Teamnum=="A" & Action=="Loose BW"], pch=3, col="yellow", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Short Gk"], Areay[Teamnum=="A" & Action=="Short Gk"], pch=4, col="orange", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Break Won"], Areay[Teamnum=="A" & Action=="Break Won"], pch=6, col="purple", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Ko Int"], Areay[Teamnum=="A" & Action=="Ko Int"], pch=8, col="red", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Ko Break Int"], Areay[Teamnum=="A" & Action=="Ko Break Int"], pch=7, col="brown", cex=.8)
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+#Shots
+
+points (Areax[Outcome=="Goal" & Foot=="Shot Left"], Areay[Outcome=="Goal" & Foot=="Shot Left"], pch=1, col="blue", cex=.8)
+points (Areax[Outcome=="Point" & Foot=="Shot Left"], Areay[Outcome=="Point" & Foot=="Shot Left"], pch=3, col="red", cex=.8)
+points (Areax[Outcome=="Wide Left" & Foot=="Shot Left"], Areay[Outcome=="Wide Left" & Foot=="Shot Left"], pch=4, col="blue", cex=.8)
+points (Areax[Outcome=="Wide Right" & Foot=="Shot Left"], Areay[Outcome=="Wide Right" & Foot=="Shot Left"], pch=18, col="blue", cex=.8)
+points (Areax[Outcome=="Short" & Foot=="Shot Left"], Areay[Outcome=="Short" & Foot=="Shot Left"], pch=8, col="blue", cex=.8)
+points (Areax[Outcome=="Save" & Foot=="Shot Left"], Areay[Outcome=="Save" & Foot=="Shot Left"], pch=5, col="blue", cex=.8)
+points (Areax[Outcome=="Goal" & Foot=="Shot Right"], Areay[Outcome=="Goal" & Foot=="Shot Right"], pch=1, col="green", cex=.8)
+points (Areax[Outcome=="Point" & Foot=="Shot Right"], Areay[Outcome=="Point" & Foot=="Shot Right"], pch=3, col="red", cex=.8)
+points (Areax[Outcome=="Wide Left" & Foot=="Shot Right"], Areay[Outcome=="Wide Left" & Foot=="Shot Right"], pch=4, col="green", cex=.8)
+points (Areax[Outcome=="Wide Right" & Foot=="Shot Right"], Areay[Outcome=="Wide Right" & Foot=="Shot Right"], pch=18, col="green", cex=.8)
+points (Areax[Outcome=="Short" & Foot=="Shot Right"], Areay[Outcome=="Short" & Foot=="Shot Right"], pch=8, col="green", cex=.8)
+points (Areax[Outcome=="Save" & Foot=="Shot Right"], Areay[Outcome=="Save" & Foot=="Shot Right"], pch=5, col="green", cex=.8)
+
+#Free Shots
+
+points (Areax[Outcome=="Free Goal" & Foot=="Free Shot Right"], Areay[Outcome=="Free Goal" & Foot=="Free Shot Right"], pch=1, col="orange", cex=.8)
+points (Areax[Outcome=="Free Point" & Foot=="Free Shot Right"], Areay[Outcome=="Free Point" & Foot=="Free Shot Right"], pch=3, col="orange", cex=.8)
+points (Areax[Outcome=="Free Wide Left" & Foot=="Free Shot Right"], Areay[Outcome=="Free Wide Left" & Foot=="Free Shot Right"], pch=4, col="orange", cex=.8)
+points (Areax[Outcome=="Free Wide Right" & Foot=="Free Shot Right"], Areay[Outcome=="Free Wide Right" & Foot=="Free Shot Right"], pch=18, col="orange", cex=.8)
+points (Areax[Outcome=="Free Short" & Foot=="Free Shot Right"], Areay[Outcome=="Free Short" & Foot=="Free Shot Right"], pch=8, col="orange", cex=.8)
+points (Areax[Outcome=="Free Save" & Foot=="Free Shot Right"], Areay[Outcome=="Free Save" & Foot=="Free Shot Right"], pch=5, col="orange", cex=.8)
+points (Areax[Outcome=="Free Goal" & Foot=="Free Shot Left"], Areay[Outcome=="Free Goal" & Foot=="Free Shot Left"], pch=1, col="orange", cex=.8)
+points (Areax[Outcome=="Free Point" & Foot=="Free Shot Left"], Areay[Outcome=="Free Point" & Foot=="Free Shot Left"], pch=3, col="orange", cex=.8)
+points (Areax[Outcome=="Free Wide Left" & Foot=="Free Shot Left"], Areay[Outcome=="Free Wide Left" & Foot=="Free Shot Left"], pch=4, col="orange", cex=.8)
+points (Areax[Outcome=="Free Wide Right" & Foot=="Free Shot Left"], Areay[Outcome=="Free Wide Right" & Foot=="Free Shot Left"], pch=18, col="orange", cex=.8)
+points (Areax[Outcome=="Free Short" & Foot=="Free Shot Left"], Areay[Outcome=="Free Short" & Foot=="Free Shot Left"], pch=8, col="orange", cex=.8)
+points (Areax[Outcome=="Free Save" & Foot=="Free Shot Left"], Areay[Outcome=="Free Save" & Foot=="Free Shot Left"], pch=5, col="orange", cex=.8)
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+#Phase Breakdown
+
+pass <- read.csv (file.choose(),sep=";",header=TRUE,check.names=FALSE)
+attach (pass)
+head (pass, n = 1)
+
+#Pitch
+par(xpd=F)
+plot(Areax,Areay,type="n",xlab="",ylab="",ylim = c(0,5.5),xlim = c(0.5,8), xaxt='n', yaxt='n', bty='n')
+abline (v=0.5, col="black", cex=.2)
+abline (v=1.5, col="grey", lty = "dotted", cex=.2)
+abline (v=2.5, col="grey", lty = "dotted", cex=.2)
+abline (v=3.5, col="grey", lty = "dotted", cex=.2)
+abline (v=4.5, col="grey", lty = "dotted", cex=.2)
+abline (v=5.5, col="grey", lty = "dotted", cex=.2)
+abline (v=6.5, col="grey", lty = "dotted", cex=.2)
+abline (v=7.5, col="black", cex=.2)
+abline (h=0.25, col="black", cex=.2)
+abline(h=1.5, col="grey", lty = "dotted", cex=.2)
+abline(h=2.5, col="grey", lty = "dotted", cex=.2)
+abline(h=3.5, col="grey", lty = "dotted", cex=.2)
+abline(h=4.5, col="grey", lty = "dotted", cex=.2)
+abline(h=5.5, col="black", cex=.2)
+abline (v=8, col="grey", lty = "dotted", cex=.2)
+points (x=7.5,y=2.5, cex=.5)
+points (x=7.5,y=3.5, cex=.5)
+points (x=0.5,y=3.5, cex=.5)
+points (x=0.5,y=2.5, cex=.5)
+
+#Phase Breakdown
+title ("Phase of Play - Team A")
+
+#ball path - line only
+points (Areax[Teamnum=="A" & Phase=="A1"], Areay[Teamnum=="A" & Phase=="A1"], type="l", pch=1, col="purple", lty="dotted", cex=.2)
+
+#start
+points (Areax[Teamnum=="A" & Action=="KP Int" & Phase=="A15"], Areay[Teamnum=="A" & Action=="KP Int" & Phase=="A15"], pch=8, col="red", cex=1.5)
+
+#action
+points (Areax[Teamnum=="A" & Action=="Rec" & Phase=="A1"], Areay[Teamnum=="A" & Action=="Rec" & Phase=="A1"], pch=1, col="blue", cex=1.5)
+points (Areax[Teamnum=="A" & Action=="Hand Pass" & Phase=="A1"], Areay[Teamnum=="A" & Action=="Hand Pass" & Phase=="A1"], pch=6, col="green", cex=1.5)
+points (Areax[Teamnum=="A" & Action=="Kick Pass" & Phase=="A1"], Areay[Teamnum=="A" & Action=="Kick Pass" & Phase=="A1"], pch=2, col="orange", cex=1.5)
+points (Areax[Teamnum=="A" & Action=="Shot Right" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Shot Right" & Phase=="A15"], pch=3, col="black", cex=1.5)
+
+#outcome
+points (Areax[Teamnum=="A" & Action=="Point" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Point" & Phase=="A15"], pch=10, col="green", cex=.8)
+
+legend("bottomleft", text.width=c(0,1,0.35,0.85),
+       inset = c(0, -0.2), bty = "n", x.intersp=2,
+       xjust=1, yjust=1,
+       legend=c("Hand Pass" , "Kick Pass","Break","Break Won","Rec","Point Right"),
+       col=c("green","orange","red","green","blue","black"), 
+       pch = c(6,2,8,19,1,3),
+       cex = .6, xpd = TRUE, horiz=FALSE)
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+#Phases
+#with points
+points (Areax[Teamnum=="A" & Phase=="A1"], Areay[Teamnum=="A" & Phase=="A1"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A2"], Areay[Teamnum=="A" & Phase=="A2"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A3"], Areay[Teamnum=="A" & Phase=="A3"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A4"], Areay[Teamnum=="A" & Phase=="A4"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A5"], Areay[Teamnum=="A" & Phase=="A5"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A6"], Areay[Teamnum=="A" & Phase=="A6"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A7"], Areay[Teamnum=="A" & Phase=="A7"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A8"], Areay[Teamnum=="A" & Phase=="A8"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A9"], Areay[Teamnum=="A" & Phase=="A9"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A10"], Areay[Teamnum=="A" & Phase=="A10"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A11"], Areay[Teamnum=="A" & Phase=="A11"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A12"], Areay[Teamnum=="A" & Phase=="A12"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A13"], Areay[Teamnum=="A" & Phase=="A13"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A14"], Areay[Teamnum=="A" & Phase=="A14"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A15"], Areay[Teamnum=="A" & Phase=="A15"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A16"], Areay[Teamnum=="A" & Phase=="A16"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A17"], Areay[Teamnum=="A" & Phase=="A17"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A18"], Areay[Teamnum=="A" & Phase=="A18"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A19"], Areay[Teamnum=="A" & Phase=="A19"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A20"], Areay[Teamnum=="A" & Phase=="A20"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A21"], Areay[Teamnum=="A" & Phase=="A21"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A22"], Areay[Teamnum=="A" & Phase=="A22"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A23"], Areay[Teamnum=="A" & Phase=="A23"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A24"], Areay[Teamnum=="A" & Phase=="A24"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A25"], Areay[Teamnum=="A" & Phase=="A25"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A26"], Areay[Teamnum=="A" & Phase=="A26"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A27"], Areay[Teamnum=="A" & Phase=="A27"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A28"], Areay[Teamnum=="A" & Phase=="A28"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A29"], Areay[Teamnum=="A" & Phase=="A29"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A30"], Areay[Teamnum=="A" & Phase=="A30"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A1"], Areay[Teamnum=="A" & Phase=="A1"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A1"], Areay[Teamnum=="A" & Phase=="A1"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A1"], Areay[Teamnum=="A" & Phase=="A1"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A1"], Areay[Teamnum=="A" & Phase=="A1"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A1"], Areay[Teamnum=="A" & Phase=="A1"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A1"], Areay[Teamnum=="A" & Phase=="A1"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A1"], Areay[Teamnum=="A" & Phase=="A1"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A1"], Areay[Teamnum=="A" & Phase=="A1"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A1"], Areay[Teamnum=="A" & Phase=="A1"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A1"], Areay[Teamnum=="A" & Phase=="A1"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A1"], Areay[Teamnum=="A" & Phase=="A1"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A1"], Areay[Teamnum=="A" & Phase=="A1"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A1"], Areay[Teamnum=="A" & Phase=="A1"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A1"], Areay[Teamnum=="A" & Phase=="A1"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A1"], Areay[Teamnum=="A" & Phase=="A1"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A1"], Areay[Teamnum=="A" & Phase=="A1"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A1"], Areay[Teamnum=="A" & Phase=="A1"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A1"], Areay[Teamnum=="A" & Phase=="A1"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A1"], Areay[Teamnum=="A" & Phase=="A1"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A1"], Areay[Teamnum=="A" & Phase=="A1"], type="o", pch=1, col="blue", cex=.6)
+points (Areax[Teamnum=="A" & Phase=="A1"], Areay[Teamnum=="A" & Phase=="A1"], type="o", pch=1, col="blue", cex=.6)
+
+# line only
+title ("Phases of Play - Team A")
+points (Areax[Teamnum=="A" & Phase=="A1"], Areay[Teamnum=="A" & Phase=="A1"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A2"], Areay[Teamnum=="A" & Phase=="A2"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A3"], Areay[Teamnum=="A" & Phase=="A3"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A4"], Areay[Teamnum=="A" & Phase=="A4"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A5"], Areay[Teamnum=="A" & Phase=="A5"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A6"], Areay[Teamnum=="A" & Phase=="A6"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A7"], Areay[Teamnum=="A" & Phase=="A7"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A8"], Areay[Teamnum=="A" & Phase=="A8"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A9"], Areay[Teamnum=="A" & Phase=="A9"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A10"], Areay[Teamnum=="A" & Phase=="A10"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A11"], Areay[Teamnum=="A" & Phase=="A11"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A12"], Areay[Teamnum=="A" & Phase=="A12"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A13"], Areay[Teamnum=="A" & Phase=="A13"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A14"], Areay[Teamnum=="A" & Phase=="A14"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A15"], Areay[Teamnum=="A" & Phase=="A15"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A16"], Areay[Teamnum=="A" & Phase=="A16"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A17"], Areay[Teamnum=="A" & Phase=="A17"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A18"], Areay[Teamnum=="A" & Phase=="A18"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A19"], Areay[Teamnum=="A" & Phase=="A19"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A20"], Areay[Teamnum=="A" & Phase=="A20"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A21"], Areay[Teamnum=="A" & Phase=="A21"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A22"], Areay[Teamnum=="A" & Phase=="A22"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A23"], Areay[Teamnum=="A" & Phase=="A23"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A24"], Areay[Teamnum=="A" & Phase=="A24"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A25"], Areay[Teamnum=="A" & Phase=="A25"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A26"], Areay[Teamnum=="A" & Phase=="A26"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A27"], Areay[Teamnum=="A" & Phase=="A27"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A28"], Areay[Teamnum=="A" & Phase=="A28"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A29"], Areay[Teamnum=="A" & Phase=="A29"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A30"], Areay[Teamnum=="A" & Phase=="A30"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A19"], Areay[Teamnum=="A" & Phase=="A19"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A20"], Areay[Teamnum=="A" & Phase=="A20"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A21"], Areay[Teamnum=="A" & Phase=="A21"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A22"], Areay[Teamnum=="A" & Phase=="A22"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A23"], Areay[Teamnum=="A" & Phase=="A23"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A24"], Areay[Teamnum=="A" & Phase=="A24"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A25"], Areay[Teamnum=="A" & Phase=="A25"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A26"], Areay[Teamnum=="A" & Phase=="A26"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A27"], Areay[Teamnum=="A" & Phase=="A27"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A28"], Areay[Teamnum=="A" & Phase=="A28"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A29"], Areay[Teamnum=="A" & Phase=="A29"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A30"], Areay[Teamnum=="A" & Phase=="A30"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A31"], Areay[Teamnum=="A" & Phase=="A31"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A32"], Areay[Teamnum=="A" & Phase=="A32"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A33"], Areay[Teamnum=="A" & Phase=="A33"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A34"], Areay[Teamnum=="A" & Phase=="A34"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A35"], Areay[Teamnum=="A" & Phase=="A35"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A36"], Areay[Teamnum=="A" & Phase=="A36"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A37"], Areay[Teamnum=="A" & Phase=="A37"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A38"], Areay[Teamnum=="A" & Phase=="A38"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A39"], Areay[Teamnum=="A" & Phase=="A39"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A40"], Areay[Teamnum=="A" & Phase=="A40"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A41"], Areay[Teamnum=="A" & Phase=="A41"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A42"], Areay[Teamnum=="A" & Phase=="A42"], type="l", pch=1, col="blue", cex=.4)
+points (Areax[Teamnum=="A" & Phase=="A43"], Areay[Teamnum=="A" & Phase=="A43"], type="l", pch=1, col="blue", cex=.4)
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+#add labels 
+text(Areax, Areay, labels=Player, cex= 0.5, pos=2, col="black")
+text(Areax[Team=="A"], Areay[Team=="A"], labels=Player, cex= 0.5, pos=2, col="blue")
+text(Areax[Team=="A"], Areay[Team=="A"], labels=Player, cex= 0.5, pos=2, col="red")
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+#counts
+
+team <- table(pass$Teamnum=="A", pass$Action)
+
+barplot(as.matrix(team), main="Annes vs Skerries Total Actions", ylab= "Action Totals", beside=TRUE, col=rainbow(2), lwd=1, las=2)
+legend("topleft", c("Skerries","Annes"), cex=0.6, 
+   bty="n", fill=rainbow(2))
+
+true = selected team 
+
+dplyr & formattable 
+annesstat <- filter(pass, Teamnum=="A")
+annesdata <- annesstat %>% count(Action)
+formattable(annesdata) 
+
+team <- table(pass$Teamnum=="A", pass$Action=="Rec", pass$Action=="Kick Pass", pass$Action=="Hand Pass")
+barplot(as.matrix(team), main="Annes vs Skerries Total Actions", ylab= "Action Totals",xlab= "Action Totals", beside=T, col=rainbow(2), lwd=1, las=2)
+legend("topleft", c("Skerries","Annes"), cex=0.6, 
+   bty="n", fill=rainbow(2))
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+#Formation
+
+calculate average positions
+
+points (Areax[Team=="A" & Player=="1"], Areay[Team=="A" & Player=="1"], pch=0, col="blue", cex=1)
+points (Areax[Team=="A" & Player=="2"], Areay[Team=="A" & Player=="2"], pch=0, col="blue", cex=1)
+points (Areax[Team=="A" & Player=="3"], Areay[Team=="A" & Player=="3"], pch=0, col="blue", cex=1)
+points (Areax[Team=="A" & Player=="4"], Areay[Team=="A" & Player=="4"], pch=0, col="blue", cex=1)
+points (Areax[Team=="A" & Player=="5"], Areay[Team=="A" & Player=="5"], pch=0, col="blue", cex=1)
+points (Areax[Team=="A" & Player=="6"], Areay[Team=="A" & Player=="6"], pch=0, col="blue", cex=1)
+points (Areax[Team=="A" & Player=="7"], Areay[Team=="A" & Player=="7"], pch=0, col="blue", cex=1)
+points (Areax[Team=="A" & Player=="8"], Areay[Team=="A" & Player=="8"], pch=0, col="blue", cex=1)
+points (Areax[Team=="A" & Player=="9"], Areay[Team=="A" & Player=="9"], pch=0, col="blue", cex=1)
+points (Areax[Team=="A" & Player=="10"], Areay[Team=="A" & Player=="10"], pch=0, col="blue", cex=1)
+points (Areax[Team=="A" & Player=="11"], Areay[Team=="A" & Player=="11"], pch=0, col="blue", cex=1)
+points (Areax[Team=="A" & Player=="12"], Areay[Team=="A" & Player=="12"], pch=0, col="blue", cex=1)
+points (Areax[Team=="A" & Player=="13"], Areay[Team=="A" & Player=="13"], pch=0, col="blue", cex=1)
+points (Areax[Team=="A" & Player=="14"], Areay[Team=="A" & Player=="14"], pch=0, col="blue", cex=1)
+points (Areax[Team=="A" & Player=="15"], Areay[Team=="A" & Player=="15"], pch=0, col="blue", cex=1)
+points (Areax[Team=="B" & Player=="1"], Areay[Team=="B" & Player=="1"], pch=0, col="red", cex=1)
+points (Areax[Team=="B" & Player=="2"], Areay[Team=="B" & Player=="2"], pch=0, col="red", cex=1)
+points (Areax[Team=="B" & Player=="3"], Areay[Team=="B" & Player=="3"], pch=0, col="red", cex=1)
+points (Areax[Team=="B" & Player=="4"], Areay[Team=="B" & Player=="4"], pch=0, col="red", cex=1)
+points (Areax[Team=="B" & Player=="5"], Areay[Team=="B" & Player=="5"], pch=0, col="red", cex=1)
+points (Areax[Team=="B" & Player=="6"], Areay[Team=="B" & Player=="6"], pch=0, col="red", cex=1)
+points (Areax[Team=="B" & Player=="9"], Areay[Team=="B" & Player=="9"], pch=0, col="red", cex=1)
+points (Areax[Team=="B" & Player=="10"], Areay[Team=="B" & Player=="10"], pch=0, col="red", cex=1)
+points (Areax[Team=="B" & Player=="11"], Areay[Team=="B" & Player=="11"], pch=0, col="red", cex=1)
+points (Areax[Team=="B" & Player=="12"], Areay[Team=="B" & Player=="12"], pch=0, col="red", cex=1)
+points (Areax[Team=="B" & Player=="13"], Areay[Team=="B" & Player=="13"], pch=0, col="red", cex=1)
+points (Areax[Team=="B" & Player=="14"], Areay[Team=="B" & Player=="14"], pch=0, col="red", cex=1)
+points (Areax[Team=="B" & Player=="15"], Areay[Team=="B" & Player=="15"], pch=0, col="red", cex=1)
+points (Areax[Team=="C" & Player=="1"], Areay[Team=="C" & Player=="1"], pch=19, col="green", cex=.6)
+
+
+text(Areax[Team=="A"], Areay[Team=="A"], labels=Player, cex= 0.5, pos=2, col="blue")
+text(Areax[Team=="B"], Areay[Team=="B"], labels=Player, cex= 0.5, pos=2, col="red")
+
+points (Areax, Areay, pch=0, col="blue", cex=.8)
+textxy(Areax, Areay, labs=Player, cex = .9, dcol ="black", pos=1)
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+#Surface Area
+
+vtess <- deldir(Areax, Areay)
+vtessA <- deldir(Areax [Team=="A"], Areay[Team=="A"])
+vtessB <- deldir(Areax [Team=="B"], Areay[Team=="B"])
+
+#deleaney triangulation
+
+plot(vtessA, wlines="triang", wpoints="none", number=FALSE, add=TRUE, lty=2, col="blue", cex=.2)
+plot(vtessB, wlines="triang", wpoints="none", number=FALSE, add=TRUE, lty=2, col="red", cex=.2)
+
+plot(vtess, wlines="triang", wpoints="none", number=FALSE, add=TRUE, lty=2, col="orange", cex=.2)
+
+#Surface Area 
+points (mean(Areax [Team=="A" & Player=="1"]), mean(Areay [Team=="A" & Player=="1"]), pch=0, col="blue", cex=.9)
+
+vtessA <- deldir(mean(Areax [Team=="A"]), mean(Areay[Team=="A"]))
+vtessA <- deldir(Areax [Team=="A"], Areay[Team=="A"])
+
+library(sp)
+
+hpts <- chull(x = Areax, y = Areay)
+hpts <- c(hpts, hpts[1])
+xy.coords <- cbind(Areax, Areay)
+chull.coords <- xy.coords[hpts,]
+chull.poly <- Polygon(chull.coords, hole=F)
+chull.area <- chull.poly@area
+
+chull.area
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+#Voronoi
+vtessA <- deldir(Areax [Team=="A"], Areay[Team=="A"])
+vtessB <- deldir(Areax [Team=="B"], Areay[Team=="B"])
+plot(vtessA, wlines="tess", wpoints="none", number=FALSE, add=TRUE, lty=3, col="blue", cex=.1)
+plot(vtessB, wlines="tess", wpoints="none", number=FALSE, add=TRUE, lty=3, col="red", cex=.1)
+
+vtessC <- deldir(Areax, Areay)
+plot(vtess, wlines="tess", wpoints="none", number=FALSE, add=TRUE, lty=3, col="black", cex=.1)
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+#Centroid
+
+points (mean(Areax [Team=="A"]), mean(Areay [Team=="A"]), pch=3, col="blue", cex=.9)
+points (mean(Areax [Team=="B"]), mean(Areay [Team=="B"]), pch=3, col="red", cex=.9)
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+#lenght/width (Ratio)
+
+min(Areax)
+max(Areax)
+min(Areay)
+max(Areay)
+
+(mean(Areax [Team=="A"])/mean(Areay[Team=="A"]))
+(mean(Areax [Team=="B"])/mean(Areay[Team=="B"]))
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+#Team Spread
+
+c(mean(Areax [Team=="A"]),mean(Areax [Team=="A"]))
+c(mean(Areax [Team=="B"]),mean(Areax [Team=="B"]))
+
+dist <-  apply(pass,1,function(x,cent) {(sqrt((x[1] - cent[1])^2+(x[2]-cent[2])^2))},cent)
+dist
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+#Passing Networks 
+
+V(net)$Weight <- strength(net)
+par(mar=c(0,0,0,0)); plot(net,  vertex.color = "grey",
+     vertex.label.color = "black", 
+     vertex.label.cex = .75, 
+     edge.curved=.25, 
+     edge.color="grey20",
+layout=layout_on_grid, main="Grid", edge.arrow.size=.2)
+
+V(net)$size <- log(strength(net)) * 4 + 3
+par(mar=c(0,0,0,0)); plot(net, ertex.color = "grey",
+     vertex.label.color = "black", 
+     vertex.label.cex = .75, 
+     edge.curved=.25, 
+     edge.color="grey20",
+layout=layout_on_grid, main="Grid", edge.arrow.size=.2)
+
+E(net)$width <- log(E(net)$weight) + 1
+edge_attr(net)
+plot(net, ertex.color = "grey",
+     vertex.label.color = "black", 
+     vertex.label.cex = .75, 
+     edge.curved=.25, 
+     edge.color="grey20",
+layout=layout_on_grid, main="Grid", edge.arrow.size=.2)
+
+V(net)$indegree <- centr_degree(net, mode = "in")$res
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+#Legend
+
+legend("bottomleft", text.width=c(0,0.085,0.235,0.35),
+       inset = c(0, -0.2), bty = "n", x.intersp=0.5,
+       xjust=0.5, yjust=0.5,
+       legend=c("Tack Won" , "KP Int" , "HP Int" , "Loose BW" , "Short Gk" , "Break Won", "Ko Int" , "Ko Break Int"),
+       col=c("green","blue","black","yellow","orange","purple","red", "brown"), 
+       pch = c(0,1,2,3,4,6,8,7),
+       cex = 0.6, xpd = TRUE, horiz=TRUE)
+
+legend("bottomleft",
+  legend = c("Tack Won", "KP Int","HP Int","Loose BW","Short Gk","Break Won","Ko Int", "Ko Break Int"), 
+  col = c("green","blue","black","yellow","orange","purple","red", "brown"),
+  pch = c(0,1,2,3,4,6,8,7),
+  bty = "n",
+  pt.cex = .6,
+  cex = .6,
+  text.col = "black",
+  ncol = 3,
+  inset = c(0.01, 0.04))
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+Sub Kickout()
+With ActiveCell.Value = Text
+    Range("U19").Select
+Selection.Copy
+ActiveSheet.Range("E2000").End(xlUp).Offset(1, 0).Select
+Selection.PasteSpecial Paste:=xlPasteValues
+
+End With
+Range("A1").Select
+
+End Sub
+
+Private Sub UserForm_Initialize()
+Me.CommandButton1.Caption = ThisWorkbook.Sheets("Sheet1").Range("O1")
+End Sub
+
+Sub Kickout()
+With ActiveCell.Value = Text
+    Range("J19").Select
+Selection.Copy
+ActiveSheet.Range("C2000").End(xlUp).Offset(1, 0).Select
+Selection.PasteSpecial Paste:=xlPasteValues
+With ActiveCell.Value = Text
+    Range("Q2").Select
+Selection.Copy
+ActiveSheet.Range("A2000").End(xlUp).Offset(1, 0).Select
+Selection.PasteSpecial Paste:=xlPasteValues
+End With
+
+End With
+
+
+End Sub
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Dim NextTick As Date, t As Date
+
+Sub StartClock()
+If Range("IV1").Value = True Or Range("IV1").Value = "" Then
+    t = Time
+Else
+    t = Time - Range("IV2").Value
+End If
+Call TickTock
+
+ With ActiveCell.Value = Text
+    Range("A1").Select
+Selection.Copy
+ActiveSheet.Range("I900").End(xlUp).Offset(1, 0).Select
+Selection.PasteSpecial Paste:=xlPasteValues
+End With
+Range("A3").Select
+
+End Sub
+
+Private Sub TickTock()
+Range("A1").Value = Format(Time - t, "hh:mm:ss")
+NextTick = Now + TimeValue("00:00:01")
+Application.OnTime NextTick, "TickTock"
+End Sub
+
+Sub StopClock()
+Range("IV1").Value = False
+Range("IV2").Value = Range("A1").Value
+On Error Resume Next
+Application.OnTime earliesttime:=NextTick, procedure:="TickTock", schedule:=False
+On Error GoTo 0
+ With ActiveCell.Value = Text
+    Range("A1").Select
+Selection.Copy
+ActiveSheet.Range("I900").End(xlUp).Offset(1, 0).Select
+Selection.PasteSpecial Paste:=xlPasteValues
+End With
+Range("A3").Select
+End Sub
+
+Sub Reset()
+Call StopClock
+Range("A1").Value = 0
+Range("IV1").Value = True
+Range("IV2").ClearContents
+End Sub
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+title ("Actions - Team A")
+
+pass <- read.csv (file.choose(),sep=";",header=TRUE,check.names=FALSE)
+attach (pass)
+head (pass, n = 1)
+
+#Pitch
+plot(Areax,Areay,type="n",xlab="",ylab="",ylim = c(0,5.5),xlim = c(0.5,8), xaxt='n', yaxt='n')
+abline (v=0.5, col="black", lty = "dotted", cex=.2)
+abline (v=1.5, col="grey", lty = "dotted", cex=.2)
+abline (v=2.5, col="grey", lty = "dotted", cex=.2)
+abline (v=3.5, col="grey", lty = "dotted", cex=.2)
+abline (v=4.5, col="grey", lty = "dotted", cex=.2)
+abline (v=5.5, col="grey", lty = "dotted", cex=.2)
+abline (v=6.5, col="grey", lty = "dotted", cex=.2)
+abline (v=7.5, col="black", lty = "dotted", cex=.2)
+abline (h=0.25, col="black", lty = "dotted", cex=.2)
+abline(h=1.5, col="grey", lty = "dotted", cex=.2)
+abline(h=2.5, col="grey", lty = "dotted", cex=.2)
+abline(h=3.5, col="grey", lty = "dotted", cex=.2)
+abline(h=4.5, col="grey", lty = "dotted", cex=.2)
+abline(h=5.5, col="black", lty = "dotted", cex=.2)
+abline (v=8, col="grey", lty = "dotted", cex=.2)
+points (x=7.5,y=2.5, cex=.5)
+points (x=7.5,y=3.5, cex=.5)
+points (x=0.5,y=3.5, cex=.5)
+points (x=0.5,y=2.5, cex=.5)
+
+legend("bottomleft",
+       legend = c("0-21"), col = c("black"),
+       pch = c(8),
+       bty = "n",
+       pt.cex = .01,
+       cex = .6,
+       text.col = "black",
+       horiz = F ,
+      inset = c(0.02, 0.00))
+
+legend("bottomleft",
+       legend = c("21-45"), col = c("black"),
+       pch = c(8),
+       bty = "n",
+       pt.cex = .01,
+       cex = .6,
+       text.col = "black",
+       horiz = F ,
+      inset = c(0.13, 0.00))
+
+legend("bottomleft",
+       legend = c("45-65"), col = c("black"),
+       pch = c(8),
+       bty = "n",
+       pt.cex = .01,
+       cex = .6,
+       text.col = "black",
+       horiz = F ,
+      inset = c(0.25, 0.00))
+
+legend("bottomleft",
+       legend = c("65-65"), col = c("black"),
+       pch = c(8),
+       bty = "n",
+       pt.cex = .01,
+       cex = .6,
+       text.col = "black",
+       horiz = F ,
+      inset = c(0.35, 0.00))
+
+legend("bottomleft",
+       legend = c("65-45"), col = c("black"),
+       pch = c(8),
+       bty = "n",
+       pt.cex = .01,
+       cex = .6,
+       text.col = "black",
+       horiz = F ,
+      inset = c(0.5, 0.00))
+
+legend("bottomleft",
+       legend = c("45-21"), col = c("black"),
+       pch = c(8),
+       bty = "n",
+       pt.cex = .01,
+       cex = .6,
+       text.col = "black",
+       horiz = F ,
+      inset = c(0.6, 0.00))
+
+legend("bottomleft",
+       legend = c("21-0"), col = c("black"),
+       pch = c(8),
+       bty = "n",
+       pt.cex = .01,
+       cex = .6,
+       text.col = "black",
+       horiz = F ,
+      inset = c(0.75, 0.00))
+
+#Passing
+title ("Passing & Receiving- Team A")
+points (Areax[Teamnum=="A" & Action=="Hand Pass"], Areay[Teamnum=="A" & Action=="Hand Pass"], pch=6, col="green", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Kick Pass"], Areay[Teamnum=="A" & Action=="Kick Pass"], pch=2, col="orange", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Rec"], Areay[Teamnum=="A" & Action=="Rec"], pch=4, col="blue", cex=.8)
+
+legend("bottomleft", text.width=c(0,0.085,0.235,0.35),
+       inset = c(0, -0.2), bty = "n", x.intersp=0.5,
+       xjust=0.5, yjust=0.5,
+       legend=c("Hand Pass" , "Kick Pass","Rec"),
+       col=c("green","orange","blue"), 
+       pch = c(6,2,4),
+       cex = 0.6, xpd = TRUE, horiz=TRUE)
+
+#Loss
+points (Areax[Teamnum=="A" & Action=="Break Loss"], Areay[Teamnum=="A" & Action=="Break Loss"], pch=0, col="red", cex=.5)
+points (Areax[Teamnum=="A" & Action=="Loss Tack"], Areay[Teamnum=="A" & Action=="Loss Tack"], pch=1, col="red", cex=.5)
+points (Areax[Teamnum=="A" & Action=="Loss Ball"], Areay[Teamnum=="A" & Action=="Loss Ball"], pch=3, col="red", cex=.5)
+points (Areax[Teamnum=="A" & Action=="Loss KP Int"], Areay[Teamnum=="A" & Action=="Loss KP Int"], pch=3, col="red", cex=.8)
+points (Areax[Teamnum=="A" & Action=="UnF Int KP Loss"], Areay[Teamnum=="A" & Action=="UnF Int KP Loss"], pch=4, col="red", cex=.8)
+points (Areax[Teamnum=="A" & Action=="UnF Int HP Loss"], Areay[Teamnum=="A" & Action=="UnF Int HP Loss"], pch=8, col="red", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Loss HP Int"], Areay[Teamnum=="A" & Action=="Loss HP Int"], pch=6, col="red", cex=.8)
+
+legend("bottomleft", text.width=c(0,0.085,0.235,0.35),
+       inset = c(0, -0.2), bty = "n", x.intersp=0.5,
+       xjust=0.5, yjust=0.5,
+       legend=c("Hand Pass" , "Kick Pass","Rec"),
+       col=c("green","orange","blue"), 
+       pch = c(6,2,4),
+       cex = 0.6, xpd = TRUE, horiz=TRUE)
+
+#Frees
+
+points (Areax[Teamnum=="A" & Action=="Free Loss"], Areay[Teamnum=="A" & Action=="Free Loss"], pch=3, col="red", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Free Won"], Areay[Teamnum=="A" & Action=="Free Won"], pch=4, col="green", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Free Loss Off"], Areay[Teamnum=="A" & Action=="Free Loss Off"], pch=1, col="red", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Free Won Def"], Areay[Teamnum=="A" & Action=="Free Won Def"], pch=2, col="green", cex=.8)
+
+legend("bottomleft", text.width=c(0,0.085,0.235,0.35),
+       inset = c(0, -0.2), bty = "n", x.intersp=0.5,
+       xjust=0.5, yjust=0.5,
+       legend=c("Hand Pass" , "Kick Pass","Rec"),
+       col=c("green","orange","blue"), 
+       pch = c(6,2,4),
+       cex = 0.6, xpd = TRUE, horiz=TRUE)
+
+#Conquer
+points (Areax[Teamnum=="A" & Action=="Tack W"], Areay[Teamnum=="A" & Action=="Tack W"], pch=0, col="green", cex=.8)
+points (Areax[Teamnum=="A" & Action=="KP Int"], Areay[Teamnum=="A" & Action=="KP Int"], pch=1, col="blue", cex=.8)
+points (Areax[Teamnum=="A" & Action=="HP Int"], Areay[Teamnum=="A" & Action=="HP Int"], pch=2, col="black", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Loose BW"], Areay[Teamnum=="A" & Action=="Loose BW"], pch=3, col="yellow", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Short Gk"], Areay[Teamnum=="A" & Action=="Short Gk"], pch=4, col="orange", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Break Won"], Areay[Teamnum=="A" & Action=="Break Won"], pch=6, col="purple", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Ko Int"], Areay[Teamnum=="A" & Action=="Ko Int"], pch=8, col="red", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Ko Break Int"], Areay[Teamnum=="A" & Action=="Ko Break Int"], pch=7, col="brown", cex=.8)
+
+title ("Conquers - Team A")
+
+legend("bottomleft", text.width=c(0,0.085,0.235,0.35),
+       inset = c(0, -0.2), bty = "n", x.intersp=0.5,
+       xjust=0.5, yjust=0.5,
+       legend=c("Tack Won" , "KP Int", "HP Int", "Loose BW", "Short GK", "Break Won", "Ko Int" , "Ko Break Int"),
+       col=c("green", "blue", "black", "yellow", "orange", "purple", "red", "brown"), 
+       pch = c(0,1,2,3,4,5,6,7),
+       cex = 0.6, xpd = TRUE, horiz=TRUE)
+
+
+#Kick Outs
+
+points (Areax[Teamnum=="A" & Action=="Ko Rec"], Areay[Teamnum=="A" & Action=="Ko Rec"], pch=3, col="green", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Ko Lost"], Areay[Teamnum=="A" & Action=="Ko Lost"], pch=4, col="red", cex=.8)
+points (Areax[Teamnum=="A" & Action=="KoBr Rec"], Areay[Teamnum=="A" & Action=="KoBr Rec"], pch=1, col="blue", cex=.8)
+points (Areax[Teamnum=="A" & Action=="KoBr Lost"], Areay[Teamnum=="A" & Action=="KoBr Lost"], pch=2, col="orange", cex=.8)
+
+
+title ("Kickouts - Team A")
+
+legend("bottomleft", text.width=c(0,0.085,0.235,0.35),
+       inset = c(0, -0.2), bty = "n", x.intersp=0.5,
+       xjust=0.5, yjust=0.5,
+       legend=c("Ko Rec" , "Ko Lost","KoBr Rec","KoBr Lost"),
+       col=c("green","red","blue","orange"), 
+       pch = c(3,4,1,2),
+       cex = 0.6, xpd = TRUE, horiz=TRUE)
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+#Positioning
+
+pass <- read.csv (file.choose(),sep=";",header=TRUE,check.names=FALSE)
+attach (pass)
+head (pass, n = 1)
+
+title ("Surface Area & Centroids - Team A & B")
+
+legend("bottomleft", text.width=c(0,0.085,0.235,0.35),
+       inset = c(0, -0.2), bty = "n", x.intersp=0.5,
+       xjust=0.5, yjust=0.5,
+       legend=c("Team A" , "Team B", "Team A Centroid" , "Team B Centroid"),
+       col=c("blue","red","blue","red"), 
+       pch = c(19,19,3,3),
+       cex = 0.6, xpd = TRUE, horiz=TRUE)
+
+#Pitch
+plot(Areax,Areay,type="n",xlab="",ylab="",ylim = c(0,5.5),xlim = c(0.5,8), xaxt='n', yaxt='n')
+abline (v=0.5, col="black", lty = "dotted", cex=.2)
+abline (v=1.5, col="grey", lty = "dotted", cex=.2)
+abline (v=2.5, col="grey", lty = "dotted", cex=.2)
+abline (v=3.5, col="grey", lty = "dotted", cex=.2)
+abline (v=4.5, col="grey", lty = "dotted", cex=.2)
+abline (v=5.5, col="grey", lty = "dotted", cex=.2)
+abline (v=6.5, col="grey", lty = "dotted", cex=.2)
+abline (v=7.5, col="black", lty = "dotted", cex=.2)
+abline (h=0.25, col="black", lty = "dotted", cex=.2)
+abline(h=1.5, col="grey", lty = "dotted", cex=.2)
+abline(h=2.5, col="grey", lty = "dotted", cex=.2)
+abline(h=3.5, col="grey", lty = "dotted", cex=.2)
+abline(h=4.5, col="grey", lty = "dotted", cex=.2)
+abline(h=5.5, col="black", lty = "dotted", cex=.2)
+abline (v=8, col="grey", lty = "dotted", cex=.2)
+points (x=7.5,y=2.75, cex=.5)
+points (x=7.5,y=3.25, cex=.5)
+points (x=0.5,y=3.25, cex=.5)
+points (x=0.5,y=2.75, cex=.5)
+
+legend("bottomleft",
+       legend = c("0-21"), col = c("black"),
+       pch = c(8),
+       bty = "n",
+       pt.cex = .01,
+       cex = .6,
+       text.col = "black",
+       horiz = F ,
+      inset = c(0.02, 0.00))
+
+legend("bottomleft",
+       legend = c("21-45"), col = c("black"),
+       pch = c(8),
+       bty = "n",
+       pt.cex = .01,
+       cex = .6,
+       text.col = "black",
+       horiz = F ,
+      inset = c(0.13, 0.00))
+
+legend("bottomleft",
+       legend = c("45-65"), col = c("black"),
+       pch = c(8),
+       bty = "n",
+       pt.cex = .01,
+       cex = .6,
+       text.col = "black",
+       horiz = F ,
+      inset = c(0.25, 0.00))
+
+legend("bottomleft",
+       legend = c("65-65"), col = c("black"),
+       pch = c(8),
+       bty = "n",
+       pt.cex = .01,
+       cex = .6,
+       text.col = "black",
+       horiz = F ,
+      inset = c(0.35, 0.00))
+
+legend("bottomleft",
+       legend = c("65-45"), col = c("black"),
+       pch = c(8),
+       bty = "n",
+       pt.cex = .01,
+       cex = .6,
+       text.col = "black",
+       horiz = F ,
+      inset = c(0.5, 0.00))
+
+legend("bottomleft",
+       legend = c("45-21"), col = c("black"),
+       pch = c(8),
+       bty = "n",
+       pt.cex = .01,
+       cex = .6,
+       text.col = "black",
+       horiz = F ,
+      inset = c(0.6, 0.00))
+
+legend("bottomleft",
+       legend = c("21-0"), col = c("black"),
+       pch = c(8),
+       bty = "n",
+       pt.cex = .01,
+       cex = .6,
+       text.col = "black",
+       horiz = F ,
+      inset = c(0.75, 0.00))
+
+points (Areax[Team=="A" & Player=="1"], Areay[Team=="A" & Player=="1"], pch=0, col="blue", cex=1)
+points (Areax[Team=="A" & Player=="2"], Areay[Team=="A" & Player=="2"], pch=0, col="blue", cex=1)
+points (Areax[Team=="A" & Player=="3"], Areay[Team=="A" & Player=="3"], pch=0, col="blue", cex=1)
+points (Areax[Team=="A" & Player=="4"], Areay[Team=="A" & Player=="4"], pch=0, col="blue", cex=1)
+points (Areax[Team=="A" & Player=="5"], Areay[Team=="A" & Player=="5"], pch=0, col="blue", cex=1)
+points (Areax[Team=="A" & Player=="6"], Areay[Team=="A" & Player=="6"], pch=0, col="blue", cex=1)
+points (Areax[Team=="A" & Player=="7"], Areay[Team=="A" & Player=="7"], pch=0, col="blue", cex=1)
+points (Areax[Team=="A" & Player=="8"], Areay[Team=="A" & Player=="8"], pch=0, col="blue", cex=1)
+points (Areax[Team=="A" & Player=="9"], Areay[Team=="A" & Player=="9"], pch=0, col="blue", cex=1)
+points (Areax[Team=="A" & Player=="10"], Areay[Team=="A" & Player=="10"], pch=0, col="blue", cex=1)
+points (Areax[Team=="A" & Player=="11"], Areay[Team=="A" & Player=="11"], pch=0, col="blue", cex=1)
+points (Areax[Team=="A" & Player=="12"], Areay[Team=="A" & Player=="12"], pch=0, col="blue", cex=1)
+points (Areax[Team=="A" & Player=="13"], Areay[Team=="A" & Player=="13"], pch=0, col="blue", cex=1)
+points (Areax[Team=="A" & Player=="14"], Areay[Team=="A" & Player=="14"], pch=0, col="blue", cex=1)
+points (Areax[Team=="A" & Player=="15"], Areay[Team=="A" & Player=="15"], pch=0, col="blue", cex=1)
+points (Areax[Team=="B" & Player=="1"], Areay[Team=="B" & Player=="1"], pch=0, col="red", cex=1)
+points (Areax[Team=="B" & Player=="2"], Areay[Team=="B" & Player=="2"], pch=0, col="red", cex=1)
+points (Areax[Team=="B" & Player=="3"], Areay[Team=="B" & Player=="3"], pch=0, col="red", cex=1)
+points (Areax[Team=="B" & Player=="4"], Areay[Team=="B" & Player=="4"], pch=0, col="red", cex=1)
+points (Areax[Team=="B" & Player=="5"], Areay[Team=="B" & Player=="5"], pch=0, col="red", cex=1)
+points (Areax[Team=="B" & Player=="6"], Areay[Team=="B" & Player=="6"], pch=0, col="red", cex=1)
+points (Areax[Team=="B" & Player=="7"], Areay[Team=="B" & Player=="7"], pch=0, col="red", cex=1)
+points (Areax[Team=="B" & Player=="8"], Areay[Team=="B" & Player=="8"], pch=0, col="red", cex=1)
+points (Areax[Team=="B" & Player=="9"], Areay[Team=="B" & Player=="9"], pch=0, col="red", cex=1)
+points (Areax[Team=="B" & Player=="10"], Areay[Team=="B" & Player=="10"], pch=0, col="red", cex=1)
+points (Areax[Team=="B" & Player=="11"], Areay[Team=="B" & Player=="11"], pch=0, col="red", cex=1)
+points (Areax[Team=="B" & Player=="12"], Areay[Team=="B" & Player=="12"], pch=0, col="red", cex=1)
+points (Areax[Team=="B" & Player=="13"], Areay[Team=="B" & Player=="13"], pch=0, col="red", cex=1)
+points (Areax[Team=="B" & Player=="14"], Areay[Team=="B" & Player=="14"], pch=0, col="red", cex=1)
+points (Areax[Team=="B" & Player=="15"], Areay[Team=="B" & Player=="15"], pch=0, col="red", cex=1)
+points (Areax[Team=="C" & Player=="1"], Areay[Team=="C" & Player=="1"], pch=19, col="green", cex=.6)
+
+#Surface Area
+{hpts <- chull(x = (Areax[Team=="B"]), y = (Areay[Team=="B"]))
+  hpts <- c(hpts, hpts[1])
+  lines(Areax[Team=="B"][hpts], Areay[Team=="B"][hpts], col = "red", lty= "dotted")}  
+
+{hpts <- chull(x = (Areax[Teamnum=="A"]), y = (Areay[Teamnum=="A"]))
+  hpts <- c(hpts, hpts[1])
+  lines(Areax[Teamnum=="A"][hpts], Areay[Teamnum=="A"][hpts], col = "blue", lty= "dotted")} 
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+#Centroid
+
+points (mean(Areax [Team=="A"]), mean(Areay [Team=="A"]), pch=3, col="blue", cex=.9)
+points (mean(Areax [Team=="B"]), mean(Areay [Team=="B"]), pch=3, col="red", cex=.9)
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+#length/width (Ratio)
+
+min(Areax)
+max(Areax)
+min(Areay)
+max(Areay)
+
+(mean(Areax [Team=="A"])/mean(Areay[Team=="A"]))
+(mean(Areax [Team=="B"])/mean(Areay[Team=="B"]))
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+#Team Spread
+
+c(mean(Areax [Team=="A"]),mean(Areax [Team=="A"]))
+c(mean(Areax [Team=="B"]),mean(Areax [Team=="B"]))
+
+
+c(mean(Areax [Team=="A" & [Player=="5"]),mean(Areax [Team=="A"] & [Player=="5"]))
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+#Play Space
+
+pass <- read.csv (file.choose(),sep=";",header=TRUE,check.names=FALSE)
+attach (pass)
+head (pass, n = 1)
+
+title ("Play Space - Team A & B")
+
+legend("bottomleft", text.width=c(0,0.085,0.235,0.35),
+       inset = c(0, -0.2), bty = "n", x.intersp=0.5,
+       xjust=0.5, yjust=0.5,
+       legend=c("Team A" , "Team B", "Team A Centroid" , "Team B Centroid"),
+       col=c("blue","red","blue","red"), 
+       pch = c(19,19,3,3),
+       cex = 0.6, xpd = TRUE, horiz=TRUE)
+
+#Pitch
+plot(Areax,Areay,type="n",xlab="",ylab="",ylim = c(0,5.5),xlim = c(0.5,8), xaxt='n', yaxt='n')
+abline (v=0.5, col="black", lty = "dotted", cex=.2)
+abline (v=1.5, col="grey", lty = "dotted", cex=.2)
+abline (v=2.5, col="grey", lty = "dotted", cex=.2)
+abline (v=3.5, col="grey", lty = "dotted", cex=.2)
+abline (v=4.5, col="grey", lty = "dotted", cex=.2)
+abline (v=5.5, col="grey", lty = "dotted", cex=.2)
+abline (v=6.5, col="grey", lty = "dotted", cex=.2)
+abline (v=7.5, col="black", lty = "dotted", cex=.2)
+abline (h=0.25, col="black", lty = "dotted", cex=.2)
+abline(h=1.5, col="grey", lty = "dotted", cex=.2)
+abline(h=2.5, col="grey", lty = "dotted", cex=.2)
+abline(h=3.5, col="grey", lty = "dotted", cex=.2)
+abline(h=4.5, col="grey", lty = "dotted", cex=.2)
+abline(h=5.5, col="black", lty = "dotted", cex=.2)
+abline (v=8, col="grey", lty = "dotted", cex=.2)
+points (x=7.5,y=2.75, cex=.5)
+points (x=7.5,y=3.25, cex=.5)
+points (x=0.5,y=3.25, cex=.5)
+points (x=0.5,y=2.75, cex=.5)
+
+legend("bottomleft",
+       legend = c("0-21"), col = c("black"),
+       pch = c(8),
+       bty = "n",
+       pt.cex = .01,
+       cex = .6,
+       text.col = "black",
+       horiz = F ,
+      inset = c(0.02, 0.00))
+
+legend("bottomleft",
+       legend = c("21-45"), col = c("black"),
+       pch = c(8),
+       bty = "n",
+       pt.cex = .01,
+       cex = .6,
+       text.col = "black",
+       horiz = F ,
+      inset = c(0.13, 0.00))
+
+legend("bottomleft",
+       legend = c("45-65"), col = c("black"),
+       pch = c(8),
+       bty = "n",
+       pt.cex = .01,
+       cex = .6,
+       text.col = "black",
+       horiz = F ,
+      inset = c(0.25, 0.00))
+
+legend("bottomleft",
+       legend = c("65-65"), col = c("black"),
+       pch = c(8),
+       bty = "n",
+       pt.cex = .01,
+       cex = .6,
+       text.col = "black",
+       horiz = F ,
+      inset = c(0.35, 0.00))
+
+legend("bottomleft",
+       legend = c("65-45"), col = c("black"),
+       pch = c(8),
+       bty = "n",
+       pt.cex = .01,
+       cex = .6,
+       text.col = "black",
+       horiz = F ,
+      inset = c(0.5, 0.00))
+
+legend("bottomleft",
+       legend = c("45-21"), col = c("black"),
+       pch = c(8),
+       bty = "n",
+       pt.cex = .01,
+       cex = .6,
+       text.col = "black",
+       horiz = F ,
+      inset = c(0.6, 0.00))
+
+legend("bottomleft",
+       legend = c("21-0"), col = c("black"),
+       pch = c(8),
+       bty = "n",
+       pt.cex = .01,
+       cex = .6,
+       text.col = "black",
+       horiz = F ,
+      inset = c(0.75, 0.00))
+
+points (Areax[Team=="A" & Player=="1"], Areay[Team=="A" & Player=="1"], pch=0, col="blue", cex=1)
+points (Areax[Team=="A" & Player=="2"], Areay[Team=="A" & Player=="2"], pch=0, col="blue", cex=1)
+points (Areax[Team=="A" & Player=="3"], Areay[Team=="A" & Player=="3"], pch=0, col="blue", cex=1)
+points (Areax[Team=="A" & Player=="4"], Areay[Team=="A" & Player=="4"], pch=0, col="blue", cex=1)
+points (Areax[Team=="A" & Player=="5"], Areay[Team=="A" & Player=="5"], pch=0, col="blue", cex=1)
+points (Areax[Team=="A" & Player=="6"], Areay[Team=="A" & Player=="6"], pch=0, col="blue", cex=1)
+points (Areax[Team=="A" & Player=="7"], Areay[Team=="A" & Player=="7"], pch=0, col="blue", cex=1)
+points (Areax[Team=="A" & Player=="8"], Areay[Team=="A" & Player=="8"], pch=0, col="blue", cex=1)
+points (Areax[Team=="A" & Player=="9"], Areay[Team=="A" & Player=="9"], pch=0, col="blue", cex=1)
+points (Areax[Team=="A" & Player=="10"], Areay[Team=="A" & Player=="10"], pch=0, col="blue", cex=1)
+points (Areax[Team=="A" & Player=="11"], Areay[Team=="A" & Player=="11"], pch=0, col="blue", cex=1)
+points (Areax[Team=="A" & Player=="12"], Areay[Team=="A" & Player=="12"], pch=0, col="blue", cex=1)
+points (Areax[Team=="A" & Player=="13"], Areay[Team=="A" & Player=="13"], pch=0, col="blue", cex=1)
+points (Areax[Team=="A" & Player=="14"], Areay[Team=="A" & Player=="14"], pch=0, col="blue", cex=1)
+points (Areax[Team=="A" & Player=="15"], Areay[Team=="A" & Player=="15"], pch=0, col="blue", cex=1)
+points (Areax[Team=="B" & Player=="1"], Areay[Team=="B" & Player=="1"], pch=0, col="red", cex=1)
+points (Areax[Team=="B" & Player=="2"], Areay[Team=="B" & Player=="2"], pch=0, col="red", cex=1)
+points (Areax[Team=="B" & Player=="3"], Areay[Team=="B" & Player=="3"], pch=0, col="red", cex=1)
+points (Areax[Team=="B" & Player=="4"], Areay[Team=="B" & Player=="4"], pch=0, col="red", cex=1)
+points (Areax[Team=="B" & Player=="5"], Areay[Team=="B" & Player=="5"], pch=0, col="red", cex=1)
+points (Areax[Team=="B" & Player=="6"], Areay[Team=="B" & Player=="6"], pch=0, col="red", cex=1)
+points (Areax[Team=="B" & Player=="7"], Areay[Team=="B" & Player=="7"], pch=0, col="red", cex=1)
+points (Areax[Team=="B" & Player=="8"], Areay[Team=="B" & Player=="8"], pch=0, col="red", cex=1)
+points (Areax[Team=="B" & Player=="9"], Areay[Team=="B" & Player=="9"], pch=0, col="red", cex=1)
+points (Areax[Team=="B" & Player=="10"], Areay[Team=="B" & Player=="10"], pch=0, col="red", cex=1)
+points (Areax[Team=="B" & Player=="11"], Areay[Team=="B" & Player=="11"], pch=0, col="red", cex=1)
+points (Areax[Team=="B" & Player=="12"], Areay[Team=="B" & Player=="12"], pch=0, col="red", cex=1)
+points (Areax[Team=="B" & Player=="13"], Areay[Team=="B" & Player=="13"], pch=0, col="red", cex=1)
+points (Areax[Team=="B" & Player=="14"], Areay[Team=="B" & Player=="14"], pch=0, col="red", cex=1)
+points (Areax[Team=="B" & Player=="15"], Areay[Team=="B" & Player=="15"], pch=0, col="red", cex=1)
+points (Areax[Team=="C" & Player=="1"], Areay[Team=="C" & Player=="1"], pch=19, col="green", cex=.6)
+
+#Voronoi
+
+#Individual Teams 
+vtessA <- deldir(Areax [Team=="A"], Areay[Team=="A"])
+plot(vtessA, wlines="tess", wpoints="none", number=FALSE, add=TRUE, lty=3, col="blue", cex=.1)
+
+vtessB <- deldir(Areax [Team=="B"], Areay[Team=="B"])
+plot(vtessB, wlines="tess", wpoints="none", number=FALSE, add=TRUE, lty=3, col="red", cex=.1)
+
+
+#Both teams
+vtessC <- deldir(Areax, Areay)
+plot(vtessC, wlines="tess", wpoints="none", number=FALSE, add=TRUE, lty=3, col="black", cex=.1)
+
+title ("Voronoi Play Space - Team A & B")
+
+legend("bottomleft", text.width=c(0,0.085,0.235,0.35),
+       inset = c(0, -0.2), bty = "n", x.intersp=0.5,
+       xjust=0.5, yjust=0.5,
+       legend=c("Team A" , "Team B", "Team A Centroid" , "Team B Centroid"),
+       col=c("blue","red","blue","red"), 
+       pch = c(19,19,3,3),
+       cex = 0.6, xpd = TRUE, horiz=TRUE)
+---------------------------------------------------------------------------------------------------------------------------------------
+
+
+legend("bottomleft",
+       legend = c("0-21"), col = c("black"),
+       pch = c(8),
+       bty = "n",
+       pt.cex = .01,
+       cex = .6,
+       text.col = "black",
+       horiz = F ,
+      inset = c(0.02, 0.00))
+
+legend("bottomleft",
+       legend = c("21-45"), col = c("black"),
+       pch = c(8),
+       bty = "n",
+       pt.cex = .01,
+       cex = .6,
+       text.col = "black",
+       horiz = F ,
+      inset = c(0.13, 0.00))
+
+legend("bottomleft",
+       legend = c("45-65"), col = c("black"),
+       pch = c(8),
+       bty = "n",
+       pt.cex = .01,
+       cex = .6,
+       text.col = "black",
+       horiz = F ,
+      inset = c(0.3, 0.00))
+
+legend("bottomleft",
+       legend = c("65-65"), col = c("black"),
+       pch = c(8),
+       bty = "n",
+       pt.cex = .01,
+       cex = .6,
+       text.col = "black",
+       horiz = F ,
+      inset = c(0.40, 0.00))
+
+legend("bottomleft",
+       legend = c("65-45"), col = c("black"),
+       pch = c(8),
+       bty = "n",
+       pt.cex = .01,
+       cex = .6,
+       text.col = "black",
+       horiz = F ,
+      inset = c(0.55, 0.00))
+
+legend("bottomleft",
+       legend = c("45-21"), col = c("black"),
+       pch = c(8),
+       bty = "n",
+       pt.cex = .01,
+       cex = .6,
+       text.col = "black",
+       horiz = F ,
+      inset = c(0.65, 0.00))
+
+legend("bottomleft",
+       legend = c("21-0"), col = c("black"),
+       pch = c(8),
+       bty = "n",
+       pt.cex = .01,
+       cex = .6,
+       text.col = "black",
+       horiz = F ,
+      inset = c(0.75, 0.00))
+
+points (Areax[Teamnum=="A" & Action=="Shot Left" & Phase=="A43"], Areay[Teamnum=="A" & Action=="Shot Left" & Phase=="A43"], pch=3, col="black", cex=1.5)
+
+#outcome
+points (Areax[Teamnum=="A" & Action=="Point" & Phase=="A43"], Areay[Teamnum=="A" & Action=="Point" & Phase=="A43"], pch=10, col="green", cex=.8)
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+points (Areax[Teamnum=="A" & Action=="Shot Right" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Shot Right" & Phase=="A15"], pch=12, col="green", cex=1)
+points (Areax[Teamnum=="A" & Action=="Point" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Point" & Phase=="A15"], pch=3, col="red", cex=1)
+
+segments(x0 = Areax[Teamnum=="A" & Action=="Shot Right" & Phase=="A15"], 
+         y0 = Areay[Teamnum=="A" & Action=="Shot Right" & Phase=="A15"], 
+         x1 = Areax[Teamnum=="A" & Action=="Point" & Phase=="A15"], 
+         y1 = Areay[Teamnum=="A" & Action=="Point" & Phase=="A15"], 
+         col = gray(0, .5))
+
+points (Areax[Teamnum=="A" & Action=="Shot Right" & Phase=="A11"], Areay[Teamnum=="A" & Action=="Shot Right" & Phase=="A11"], pch=12, col="green", cex=1)
+points (Areax[Teamnum=="A" & Action=="Point" & Phase=="A11"], Areay[Teamnum=="A" & Action=="Point" & Phase=="A11"], pch=3, col="red", cex=1)
+
+segments(x0 = Areax[Teamnum=="A" & Action=="Shot Right" & Phase=="A11"], 
+         y0 = Areay[Teamnum=="A" & Action=="Shot Right" & Phase=="A11"], 
+         x1 = Areax[Teamnum=="A" & Action=="Point" & Phase=="A11"], 
+         y1 = Areay[Teamnum=="A" & Action=="Point" & Phase=="A11"], 
+         col = gray(0, .5))
+
+
+segments(x0 = Areax[Teamnum=="A" & Action=="Hand Pass"], 
+         y0 = Areay[Teamnum=="A" & Action=="Hand Pass"], 
+         x1 = Areax[Teamnum=="A" & Action=="Rec"], 
+         y1 = Areay[Teamnum=="A" & Action=="Rec"], 
+         col = gray(0, .1))
+
+segments(x0 = Areax[Teamnum=="A" & Action=="Kick Pass"], 
+         y0 = Areay[Teamnum=="A" & Action=="Kick Pass"], 
+         x1 = Areax[Teamnum=="A" & Action=="Rec"], 
+         y1 = Areay[Teamnum=="A" & Action=="Rec"], 
+         col = gray(0, .1))
+
+
+legend("bottomleft", 
+       inset = c(0, -0.2), bty = "n", x.intersp=2,
+       xjust=1, yjust=1,
+       legend=c("Shot Right","Point"),
+       col=c("green","red"), 
+       pch = c(12,3,),
+       cex = .6, xpd = TRUE, ncol=1)
+
+points (Areax[Teamnum=="A" & Action=="Shot Right" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Shot Right" & Phase=="A15"], pch=12, col="green", cex=1)
+points (Areax[Teamnum=="A" & Action=="Point" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Point" & Phase=="A15"], pch=3, col="red", cex=1)
+
+segments(x0 = Areax[Teamnum=="A" & Action=="Shot Right" & Phase=="A15"], 
+         y0 = Areay[Teamnum=="A" & Action=="Shot Right" & Phase=="A15"], 
+         x1 = Areax[Teamnum=="A" & Action=="Point" & Phase=="A15"], 
+         y1 = Areay[Teamnum=="A" & Action=="Point" & Phase=="A15"], 
+         col = gray(0, .5))
+
+points (Areax[Teamnum=="A" & Action=="Shot Right" & Phase=="A11"], Areay[Teamnum=="A" & Action=="Shot Right" & Phase=="A11"], pch=12, col="green", cex=1)
+points (Areax[Teamnum=="A" & Action=="Point" & Phase=="A11"], Areay[Teamnum=="A" & Action=="Point" & Phase=="A11"], pch=3, col="red", cex=1)
+
+segments(x0 = Areax[Teamnum=="A" & Action=="Shot Right" & Phase=="A11"], 
+         y0 = Areay[Teamnum=="A" & Action=="Shot Right" & Phase=="A11"], 
+         x1 = Areax[Teamnum=="A" & Action=="Point" & Phase=="A11"], 
+         y1 = Areay[Teamnum=="A" & Action=="Point" & Phase=="A11"], 
+         col = gray(0, .5))
+
+legend("bottomleft", 
+       inset = c(0, -0.2), bty = "n", x.intersp=2,
+       xjust=1, yjust=1,
+       legend=c("Shot Right","Point"),
+       col=c("green","red"), 
+       pch = c(12,3),
+       cex = .6, xpd = TRUE, ncol=1)
+
+title ("Shots - Team A")
+

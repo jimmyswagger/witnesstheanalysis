@@ -1,0 +1,248 @@
+A1 <- pass %>% filter(Teamnum == "A" & poss == "A1") 
+A2 <- pass %>% filter(Teamnum == "A" & poss == "A2") 
+A3 <- pass %>% filter(Teamnum == "A" & poss == "A3") 
+A4 <- pass %>% filter(Teamnum == "A" & poss == "A4") 
+A5 <- pass %>% filter(Teamnum == "A" & poss == "A5") 
+A6 <- pass %>% filter(Teamnum == "A" & poss == "A6") 
+A7 <- pass %>% filter(Teamnum == "A" & poss == "A7") 
+A8 <- pass %>% filter(Teamnum == "A" & poss == "A8") 
+A9 <- pass %>% filter(Teamnum == "A" & poss == "A9") 
+A10 <- pass %>% filter(Teamnum == "A" & poss == "A10") 
+A11 <- pass %>% filter(Teamnum == "A" & poss == "A11") 
+A12 <- pass %>% filter(Teamnum == "A" & poss == "A12") 
+A13 <- pass %>% filter(Teamnum == "A" & poss == "A13") 
+A14 <- pass %>% filter(Teamnum == "A" & poss == "A14") 
+A15 <- pass %>% filter(Teamnum == "A" & poss == "A15") 
+A16 <- pass %>% filter(Teamnum == "A" & poss == "A16") 
+A17 <- pass %>% filter(Teamnum == "A" & poss == "A17") 
+A18 <- pass %>% filter(Teamnum == "A" & poss == "A18") 
+A19 <- pass %>% filter(Teamnum == "A" & poss == "A19") 
+A20 <- pass %>% filter(Teamnum == "A" & poss == "A20") 
+A21 <- pass %>% filter(Teamnum == "A" & poss == "A21") 
+A22 <- pass %>% filter(Teamnum == "A" & poss == "A22") 
+A23 <- pass %>% filter(Teamnum == "A" & poss == "A23") 
+A24 <- pass %>% filter(Teamnum == "A" & poss == "A24") 
+A25 <- pass %>% filter(Teamnum == "A" & poss == "A25") 
+A26 <- pass %>% filter(Teamnum == "A" & poss == "A26") 
+A27 <- pass %>% filter(Teamnum == "A" & poss == "A27") 
+A28 <- pass %>% filter(Teamnum == "A" & poss == "A28") 
+A29 <- pass %>% filter(Teamnum == "A" & poss == "A29") 
+A30 <- pass %>% filter(Teamnum == "A" & poss == "A30") 
+A31 <- pass %>% filter(Teamnum == "A" & poss == "A31") 
+A32 <- pass %>% filter(Teamnum == "A" & poss == "A32") 
+A33 <- pass %>% filter(Teamnum == "A" & poss == "A33") 
+A34 <- pass %>% filter(Teamnum == "A" & poss == "A34") 
+A35 <- pass %>% filter(Teamnum == "A" & poss == "A35") 
+A36 <- pass %>% filter(Teamnum == "A" & poss == "A36") 
+A37 <- pass %>% filter(Teamnum == "A" & poss == "A37") 
+A38 <- pass %>% filter(Teamnum == "A" & poss == "A38") 
+A39 <- pass %>% filter(Teamnum == "A" & poss == "A39") 
+A40 <- pass %>% filter(Teamnum == "A" & poss == "A40") 
+A41 <- pass %>% filter(Teamnum == "A" & poss == "A41") 
+A42 <- pass %>% filter(Teamnum == "A" & poss == "A42") 
+A43 <- pass %>% filter(Teamnum == "A" & poss == "A43") 
+A44 <- pass %>% filter(Teamnum == "A" & poss == "A44") 
+A45 <- pass %>% filter(Teamnum == "A" & poss == "A45") 
+A46 <- pass %>% filter(Teamnum == "A" & poss == "A46") 
+A47 <- pass %>% filter(Teamnum == "A" & poss == "A47") 
+A48 <- pass %>% filter(Teamnum == "A" & poss == "A48")
+A49 <- pass %>% filter(Teamnum == "A" & poss == "A49")
+A50 <- pass %>% filter(Teamnum == "A" & poss == "A50")
+
+actA <- pass %>% filter(Teamnum == "A", main == "PW"|main == "Pass Op"|main == "Pass Rs"|main == "Shot Op"|main == "Shot Rs"|main == "ToL")
+actAA <- pass %>% filter(Teamnum == "A", main == "Rec Op"|main == "Rec Rs"|main == "Ko Rec")
+
+actcolpal <- c(
+  "0" = "blue",
+  "1" = "black", 
+  "2" = "blue", 
+  "3" = "white",
+  "4" = "yellow",
+  "5" =  "gold",
+  "6" = "darkred",
+  "7" = "red",
+  "8" = "red",
+  "9" = "darkblue",
+  "10" = "lightblue")
+
+p + geom_path(data = A1, aes(x=Areax, y=Areay, colour = as.factor(A)), size = 0.8, linetype="solid") + 
+geom_path(data = A2, aes(x=Areax, y=Areay, colour = as.factor(A)), size = 0.8, linetype="solid") + 
+geom_path(data = A3, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = A4, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = A5, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = A6, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = A7, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = A8, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = A9, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = A10, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = A11, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = A12, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = A13, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = A14, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = A15, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = A16, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = A17, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = A18, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = A19, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = A20, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = A21, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = A22, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = A23, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = A24, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = A25, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = A26, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = A27, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = A28, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = A29, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = A30, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = A31, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = A32, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = A33, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = A34, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = A35, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = A36, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = A37, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = A38, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = A39, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = A40, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = A41, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = A42, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = A43, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = A44, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = A45, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = A46, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = A47, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") +
+geom_path(data = A48, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") +
+geom_path(data = A49, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") +
+geom_path(data = A50, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") +
+theme(legend.position="none") +
+scale_colour_manual(values = actcolpal) 
+
+
+geom_point(data = actA, aes(x=Areax, y=Areay, colour = main),size = 2, shape = 19) +
+geom_point(data = actAA, aes(x=Areax, y=Areay),size = 1, shape = 19, colour = "white") +
+theme(legend.position="bottom") +
+
+B1 <- pass %>% filter(Teamnum == "B" & poss == "B1") 
+B2 <- pass %>% filter(Teamnum == "B" & poss == "B2") 
+B3 <- pass %>% filter(Teamnum == "B" & poss == "B3") 
+B4 <- pass %>% filter(Teamnum == "B" & poss == "B4") 
+B5 <- pass %>% filter(Teamnum == "B" & poss == "B5") 
+B6 <- pass %>% filter(Teamnum == "B" & poss == "B6") 
+B7 <- pass %>% filter(Teamnum == "B" & poss == "B7") 
+B8 <- pass %>% filter(Teamnum == "B" & poss == "B8") 
+B9 <- pass %>% filter(Teamnum == "B" & poss == "B9") 
+B10 <- pass %>% filter(Teamnum == "B" & poss == "B10") 
+B11 <- pass %>% filter(Teamnum == "B" & poss == "B11") 
+B12 <- pass %>% filter(Teamnum == "B" & poss == "B12") 
+B13 <- pass %>% filter(Teamnum == "B" & poss == "B13") 
+B14 <- pass %>% filter(Teamnum == "B" & poss == "B14") 
+B15 <- pass %>% filter(Teamnum == "B" & poss == "B15") 
+B16 <- pass %>% filter(Teamnum == "B" & poss == "B16") 
+B17 <- pass %>% filter(Teamnum == "B" & poss == "B17") 
+B18 <- pass %>% filter(Teamnum == "B" & poss == "B18") 
+B19 <- pass %>% filter(Teamnum == "B" & poss == "B19") 
+B20 <- pass %>% filter(Teamnum == "B" & poss == "B20") 
+B21 <- pass %>% filter(Teamnum == "B" & poss == "B21") 
+B22 <- pass %>% filter(Teamnum == "B" & poss == "B22") 
+B23 <- pass %>% filter(Teamnum == "B" & poss == "B23") 
+B24 <- pass %>% filter(Teamnum == "B" & poss == "B24") 
+B25 <- pass %>% filter(Teamnum == "B" & poss == "B25") 
+B26 <- pass %>% filter(Teamnum == "B" & poss == "B26") 
+B27 <- pass %>% filter(Teamnum == "B" & poss == "B27") 
+B28 <- pass %>% filter(Teamnum == "B" & poss == "B28") 
+B29 <- pass %>% filter(Teamnum == "B" & poss == "B29") 
+B30 <- pass %>% filter(Teamnum == "B" & poss == "B30") 
+B31 <- pass %>% filter(Teamnum == "B" & poss == "B31") 
+B32 <- pass %>% filter(Teamnum == "B" & poss == "B32") 
+B33 <- pass %>% filter(Teamnum == "B" & poss == "B33") 
+B34 <- pass %>% filter(Teamnum == "B" & poss == "B34") 
+B35 <- pass %>% filter(Teamnum == "B" & poss == "B35") 
+B36 <- pass %>% filter(Teamnum == "B" & poss == "B36") 
+B37 <- pass %>% filter(Teamnum == "B" & poss == "B37") 
+B38 <- pass %>% filter(Teamnum == "B" & poss == "B38") 
+B39 <- pass %>% filter(Teamnum == "B" & poss == "B39") 
+B40 <- pass %>% filter(Teamnum == "B" & poss == "B40") 
+B41 <- pass %>% filter(Teamnum == "B" & poss == "B41") 
+B42 <- pass %>% filter(Teamnum == "B" & poss == "B42") 
+B43 <- pass %>% filter(Teamnum == "B" & poss == "B43") 
+B44 <- pass %>% filter(Teamnum == "B" & poss == "B44") 
+B45 <- pass %>% filter(Teamnum == "B" & poss == "B45") 
+B46 <- pass %>% filter(Teamnum == "B" & poss == "B46") 
+B47 <- pass %>% filter(Teamnum == "B" & poss == "B47") 
+B48 <- pass %>% filter(Teamnum == "B" & poss == "B48") 
+B49 <- pass %>% filter(Teamnum == "B" & poss == "B49") 
+B50 <- pass %>% filter(Teamnum == "B" & poss == "B50")
+B51 <- pass %>% filter(Teamnum == "B" & poss == "B51")
+B52 <- pass %>% filter(Teamnum == "B" & poss == "B52")
+B53 <- pass %>% filter(Teamnum == "B" & poss == "B53")
+B54 <- pass %>% filter(Teamnum == "B" & poss == "B54")
+B55 <- pass %>% filter(Teamnum == "B" & poss == "B55")
+B56 <- pass %>% filter(Teamnum == "B" & poss == "B56")
+
+actB <- pass %>% filter(Teamnum == "B", main == "PW"|main == "Pass Op"|main == "Pass Rs"|main == "Shot Op"|main == "Shot Rs"|main =="ToL")
+actBB <- pass %>% filter(Teamnum == "B", main == "Rec Op"|main == "Rec Rs"|main == "Ko Rec")
+
+
+p + geom_path(data = B1, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B2, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B3, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B4, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B5, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B6, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B7, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B8, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B9, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B10, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B11, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B12, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B13, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B14, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B15, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B16, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B17, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B18, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B19, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B20, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B21, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B22, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B23, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B24, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B25, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B26, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B27, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B28, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B29, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B30, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B31, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B32, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B33, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B34, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B35, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B36, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B37, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B38, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B39, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B40, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B41, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B42, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B43, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B44, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B45, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B46, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B47, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B48, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") + 
+geom_path(data = B49, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") +
+geom_path(data = B50, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") +
+geom_path(data = B51, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") +  
+geom_path(data = B52, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") +
+geom_path(data = B53, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") +
+  geom_path(data = B54, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") +
+  geom_path(data = B55, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") +
+  geom_path(data = B56, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "white") +
+  geom_point(data = actB, aes(x=Areax, y=Areay, colour = main),size = 2, shape = 19) +
+geom_point(data = actBB, aes(x=Areax, y=Areay),size = 1, shape = 19, colour = "white") +
+theme(legend.position="bottom") +
+scale_colour_manual(values = actcolpal) 
+
+

@@ -1,0 +1,44 @@
+nodesteamA <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/newplan/nodesnewplan.csv", header=TRUE, sep=";")
+attach (nodesteamA)
+
+pass <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/newplan/passnewplan.csv", header=TRUE, sep=";")
+attach (pass)
+
+#Open play Pass & rec (links)
+passonly <- pass %>% filter(subset== "Pass Op"|subset == "Rec Op"|subset == "Pass Rs"|subset == "Rec Rs"|subset=="Pass ToL"|subset=="Rs ToL"
+|subset=="Fk Loss ToL"|main =="Shot Op"|main == "Shot Op Oc"|main =="Shot Rs"|main == "Shot Rs Oc")%>%select(Teamnum,Player,main)
+
+oddpl <- passonly[seq(1, nrow(passonly), 2),]
+colnames(oddpl) <- c("Teamnum","plypass","Action")
+evenpl <- passonly[seq(2, nrow(passonly), 2),]
+colnames(evenpl) <- c("Teamnumoc","plyrec","octype")
+pass_links <- bind_cols(oddpl, evenpl) 
+
+
+
+linksAB <- pass_links
+
+linksAB <-mutate(linksAB, plyrecs = ifelse(octype  == "ToL", 37,ifelse(octype  =="Shot Op Oc", 35, ifelse(octype  =="Shot Rs Oc", 35,linksAB$plyrec))))
+
+linksAB$plyrecs <- as.integer(linksAB$plyrecs)
+
+linksA <- linksAB %>% filter( Teamnum == "A") %>% select(Teamnum,plypass, plyrecs)
+
+linksA <- rename(count(linksA, plypass, plyrecs), weight = n)
+
+netA <- graph_from_data_frame(d=linksA, vertices=nodesteamA, directed=T) 
+
+# Generate colors based on number of position (ie gk back mf for) type:
+colrs <- c("blue", "darkgreen", "yellow", "purple", "orange")
+V(netA)$color <- colrs[V(netA)$posn]
+
+# Compute node degrees (#links) and use that to set node size:
+deg <- degree(netA, mode="all")
+V(netA)$size <- deg*2 #size of node 
+
+nodes.coordA <- data.frame(data = nodesteamA,
+    x= NodesX,
+    y=NodesY)
+
+plot(netA, edge.arrow.size=.4, edge.color=E(netA)$weight*5,edge.arrow.width=.4,
+      edge.width=E(netA)$weight*5, layout=as.matrix(nodes.coordA[,c("x","y")]), vertex.label.color="black", vertex.label = labelA, vertex.label.cex = 5)

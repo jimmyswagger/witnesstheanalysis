@@ -1,0 +1,86 @@
+Hi,
+Hope you are well. 
+
+I really enjoy the content you produce and am currently working with some teams as a performance analyst. 
+
+My background is in data science and analytics so I am quite familiar with the R coding and programmes you are running. 
+
+Currently I provide my teams information on kick outs and shot locations much like you have in your koshot tracker 
+and add some context such as quantifying value of each KO and shot with expected points etc. 
+
+I’m trying to assess the feasibility of producing a similar level of detailed analysis such as https://witnesstheanalysis.com/dubkerfr.html.
+
+I was wondering could you provide some more detail on how you are tracking each action and the time taken to log these events. 
+
+It seems to me the best way would be to watch video and log each action/event on a pitch map similar to your rugby tracker. 
+
+What is the level of effort to do this - 2-3 hours per game? 
+
+Any resources or pointers would be greatly appreciated.
+
+
+Thanks for your help in advance.
+Regards,
+Diarmuid 
+---------------------------------------
+
+Hi Diarmuid 
+
+Very nice to hear from you
+
+Its definitely possible to create detailed analysis it just depends on how much time you want to dedicate to it
+
+Its based on watching the video and tagging each event. 
+
+Im not sure time wise how quickly you could do it using rstudio
+
+I have been using a userform in excel to do it similar to the examples here https://witnesstheanalysis.wordpress.com/2019/07/21/using-excel-to-create-a-match-tracker/
+
+you could look into nacsports, performa sports etc but as far as im aware there is a fee to use them
+
+I have just created this which I hope can be of some use to you if you have windows
+https://witnesstheanalysis.wordpress.com/2019/10/23/a-home-made-video-analysis-application-for-windows/
+
+Some tips and ideas - Im sure there isnt much different here to working with any kind of data 
+
+Sequence for Coding a Game
+1.Team details (Numbers names subs etc)
+2.Code Game (save after set points of time)
+3.Clean Data (excel formulas and R)
+4.Assign Data
+5.Load to R & Visualise 
+6.Upload to website 
+
+
+* what needs to be tracked (Im looking at everything that I can think of that can be tracked. It could be worth talking to the coaches that you are working with as to what they want. 
+They may not need as much detail although in saying that it could be up to you to show them what they are missing)
+* It wil be harder to go in to too much detail if you are coding the game live 
+* Templates - automate as much as possible (I use team "A" & "B" and then a different column with the team names so dont have to change the code for different games)
+this is an example of what the log looks like and then after I have cleaned it 
+* If you are going in to a lot of detail it can make it easier to filter etc on R by grouping actions together 
+for example (if you are using R shiny for this it is probably simpler to do this in excel)
+          
+          Main - Shot Open Play
+          Subset - Shot Op
+          Action - Shot Left
+          
+* Take time to make sure your data is clean and correct before you start analyising/visualising it - I use a mix of excel and R for this 
+* Finding a way to highlight errors - Things like conditional formating in excel 
+* Easy retrieval of codes and ideas - so a good system for storing codes etc and for interesting websites/articles
+* Im just learning as I go along so one of the main things is finding ideas and working backwards from there.
+  figuring out how to ask google the right questions and then finding the right code  
+  here is a good starting place for ideas https://wikieducator.org/Sport_Informatics_and_Analytics/Pattern_Recognition/Using_R and following people on twitter not just GAA 
+* Keep a master copy of the cleaned data and use a different file/sheet for analysis - so mistakes arent permenant 
+
+Time
+* Time wise - it all very much depends on the level of detail (Id say any where between 6-8 hours to do a game not including the r work-
+It should probably only take about 3-4 hours but Im not under any deadline so I do it at a more leisurely pace)
+* A couple of things that can affect the speed of the coding 
+	*Coding the games from the tv coverage adds a bit of time to it due to changing camera angles, replays etc it helps having a fixed camera
+	*intercounty games take a lot longer than club games too (more actions and a lot more injury time)
+	*having the team details, when subs are made any cards etc before you start coding speeds things up to 
+*The more you can automate the better 
+
+I'll try and do up a list of other resources etc that might be of help
+
+Any further questions dont be afraid to get in touch

@@ -1,0 +1,232 @@
+team	outcome	player	x	y
+B	Fr Point	11	76.89	50.44
+B	Fr Point	11	64.22	86.56
+B	Miss	15	85.55	81.76
+B	Point	12	113.43	16.98
+A	Miss	14	16.07	59.65
+A	Fr Miss	5	98.23	51.00
+A	Point	13	36.55	64.46
+B	Fr Point	11	109.84	97.71
+A	Miss	13	25.99	85.02
+B	Point	12	83.23	67.34
+B	Point	13	107.10	1.60
+B	Miss	10	85.98	59.27
+B	Miss	10	104.77	43.50
+A	Point	14	67.18	72.72
+B	Point	6	94.42	50.81
+A	Miss	11	50.28	32.16
+A	Miss	8	15.43	88.87
+B	Goal	14	141.31	56.01
+B	Miss	15	86.19	96.75
+A	Miss	14	6.99	19.47
+B	Fr Point	11	121.46	37.16
+A	Fr Point	13	21.35	52.73
+A	Point	15	38.03	93.10
+A	Point	14	44.79	25.05
+B	Fr Point	11	111.32	64.65
+B	Fr Point	11	62.32	10.82
+A	Point	13	31.06	31.01
+B	Fr Point	11	91.47	93.10
+B	Miss	15	113.22	63.11
+A	Fr Point	13	28.95	47.35
+A	Point	12	62.53	33.12
+A	Miss	15	30.64	79.83
+A	Miss	12	42.26	32.55
+A	Fr Point	13	62.11	37.54
+A	Miss	5	74.78	93.29
+A	Miss	13	22.83	22.17
+A	Fr Goal	13	21.56	49.08
+A	Miss	14	55.35	36.39
+B	Point	15	100.76	46.00
+team	outcome	player	x	y
+B	Point	14	7.62	63.19
+A	Point	13	120.61	26.78
+A	Fr Point	5	66.97	65.61
+A	Miss	13	92.95	34.08
+B	Fr Point	11	20.93	50.81
+A	Fr Point	13	81.33	46.39
+A	Fr Point	13	115.12	60.03
+B	Point	13	37.82	35.43
+A	Miss	14	113.01	77.91
+A	Fr Point	13	113.43	64.46
+A	Miss	11	79.22	64.07
+B	Point	10	57.89	14.86
+B	Miss	8	11.00	43.50
+A	Point	21	90.83	67.15
+B	Miss	5	69.08	76.37
+A	Miss	10	69.92	50.81
+B	Point	13	30.85	62.34
+B	Point	14	23.67	41.58
+B	Miss	12	75.42	94.25*
+A	Miss	12	93.79	57.53
+B	Fr Miss	11	41.62	97.71
+B	Point	13	28.95	51.96
+B	Point	14	42.89	40.23
+B	Fr Miss	11	66.97	43.50
+A	Goal	19	129.91	46.39
+A	Point	24	119.98	36.20
+A	Fr Miss	5	59.58	81.56
+B	Point	21	10.79	74.84
+A	Miss	24	136.66	64.26
+A	Fr Point	5	79.01	55.04
+A	Fr Miss	22	113.64	97.90
+
+
+np + geom_point(limkil, aes(x = x, y = y,color=team, shape = outcome),size = 1)
+
+
+np + geom_point(data = limkil, aes(x=x, y=y, colour = team, shape = outcome, size = 6, stroke = 2))+
+geom_text_repel(data = limkil, aes(x=x, y=y, label = player, col = team), size = 8)
+
+limkil <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/limkil.csv", header=TRUE, sep=";")
+attach (limkil)
+head (limkil)
+
+pal = c("Wexford" = "red",
+"Tipperary" = "blue")
+
+pals = c("Goal" = 15,
+"Point" = 16,
+"Miss" = 4,
+"Fr Point" = 1,
+"Fr Miss" = 3,
+"Sl Point" = 6,
+"Sl Miss" = 2,
+"65 Point" = 8,
+"Pen Goal" = 0)
+
+limA1<-filter(limkil, half == "1")
+
+np + geom_point(data = limA1, aes(x=x, y=y, colour = team, shape = outcome, stroke = 2), size = 2)+
+geom_text_repel(data = limA1, aes(x=x, y=y, label = player, col = team), size = 4) +
+theme(plot.title = element_text(hjust=0.5)) +
+theme(legend.position="bottom") +
+scale_shape_manual(values= pals) +
+  scale_colour_manual(values = pal) +
+guides(size = FALSE) +
+ggtitle("Shots – 1st half Wexford 1.14 (into blue goal) vs Tipperary 1.12 (into red goal)") +
+guides(shape = guide_legend(override.aes = list(size = 3)))
+
+limA2<-filter(limkil, half == "2")
+np + geom_point(data = limA2, aes(x=x, y=y, colour = team, shape = outcome, stroke = 2), size = 2)+
+geom_text_repel(data = limA2, aes(x=x, y=y, label = player, col = team), size = 4) +
+theme(plot.title = element_text(hjust=0.5)) +
+theme(legend.position="bottom") +
+scale_shape_manual(values= pals) +
+  scale_colour_manual(values = pal) +
+guides(size = FALSE) +
+ggtitle("Shots – 2nd half Wexford 2.6 (into red goal) vs Tipperary 0.16 (into blue goal)") +
+guides(shape = guide_legend(override.aes = list(size = 6)))
+
+
+plyA <- limkil %>%group_by(player, outcome) %>% filter(team == "Wexford")%>%summarize(count=n())
+
+q <- ggplot(data = scores, aes(x = shotx, y = shoty, fill = team))
+
+
+
+q + geom_bar(width=.7, stat = "identity", aes(x = x, y = y, fill = team)) +
+theme(axis.ticks.y = element_blank()) 
+
++
+ scale_y_continuous(limit = c(0,1))
+ +
+
+
+plyB <- limkil %>%group_by(player, outcome) %>% filter(team == "Tipperary")%>%summarize(count=n())
+
+q <- ggplot(data = plyB, aes(x = player, y = count, fill = outcome))
+
+
+
+q + geom_bar(width=.7, stat = "identity", aes(x = player, y = count, fill = outcome)) +
+ xlab("player") + ylab("count") + 
+
+scale_x_continuous("player", labels = as.character(player), breaks = player) +
+ scale_y_continuous(breaks = count)
+ + 
+ 
+theme(legend.position="right",plot.title = element_text(size = 20, color = "black"))
+
+
+ToWA <- limkil %>%group_by(team,outcome)%>%filter(team == "Wexford")%>%summarize(count=n())
+
+my_theme <- function(){
+  theme_light() +
+    theme(text = element_text(),  
+          panel.grid = element_blank(),
+          panel.border = element_blank(),
+          axis.title = element_blank(),
+          axis.ticks = element_blank(),
+          axis.text.x = element_blank(),
+          axis.text.y = element_text(size = 15, color = "gray10"),
+          plot.title =  element_text(size = 20, color = "black"))
+  }
+
+final_data <- ToWA %>% 
+  # Calculate -- and format -- the percentage for each channel
+  mutate(bar_percentage = sprintf("%.1f%%", 100*(count / sum(.$count)))) %>% 
+  # Combine that percentage with the actual value
+  mutate(bar_label = paste0(format(count, big.mark = ","), ", ", bar_percentage)) %>% 
+  # Remove the "just the percentage" column
+  select(-bar_percentage)
+
+
+total_ToWA <- paste0("Total Shots: ",
+                      format(sum(final_data$count), big.mark = ","))
+
+
+ggplot(final_data, aes(x = outcome, y = count)) +
+ggtitle("Wexford",  # Add the title and subtitle
+          subtitle = total_ToWA) +   
+  geom_bar(stat = "identity", 
+           fill = "lightgreen",    
+           width = 0.50) +  
+geom_text(aes(label = bar_label, size = 5.5, hjust = 0)) +
+  coord_flip() +
+  scale_y_continuous(expand = c(0, 0),
+                     limits = c(0, max(final_data$count) * 1.3)) +
+  my_theme() +
+theme(legend.position="none", plot.title =  element_text(size = 20, color = "black"),plot.subtitle =  element_text(size = 18, color = "black"))
+
+
+ToWB <- limkil %>%group_by(team,outcome)%>%filter(team == "Tipperary")%>%summarize(count=n())
+
+my_theme <- function(){
+  theme_light() +
+    theme(text = element_text(),  
+          panel.grid = element_blank(),
+          panel.border = element_blank(),
+          axis.title = element_blank(),
+          axis.ticks = element_blank(),
+          axis.text.x = element_blank(),
+          axis.text.y = element_text(size = 15, color = "gray10"),
+          plot.title =  element_text(size = 20, color = "black"))
+  }
+
+final_data <- ToWB %>% 
+  # Calculate -- and format -- the percentage for each channel
+  mutate(bar_percentage = sprintf("%.1f%%", 100*(count / sum(.$count)))) %>% 
+  # Combine that percentage with the actual value
+  mutate(bar_label = paste0(format(count, big.mark = ","), ", ", bar_percentage)) %>% 
+  # Remove the "just the percentage" column
+  select(-bar_percentage)
+
+
+total_ToWB <- paste0("Total Shots: ",
+                      format(sum(final_data$count), big.mark = ","))
+
+
+ggplot(final_data, aes(x = outcome, y = count)) +
+ggtitle("Tipperary",  # Add the title and subtitle
+          subtitle = total_ToWB) +   
+  geom_bar(stat = "identity", 
+           fill = "lightgreen",    
+           width = 0.50) +  
+geom_text(aes(label = bar_label, size = 5.5, hjust = 0)) +
+  coord_flip() +
+  scale_y_continuous(expand = c(0, 0),
+                     limits = c(0, max(final_data$count) * 1.3)) +
+  my_theme() +
+theme(legend.position="none", plot.title =  element_text(size = 20, color = "black"),plot.subtitle =  element_text(size = 18, color = "black"))
+

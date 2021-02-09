@@ -1,0 +1,177 @@
+---
+title: "Match layout"
+output: html_document
+---
+
+  
+#Summary
+
+* Starting Line Up
+	
+    * How teams are lined out as per program plus players they were replaced by & time
+       	
+* Score list 
+	
+    * Who scored and total
+	
+* Overview
+	
+	 * Quick run down of certain stats 
+	
+* Efficiency 
+	
+    * Shot, kickout & frees efficiency
+	
+* Goal Posts
+	
+	 * Break down of scores
+	
+* Scoring Timeline
+	
+	 * When the scores happened 
+	
+* Score Differential
+	
+	 * Score difference over the course of the game
+	
+#Positioning & Possession
+
+* Average Position by Action/Qtr
+
+    * Players average position by touch
+	
+* Average Areas of Play by possession
+
+    * Team heatmap based on Player on Ball
+	
+* Path of Possession
+		
+    * Break down of possession by run, pass type and shot
+	
+* All Actions Density
+	
+    * Density map based on player actions
+    
+#General
+
+* Kick outs 
+		
+    * Kick out locations and outcome		
+	
+* Kickout Efficiency 
+		
+    * Breakdown of percentage kick out won per zone	
+	
+* Kick out network
+		
+    * Who kickouts were played to		
+	
+* Possession won 
+       		
+    * How and where possession was won
+	
+* Frees Won 
+		
+    * Location and type of free won
+	
+* Frees Lost 
+		
+    * Location and type of free loss
+
+#Attacking
+	
+* Poss times & stats - Breakdown of attacking by:
+		
+    * Attacking time (Total time of attacking possessions)
+		
+		* Average possession time (for shots & score)
+		
+		* Average phase time (for shots & score)
+		
+		* Start of shot & scores possession (kick out or possession Won)
+		
+		* Origin of shot & scores possession (Area)
+		
+		* Possession frequency by duration 
+	
+	* Shot Stats 
+		
+		* Breakdown of shots & scores 
+	
+	* Shot Origin & Time
+		
+		* Break down of possession duration by area of origin
+	
+	* Open Play Shots - Location and Outcome 
+		
+		* Location, player, type and outcome of open play shots
+	
+	* Shot Efficiency
+		
+		* Breakdown of shot efficiency per zone
+	
+* All shots location and outcome 
+		
+	* Location, player, type and outcome of open play restart (Fk & 45) shots
+	
+* All shots origin of possession 
+		
+	* Location and how possession that lead to a open play or restart shot occured 
+	
+* Open play shot origin by phase 
+		
+	* Location and how phase that lead to a open play shot occured 
+       
+* Shot Network
+		
+	* Network of player involvement in shot possession (pass, received and shot)
+	
+* Score Network
+		
+	* Network of player involvement in score possession (pass, received and shot)
+	
+* Passing 
+		
+	* Passes into 45
+			
+		* Passes from outside into attacking area
+		
+	* Passes inside Opp 65
+			
+		* Passes made inside opposition 65
+		.
+* Pass Network 
+			
+	* Network of player involvement in possession (passing & received only)
+
+#Player Stats
+
+* Total On-Ball Possessions per Player
+		
+	* Number of player possessions (gaining or receiving ball counts as a possession irregardless of actions)
+	
+	* On-Ball Posessions Per Playing Time
+		
+	* Open Play Shots vs Play Time
+		
+	* Open Play Scores vs Play Time
+		
+	* Open Play Shots vs Open Play Score
+
+* Player shot involvement
+		
+	* Players involvement in a shot possession (On-ball Possession)
+	
+* Player score involvement
+		
+	* Players involvement in a shot possession (On-ball Possession)
+	
+#Periods & Zones
+
+* By Period
+		
+	* Breakdown of actions by period
+	  
+* Zones
+	  
+	* Frequency of actions with in a zone

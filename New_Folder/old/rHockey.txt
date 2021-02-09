@@ -1,0 +1,144 @@
+#Pitch
+create_Hockey_pitch <- function(court_colour, line_colour, background_colour, goala_colour,goalb_colour,label_colour, BasicFeatures){
+  
+  theme_blankPitch = function(size=12) { 
+    theme(
+      #axis.line=element_blank(), 
+      axis.text.x=element_blank(), 
+      axis.text.y=element_blank(), 
+      #axis.ticks.y=element_text(size=size),
+      #axis.ticks=element_blank(),
+      axis.ticks.length=unit(0, "lines"), 
+      #axis.ticks.margin=unit(0, "lines"), 
+      axis.title.x=element_blank(), 
+      axis.title.y=element_blank(), 
+      legend.key.size=unit(1.2, "lines"), 
+      legend.text=element_text(size=size), 
+      legend.title=element_text(size=size, face="bold",hjust=0),
+      # panel.border=element_blank(), 
+      panel.grid.major=element_blank(), 
+      panel.grid.minor=element_blank(), 
+      panel.spacing=element_blank(), 
+      plot.margin=unit(c(0, 0, 0, 0), "lines"), 
+      plot.title=element_text(size=size*1.2), 
+      panel.background=element_rect(fill= background_colour,colour= background_colour),
+      strip.text.x=element_text(size=size*1))}
+
+  ymin <- 0 # minimum width
+  ymax <- 55 # maximum width
+  xmin <- 0 # minimum length
+  xmax <- 91.1 # maximum length
+  
+  # pitch lines
+  def23 <- 22.9
+  hw <- 45.7
+  att23 <- 68.2
+
+  #penc
+  pencl <- 32.05
+  pencr <- 22.95
+  scl   <- 36.6
+  scr <- 18.4
+  crendd <- 0.3
+  crenda <- 90.80
+
+  #pensp
+  pend <- 6.4
+  pena <- 84.7
+  penst <- 27.45  
+  pened <- 27.55
+
+  #Goals
+  glst <- 25.67
+  gled <- 29.33
+
+     
+  circleFuncdefa <- function(center=c(0,0), diameter=1, npoints=100, start=0, end=2)
+  {
+    tt <- seq(start*pi, end*pi, length.out=npoints)
+    data.frame(x = center[1] + diameter / 2 * cos(tt), 
+               y = center[2] + diameter / 2 * sin(tt))
+  }
+  
+  circleFuncdefb <- function(center=c(0,0), diameter=1, npoints=100, start=0, end=2)
+  {
+    tt <- seq(start*pi, end*pi, length.out=npoints)
+    data.frame(x = center[1] + diameter / 2 * cos(tt), 
+               y = center[2] + diameter / 2 * sin(tt))
+  }
+
+  circleFuncatta <- function(center=c(0,0), diameter=1, npoints=100, start=0, end=2)
+  {
+    tt <- seq(start*pi, end*pi, length.out=npoints)
+    data.frame(x = center[1] - diameter / 2 * cos(tt), 
+               y = center[2] - diameter / 2 * sin(tt))
+  }
+  
+  circleFuncattb <- function(center=c(0,0), diameter=1, npoints=100, start=0, end=2)
+  {
+    tt <- seq(start*pi, end*pi, length.out=npoints)
+    data.frame(x = center[1] - diameter / 2 * cos(tt), 
+               y = center[2] - diameter / 2 * sin(tt))
+  }
+
+
+  #### create semi circle ####
+  defa_circle <-  circleFuncdefa(c(0,27.5), 29.26, start=1.5, end=2.5)
+  defb_circle <-  circleFuncdefb(c(0,27.5), 34.26, start=1.5, end=2.5)
+  atta_circle <-  circleFuncatta(c(91.1,27.5), 29.26, start=1.5, end=2.5)
+  attb_circle <-  circleFuncattb(c(91.1,27.5), 34.26, start=1.5, end=2.5)
+  
+  if(BasicFeatures == TRUE){
+    ## initiate the plot, set some boundries to the plot
+    np <- ggplot() + xlim(c(xmin,xmax)) + ylim(c(ymin,ymax)) +
+      # add the theme 
+      theme_blankPitch() +
+      geom_rect(aes(xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax), fill = court_colour, colour = line_colour) + 
+      geom_segment(aes(x = def23, y = ymin, xend = def23, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = hw, y = ymin, xend = hw, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) +      
+      geom_segment(aes(x = att23, y = ymin, xend = att23, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) + 
+      geom_segment(aes(x = xmin, y = glst, xend = xmin, yend = gled),colour = goala_colour,linetype="solid",size = 1) + 
+      geom_segment(aes(x = xmax, y = glst, xend = xmax, yend = gled),colour = goalb_colour,linetype="solid",size = 1) + 
+      geom_segment(aes(x = xmin, y = pencl, xend = crendd, yend = pencl),colour = line_colour,linetype="solid",size = 1) + 
+      geom_segment(aes(x = xmin, y = pencr, xend = crendd, yend = pencr),colour = line_colour,linetype="solid",size = 1) + 
+      geom_segment(aes(x = xmin, y = scl, xend = crendd, yend = scl),colour = line_colour,linetype="solid",size = 1) + 
+      geom_segment(aes(x = xmin, y = scr, xend = crendd, yend = scr),colour = line_colour,linetype="solid",size = 1) + 
+      geom_segment(aes(x = xmax, y = pencl, xend = crenda, yend = pencl),colour = line_colour,linetype="solid",size = 1) + 
+      geom_segment(aes(x = xmax, y = pencr, xend = crenda, yend = pencr),colour = line_colour,linetype="solid",size = 1) + 
+      geom_segment(aes(x = xmax, y = scl, xend = crenda, yend = scl),colour = line_colour,linetype="solid",size = 1) + 
+      geom_segment(aes(x = xmax, y = scr, xend = crenda, yend = scr),colour = line_colour,linetype="solid",size = 1) + 
+      geom_segment(aes(x = pend, y = penst, xend = pend, yend = pened),colour = line_colour,linetype="solid",size = 1) + 
+      geom_segment(aes(x = pena, y = penst, xend = pena, yend = pened),colour = line_colour,linetype="solid",size = 1) + 
+      geom_path(data=defa_circle, aes(x,y), colour = line_colour,size = 0.5) +
+      geom_path(data=defb_circle, aes(x,y), colour = line_colour,size = 0.5) + 
+      geom_path(data=atta_circle, aes(x,y), colour = line_colour,size = 0.5) + 
+      geom_path(data=attb_circle, aes(x,y), colour = line_colour,size = 0.5) +
+      annotate(geom="text", x= 45.5, y=.5, label="www.witnesstheanalysis.com",color = label_colour,size = 4, alpha = 0.4) +
+      annotate(geom="text", x= 45.5, y=53, label="www.witnesstheanalysis.com",color = label_colour,size = 4, alpha = 0.4)
+    
+  }
+  
+  else{
+    ## initiate the plot, set some boundries to the plot
+     np <- ggplot() + xlim(c(xmin,xmax)) + ylim(c(ymin,ymax)) +
+      theme_blankPitch() +
+      geom_rect(aes(xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax), fill = court_colour, colour = line_colour) + 
+      geom_segment(aes(x = def23, y = ymin, xend = def23, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = hw, y = ymin, xend = hw, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) +      
+      geom_segment(aes(x = att23, y = ymin, xend = att23, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) + 
+      geom_segment(aes(x = xmin, y = glst, xend = xmin, yend = gled),colour = goala_colour,linetype="solid",size = 0.5) + 
+      geom_segment(aes(x = xmax, y = glst, xend = xmax, yend = gled),colour = goalb_colour,linetype="solid",size = 0.5) + 
+      geom_path(data=defa_circle, aes(x,y), colour = line_colour,size = 0.5) +
+      geom_path(data=defb_circle, aes(x,y), colour = line_colour,size = 0.5) + 
+      geom_path(data=atta_circle, aes(x,y), colour = line_colour,size = 0.5) + 
+      geom_path(data=attb_circle, aes(x,y), colour = line_colour,size = 0.5) +
+      annotate(geom="text", x= 45.5, y=.5, label="www.witnesstheanalysis.com",color = label_colour,size = 4, alpha = 0.4) +
+      annotate(geom="text", x= 45.5, y=53, label="www.witnesstheanalysis.com",color = label_colour,size = 4, alpha = 0.4)
+  }
+  
+  return(np)}
+
+
+np <- create_Hockey_pitch ("lightblue", "white", "orange", "blue","red","white", BasicFeatures=TRUE)
+
+np

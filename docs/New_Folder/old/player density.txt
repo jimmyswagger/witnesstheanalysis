@@ -1,0 +1,85 @@
+#Actions
+Dubden <- pass %>% filter( Teamnum == "A", Player == "8", main == "ToW"|main == "Rec Op"|main == "Rec Rs"|main == "Pass Op"|main == "Pass Rs"|main == "Shot Op"
+|main == "Shot Rs"|main == "Ko Rec"|main == "Fkw"|Action == "Free Loss")
+ 
+#contour + density
+p  +   stat_density_2d(data = Dubden,aes(x=Areax, y=Areay, fill = ..level..), geom = "polygon", colour="white")+
+    geom_point(data = Dubden, aes(x=Areax, y=Areay), colour = "white", shape=19, size = 2)+ 
+    theme_classic () +  
+    theme(axis.title.x=element_blank(),
+          axis.ticks.x=element_blank(), 
+          axis.title.y=element_blank(), 
+          axis.text.y=element_blank(), 
+          axis.ticks.y=element_blank(),
+          axis.text.x=element_blank(),
+          line = element_blank())
+
+#contour
+p  +  geom_density_2d(data = Dubden, aes(x=Areax, y=Areay),colour = "blue") +
+    geom_point(data = Dubden, aes(x=Areax, y=Areay), colour = "white", shape=19, size = 2)+ 
+    theme_classic () +  
+    theme(axis.title.x=element_blank(),
+          axis.ticks.x=element_blank(), 
+          axis.title.y=element_blank(), 
+          axis.text.y=element_blank(), 
+          axis.ticks.y=element_blank(),
+          axis.text.x=element_blank(),
+          line = element_blank()
+
+
+
+Dub <- pass %>%group_by(Player, Action)%>%filter( Teamnum == "A", Player == "8", main == "ToW"|main == "Rec Op"|main == "Rec Rs"|main == "Pass Op"|main == "Pass Rs"|Action == "Shot Op"
+|main == "Shot Rs"|main == "Ko Rec"|main == "Fkw"|Action == "Free Loss")%>%summarize(count=n())
+
+ggplot(data = Dub, aes(x = Player, y = count, fill = Action)) + 
+geom_bar(width=.7, stat = "identity", aes(x = Player, y= count, fill = Action), position = "dodge")
+
+
+---------------------------------------------------------------------------------------------------------------------
+
+Dubden <- pass %>%group_by(Player, main)%>%filter( Teamnum == "A", Player == "8", main == "ToW"|main == "Rec Op"|main == "Rec Rs"|main == "Pass Op"|main == "Pass Rs"|main == "Shot Op"
+|main == "Shot Rs"|main == "Ko Rec"|main == "Fkw")%>%summarize(count=n())
+
+ggplot(data = Dub, aes(x = main, y = count, fill = main)) + 
+geom_bar(stat = "identity", aes(x = main, y= count, fill = main), position = "dodge") +
+geom_text(aes(label = count), size = 14, colour ="black") +
+theme_classic () + labs(title = "Player 8") + 
+theme(plot.background = element_blank(),
+legend.position="none",
+panel.grid.major = element_blank(),
+panel.grid.minor = element_blank(),
+axis.line = element_blank(),
+axis.text.y = element_blank(),
+axis.ticks = element_blank(),
+axis.title.x = element_blank(),
+axis.title.y = element_blank(),
+axis.text.x = element_text(size = 15, color = "gray10"),
+plot.title =  element_text(size = 20, color = "black", hjust = .5)) 
+
+#contour + density
+p  +   stat_density_2d(data = Dubden,aes(x=Areax, y=Areay, fill = ..level..), geom = "polygon", colour="white")+
+    geom_point(data = Dubden, aes(x=Areax, y=Areay), colour = "white", shape=19, size = 2)+ 
+    theme_classic () +  
+    theme(axis.title.x=element_blank(),
+          axis.ticks.x=element_blank(), 
+          axis.title.y=element_blank(), 
+          axis.text.y=element_blank(), 
+          axis.ticks.y=element_blank(),
+          axis.text.x=element_blank(),
+          line = element_blank(),
+          legend.position="none")
+
+
+p  +  geom_density_2d(data = Dubden, aes(x=Areax, y=Areay),colour = "white") +
+    geom_point(data = Dubden, aes(x=Areax, y=Areay), colour = "white", shape=19, size = 4)+ 
+    theme_classic () +  
+    theme(axis.title.x=element_blank(),
+          axis.ticks.x=element_blank(), 
+          axis.title.y=element_blank(), 
+          axis.text.y=element_blank(), 
+          axis.ticks.y=element_blank(),
+          axis.text.x=element_blank(),
+          line = element_blank()
+
+
+

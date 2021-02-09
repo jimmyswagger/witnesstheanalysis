@@ -1,0 +1,115 @@
+sapply(..., class)
+
+df <- rename(df, "new_name" = old_name, "new_name1" = old_name1,... )
+
+
+run %>% mutate(Ko_Dist =ifelse(main == "Ko",(sqrt((xend - Areax)^2+ (yend - Areay)^2)), 0))
+
+# Pulling Data
+# origin
+
+TeamAPAScrNo  <- run %>%group_by(Team, Action) %>% filter(keep=="Y",Teamnum == "A", main %in% c ("PW","Ko Rec"), zone < 10)
+
+# pull out those ones 
+
+runAPAScrNo <- subset(run, poss %in% TeamAPAScrNo$poss)
+
+# find ones that ended in shots etc
+TeamAPAScrNo  <- runAPAScrNo %>%group_by(Team, Action) %>% filter(keep=="Y",Teamnum == "A", main == "ToL"|subsetoc== "Scr Op"|subsetoc== "Ms Op"|subsetoc== "Scr Rs"|subsetoc== "Ms Rs")
+
+# pull out those ones 
+
+runAPAScrNo <- subset(runAPAScrNo, poss %in% TeamAPAScrNo$poss)
+
+
+
+
+#create a df
+
+time <- c("TotalGameTime ","FirstHalf","SecondHalf")
+
+mins<- c("70", "35", "35")
+
+
+gametime <- data.frame(time,mins)
+
+
+# Spreading 
+
+lpop <-lpop %>%
+  tidyr::gather(variable, value, -Team)
+
+lpop <-lpop %>% select (variable, value)
+
+#lpop
+
+
+oddps <- lpop[seq(1, nrow(lpop), 1),]
+colnames(oddps) <- c("variable", "value")
+evenps <- lpop[seq(2, nrow(lpop), 1),]
+colnames(evenps) <- c("variable", "value")
+
+#add column to each data frame with row number
+oddps$number <- row.names(oddps)
+evenps$number <- row.names(evenps)
+
+lpopa <- merge(oddps, evenps, by = "number", all = TRUE)
+
+lpopa$number <- as.numeric(lpopa$number)
+
+lpopa  <- lpopa %>% arrange(number)
+
+lpopa = lpopa %>% 
+   unite(totals, value.x, value.y, sep = "/", remove = FALSE)
+
+lpopa = lpopa %>% 
+   unite(names, variable.x, variable.y, sep = "/", remove = FALSE)
+
+
+lpopa = lpopa%>% mutate(total = ifelse (number == "1", lpopa$value.x, ifelse(number == "4",lpopa$value.x,lpopa$totals)))
+
+lpopa = lpopa%>% mutate(name = ifelse (number == "1", lpopa$variable.x, ifelse(number == "4",lpopa$variable.x,lpopa$name)))
+
+
+#lpopa <- lpopa[lpopa$number!="3", ]
+
+lpopa <- lpopa[lpopa$number!="6", ]
+
+lpopa <- lpopa[lpopa$number!="8", ]
+
+#lpopa
+
+
+
+#boxes
+
+df <- data.frame(
+    x = rep(seq(0, 12, 6), 1),
+    y = c(rep(6.5, 3)),
+    h = rep(4.25,3),
+    w = rep(6.25,3),
+    value = gametime$mins,
+    info = gametime$time,
+    color = factor(1:3)
+)
+
+ggplot(df, aes(x, y, height = h, width = w, label = info)) +
+    geom_tile(aes(fill = color)) +
+    geom_text(data = df,
+              aes(label = value, x = x - 1, y = y + .5),color = "white", fontface = "bold", size = 40, hjust = 0) +
+    geom_text(data = df,
+              aes(label = info, x = x - 2.9, y = y - 1),color = "white", fontface = "bold", size = 20, hjust = 0) +
+    #coord_fixed() +
+    scale_fill_brewer(type = "qual",palette = "Dark2") +
+    theme_void() +
+    guides(fill = FALSE) +
+    scale_x_continuous(expand = c(0, 0)) + 
+    scale_y_continuous(expand = c(0, 0))
+
+
+# decimal places
+ShotsAll <-ShotsAll %>% mutate_at(vars(Shot_Eff), funs(round(., 1)))
+
+pTotA[, 4:13] <- round(pTotA[, 4:13], digits = 2)
+
+

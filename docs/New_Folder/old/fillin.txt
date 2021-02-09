@@ -1,0 +1,53 @@
+f <-  pass %>% filter (poss %in% c("A1")) %>% select(Areax)
+
+
+oddps <- f [seq(1, nrow(f), 1),]
+colnames(oddps) <- c("poss","Areax")
+evenps <- f [seq(2, nrow(f), 1),]
+colnames(evenps) <- c("possoc","Areaxoc")
+
+#add column to each data frame with row number
+oddps$number <- row.names(oddps)
+evenps$number <- row.names(evenps)
+
+runf <- merge(oddps, evenps, by = "number", all = TRUE)
+
+runf$number <- as.numeric(runf$number)
+
+runf  <- runf %>% arrange(number)
+
+runf 
+
+
+fu <-  runf %>% filter (number %in% c("1", "2")) %>% select(number, poss, Areax, Areaxoc)
+
+
+ddply(fu, .(number), summarise, Dte = seq(as.numeric(Areax), as.numeric(Areaxoc), by = 0.25))
+
+
+
+f <-  pass %>% filter (poss %in% c("A1")) %>% select(Areay)
+
+
+oddps <- f [seq(1, nrow(f), 1),]
+colnames(oddps) <- c("poss","Areay")
+evenps <- f [seq(2, nrow(f), 1),]
+colnames(evenps) <- c("possoc","Areayoc")
+
+#add column to each data frame with row number
+oddps$number <- row.names(oddps)
+evenps$number <- row.names(evenps)
+
+runf <- merge(oddps, evenps, by = "number", all = TRUE)
+
+runf$number <- as.numeric(runf$number)
+
+runf  <- runf %>% arrange(number)
+
+runf 
+
+
+fu <-  runf %>% filter (number %in% c("1", "2")) %>% select(number, poss, Areay, Areayoc)
+
+
+ddply(fu, .(number), summarise, Dte = seq(as.numeric(Areay), as.numeric(Areayoc), by = 0.25))

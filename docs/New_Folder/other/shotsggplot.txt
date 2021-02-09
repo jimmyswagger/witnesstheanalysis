@@ -1,0 +1,57 @@
+shotsA <- pass %>% group_by(foot, plyoc) %>%  filter(Teamnum == "A")
+
+p + geom_point(data = shotsA, aes(x=shlocx, y=shlocy, colour = plyoc, shape = plyoc)) +
+geom_text_repel(data = shotsA, aes(x=shlocx, y=shlocy, label = plyshot), size = 3) +
+scale_color_brewer(palette="Dark2") +
+scale_shape_manual(values = 0:10)
+
+shotsB <- pass %>% group_by(foot, plyoc) %>%  filter(Teamnum == "B")
+
+p + geom_point(data = shotsB, aes(x=shlocx, y=shlocy, colour = plyoc, shape = plyoc)) +
+geom_text_repel(data = shotsB, aes(x=shlocx, y=shlocy, label = plyshot), size = 3) +
+scale_color_brewer(palette="Dark2") +
+scale_shape_manual(values = 0:10)
+
+
+shotteam <-pass %>% group_by(foot, plyoc) %>% %>% summarize(count=n())
+
+shotteams <- shots %>% group_by(plyoc, Teamnum) %>% summarize(count=n())
+
+q <- ggplot(data = shotteams, aes(x = Teamnum, y = count, fill = plyoc))
+
+q +geom_bar(width=.7, stat = "identity", aes(x = Teamnum, y= count, fill = plyoc), position = "dodge") +
+  xlab("Teamnum") + ylab("count") +
+  theme_bw() + theme (panel.grid.major = element_blank(),
+panel.grid.minor = element_blank()) +
+geom_text(aes(label=count), vjust=1.6, color="white", position = position_dodge(0.8), size=3.5) +
+ggtitle("Shots")
+
+
+
+
+
+footA <- pass %>% group_by(foot, plyoc) %>%  filter(Teamnum == "A", foot == "Shot Right"|foot == "Shot Left")
+
+p + geom_point(data = footA, aes(x=shlocx, y=shlocy, colour = plyoc, shape = plyoc)) +
+geom_text_repel(data = footA, aes(x=shlocx, y=shlocy, label = plyshot), size = 3) +
+scale_color_brewer(palette="Dark2") +
+scale_shape_manual(values = 0:10)
+
+
+footA <- pass %>% group_by(foot, plyoc) %>%  filter(Teamnum == "A", foot == "Shot Right"|foot == "Shot Left")
+
+p + geom_point(data = footA, aes(x=shlocx, y=shlocy, colour = plyoc, shape = plyoc)) +
+geom_text_repel(data = footA, aes(x=shlocx, y=shlocy, label = plyshot), size = 3) +
+scale_color_brewer(palette="Dark2") +
+scale_shape_manual(values = 0:10)
+
+colorRampPalette(brewer.pal(n_palette, "palette_name"))(n_plot)
+
+q <- ggplot(data = shots, aes(x = Player, y = count, fill = Action))
+
+q +geom_bar(width=.7, stat = "identity", aes(x = Player, y=count, fill = Action), position = "dodge") +
+  xlab("Player") + ylab("count") +
+scale_x_continuous("Player", labels = as.character(Player), breaks = Player) +
+  ggtitle("On ball Action") +
+  theme_bw() + theme (panel.grid.major = element_blank(),
+panel.grid.minor = element_blank())

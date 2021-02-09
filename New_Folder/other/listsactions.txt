@@ -1,0 +1,89 @@
+shotsA <- linksdubmayo %>%group_by(Team, Action) %>% filter(Teamnum == "A", Action== "Shot Left"|Action== "Shot Right"|Action== "Fk Shot Left"|Action== "Fk Shot Right"|
+Action== "45 Shot Left"|Action== "45 Shot Right"|Action== "Mk Shot Left"|Action== "Mk Shot Right"|
+Action== "Pen Shot Left"|Action== "Pen Shot Right")
+
+shotsA <- linksdubmayo %>%group_by(Team, Action) %>% filter(Action== "Shot Left"|Action== "Shot Right"|Action== "Fk Shot Left"|Action== "Fk Shot Right"|
+Action== "45 Shot Left"|Action== "45 Shot Right"|Action== "Mk Shot Left"|Action== "Mk Shot Right"|
+Action== "Pen Shot Left"|Action== "Pen Shot Right")
+
+
+Action== "Shot Left"|Action== "Shot Right"|Action== "Fk Shot Left"|Action== "Fk Shot Right"|
+Action== "45 Shot Left"|Action== "45 Shot Right"|Action== "Mk Shot Left"|Action== "Mk Shot Right"|
+Action== "Pen Shot Left"|Action== "Pen Shot Right"
+
+"/Users/donag/Documents/R/test.xlsx"
+
+
+write.csv2(shotsAll, "/Users/donag/Documents/R/table_car.csv")
+
+scoresdubmayo <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/DubvsMayo/scoresdubmayo.csv", header=TRUE, sep=";")
+attach (scoresdubmayo)
+
+wormA <-filter(scoresdubmayo, Teamnum == "A")
+wormB <-filter(scoresdubmayo, Teamnum == "B") 
+
+ggplot(data=scoresdubmayo, aes(x=time, y=score, group=Team)) +
+    geom_step(data=wormA, aes(x=time, y=score), colour = "lightblue", ,size=2) + 
+    geom_step(data=wormB, aes(x=time, y=score), colour = "red", ,size=2) + 
+    geom_point(data = wormA, shape = 1, size = 4, stroke = 2, colour = "blue") +
+    geom_point(data = wormB, shape = 1, size = 4, stroke = 2, colour = "green") +
+    theme_classic() + 
+    theme(plot.background = element_blank(),
+    legend.position="bottom",
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    axis.line = element_blank(),
+    axis.text.x = element_blank(),
+    axis.text.y = element_blank(),
+    axis.ticks = element_blank(), 
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank()) +
+    geom_text_repel(data = wormA, aes(x=time, y=score, label = shotlab), size = 6, colour = "blue", nudge_y = 2, 
+    segment.size  = 0.2,  direction = "x", hjust = 1 ) + 
+    geom_text_repel(data = wormB, aes(x=time, y=score, label = shotlab), size = 6, colour = "green", nudge_x = 4, nudge_y = -2, 
+    segment.size  = 0.2,  direction = "y", hjust = 1) + 
+    guides(size = FALSE) +
+   geom_vline(xintercept=17.5, linetype="dotted", color = "black") +
+   geom_vline(xintercept=35, linetype="dotted", color = "black") +
+   geom_vline(xintercept=52.5, linetype="dotted", color = "black") 
+
+
+---------------------------------------------------------------------------------
+
+ggplot(data=scoresdubmayo, aes(x=time, y=scorediff)) +
+  geom_step()+
+  geom_point() +
+geom_hline(yintercept=0, linetype="dashed", color = "red") +
+theme_classic() +
+geom_text_repel(data = scoresdubmayo, aes(x=time, y=scorediff, label = scorediff), size = 4) + 
+geom_vline(xintercept=17.5, linetype="dotted", color = "green") +
+ geom_vline(xintercept=35, linetype="dotted", color = "green") +
+ geom_vline(xintercept=52.5, linetype="dotted", color = "green") + 
+    annotate(geom="text", x=1, y=4.5, label="Dublin", color="black", size = 10) +
+    theme(plot.background = element_blank(),
+    legend.position="none",
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    axis.line = element_blank(),
+    axis.text.x = element_blank(),
+    axis.text.y = element_blank(),
+    axis.ticks = element_blank(), 
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank())
+
+------------------------------------------------------------------------------------------
+
+shotvertdubmayo <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/DubvsMayo/shotvertdubmayo.csv", header=TRUE, sep=";")
+attach (shotvertdubmayo)
+
+shotsA <- shotvertdubmayo %>% filter(Teamnum == "A")
+
+qp + geom_point(data = shotsA, aes(x=vertx, y=verty, colour = octype, size = 8, shape = Action, stroke = 2)) +
+    geom_text_repel(data = shotsA, aes(x=vertx, y=verty, label = plylabrec, col = octype), size = 6) +
+    scale_shape_manual(values = 0:18) +
+    theme(legend.position="bottom", legend.title=element_text(size=15), 
+          legend.text=element_text(size=20)) +
+    theme(plot.title = element_text(hjust=0.5)) +
+    theme(plot.subtitle = element_text(hjust=0.5)) +
+    guides(color = FALSE, size = FALSE) +
+    guides(shape = guide_legend(override.aes = list(size = 12)))

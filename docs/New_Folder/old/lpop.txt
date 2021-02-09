@@ -1,0 +1,25 @@
+lpop <- pass %>%group_by(Team)%>%summarize(PW =sum(main == "PW"), Ko = sum(main == "Ko"),Possessions = sum(PW + Ko),KoRec = sum(main == "Ko Rec"),OpShots = sum(main == "Shot Op"),RsShots = sum(main == "Shot Rs"),ScoreOp = sum(subset == "Scr Op"),ScoreRs = sum(subset == "Scr Rs"))
+
+lpop <-lpop %>%
+  tidyr::gather(variable, value, -Team)
+
+my_theme <- function(){
+  theme_light() +
+    theme(text = element_text(),  
+          panel.grid = element_blank(),
+          panel.border = element_blank(),
+          axis.title = element_blank(),
+          axis.ticks = element_blank(),
+          axis.text.x = element_blank(),
+          axis.text.y = element_text(size = 15, color = "gray10"),
+          plot.title =  element_text(size = 20, color = "black")) +
+theme(legend.position="bottom")
+  }
+
+q <- ggplot(data = lpop , aes(x = variable, y = value, fill = Team))
+
+q +geom_point(stat = "identity", aes(x = variable, y = value, colour = Team), size = 12) +
+geom_text(data =lpop ,aes(x = variable, y = value, label = value), colour = "white", size = 6) +
+ coord_flip() +
+  my_theme ()
+

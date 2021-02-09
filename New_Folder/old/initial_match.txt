@@ -1,0 +1,21 @@
+initial <- read.csv(file="c:/Users/donagh/OneDrive/Spreadsheet fun/PA Analytics/PA Template/dubmayaifr16/initialdubmayaifr16.csv", header=TRUE, sep=";")
+attach (initial)
+
+sets <- read.csv(file="c:/Users/donagh/OneDrive/Spreadsheet fun/PA Analytics/PA Template/sets.csv", header=TRUE, sep=";")
+attach (sets)
+
+initial <-initial %>%
+    mutate(No = VLOOKUP(Action, sets, Action, ActNo))
+
+initial <-initial %>%
+    mutate(Mins = sum(time/60))
+
+
+write.csv(initial, "initial.csv")
+
+
+initial
+
+
+team <- read.csv(file="c:/Users/donagh/OneDrive/Spreadsheet fun/PA Analytics/PA Template/dubkeraif75/teamsheetdubkeraif75.csv", header=TRUE, sep=";")
+attach (team)

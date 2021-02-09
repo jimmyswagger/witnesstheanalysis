@@ -1,0 +1,112 @@
+run <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/bodeir/runbodeir.csv", header=TRUE, sep=";")
+attach (run)
+
+actcolpals <- c(
+  "20" = "grey",
+  "1" = "black", 
+  "2" = "blue", 
+  "3" = "red",
+  "4" = "purple",
+  "5" =  "yellow",
+  "6" = "white",
+  "7" = "orange",
+  "8" = "pink")
+
+
+
+
+run <- run[run$Asht!="20", ]
+
+
+
+passPW <- run %>%group_by(Team, Action) %>% filter(Teamnum == "A",main =="PW")
+passKo <- run%>%group_by(Team, Action) %>% filter(Teamnum == "A",main=="Ko Rec")
+passRs <- run%>%group_by(Team, Action) %>% filter(Teamnum == "A",main=="Pass Rs")
+passOp <- run%>%group_by(Team, Action) %>% filter(Teamnum == "A",main=="Shot Op")
+
+runA <- run%>%filter(Teamnum=="A",keep=="Y")
+
+
+p + geom_segment(data = runA, aes(x = Areax, y = Areay, xend = xend, yend = yend, colour = as.factor(Asht)),size = .6,arrow = arrow()) +
+  geom_point(data = runA, aes(x=Areax, y=Areay), colour = "white",size = 5, shape = 19) +
+  geom_text(data = runA, aes(x=Areax, y=Areay, label = Player), colour = "black", size = 3) +
+    theme(legend.position="none") + scale_colour_manual(values = actcolpals) +
+  geom_point(data = passPW, aes(x=Areax, y=Areay, stroke = 1), size = 7, colour = "orange", shape = 16) +
+geom_text(data = passPW, aes(x=Areax, y=Areay, label = Player),colour = "black") +
+geom_point(data = passRs, aes(x=Areax, y=Areay, stroke = 1), size = 7, colour = "blue", shape = 16) +
+geom_text(data = passRs, aes(x=Areax, y=Areay, label = Player),colour = "white") +
+geom_point(data = passOp, aes(x=Areax, y=Areay, stroke = 1), size = 7, colour = "red", shape = 16) +
+geom_text(data = passOp, aes(x=Areax, y=Areay, label = Player),colour = "white") +
+geom_point(data = passKo, aes(x=Areax, y=Areay, stroke = 1), size = 7, colour = "black", shape = 16) +
+geom_text(data = passKo, aes(x=Areax, y=Areay, label = Player),colour = "white") +
+geom_text_repel(data = runA, aes(x=Areax, y=Areay, label = possno), colour = "white", size = 3)
+
+
+
+
+pass <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/bodeir/passingbodeir.csv", header=TRUE, sep=";")
+attach (pass)
+
+pass <- pass%>%filter(Teamnum == "A")
+
+pass <- pass[pass$possno!="0", ]
+pass <- pass[pass$phaseno!="0", ]
+
+#id poss with shots
+pashscr <- pass%>%group_by(Team, Action) %>% filter(main  == "Shot Op Oc"|main =="Shot Rs Oc")
+
+#Pulls out all of the poss
+teamsht <- subset(pass,poss%in%pashscr$poss)
+
+
+#4Player Score Link - By vop
+plyrsshtinv <- teamsht%>%group_by(Player) %>% filter(main == "PW"| main == "Ko Rec"| main == "Rec Op"| main == "Rec Rs"|main == "Pass Rs"|main == "Ko"|main == "Shot Rs")%>%summarize(count=n()) 
+
+
+#fig out - showing name in x axis not number
+ggplot(plyrsshtinv, aes(x = Player, y = count)) +
+  geom_bar(stat = "identity", 
+           fill = "lightgreen",    
+           width = .5) +  
+geom_text(aes(label =count, vjust = 0), size = 8,colour ="black") +
+scale_x_continuous("Player", labels = as.character(Player), breaks = Player)  + 
+ylab("Shot involvements") +
+theme(legend.position="none") +
+ theme_classic()
+
+
+
+pashscr <- pass%>%group_by(Team, Action) %>% filter(subset  == "Scr Op"|subset =="Scr Rs")
+
+#Pulls out all of the poss
+teamscr <- subset(pass,poss%in%pashscr$poss)
+
+plyrpossinv <- teamscr%>%group_by(Player, .drop = FALSE) %>% filter(main == "PW"| main == "Ko Rec"| main == "Rec Op"| main == "Rec Rs"|main == "Pass Rs"|main == "Ko"|main == "Shot Rs")%>%select(Player, poss)%>%summarize(count=n()) 
+
+posname <- position %>%filter(Teamnum == "A") %>% select(name)
+
+#fig out count zeros
+posname <- slice(posname, 1:(n()-1))
+bod <- bind_cols(plyrpossinv, posname)
+
+#fig out - showing name in x axis not number
+ggplot(bod  , aes(x = Player, y = count)) +
+  geom_bar(stat = "identity", 
+           fill = "lightgreen",    
+           width = .5) +  
+geom_text(aes(label =count, vjust = 0), size = 8,colour ="black") +
+scale_x_continuous("Player", labels = as.character(Player), breaks = Player)  + 
+ylab("Shot involvements") +
+theme(legend.position="none") +
+ theme_classic()
+
+
+All_Time <- teamsht %>%group_by(Team, possno) %>%summarize(Pass =sum(main == "Pass Op"), Shots_Op = sum(main == "Shot Op"), Shots_Rs = sum(main == "Shot Rs"))
+All_Time <-All_Time %>% arrange(possno)
+All_Time
+
+sop <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/bodeir/sopbodeir.csv", header=TRUE, sep=";")
+attach (sop)
+
+sopshttab <- sopsht %>%summarize(Time =mean(secs), Dist_Ave = mean(distance), MS_Ave = mean(m.s))
+sopshttab

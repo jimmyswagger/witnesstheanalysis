@@ -1,0 +1,156 @@
+```{r, fig.width = 10, fig.height = 5}
+my_theme <- function(){
+  theme_light() +
+    theme(text = element_text(),  
+          panel.grid = element_blank(),
+          panel.border = element_blank(),
+          axis.title = element_blank(),
+          axis.ticks = element_blank(),
+          axis.text.x = element_blank(),
+          axis.text.y = element_blank(),
+          plot.title =  element_blank(),
+          panel.background = element_rect(fill = "#BFD5E3")) +
+theme(legend.position="none")
+  }
+
+
+ ymin <- 0 # minimum width
+          ymax <- 7 # maximum width
+          xmin <- 0 # minimum length
+          xmax <- 7 # maximum length
+
+
+
+q <- ggplot() + xlim(c(xmin,xmax)) + ylim(c(ymin,ymax)) +
+  
+  geom_rect(aes(xmin=.9, xmax=6.25, ymin=3.2, ymax=3.85), fill = NA, colour = "white") + 
+  
+  geom_segment(aes(x = 1, y = 6.5, xend = 6, yend = 6.5),size = 0.5) +
+  geom_segment(aes(x = 1, y = 6.5, xend = 1, yend = 6.4),size = 0.5) +
+  geom_segment(aes(x = 6, y = 6.5, xend = 6, yend = 6.4),size = 0.5) +
+  
+
+  geom_segment(aes(x = .65, y = 3.5, xend = .55, yend = 3.5),size = 0.5) +
+  
+  geom_segment(aes(x = 6.35, y = 3.5, xend = 6.45, yend = 3.5),size = 0.5) +
+  
+  annotate(geom="text", x=3.5, y=6.75, label="Match/Training", color="blue", size = 4) +
+  annotate(geom="text", x=.05, y=3.5, label="Theory", color="blue", size = 4)+
+  annotate(geom="text", x=6.85, y=3.75, label="Training", color="blue", size = 4)+
+  annotate(geom="text", x=6.85, y=3.5, label="Design", color="blue", size = 4)+
+  annotate(geom="text", x=6.85, y=3.15, label="Pedagogy", color="blue", size = 4)+
+  
+  annotate(geom="text", x=1.25, y=3.5, label="Ko | PW", color="black", size = 4)+
+  annotate(geom="text", x=3.5, y=3.5, label="Passing", color="black", size = 4)+
+  annotate(geom="text", x=5.55, y=3.5, label="Shot | Turn Over", color="black", size = 4)+     
+  
+  
+  annotate(geom="text", x=3.5, y= 2.25, label="KPI", color="red", size = 4)+
+  annotate(geom="text", x=3.75, y=1.05, label="Classifying Player/Team Roles", color="red", size = 4)+
+  annotate(geom="text", x=1.05, y=1.05, label="TID", color="red", size = 4)+
+  
+  annotate(geom="text", x=3.5, y= 6.35, label="Patterns", color="red", size = 4)+
+  annotate(geom="text", x=3.5, y= 6.05, label="Speed of Play", color="red", size = 4)+
+  annotate(geom="text", x=3.5, y= 5.75, label="Player Inv. - Motifs", color="red", size = 4)+
+  annotate(geom="text", x=3.5, y= 5.45, label="Pass Networks", color="red", size = 4)+
+  
+  annotate("segment", x = 1.75, xend = 2.75, y = 3.5, yend = 3.5, colour = "white", size=1, alpha=0.6, arrow=arrow(length = unit(0.4,"cm")))+
+  annotate("segment", x = 4., xend = 4.80, y = 3.5, yend = 3.5, colour = "white", size=1, alpha=0.6, arrow=arrow(length = unit(0.4,"cm")))+
+  
+  annotate("segment", x = 3.5, xend = 3.5, y = 4.35, yend = 5, colour = "black", size=1, alpha=0.6, arrow=arrow(length = unit(0.4,"cm")))+
+  annotate("segment", x = 2.5, xend = 1.5, y = 1.0, yend = 1.0, colour = "black", size=1, alpha=0.6, arrow=arrow(length = unit(0.4,"cm")))+
+  
+  annotate("segment", x = 3.5, xend = 3.5, y = 2.0, yend = 1.20, colour = "black", size=1, alpha=0.6, arrow=arrow(length = unit(0.4,"cm")))+
+  annotate("segment", x = 3.5, xend = 3.5, y = 3.0, yend = 2.40, colour = "black", size=1, alpha=0.6, arrow=arrow(length = unit(0.4,"cm")))+
+  
+  
+  annotate(geom="text", x=5.3, y= 5.5, label="Play Space", color="red", size = 4)+
+  annotate("segment", x = 3.75, xend = 4.95, y = 4.35, yend = 5.45, colour = "black", size=1, alpha=0.6, arrow=arrow(length = unit(0.4,"cm")))+
+ 
+  annotate(geom="text", x=6, y= 1.25, label="Physiological", color="red", size = 4)+
+  annotate("segment", x = 6, xend = 6, y = 2, yend = 1.35, colour = "black", size=1, alpha=0.6, arrow=arrow(length = unit(0.4,"cm")))+
+  
+  annotate("segment", x = 4, xend = 5.2, y = 3, yend = 2.2, colour = "black", size=1, alpha=0.6, arrow=arrow(length = unit(0.4,"cm")))+
+  annotate(geom="text", x=6, y= 2.25, label="Collective Team Behaviour", color="red", size = 4)+
+  
+  
+  my_theme ()
+
+q
+```
+
+"C:/Users/donagh/OneDrive/Spreadsheet fun/PA Analytics/PA Template/"+"knckhlly.mp4"
+
+
+path="C:/Users/donagh/OneDrive/Spreadsheet fun/PA Analytics/PA Template/"
+filename='game1s.wav'
+import librosa
+x, sr = librosa.load(path+filename,sr=16000)
+
+
+Hi All 
+
+I am trying to name clips from an ffmpeg output based on text in dataframe columns.
+I can create the clips but am having trouble with the naming as Im not sure how to loop through the list 
+and add it to the output file name.  
+
+example data frame
+
+
+data = [["Park","Road",4, 10], ["Road","Street", 80, 95], ["Street","Park",120, 132]] 
+df = pd.DataFrame(data, columns = ["Origin", "Destination","Start", "End"])
+
+print (df)
+
+Id like the output file to show the Origin and Destination 
+
+videoParkRoad1
+videoRoadStreet2
+videoStreetPark3
+
+the code I have at the moment returns
+
+filename="D:\video" + str(i+1) + ".mp4"
+
+video1
+video2
+video3
+
+Thanks 
+
+"""
+Created on Tue Apr 21 09:54:23 2020
+
+@author: Donagh
+"""
+
+
+import pandas as pd 
+import numpy as np
+  
+# initialize list of lists 
+data = [[840, 943]] 
+  
+# Create the pandas DataFrame 
+df = pd.DataFrame(data, columns = ['Start', 'End']) 
+  
+# print dataframe. 
+print (df)
+
+
+from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
+start=np.array(df['Start'])
+end=np.array(df['End'])
+
+for i in range(len(df)):
+    if(i!=0):
+        start_lim = start[i] - 2
+    else:
+        start_lim = start[i] 
+    end_lim   = end[i]   
+    filename="D:\gameskeep" + str(i+1) + ".mp4"
+    ffmpeg_extract_subclip("C:/Users/donagh/OneDrive/Spreadsheet fun/PA Analytics/PA Template/"+"knckhlly.mp4",start_lim,end_lim,targetname=filename)
+
+print ("I think you did it")
+
+

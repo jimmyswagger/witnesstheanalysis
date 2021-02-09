@@ -1,0 +1,71 @@
+# Only needed for the counts not the maps (except entry)
+# Creates for all rows 
+
+#0 point is strictly exterior to polygon
+#1 point is strictly interior to polygon
+#2 point lies on the relative interior of an edge of polygon
+#3 point is a vertex of polygon
+
+
+#looking at poss that started in in_def and see if they ended in inzone
+#creating the hull
+#Finds the shots
+
+scoresBarea <- scores %>%ungroup() %>%filter (Teamnum == "B") %>% select(Areax, Areay)
+
+#creates the hull for all shots - think about changing this to scores only
+hullB <- scoresBarea %>%slice(chull(Areax, Areay))
+
+#filters end of possessions - actions only
+TeamBEnd  <- run %>%group_by(Team, Action) %>% filter(keep=="Y",Teamnum == "B")
+
+#finds which are inside 
+#point.in.polygon( TeamBEnd$Areax, TeamBEnd$Areay,hullB$Areax, hullB$Areay, mode.checked=FALSE)
+
+#creates a dataframe of oc 
+inzoneB <- data.frame(inzone = point.in.polygon(TeamBEnd$Areax, TeamBEnd$Areay,hullB$Areax, hullB$Areay, mode.checked=FALSE))
+
+#creates a df of all action - allows to create other things
+zonedB <-bind_cols(TeamBEnd,inzoneB)
+
+
+#filters end of possessions - actions only
+zonedBB  <- zonedB %>%group_by(Team, Action) %>% filter(keep=="Y",Teamnum == "B")
+
+#finds which are inside 
+#point.in.polygon(zonedBB$xend,zonedBB$yend,hullB$Areax, hullB$Areay, mode.checked=FALSE)
+
+#creates a dataframe of oc 
+oczone <- data.frame(oczone = point.in.polygon(zonedBB$xend,zonedBB$yend,hullB$Areax, hullB$Areay, mode.checked=FALSE))
+
+#creates col based on oc - allows to create other things
+zonedB <-bind_cols(zonedB,oczone)
+
+#Finds the scores 
+
+scrAarea <- scores %>%ungroup() %>%filter (Teamnum == "B", subsetoc %in% c("Scr Op", "Scr Rs")) %>% select(Areax, Areay)
+
+#creates the hull for all shots - think about changing this to scores only
+hullscrB <- scrBarea %>%slice(chull(Areax, Areay))
+
+#filters end of possessions - actions only
+TeamBEndscrB  <- run %>%group_by(Team, Action) %>% filter(keep=="Y",Teamnum == "B")
+
+#finds which are inside 
+#point.in.polygon( TeamBEnd$Areax, TeamBEnd$Areay,hullB$Areax, hullB$Areay, mode.checked=FALSE)
+
+#creates a dataframe of orig 
+inzonescrB <- data.frame(inzonescr = point.in.polygon(TeamBEndscrB$Areax, TeamBEndscrB$Areay,hullscrB$Areax, hullscrB$Areay, mode.checked=FALSE))
+
+
+#filters end of possessions - actions only
+zonedBscrB  <- run %>%group_by(Team, Action) %>% filter(keep=="Y",Teamnum == "B")
+
+#finds which are inside 
+#point.in.polygon(zonedB$xend,zonedB$yend,hullB$Areax, hullB$Areay, mode.checked=FALSE)
+
+#creates a dataframe of oc 
+oczonescrB <- data.frame(oczonescr = point.in.polygon(zonedBscrB$xend,zonedBscrB$yend,hullscrB$Areax, hullscrB$Areay, mode.checked=FALSE))
+
+#creates col based on oc - allows to create other things
+zonedB <-bind_cols(zonedB,inzonescrB,oczonescrB)

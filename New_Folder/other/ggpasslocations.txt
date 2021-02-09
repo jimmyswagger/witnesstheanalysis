@@ -1,0 +1,24 @@
+kick <- pass %>% filter(xloc <= 5.5 & xend >=5.5 , Teamnum == "A" ,octype =="Hp Rec"| octype =="Kp Rec") %>%summarize(count=n())
+
+allpassA <- pass %>% filter(Teamnum == "A" )
+
+p + geom_segment(data = allpassA , aes(x = xloc, y = yloc, xend = xend, yend = yend, colour = Team)) +
+    geom_point(data = allpassA , aes(x=xloc, y=yloc, colour = passtype, shape = passtype)) +
+    geom_point (data = allpassA , aes(x=xend, y=yend, colour = octype, shape = octype)) +
+    geom_text_repel(data = allpassA , aes(x=xloc, y=yloc, label = plypass, col = Team), size = 3) + 
+    geom_text_repel(data = allpassA , aes(x=xend, y=yend, label = plyrec, col = Team), size = 3) +
+    scale_shape_manual(values = 0:18) + 
+    theme(legend.position="bottom") +
+    guides(color = FALSE, size = FALSE)
+
+
+attpassA <- pass %>% filter(xloc <= 5.5 & xend >=5.5 , Teamnum == "A" ,octype =="Hp Rec"| octype =="Kp Rec") %>%summarize(count=n())
+
+p + geom_segment(data = attpassA, aes(x = xloc, y = yloc, xend = xend, yend = yend, colour = Team)) +
+    geom_point(data = attpassA, aes(x=xloc, y=yloc, colour = passtype, shape = passtype)) +
+    geom_point (data = attpassA, aes(x=xend, y=yend, colour = octype, shape = octype)) +
+    geom_text_repel(data = attpassA, aes(x=xloc, y=yloc, label = plypass, col = Team), size = 3) + 
+    geom_text_repel(data = attpassA, aes(x=xend, y=yend, label = plyrec, col = Team), size = 3) +
+    scale_shape_manual(values = 0:18) + 
+    theme(legend.position="bottom") +
+    guides(color = FALSE, size = FALSE)

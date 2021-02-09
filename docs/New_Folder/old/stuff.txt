@@ -1,0 +1,210 @@
+pass <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/anyall.csv", header=TRUE, sep=";")
+attach (pass)
+
+scores <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/timeline.csv", header=TRUE, sep=";")
+attach (scores)
+
+lines <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/velband.csv", header=TRUE, sep=";")
+attach (lines)
+
+limkil <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/limkil.csv", header=TRUE, sep=";")
+attach (limkil)
+
+ko <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/koexp.csv", header=TRUE, sep=";")
+attach (ko)
+head (ko)
+
+cluster <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/cluster.csv", header=TRUE, sep=";")
+attach (cluster)
+head (cluster)
+
+
+xs <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/xs.csv", header=TRUE, sep=";")
+attach (xs)
+head (xs)
+
+ocome <- c("Ko Rec"= 16,
+             "Ko Unc Rec"= 15,
+             "KoBrk Rec"= 17,
+             "Ko Mk Won"= 18,
+             "Ko Lost"= 4,
+             "KoBrk Lost"= 3,
+             "Ko Mk Lost"= 8)
+
+ocol <- c("Ko Rec"= "blue",
+             "Ko Unc Rec"= "blue",
+             "KoBrk Rec"= "blue",
+             "Ko Mk Won"= "blue",
+             "Ko Lost"= "red",
+             "KoBrk Lost"= "red",
+             "Ko Mk Lost"= "red")
+
+np + geom_segment(data = ko, aes(x = x, y = y, xend = xend, yend = yend, colour = outcome),size = .5) +
+geom_point(data = ko, aes(x = xend, y = yend,colour = outcome, shape = outcome ), size = 1.5) +
+scale_shape_manual(values = ocome)
+
+ToWA <- pass %>%group_by(team,player,outcome) %>% filter(team == "A")%>%summarize(count=n())
+
+shot_theme <- function(){
+  theme_light() +
+    theme(text = element_text(),  
+          panel.border = element_blank(),
+          axis.title = element_blank(),
+          axis.ticks = element_blank(),
+          axis.text.x = element_text(size = 15, color = "gray10"),
+          axis.text.y = element_text(size = 15, color = "gray10"),
+          plot.title =  element_text(size = 20, color = "black"))
+  }
+
+#Bar charts 
+
+q <- ggplot(data = ply, aes(x = player, y = count, fill = outcome))
+
+q +geom_bar(width=.7, stat = "identity", aes(x = player, y = count, fill = outcome)) +
+  xlab("player") + ylab("count") +
+scale_x_continuous("player", labels = as.character(player), breaks = player) + 
+scale_y_continuous(limit = c(0,3)) +
+theme(legend.position="right")
+
+q +geom_bar(width=.7, stat = "identity", aes(x = player, y = count, fill = outcome)) +
+  xlab("player") + ylab("count") +
+scale_y_continuous(limit = c(0,3)) +
+theme(legend.position="right")
+
+
+
+q <- ggplot(data = ToWA, aes(x = player, y = count, fill = outcome))
+
+q +geom_bar(width=.7, stat = "identity", aes(x = player, y = count, fill = outcome)) +
+  xlab("player") + ylab("count") +
+geom_text(aes(label = count, size = 5.5)) +
+scale_x_continuous("player", labels = as.character(player), breaks = player) +
+  ggtitle("Shots")
+
+
+pass <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/shotcharts.csv", header=TRUE, sep=";")
+attach (pass)
+
+teamA <- pass %>%group_by(team,shot) %>% filter(team == "A")%>%summarize(count=n())
+
+
+my_theme <- function(){
+  theme_light() +
+    theme(text = element_text(),  
+          panel.grid = element_blank(),
+          panel.border = element_blank(),
+          axis.title = element_blank(),
+          axis.ticks = element_blank(),
+          axis.text.x = element_blank(),
+          axis.text.y = element_text(size = 15, color = "gray10"),
+          plot.title =  element_text(size = 20, color = "black"))
+  }
+
+final_data <- teamA %>% 
+  # Calculate -- and format -- the percentage for each channel
+  mutate(bar_percentage = sprintf("%.1f%%", 100*(count / sum(.$count)))) %>% 
+  # Combine that percentage with the actual value
+  mutate(bar_label = paste0(format(count, big.mark = ","), ", ", bar_percentage)) %>% 
+  # Remove the "just the percentage" column
+  select(-bar_percentage)
+# Display the table
+kable(final_data, align=c('l','r','r'))
+
+total_teamA <- paste0("Total Shots: ",
+                      format(sum(final_data$count), big.mark = ","))
+
+
+ggplot(final_data, aes(x = shot, y = count)) +
+ggtitle("Shot Type",  # Add the title and subtitle
+          subtitle = total_teamA) +   
+  geom_bar(stat = "identity", 
+           fill = "lightgreen",    
+           width = 0.50) +  
+geom_text(aes(label = bar_label, size = 5.5, hjust = 0)) +
+  coord_flip() +
+  scale_y_continuous(expand = c(0, 0),
+                     limits = c(0, max(final_data$count) * 1.3)) +
+  my_theme() +
+theme(legend.position="none",plot.subtitle =  element_text(size = 20, color = "black"))
+
+
+scores <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/timeline.csv", header=TRUE, sep=";")
+attach (scores)
+
+my_theme <- function(){
+  theme_light() +
+    theme(text = element_text(),  
+          panel.grid = element_blank(),
+          panel.border = element_blank(),
+          axis.title = element_blank(),
+          axis.ticks = element_blank(),
+          axis.text.x = element_blank(),
+          axis.text.y = element_blank(),
+          plot.title =  element_blank(),) +
+theme(legend.position="bottom")
+  }
+
+wormA <-scores%>%filter(Teamnum == "A", subsetoc =="Start"|subsetoc =="Scr Op"|subsetoc =="Scr Rs"|subsetoc =="Ms Op"|subsetoc =="Ms Rs")%>%select(subsetoc,Team, octype,xend,yend,plylabrec,timeoc,shotlab,score,direction,scorediff)
+
+wormB <-scores%>%filter(Teamnum == "B",subsetoc =="Start"|subsetoc =="Scr Op"|subsetoc =="Scr Rs"|subsetoc =="Ms Op"|subsetoc =="Ms Rs")%>%select(subsetoc,Team, octype,xend,yend,plylabrec,timeoc,shotlab,score,direction,scorediff)
+ 
+ggplot(data=scores, aes(x=timeoc, y=score, group=Team)) +
+    geom_step(data=wormA, aes(x=timeoc, y=score),size=1) + 
+    geom_step(data=wormB, aes(x=timeoc, y=score),size=1) + 
+    geom_point(data=wormA, aes(x=timeoc, y=score, colour = subsetoc, shape = Team), size = 2, stroke = 2) +
+    geom_point(data=wormB, aes(x=timeoc, y=score, colour = subsetoc, shape = Team), size = 2, stroke = 2) +
+    guides(size = FALSE) + 
+    my_theme () +
+    theme(axis.text.y =element_text(size=16),
+        axis.title.y =element_text(size=16,face="bold"))
+
+scores <- scores%>%filter(subsetoc =="Start"|subsetoc =="Scr Op"|subsetoc =="Scr Rs")%>%select(Team,octype,xend,yend,plylabrec,timeoc,shotlab,score,direction,scorediff,scrd)
+
+#margins
+
+ggplot(data=scores, aes(x=timeoc, y=scorediff )) +
+  geom_step(size=2) +
+  geom_point() +
+geom_hline(yintercept=0, linetype="dashed", color = "orange") +
+theme_classic() +
+geom_text_repel(data = scores, aes(x=timeoc, y=scorediff, label = scrd),  size = 8) + 
+ geom_vline(xintercept=39, linetype="dotted", color = "black") +
+    annotate(geom="text", x=2, y=4.5, label="Dublin", color="darkblue", size = 16) +
+    annotate(geom="text", x=3.5, y=-4.5, label="Meath", color="lightgreen", size = 12) +
+    theme(plot.background = element_blank(),
+    legend.position="none",
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    axis.line = element_blank(),
+    axis.text.x = element_blank(),
+    axis.text.y = element_blank(),
+    axis.ticks = element_blank(), 
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank()) +
+      annotate(geom="text", x= 39, y=-0.25, label="HT",color = "black") 
+
+my_theme <- function(){
+  theme_light() +
+    theme(text = element_text(),  
+          panel.grid = element_blank(),
+          panel.border = element_blank(),
+          axis.title = element_blank(),
+          axis.ticks = element_blank(),
+          axis.text.x = element_blank(),
+          axis.text.y = element_text(size = 15, color = "gray10"),
+          plot.title =  element_text(size = 20, color = "black")) +
+theme(legend.position="none")
+  }
+
+# Plot
+ggplot(scores, aes(x=timoc, y=score)) + 
+  geom_point(scores, aes(x=timoc, y=score), col="darkblue", size=10) +  
+  geom_point(scores, aes(x=timoc, y=score), col="lightgreen", size= 10) +
+  geom_segment(aes(x=timoc, xend=timoc, y=min(score), yend=max(score)), 
+  linetype="dashed", size=0.1,colour = "grey") +     
+  coord_flip() +
+my_theme ()
+geom_text(data = overview,aes(x=Stat, y=Dublin,label = Dublin), size = 6,col="white") +
+geom_text(data = overview,aes(x=Stat, y=Meath,label = Meath), size = 6,col="yellow") +
+my_theme ()
+

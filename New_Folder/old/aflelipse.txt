@@ -1,0 +1,54 @@
+theme_blankPitch = function(size=12) { 
+    theme(
+      #axis.line=element_blank(), 
+      axis.text.x=element_blank(), 
+      axis.text.y=element_blank(), 
+      #axis.ticks.y=element_text(size=size),
+      #axis.ticks=element_blank(),
+      axis.ticks.length=unit(0, "lines"), 
+      #axis.ticks.margin=unit(0, "lines"), 
+      axis.title.x=element_blank(), 
+      axis.title.y=element_blank(), 
+      legend.key.size=unit(1.2, "lines"), 
+      legend.text=element_text(size=size), 
+      legend.title=element_text(size=size, face="bold",hjust=0),
+      # panel.border=element_blank(), 
+      panel.grid.major=element_blank(), 
+      panel.grid.minor=element_blank(), 
+      panel.spacing=element_blank(), 
+      plot.margin=unit(c(0, 0, 0, 0), "lines"), 
+      plot.title=element_text(size=size*1.2), 
+      panel.background=element_rect(fill= "lightgreen",colour= "lightgreen"),
+      strip.text.x=element_text(size=size*1))}
+
+
+  ymin <- 0 # minimum width
+  ymax <- 141 # maximum width
+  xmin <- 0 # minimum length
+  xmax <- 160 # maximum length
+
+
+# pitch lines
+  def13 <- 9
+  def20 <- 20
+  def45 <- 45
+  def65 <- 65
+  off65 <- 79
+  off45 <- 99
+  off20 <- 124
+  off13 <- 131
+
+  #Goal Square
+  right14d <- 67.3
+  left14d <- 73.7
+
+
+ggplot() +
+  geom_ellipse(aes(x0 = 0, y0 = 0, a = 160, b = 141, angle = 0)) +
+  coord_fixed() +
+theme_blankPitch() +
+geom_segment(aes(x = def13, y = ymin, xend = def13, yend = ymax),colour = "white",linetype="solid",size = 0.5) +   
+      geom_segment(aes(x = xmin, y = right14d, xend = def13, yend = right14d),colour = "white",linetype="solid",size = 0.5) + 
+      geom_segment(aes(x = xmin, y = left14d, xend = def13, yend = left14d),colour = "white",linetype="solid",size = 0.5) 
+
+

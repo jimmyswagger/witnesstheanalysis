@@ -1,0 +1,82 @@
+heatmapA2 <- passmap %>% filter(Teamnum == "A", plyr =="2")
+p + geom_raster(data = heatmapA2, aes(x=Areax, y=Areay, fill=value, alpha = value), interpolate = T) + scale_fill_gradient(low = "gray95", high = "yellow") + 
+theme(legend.position="none")
+
+heatmapA3 <- passmap %>% filter(Teamnum == "A", plyr =="3")
+p + geom_raster(data = heatmapB3, aes(x=Areax, y=Areay, fill=value, alpha = value), interpolate = T) + scale_fill_gradient(low = "gray95", high = "yellow") + 
+theme(legend.position="none")
+
+heatmapA21 <- passmap %>% filter(Teamnum == "A", plyr =="21")
+p + geom_raster(data = heatmapB21, aes(x=Areax, y=Areay, fill=value, alpha = value), interpolate = T) + scale_fill_gradient(low = "gray95", high = "yellow") + 
+theme(legend.position="none")
+
+heatmapA5 <- passmap %>% filter(Teamnum == "A", plyr =="5")
+p + geom_raster(data = heatmapB5, aes(x=Areax, y=Areay, fill=value, alpha = value), interpolate = T) + scale_fill_gradient(low = "gray95", high = "yellow") + 
+theme(legend.position="none")
+
+heatmapA6 <- passmap %>% filter(Teamnum == "A", plyr =="6")
+p + geom_raster(data = heatmapB6, aes(x=Areax, y=Areay, fill=value, alpha = value), interpolate = T) + scale_fill_gradient(low = "gray95", high = "yellow") + 
+theme(legend.position="none")
+
+heatmapA7 <- passmap %>% filter(Teamnum == "A", plyr =="7")
+p + geom_raster(data = heatmapB7, aes(x=Areax, y=Areay, fill=value, alpha = value), interpolate = T) + scale_fill_gradient(low = "gray95", high = "yellow") + 
+theme(legend.position="none")
+
+heatmapA8 <- passmap %>% filter(Teamnum == "A", plyr =="8")
+p + geom_raster(data = heatmapB8, aes(x=Areax, y=Areay, fill=value, alpha = value), interpolate = T) + scale_fill_gradient(low = "gray95", high = "yellow") + 
+theme(legend.position="none")
+
+heatmapBA9 <- passmap %>% filter(Teamnum == "A", plyr =="9")
+p + geom_raster(data = heatmapB9, aes(x=Areax, y=Areay, fill=value, alpha = value), interpolate = T) + scale_fill_gradient(low = "gray95", high = "yellow") + 
+theme(legend.position="none")
+
+heatmapA10 <- passmap %>% filter(Teamnum == "A", plyr =="10")
+p + geom_raster(data = heatmapB10, aes(x=Areax, y=Areay, fill=value, alpha = value), interpolate = T) + scale_fill_gradient(low = "gray95", high = "yellow") + 
+theme(legend.position="none")
+
+heatmapA11 <- passmap %>% filter(Teamnum == "A", plyr =="11")
+p + geom_raster(data = heatmapB11, aes(x=Areax, y=Areay, fill=value, alpha = value), interpolate = T) + scale_fill_gradient(low = "gray95", high = "yellow") + 
+theme(legend.position="none")
+
+heatmapA12 <- passmap %>% filter(Teamnum == "A", plyr =="12")
+p + geom_raster(data = heatmapB12, aes(x=Areax, y=Areay, fill=value, alpha = value), interpolate = T) + scale_fill_gradient(low = "gray95", high = "yellow") + 
+theme(legend.position="none")
+
+heatmapA13 <- passmap %>% filter(Teamnum == "A", plyr =="13")
+p + geom_raster(data = heatmapB13, aes(x=Areax, y=Areay, fill=value, alpha = value), interpolate = T) + scale_fill_gradient(low = "gray95", high = "yellow") + 
+theme(legend.position="none")
+
+heatmapA14 <- passmap %>% filter(Teamnum == "A", plyr =="14")
+p + geom_raster(data = heatmapB14, aes(x=Areax, y=Areay, fill=value, alpha = value), interpolate = T) + scale_fill_gradient(low = "gray95", high = "yellow") + 
+theme(legend.position="none")
+
+heatmapA19 <- passmap %>% filter(Teamnum == "A", plyr =="19")
+p + geom_raster(data = heatmapB19, aes(x=Areax, y=Areay, fill=value, alpha = value), interpolate = T) + scale_fill_gradient(low = "gray95", high = "yellow") + 
+theme(legend.position="none")
+
+heatmapA17 <- passmap %>% filter(Teamnum == "A", plyr =="17")
+p + geom_raster(data = heatmapB17, aes(x=Areax, y=Areay, fill=value, alpha = value), interpolate = T) + scale_fill_gradient(low = "gray95", high = "yellow") + 
+theme(legend.position="none")
+
+heatmapA24 <- passmap %>% filter(Teamnum == "A", plyr =="24")
+p + geom_raster(data = heatmapB24, aes(x=Areax, y=Areay, fill=value, alpha = value), interpolate = T) + scale_fill_gradient(low = "gray95", high = "yellow") + 
+theme(legend.position="none")
+
+heatmapA23 <- passmap %>% filter(Teamnum == "A", plyr =="23")
+p + geom_raster(data = heatmapB23, aes(x=Areax, y=Areay, fill=value, alpha = value), interpolate = T) + scale_fill_gradient(low = "gray95", high = "yellow") + 
+theme(legend.position="none")
+
+heatmapA26 <- passmap %>% filter(Teamnum == "A", plyr =="26")
+p + geom_raster(data = heatmapB26, aes(x=Areax, y=Areay, fill=value, alpha = value), interpolate = T) + scale_fill_gradient(low = "gray95", high = "yellow") + 
+theme(legend.position="none")
+
+heatmapA20 <- passmap %>% filter(Teamnum == "A", plyr =="20")
+p + geom_raster(data = heatmapB20, aes(x=Areax, y=Areay, fill=value, alpha = value), interpolate = T) + scale_fill_gradient(low = "gray95", high = "yellow") + 
+theme(legend.position="none")
+
+
+
+
+
+
+

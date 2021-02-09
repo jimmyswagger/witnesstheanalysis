@@ -1,0 +1,141 @@
+match <- read.csv(file="c:/Users/Donagh/OneDrive/Spreadsheet fun/PA Analytics/PA Template/Other_Data_Sets/American_NFL/nfl.csv", header=TRUE, sep=";")
+attach (match)
+
+#match$event_name[match$event_name==""]<-"NA"
+
+#match %>% filter (event_name != "NA")
+
+library(lubridate)
+match$time<- hms(match$time)
+match$time<- as.numeric(match$time)
+
+## Avg Positions ##
+avgpos <- match%>%
+    group_by(displayName) %>% filter (play_id == "2688") %>%  
+    summarise(AreaxA = mean(x,na.rm = TRUE),AreayA = mean(y,na.rm = TRUE))
+
+avgpos
+
+p + geom_point(data = avgpos, aes(x=AreaxA, y=AreayA), colour = "blue", size = 6) +
+geom_text_repel(data = avgpos, aes(x=AreaxA, y=AreayA, label = displayName), size = 8, colour = "white") +
+theme(legend.position="none") 
+
+## Routes ##
+
+ply <-match%>% filter ( nflId =="79848", play_id == "2688")
+
+nfl + geom_point(data = ply, aes(x, y), colour = "blue", size = 6) +
+theme(legend.position="none") 
+
+ply <-match%>% filter ( play_id == "2688")
+
+nfl + geom_point(data = ply, aes(x, y, colour = nflId), size = 2) +
+theme(legend.position="none") 
+
+## Creating a start and end - possib ms etc too ## 
+
+ply <-match%>% filter ( nflId =="79848", play_id == "2688")
+
+oddps <- ply[seq(1, nrow(ply), 1),]
+colnames(oddps) <- c("dir",	"displayName",	"nflId"	,"o",	"position","s",	"time",	"x","y","game_id","play_id","event_name")
+evenps <- ply[seq(2, nrow(ply), 1),]
+colnames(evenps) <- c("diroc","displayNameoc","nflIdoc","ooc","positionoc","soc","timeoc","xoc","yoc","game_idoc","play_idoc","event_nameoc")
+
+#add column to each data frame with row number
+oddps<- oddps %>% mutate(number = row_number())
+evenps<- evenps %>% mutate(number = row_number())
+
+run <- merge(oddps, evenps, by = "number", all = TRUE)
+
+run$number <- as.numeric(run$number)
+
+run  <- run %>% arrange(number)
+
+run <-run %>% mutate(time_diff = (timeoc-time), dist =(sqrt((xoc -x)^2+ (yoc - y)^2)),ms = (dist/time_diff), vec = (atan2(yoc-y,xoc - x)*180/pi))
+--
+
+
+match <- read.csv(file="c:/Users/Donagh/OneDrive/Spreadsheet fun/PA Analytics/PA Template/Other_Data_Sets/American_NFL/nfl.csv", header=TRUE, sep=";")
+attach (match)
+
+#match$event_name[match$event_name==""]<-"NA"
+
+#match %>% filter (event_name != "NA")
+
+library(lubridate)
+match$time<- hms(match$time)
+match$time<- as.numeric(match$time)
+
+match  <- match  %>% mutate_at(vars(time), funs(round(., 0)))
+
+ply <-match%>% filter ( play_id == "2688")
+
+p <- ggplot(ply, aes(x, y, colour = nflId)) +
+    geom_point(aes(colour = nflId)) 
+
+p <- p + transition_time(time) +
+  labs(title = "time: {frame_time}")
+
+anim_save(filenamehere.gif, p)
+
+===
+
+library(ggplot2)
+library(ggrepel)
+library(lubridate)
+
+
+game <- read.csv(file="c:/Users/Donagh/OneDrive/Spreadsheet fun/PA Analytics/PA Template/Other_Data_Sets/American_NFL/nfl.csv", header=TRUE, sep=";")
+attach (game)
+
+library(lubridate)
+game$time<- hms(game$time)
+game$time<- as.numeric(game$time)
+
+game  <- game  %>% mutate_at(vars(time), funs(round(., 0)))
+
+## Routes ##
+
+ply <-game%>% filter ( play_id == "2688")
+
+nfl + geom_point(data = ply, aes(x, y, colour = displayName), size = 2) + 
+theme(legend.position="bottom") 
+
+
+ply <-game%>% filter ( play_id == "2688")
+
+names <- ply %>%
+  group_by(nflId) %>%
+  arrange(nflId) %>%
+  filter(row_number()==1 | row_number()==n())
+
+nfl + geom_point(data = ply, aes(x, y, colour = displayName), size = 2) + 
+geom_text_repel(data = names, aes(x, y, label = displayName), size = 4) +
+theme(legend.position="bottom") 
+
+ply <-game%>% filter ( play_id == "2688")
+
+names <- ply %>%
+  group_by(nflId) %>%
+  arrange(nflId) %>%
+  filter(row_number()==n())
+
+nfl + geom_point(data = ply, aes(x, y, colour = displayName), size = 2) + 
+geom_text_repel(data = names, aes(x, y, label = displayName), size = 4) +
+theme(legend.position="bottom") 
+
+
+ply <-game%>% filter ( play_id == "2688")
+
+names <- ply %>%
+  group_by(nflId) %>%
+  arrange(nflId) %>%
+  filter(row_number()==1 )
+
+nfl + geom_point(data = ply, aes(x, y, colour = displayName), size = 2) + 
+    geom_text_repel(data = names, aes(x, y, label = displayName), size = 4) +
+    labs(colour="Player") +
+    labs(colour="Player") + 
+    theme(legend.position="bottom") 
+
+

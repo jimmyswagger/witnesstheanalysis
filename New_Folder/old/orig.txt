@@ -1,0 +1,53 @@
+##All Shots Origin by Possession
+###Kerry (Blue = Score)
+```{r, fig.width = 16, fig.height = 10}
+
+#Finds all shots
+
+TeamAPAScr  <- pass %>%group_by(Team, Action) %>% filter(Teamnum == "A", subset== "Scr Op"|subset== "Scr Rs")
+
+TeamAPAMis <- pass %>%group_by(Team, Action) %>% filter(Teamnum == "A", subset== "Ms Op"|subset== "Ms Rs")
+
+#Pulls out all shots from main TeamA
+TeamAPASc <- subset(pass, poss %in% TeamAPAScr$poss)
+
+TeamAPAMi <- subset(pass, poss %in% TeamAPAMis$poss)
+
+#Ones that start from turnover
+TeamAphasePASccq <- TeamAPASc %>% filter(main == "PW")
+
+TeamAphasePAMicq <- TeamAPAMi %>% filter(main == "PW")
+
+#Ones that start from kickout
+
+TeamAphasePAScko <- TeamAPASc %>% filter(main == "Ko Rec")
+
+TeamAphasePAMiko <- TeamAPAMi %>% filter(main == "Ko Rec")
+
+p + geom_point(data = TeamAphasePASccq , aes(x=Areax, y=Areay), colour = "blue", size = 6, shape = 17) +
+geom_point(data = TeamAphasePAMicq, aes(x=Areax, y=Areay), colour = "white", size = 6,shape = 4, stroke = 2) +
+geom_point(data = TeamAphasePAScko, aes(x=Areax, y=Areay), colour = "blue", size = 6, shape = 17) +
+geom_point(data = TeamAphasePAMiko, aes(x=Areax, y=Areay), colour = "white", size = 6,shape = 4, stroke = 2) +
+theme(legend.position = "bottom") + 
+geom_text_repel(data = TeamAphasePASccq , aes(x=Areax, y=Areay, label = plylab), colour = "blue", size = 8) +
+geom_text_repel(data = TeamAphasePAMicq, aes(x=Areax, y=Areay, label = plylab), col = "white", size = 8) +
+geom_text_repel(data = TeamAphasePAScko, aes(x=Areax, y=Areay, label = plylab), colour = "blue", size = 8) + 
+geom_text_repel(data = TeamAphasePAMiko, aes(x=Areax, y=Areay, label = plylab), col = "white", size = 8) 
+```
+
+#Pulls out all shots from main
+TeamAPAScr  <- pass %>%group_by(poss) %>% filter(main =="Shot Op Oc"| main =="Shot Rs Oc")
+
+TeamAPASc <- subset(pass, poss %in% TeamAPAScr$poss)
+
+#Pulls out all scores from main
+
+TeamAPAScr  <- pass %>%group_by(poss) %>% filter(subset =="Scr Op"| subset =="Scr Rs")
+
+TeamAPASc <- subset(pass, poss %in% TeamAPAScr$poss)
+
+
+
+
+
+

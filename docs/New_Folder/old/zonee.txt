@@ -1,0 +1,35 @@
+```{r, fig.width = 16, fig.height = 10}
+
+zone1 <- pass %>% filter(Areax > .5,Areax <1.5,Areay >2.5, Areay <3.5, Teamnum == "A",main =="PW")%>% summarize(count=n())
+ 
+zone1 <- zone1 %>% 
+    mutate(total = (sum(.$count)))
+
+final_datazone1 <- zone1 %>% 
+  # Combine that percentage with the actual value
+  mutate(bar_labelzone1 = paste0(format(total)))
+
+TeamAPAScr <- pass %>%group_by(Team, Action) %>% filter(Teamnum == "A", Action== "Goal"|Action== "Point"|Action== "Fk Goal"|
+Action== "Fk Point"|Action== "Mk Goal"|Action== "Mk Point"|Action== "45 goal"|Action== "45 Point")
+
+#Pulls out all scores from main TeamA
+TeamAPASc <- subset(pass, possno %in% TeamAPAScr$possno)
+
+#Ones that start from turnover
+TeamAphasePASccqzone1 <- TeamAPASc %>% filter(Areax > .5,Areax <1.5,Areay >2.5, Areay <3.5,main == "PW")%>% summarize(count=n())
+
+TeamAphasePASccqzone1 <- TeamAphasePASccqzone1%>% 
+    mutate(total = (sum(.$count)))
+
+final_data1 <-TeamAphasePASccq %>% 
+  # Combine that percentage with the actual value
+  mutate(bar_label1 = paste0(format(total)))
+
+p + 
+geom_text(data= final_data TeamAphasePASccqzone1, aes(x= 1, y= 3.2, label = bar_labelzone1),colour = "blue", size = 6) +
+geom_text(data= final_data1, aes(x= 1, y= 2.9, label = bar_label1),colour = "white", size = 5) +
+
+
+
+
+```

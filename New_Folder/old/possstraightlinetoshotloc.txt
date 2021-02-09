@@ -1,0 +1,7 @@
+
+sop <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/Testnewplan/SoPAB.csv", header=TRUE, sep=";")
+attach (sop)
+
+
+a <- sop %>% filter (mainoc == "Shot Op Oc")
+> p +geom_segment(data = a, aes(x = Areax, y = Areay, xend = Shotx, yend = Shoty, colour = as.factor(poss)),show.legend = FALSE,size = .8,arrow = arrow(length = unit(0.4,"cm")))

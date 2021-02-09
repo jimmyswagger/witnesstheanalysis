@@ -1,0 +1,400 @@
+---
+title: "By Quarter"
+output:
+  flexdashboard::flex_dashboard:
+    navbar:
+      - { title: "About", href: "https://example.com/about" }
+---
+
+```{r setup, include=FALSE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE)
+#Load packages
+library(flexdashboard)
+library(dplyr)
+library(deldir)
+library(ggplot2)
+library(ggrepel)
+library(ggpubr)
+library(knitr)
+library(rmarkdown)
+library(kableExtra)
+library(data.table)
+library(RColorBrewer)
+library(gridExtra)
+library(igraph)
+library(tidyverse)
+library(treemap)
+library(plotly)
+library(networkD3)
+library (curl)
+
+pass <- read.csv (file.choose(),sep=";",header=TRUE,check.names=FALSE)
+attach (pass)
+
+
+shotvert <- read.csv (file.choose(),sep=";",header=TRUE,check.names=FALSE)
+attach (shotvert)
+
+
+
+create_Stats_Pitch <- function(grass_colour, line_colour, background_colour, goal_colour, BasicFeatures){
+  
+  theme_blankPitch = function(size=12) { 
+    theme(
+      #axis.line=element_blank(), 
+      axis.text.x=element_blank(), 
+      axis.text.y=element_blank(), 
+      #axis.ticks.y=element_text(size=size),
+      #   axis.ticks=element_blank(),
+      axis.ticks.length=unit(0, "lines"), 
+      #axis.ticks.margin=unit(0, "lines"), 
+      axis.title.x=element_blank(), 
+      axis.title.y=element_blank(), 
+      legend.background=element_rect(fill=background_colour, colour=NA), 
+      legend.key=element_rect(colour=background_colour,fill=background_colour), 
+      legend.key.size=unit(1.2, "lines"), 
+      legend.text=element_text(size=size), 
+      legend.title=element_text(size=size, face="bold",hjust=0),
+      strip.background = element_rect(colour = background_colour, fill = background_colour, size = .5),
+      panel.background=element_rect(fill=background_colour,colour=background_colour), 
+      #       panel.border=element_blank(), 
+      panel.grid.major=element_blank(), 
+      panel.grid.minor=element_blank(), 
+      panel.spacing=element_blank(), 
+      plot.background=element_blank(), 
+      plot.margin=unit(c(0, 0, 0, 0), "lines"), 
+      plot.title=element_text(size=size*1.2), 
+      strip.text.y=element_text(colour=background_colour,size=size,angle=270),   
+      strip.text.x=element_text(size=size*1))}
+  
+  ymin <- 0.5 # minimum width
+  ymax <- 5.5 # maximum width
+  xmin <- 0.5 # minimum length
+  xmax <- 7.5 # maximum length
+  
+  # Defining features along the length
+  defel <- 0.5
+  def14 <- 1.25
+  def21 <- 1.5
+  def45 <- 2.5
+  def65 <- 3.5
+  off65 <- 4.5
+  off45 <- 5.5
+  off21 <- 6.5
+  off14 <- 6.75
+  offel <- 7.5
+  
+  
+  
+  # Defining features along the width
+  srwing <- 1.5
+  frightwing <- 5
+  rhalfsp <- 2.5
+  ctre <- 3.5
+  lhspce <- 4.5
+  leftwing <- 5.5
+  right14d <- 2.6
+  left14d <- 3.4
+  
+  
+  # Defining features along the width
+  
+  boxEdgeOff <- 6.75  
+  boxEdgeLeft <- 2.6 
+  boxEdgeRight <- 3.4 
+  
+  # small sqaure
+  
+  sixYardDef <- 0.75
+  sixYardOff <- 7.25
+  sixYardLeft <- 2.70 
+  sixYardRight <- 3.3
+  
+  
+  
+  if(BasicFeatures == TRUE){
+    ## initiate the plot, set some boundries to the plot
+    p <- ggplot() + xlim(c(xmin,xmax)) + ylim(c(ymin,ymax)) +
+      # add the theme 
+      theme_blankPitch() +
+      # add halway line
+      geom_rect(aes(xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax), fill = grass_colour, colour = line_colour) + 
+      geom_segment(aes(x = def14, y = ymin, xend = def14, yend = ymax),colour = "white",linetype="solid") +   
+      geom_segment(aes(x = def21, y = ymin, xend = def21, yend = ymax),colour = "white",linetype="solid") + 
+      geom_segment(aes(x = def45, y = ymin, xend = def45, yend = ymax),colour = "blue",linetype="solid") +
+      geom_segment(aes(x = def65, y = ymin, xend = def65, yend = ymax),colour = "white",linetype="solid") +
+      geom_segment(aes(x = off65, y = ymin, xend = off65, yend = ymax),colour = "white",linetype="solid") +
+      geom_segment(aes(x = off45, y = ymin, xend = off45, yend = ymax),colour = "black",linetype="solid") +
+      geom_segment(aes(x = off21, y = ymin, xend = off21, yend = ymax),colour = "white",linetype="solid") +
+      geom_segment(aes(x = off14, y = ymin, xend = off14, yend = ymax),colour = "white",linetype="solid") + 
+      geom_segment(aes(x = xmin, y = right14d, xend = def14, yend = right14d),colour = "white",linetype="solid") + 
+      geom_segment(aes(x = xmin, y = left14d, xend = def14, yend = left14d),colour = "white",linetype="solid") +
+      geom_segment(aes(x = xmin, y = srwing, xend = xmax, yend = srwing),colour = line_colour,linetype="dotted") + 
+      geom_segment(aes(x = xmin, y = srwing, xend = xmax, yend = srwing),colour = line_colour,linetype="dotted") +
+      geom_segment(aes(x = xmin, y = rhalfsp, xend = xmax, yend = rhalfsp),colour = line_colour,linetype="dotted") +
+      geom_segment(aes(x = xmin, y = ctre , xend = xmax, yend = ctre),colour = line_colour,linetype="dotted") +
+      geom_segment(aes(x = xmin, y = lhspce, xend = xmax, yend = lhspce),colour = line_colour,linetype="dotted") + 
+      geom_rect(aes(xmin=boxEdgeOff, xmax=xmax, ymin=boxEdgeLeft, ymax=boxEdgeRight), colour = "white", fill = grass_colour) + 
+      geom_rect(aes(xmin=xmin, xmax=sixYardDef, ymin=sixYardLeft, ymax=sixYardRight), fill = grass_colour, colour = "white") +  
+      geom_rect(aes(xmin=sixYardOff, xmax=xmax, ymin=sixYardLeft, ymax=sixYardRight), fill = grass_colour, colour = "white") + 
+      geom_segment(aes(x = 4, y = 2.90, xend = 4, yend = 3.10),colour = "white") +
+      geom_segment(aes(x =0.5, y = 2.75, xend = 0.5, yend = 3.25),colour = "blue", size = 2) +
+      geom_segment(aes(x =7.5, y = 2.75, xend = 7.5, yend = 3.25),colour = "black", size = 2) +
+      annotate(geom="text", x= 1.50, y=.57, label="21",color = "white") +
+      annotate(geom="text", x= 2.50, y=.57, label="45",color = "blue") +
+      annotate(geom="text", x= 3.50, y=.57, label="65",color = "white") +
+      annotate(geom="text", x= 4.50, y=.57, label="65",color = "white") +
+      annotate(geom="text", x=5.50, y=.57, label="45", color="black") +
+      annotate(geom="text", x=6.50, y=.57, label="21",color = "white") +
+      annotate("segment", x = 3.5, xend = 4.5, y = 0.75, yend = 0.75, colour = "pink", size=3, alpha=0.6, arrow=arrow())
+    
+  }
+  
+  else{
+    ## initiate the plot, set some boundries to the plot
+    p <- ggplot() + xlim(c(xmin,xmax)) + ylim(c(ymin-0.5,ymax+0.5)) +
+      # add the theme 
+      theme_blankPitch() +
+      # add the base rectangle of the pitch 
+      geom_rect(aes(xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax), fill = grass_colour, colour = line_colour) +
+      geom_rect(aes(xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax), fill = grass_colour, colour = line_colour) +
+      geom_segment(aes(x = off65, y = ymin, xend = off65, yend = ymax),colour = line_colour) +
+      geom_segment(aes(x = off45, y = ymin, xend = off45, yend = ymax),colour = "Red",linetype="dotted")
+    
+  }
+  
+  return(p)}
+
+
+p <- create_Stats_Pitch("#538032", "#A9A9A9", "#ffffff", "#000000", BasicFeatures=TRUE)
+
+
+create_Stats_Pitch <- function(grass_colour, line_colour, background_colour, goal_colour, BasicFeatures){
+  
+  theme_blankPitch = function(size=12) { 
+    theme(
+      #axis.line=element_blank(), 
+      axis.text.x=element_blank(), 
+      axis.text.y=element_blank(), 
+      #axis.ticks.y=element_text(size=size),
+      #   axis.ticks=element_blank(),
+      axis.ticks.length=unit(0, "lines"), 
+      #axis.ticks.margin=unit(0, "lines"), 
+      axis.title.x=element_blank(), 
+      axis.title.y=element_blank(), 
+      legend.background=element_rect(fill=background_colour, colour=NA), 
+      legend.key=element_rect(colour=background_colour,fill=background_colour), 
+      legend.key.size=unit(1.2, "lines"), 
+      legend.text=element_text(size=size), 
+      legend.title=element_text(size=size, face="bold",hjust=0),
+      strip.background = element_rect(colour = background_colour, fill = background_colour, size = .5),
+      panel.background=element_rect(fill=background_colour,colour=background_colour), 
+      #       panel.border=element_blank(), 
+      panel.grid.major=element_blank(), 
+      panel.grid.minor=element_blank(), 
+      panel.spacing=element_blank(), 
+      plot.background=element_blank(), 
+      plot.margin=unit(c(0, 0, 0, 0), "lines"), 
+      plot.title=element_text(size=size*1.2), 
+      strip.text.y=element_text(colour=background_colour,size=size,angle=270),   
+      strip.text.x=element_text(size=size*1))}
+  
+  ymin <- 0.5 # minimum width
+  ymax <- 3.5 # maximum width
+  xmin <- 0.5 # minimum length
+  xmax <- 5.5 # maximum length
+  
+  # Defining features along the length
+  srwing <- 1.5
+  rhalfsp <- 2.5
+  ctre <- 3.5
+  lhspce <- 4.5
+  sixYardLeft <- 2.75
+  sixYardRight <- 3.25
+  
+  # Defining features along the width
+  
+  off14 <- 2.7
+  off21 <- 2.5
+  off45 <- 1.5
+  left14 <- 2.65
+  right14 <- 3.35
+
+  
+  if(BasicFeatures == TRUE){
+    ## initiate the plot, set some boundries to the plot
+    qp <- ggplot() + xlim(c(xmin,xmax)) + ylim(c(ymin,ymax)) +
+      # add the theme 
+      theme_blankPitch() +
+      # add halway line
+      geom_rect(aes(xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax), fill = grass_colour, colour = line_colour) +
+      geom_segment(aes(x = xmin, y = off21, xend = xmax, yend = off21),colour = "white",linetype="solid") +
+      geom_segment(aes(x = xmin, y = off45, xend = xmax, yend = off45),colour = "white",linetype="solid") +
+      geom_segment(aes(x = xmin, y = off14, xend = xmax, yend = off14),colour = "white",linetype="solid") +
+      geom_segment(aes(x = srwing, y = ymin, xend = srwing, yend = ymax),colour = line_colour,linetype="dotted") +
+      geom_segment(aes(x = rhalfsp, y = ymin, xend = rhalfsp, yend = ymax),colour = line_colour,linetype="dotted") +
+      geom_segment(aes(x = ctre, y = ymin, xend = ctre, yend = ymax),colour = line_colour,linetype="dotted") +
+      geom_segment(aes(x = lhspce, y = ymin, xend = lhspce, yend = ymax),colour = line_colour,linetype="dotted") +
+      geom_segment(aes(x = left14, y = ymax, xend = left14, yend = 2.7),colour = "white" ,linetype="solid") + 
+      geom_segment(aes(x = right14, y = ymax, xend = right14, yend = 2.7),colour = "white" ,linetype="solid") +
+      geom_segment(aes(x = sixYardLeft, y = ymax, xend = sixYardLeft, yend =3.25),colour = "white" ,linetype="solid") +
+      geom_segment(aes(x = sixYardRight, y = ymax, xend = sixYardRight, yend =3.25),colour = "white" ,linetype="solid") +
+      geom_segment(aes(x = 2.75, y = 3.25, xend = 3.25, yend =3.25),colour = "white" ,linetype="solid") +
+      geom_segment(aes(x =2.8, y = 3.5, xend = 3.20, yend = 3.5),colour = "black", size = 2) +
+      annotate(geom="text", x=0.57, y=1.45, label="45", color="white") +
+      annotate(geom="text", x=0.57, y=2.45, label="21",color = "white") 
+  }
+  
+  else{
+    ## initiate the plot, set some boundries to the plot
+    qp <- ggplot() + xlim(c(xmin,xmax)) + ylim(c(ymin-0.5,ymax+0.5)) +
+      # add the theme 
+      theme_blankPitch() +
+      # add the base rectangle of the pitch 
+      geom_rect(aes(xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax), fill = grass_colour, colour = line_colour) +
+      geom_rect(aes(xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax), fill = grass_colour, colour = line_colour) +
+      geom_segment(aes(x = off65, y = ymin, xend = off65, yend = ymax),colour = line_colour) +
+      geom_segment(aes(x = off45, y = ymin, xend = off45, yend = ymax),colour = "Red",linetype="dotted")
+    
+  }
+  
+  return(qp)}
+
+
+qp <- create_Stats_Pitch("#538032", "#A9A9A9", "#ffffff", "#000000", BasicFeatures=TRUE)
+
+
+```
+
+
+Kickouts by Quaters {data-icon="fa-signal"}
+===========================================
+
+### Qtr 1
+
+```{r}
+komapA1 <-filter(pass, period == "1", Teamnum == "A",Action=="Ko Rec"| Action =="Ko Lost"|Action=="KoBrk Rec"|Action=="KoBrk Lost"|Action =="Ko Mk Rec"|Action =="Ko Lost Mk")
+
+p + geom_point(data = komapA1, aes(x=Areax, y=Areay, colour = Action, shape = Action,size = 4))+
+geom_text_repel(data = komapA1, aes(x=Areax, y=Areay, label = plylab, col = Action), size = 6) +
+theme(plot.title = element_text(hjust=0.5)) +
+theme(plot.subtitle = element_text(hjust=0.5)) +
+theme(legend.position="none") +
+scale_shape_manual(values=c(15, 16, 17, 18,19,20)) +
+    scale_color_manual(values=c("red","black", "white", "red","blue", "red")) 
+
+```
+
+### Qtr 2
+
+```{r}
+komapA2 <-filter(pass, period == "2", Teamnum == "A",Action=="Ko Rec"| Action =="Ko Lost"|Action=="KoBrk Rec"|Action=="KoBrk Lost"|Action =="Ko Mk Rec"|Action =="Ko Lost Mk")
+
+p + geom_point(data = komapA2, aes(x=Areax, y=Areay, colour = Action, shape = Action,size = 4))+
+geom_text_repel(data = komapA2, aes(x=Areax, y=Areay, label = plylab, col = Action), size = 6) +
+theme(plot.title = element_text(hjust=0.5)) +
+theme(plot.subtitle = element_text(hjust=0.5)) +
+theme(legend.position="none") +
+scale_shape_manual(values=c(15, 16, 17, 18,19,20)) +
+    scale_color_manual(values=c("red","black", "white", "red","blue", "red")) 
+```
+
+### Qtr 3
+
+```{r}
+komapA3 <-filter(pass, period == "3", Teamnum == "A",Action=="Ko Rec"| Action =="Ko Lost"|Action=="KoBrk Rec"|Action=="KoBrk Lost"|Action =="Ko Mk Rec"|Action =="Ko Lost Mk")
+
+p + geom_point(data = komapA3, aes(x=Areax, y=Areay, colour = Action, shape = Action,size = 4))+
+geom_text_repel(data = komapA3, aes(x=Areax, y=Areay, label = plylab, col = Action), size = 6) +
+theme(plot.title = element_text(hjust=0.5)) +
+theme(plot.subtitle = element_text(hjust=0.5)) +
+theme(legend.position="none") +
+scale_shape_manual(values=c(15, 16, 17, 18,19,20)) +
+    scale_color_manual(values=c("red","black", "white", "red","blue", "red")) 
+```
+
+### Qtr 4 
+
+```{r}
+komapA4 <-filter(pass, period == "4", Teamnum == "A",Action=="Ko Rec"| Action =="Ko Lost"|Action=="KoBrk Rec"|Action=="KoBrk Lost"|Action =="Ko Mk Rec"|Action =="Ko Lost Mk")
+
+p + geom_point(data = komapA4, aes(x=Areax, y=Areay, colour = Action, shape = Action,size = 4))+
+geom_text_repel(data = komapA4, aes(x=Areax, y=Areay, label = plylab, col = Action), size = 6) +
+theme(plot.title = element_text(hjust=0.5)) +
+theme(plot.subtitle = element_text(hjust=0.5)) +
+theme(legend.position="none") +
+scale_shape_manual(values=c(15, 16, 17, 18,19,20)) +
+    scale_color_manual(values=c("red","black", "white", "red","blue", "red")) 
+```
+
+Scores by Quarter {data-icon="fa-table"}
+========================================     
+
+### Qtr 1
+
+```{r, fig.width=20, fig.height=20}    
+shotsA1 <- shotvert %>%group_by(Team, foot) %>% filter(Teamnum == "A", period == "1", foot=="Shot Right"| foot =="Shot Left"|foot =="Fk Shot Right"| foot =="Fk Shot Left"
+|foot =="Mk Shot Right"| foot =="Mk Shot Left"|foot =="45 Shot Right"| foot =="45 Shot Left")
+
+qp + geom_point(data = shotsA1, aes(x=shlocx, y=shlocy, colour = foot, size = 6, shape = foot, stroke = 2)) +
+    geom_text_repel(data = shotsA1, aes(x=shlocx, y=shlocy, label = shotlab, col = foot), size = 8) +
+    scale_shape_manual(values = 0:18) +
+    theme(legend.position="bottom", legend.title=element_text(size=15), 
+          legend.text=element_text(size=20)) +
+    theme(plot.title = element_text(hjust=0.5)) +
+    theme(plot.subtitle = element_text(hjust=0.5)) +
+    guides(color = FALSE, size = FALSE) +
+    guides(shape = guide_legend(override.aes = list(size = 12)))
+```
+
+### Qtr 2
+
+```{r}
+shotsA2 <- shotvert %>%group_by(Team, foot) %>% filter(Teamnum == "A", period == "2", foot=="Shot Right"| foot =="Shot Left"|foot =="Fk Shot Right"| foot =="Fk Shot Left"
+|foot =="Mk Shot Right"| foot =="Mk Shot Left"|foot =="45 Shot Right"| foot =="45 Shot Left")
+
+qp + geom_point(data = shotsA2, aes(x=shlocx, y=shlocy, colour = foot, size = 6, shape = foot, stroke = 2)) +
+    geom_text_repel(data = shotsA2, aes(x=shlocx, y=shlocy, label = shotlab, col = foot), size = 8) +
+    scale_shape_manual(values = 0:18) +
+    theme(legend.position="bottom", legend.title=element_text(size=15), 
+          legend.text=element_text(size=20)) +
+    theme(plot.title = element_text(hjust=0.5)) +
+    theme(plot.subtitle = element_text(hjust=0.5)) +
+    guides(color = FALSE, size = FALSE) +
+    guides(shape = guide_legend(override.aes = list(size = 12)))
+```
+
+### Qtr 3
+
+```{r}
+shotsA3 <- shotvert %>%group_by(Team, foot) %>% filter(Teamnum == "A", period == "3", foot=="Shot Right"| foot =="Shot Left"|foot =="Fk Shot Right"| foot =="Fk Shot Left"
+|foot =="Mk Shot Right"| foot =="Mk Shot Left"|foot =="45 Shot Right"| foot =="45 Shot Left")
+
+qp + geom_point(data = shotsA3, aes(x=shlocx, y=shlocy, colour = foot, size = 6, shape = foot, stroke = 2)) +
+    geom_text_repel(data = shotsA3, aes(x=shlocx, y=shlocy, label = shotlab, col = foot), size = 8) +
+    scale_shape_manual(values = 0:18) +
+    theme(legend.position="bottom", legend.title=element_text(size=15), 
+          legend.text=element_text(size=20)) +
+    theme(plot.title = element_text(hjust=0.5)) +
+    theme(plot.subtitle = element_text(hjust=0.5)) +
+    guides(color = FALSE, size = FALSE) +
+    guides(shape = guide_legend(override.aes = list(size = 12)))
+```
+
+### Qtr 4
+
+```{r}
+
+shotsA4 <- shotvert %>%group_by(Team, foot) %>% filter(Teamnum == "A", period == "4", foot=="Shot Right"| foot =="Shot Left"|foot =="Fk Shot Right"| foot =="Fk Shot Left"
+|foot =="Mk Shot Right"| foot =="Mk Shot Left"|foot =="45 Shot Right"| foot =="45 Shot Left")
+
+qp + geom_point(data = shotsA4, aes(x=shlocx, y=shlocy, colour = foot, size = 6, shape = foot, stroke = 2)) +
+    geom_text_repel(data = shotsA4, aes(x=shlocx, y=shlocy, label = shotlab, col = foot), size = 8) +
+    scale_shape_manual(values = 0:18) +
+    theme(legend.position="bottom", legend.title=element_text(size=15), 
+          legend.text=element_text(size=20)) +
+    theme(plot.title = element_text(hjust=0.5)) +
+    theme(plot.subtitle = element_text(hjust=0.5)) +
+    guides(color = FALSE, size = FALSE) +
+    guides(shape = guide_legend(override.aes = list(size = 12)))
+```

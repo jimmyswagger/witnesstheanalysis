@@ -1,0 +1,34 @@
+mv <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/mv.csv"+ header=TRUE+ sep=";")
+attach (mv)
+mv
+
+
+
+mlm1 <- lm(cbind(TOT+ AMI) ~ GEN + AMT + PR + DIAP + QRS+ data = ami_data)
+summary(mlm1)
+
+
+sopA <- sop %>% select(Zone+main+subsetoc+Entry_45+plyshot+shot_type+Shotx+Shoty+Ko_Dist+Ko_Time+Shot_Dist+Pass_Op+Tot_Dist+m.s+Pitch_Area_Rec)
+
+model <- lm(sales ~ youtube + facebook + newspaper+ data = marketing)
+summary(model)
+
+model <- lm(subsetoc ~ Zone+main+Entry_45+plyshot+shot_type+Shotx+Shoty+Ko_Dist+Ko_Time+Shot_Dist+Pass_Op+Tot_Dist+m.s+Pitch_Area_Rec+ data = mv)
+summary(model)
+
+
+mlm1 <- lm(cbind(subsetoc) ~ zone+main+shdf+Ko_Dist+Ko_Time+Shot_Dist+Pass_Op+Tot_Dist+m.s, data = mv)
+summary(mlm1)
+
+
+zone+main+shdf+	subsetoc+Ko_Dist+Ko_Time+Shot_Dist+Pass_Op+Tot_Dist+m.s
+
+
+mlm2 <- lm2(cbind(subsetoc) ~ shdf+Shot_Dist+Pass_Op+Tot_Dist, data = mv)
+summary(mlm2)
+
+model <- lm(subsetoc ~ zone+main+shdf+Ko_Dist+Ko_Time+Shot_Dist+Pass_Op+Tot_Dist+m.s, data = mv)
+summary(model)
+
+model <- lm(subsetoc ~ shdf+Shot_Dist+Pass_Op+m.s, data = mv)
+summary(model)

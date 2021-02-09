@@ -1,0 +1,263 @@
+```{r}
+create_Stats_Pitch <- function(grass_colour, line_colour, background_colour, goal_colour, BasicFeatures){
+  
+  theme_blankPitch = function(size=12) { 
+    theme(
+      #axis.line=element_blank(), 
+      axis.text.x=element_blank(), 
+      axis.text.y=element_blank(), 
+      #axis.ticks.y=element_text(size=size),
+      #axis.ticks=element_blank(),
+      axis.ticks.length=unit(0, "lines"), 
+      #axis.ticks.margin=unit(0, "lines"), 
+      axis.title.x=element_blank(), 
+      axis.title.y=element_blank(), 
+      legend.key.size=unit(1.2, "lines"), 
+      legend.text=element_text(size=size), 
+      legend.title=element_text(size=size, face="bold",hjust=0),
+      # panel.border=element_blank(), 
+      panel.grid.major=element_blank(), 
+      panel.grid.minor=element_blank(), 
+      panel.spacing=element_blank(), 
+      plot.margin=unit(c(0, 0, 0, 0), "lines"), 
+      plot.title=element_text(size=size*1.2), 
+      panel.background=element_rect(fill= background_colour,colour= background_colour),
+      strip.text.x=element_text(size=size*1))}
+
+  ymin <- 0 # minimum width
+  ymax <- 98 # maximum width
+  xmin <- 0 # minimum length
+  xmax <- 144 # maximum length
+  
+  # Defining features along the length
+  defel <- 0
+  def14 <- 13
+  def21 <- 20
+  def45 <- 45
+  def65 <- 65
+  off65 <- 79
+  off45 <- 99
+  off21 <- 124
+  off14 <- 131
+  offel <- 144
+  
+  # small sqaure
+
+  sixYardrd <- 42
+  sixYardld <- 56
+  sixYardDefxst <- 4.5
+  sixYardOffxst <- 139.5
+
+
+  #13 box
+  right14d <- 39.5
+  left14d <- 58.5
+
+  #halfway line
+  hwxst <- 72.5
+  hwyst <- 45.75
+  hwxed <- 72.5
+  hwyed <- 52.25
+	   
+
+
+  circleFundef <- function(center=c(0,0), diameter=1, npoints=100, start=0, end=2)
+  {
+    tt <- seq(start*pi, end*pi, length.out=npoints)
+    data.frame(x = center[1] + diameter / 2 * cos(tt), 
+               y = center[2] + diameter / 2 * sin(tt))
+  }
+  
+  circleFunatt <- function(center=c(0,0), diameter=1, npoints=100, start=0, end=2)
+  {
+    tt <- seq(start*pi, end*pi, length.out=npoints)
+    data.frame(x = center[1] - diameter / 2 * cos(tt), 
+               y = center[2] - diameter / 2 * sin(tt))
+  }
+  #### create semi circle ####
+  def_circle <-  circleFundef(c(20,49), 26, start=1.5, end=2.5)
+  att_circle <-  circleFunatt(c(124,49), 26, start=1.5, end=2.5)
+  
+  if(BasicFeatures == TRUE){
+    ## initiate the plot, set some boundries to the plot
+    np <- ggplot() + xlim(c(xmin,xmax)) + ylim(c(ymin,ymax)) +
+      # add the theme 
+      theme_blankPitch() +
+      # add halway line
+      geom_rect(aes(xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax), fill = grass_colour, colour = line_colour) + 
+      geom_segment(aes(x = def14, y = ymin, xend = def14, yend = ymax),colour = line_colour,linetype="solid") +   
+      geom_segment(aes(x = def21, y = ymin, xend = def21, yend = ymax),colour = line_colour,linetype="solid") + 
+      geom_segment(aes(x = def45, y = ymin, xend = def45, yend = ymax),colour = line_colour,linetype="solid") +
+      geom_segment(aes(x = def65, y = ymin, xend = def65, yend = ymax),colour = line_colour,linetype="solid") +
+      geom_segment(aes(x = off65, y = ymin, xend = off65, yend = ymax),colour = line_colour,linetype="solid") +
+      geom_segment(aes(x = off45, y = ymin, xend = off45, yend = ymax),colour = line_colour,linetype="solid") +
+      geom_segment(aes(x = off21, y = ymin, xend = off21, yend = ymax),colour = line_colour,linetype="solid") +
+      geom_segment(aes(x = off14, y = ymin, xend = off14, yend = ymax),colour = line_colour,linetype="solid") + 
+      geom_segment(aes(x = xmin, y = right14d, xend = def14, yend = right14d),colour = line_colour,linetype="solid") + 
+      geom_segment(aes(x = xmin, y = left14d, xend = def14, yend = left14d),colour = line_colour,linetype="solid") + 
+      geom_segment(aes(x = xmax, y = right14d, xend = off14, yend = right14d),colour = line_colour,linetype="solid") + 
+      geom_segment(aes(x = xmax, y = left14d, xend = off14, yend = left14d),colour = line_colour,linetype="solid") + 
+      geom_segment(aes(x = hwxst, y = hwyst, xend = hwxed, yend = hwyed),colour = line_colour,linetype="solid") +
+      geom_segment(aes(x = xmin, y = sixYardrd, xend = sixYardDefxst, yend = sixYardrd),colour = line_colour,linetype="solid") + 
+      geom_segment(aes(x = xmin, y = sixYardld, xend = sixYardDefxst, yend = sixYardld),colour = line_colour,linetype="solid") +
+      geom_segment(aes(x = sixYardDefxst, y = sixYardrd, xend = sixYardDefxst, yend = sixYardld),colour = line_colour,linetype="solid") +
+      geom_segment(aes(x = xmax, y = sixYardrd, xend = sixYardOffxst, yend = sixYardrd),colour = line_colour,linetype="solid") + 
+      geom_segment(aes(x = xmax, y = sixYardld, xend = sixYardOffxst, yend = sixYardld),colour = line_colour,linetype="solid") +
+      geom_segment(aes(x = sixYardOffxst, y = sixYardrd, xend = sixYardOffxst, yend = sixYardld),colour = line_colour,linetype="solid") +
+      geom_segment(aes(x = 0, y = 45.75, xend = 0, yend = 52.25),colour = "blue", size = 2) +
+      geom_segment(aes(x =144, y = 45.75, xend = 144, yend = 52.5),colour = "red", size = 2) +
+      geom_path(data=def_circle, aes(x,y), colour = line_colour,size = 0.5) +
+      geom_path(data=att_circle, aes(x,y), colour = line_colour,size = 0.5) + 
+      annotate(geom="text", x= 20, y=.57, label="21",color = "white") +
+      annotate(geom="text", x= 45, y=.57, label="45",color = "blue") +
+      annotate(geom="text", x= 65, y=.57, label="65",color = "white") +
+      annotate(geom="text", x= 79, y=.57, label="65",color = "white") +
+      annotate(geom="text", x=99, y=.57, label="45", color="red") +
+      annotate(geom="text", x=124, y=.57, label="21",color = "white") +
+      annotate(geom="text", x= 72, y=4, label="www.witnesstheanalysis.com",color = "black",size = 6, alpha = 0.4) +
+      annotate(geom="text", x= 72, y=96, label="www.witnesstheanalysis.com",color = "black",size = 6, alpha = 0.4)
+    
+  }
+  
+  else{
+    ## initiate the plot, set some boundries to the plot
+    np <- ggplot() + xlim(c(xmin,xmax)) + ylim(c(ymin-0.5,ymax+0.5)) +
+      # add the theme 
+      theme_blankPitch() +
+      # add the base rectangle of the pitch 
+      geom_rect(aes(xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax), fill = grass_colour, colour = line_colour) +
+      geom_rect(aes(xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax), fill = grass_colour, colour = line_colour) +
+      geom_segment(aes(x = off65, y = ymin, xend = off65, yend = ymax),colour = line_colour) +
+      geom_segment(aes(x = off45, y = ymin, xend = off45, yend = ymax),colour = "Red",linetype="dotted")
+    
+  }
+  
+  return(np)}
+
+
+np <- create_Stats_Pitch("#A2CD5A", "white", "black", "#000000", BasicFeatures=TRUE)
+  
+```
+pass <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/anyall.csv", header=TRUE, sep=";")
+attach (pass)
+
+positionA <-pass %>% filter (team == "A", group =="3")
+positionB <-pass %>% filter (team == "B", group =="5")
+centA <-pass %>% filter (team == "A", group =="7")
+centB <- pass %>% filter (team == "B", group =="8")  
+
+np + geom_point(data = positionA, aes(x=Areax, y=Areay), colour = "red",size = 3, shape = 15) +
+geom_point(data = positionB, aes(x=Areax, y=Areay), colour = "blue",size = 3, shape = 16) +
+geom_point(data = centA, aes(x=Areax, y=Areay), colour = "red",size = 5, shape = 3, stroke = 2) +
+geom_point(data = centB, aes(x=Areax, y=Areay), colour = "blue",size = 5, shape = 3, stroke = 2) +
+  theme(legend.position="none")
+
+#surface area
+np + geom_point(data = positionA, aes(x=Areax, y=Areay, colour = team, shape = team),size = 3) +
+ stat_chull(data = positionA,aes(x=Areax, y=Areay,color = team, fill = team), alpha = 0.1, geom = "polygon") 
+
+np + geom_point(data = positionA, aes(x=Areax, y=Areay, colour = team),size = 3,shape = 15) +
+ stat_chull(data = positionA,aes(x=Areax, y=Areay,color = team, fill = team), alpha = 0.1, geom = "polygon") +
+ geom_point(data = positionB, aes(x=Areax, y=Areay, colour = team),size = 3,shape = 16) +
+ stat_chull(data = positionB,aes(x=Areax, y=Areay,color = team, fill = team), alpha = 0.1, geom = "polygon") +
+theme(legend.position="bottom")
+
+pass <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/anyall.csv", header=TRUE, sep=";")
+attach (pass)
+
+np + geom_point(data = posit, aes(x=Areax, y=Areay, colour = team, shape = team)) +
+ stat_chull(data = posit,aes(x=Areax, y=Areay,color = team, fill = team), alpha = 0.1, geom = "polygon")
+
+np + geom_point(data = positionA, aes(x=Areax, y=Areay, colour = team, shape = team),size = 3) +
+ stat_chull(data = positionA,aes(x=Areax, y=Areay,color = team, fill = team), alpha = 0.1, geom = "polygon") +
+ geom_segment(aes(x =96.54, y = 26.00, xend = 137.51, yend = 26.00),colour = "black",linetype= 1) +
+      geom_segment(aes(x =95, y = 27.34, xend = 95, yend = 79.64),colour = "black",linetype= 1) 
+
+
+
+#Voronoi
+
+voronoi <- deldir(positionA$Areax, positionA$Areay)
+
+np + geom_point(data = positionA, aes(x=Areax, y=Areay, colour = team)) +
+geom_text_repel(data = positionA, aes(x=Areax, y=Areay, label = player), size = 3)+
+geom_segment(
+    aes(x = x1, y = y1, xend = x2, yend = y2),
+    size = .5,
+    data = voronoi$dirsgs,
+    linetype = 2,
+    color= "white")
+
+pass <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/anyall.csv", header=TRUE, sep=";")
+attach (pass)
+
+posit <-pass %>% filter (vor== "1")
+
+voronoi <- deldir(posit$Areax, posit$Areay)
+
+np + geom_point(data = posit, aes(x=Areax, y=Areay, colour = team)) +
+geom_text_repel(data = posit, aes(x=Areax, y=Areay, label = player), size = 3)+
+geom_segment(
+    aes(x = x1, y = y1, xend = x2, yend = y2),
+    size = .5,
+    data = voronoi$dirsgs,
+    linetype = 1,
+    color= "white")
+
+
+#Delaunay triangulation
+
+voronoi <- deldir(positionA$Areax, positionA$Areay)
+voronoib <- deldir(positionB$Areax, positionB$Areay)
+
+
+np + geom_point(data = positionA, aes(x=Areax, y=Areay, colour = team)) +
+geom_text_repel(data = positionA, aes(x=Areax, y=Areay, label = player), size = 3)+
+geom_segment(
+    aes(x = x1, y = y1, xend = x2, yend = y2),
+    size = .5,
+    data =  voronoi$delsgs,
+    linetype = 1,
+    color= "red") +
+geom_point(data = positionB, aes(x=Areax, y=Areay, colour = team)) +
+geom_text_repel(data = positionB, aes(x=Areax, y=Areay, label = player), size = 3)+
+geom_segment(
+    aes(x = x1, y = y1, xend = x2, yend = y2),
+    size = .5,
+    data =  voronoib$delsgs,
+    linetype = 1,
+    color= "blue")
+
+------------------------
+
+
+shot	team	outcome	player	time	x	y
+Left	B	Goal	15	NA	137.51	44.51
+Left	B	Goal	14	NA	128.64	51.96
+Left	B	Goal	13	NA	121.67	31.97
+Left	B	Goal	12	NA	134.76	75.41
+Left	B	Goal	11	NA	121.25	79.64
+Left	B	Goal	10	NA	110.47	54.27
+Left	B	Goal	9	NA	96.75	59.27
+Left	B	Goal	8	NA	103.72	65.42
+Left	B	Goal	7	NA	108.36	68.68
+Left	B	Goal	5	NA	119.56	68.30
+Left	B	Goal	4	NA	96.54	45.62
+Left	B	Goal	3	NA	39.30	43.89
+Left	B	Goal	2	NA	55.77	61.96
+Left	B	Goal	1	NA	2.55	48.88
+Left	A	Point	1	NA	141.94	48.88
+Left	A	Point	2	NA	137.72	46.58
+Left	A	Point	3	NA	129.27	54.07
+Left	A	Point	4	NA	120.82	34.85
+Left	A	Point	5	NA	119.98	45.62
+Left	A	Point	6	NA	118.71	54.65
+Left	A	Point	7	NA	138.78	72.91
+Left	A	Point	8	NA	123.36	66.38
+Left	A	Point	9	NA	122.51	77.14
+Left	A	Point	10	NA	113.01	51.00
+Left	A	Point	11	NA	106.67	61.96
+Left	A	Point	12	NA	115.75	63.69
+Left	A	Point	13	NA	107.31	45.42
+Left	A	Point	14	NA	56.41	59.27
+Left	A	Point	15	NA	40.15	41.77

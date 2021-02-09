@@ -1,0 +1,49 @@
+#All Shots (add in rest of shot outcomes )
+#finish in excel
+
+shotsall <- pass%>%group_by(Team,poss) %>% filter(main =="Shot Op Oc"|main =="Shot Rs Oc"|main == "Shot Op"|main =="Shot Rs")%>%select(-plyname)
+
+oddps <- shotsall[seq(1, nrow(shotsall), 2),]
+colnames(oddps) <- c("period","possno","poss","phaseno","Phase","Teamnum","Team","Player","Action","Areax","Areay","plylab","subset","Zone","time","main")
+evenps <- shotsall[seq(2, nrow(shotsall), 2),]
+colnames(evenps) <- c("periodoc","possnooc","possoc","phasenooc","Phaseoc","Teamnumoc","Teamoc","Playeroc","Actionoc","Areaxoc","Areayoc","plylaboc","subsetoc","Zoneoc","timeoc","mainoc")
+shotsall <- bind_cols(oddps, evenps) 
+shotsall <- shotsall%>%select("period","possno","poss","phaseno","Phase","Teamnum","Team","Player","Action","Zone","Areax","Areay","plylab","subset"
+,"Actionoc","Zoneoc","Areaxoc","Areayoc","plylaboc","subsetoc","timeoc")
+
+scores = shotsall %>% 
+   unite(Shot_lab, plylab, timeoc, sep = " ", remove = FALSE)
+
+scores <- scores%>% mutate(score = ifelse(Actionoc == "Goal",3,ifelse(Actionoc == "Pk Goal",3,ifelse(Actionoc == "Mk Point",1,ifelse(Actionoc == "Fk Point",1, ifelse(Actionoc == "Point",1,0))))))
+
+scored <- scores  %>%group_by(Teamnum)%>% mutate(Tot_Scr = cumsum(score))
+
+scored <- scored  %>%group_by(Teamnum)%>%  mutate(Tot_ScrA = cumsum(ifelse(Teamnum == "A",score,0)))
+#scored <- scored  %>%group_by(Teamnum)%>%  mutate(Tot_ScrAA = cumsum(ifelse(Teamnum == "A"|Teamnum == "B",score,ifelse(Teamnum == "A",score,0))))
+#scored <- scored  %>%group_by(Teamnum)%>%  mutate(Tot_ScrB = cumsum(ifelse(Teamnum == "B",score,0)))
+#scored <- scored  %>%group_by(Teamnum)%>%  mutate(Scr_Dif = (ifelse(Teamnum == "A",Tot_ScrA  ,ifelse(Teamnum == "B",Tot_ScrA - Tot_ScrB ,0))))
+
+scored <-scored %>% 
+  mutate(newcol = (ifelse(Teamnum == "A"|Teamnum == "B",cumsum (score), lag(Tot_ScrA))))
+
+
+#scored <- scored  %>%group_by(Teamnum)%>%  mutate(Scr_Dif = (Tot_ScrA-Tot_ScrB))
+
+#scored <- scored %>%group_by(Teamnum)%>% mutate(Scr_Dif = cumsum (ifelse(Teamnum == "A" & subsetoc == "Scr Op"|subsetoc == "Scr Rs",0+ scored$score, ifelse(Teamnum == "B" & subsetoc == "Scr Op"|subsetoc == "Scr Rs",0- scored$score,"-"))))
+
+write.csv2(scored,"scored .csv")
+
+a <- scored  %>%group_by(Teamnum)%>%  mutate(Tot_ScrA = cumsum(ifelse(Teamnum == "A",score,ifelse(Teamnum =="B", score, "-")))
+
+b <-  %>%group_by(Teamnum)%>%  mutate(Tot_ScrA = cumsum(ifelse(Tot_ScrA == "B",(Tot_ScrA-Score),scored$Tot_ScrA)))
+
+formattable (b)
+
+
+c <- scored  %>%group_by(Teamnum)%>%  mutate(Tot= sum(ifelse(Teamnum == "A",(Tot_Scr +score),ifelse(Teamnum =="B", (Tot_Scr -score), "-"))))
+
+c <- scored  %>%group_by(Teamnum)%>%  mutate(Tot= (ifelse(Teamnum == "A",(Tot_Scr +score),ifelse(Teamnum =="B", (Tot_Scr -score), "-"))))
+
+d <- scored  %>%group_by(Teamnum)%>% NewCol = c(NA,cumsum(ifelse(Teamnum == "A",score,ifelse(Teamnum =="B", score, "-"))))
+
+ c(NA,

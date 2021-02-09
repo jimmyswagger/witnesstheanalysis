@@ -1,0 +1,115 @@
+
+run <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/dubmonnfl20/rundubmonnfl20.csv", header=TRUE, sep=";")
+attach (run)
+
+run<- run%>% filter (keep == "Y", Teamnum == "A",main == "Pass Op"| seg == "2", dist > 9.99) %>% select (Areax, Areay, xend, yend)
+
+mc = mclapply(c(50), function(x,centers) kmeans(x, centers, iter.max=1000), x=run[,-1])
+
+run$Cluster.75 <- mc[[1]]$cluster #created clusters using 25 clusters
+
+
+
+Cluster.75.summary <- run %>% group_by(Cluster.75) %>% summarise(X.Pass = mean(Areax),Y.Pass = mean(Areay),
+                                                                          X.Receive = mean(xend), Y.Receive = mean(yend),
+                                                                          count = n()) #obtain for each cluster id, the average location of the pass
+
+
+p + 
+  geom_text(data=Cluster.75.summary,aes(x=X.Pass,y=Y.Pass,label=Cluster.75)) +
+geom_segment(data=Cluster.75.summary, aes(x=X.Pass,xend=X.Receive,y=Y.Pass,yend=Y.Receive),color="blue",size=1.5,arrow=arrow(length = unit(0.03, "npc"))) 
+
+
+
+
+-----------------------------
+
+run <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/dubmonnfl20/rundubmonnfl20.csv", header=TRUE, sep=";")
+attach (run)
+
+
+
+runA <- run%>%filter(Teamnum=="A",keep=="Y",main %in% c("Pass Op","Pass Rs"))
+
+runApass <- runA%>%filter(main %in% c("Pass Op","Pass Rs"))
+
+run<- run%>% filter (keep == "Y", Teamnum == "A",main %in% c("Pass Op","Pass Rs")) %>% select (Areax, Areay, xend, yend)
+
+
+mc = mclapply(c(25,50,75), function(x,centers) kmeans(x, centers, iter.max=1000), x=run[,-1])
+
+run$Cluster.9 <- mc[[1]]$cluster #created clusters using 25 clusters
+run$Cluster.25 <- mc[[1]]$cluster #created clusters using 25 clusters
+run$Cluster.50 <- mc[[2]]$cluster #created clusters using 50 clusters
+run$Cluster.75 <- mc[[3]]$cluster #created clusters using 75 clusters
+
+
+Cluster.75.summary <- run %>% group_by(Cluster.75) %>% summarise(X.Pass = mean(Areax),Y.Pass = mean(Areay),
+                                                                          X.Receive = mean(xend), Y.Receive = mean(yend),
+                                                                          count = n()) #obtain for each cluster id, the average location of the pass
+
+
+p + 
+  geom_text(data=Cluster.75.summary,aes(x=X.Pass,y=Y.Pass,label=Cluster.75)) +
+ geom_segment(data = runApass, aes(x = Areax, y = Areay, xend = xend, yend = yend), colour = "white",size = 0.8,arrow = arrow(length = unit(0.3, "cm"))) +
+geom_segment(data=Cluster.75.summary, aes(x=X.Pass,xend=X.Receive,y=Y.Pass,yend=Y.Receive),color="red",size=1.5,arrow=arrow(length = unit(0.03, "npc"))) 
+
+
+run <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/dubmonnfl20/rundubmonnfl20.csv", header=TRUE, sep=";")
+attach (run)
+
+
+runA <- run%>%filter(Teamnum=="A",keep=="Y",main %in% c("Pass Op"))
+
+run<- run%>% filter (keep == "Y", Teamnum == "A",main %in% c("Pass Op")) %>% select (Areax, Areay, xend, yend)
+
+
+mc = mclapply(c(75,50,90,100), function(x,centers) kmeans(x, centers, iter.max=1000), x=run[,-1])
+
+run$Cluster.A <- mc[[1]]$cluster #created clusters using 25 clusters
+run$Cluster.25 <- mc[[1]]$cluster #created clusters using 25 clusters
+run$Cluster.50 <- mc[[2]]$cluster #created clusters using 50 clusters
+run$Cluster.75 <- mc[[3]]$cluster #created clusters using 75 clusters
+
+
+Cluster.A.summary <- run %>% group_by(Cluster.A) %>% summarise(X.Pass = mean(Areax),Y.Pass = mean(Areay),
+                                                                          X.Receive = mean(xend), Y.Receive = mean(yend),
+                                                                          count = n()) #obtain for each cluster id, the average location of the pass
+
+
+p + geom_segment(data = runA, aes(x = Areax, y = Areay, xend = xend, yend = yend), colour = "black",size = 0.8,arrow = arrow(length = unit(0.3, "cm")),alpha = 0.4) +
+geom_segment(data=Cluster.A.summary, aes(x=X.Pass,xend=X.Receive,y=Y.Pass,yend=Y.Receive),color="red",size=2,arrow=arrow(length = unit(0.03, "npc"))) +
+ geom_text(data=Cluster.A.summary,aes(x=X.Pass,y=Y.Pass,label=Cluster.A)) 
+ 
+-----
+
+
+
+run <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/dubmonnfl20/rundubmonnfl20.csv", header=TRUE, sep=";")
+attach (run)
+
+passlineAllA <- run%>% mutate(vec_col =ifelse(vec > -90 & vec < -55 ,1, ifelse(vec > -55 & vec < -25,2, ifelse(vec > -25 & vec < 25, 3,ifelse(vec > 25 & vec < 55,4,ifelse(vec > 55 & vec < 90,5,
+ifelse(vec > 90 & vec < 145,6,ifelse(vec > 145 & vec < 170,7,ifelse(vec > 170 & vec < -170,8,ifelse(vec > -170 & vec < -145,9,ifelse(vec > -145 & vec < -90, 10,"Draw")))))))))))
+
+passline <-passlineAllA%>%filter(Teamnum == "A",keep=="Y",same == "N", xend > Areax)
+
+passlineA <- passline%>%filter(main == "Pass Op"| seg == "0"|seg == "2")%>% select (Areax, Areay, xend, yend, vec_col)
+
+mc = mclapply(c(25,50,90,100), function(x,centers) kmeans(x, centers, iter.max=1000), x=passlineA[,-1])
+
+passlineA$Cluster.A <- mc[[1]]$cluster #created clusters using 25 clusters
+#run$Cluster.25 <- mc[[1]]$cluster #created clusters using 25 clusters
+#run$Cluster.50 <- mc[[2]]$cluster #created clusters using 50 clusters
+#run$Cluster.75 <- mc[[3]]$cluster #created clusters using 75 clusters
+
+
+Cluster.A.summary <-passlineA %>% group_by(Cluster.A) %>% summarise(X.Pass = mean(Areax),Y.Pass = mean(Areay),
+                                                                          X.Receive = mean(xend), Y.Receive = mean(yend),
+                                                                          count = n()) #obtain for each cluster id, the average location of the pass
+
+
+p + 
+  geom_text(data=Cluster.A.summary,aes(x=X.Pass,y=Y.Pass,label=Cluster.A)) +
+  	geom_segment(data = passlineA, aes(x = Areax, y = Areay, xend = xend, yend = yend, colour = as.factor(vec_col)), size = 0.8,arrow = arrow(length = unit(0.3, "cm"))) +
+  geom_segment(data=Cluster.A.summary, aes(x=X.Pass,xend=X.Receive,y=Y.Pass,yend=Y.Receive),color="red",size=4,arrow=arrow(length = unit(0.03, "npc")), alpha = 0.4) +
+scale_colour_manual(values = veccol)

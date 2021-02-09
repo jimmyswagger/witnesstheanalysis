@@ -1,0 +1,50 @@
+vopA <- pass %>%group_by(Player)%>% filter(Teamnum == "A", 
+Action == "Tack W"|Action == "KP Int"|Action == "HP Int"|
+Action == "Kp Brk Int"| Action == "Hp Brk Int"|Action == "Sl Int"|Action == "Short Gk" |Action == "Mk Kp Int"|Action == "Loose BW"|
+Action == "Ko Int"|Action == "Ko Break Int"|Action == "Ko Int Mk"|Action == "Hp Rec"|Action == "Kp Rec"|Action == "Fk Rec"|Action == "Sl Rec"|Action == "Mk Rec"
+|Action == "Brk Hp Rec"|Action == "Brk Kp Rec"|Action == "Brk Rec"|Action == "Ko Rec"|Action == "KoBrk Own"|Action == "KoBrk Rec"|Action == "Ko Mk Rec")%>% summarise(mean_Areax = mean(Areax), mean_Areay = mean(Areay))
+
+formattable (vopA)
+
+p + geom_point(data = vopA, aes(x=mean_Areax, y=mean_Areay, colour = "yellow")) +
+ stat_chull(data = vopA,aes(x=mean_Areax, y=mean_Areay,color = "yellow", fill = "yellow"), alpha = 0.1, geom = "polygon")
+
+
+vopB <- pass %>%group_by(Player)%>% filter(Teamnum == "B", 
+Action == "Tack W"|Action == "KP Int"|Action == "HP Int"|
+Action == "Kp Brk Int"| Action == "Hp Brk Int"|Action == "Sl Int"|Action == "Short Gk" |Action == "Mk Kp Int"|Action == "Loose BW"|
+Action == "Ko Int"|Action == "Ko Break Int"|Action == "Ko Int Mk"|Action == "Hp Rec"|Action == "Kp Rec"|Action == "Fk Rec"|Action == "Sl Rec"|Action == "Mk Rec"
+|Action == "Brk Hp Rec"|Action == "Brk Kp Rec"|Action == "Brk Rec"|Action == "Ko Rec"|Action == "KoBrk Own"|Action == "KoBrk Rec"|Action == "Ko Mk Rec")%>% summarise(mean_Areax = mean(Areax), mean_Areay = mean(Areay))
+
+formattable (vopB)
+
+Tack W
+KP Int
+HP Int
+Kp Brk Int
+Hp Brk Int
+Kp Free Int
+Sl Int
+Short Gk
+Mk Kp Int
+Loose BW
+Ko Int
+KoBrk Int
+Ko Int Mk
+Free Won Def
+Sl Won To
+
+Hp Rec
+Kp Rec
+Fk Rec
+Sl Rec
+Mk Rec
+Ko Mk Rec
+Brk Hp Rec
+Brk Kp Rec
+Brk Rec
+
+Ko Rec
+KoBrk Own
+KoBrk Rec
+Ko Mk Rec

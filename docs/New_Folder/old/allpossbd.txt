@@ -1,0 +1,247 @@
+
+possbdproper
+
+pass <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/mayker/gamelogmayker.csv", header=TRUE, sep=";")
+attach (pass)
+
+
+pass <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/anyall.csv", header=TRUE, sep=";")
+attach (pass)
+
+pass <- pass%>%filter(Teamnum == "A")
+
+pass <- pass[pass$poss!="0", ]
+pass <- pass[pass$phaseno!="0", ]
+pass <- pass[pass$Team!="Ref", ]
+pass <- pass[pass$main!="Misc", ]
+
+#1Total Actions per Phase
+teamAPhaseposs<- pass%>%group_by(Phase)%>%select(Phase)%>%summarize(count=n()) 
+write.csv2(teamAPhaseposs, "1teamAPhase1poss.csv")
+
+#2Counts makeup of Phase by action Team
+teamAteamposs <- pass%>%group_by(Phase, Action) %>% filter(Teamnum == "A")%>%select(Phase, Action)%>%summarize(count=n()) 
+write.csv2(teamAteamposs, "2teamAteam2Aposs.csv")
+
+#3player involvement in Phase
+teamAplyrposs <- pass%>%group_by(Player,Phase) %>% filter(Teamnum == "A")%>%select(Player,Phase)%>%summarize(count=n()) 
+write.csv2(teamAplyrposs, "3teamAplyr3Aposs.csv")
+
+#4Total Actions per Team Possession 
+teamApossns<- pass%>%group_by(possno) %>% filter(Teamnum == "A")%>%select(possno)%>%summarize(count=n()) 
+write.csv2(teamApossns, "4teamAposs4A.csv")
+
+#5Counts makeup of Team possession by action Team
+teamAteampossns <- pass%>%group_by(possno, Action) %>% filter(Teamnum == "A")%>%select(possno, Action)%>%summarize(count=n()) 
+write.csv2(teamAteampossns, "5teamAteamposs5A.csv")
+
+#6player involvement in poss
+teamAplyrpossns <- pass%>%group_by(Player, possno) %>% filter(Teamnum == "A")%>%select(Player, possno)%>%summarize(count=n()) 
+write.csv2(teamAplyrpossns, "6teamAplyrposs6A.csv") 
+
+
+==========================================================================================================================
+
+pass <- pass[pass$Time!="1", ]
+#time 
+timeA <- pass%>% filter(Teamnum == "A")
+write.csv2(timeA, "timeA.csv")
+
+************************************************************************************************************************
+
+possbdscore
+=====================================================================================
+**********************
+write.csv2(teamAllscore  , "teamAllscore .csv")
+**********************
+
+pass <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/mayker/gamelogmayker.csv", header=TRUE, sep=";")
+attach (pass)
+
+pass <- pass%>%filter(Teamnum == "A")
+
+pass <- pass[pass$poss!="0", ]
+pass <- pass[pass$phaseno!="0", ]
+pass <- pass[pass$Team!="Ref", ]
+pass <- pass[pass$main!="Misc", ]
+
+#Scores Only 
+#id poss with shots
+pashscr <- pass%>%group_by(Team, Action) %>% filter(subset  == "Scr Op"|subset =="Scr Rs")
+
+#Pulls out all of the poss
+teamscr <- subset(pass,possno%in%pashscr$possno)
+
+#1Total Actions per Phase Scores
+teamAPhase<- teamscr %>%group_by(Phase)%>%select(Phase)%>%summarize(count=n()) 
+write.csv2(teamAPhase, "teamAPhase1Ascr.csv")
+
+#2Counts makeup of Phase by action Team Scores
+teamAteam <- teamscr%>%group_by(Phase, Action) %>% filter(Teamnum == "A")%>%select(Phase, Action)%>%summarize(count=n()) 
+write.csv2(teamAteam, "teamAteam2Ascr.csv")
+
+#3player involvement in scr Phase
+teamAplyr <- teamscr%>%group_by(Player,Phase) %>% filter(Teamnum == "A")%>%select(Player,Phase)%>%summarize(count=n()) 
+write.csv2(teamAplyr, "teamAplyr3Ascr.csv")
+
+#4Total Actions per Team Possession Scores
+teamAposs<- teamscr%>%group_by(possno) %>% filter(Teamnum == "A")%>%select(possno)%>%summarize(count=n()) 
+write.csv2(teamAposs, "teamA4Ascr.csv")
+
+#5Counts makeup of Team possession by action Team Scores
+teamAteamposs <- teamscr%>%group_by(possno, Action) %>% filter(Teamnum == "A")%>%select(possno, Action)%>%summarize(count=n()) 
+write.csv2(teamAteamposs, "teamAteam5Ascr.csv")
+
+#6player involvement in poss Scores
+teamAplyrposs <- teamscr%>%group_by(Player, possno) %>% filter(Teamnum == "A")%>%select(Player, possno)%>%summarize(count=n()) 
+write.csv2(teamAplyrposs, "teamAplyr6Ascr.csv") 
+
+#7Player Score Link - By nop
+plyrpossinv <- teamscr%>%group_by(Player, possno) %>% filter(main == "PW"| main == "Ko Rec"| main == "Rec Op"| main == "Rec Rs")%>%select(Player, possno)%>%summarize(count=n()) 
+write.csv2(plyrpossinv, "plyrinv7Ascr.csv") 
+==================================================================================================================================
+
+pass <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/mayker/gamelogmayker.csv", header=TRUE, sep=";")
+attach (pass)
+
+pass <- pass[pass$poss!="0", ]
+
+#Scores Only
+#id poss with shots
+pashscr <- pass%>%group_by(Team, Action) %>% filter(Teamnum == "B", main =="Shot Oc"|main =="Shot Oc Rs")
+
+#Pulls out all of the poss
+teamOpscore <- subset(pass, possno %in% pashscr$possno)
+
+write.csv2(teamAllscore  , "teamAllscore .csv")
+
+#1Total Actions per Phase
+teamBPhase<- teamOpscore %>%group_by(Phase)%>%select(Phase)%>%summarize(count=n()) 
+write.csv2(teamAPhase, "teamAPhase1Ascr.csv")
+
+#2Counts makeup of Phase by action Team
+teamBteam <- teamOpscore%>%group_by(Phase, Action) %>% filter(Teamnum == "A")%>%select(Phase, Action)%>%summarize(count=n()) 
+write.csv2(teamAteam, "teamAteam2Ascr.csv")
+
+#3player involvement in Phase
+teamBplyr <- teamOpscore%>%group_by(Player,Phase) %>% filter(Teamnum == "A")%>%select(Player,Phase)%>%summarize(count=n()) 
+write.csv2(teamAplyr, "teamAplyr3Ascr.csv")
+
+#4Total Actions per Team Possession 
+teamBposs<- teamOpscore%>%group_by(possno) %>% filter(Teamnum == "A")%>%select(possno)%>%summarize(count=n()) 
+write.csv2(teamAposs, "teamAposs4Ascr.csv")
+
+#5Counts makeup of Team possession by action Team
+teamBteamposs <- teamOpscore%>%group_by(possno, Action) %>% filter(Teamnum == "A")%>%select(possno, Action)%>%summarize(count=n()) 
+write.csv2(teamAteamposs, "teamAteamposs5Ascr.csv")
+
+#6player involvement in poss
+teamBplyrposs <- teamOpscore%>%group_by(Player, possno) %>% filter(Teamnum == "A")%>%select(Player, possno)%>%summarize(count=n()) 
+write.csv2(teamAplyrposs, "teamAplyrposs6Ascr.csv") 
+
+***********************************************************************************************************
+
+==========================================================================================================================
+#Time
+
+
+pass <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/anyall.csv", header=TRUE, sep=";")
+attach (pass)
+
+#All Possessions - times
+#time (gamelog with 1 still in time column)
+pass  <- pass[pass$Time!="1", ]
+
+pass <-  pass %>%group_by(Team, Action) %>% filter(Teamnum == "A")
+
+*******skip unless need to save all poss timeteam A****
+timeA <- pass%>% filter(Teamnum == "A")
+write.csv2(timeA, "timeA.csv")
+*************************************************
+
+#All Shots - times
+TeamAshotall <- pass %>%group_by(Team, Action) %>% filter(main  == "Shot Oc"|main=="Shot Oc Rs")
+
+timeAllAshot <- subset(pass, possno %in% TeamAshotall$possno)
+
+write.csv2(timeAllAshot, "timeAllAshot.csv")
+
+#All Scores- times
+
+TeamAscrall <- pass %>%group_by(Team, Action) %>% filter(subset  == "Scr Op"|subset =="Scr Rs")
+
+timeAllAscr <- subset(pass, possno %in% TeamAscrall$possno)
+
+write.csv2(timeAllAscr, "timeAllAscr.csv")
+
+
+------------------------------------------------------------------------------------------------------------------
+timeB <- pass2%>% filter(Teamnum == "B")
+write.csv2(timeB, "timeB.csv")
+
+
+#All Shots -  times B
+TeamBscrall <- pass %>%group_by(Team, Action) %>% filter(Teamnum == "B", main  == "Shot Oc"|main=="Shot Oc Rs")
+
+teamAllBscore <- subset(timeA, possno %in% TeamAscrall$possno)
+
+write.csv2(teamAllscore, "teamAllscore.csv")
+
+===================================================
+
+pass <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/mayker/gamelogmayker.csv", header=TRUE, sep=";")
+attach (pass)
+
+pass <- pass%>%filter(Teamnum == "A")
+
+pass <- pass[pass$poss!="0", ]
+pass <- pass[pass$phaseno!="0", ]
+pass <- pass[pass$Team!="Ref", ]
+pass <- pass[pass$main!="Misc", ]
+
+#1Total Actions per Phase
+teamAPhaseposs<- pass%>%group_by(Phase)%>%select(Phase)%>%summarize(count=n()) 
+write.csv2(teamAPhaseposs, "1teamAPhase1poss.csv")
+
+#3player involvement in Phase
+teamAplyrposs <- pass%>%group_by(Player,Phase) %>% filter(Teamnum == "A")%>%select(Player,Phase)%>%summarize(count=n()) 
+write.csv2(teamAplyrposs, "3teamAplyr3Aposs.csv")
+
+#4Total Actions per Team Possession 
+teamApossns<- pass%>%group_by(possno) %>% filter(Teamnum == "A")%>%select(possno)%>%summarize(count=n()) 
+write.csv2(teamApossns, "4teamAposs4A.csv")
+
+#6player involvement in poss
+teamAplyrpossns <- pass%>%group_by(Player, possno) %>% filter(Teamnum == "A")%>%select(Player, possno)%>%summarize(count=n()) 
+write.csv2(teamAplyrpossns, "6teamAplyrposs6A.csv") 
+
+
+==========================================================================================================================
+pass <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/mayker/gamelogmayker.csv", header=TRUE, sep=";")
+attach (pass)
+
+pass <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/anyall.csv", header=TRUE, sep=";")
+attach (pass)
+
+pass <- pass%>%filter(Teamnum == "B")
+
+pass <- pass[pass$poss!="0", ]
+pass <- pass[pass$phaseno!="0", ]
+pass <- pass[pass$Team!="Ref", ]
+pass <- pass[pass$main!="Misc", ]
+
+#1Total Actions per Phase
+teamBPhaseposs<- pass%>%group_by(Phase)%>%select(Phase)%>%summarize(count=n()) 
+write.csv2(teamBPhaseposs, "1teamBPhaseposs.csv")
+
+#3player involvement in Phase
+teamBplyrposs <- pass%>%group_by(Player,Phase) %>% filter(Teamnum == "B")%>%select(Player,Phase)%>%summarize(count=n()) 
+write.csv2(teamBplyrposs, "3teamBplyrposs.csv")
+
+#4Total Actions per Team Possession 
+teamBpossns<- pass%>%group_by(possno) %>% filter(Teamnum == "B")%>%select(possno)%>%summarize(count=n()) 
+write.csv2(teamBpossns, "4teamBposs.csv")
+
+#6player involvement in poss
+teamBplyrpossns <- pass%>%group_by(Player, possno) %>% filter(Teamnum == "B")%>%select(Player, possno)%>%summarize(count=n()) 
+write.csv2(teamBplyrpossns, "6teamBplyrposs6B.csv") 

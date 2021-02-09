@@ -1,0 +1,3531 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Mayo (1.14) vs Donegal (1.10)</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Witness the Analysis</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Home
+  </a>
+</li>
+<li>
+  <a href="matches.html">
+    <span class="fa fa-volleyball-ball"></span>
+     
+    Matches
+  </a>
+</li>
+<li>
+  <a href="https://witnesstheanalysis.shinyapps.io/Results/">
+    <span class="fas fa fas fa-book"></span>
+     
+    Results
+  </a>
+</li>
+<li>
+  <a href="https://witnesstheanalysis.wordpress.com/2020/07/10/a-match-tracker-application-for-windows-version-3/">
+    <span class="fas fa fas fa-pen"></span>
+     
+    Analysis App
+  </a>
+</li>
+<li>
+  <a href="Trackers.html">
+    <span class="fas fa fas fa-desktop"></span>
+     
+    Shiny Apps
+  </a>
+</li>
+<li>
+  <a href="https://github.com/witnesstheanalysis/witnesstheanalysis">
+    <span class="fa fa-github fa-lg"></span>
+     
+    Codes
+  </a>
+</li>
+<li>
+  <a href="contact.html">
+    <span class="fa fa-envelope fa-lg"></span>
+     
+    Contact
+  </a>
+</li>
+<li>
+  <a href="https://twitter.com/WtAnalysis">
+    <span class="fa fa-twitter fa-lg"></span>
+     
+    Twitter
+  </a>
+</li>
+<li>
+  <a href="https://witnesstheanalysis.wordpress.com">
+    <span class="fa fa-wordpress fa-lg"></span>
+     
+    Blog
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Mayo (1.14) vs Donegal (1.10)</h1>
+
+</div>
+
+
+<p>Super 8s Round 3 - 2019</p>
+<p>#Summary ##Starting Line Up (Number, Player, Playing time) ###Mayo <img src="maydon_files/figure-html/unnamed-chunk-6-1.png" width="1536" /></p>
+<p>###Donegal <img src="maydon_files/figure-html/unnamed-chunk-7-1.png" width="1536" /></p>
+##Scores
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Mayo.Donegal
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Cillian O’Connor (1-4, 0-4f) Michael Murphy (1-4, 2f 1-0 pen)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Paddy Durcan (0-3) Paddy McBrearty (0-2)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+James Carr (0-2) Niall O’Donnell (0-2)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Andy Moran (0-2) Daire O’Baoill (0-2)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Jason Doherty (0-1)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Chris Barrett (0-1)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Kevin McLoughlin (0-1)
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="maydon_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+##Efficiency
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Team
+</th>
+<th style="text-align:left;">
+Score.Eff..
+</th>
+<th style="text-align:left;">
+Shots.PerPoss
+</th>
+<th style="text-align:left;">
+Scores.PP
+</th>
+<th style="text-align:left;">
+Op.Scores.PP
+</th>
+<th style="text-align:left;">
+Fk.Score.
+</th>
+<th style="text-align:left;">
+Ko.
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Mayo
+</td>
+<td style="text-align:left;">
+39%
+</td>
+<td style="text-align:left;">
+53%
+</td>
+<td style="text-align:left;">
+23%
+</td>
+<td style="text-align:left;">
+17%
+</td>
+<td style="text-align:left;">
+57%
+</td>
+<td style="text-align:left;">
+58%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Donegal
+</td>
+<td style="text-align:left;">
+38%
+</td>
+<td style="text-align:left;">
+43%
+</td>
+<td style="text-align:left;">
+17%
+</td>
+<td style="text-align:left;">
+13%
+</td>
+<td style="text-align:left;">
+40%
+</td>
+<td style="text-align:left;">
+81%
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="maydon_files/figure-html/unnamed-chunk-11-1.png" width="50%" /><img src="maydon_files/figure-html/unnamed-chunk-11-2.png" width="50%" /></p>
+<p>##Scoring Timeline <img src="maydon_files/figure-html/unnamed-chunk-12-1.png" width="1536" /></p>
+<p>##Score Differential <img src="maydon_files/figure-html/unnamed-chunk-13-1.png" width="1536" /></p>
+<p>#Positioning &amp; Possessions ##Average Position by Action ###Mayo ###Game <img src="maydon_files/figure-html/unnamed-chunk-14-1.png" width="1536" /></p>
+<p>###Period <img src="maydon_files/figure-html/unnamed-chunk-15-1.png" width="50%" /><img src="maydon_files/figure-html/unnamed-chunk-15-2.png" width="50%" /><img src="maydon_files/figure-html/unnamed-chunk-15-3.png" width="50%" /><img src="maydon_files/figure-html/unnamed-chunk-15-4.png" width="50%" /></p>
+<p>###Donegal ###Game <img src="maydon_files/figure-html/unnamed-chunk-16-1.png" width="1536" /></p>
+<p>###Period <img src="maydon_files/figure-html/unnamed-chunk-17-1.png" width="50%" /><img src="maydon_files/figure-html/unnamed-chunk-17-2.png" width="50%" /><img src="maydon_files/figure-html/unnamed-chunk-17-3.png" width="50%" /><img src="maydon_files/figure-html/unnamed-chunk-17-4.png" width="50%" /></p>
+<p>##Areas of Play by Possession ###Mayo <img src="maydon_files/figure-html/unnamed-chunk-18-1.png" width="1536" /></p>
+<p>###Donegal <img src="maydon_files/figure-html/unnamed-chunk-19-1.png" width="1536" /></p>
+<p>##Denisty Map (All Actions) ###Mayo <img src="maydon_files/figure-html/unnamed-chunk-20-1.png" width="1536" /></p>
+<p>###Donegal <img src="maydon_files/figure-html/unnamed-chunk-21-1.png" width="1536" /></p>
+<p>##Path of Possession</p>
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Lines
+</th>
+<th style="text-align:left;">
+X
+</th>
+<th style="text-align:left;">
+X.1
+</th>
+<th style="text-align:left;">
+X.2
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Action
+</td>
+<td style="text-align:left;">
+Colour
+</td>
+<td style="text-align:left;">
+Action
+</td>
+<td style="text-align:left;">
+Colour
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hand Pass
+</td>
+<td style="text-align:left;">
+Black
+</td>
+<td style="text-align:left;">
+Kickout Lost
+</td>
+<td style="text-align:left;">
+Dark Red
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Run
+</td>
+<td style="text-align:left;">
+Blue
+</td>
+<td style="text-align:left;">
+Kick Pass Left
+</td>
+<td style="text-align:left;">
+Pink
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Score
+</td>
+<td style="text-align:left;">
+Yellow
+</td>
+<td style="text-align:left;">
+Kick Pass Right
+</td>
+<td style="text-align:left;">
+White
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Miss shot
+</td>
+<td style="text-align:left;">
+Red
+</td>
+<td style="text-align:left;">
+Fk/Mk/Sl Pass
+</td>
+<td style="text-align:left;">
+Light Blue
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Kickout
+</td>
+<td style="text-align:left;font-weight: bold;">
+Gold
+</td>
+<td style="text-align:left;font-weight: bold;">
+Pass Loss
+</td>
+<td style="text-align:left;font-weight: bold;">
+Red
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Dots
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Action
+</td>
+<td style="text-align:left;">
+Colour
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Possession Won
+</td>
+<td style="text-align:left;">
+Purple
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Ko/Pass Lost
+</td>
+<td style="text-align:left;">
+Red
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Fk Won
+</td>
+<td style="text-align:left;">
+Blue
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Fk Won (in 45)
+</td>
+<td style="text-align:left;">
+Orange
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Kickout Won
+</td>
+<td style="text-align:left;">
+Black
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+</tbody>
+</table>
+<p>###Mayo <img src="maydon_files/figure-html/unnamed-chunk-24-1.png" width="1536" /></p>
+<p>###Donegal <img src="maydon_files/figure-html/unnamed-chunk-25-1.png" width="1536" /></p>
+<p>#General ##Kick Outs ###Mayo</p>
+<p><img src="maydon_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p><img src="maydon_files/figure-html/unnamed-chunk-27-1.png" width="1536" /></p>
+<p>###Kickout Efficiency <img src="maydon_files/figure-html/unnamed-chunk-28-1.png" width="1536" /></p>
+<p>###Kickout Network - Mayo <img src="maydon_files/figure-html/unnamed-chunk-29-1.png" width="1920" /></p>
+<p>###Donegal</p>
+<p><img src="maydon_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<p><img src="maydon_files/figure-html/unnamed-chunk-31-1.png" width="1536" /></p>
+<p>###Kickout Efficiency</p>
+<p><img src="maydon_files/figure-html/unnamed-chunk-32-1.png" width="1536" /></p>
+<p>###Kickout Network - Donegal <img src="maydon_files/figure-html/unnamed-chunk-33-1.png" width="1920" /></p>
+<p>##Turn overs/Possession Won</p>
+<p>###Mayo</p>
+<p><img src="maydon_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+<p><img src="maydon_files/figure-html/unnamed-chunk-36-1.png" width="1536" /></p>
+<p>###Donegal</p>
+<p><img src="maydon_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
+<p><img src="maydon_files/figure-html/unnamed-chunk-38-1.png" width="1536" /></p>
+<p>##Frees Won ###Mayo</p>
+<p><img src="maydon_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
+<p><img src="maydon_files/figure-html/unnamed-chunk-40-1.png" width="1536" /></p>
+<p>###Donegal</p>
+<p><img src="maydon_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
+<p><img src="maydon_files/figure-html/unnamed-chunk-42-1.png" width="1536" /></p>
+<p>##Frees Loss ###Mayo</p>
+<p><img src="maydon_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
+<p><img src="maydon_files/figure-html/unnamed-chunk-44-1.png" width="1536" /></p>
+<p>###Donegal</p>
+<p><img src="maydon_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
+<p><img src="maydon_files/figure-html/unnamed-chunk-46-1.png" width="1536" /></p>
+<p>#Attacking</p>
+##Attacking Stats
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1">
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Mayo
+</div>
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Donegal
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+X
+</th>
+<th style="text-align:left;">
+Mayo
+</th>
+<th style="text-align:left;">
+X.1
+</th>
+<th style="text-align:left;">
+Donegal
+</th>
+<th style="text-align:left;">
+X.2
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+</td>
+<td style="text-align:left;">
+Shot
+</td>
+<td style="text-align:left;">
+Score
+</td>
+<td style="text-align:left;">
+shot
+</td>
+<td style="text-align:left;">
+score
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+AttTime
+</td>
+<td style="text-align:left;">
+00:14:13
+</td>
+<td style="text-align:left;">
+00:07:05
+</td>
+<td style="text-align:left;">
+00:10:19
+</td>
+<td style="text-align:left;">
+00:04:43
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+possave
+</td>
+<td style="text-align:left;">
+00:00:24
+</td>
+<td style="text-align:left;">
+00:00:28
+</td>
+<td style="text-align:left;">
+00:00:23
+</td>
+<td style="text-align:left;">
+00:00:26
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+phaseave
+</td>
+<td style="text-align:left;">
+00:00:18
+</td>
+<td style="text-align:left;">
+00:00:20
+</td>
+<td style="text-align:left;">
+00:00:16
+</td>
+<td style="text-align:left;">
+00:00:17
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+</td>
+<td style="text-align:left;">
+Origin Type
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+</td>
+<td style="text-align:left;">
+Shot
+</td>
+<td style="text-align:left;">
+Score
+</td>
+<td style="text-align:left;">
+shot
+</td>
+<td style="text-align:left;">
+score
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+PW
+</td>
+<td style="text-align:left;">
+26
+</td>
+<td style="text-align:left;">
+11
+</td>
+<td style="text-align:left;">
+17
+</td>
+<td style="text-align:left;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Ko
+</td>
+<td style="text-align:left;">
+9
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+</td>
+<td style="text-align:left;">
+Pitch Area Origin
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+</td>
+<td style="text-align:left;">
+Shot
+</td>
+<td style="text-align:left;">
+Score
+</td>
+<td style="text-align:left;">
+shot
+</td>
+<td style="text-align:left;">
+score
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Def
+</td>
+<td style="text-align:left;">
+25
+</td>
+<td style="text-align:left;">
+12
+</td>
+<td style="text-align:left;">
+13
+</td>
+<td style="text-align:left;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Def Mid
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Att Mid
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+9
+</td>
+<td style="text-align:left;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Att
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+</td>
+<td style="text-align:left;">
+Poss Duration
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+secs
+</td>
+<td style="text-align:left;">
+Shot
+</td>
+<td style="text-align:left;">
+Score
+</td>
+<td style="text-align:left;">
+shot
+</td>
+<td style="text-align:left;">
+score
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+0-9
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+10-19
+</td>
+<td style="text-align:left;">
+12
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+11
+</td>
+<td style="text-align:left;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+20-29
+</td>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+30-39
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:left;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+40-49
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+50-59
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+60-69
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+70+
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+</tr>
+</tbody>
+</table>
+##Shot Stats
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Team
+</th>
+<th style="text-align:left;">
+Poss
+</th>
+<th style="text-align:left;">
+Phase
+</th>
+<th style="text-align:left;">
+All.Shots
+</th>
+<th style="text-align:left;">
+All.Scores
+</th>
+<th style="text-align:left;">
+Shots.Per.Poss
+</th>
+<th style="text-align:left;">
+Scores.PP
+</th>
+<th style="text-align:left;">
+Shots.Op
+</th>
+<th style="text-align:left;">
+Scores.Op
+</th>
+<th style="text-align:left;">
+Score.Eff..
+</th>
+<th style="text-align:left;">
+Op.Scores.PP
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Mayo
+</td>
+<td style="text-align:left;">
+66
+</td>
+<td style="text-align:left;">
+82
+</td>
+<td style="text-align:left;">
+35
+</td>
+<td style="text-align:left;">
+15
+</td>
+<td style="text-align:left;">
+53%
+</td>
+<td style="text-align:left;">
+23%
+</td>
+<td style="text-align:left;">
+28
+</td>
+<td style="text-align:left;">
+11
+</td>
+<td style="text-align:left;">
+39%
+</td>
+<td style="text-align:left;">
+17%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Donegal
+</td>
+<td style="text-align:left;">
+63
+</td>
+<td style="text-align:left;">
+79
+</td>
+<td style="text-align:left;">
+27
+</td>
+<td style="text-align:left;">
+11
+</td>
+<td style="text-align:left;">
+43%
+</td>
+<td style="text-align:left;">
+17%
+</td>
+<td style="text-align:left;">
+21
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+38%
+</td>
+<td style="text-align:left;">
+13%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;font-weight: bold;">
+Team
+</td>
+<td style="text-align:left;font-weight: bold;">
+Poss Time
+</td>
+<td style="text-align:left;font-weight: bold;">
+Ave Poss Shot
+</td>
+<td style="text-align:left;font-weight: bold;">
+Ave Phase Shot
+</td>
+<td style="text-align:left;font-weight: bold;">
+Ave Poss Scr
+</td>
+<td style="text-align:left;font-weight: bold;">
+Ave Phase Scr
+</td>
+<td style="text-align:left;font-weight: bold;">
+Ave Act Poss
+</td>
+<td style="text-align:left;font-weight: bold;">
+Ave Act Sht
+</td>
+<td style="text-align:left;font-weight: bold;">
+Ave Act Scr
+</td>
+<td style="text-align:left;font-weight: bold;">
+</td>
+<td style="text-align:left;font-weight: bold;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Mayo
+</td>
+<td style="text-align:left;">
+00:19:55
+</td>
+<td style="text-align:left;">
+00:00:24
+</td>
+<td style="text-align:left;">
+00:00:18
+</td>
+<td style="text-align:left;">
+00:00:28
+</td>
+<td style="text-align:left;">
+00:00:20
+</td>
+<td style="text-align:left;">
+9.00
+</td>
+<td style="text-align:left;">
+12.06
+</td>
+<td style="text-align:left;">
+14.40
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Donegal
+</td>
+<td style="text-align:left;">
+00:18:38
+</td>
+<td style="text-align:left;">
+00:00:23
+</td>
+<td style="text-align:left;">
+00:00:16
+</td>
+<td style="text-align:left;">
+00:00:26
+</td>
+<td style="text-align:left;">
+00:00:17
+</td>
+<td style="text-align:left;">
+9.36
+</td>
+<td style="text-align:left;">
+12.33
+</td>
+<td style="text-align:left;">
+14.73
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+</tbody>
+</table>
+##Shot Origin &amp; Time
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Mayo
+</th>
+<th style="text-align:left;">
+Shots
+</th>
+<th style="text-align:left;">
+Time.secs
+</th>
+<th style="text-align:left;">
+X
+</th>
+<th style="text-align:left;">
+X.1
+</th>
+<th style="text-align:left;">
+X.2
+</th>
+<th style="text-align:left;">
+X.3
+</th>
+<th style="text-align:left;">
+X.4
+</th>
+<th style="text-align:left;">
+X.5
+</th>
+<th style="text-align:left;">
+X.6
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Area
+</td>
+<td style="text-align:left;">
+0-9
+</td>
+<td style="text-align:left;">
+10-19
+</td>
+<td style="text-align:left;">
+20-29
+</td>
+<td style="text-align:left;">
+30-39
+</td>
+<td style="text-align:left;">
+40-49
+</td>
+<td style="text-align:left;">
+50-59
+</td>
+<td style="text-align:left;">
+60-69
+</td>
+<td style="text-align:left;">
+70+
+</td>
+<td style="text-align:left;">
+Total
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Def
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+25
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Def Mid
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Att Mid
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Att
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mayo
+</td>
+<td style="text-align:left;">
+Scores
+</td>
+<td style="text-align:left;">
+Time secs
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Area
+</td>
+<td style="text-align:left;">
+0-9
+</td>
+<td style="text-align:left;">
+10-19
+</td>
+<td style="text-align:left;">
+20-29
+</td>
+<td style="text-align:left;">
+30-39
+</td>
+<td style="text-align:left;">
+40-49
+</td>
+<td style="text-align:left;">
+50-59
+</td>
+<td style="text-align:left;">
+60-69
+</td>
+<td style="text-align:left;">
+70+
+</td>
+<td style="text-align:left;">
+Total
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Def
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+12
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Def Mid
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Att Mid
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Att
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Donegal
+</td>
+<td style="text-align:left;">
+Shots
+</td>
+<td style="text-align:left;">
+Time secs
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Area
+</td>
+<td style="text-align:left;">
+0-9
+</td>
+<td style="text-align:left;">
+10-19
+</td>
+<td style="text-align:left;">
+20-29
+</td>
+<td style="text-align:left;">
+30-39
+</td>
+<td style="text-align:left;">
+40-49
+</td>
+<td style="text-align:left;">
+50-59
+</td>
+<td style="text-align:left;">
+60-69
+</td>
+<td style="text-align:left;">
+70+
+</td>
+<td style="text-align:left;">
+Total
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Def
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+13
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Def Mid
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Att Mid
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Att
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Donegal
+</td>
+<td style="text-align:left;">
+Scores
+</td>
+<td style="text-align:left;">
+Time secs
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Area
+</td>
+<td style="text-align:left;">
+0-9
+</td>
+<td style="text-align:left;">
+10-19
+</td>
+<td style="text-align:left;">
+20-29
+</td>
+<td style="text-align:left;">
+30-39
+</td>
+<td style="text-align:left;">
+40-49
+</td>
+<td style="text-align:left;">
+50-59
+</td>
+<td style="text-align:left;">
+60-69
+</td>
+<td style="text-align:left;">
+70+
+</td>
+<td style="text-align:left;">
+Total
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Def
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Def Mid
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Att Mid
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Att
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+</tr>
+</tbody>
+</table>
+<p>##Open Play Shots - Location &amp; Outcome</p>
+<p>###Mayo</p>
+<p><img src="maydon_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
+<p><img src="maydon_files/figure-html/unnamed-chunk-52-1.png" width="1536" /></p>
+<p>###Shot Efficiency - Mayo <img src="maydon_files/figure-html/unnamed-chunk-53-1.png" width="1536" /></p>
+<p>###Donegal</p>
+<p><img src="maydon_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
+<p><img src="maydon_files/figure-html/unnamed-chunk-55-1.png" width="1536" /></p>
+<p>###Shot Efficiency - Donegal <img src="maydon_files/figure-html/unnamed-chunk-56-1.png" width="1536" /></p>
+<p>##All Shots - Location &amp; Outcome ###Mayo <img src="maydon_files/figure-html/unnamed-chunk-57-1.png" width="672" /></p>
+<p><img src="maydon_files/figure-html/unnamed-chunk-58-1.png" width="1536" /></p>
+<p>###Donegal <img src="maydon_files/figure-html/unnamed-chunk-59-1.png" width="672" /></p>
+<p><img src="maydon_files/figure-html/unnamed-chunk-60-1.png" width="1536" /></p>
+<p>##All Shots Origin by Possession ###Mayo (Blue = Score) <img src="maydon_files/figure-html/unnamed-chunk-61-1.png" width="1536" /></p>
+<p>###Donegal (Blue = Score) <img src="maydon_files/figure-html/unnamed-chunk-62-1.png" width="1536" /></p>
+<p>##Open Play Shot Origin by Phase ###Mayo (Blue = Score) <img src="maydon_files/figure-html/unnamed-chunk-63-1.png" width="1536" /></p>
+<p>###Donegal (Blue = Score) <img src="maydon_files/figure-html/unnamed-chunk-64-1.png" width="1536" /></p>
+<p>##Shot Network ###Mayo <img src="maydon_files/figure-html/unnamed-chunk-65-1.png" width="1920" /></p>
+<p>###Donegal <img src="maydon_files/figure-html/unnamed-chunk-66-1.png" width="1920" /></p>
+<p>##Score Network ###Mayo <img src="maydon_files/figure-html/unnamed-chunk-67-1.png" width="1920" /></p>
+<p>###Donegal <img src="maydon_files/figure-html/unnamed-chunk-68-1.png" width="1920" /></p>
+<p>#Passing</p>
+##Pass Breakdown
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Mayo.Donegal
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Total Pass 192 213
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hp 157 168
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Kp 22 27
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Kp Left 3 6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Kp Right 19 21
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Fk Pass 10 11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sl Pass 0 3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mk Kp 2 1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mk Hp 0 0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sl Kp Won To 1 3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+45 Pass 0 0
+</td>
+</tr>
+</tbody>
+</table>
+<p>##All Passes ###Mayo</p>
+<p><img src="maydon_files/figure-html/unnamed-chunk-71-1.png" width="1536" /></p>
+<p>###Donegal</p>
+<p><img src="maydon_files/figure-html/unnamed-chunk-72-1.png" width="1536" /></p>
+<p>##Passes into 45 ###Mayo</p>
+<p><img src="maydon_files/figure-html/unnamed-chunk-73-1.png" width="1536" /></p>
+<p>###Donegal</p>
+<p><img src="maydon_files/figure-html/unnamed-chunk-74-1.png" width="1536" /></p>
+<p>##Passes Inside Opp 65 ###Mayo</p>
+<p><img src="maydon_files/figure-html/unnamed-chunk-75-1.png" width="1536" /></p>
+<p>###Donegal</p>
+<p><img src="maydon_files/figure-html/unnamed-chunk-76-1.png" width="1536" /></p>
+<p>##Pass Network ###Mayo</p>
+<p><img src="maydon_files/figure-html/unnamed-chunk-77-1.png" width="1920" /></p>
+<p>###In Degree (Number of Players a Player Received a Pass from)</p>
+<pre><code>##     McDonagh        Moran       Keegan     P Durcan     A O Shea         Carr   O Donoghue    Harrision         Coen   McLoughlin     S O Shea      Barrett        Boyle 
+##           11           11           10           10            9            9            8            7            7            7            6            5            5 
+##      Doherty     O Connor       Boland         Coen        Ruane     Hennelly Higgins (bc)     J Durcan 
+##            5            5            4            3            2            1            0            0</code></pre>
+<p>###Out Degree (Number of Players a Player Made a Pass to)</p>
+<pre><code>##       Keegan     A O Shea     S O Shea    Harrision      Doherty     McDonagh   O Donoghue        Boyle     P Durcan     O Connor         Carr        Moran   McLoughlin 
+##           12           11           11            9            8            7            7            6            6            6            6            6            6 
+##     Hennelly      Barrett         Coen       Boland Higgins (bc)         Coen        Ruane     J Durcan 
+##            5            5            5            5            1            1            1            1</code></pre>
+<p>###Strength in (Number of Passes Received by a Player)</p>
+<pre><code>##       Keegan     McDonagh     P Durcan     A O Shea        Moran         Carr     S O Shea   O Donoghue   McLoughlin    Harrision         Coen     O Connor      Doherty 
+##           21           17           17           16           15           13           12           11            9            8            8            8            7 
+##      Barrett        Boyle       Boland         Coen        Ruane     Hennelly Higgins (bc)     J Durcan 
+##            6            5            5            4            2            1            0            0</code></pre>
+<p>###Strength Out (Number of Passes/Shots Made by a Player)</p>
+<pre><code>##     A O Shea       Keegan     S O Shea    Harrision     P Durcan     McDonagh     O Connor   O Donoghue        Moran         Coen      Doherty        Boyle         Carr 
+##           26           22           15           13           12           11           10           10            9            8            8            7            7 
+##   McLoughlin     Hennelly      Barrett       Boland        Ruane Higgins (bc)         Coen     J Durcan 
+##            7            5            5            5            2            1            1            1</code></pre>
+<p>###Betweenness Centrality (Flow of Passes through a Player)</p>
+<pre><code>##       Boland         Carr     S O Shea     McDonagh         Coen       Keegan        Moran     A O Shea     P Durcan   McLoughlin      Barrett      Doherty   O Donoghue 
+## 0.1448912637 0.1232763712 0.0740231298 0.0620816483 0.0555636599 0.0488696999 0.0390567035 0.0330803119 0.0305462105 0.0281628113 0.0244057332 0.0220601294 0.0218530446 
+##    Harrision        Boyle     O Connor        Ruane     Hennelly         Coen Higgins (bc)     J Durcan 
+## 0.0171835813 0.0108484098 0.0064350270 0.0030075188 0.0012134503 0.0008097166 0.0000000000 0.0000000000</code></pre>
+<p>###Closeness Centrality (How Well connected and central a Player is within the Teams Network)</p>
+<pre><code>##     S O Shea       Keegan     McDonagh     A O Shea     P Durcan        Moran    Harrision   O Donoghue      Barrett      Doherty         Carr   McLoughlin         Coen 
+##    0.7692308    0.7407407    0.7407407    0.7142857    0.6896552    0.6896552    0.6666667    0.6666667    0.6451613    0.6451613    0.6451613    0.6451613    0.6250000 
+##       Boland        Boyle     O Connor     Hennelly         Coen        Ruane Higgins (bc)     J Durcan 
+##    0.6060606    0.5882353    0.5882353    0.5555556    0.5263158    0.4444444    0.4000000    0.3846154</code></pre>
+<p>###Entropy (The Unpredictability in who a Player Passes to/Takes shot)</p>
+<pre><code>##   S O Shea   A O Shea      Ruane      Moran   P Durcan     Keegan       Coen  Harrision       Coen   O Connor       Carr   McDonagh O Donoghue    Doherty McLoughlin 
+##  0.9312335  0.9461621  0.9463946  0.9509180  0.9558746  0.9606500  0.9609640  0.9610582  0.9631397  0.9684276  0.9685922  0.9686382  0.9687862  0.9701274  0.9796133 
+##     Boland    Barrett      Boyle   Hennelly 
+##  0.9848587  0.9866600  0.9881091  1.0000000</code></pre>
+<p>###Global clustering coefficient (Groups of Players who pass to each other)</p>
+<pre><code>## [1] 0.6186896</code></pre>
+<p>###eigen_centrality (How well connected the well connected are)</p>
+<pre><code>##     A O Shea       Keegan     P Durcan     S O Shea     McDonagh   O Donoghue    Harrision        Moran     O Connor         Carr         Coen   McLoughlin      Doherty 
+##  1.000000000  0.990153718  0.764564727  0.665364881  0.636013603  0.541261489  0.527406323  0.526704080  0.461696831  0.435772336  0.382496972  0.361414258  0.360677628 
+##        Boyle      Barrett     Hennelly       Boland         Coen        Ruane Higgins (bc)     J Durcan 
+##  0.248757303  0.247798128  0.148937464  0.128253331  0.098574893  0.029851693  0.016954609  0.004989957</code></pre>
+<p>##Donegal <img src="maydon_files/figure-html/unnamed-chunk-87-1.png" width="1920" /></p>
+<p>###In Degree (Number of Players a Player Received a Pass from)</p>
+<pre><code>##        McFadden        O Baoill       O Donnell        Thompson          Murphy          McHugh       McBrearty         McLoone       McMenamin          Langan 
+##              13              12              11               9               9               8               8               8               6               6 
+## Brennan (bc 63)  McFadden Ferry         Doherty           McGee         Brennan          Gallen          Patton          McHugh         McGrath            Ward 
+##               6               5               4               4               4               4               3               2               1               1 
+##      McGettigan 
+##               0</code></pre>
+<p>###Out Degree (Number of Players a Player Made a Pass to)</p>
+<pre><code>##        McFadden       O Donnell         McLoone       McMenamin          McHugh        O Baoill  McFadden Ferry          Murphy        Thompson          Langan 
+##              14              11               9               8               8               8               8               7               6               6 
+## Brennan (bc 63)         Doherty           McGee          Patton         McGrath         Brennan       McBrearty            Ward          Gallen          McHugh 
+##               6               5               5               4               4               4               4               3               2               2 
+##      McGettigan 
+##               0</code></pre>
+<p>###Strength in (Number of Passes Received by a Player)</p>
+<pre><code>##        McFadden       O Donnell          Murphy        O Baoill         McLoone          McHugh        Thompson       McBrearty       McMenamin Brennan (bc 63) 
+##              24              19              18              17              15              13              12              12              11               8 
+##          Langan         Brennan  McFadden Ferry           McGee          Patton         Doherty          Gallen          McHugh            Ward         McGrath 
+##               7               6               5               5               4               4               4               3               2               1 
+##      McGettigan 
+##               0</code></pre>
+<p>###Strength Out (Number of Passes/Shots Made by a Player)</p>
+<pre><code>##        McFadden       O Donnell         McLoone       McMenamin        O Baoill          Murphy          McHugh        Thompson  McFadden Ferry          Langan 
+##              30              17              15              14              14              13              11              10               9               8 
+##          Patton       McBrearty Brennan (bc 63)           McGee         Doherty         McGrath         Brennan            Ward          McHugh          Gallen 
+##               7               7               7               6               5               4               4               4               3               2 
+##      McGettigan 
+##               0</code></pre>
+<p>###Betweenness Centrality (Flow of Passes through a Player)</p>
+<pre><code>##        McFadden       O Donnell        O Baoill         McLoone        Thompson       McMenamin          Murphy       McBrearty Brennan (bc 63)          Langan 
+##    0.1291128707    0.0864327000    0.0695751507    0.0515528177    0.0433059192    0.0345093765    0.0209722579    0.0168273509    0.0134555108    0.0121897961 
+##          McHugh  McFadden Ferry         Doherty           McGee         Brennan          Patton         McGrath          McHugh            Ward          Gallen 
+##    0.0113795707    0.0111068026    0.0080294486    0.0053296703    0.0030314757    0.0029340981    0.0009569378    0.0003508772    0.0000000000    0.0000000000 
+##      McGettigan 
+##    0.0000000000</code></pre>
+<p>###Closeness Centrality (How Well connected and central a Player is within the Teams Network)</p>
+<pre><code>##        McFadden       O Donnell        O Baoill         McLoone          Murphy       McMenamin          McHugh        Thompson Brennan (bc 63)  McFadden Ferry 
+##      0.46511628      0.45454545      0.44444444      0.44444444      0.42553191      0.41666667      0.41666667      0.41666667      0.41666667      0.40816327 
+##       McBrearty          Langan           McGee         Doherty         Brennan          Patton          Gallen          McHugh         McGrath            Ward 
+##      0.40816327      0.40816327      0.39215686      0.38461538      0.37735849      0.37037037      0.36363636      0.35714286      0.35087719      0.35087719 
+##      McGettigan 
+##      0.04761905</code></pre>
+<p>###Entropy (The Unpredictability in who a Player Passes to/Takes shot)</p>
+<pre><code>##       McMenamin          Patton       O Donnell            Ward          McHugh        McFadden        Thompson          McHugh          Langan         McLoone 
+##       0.9127294       0.9487695       0.9583473       0.9591479       0.9591479       0.9601236       0.9609795       0.9638471       0.9641844       0.9659768 
+##          Murphy       McBrearty        O Baoill         Brennan           McGee Brennan (bc 63)  McFadden Ferry         McGrath         Doherty          Gallen 
+##       0.9661746       0.9683098       0.9708205       0.9739760       0.9766147       0.9782224       0.9902871       1.0000000       1.0000000       1.0000000</code></pre>
+<p>###Global clustering coefficient (Groups of Players who pass to each other)</p>
+<pre><code>## [1] 0.6045016</code></pre>
+<p>###eigen_centrality (How well connected the well connected are)</p>
+<pre><code>##        McFadden       O Donnell          Murphy        O Baoill         McLoone       McMenamin          McHugh        Thompson       McBrearty Brennan (bc 63) 
+##      1.00000000      0.69821712      0.68098691      0.61221317      0.59536415      0.59438222      0.56633096      0.48492015      0.42330290      0.34162855 
+##  McFadden Ferry          Langan          Patton           McGee         Doherty            Ward         Brennan          McHugh          Gallen         McGrath 
+##      0.32374943      0.31487306      0.29815963      0.25954160      0.22128004      0.20780885      0.19649196      0.14059861      0.12593767      0.10758616 
+##      McGettigan 
+##      0.02295532</code></pre>
+<p>#Player Stats ##Player On Ball Possession (Number, Player, Total) ###Mayo</p>
+<p><img src="maydon_files/figure-html/unnamed-chunk-97-1.png" width="1536" /></p>
+<p>###Donegal</p>
+<p><img src="maydon_files/figure-html/unnamed-chunk-98-1.png" width="1536" /></p>
+<p>##Posessions Per Playing Time</p>
+<p><img src="maydon_files/figure-html/unnamed-chunk-99-1.png" width="672" /></p>
+##Player % involvement and shot efficiency
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Team
+</th>
+<th style="text-align:left;">
+ply
+</th>
+<th style="text-align:right;">
+opshots
+</th>
+<th style="text-align:left;">
+Totteamshot
+</th>
+<th style="text-align:right;">
+opscr
+</th>
+<th style="text-align:left;">
+Totteamscr
+</th>
+<th style="text-align:left;">
+convrate
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Mayo
+</td>
+<td style="text-align:left;">
+Hennelly
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mayo
+</td>
+<td style="text-align:left;">
+Barrett
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+4%
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+13%
+</td>
+<td style="text-align:left;">
+100%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mayo
+</td>
+<td style="text-align:left;">
+Harrision
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mayo
+</td>
+<td style="text-align:left;">
+Higgins (bc)
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mayo
+</td>
+<td style="text-align:left;">
+Keegan
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+8%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mayo
+</td>
+<td style="text-align:left;">
+Boyle
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mayo
+</td>
+<td style="text-align:left;">
+Coen
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+4%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mayo
+</td>
+<td style="text-align:left;">
+A O Shea
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mayo
+</td>
+<td style="text-align:left;">
+S O Shea
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mayo
+</td>
+<td style="text-align:left;">
+McDonagh
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+12%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mayo
+</td>
+<td style="text-align:left;">
+Doherty
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+8%
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+13%
+</td>
+<td style="text-align:left;">
+50%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mayo
+</td>
+<td style="text-align:left;">
+P Durcan
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+15%
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+38%
+</td>
+<td style="text-align:left;">
+75%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mayo
+</td>
+<td style="text-align:left;">
+O Connor
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+13%
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mayo
+</td>
+<td style="text-align:left;">
+Coen
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+12%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mayo
+</td>
+<td style="text-align:left;">
+Carr
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+15%
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+25%
+</td>
+<td style="text-align:left;">
+50%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mayo
+</td>
+<td style="text-align:left;">
+O Donoghue
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+4%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mayo
+</td>
+<td style="text-align:left;">
+Moran
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+15%
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+25%
+</td>
+<td style="text-align:left;">
+50%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mayo
+</td>
+<td style="text-align:left;">
+McLoughlin
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+4%
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+13%
+</td>
+<td style="text-align:left;">
+100%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mayo
+</td>
+<td style="text-align:left;">
+Boland
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mayo
+</td>
+<td style="text-align:left;">
+Ruane
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mayo
+</td>
+<td style="text-align:left;">
+J Durcan
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+</tbody>
+</table></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Team
+</th>
+<th style="text-align:left;">
+ply
+</th>
+<th style="text-align:right;">
+opshots
+</th>
+<th style="text-align:left;">
+Totteamshot
+</th>
+<th style="text-align:right;">
+opscr
+</th>
+<th style="text-align:left;">
+Totteamscr
+</th>
+<th style="text-align:left;">
+convrate
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Donegal
+</td>
+<td style="text-align:left;">
+Patton
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Donegal
+</td>
+<td style="text-align:left;">
+McGrath
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Donegal
+</td>
+<td style="text-align:left;">
+Doherty
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Donegal
+</td>
+<td style="text-align:left;">
+McMenamin
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Donegal
+</td>
+<td style="text-align:left;">
+McHugh
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+5%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Donegal
+</td>
+<td style="text-align:left;">
+O Baoill
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+10%
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+25%
+</td>
+<td style="text-align:left;">
+100%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Donegal
+</td>
+<td style="text-align:left;">
+McFadden Ferry
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Donegal
+</td>
+<td style="text-align:left;">
+McFadden
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Donegal
+</td>
+<td style="text-align:left;">
+McGee
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Donegal
+</td>
+<td style="text-align:left;">
+Thompson
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+5%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Donegal
+</td>
+<td style="text-align:left;">
+O Donnell
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+14%
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+25%
+</td>
+<td style="text-align:left;">
+67%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Donegal
+</td>
+<td style="text-align:left;">
+Brennan
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+5%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Donegal
+</td>
+<td style="text-align:left;">
+McBrearty
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+29%
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+25%
+</td>
+<td style="text-align:left;">
+33%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Donegal
+</td>
+<td style="text-align:left;">
+Murphy
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+19%
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+25%
+</td>
+<td style="text-align:left;">
+50%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Donegal
+</td>
+<td style="text-align:left;">
+Langan
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+10%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Donegal
+</td>
+<td style="text-align:left;">
+McLoone
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+5%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+0%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Donegal
+</td>
+<td style="text-align:left;">
+Brennan (bc 63)
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Donegal
+</td>
+<td style="text-align:left;">
+Ward
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Donegal
+</td>
+<td style="text-align:left;">
+Gallen
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Donegal
+</td>
+<td style="text-align:left;">
+McGettigan
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Donegal
+</td>
+<td style="text-align:left;">
+McHugh
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+</tbody>
+</table></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<p>##Open Play Shots vs Play Time <img src="maydon_files/figure-html/unnamed-chunk-101-1.png" width="672" /></p>
+<p>##Open Play Scores vs Play Time <img src="maydon_files/figure-html/unnamed-chunk-102-1.png" width="672" /></p>
+<p>##Open Play Shots vs Open Play Score <img src="maydon_files/figure-html/unnamed-chunk-103-1.png" width="672" /></p>
+<p>##Player Possession Involvement ###Mayo <img src="maydon_files/figure-html/unnamed-chunk-104-1.png" width="672" /></p>
+<p>###Donegal <img src="maydon_files/figure-html/unnamed-chunk-105-1.png" width="672" /></p>
+<p>##Player Shot Involvement ###Mayo <img src="maydon_files/figure-html/unnamed-chunk-106-1.png" width="672" /></p>
+<p>###Donegal <img src="maydon_files/figure-html/unnamed-chunk-107-1.png" width="672" /></p>
+<p>##Player Score Involvement ###Mayo <img src="maydon_files/figure-html/unnamed-chunk-108-1.png" width="672" /></p>
+<p>###Donegal <img src="maydon_files/figure-html/unnamed-chunk-109-1.png" width="672" /></p>
+<p>##Actions and Zones ##By Period ###Mayo <img src="maydon_files/figure-html/unnamed-chunk-110-1.png" width="672" /></p>
+<p><img src="maydon_files/figure-html/unnamed-chunk-111-1.png" width="672" /></p>
+<p>###Donegal <img src="maydon_files/figure-html/unnamed-chunk-112-1.png" width="672" /></p>
+<p><img src="maydon_files/figure-html/unnamed-chunk-113-1.png" width="672" /></p>
+<p>##Zones Frequency ###Mayo</p>
+<p><img src="maydon_files/figure-html/unnamed-chunk-114-1.png" width="672" /></p>
+<p>###Donegal <img src="maydon_files/figure-html/unnamed-chunk-115-1.png" width="672" /></p>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

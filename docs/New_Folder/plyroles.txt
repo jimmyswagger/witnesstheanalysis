@@ -1,8 +1,0 @@
-
-plystats <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/newplan/plystatsnewplan.csv", header=TRUE, sep=";")
-attach (plystats)
-
-plystats <- plystats%>%select(plyno,Teamnum, name,PW,Rec,PassOp,opshots,opscr,ToL,FreeWon,FreeLoss,spoils)
-
-plystats
-

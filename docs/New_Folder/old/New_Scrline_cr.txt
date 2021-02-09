@@ -1,4 +1,0 @@
-scrs <- pass %>%group_by(plyname,Action) %>%  filter(subset %in% c ("Scr Op", "Scr Rs"))%>% mutate (Minute = time/60)
-
-#need to make Minute only
-scrs %>% select(Team,plyname,Action,Minute)

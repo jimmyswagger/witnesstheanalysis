@@ -1,6 +1,0 @@
----
-title: "footer"
-output: html_document
----
-
-<p>Copyright &copy; 2019 WitnesstheAnalysis. All rights reserved.</p>

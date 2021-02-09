@@ -1,4 +1,0 @@
-PosstimeAb  <- sop %>% group_by(period,line_time, .drop = FALSE)%>% filter(Teamnum == "A") %>% summarise(count = n())
-
-ggplot(data = PosstimeAb, aes(x = period, y = count, fill = line_time)) + geom_bar(position="dodge", stat="identity")
-

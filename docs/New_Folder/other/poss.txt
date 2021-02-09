@@ -1,0 +1,187 @@
+#Finds all scores and misses
+
+kerryPAScr <- pass %>%group_by(Team, Action) %>% filter(Teamnum == "A", Action== "Goal"|Action== "Point"|Action== "Fk Goal"|
+Action== "Fk Point"|Action== "Mk Goal"|Action== "Mk Point"|Action== "45 goal"|Action== "45 Point")
+
+kerryPAMis <- pass %>%group_by(Team, Action) %>% filter(Teamnum == "A", Action== "Wide Left"|Action== "Wide Right"|Action== "Save"|Action== "Shot Blk"|
+Action== "Short"|Action== "Fk Short"|Action== "Fk Wide Left"|Action== "Fk Wide Right"|
+Action== "Fk Save"|Action== "Mk Short"|Action== "Mk Wide Left"|Action== "Mk Wide Right"|Action== "Mk Save"|Action== "Mk Pass")
+
+#Pulls out all shots from main
+kerryPASc <- subset(pass, possno %in% kerryPAScr$possno)
+
+kerryPAMi <- subset(pass, possno %in% kerryPAMis$possno)
+
+#Ones that start from turnover
+kerphasePASccq <- kerryPASc %>% filter(Action=="Tack W"|Action=="KP Int"|Action=="HP Int"|Action=="Kp Brk Int"
+|Action=="Hp Brk Int"|Action=="Kp Free Int"
+|Action=="Sl Int"|Action=="Short Gk"|Action=="Mk Kp Int"|Action=="Loose BW"|Action=="Ko Int"
+|Action=="KoBrk Int"|Action=="Ko Int Mk"|Action=="Free Won Def"|Action=="Sl Won To")
+
+kerphasePAMicq <- kerryPAMi %>% filter(Action=="Tack W"|Action=="KP Int"|Action=="HP Int"|Action=="Kp Brk Int"
+|Action=="Hp Brk Int"|Action=="Kp Free Int"
+|Action=="Sl Int"|Action=="Short Gk"|Action=="Mk Kp Int"|Action=="Loose BW"|Action=="Ko Int"
+|Action=="KoBrk Int"|Action=="Ko Int Mk"|Action=="Free Won Def"|Action=="Sl Won To")
+
+#Ones that start from kickout
+
+kerphasePAScko <- kerryPASc %>% filter(Action=="Ko Rec"|Action=="KoBrk Rec"|Action=="Ko Mk Rec")
+
+kerphasePAMiko <- kerryPAMi %>% filter(Action=="Ko Rec"|Action=="KoBrk Rec"|Action=="Ko Mk Rec")
+
+p + geom_point(data = kerphasePASccq , aes(x=Areax, y=Areay), colour = "white", size = 6) +
+geom_point(data = kerphasePAMicq, aes(x=Areax, y=Areay), colour = "blue", size = 6) +
+geom_point(data = kerphasePAScko, aes(x=Areax, y=Areay), colour = "orange", size = 6) +
+geom_point(data = kerphasePAMiko, aes(x=Areax, y=Areay), colour = "red", size = 6) +
+scale_shape_manual(values = 0:50)  +
+theme(legend.position = "bottom") + 
+geom_text_repel(data = kerphasePASccq , aes(x=Areax, y=Areay, label = plylab), colour = "white", size = 8) +
+geom_text_repel(data = kerphasePAMicq, aes(x=Areax, y=Areay, label = plylab), col = "blue", size = 8) +
+geom_text_repel(data = kerphasePAScko, aes(x=Areax, y=Areay, label = plylab), colour = "orange", size = 8) + 
+geom_text_repel(data = kerphasePAMiko, aes(x=Areax, y=Areay, label = plylab), col = "red", size = 8) 
+
+----------------------------------------------------------------------------------------------------------------------------
+#Finds all shots
+
+dublinPAScr <- pass %>%group_by(Team, Action) %>% filter(Teamnum == "B", Action== "Goal"|Action== "Point"|Action== "Fk Goal"|
+Action== "Fk Point"|Action== "Mk Goal"|Action== "Mk Point"|Action== "45 goal"|Action== "45 Point")
+
+dublinPAMis <- pass %>%group_by(Team, Action) %>% filter(Teamnum == "B", Action== "Wide Left"|Action== "Wide Right"|Action== "Save"|Action== "Shot Blk"|
+Action== "Short"|Action== "Fk Short"|Action== "Fk Wide Left"|Action== "Fk Wide Right"|
+Action== "Fk Save"|Action== "Mk Short"|Action== "Mk Wide Left"|Action== "Mk Wide Right"|Action== "Mk Save"|Action== "Mk Pass")
+
+#Pulls out all shots from main
+dublinPASc <- subset(pass, possno %in% dublinPAScr$possno)
+
+dublinPAMi <- subset(pass, possno %in% dublinPAMis$possno)
+
+#Ones that start from turnover
+dubphasePASccq <- dublinPASc %>% filter(Action=="Tack W"|Action=="KP Int"|Action=="HP Int"|Action=="Kp Brk Int"
+|Action=="Hp Brk Int"|Action=="Kp Free Int"
+|Action=="Sl Int"|Action=="Short Gk"|Action=="Mk Kp Int"|Action=="Loose BW"|Action=="Ko Int"
+|Action=="KoBrk Int"|Action=="Ko Int Mk"|Action=="Free Won Def"|Action=="Sl Won To")
+
+dubphasePAMicq <- dublinPAMi %>% filter(Action=="Tack W"|Action=="KP Int"|Action=="HP Int"|Action=="Kp Brk Int"
+|Action=="Hp Brk Int"|Action=="Kp Free Int"
+|Action=="Sl Int"|Action=="Short Gk"|Action=="Mk Kp Int"|Action=="Loose BW"|Action=="Ko Int"
+|Action=="KoBrk Int"|Action=="Ko Int Mk"|Action=="Free Won Def"|Action=="Sl Won To")
+
+#Ones that start from kickout
+
+dubphasePAScko <- dublinPASc %>% filter(Action=="Ko Rec"|Action=="KoBrk Rec"|Action=="Ko Mk Rec")
+
+dubphasePAMiko <- dublinPAMi %>% filter(Action=="Ko Rec"|Action=="KoBrk Rec"|Action=="Ko Mk Rec")
+
+p + geom_point(data = dubphasePASccq , aes(x=Areax, y=Areay), colour = "white", size = 6) +
+geom_point(data = dubphasePAMicq, aes(x=Areax, y=Areay), colour = "blue", size = 6) +
+geom_point(data = dubphasePAScko, aes(x=Areax, y=Areay), colour = "orange", size = 6) +
+geom_point(data = dubphasePAMiko, aes(x=Areax, y=Areay), colour = "red", size = 6) +
+scale_shape_manual(values = 0:50)  +
+theme(legend.position = "bottom") + 
+geom_text_repel(data = dubphasePASccq , aes(x=Areax, y=Areay, label = plylab), colour = "white", size = 8) +
+geom_text_repel(data = dubphasePAMicq, aes(x=Areax, y=Areay, label = plylab), col = "blue", size = 8) +
+geom_text_repel(data = dubphasePAScko, aes(x=Areax, y=Areay, label = plylab), colour = "orange", size = 8) + 
+geom_text_repel(data = dubphasePAMiko, aes(x=Areax, y=Areay, label = plylab), col = "red", size = 8) +
+theme(legend.position = "bottom")
+
+
+------------------------------------------------------------------------------------------------------------------------
+Action== "Wide Left"|Action== "Wide Right"|Action== "Save"|Action== "Shot Blk"|
+Action== "Short"|Action== "Fk Short"|Action== "Fk Wide Left"|Action== "Fk Wide Right"|
+Action== "Fk Save"|Action== "Mk Short"|Action== "Mk Wide Left"|
+Action== "Mk Wide Right"|Action== "Mk Save"|Action== "Mk Pass
+
+Action== "Goal"|Action== "Point"|Action== "Fk Goal"|
+Action== "Fk Point"|Action== "Mk Goal"|Action== "Mk Point
+
+--------------------------------------------------------------------------------------------------------------------
+#Finds all shots
+kerryPA <- pass %>%group_by(Team, Action) %>% filter(Teamnum == "A", Action=="Shot Right"| 
+Action =="Shot Left"|Action=="Fk Shot Right"| Action =="Fk Shot Left"|
+Action=="Mk Shot Right"| Action =="Mk Shot Left"|Action =="45 Shot Right"|Action =="45 Shot Left")
+
+#Pulls out all shots from main
+kerryPAp <- subset(pass, possno %in% kerryPA$possno)
+
+#Ones that start from turnover
+kerphasePAcq <- kerryPAp %>% filter(Action=="Tack W"|Action=="KP Int"|Action=="HP Int"|Action=="Kp Brk Int"
+|Action=="Hp Brk Int"|Action=="Kp Free Int"
+|Action=="Sl Int"|Action=="Short Gk"|Action=="Mk Kp Int"|Action=="Loose BW"|Action=="Ko Int"
+|Action=="KoBrk Int"|Action=="Ko Int Mk"|Action=="Free Won Def"|Action=="Sl Won To")
+
+#Ones that start from kickout
+kerphasePAko <- kerryPAp %>% filter(Action=="Ko Rec"|Action=="KoBrk Rec"|Action=="Ko Mk Rec")
+
+p + geom_point(data = kerphasePAcq, aes(x=Areax, y=Areay), colour = "white", size = 6) +
+geom_point(data = kerphasePAko, aes(x=Areax, y=Areay), colour = "blue", size = 6) +
+scale_shape_manual(values = 0:50)  +
+theme(legend.position = "bottom") + 
+geom_text_repel(data = kerphasePAcq, aes(x=Areax, y=Areay, label = plylab), colour = "white", size = 8) +
+geom_text_repel(data = kerphasePAko, aes(x=Areax, y=Areay, label = plylab), col = "blue", size = 8)
+
+---------------------------------------------------------------------------------------------
+
+dublinB <- pass %>%group_by(Team, Action) %>% filter(Teamnum == "B", Action=="Shot Right"| 
+Action =="Shot Left"|Action=="Fk Shot Right"| Action =="Fk Shot Left"|
+Action=="Mk Shot Right"| Action =="Mk Shot Left"|Action =="45 Shot Right"|Action =="45 Shot Left")
+
+dublinBp <- subset(pass, possno %in% dublinB$possno)
+
+dubphaseBcq <- dublinBp %>% filter(Action=="Tack W"|Action=="KP Int"|Action=="HP Int"|Action=="Kp Brk Int"
+|Action=="Hp Brk Int"|Action=="Kp Free Int"
+|Action=="Sl Int"|Action=="Short Gk"|Action=="Mk Kp Int"|Action=="Loose BW"|Action=="Ko Int"
+|Action=="KoBrk Int"|Action=="Ko Int Mk"|Action=="Free Won Def"|Action=="Sl Won To")
+
+dubphaseBko <- dublinBp %>% filter(Action=="Ko Rec"|Action=="KoBrk Rec")
+
+p + geom_point(data = dubphaseBcq, aes(x=Areax, y=Areay), colour = "white", size = 6) +
+geom_point(data = dubphaseBko, aes(x=Areax, y=Areay), colour = "blue", size = 6) +
+theme(legend.position = "bottom") + 
+geom_text_repel(data = dubphaseBcq, aes(x=Areax, y=Areay, label = plylab), colour = "white", size = 8) +
+geom_text_repel(data = dubphaseBko, aes(x=Areax, y=Areay, label = plylab), col = "blue", size = 8)
+
+
+-----------------------------------------------------
+#Phase open play shots
+
+kerryA <- pass %>%group_by(Team, Action) %>% filter(Teamnum == "A", Action=="Shot Right"| 
+Action =="Shot Left")
+
+kerryAp <- subset(pass, Phase %in% kerryA$Phase)
+
+kerphaseAcq <- kerryAp %>% filter(Action=="Tack W"|Action=="KP Int"|Action=="HP Int"|Action=="Kp Brk Int"
+|Action=="Hp Brk Int"|Action=="Kp Free Int"
+|Action=="Sl Int"|Action=="Short Gk"|Action=="Mk Kp Int"|Action=="Loose BW"|Action=="Ko Int"
+|Action=="KoBrk Int"|Action=="Ko Int Mk")
+
+kerphaseARs <- kerryAp %>% filter(Action=="Sl Pass"|Action == "Fk Pass"|Action == "Mk Kp"|Action =="Mk Hp")
+
+kerphaseAko <- kerryAp %>% filter(Action=="Ko Rec"|Action=="KoBrk Rec")
+
+p + geom_point(data = kerphaseAcq, aes(x=Areax, y=Areay), colour = "white", size = 6) +
+geom_point(data = kerphaseARs, aes(x=Areax, y=Areay), colour = "orange", size = 6) +
+geom_point(data = kerphaseAko, aes(x=Areax, y=Areay), colour = "blue", size = 6) +
+scale_shape_manual(values = 0:50)  +
+theme(legend.position = "bottom") + 
+geom_text_repel(data = kerphaseAcq, aes(x=Areax, y=Areay, label = plylab), colour = "white", size = 8) +
+geom_text_repel(data = kerphaseARs, aes(x=Areax, y=Areay, label = plylab), col = "orange", size = 8) +
+geom_text_repel(data = kerphaseAko, aes(x=Areax, y=Areay, label = plylab), col = "blue", size = 8)
+
+--------------------------------------------------------------------------------------
+
+#subset data
+kerryA <- pass %>%group_by(Team, Action) %>% filter(Teamnum == "A", Action=="Shot Right"|Action =="Shot Left")
+
+#id poss with shots
+kerryAp <- subset(pass, possno %in% kerryA$possno)
+
+#Removes rec  (do the same thing)
+kerryAp[kerryAp$Action!="Kp Rec" & kerryAp$Action!= "Hp Rec", ]
+
+kerryAp[ ! kerryAp$Action %in% c("Kp Rec","Hp Rec"), ]
+
+#counts
+kerryApA <- kerryAp %>%group_by(Player, Action)%>%summarize(count=n())
+
+kerryApAA <- kerryAp %>%group_by(Player)%>%summarize(count=n())
+

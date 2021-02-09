@@ -1,0 +1,280 @@
+
+#What needs to be done here and what can be loaded within NewPlan
+
+#**Make sure times for Periods are correct** 
+
+#***Change Team for A B** 
+
+#***Upload Correct Files** 
+
+#add match and pass to plan 
+match <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/dubmonnfl20/matchdubmonnfl20.csv", header=TRUE, sep=";")
+attach (match)
+
+match <- match %>% mutate(Teamnum =ifelse(Team == "Dublin","A","B"))
+
+match <- match%>% mutate(half =ifelse(time < 2220.5,1, ifelse(time > 2222.6,2,"time")))
+
+match <- match %>%mutate(Areax=ifelse(Teamnum == "A" & half == 1,X,ifelse(Teamnum == "B" & half == 1,144-X
+,ifelse(Teamnum == "A" & half == 2,144-X,ifelse(Teamnum == "B" & half == 2,X,X)))))
+
+
+match <-match %>%mutate(Areay=ifelse(Teamnum == "A" & half == 1,Y,ifelse(Teamnum == "B" & half == 1,98-Y
+,ifelse(Teamnum == "A" & half == 2,98-Y,ifelse(Teamnum == "B" & half == 2,Y,Y)))))
+
+match <- match %>% mutate(Zone =
+ifelse(Areax >=0 & Areax <=19.99& Areay >=0 & Areay <=17.99,1, 
+ifelse(Areax >=0 & Areax <=19.99& Areay >=18 & Areay <=35.99,2, 
+ifelse(Areax >=0 & Areax <=19.99& Areay >=36 & Areay <=61.99,3, 
+ifelse(Areax >=0 & Areax <=19.99& Areay >=62 & Areay <=79.99,4, 
+ifelse(Areax >=0 & Areax <=19.99& Areay >=80 & Areay <=98,5, 
+ifelse(Areax >=20 & Areax <=44.99& Areay >=0 & Areay <=17.99,6, 
+ifelse(Areax >=20 & Areax <=44.99& Areay >=18 & Areay <=35.99,7, 
+ifelse(Areax >=20 & Areax <=44.99& Areay >=36 & Areay <=61.99,8, 
+ifelse(Areax >=20 & Areax <=44.99& Areay >=62 & Areay <=79.99,9, 
+ifelse(Areax >=20 & Areax <=44.99& Areay >=80 & Areay <=98,10, 
+ifelse(Areax >=45 & Areax <=71.99& Areay >=0 & Areay <=17.99,11, 
+ifelse(Areax >=45 & Areax <=71.99& Areay >=18 & Areay <=35.99,12, 
+ifelse(Areax >=45 & Areax <=71.99& Areay >=36 & Areay <=61.99,13, 
+ifelse(Areax >=45 & Areax <=71.99& Areay >=62 & Areay <=79.99,14, 
+ifelse(Areax >=45 & Areax <=71.99& Areay >=80 & Areay <=98,15, 
+ifelse(Areax >=72 & Areax <=98.99& Areay >=0 & Areay <=17.99,16, 
+ifelse(Areax >=72 & Areax <=98.99& Areay >=18 & Areay <=35.99,17, 
+ifelse(Areax >=72 & Areax <=98.99& Areay >=36 & Areay <=61.99,18, 
+ifelse(Areax >=72 & Areax <=98.99& Areay >=62 & Areay <=79.99,19, 
+ifelse(Areax >=72 & Areax <=98.99& Areay >=80 & Areay <=98,20, 
+ifelse(Areax >=99 & Areax <=123.99& Areay >=0 & Areay <=17.99,21, 
+ifelse(Areax >=99 & Areax <=123.99& Areay >=18 & Areay <=35.99,22, 
+ifelse(Areax >=99 & Areax <=123.99& Areay >=36 & Areay <=61.99,23, 
+ifelse(Areax >=99 & Areax <=123.99& Areay >=62 & Areay <=79.99,24, 
+ifelse(Areax >=99 & Areax <=123.99& Areay >=80 & Areay <=98,25, 
+ifelse(Areax >=124 & Areax <=144& Areay >=0 & Areay <=17.99,26, 
+ifelse(Areax >=124 & Areax <=144& Areay >=18 & Areay <=35.99,27, 
+ifelse(Areax >=124 & Areax <=144& Areay >=36 & Areay <=61.99,28, 
+ifelse(Areax >=124 & Areax <=144& Areay >=62 & Areay <=79.99,29, 
+ifelse(Areax >=124 & Areax <=144& Areay >=80 & Areay <=98,30
+,"Draw")))))))))))))))))))))))))))))))
+
+
+
+match = match %>% 
+   unite(plyid, Team, Player, sep = " ", remove = FALSE)
+
+sets <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/sets.csv", header=TRUE, sep=";")
+attach (sets)
+
+teamsheet <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/maydubnfl20/teamsheetmaydubnfl20.csv", header=TRUE, sep=";")
+attach (teamsheet)
+
+
+teamsheet = teamsheet %>% 
+   unite(plyid, Team, ply, sep = " ", remove = FALSE)
+   
+zonetext <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/zonetext.csv", header=TRUE, sep=";")
+attach (zonetext) 
+
+match <-match %>%
+    mutate(subset = VLOOKUP(Action, sets, Action, subset), main = VLOOKUP(Action, sets, Action, main),plyname = VLOOKUP(plyid,teamsheet,plyid, name))
+    
+match = match %>% 
+   unite(plylab, Player, Action, sep = " ", remove = FALSE)
+   
+
+#teamcnts <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/newplan/passlinenewplan.csv", header=TRUE, sep=";")
+#attach (teamcnts)
+
+
+teamcnts <- match%>%group_by(Teamnum)%>% mutate(possno = cumsum(main %in% c("PW","Ko")|Action %in% c("45 Shot Left","45 Shot Right")))
+
+teamcnts <- teamcnts%>%group_by(Teamnum)%>% mutate(phaseno = cumsum(main %in% c("PW","Ko","Pass Rs","Shot Rs")))
+
+teamcnts <-teamcnts%>% unite(poss, Teamnum, possno,sep = "",  remove = FALSE)
+
+teamcnts <-teamcnts%>% unite(Phase, Teamnum, phaseno,sep = "",  remove = FALSE)
+
+teamcnts <- teamcnts%>% mutate(period =ifelse(time < 1090.4,1, ifelse(time > 1090.5 & time < 2220.6 ,2, ifelse(time > 2222 & time < 3723.5,3,ifelse(time > 3723.9,4,"Time")))))
+
+teamcnts$Zone <- as.integer(teamcnts$Zone)
+
+teamcnts <- teamcnts %>% mutate(Pitch_Area =ifelse(Zone >0 & Zone  <=5 ,"In_Def", ifelse(Zone >= 6 & Zone  <=10 ,"Mid_Def", ifelse(Zone >=11 & Zone <=15, "Out_Def",ifelse(Zone  >=16 & Zone <=20,"Out_Att",ifelse(Zone  >=21 & Zone <=25, "Mid_Att",ifelse(Zone >=26 & Zone <=30, "In_Att","Draw")))))))
+
+teamcnts <-teamcnts%>%select (period,possno,poss, phaseno, Phase, Teamnum, Team, Player, plyname, Action, Areax, Areay, plylab, subset, Zone, time, main, Pitch_Area)
+
+pass <-teamcnts
+
+pass$period <- as.integer(pass$period)
+pass$poss <- as.factor(pass$poss)
+pass$Phase <- as.factor(pass$Phase)
+pass$Teamnum <- as.factor(pass$Teamnum)
+pass$subset <- as.factor(pass$subset)
+
+#Save for Player stats & add to Pass 
+write.csv(pass, "tallylog.csv")
+
+
+#Run (add to excel sheet)
+passR <- pass[pass$main!="Spoil Off", ]
+passR <- passR[passR$main!="Def Act", ]
+passR <- passR[passR$main!="Free Loss", ]
+passR <- passR[passR$main!="Tck Def", ]
+passR <- passR[passR$main!="Tck End", ]
+passR <- passR[passR$main!="Shot Prs", ]
+passR <- passR%>%select(period,possno,poss,Teamnum,Phase,Team,Player,Action,Areax,Areay,plylab,subset,Zone,time,main,Pitch_Area)
+
+write.csv(passR, "runorig.csv")
+
+
+
+#All Shots (add in rest of shot outcomes )
+#finish in excel
+
+shotsall <- pass%>%group_by(Team,poss) %>% filter(main =="Shot Op Oc"|main =="Shot Rs Oc"|main == "Shot Op"|main =="Shot Rs")%>%select(-plyname)
+
+oddps <- shotsall[seq(1, nrow(shotsall), 2),]
+colnames(oddps) <- c("period","possno","poss","phaseno","Phase","Teamnum","Team","Player","Action","Areax","Areay","plylab","subset","Zone","time","main")
+evenps <- shotsall[seq(2, nrow(shotsall), 2),]
+colnames(evenps) <- c("periodoc","possnooc","possoc","phasenooc","Phaseoc","Teamnumoc","Teamoc","Playeroc","Actionoc","Areaxoc","Areayoc","plylaboc","subsetoc","Zoneoc","timeoc","mainoc")
+shotsall <- bind_cols(oddps, evenps) 
+shotsall <- shotsall%>%select("period","possno","poss","phaseno","Phase","Teamnum","Team","Player","Action","Zone","Areax","Areay","plylab","subset"
+,"Actionoc","Zoneoc","Areaxoc","Areayoc","plylaboc","subsetoc","timeoc")
+
+scores = shotsall %>% 
+   unite(Shot_lab, plylab, timeoc, sep = " ", remove = FALSE)
+
+scores <- scores%>% mutate(score = ifelse(Actionoc == "Goal",3,ifelse(Actionoc == "Pk Goal",3,ifelse(Actionoc == "Mk Point",1,ifelse(Actionoc == "Fk Point",1, ifelse(Actionoc == "Point",1,0))))))
+
+scored <- scores  %>%group_by(Teamnum)%>% mutate(Tot_Scr = cumsum(score))
+
+scored <-scored %>%  mutate(minute =(timeoc/60))
+  
+scored <- scored %>% unite(Shot_lab, plylab, minute, sep = " ", remove = FALSE)
+
+write.csv(scored,"scored .csv")
+
+
+
+#SoP (May not need to add pitch_Area y Pitch_end again - Add to cols though)
+#Remove time y Linecol
+
+pass <- pass %>% 
+  filter(!grepl('45 Shot Right', Action))
+
+pass <- pass %>% 
+  filter(!grepl('45 Short', Action))
+
+
+passSoP <- pass %>%filter (main %in% c("PW", "Ko", "Shot Op Oc", "Shot Rs Oc","ToL"))
+
+passSoP <- passSoP%>%select(-plyname)
+
+oddps <- passSoP [seq(1, nrow(passSoP), 2),]
+colnames(oddps) <- c("period","possno","poss","phaseno","Phase","Teamnum","Team","Player","Action","Areax","Areay","plylab","subset","Zone","time","main","Pitch_Area")
+evenps <- passSoP[seq(2, nrow(passSoP), 2),]
+colnames(evenps) <- c("periodoc","possnooc","possoc","phasenooc","Phaseoc","Teamnumoc","Teamoc","Playeroc","Actionoc","Areaxoc","Areayoc","plylaboc","subsetoc","Zoneoc","timeoc","mainoc", "Pitch_Area")
+passSoP <- bind_cols(oddps, evenps) 
+passSoP <- passSoP%>%select("period","possno","poss","Teamnum","Team","Player","Action","Zone","Areax","Areay","plylab","subset","main","time","Pitch_Area",
+"possoc","Actionoc","Zoneoc","Areaxoc","Areayoc","plylaboc","subsetoc","mainoc","timeoc","Pitch_Areaoc")
+
+passSoP  <-passSoP %>% mutate(secs =(timeoc - time))
+
+passSoP <-passSoP %>% mutate(line_col = ifelse(secs >0 & secs  <9.4 ,1, ifelse(secs  >9.5 & secs  <19.4, 2,ifelse(secs >19.5 & secs  <29.4, 3,ifelse(secs >29.5 & secs  <39.4, 4 ,ifelse(secs >39.5 & secs  <50.4, 5 ,ifelse(secs >49.5 & secs  <60.4, 6,ifelse(secs >59.5 & secs  <70.4, 7,ifelse(secs >70.5, 8,10)))))))))
+
+passSoP <- passSoP %>% mutate(Entry_45 = ifelse(Areax <99.5 & Areaxoc >99.6 ,"Y", "N"))
+
+passSoP <- passSoP %>%select (-phaseno,-Phase, -periodoc,-possnooc, -phasenooc,-Phaseoc,-Teamnumoc,-Teamoc)
+
+write.csv(passSoP, "passSoP.csv")
+
+
+#Phases
+
+phs <- pass%>%group_by(Phase) %>%filter(main %in% c("PW","Ko","ToL", "Pass Rs","Shot Op Oc","Shot Rs Oc","Free Won", "Shot Rs")|(Action %in% c("Ko Mk Won", "Att Mk Won","Loss Kp SlW")))
+
+#p <- phs %>% group_by (poss) %>% summarise (c = n())
+#formattable(p)
+
+#%>%select(Team,poss,Phase,Zone,main)
+
+write.csv(phs, "phase.csv")
+
+#pass%>%group_by(Phase) %>%filter(poss == "B21",(main %in% c("PW","Ko","ToL", "Pass Rs","Shot Op Oc","Shot Rs Oc","Free Won", "Shot Rs")|(Action %in% c("Ko Mk Won", "Att Mk Won"))))
+
+#Time
+
+time <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/maydubnfl20/misc.csv", header=TRUE, sep=";")
+attach (time)
+
+time <- time%>%filter(keep=="Y")
+
+time <- time %>% mutate(min=(timeoc - time))
+
+timea <- time %>%select (poss,min)
+
+timea <- timea %>%group_by(poss) %>% mutate(secs= sum(min))
+
+timea <-timea[!duplicated(timea[,c('poss')]),]
+
+timea<-timea %>% mutate(line_col = ifelse(secs >0 & secs  <9.4 ,1, ifelse(secs  >9.5 & secs  <19.4, 2,
+ifelse(secs >19.5 & secs  <29.4, 3,ifelse(secs >29.5 & secs  <39.4, 4 ,ifelse(secs >39.5 & secs  <50.4, 5 
+,ifelse(secs >49.5 & secs  <60.4, 6,ifelse(secs >59.5 & secs  <70.4, 7,ifelse(secs >70.5, 8,10)))))))))
+
+write.csv2(timea,"timea.csv")
+
+
+
+#After seg added to run on excel, runup up loaded y runend is added to sop in excel to create run
+
+
+run <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/maydubnfl20/runupmaydubnfl20.csv", header=TRUE, sep=";")
+attach (run)
+
+run <-run %>% mutate(segtype = ifelse(seg == 0 ,"Carry", ifelse(seg == 1, "Hp",ifelse(seg == 2,"Carry" ,ifelse(seg == 3, "Kp Right",
+ifelse(seg == 4, "Score" ,ifelse(seg == 5, "Ko",ifelse(seg == 6, "Ko ToL",ifelse(seg == 7, "Pass ToL",ifelse(seg == 8, "Miss",ifelse(seg == 9, "Kp Left",ifelse(seg == 10, "Pass Rs",
+ifelse(seg == 11, "Score Rs",ifelse(seg == 12, "Miss Rs",NA))))))))))))))
+
+run <-run %>% mutate(same = ifelse(zone == zoneoc ,"Y", "N"))
+
+run <-run %>% mutate(time_diff = (timeoc-time))
+
+run <- run %>% mutate (dist =(sqrt((xend - Areax)^2+ (yend - Areay)^2)))
+
+run <-run %>% mutate(ms = (dist/time_diff))
+
+write.csv(run,"runend.csv")
+
+
+#Full Run 
+
+run <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/maydubnfl20/runmaydubnfl20.csv", header=TRUE, sep=";")
+attach (run)
+
+#Shot distance 
+
+runa <- run %>% filter (main %in% c("Shot Op"))%>%select(poss,Player, Action,Areax,Areay)
+
+runShtd <-runa%>%mutate (Shot_Dist =(sqrt((144 - Areax)^2+ (49 - Areay)^2)))%>%select(poss,Player, Action,Areax,Areay, Shot_Dist)
+
+write.csv(runShtd, "runShtd.csv")
+
+#Ko Dist y Ko Rec
+
+runakod <- run %>% filter (main %in% c("Ko"))
+
+Ko_Dist <- runakod %>% mutate (Ko_Dist =(sqrt((xend - Areax)^2+ (yend - Areay)^2)))%>%select (poss, Ko_Dist,mainoc,zoneoc,Pitch_End)
+
+write.csv(Ko_Dist , "Ko_Dist.csv")
+
+#Ko Time
+
+runa <- run %>% filter (mainoc %in% c("Ko"))
+
+runa$time <- as.numeric(runa$time)
+runa$timeoc <- as.numeric(runa$timeoc)
+
+Ko_Time <- runa%>% mutate(Ko_Time = (timeoc - time))%>%select (possoc, Ko_Time)
+
+write.csv(Ko_Time, "Ko_Time.csv")
+
+
+
+

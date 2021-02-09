@@ -1,0 +1,102 @@
+#sonars
+#runA <- run%>%filter(Teamnum=="A",keep=="Y")
+
+P_Ar <- data.frame(P_A = c("In_Def", "Mid_Def", "Out_Def","Out_Att", "Mid_Att", "In_Att"))
+
+P_Ar$P_A <- as.factor(P_Ar$P_A)
+
+runA <- run%>%group_by (Pitch_Area) %>% filter(Teamnum=="A",keep=="Y")
+
+runApass <- runA%>%group_by (Pitch_Area,vec_col, .drop=TRUE)%>%filter(main %in% c("Pass Op","Pass Rs")|subsetoc == "Pass ToL"|seg %in% c("0","2"),dist > 9.99 ) %>% 
+summarise(count = n ()) 
+
+sega <- data.frame(vec_col = c(1, 2, 3, 4,5,6,7,8,9,10),
+                   x = c(1, 2, 3, 4,5,6,7,8,9,10))
+
+sega$vec_col <- as.factor(sega$vec_col)
+
+
+# use left_join
+df3 <- left_join(sega,runApass, by = NULL)
+
+# rename and set NAs to 0
+#names(df3) <- c("id", "val", "val")
+df3[is.na(df3)] <- 0
+
+
+df3$vec_col <- as.numeric(df3$vec_col)
+
+df3
+
+game.players = (P_Ar$P_A)
+
+player.plots =list()
+for (i in 1:length(game.players)){ 
+
+plot.data= df3 %>%group_by (Pitch_Area) %>%filter(Pitch_Area == game.players[i])
+
+player.plots[[i]] <- ggplot(plot.data, aes(vec_col, count, fill = count)) +
+  geom_bar(width = 1, stat = "identity", color = "white") +
+scale_x_continuous(labels = plot.data$vec_col, breaks = plot.data$vec_col) +
+  scale_y_continuous(breaks = 0:nlevels(plot.data$count)) +
+theme_void() + 
+ theme(plot.title = element_text(hjust=0.5, color="black"),
+          plot.background = element_rect(fill = "transparent",colour = NA),
+          panel.background = element_rect(fill = "transparent",colour = NA),
+          legend.position = "none") +
+  coord_polar(start=3.5, direction=1) 
+player.plots[[i]]=ggplotGrob(player.plots[[i]])}
+
+back.line=20
+  mid.line=48
+  forward.line=77
+radar.size=60
+ymax=80
+xmax=120
+
+ p + annotation_custom(grob=player.plots[[2]], xmin=-9, xmax=-9+radar.size, ymax=ymax/2+radar.size/2-1.5, y=ymax/2-radar.size/2-1.5)+ #GK
+    annotation_custom(grob=player.plots[[2]], xmin=back.line+3, xmax=back.line+3+radar.size, ymax=ymax+1, y=ymax-radar.size+1)+ #RB
+    annotation_custom(grob=player.plots[[4]], xmin=forward.line+3, xmax=forward.line+3+radar.size, ymax=-3+radar.size, y=-3)
+
+
+
+
+
+passA <- runScrihw %>%filter (Teamnum == "A", keep == "Y", same == "N")
+
+passAid <-passA %>%
+  group_by(possno) %>%
+  mutate(id = row_number())
+
+passAid <-passAid%>%group_by(possno,id)%>%arrange(desc(id))
+
+passAid <-passAid %>% group_by(possno) %>% arrange(possno, (id))
+
+posslist <- passAid %>% select (poss)
+
+posslist <-posslist[!duplicated(posslist[,c('poss')]),]
+
+game.players = (posslist$poss)
+
+
+player.plots =list()
+
+for (i in 1:length(game.players)){ 
+  
+  plot.data= passAid %>%group_by (poss) %>%filter(poss == game.players[i])
+  
+  player.plots[[i]] <- p +  
+    geom_segment(data = plot.data, aes(x = xmid, y = ymid, xend = xmidend, yend = ymidend, colour = as.factor(id)),position = pd,size = 1.2,arrow = arrow(length = unit(0.3,"cm")))+
+    geom_point(data = plot.data, aes(x=xend, y=yend), colour  = "black",size = 4, shape = 19) +
+    geom_text_repel(data = plot.data, aes(x = xmid, y = ymid,label = id, colour = as.factor(id)),position = pd, size = 8) +
+    theme(legend.position="none") +
+    scale_colour_manual(values = c(color)) +
+    labs(title = game.players[i])
+  
+  
+  player.plots[[i]]=ggplotGrob(player.plots[[i]])}
+
+for (i in (1:length(game.players))) {
+  grid.arrange(player.plots[[1]], player.plots[[6]])
+}
+

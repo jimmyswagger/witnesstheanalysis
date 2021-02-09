@@ -1,0 +1,43 @@
+# Individual Player graphs and plots - player stat section wta
+#trying for graphs grouped by different things like passing defending etc
+
+pass %>% fitler (Teamnum =="A")
+
+
+pass %>% filter (Teamnum =="A", main %in% c("Pass Op", "Pass Rs", "Rec Op", "Rec Rs"))
+
+passingA8 <- pass  %>% filter (Teamnum =="A",Player == "8", main %in% c("Pass Op", "Pass Rs", "Rec Op", "Rec Rs")) %>%group_by (main)%>% summarise(count = n())
+
+q <- ggplot(data = passingA8, aes(x = main, y = count, fill = main))
+
+q +geom_bar(width=.7, stat = "identity", aes(x = main, y = count, fill = main), position = "dodge") +
+  xlab("Player") + ylab("count") +
+  ggtitle("On ball Action") +
+  theme_bw() + theme (panel.grid.major = element_blank(),
+panel.grid.minor = element_blank()) +
+  coord_flip() 
+
+passingA8 <- pass  %>% filter (Teamnum =="A",Player == "8", main %in% c("Pass Op", "Pass Rs", "Rec Op", "Rec Rs")) %>%group_by (main)%>% summarise(count = n())
+
+my_theme <- function(){
+  theme_light() +
+    theme(text = element_text(),  
+          panel.grid = element_blank(),
+          panel.border = element_blank(),
+          axis.title = element_blank(),
+          axis.ticks = element_blank(),
+          axis.text.x = element_blank(),
+          axis.text.y = element_text(size = 15, color = "gray10"),
+          plot.title =  element_text(size = 20, color = "black"))
+  }
+
+
+ggplot(data = passingA8, aes(x = main, y = count, fill = main)) +
+ggtitle("All Shots")+   
+  geom_bar(stat = "identity",  
+           width = 0.50) +  
+geom_text(aes(label = count, size = 5.5, hjust = 0)) +
+  coord_flip() +
+  scale_y_continuous(expand = c(0, 0),
+                     limits = c(0, max(passingA8$count) * 1.3)) +
+  my_theme() + theme(legend.position="none", plot.title =  element_text(size = 20, color = "black"),plot.subtitle =  element_text(size = 18, color = "black"))

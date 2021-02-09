@@ -1,0 +1,83 @@
+
+#Kick Outs
+
+points (Areax[Teamnum=="A" & Action=="Kickout" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Kickout" & Phase=="A15"], pch=3, col="green", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Ko Rec" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Ko Rec" & Phase=="A15"], pch=3, col="green", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Ko Lost" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Ko Lost" & Phase=="A15"], pch=4, col="red", cex=.8)
+points (Areax[Teamnum=="A" & Action=="KoBr Rec" & Phase=="A15"], Areay[Teamnum=="A" & Action=="KoBr Rec" & Phase=="A15"], pch=1, col="blue", cex=.8)
+points (Areax[Teamnum=="A" & Action=="KoBr Lost" & Phase=="A15"], Areay[Teamnum=="A" & Action=="KoBr Lost" & Phase=="A15"], pch=2, col="Orange", cex=.8)
+
+#Conquer
+
+points (Areax[Teamnum=="A" & Action=="Tack W" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Tack W" & Phase=="A15"], pch=0, col="green", cex=.8)
+points (Areax[Teamnum=="A" & Action=="KP Int" & Phase=="A15"], Areay[Teamnum=="A" & Action=="KP Int" & Phase=="A15"], pch=1, col="blue", cex=.8)
+points (Areax[Teamnum=="A" & Action=="HP Int" & Phase=="A15"], Areay[Teamnum=="A" & Action=="HP Int" & Phase=="A15"], pch=2, col="black", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Loose BW" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Loose BW" & Phase=="A15"], pch=3, col="yellow", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Short Gk" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Short Gk" & Phase=="A15"], pch=4, col="orange", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Break Won" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Break Won" & Phase=="A15"], pch=6, col="purple", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Ko Int" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Ko Int" & Phase=="A15"], pch=8, col="red", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Ko Break Int" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Ko Break Int" & Phase=="A15"], pch=7, col="brown", cex=.8)
+
+#Pass
+
+points (Areax[Teamnum=="A" & Action=="Hand Pass" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Hand Pass" & Phase=="A15"], pch=6, col="green", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Kick Pass" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Kick Pass" & Phase=="A15"], pch=2, col="orange", cex=.8)
+
+#Rec
+
+points (Areax[Teamnum=="A" & Action=="Rec" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Rec" & Phase=="A15"], pch=4, col="blue", cex=.8)
+
+
+#Outcome
+
+points (Areax[Teamnum=="A" & Action=="Goal" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Goal" & Phase=="A15"], pch=1, col="blue", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Point" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Point" & Phase=="A15"], pch=3, col="red", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Wide Left" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Wide Left" & Phase=="A15"], pch=4, col="blue", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Wide Right" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Wide Right" & Phase=="A15"], pch=18, col="blue", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Short" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Short" & Phase=="A15"], pch=8, col="blue", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Save" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Save" & Phase=="A15"], pch=5, col="blue", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Goal" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Goal" & Phase=="A15"], pch=1, col="green", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Point" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Point" & Phase=="A15"], pch=3, col="red", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Wide Left" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Wide Left" & Phase=="A15"], pch=4, col="green", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Wide Right" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Wide Right" & Phase=="A15"], pch=18, col="green", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Short" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Short" & Phase=="A15"], pch=8, cex=.8)
+points (Areax[Teamnum=="A" & Action=="Save" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Save" & Phase=="A15"], pch=5, col="green", cex=.8)
+
+points (Areax[Teamnum=="A" & Action=="Free Goal" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Free Goal" & Phase=="A15"], pch=1, col="orange", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Free Point" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Free Point" & Phase=="A15"], pch=3, col="orange", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Free Wide Left" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Free Wide Left" & Phase=="A15"], pch=4, col="orange", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Free Wide Right" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Free Wide Right" & Phase=="A15"], pch=18, col="orange", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Free Short" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Free Short" & Phase=="A15"], pch=8, col="orange", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Free Save" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Free Save" & Phase=="A15"], pch=5, col="orange", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Free Goal" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Free Goal" & Phase=="A15"], pch=1, col="orange", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Free Point" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Free Point" & Phase=="A15"], pch=3, col="orange", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Free Wide Left" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Free Wide Left" & Phase=="A15"], pch=4, col="orange", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Free Wide Right" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Free Wide Right" & Phase=="A15"], pch=18, col="orange", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Free Short" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Free Short" & Phase=="A15"], pch=8, col="orange", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Free Save" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Free Save" & Phase=="A15"], pch=5, col="orange", cex=.8)
+
+#Shots
+
+points (Areax[Teamnum=="A" & Action=="Shot Left" & Phase=="A15"], Areay[Teamnum=="A" & "Shot Left" & Phase=="A15"], pch=1, col="blue", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Shot Right" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Shot Right" & Phase=="A15"], pch=1, col="green", cex=.8)
+
+#Free Shot 
+
+points (Areax[Teamnum=="A" & Action==""Free Shot Right" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Free Shot Right" & Phase=="A15"], pch=1, col="orange", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Free Shot Left" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Free Shot Left" & Phase=="A15"], pch=1, col="orange", cex=.8)
+
+#Lost
+
+points (Areax[Teamnum=="A" & Action=="Break Loss" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Break Loss" & Phase=="A15"], pch=0, col="red", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Loss Tack" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Loss Tack" & Phase=="A15"], pch=1, col="red", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Loss Ball" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Loss Ball" & Phase=="A15"], pch=3, col="red", cex=.8)
+
+points (Areax[Teamnum=="A" & Action=="Loss KP Int" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Loss KP Int" & Phase=="A15"], pch=3, col="red", cex=.8)
+points (Areax[Teamnum=="A" & Action=="UnF Int KP Loss" & Phase=="A15"], Areay[Teamnum=="A" & Action=="UnF Int KP Loss" & Phase=="A15"], pch=4, col="red", cex=.8)
+points (Areax[Teamnum=="A" & Action=="UnF Int HP Loss" & Phase=="A15"], Areay[Teamnum=="A" & Action=="UnF Int HP Loss" & Phase=="A15"], pch=8, col="red", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Loss HP Int" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Loss HP Int" & Phase=="A15"], pch=6, col="red", cex=.8)
+
+#Frees
+
+points (Areax[Teamnum=="A" & Action=="Free Loss" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Free Loss" & Phase=="A15"], pch=3, col="red", cex=.8)
+points (Areax[Teamnum=="A" & Action=="Free Won" & Phase=="A15"], Areay[Teamnum=="A" & Action=="Free Won" & Phase=="A15"], pch=4, col="green", cex=.8)

@@ -1,0 +1,70 @@
+#Team Total
+pass %>%group_by(Team,main) %>% filter(Teamnum == "A",main == "PW"|main == "Rec Op"|main == "ToL"|main == "Fkws"|main == "Fkls"
+|main == "Shot Op"|main =="Scr Op"|main =="Ms Op"|main == "Pass Op"|main == "Spoil Def")%>%summarize(count=n())
+
+#Team Period
+pass %>%group_by(Team,main,period) %>% filter(Teamnum == "A",main == "PW"|main == "Rec Op"|main == "ToL"|main == "Fkws"|main == "Fkls"
+|main == "Shot Op"|main =="Scr Op"|main =="Ms Op"|main == "Pass Op"|main == "Spoil Def")%>%summarize(count=n())
+
+#Player
+pass %>%group_by(Player,main) %>% filter(Teamnum == "A", Player == "6", main == "PW"|main == "Rec Op"|main == "ToL"|main == "Fkws"|main == "Fkls"
+|main == "Shot Op"|main =="Scr Op"|main =="Ms Op"|main == "Pass Op"|main == "Spoil Def")%>%summarize(count=n())
+
+Possessions
+(main== "PW"|main== "Rec Op"|
+main== "Rec Rs"|main== "Ko Rec")
+
+Actions
+(main== "PW"|main== "Rec Op"|main== "Rec Rs"|main== "Ko Rec"|
+main== "Pass Op"|main== "Pass Rs"|main== "ToL"|main== "Shot Op"|
+main== "Shot Rs"|main== "Ko"|main== "Spoils Def"|main== "Spoils Off"
+main== "Fkw"|main== "Fkl")
+
+
+perb <- pass %>%group_by(Team,main,period) %>% filter(main == "PW"|main == "ToL"|main == "Fkws"|main == "Fkls"
+|main == "Shot Op"|main =="Scr Op"|main =="Ms Op"|main == "Spoil Def")%>%summarize(count=n())
+
+
+****
+ggplot(data=per,aes(x=main, y=count, group=as.factor(period),colour=as.factor(period))) +
+geom_point() +
+geom_line(data=per, aes(x=main, y=count, group=as.factor(period),colour=as.factor(period))) +
+theme_classic() +
+scale_colour_manual(values=c("green", "blue","black","red"))
+
+perb <- pass %>%group_by(Team,main,period) %>% filter(main == "PW"|main == "ToL"|main == "Fkws"|main == "Fkls"
+|main == "Shot Op"|main =="Scr Op"|main =="Ms Op"|main == "Spoil Def")%>%summarize(count=n())
+
+
+ggplot() +
+geom_point(data=per,aes(x=main, y=count, group=as.factor(period),colour=as.factor(Team),shape=as.factor(period), size = 3)) +
+geom_line(data=per, aes(x=main, y=count, group=as.factor(period),colour=as.factor(Team))) +
+geom_point(data=perb,aes(x=main, y=count, group=as.factor(period),colour=as.factor(Team),shape=as.factor(period), size = 3)) +
+geom_line(data=perb, aes(x=main, y=count, group=as.factor(period),colour=as.factor(Team))) +
+theme_classic() +
+scale_colour_brewer(palette="Dark2")
+
+ggplot() +
+geom_bar(data=perb, aes(x=main, y=count) +
+theme_classic() +
+scale_colour_brewer(palette="Dark2")
+
+q <- ggplot(data = perb, aes(x = main, y = count, fill = period))
+
+q +geom_bar(width=.7, stat = "identity", aes(x = main, y = count, fill = period), position = "dodge")
+
+q <- ggplot(data = perb, aes(x = period, y = count, fill = main))
+
+q +geom_bar(width=.7, stat = "identity", aes(x = period, y = count, fill = main), position = "dodge")
+
+ scale_colour_brewer(palette="Dark2")
+scale_colour_manual(values=c("green", "blue","black","red"))
+-------------------------------------------------------------------------
+
+perb <- glmayker %>%group_by(Team,main,period) %>% filter(main == "PW"|main == "ToL"|main == "Fkws"|main == "Fkls"
+|main == "Shot Op"|main =="Scr Op"|main =="Ms Op")%>%summarize(count=n())
+
+ggplot() +
+geom_point(data=perb,aes(x=main, y=count, group=as.factor(period),colour=as.factor(Team),shape=as.factor(period), size = 6)) +
+theme_classic() +
+scale_colour_brewer(palette="Dark2")

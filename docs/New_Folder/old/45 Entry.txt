@@ -1,0 +1,53 @@
+
+
+
+total45A <- run%>%group_by(Team) %>% filter(Teamnum=="A",keep=="Y", Areax <98.9 & xend > 99 )%>%summarize(count=n())
+
+hp45A <- run%>%filter(Teamnum=="A",keep=="Y", Areax <98.9 & xend > 99, seg == "1" )%>%summarize(count=n())
+
+KPLA <-  run%>%filter(Teamnum=="A",keep=="Y", Areax <98.9 & xend > 99, seg == "9" )%>%summarize(count=n())
+
+KPRA <-  run%>%filter(Teamnum=="A",keep=="Y",  Areax <98.9 & xend > 99, seg == "3" )%>%summarize(count=n())
+
+run45A <- run%>%filter(Teamnum=="A",keep=="Y", Areax <98.9 & xend > 99, seg == "2"| seg == "0" )%>%summarize(count=n())
+
+RestartA <-  run%>%filter(Teamnum=="A",keep=="Y", Areax <98.9 & xend > 99, seg == "10" )%>%summarize(count=n())
+
+LostA <-  run%>%filter(Teamnum=="A",keep=="Y", Areax <98.9 & xend > 99, seg == "7" )%>%summarize(count=n())
+
+
+tot45A <- bind_cols (total45A,hp45A,KPLA,KPRA,run45A, RestartA, LostA)
+
+library(plyr)
+
+tot45A <- rename(tot45A, c( count = "Total", count1 = "Hp", count2 = "KPL", count3 = "KPR", count4 = "run", count5 = "Restart", count6 = "Lost"))
+
+detach(package:plyr)
+
+formattable (tot45A)
+
+
+total45B <- run%>%group_by(Team) %>% filter(Teamnum=="B",keep=="Y", Areax <98.9 & xend > 99 )%>%summarize(count=n())
+
+hp45B <- run%>%filter(Teamnum=="B",keep=="Y", Areax <98.9 & xend > 99, seg == "1" )%>%summarize(count=n())
+
+KPLB <-  run%>%filter(Teamnum=="B",keep=="Y", Areax <98.9 & xend > 99, seg == "9" )%>%summarize(count=n())
+
+KPRB <-  run%>%filter(Teamnum=="B",keep=="Y",  Areax <98.9 & xend > 99, seg == "3" )%>%summarize(count=n())
+
+run45B <- run%>%filter(Teamnum=="B",keep=="Y", Areax <98.9 & xend > 99, seg == "2"| seg == "0" )%>%summarize(count=n())
+
+RestartB <-  run%>%filter(Teamnum=="B",keep=="Y", Areax <98.9 & xend > 99, seg == "10" )%>%summarize(count=n())
+
+LostB <-  run%>%filter(Teamnum=="B",keep=="Y", Areax <98.9 & xend > 99, seg == "7" )%>%summarize(count=n())
+
+
+tot45B <- bind_cols (total45B,hp45B,KPLB,KPRB,run45B, RestartB, LostB)
+
+library(plyr)
+
+tot45B <- rename(tot45B, c( count = "Total", count1 = "Hp", count2 = "KPL", count3 = "KPR", count4 = "run", count5 = "Restart", count6 = "Lost"))
+
+detach(package:plyr)
+
+formattable (tot45B)

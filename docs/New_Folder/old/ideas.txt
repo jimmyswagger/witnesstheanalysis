@@ -1,0 +1,22 @@
+ideas
+------
+
+#Average time/sop of shot attacks 
+
+zonesA <- zones%>% filter( Teamnum == "A",Scr == "Scr Op"|Scr == "Ms Op")
+
+zonesA <- zonesA%>%group_by (Scr)%>% summarize(Scr_Op =sum(Scr == "Scr Op"),Ms_Op =sum(Scr == "Ms Op"),Total =sum(Scr == "Scr Op"| Scr == "Ms Op"), Ave_Time = mean(ms),Att_Time =sum(ms))
+
+zonesA
+
+#time to kickout 
+
+
+##outcomes of diff ko distance 
+
+
+#zone leave/ entry
+= total, %, outcome etc
+
+#outcome of pressure 
+- turnover etc 

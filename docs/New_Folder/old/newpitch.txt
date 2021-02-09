@@ -1,0 +1,171 @@
+create_Stats_Pitch <- function(grass_colour, line_colour, background_colour, goal_colour, BasicFeatures){
+  
+  theme_blankPitch = function(size=12) { 
+    theme(
+      #axis.line=element_blank(), 
+      axis.text.x=element_blank(), 
+      axis.text.y=element_blank(), 
+      #axis.ticks.y=element_text(size=size),
+      #axis.ticks=element_blank(),
+      axis.ticks.length=unit(0, "lines"), 
+      #axis.ticks.margin=unit(0, "lines"), 
+      axis.title.x=element_blank(), 
+      axis.title.y=element_blank(), 
+      legend.key.size=unit(1.2, "lines"), 
+      legend.text=element_text(size=size), 
+      legend.title=element_text(size=size, face="bold",hjust=0),
+      # panel.border=element_blank(), 
+      panel.grid.major=element_blank(), 
+      panel.grid.minor=element_blank(), 
+      panel.spacing=element_blank(), 
+      plot.margin=unit(c(0, 0, 0, 0), "lines"), 
+      plot.title=element_text(size=size*1.2), 
+      panel.background=element_rect(fill= background_colour,colour= background_colour),
+      strip.text.x=element_text(size=size*1))}
+
+  ymin <- 0 # minimum width
+  ymax <- 98 # maximum width
+  xmin <- 0 # minimum length
+  xmax <- 144 # maximum length
+  
+  # Defining features along the length
+  defel <- 0
+  def14 <- 13
+  def21 <- 20
+  def45 <- 45
+  def65 <- 65
+  off65 <- 79
+  off45 <- 99
+  off21 <- 124
+  off14 <- 131
+  offel <- 144
+  
+  # small sqaure
+
+  sixYardrd <- 42
+  sixYardld <- 56
+  sixYardDefxst <- 4.5
+  sixYardOffxst <- 139.5
+
+  #13 box
+  right14d <- 39.5
+  left14d <- 58.5
+
+  #halfway line
+  hwxst <- 72.5
+  hwyst <- 45.75
+  hwxed <- 72.5
+  hwyed <- 52.25
+
+# Defining features along the length
+  srwing <- 19.6
+  rhalfsp <- 39.2
+  ctre <- 58.8
+  lhalfsp <- 78.4
+  	  
+  circleFundef <- function(center=c(0,0), diameter=1, npoints=100, start=0, end=2)
+  {
+    tt <- seq(start*pi, end*pi, length.out=npoints)
+    data.frame(x = center[1] + diameter / 2 * cos(tt), 
+               y = center[2] + diameter / 2 * sin(tt))
+  }
+  
+  circleFunatt <- function(center=c(0,0), diameter=1, npoints=100, start=0, end=2)
+  {
+    tt <- seq(start*pi, end*pi, length.out=npoints)
+    data.frame(x = center[1] - diameter / 2 * cos(tt), 
+               y = center[2] - diameter / 2 * sin(tt))
+  }
+  #### create semi circle ####
+  def_circle <-  circleFundef(c(20,49.5), 26, start=1.5, end=2.5)
+  att_circle <-  circleFunatt(c(124,49.5), 26, start=1.5, end=2.5)
+  
+  if(BasicFeatures == TRUE){
+    ## initiate the plot, set some boundries to the plot
+    np <- ggplot() + xlim(c(xmin,xmax)) + ylim(c(ymin,ymax)) +
+      # add the theme 
+      theme_blankPitch() +
+      # add halway line
+      geom_rect(aes(xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax), fill = grass_colour, colour = line_colour) + 
+      geom_segment(aes(x = def14, y = ymin, xend = def14, yend = ymax),colour = line_colour,linetype="solid") +   
+      geom_segment(aes(x = def21, y = ymin, xend = def21, yend = ymax),colour = line_colour,linetype="solid") + 
+      geom_segment(aes(x = def45, y = ymin, xend = def45, yend = ymax),colour = line_colour,linetype="solid") +
+      geom_segment(aes(x = def65, y = ymin, xend = def65, yend = ymax),colour = line_colour,linetype="solid") +
+      geom_segment(aes(x = off65, y = ymin, xend = off65, yend = ymax),colour = line_colour,linetype="solid") +
+      geom_segment(aes(x = off45, y = ymin, xend = off45, yend = ymax),colour = line_colour,linetype="solid") +
+      geom_segment(aes(x = off21, y = ymin, xend = off21, yend = ymax),colour = line_colour,linetype="solid") +
+      geom_segment(aes(x = off14, y = ymin, xend = off14, yend = ymax),colour = line_colour,linetype="solid") + 
+      geom_segment(aes(x = xmin, y = right14d, xend = def14, yend = right14d),colour = line_colour,linetype="solid") + 
+      geom_segment(aes(x = xmin, y = left14d, xend = def14, yend = left14d),colour = line_colour,linetype="solid") + 
+      geom_segment(aes(x = xmax, y = right14d, xend = off14, yend = right14d),colour = line_colour,linetype="solid") + 
+      geom_segment(aes(x = xmax, y = left14d, xend = off14, yend = left14d),colour = line_colour,linetype="solid") + 
+      geom_segment(aes(x = hwxst, y = hwyst, xend = hwxed, yend = hwyed),colour = line_colour,linetype="solid") +
+      geom_segment(aes(x = xmin, y = sixYardrd, xend = sixYardDefxst, yend = sixYardrd),colour = line_colour,linetype="solid") + 
+      geom_segment(aes(x = xmin, y = sixYardld, xend = sixYardDefxst, yend = sixYardld),colour = line_colour,linetype="solid") +
+      geom_segment(aes(x = sixYardDefxst, y = sixYardrd, xend = sixYardDefxst, yend = sixYardld),colour = line_colour,linetype="solid") +
+      geom_segment(aes(x = xmax, y = sixYardrd, xend = sixYardOffxst, yend = sixYardrd),colour = line_colour,linetype="solid") + 
+      geom_segment(aes(x = xmax, y = sixYardld, xend = sixYardOffxst, yend = sixYardld),colour = line_colour,linetype="solid") +
+      geom_segment(aes(x = sixYardOffxst, y = sixYardrd, xend = sixYardOffxst, yend = sixYardld),colour = line_colour,linetype="solid") +
+      geom_segment(aes(x = 0, y = 45.75, xend = 0, yend = 52.25),colour = "blue", size = 2) +
+      geom_segment(aes(x =144, y = 45.75, xend = 144, yend = 52.5),colour = "red", size = 2) +
+      geom_path(data=def_circle, aes(x,y), colour = line_colour,size = 0.5) +
+      geom_path(data=att_circle, aes(x,y), colour = line_colour,size = 0.5) + 
+      annotate(geom="text", x= 20, y=.57, label="21",color = "white") +
+      annotate(geom="text", x= 45, y=.57, label="45",color = "blue") +
+      annotate(geom="text", x= 65, y=.57, label="65",color = "white") +
+      annotate(geom="text", x= 79, y=.57, label="65",color = "white") +
+      annotate(geom="text", x=99, y=.57, label="45", color="red") +
+      annotate(geom="text", x=124, y=.57, label="21",color = "white") +
+      annotate(geom="text", x= 72, y=4, label="www.witnesstheanalysis.com",color = "black",size = 6, alpha = 0.4) +
+      annotate(geom="text", x= 72, y=96, label="www.witnesstheanalysis.com",color = "black",size = 6, alpha = 0.4)
+    
+  }
+  
+  else{
+    ## initiate the plot, set some boundries to the plot
+     np <- ggplot() + xlim(c(xmin,xmax)) + ylim(c(ymin,ymax)) +
+      # add the theme 
+      theme_blankPitch() +
+      # add halway line
+      geom_rect(aes(xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax), fill = grass_colour, colour = line_colour) + 
+      geom_segment(aes(x = def14, y = ymin, xend = def14, yend = ymax),colour = line_colour,linetype="solid") +   
+      geom_segment(aes(x = def21, y = ymin, xend = def21, yend = ymax),colour = line_colour,linetype="solid") + 
+      geom_segment(aes(x = def45, y = ymin, xend = def45, yend = ymax),colour = line_colour,linetype="solid") +
+      geom_segment(aes(x = def65, y = ymin, xend = def65, yend = ymax),colour = line_colour,linetype="solid") +
+      geom_segment(aes(x = off65, y = ymin, xend = off65, yend = ymax),colour = line_colour,linetype="solid") +
+      geom_segment(aes(x = off45, y = ymin, xend = off45, yend = ymax),colour = line_colour,linetype="solid") +
+      geom_segment(aes(x = off21, y = ymin, xend = off21, yend = ymax),colour = line_colour,linetype="solid") +
+      geom_segment(aes(x = off14, y = ymin, xend = off14, yend = ymax),colour = line_colour,linetype="solid") + 
+      geom_segment(aes(x = xmin, y = right14d, xend = def14, yend = right14d),colour = line_colour,linetype="solid") + 
+      geom_segment(aes(x = xmin, y = left14d, xend = def14, yend = left14d),colour = line_colour,linetype="solid") + 
+      geom_segment(aes(x = xmax, y = right14d, xend = off14, yend = right14d),colour = line_colour,linetype="solid") + 
+      geom_segment(aes(x = xmax, y = left14d, xend = off14, yend = left14d),colour = line_colour,linetype="solid") + 
+      geom_segment(aes(x = hwxst, y = hwyst, xend = hwxed, yend = hwyed),colour = line_colour,linetype="solid") +
+      geom_segment(aes(x = xmin, y = sixYardrd, xend = sixYardDefxst, yend = sixYardrd),colour = line_colour,linetype="solid") + 
+      geom_segment(aes(x = xmin, y = sixYardld, xend = sixYardDefxst, yend = sixYardld),colour = line_colour,linetype="solid") +
+      geom_segment(aes(x = sixYardDefxst, y = sixYardrd, xend = sixYardDefxst, yend = sixYardld),colour = line_colour,linetype="solid") +
+      geom_segment(aes(x = xmax, y = sixYardrd, xend = sixYardOffxst, yend = sixYardrd),colour = line_colour,linetype="solid") + 
+      geom_segment(aes(x = xmax, y = sixYardld, xend = sixYardOffxst, yend = sixYardld),colour = line_colour,linetype="solid") +
+      geom_segment(aes(x = sixYardOffxst, y = sixYardrd, xend = sixYardOffxst, yend = sixYardld),colour = line_colour,linetype="solid") +
+      geom_segment(aes(x = 0, y = 45.75, xend = 0, yend = 52.25),colour = "blue", size = 2) +
+      geom_segment(aes(x =144, y = 45.75, xend = 144, yend = 52.5),colour = "red", size = 2) +
+      geom_segment(aes(x = xmin, y = srwing, xend = xmax, yend = srwing),colour = line_colour,linetype="dotted") +
+      geom_segment(aes(x = xmin, y = rhalfsp, xend = xmax, yend = rhalfsp),colour = line_colour,linetype="dotted") +
+      geom_segment(aes(x = xmin, y = ctre, xend = xmax, yend = ctre),colour = line_colour,linetype="dotted") +
+      geom_segment(aes(x = xmin, y = lhalfsp, xend = xmax, yend = lhalfsp),colour = line_colour,linetype="dotted") +
+      geom_path(data=def_circle, aes(x,y), colour = line_colour,size = 0.5) +
+      geom_path(data=att_circle, aes(x,y), colour = line_colour,size = 0.5) + 
+      annotate(geom="text", x= 20, y=.57, label="21",color = "white") +
+      annotate(geom="text", x= 45, y=.57, label="45",color = "blue") +
+      annotate(geom="text", x= 65, y=.57, label="65",color = "white") +
+      annotate(geom="text", x= 79, y=.57, label="65",color = "white") +
+      annotate(geom="text", x=99, y=.57, label="45", color="red") +
+      annotate(geom="text", x=124, y=.57, label="21",color = "white") +
+      annotate(geom="text", x= 72, y=4, label="www.witnesstheanalysis.com",color = "black",size = 6, alpha = 0.4) +
+      annotate(geom="text", x= 72, y=96, label="www.witnesstheanalysis.com",color = "black",size = 6, alpha = 0.4)
+  }
+  
+  return(np)}
+
+
+np <- create_Stats_Pitch("#A2CD5A", "white", "black", "#000000", BasicFeatures=TRUE)

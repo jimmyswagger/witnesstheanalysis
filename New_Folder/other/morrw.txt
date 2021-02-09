@@ -1,0 +1,277 @@
+
+formattable(kickouts, align =c("l","c","r"), style = ~ style(color = "grey",font.weight = "bold"))
+
+posit <- read.csv (file.choose(),sep=";",header=TRUE,check.names=FALSE)
+attach (posit)
+head (posit, n = 1)
+
+voronoi <- deldir(postA$Areax, postA$Areay)
+
+#getting the convex hull of each unique point set
+df <- postA
+find_hull <- function(df) df[chull(df$Areax, df$Areay), ]
+hulls <- ddply(df, "issue", find_hull)
+
+#Delaunay triangulation
+
+plot <- ggplot(data = nomissing, aes(x = eff, y = man, colour=issue, fill = issue)) +
+geom_point() + 
+geom_polygon(data = hulls, alpha = 0.5) +
+labs(x = "Efficiency", y = "Mandate")
+plot
+
+stat_chull(aes(color = Teamnum, fill = Teamnum), alpha = 0.1, geom = "polygon")
+
+
+geom_tile(aes(fill = Teamnum), , color = "white") +
+  scale_fill_gradient(low = "red", high = "green") +
+  theme(legend.title = element_text(size = 10),
+        legend.text = element_text(size = 12),
+        plot.title = element_text(size=16),
+        axis.title=element_text(size=14,face="bold"),
+        axis.text.x = element_text(angle = 90, hjust = 1)) +
+  labs(fill = "Area")
+
+
+centroids <- aggregate(fcuku(Areax,Areay),posit,mean)
+ggplot(df,aes(x,y,color=factor(class))) +
+  geom_point(size=3)+ geom_point(data=centroids,size=5)
+
+centroid <- aggregate(cbind(Areax,Areay) ~ Player, data=fcuku, FUN=mean)
+
+centroid <- aggregate(cbind(Areax,Areay), data=fcuku, FUN=mean)
+
+p + geom_point(data = kick)
+
+p + geom_point(data = kick, aes(x=xloc, y=yloc, colour = "Teamnum", shape = "pass type")) +
+geom_point (data = kick, aes(x=xend, y=yend, colour = "Teamnum", shape = "pass type")) +
+geom_segment(data = kick,aes(x = xloc, y = yloc, xend = xend, yend = yend, colour = "segment")) +
+geom_text_repel(data = kick, aes(x=xloc, y=yloc, label = plypass, col = Team), size = 3) +
+
+
+
+> p + geom_point(aes(x=xloc, y=yloc, colour = "Teamnum", shape = "pass type")) +
++     geom_point ( aes(x=xend, y=yend, colour = "Teamnum", shape = "Rec")) +
++     geom_segment(aes(x = xloc, y = yloc, xend = xend, yend = yend, colour = "segment"))
+> 
+
+(df2, aes(x = 1, y = y, xend = 2, yend = y, label = paste(lineend, linejoin))) +
+  geom_segment(
+     lineend = df2$lineend, linejoin = df2$linejoin,
+     size = 3, arrow = arrow(length = unit(0.3, "inches"))
+
+p + geom_point(data = posit, aes(x=Areax, y=Areay, colour = Teamnum, shape = Teamnum)) +
+labs(title = "Ave Posit", subtitle = "+ Team Centroid") +
+labs(caption = "(Team A vs Team B 25/01/2018)") +
+geom_text_repel(data = posit, aes(x=Areax, y=Areay, label = Player, col = Teamnum), size = 3) +
+theme(plot.title = element_text(hjust=0.5)) +
+theme(plot.subtitle = element_text(hjust=0.5)) +
+geom_point(aes(x=mean.Areax,y=mean.Areay),size=5)
+
+p + geom_point(data = kick, aes(x=Areax, y=Areay, colour = Teamnum, shape = Teamnum)) +
+geom_point(data=centroid,aes(x=Areax, y=Areay, colour = Teamnum, shape = Teamnum), size=4)
+
+p + geom_point(data = postA, aes(x=Areax, y=Areay, colour = Teamnum, shape = Teamnum)) +
+ stat_chull(aes(data = postA, x=Areax, y=Areay,color = Teamnum, fill = Teamnum), alpha = 0.1, geom = "polygon")
+
+#Surface Area
+p + geom_point(data = postA, aes(x=Areax, y=Areay, colour = Teamnum, shape = Teamnum)) +
+ stat_chull(data = postA,aes(x=Areax, y=Areay,color = Teamnum, fill = Teamnum), alpha = 0.1, geom = "polygon")
+
+#Both teams 
+p + geom_point(data = posit, aes(x=Areax, y=Areay, colour = Teamnum, shape = Teamnum)) +
+ stat_chull(data = posit,aes(x=Areax, y=Areay,color = Teamnum, fill = Teamnum), alpha = 0.1, geom = "polygon")
+
+
+
+#Bar charts 
+
+ggbarplot(fcuk, x = "Player", y = "count",
+          fill = "Player",               # change fill color by cyl
+          color = "white",            # Set bar border colors to white
+          palette = "jco",            # jco journal color palett. see ?ggpar
+          sort.val = "desc",          # Sort the value in dscending order
+          sort.by.groups = FALSE,     # Don't sort inside each group
+          x.text.angle = 90           # Rotate vertically x axis texts
+          )
+
+ggdotchart(fcuk, x = "Player", y = "count",
+           color = "Player",                                # Color by groups
+           palette = c("jco"), # Custom color palette
+           sorting = "descending",                       # Sort value in descending order
+           add = "segments",                             # Add segments from y = 0 to dots
+           rotate = TRUE,                                # Rotate vertically
+           group = "cyl",                                # Order by groups
+           dot.size = 6,                                 # Large dot size
+           label = round(fcuk$Player),                        # Add mpg values as dot labels
+           font.label = list(color = "white", size = 9, 
+                             vjust = 0.5),               # Adjust label parameters
+           ggtheme = theme_pubr()                        # ggplot2 theme
+           )
+
+p + geom_point(data = fcuk, aes(x=Areax, y=Areay, colour = Teamnum)) +
+labs(title = "Avg Pos", subtitle = "Ours") +
+labs(caption = "(Team A vs Team B 25/01/2018)") +
+geom_text_repel(data = fcuk, aes(x=Areax, y=Areay, label = Player), size = 3)
+
+fcuk %>% group_by(Player) %>% filter(Teamnum == "A", Player > 1 & Player < 15)%>%
+head()
+
+fcuk %>%
+ mutate(Areax2) %>%
+ mutate(Areay2) %>%
+  head())
+------------------------------------------------------------
+
+fcuk <- pass %>% group_by(Player) %>% filter(Teamnum == "A", Player > 1 & Player < 15)
+
+Areax2 <- fcuk %>%
+    group_by(Player) %>%
+    summarise(Areax = mean(Areax,na.rm = TRUE)) 
+
+Areay2<- fcuk%>%
+    group_by(Player) %>%
+    summarise(Areay = mean(Areay,na.rm = TRUE))
+
+avgpos <- left_join(Areax2, Areay2, by ="Player")
+
+p + geom_point(data = avgpos, aes(x=Areax, y=Areay, colour = Player)) +
+ stat_chull(data = avgpos,aes(x=Areax, y=Areay,color = Player, fill = Player), alpha = 0.1, geom = "polygon") +
+labs(title = "Average Positions", subtitle = "+ Surface Area") +
+labs(caption = "(Team A vs Team B 25/01/2018)") +
+geom_text_repel(data = fcuku, aes(x=Areax, y=Areay, label = Player), size = 3)+
+theme(plot.title = element_text(hjust=0.5)) +
+theme(plot.subtitle = element_text(hjust=0.5))
+
+p + geom_point(data = fcuku, aes(x=Areax, y=Areay, colour = Player)) +
+ stat_chull(data = fcuku,aes(x=Areax, y=Areay,color = Player, fill = Player), alpha = 0.1, geom = "polygon") +
+labs(title = "Average Positions", subtitle = "+ Surface Area") +
+labs(caption = "(Team A vs Team B 25/01/2018)") +
+geom_text_repel(data = fcuku, aes(x=Areax, y=Areay, label = Player), size = 3)+
+theme(plot.title = element_text(hjust=0.5)) +
+theme(plot.subtitle = element_text(hjust=0.5))
++
+geom_polygon(data = fcuku, mapping = aes(x=Area, y=Areay, fill=Player))
+
+
+centroids <- aggregate(cbind(Areax,Areay)~Player,fcuku,mean)
+-----------------------------------------
+
+avgpos <- left_join(Areax2, Areay2[c("Areay")])
+
+avgpos<- left_join(Areax2, select(Areay2, -Player))
+
+saida["MY_NEW_COLUMN"] <- NA
+fcuk$MY_NEW_COLUMN <- fcuk %>%
+    group_by(Player, Areax) %>%
+    summarise(newvar = mean(Areax,na.rm = TRUE)) 
+
+fcuk <- mutate(fcuk,Areax2)
+
+fcuk %>%
+    group_by(Player) %>%
+    summarise(newvar = mean(Areax,na.rm = TRUE)) %>%
+    summarise(newvar2 = mean(Areay,na.rm = TRUE))
+
+summarise(newvar = sum(wt))
+
+
+fcuk <- pass %>% group_by(Player) %>% filter(Teamnum == "A", Player > 1 & Player < 15)
+
+
+p + geom_point(data = fcuku, aes(x=Areax, y=Areay, colour = Teamnum)) +
+labs(title = "Avg Pos", subtitle = "Ours") +
+labs(caption = "(Team A vs Team B 25/01/2018)") +
+geom_text_repel(data = fcuku, aes(x=Areax, y=Areay, label = Player), size = 3)
+
+X <- fcuk %>%
+ group_by(Player) %>%
+ summarise(Areax = mean(Areax,na.rm = TRUE))
+
+Y <- fcuk %>%
+ group_by(Player) %>%
+ summarise(Areay = mean(Areay,na.rm = TRUE))
+
+Y <- df1 %>%
+ group_by(cyl) %>%
+ summarise(newvar2 = sum(newvar)+5)
+
+
+> att<-filter(pass, Teamnum == "A", Areax >= 4.5, Action =="Hand Pass"|Action =="Kick Pass"|Action =="Rec")
+> attatt<- att %>% group_by(Player, Action)%>% summarize(count=n())
+> g <- ggplot(attatt, aes(Player))
+
+ g + geom_bar(aes(fill = Action))
+
+g +geom_bar(stat = "identity", aes(fill = type))
+
+
+ggplot(data = attatt, aes(x = Player, fill = count)) +
+geom_bar(colour = "black", size = 1) +
+xlab("Player") +
+ylab("Action") +
+scale_y_continuous(expand = c(0,0), limits = c(0, 20)) +
+theme_classic() +
+theme(legend.position = "top")
+
+
+ggplot(data = attatt, aes(x = Position, y = Action, fill = count)) +
+geom_bar(width=.7, stat="identity", position="dodge", colour="Black") +
+scale_fill_grey() +
+theme_bw() +
+ylab("count") +
+scale_y_continuous(limits = c(0, 10), expand = c(0, 0), breaks = seq(0, 10, by = 1)) +
+theme(legend.position = "none",
+legend.title = element_blank(),
+axis.text.x = element_text(size = 12, colour = "black"),
+axis.text.y = element_text(size = 12, colour = "black"),
+axis.ticks.x = element_blank(),
+plot.background = element_blank(),
+plot.title = element_blank(),
+axis.title.x = element_blank(),
+axis.title.y = element_text(face = "bold", size = 14),
+axis.line.x = element_line(color = "black", size = .5),
+axis.line.y = element_line(color = "black", size = .5),
+panel.grid.major = element_blank(),
+panel.grid.minor = element_blank(),
+panel.border = element_blank())
+
+# Create a new column, based on "Centers" data.frame
+ggplot(data = attatt, aes(x = count, fill = Player)) +
+geom_bar(colour = "black", size = 1) +
+xlab("Player") +
+ylab("count") +
+scale_y_continuous(limits = c(0, 25)) +
+theme_classic() +
+theme(legend.position = "none")
+
+
+p <-ggplot(attatt, aes(Player, Action))
+p +geom_bar(stat = "identity", aes(fill = count))
+
+shots <-filter(pass, Teamnum == "A", Areax >= 4.5, Action=="Shot Right"| Action =="Shot Left")
+
+-------------------------------------------------------------------------------------
+
+passrec <-filter(pass, Teamnum == "A", Action=="Hand Pass"|Action =="Kick Pass")
+fcuk <-passrec %>% group_by(Player) %>% summarize(count=n())
+
+fcuk<- passrec %>%
+    group_by(Player) %>%
+    summarise(Action = count=n())
+
+p <-ggplot(fcuk, aes(Player, Action))
+
+q <- ggplot(data = passit3, aes(x = Player, y = count, fill = Action))
+
+q +geom_bar(stat = "identity", aes(x = Player, y=count, fill = Action), position = "dodge") +
+  xlab("Player") + ylab("count") +
+  ggtitle("On ball Action") +
+  theme_bw() +
+  scale_x_continuous("Player", labels = as.character(Player), breaks = Player)
+
+ggplot(data = passit3, aes(stat = "identity", x = Player, y = count, fill = Action)) +
++   geom_bar(fill = 'cyan', color = 'red') + scale_x_continuous("Player", labels = as.character(Player), breaks = Player)
+
+
+

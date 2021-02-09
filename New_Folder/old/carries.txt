@@ -1,0 +1,20 @@
+a <- run %>%group_by(Player) %>%  filter (Teamnum == "A", segtype == "Carry", dist >9.99, vec >50) %>% summarise(count=n())
+
+rA <- run %>%group_by(Player) %>%  filter (Teamnum == "A", segtype == "Carry", dist >9.99)
+
+rAA <- rA%>%group_by (Player)%>% summarise(Carry = sum(segtype == "Carry"))
+
+plystats <- pass%>%group_by(Player)%>% filter(Teamnum == "A")%>%summarize(PWDef =sum(main == "PW"),Pass =sum(main == "Pass Op"),Rec =sum(main == "Rec Op"),OpShot =sum(main == "Shot Op"),Poss_Lost =sum(main == "ToL"),Fk_Won =sum(main == "Free Won"),Fk_Lost =sum(main == "Free Loss"),Spoils =sum(main == "Def Act"))
+ 
+#Replace NAs with 0
+plystats <-plystats %>%
+    mutate(car = VLOOKUP(Player, rAA,Player, Carry))
+
+plystats <- mutate(plystats, car = ifelse(is.na(car), 0, car))
+
+ rA <- run %>%group_by(Player) %>%  filter (Teamnum == "A", segtype == "Carry", dist >9.99, vec <0)
+ p +geom_segment(data = rA, aes(x = Areax, y = Areay, xend = xend, yend = yend, colour = as.factor(poss)),show.legend = FALSE,size = .8,arrow = arrow(length = unit(0.4,"cm")))
+
+
+
+

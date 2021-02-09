@@ -1,0 +1,70 @@
+You werent far off from what I can see, these are the things I noticed.
+Apologies if this is some stuff that youve thought about but havent added yet. 
+Im trying to think of things that may be useful hopefully they make sense 
+
+Ive sent to other workbooks one is the sort of fixed one you sent me and the other has the codes for the ideas 
+
+**Fixes**
+
+* Seems you need to use shapes for the players too - same as what you have done for the actions  
+
+* xlUp contains a lower case L (l) and not a 1 (one)
+
+* 2 modules with same name Stats_Event - this causes an 'Ambiguous name detected' error message
+
+* missing 
+
+	Cells(R, 15).Value = btncapt
+
+  from Sub Stat_Event() - this will add the player names to the table 
+
+* Option Explicit - add this to the top (Im not sure what it does but he has it in his code so I just copy it in)
+
+* you may get an error 'type mismatch' when you run it inside the developer page but it doesnt seem to occur when run normally - i dont know why this is  
+
+**Ideas**
+
+* returning to the buttons and not staying on last entered row (stops having to scroll up after each button press but you have to scroll down to see what the last entry was)
+
+put 		
+
+Range("A1").Select
+
+at the end it returns the selected box to A1 (moves the page back up) - its added to the player buttons on the test shape page
+
+* for the player you are going to have to press it after the action button as it puts it beside it based on the last row of the column beside it - this could be a bit restrictive on the order of how youd add the events
+
+* remove last and clear all buttons
+
+https://www.ozgrid.com/forum/index.php?thread/91788-find-last-cell-in-column-and-clear-contents/
+
+**For Live**
+
+* Counters instead of up/down arrows - arrows are counting whats already being tracked with button press 
+
+With ActiveSheet.Range(“B3”)
+.Value = .Value + 1
+
+or countifs (can count players then too in a matrix) - countifs work better than the button click 
+
+=COUNTIFS(A10:A18;B3;C10:C18;S3)
+
+* Tagging - things to think about 
+
+	* look at how quick the button needed can be identified (things like different colours for positions) - I think youre alright as you arent tagging that much 
+	* Think about having to tag a foul/turn over after a lost kick out as play is still going on 
+	* is the time stamp needed - chances of having all the information at the exact time of the action (could just use periods)
+	* using opposites to reduce what needs to be tagged - own kick lost would = an opposition kick out won / shot outcomes = number of shots etc 
+	* could it be claimed that there is no such thing as an 'unforced error'
+        * Possibly add in Frees scored/missed etc
+        * would pitch area be useful - Youd be looking at tagging three things then - Player, Action and Pitch Area 
+
+* both teams tracked from buttons 
+
+* If youre also videoing the game you could do a more comprehensive analysis afterwards
+
+	* example - tag all non scoring shots as a 'miss' and the later change this to a 'wide/short' etc or something similar 
+
+* One last thing is making sure the information is useful and think of ways it can be communicated and used during the game or for training 
+
+Im sure there is more stuff let me know if any of this needs clarifying 

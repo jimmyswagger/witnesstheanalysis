@@ -1,0 +1,26 @@
+passppda <- pass[pass$main!="Def Act", ]
+passppda <- passppda[passppda$main!="Free Loss", ]
+passppda <- passppda[passppda$main!="Tck End", ]
+passppda <- passppda[passppda$main!="Shot Prs", ]
+passppda <- passppda[passppda$main!="Spoil Off", ]
+passppda <- passppda[passppda$main!="Opp Brk", ]
+
+Adef <- passppda%>%group_by(Team)%>%filter(Teamnum == "A") 
+Adef <- Adef %>%group_by(Team,Pitch_Area)%>%filter(Teamnum == "A") %>%summarize(Tack = sum(Action == "Tck Def"),Spoil = sum(subset == "Spoil Def"), Def_Act = (Tack + Spoil))
+
+Bpass <- passppda %>%group_by(Team)%>%filter(Teamnum == "B")
+Bpass <- Bpass %>%group_by(Team,Pitch_Area)%>%filter(Teamnum == "B") %>%summarize(Pass =sum(main == "Pass Op"))
+
+BA <- bind_cols(Bpass,Adef)
+
+
+BAdefact <- BA %>% summarize (Pass, Def_Act, PPDA = (Pass/Def_Act))
+
+
+library(plyr)
+
+BAdefact <- rename(BAdefact, c(Pass = "# Opposition Passes", Def_Act = "Tackle Attempt (Def Act)", PPDA = "Passes per Defensive Action"))
+
+detach(package:plyr)
+
+formattable (BAdefact, align = c("l", rep("c", NCOL(BAdefact) - 1)))

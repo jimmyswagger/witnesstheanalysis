@@ -1,0 +1,292 @@
+
+
+Player Loops too
+=====================================  
+
+### Player Loops too
+
+```{r, fig.width = 16, fig.height = 12}
+# A Loop for players 
+
+# Create a list 
+
+alist <- teamsheet %>% filter (Teamnum == "A") %>% select (Teamnum, ply)
+
+game.players = (alist$ply)
+
+player.plots =list()
+
+for (i in 1:length(game.players)){ 
+  
+  plot.data= pass %>%group_by (Player) %>%filter( Player == game.players[i])
+
+  player.plots[[i]] <-
+
+actA  <- pass %>% group_by (Zone) %>%filter(Teamnum == "A",Player == game.players[i]) 
+  
+actAcnt  <- pass %>% group_by (Player, Zone,plynum) %>%filter(Teamnum == "A") %>% summarise (count = n ())
+
+actAcnt <-actAcnt %>%
+mutate(tx = VLOOKUP(Zone, fullzones, zone, xa),ty = VLOOKUP(Zone,fullzones, zone, ya),bx = VLOOKUP(Zone,fullzones, zone, xb),by = VLOOKUP(Zone,fullzones, zone, yb))
+
+actAcnts  <- actAcnt %>% group_by (Player, Zone,plynum) %>%filter(Player == game.players[i])
+
+#shade$count[is.na(shade$count)] <- 0
+
+
+  player.plots[[i]] <- p + 
+geom_rect(data=actAcnts, mapping=aes(xmin=tx, xmax=bx, ymin=ty, ymax=by, fill=as.numeric(count), alpha=0.2),show.legend = FALSE) +
+    geom_point(data= actA, aes(x= Areax, y=Areay,colour = Action), size = 1) +
+                   scale_fill_gradient(low="white",high="red") +
+                     theme(legend.position="none") +
+                     labs(title = actAcnts$plynum) 
+
+
+player.plots[[i]]=ggplotGrob(player.plots[[i]])}
+
+
+# this works - use this for now 
+
+grid.arrange(grobs = player.plots,ncol= 3)
+
+
+
+```
+
+
+Boxes Baby {data-orientation=rows}
+=====================================  
+
+Row {data-height =100}
+-------------------------------------
+
+### Game Time 
+
+```{r, fig.width = 16, fig.height = 1}
+
+df <- data.frame(
+    x = rep(seq(0, 12, 6), 1),
+    y = c(rep(6.5, 3)),
+    h = rep(4.25,3),
+    w = rep(5.95,3),
+    value = gametime$mins,
+    info = gametime$time,
+    color = factor(1:3)
+)
+
+ggplot(df, aes(x, y, height = h, width = w, label = info)) +
+    geom_tile(aes(fill = color)) +
+    geom_text(data = df,
+              aes(label = value, x = x - 1, y = y + .5),color = "white", fontface = "bold", size = 15, hjust = 0) +
+    geom_text(data = df,
+              aes(label = info, x = x - 1.5, y = y - 1),color = "white", fontface = "bold", size = 10, hjust = 0) +
+    #coord_fixed() +
+    scale_fill_brewer(type = "qual",palette = "Dark2") +
+    theme_void() +
+    guides(fill = FALSE) +
+    scale_x_continuous(expand = c(0, 0)) + 
+    scale_y_continuous(expand = c(0, 0))
+
+
+
+
+```
+
+
+Row {data-width=600}
+-----------------------------------------------------------------------
+### Chart 1 {data-width=600}
+
+```{r, fig.width=16, fig.height=8}
+
+runnetB <- run%>%filter(keep=="Y")
+
+runnetB<- runnetB[runnetB$main!="Opp Brk", ]
+
+runnetB<- runnetB[runnetB$mainoc!="Opp Brk", ]
+
+aveposB <- runnetB %>%group_by(Player, main)%>%filter( Teamnum == "B", main %in% c("Pass Op","Pass Rs","Shot Op"))
+
+
+AreaxB <- aveposB %>%
+    group_by(Player) %>%
+    summarise(AreaxB = mean(Areax,na.rm = TRUE)) 
+
+AreayB <- aveposB%>%
+    group_by(Player) %>%
+    summarise(AreayB = mean(Areay,na.rm = TRUE))
+
+avgposB <- left_join(AreaxB, AreayB, by ="Player")
+
+
+#Open play Pass & rec (links)
+linksnetB <- runnetB %>% filter(main %in%c("ko","Pass Op"))%>%select(Teamnum,Player,main,Playeroc, mainoc)
+
+linksnetB <- linksnetB %>% filter( Teamnum == "B") %>% select(Teamnum,Player,Playeroc)
+
+linksnetB<- subset(linksnetB, Player != Playeroc)
+
+linksnetB <- linksnetB %>% group_by(Teamnum,Player,Playeroc) %>% summarise(weight =n())
+
+teamsheetB <-   teamsheet %>% filter (Teamnum =="B")
+
+match <-linksnetB  %>%
+    mutate(Areax = VLOOKUP(Player,teamsheetB,ply, netx),Areay = VLOOKUP(Player,teamsheetB,ply, nety),
+xend = VLOOKUP(Playeroc,teamsheetB,ply, netx),yend = VLOOKUP(Playeroc,teamsheetB,ply, nety))
+
+
+#Nodes - deg
+indeg <- match %>% group_by(Teamnum, Playeroc) %>% summarise(indeg=n())
+outdeg <- match %>% group_by(Teamnum, Player) %>% summarise(outdeg=n())
+
+#Nodes - count of pass out and rec in 
+instr <- linksnetB %>% group_by (Playeroc)%>% summarise(instr = sum( weight))
+outstr <- linksnetB %>% group_by (Player)%>% summarise(outstr = sum( weight))
+
+teamsheetshtB <- teamsheetB %>%select(-plytime,-Areax,-Areay,-netx,-nety)
+
+strnetB <- teamsheetshtB %>% mutate(instr = VLOOKUP(ply,instr,Playeroc,instr),outstr = VLOOKUP(ply,outstr,Player, outstr),
+Areax = VLOOKUP(ply,teamsheetB,ply, netx),Areay = VLOOKUP(ply,teamsheetB,ply, nety))
+
+strnetB [is.na(strnetB)] <- 0
+
+strnetB <- strnetB %>% mutate (totstr = (instr+outstr))
+
+strnetB <- strnetB %>% filter(Teamnum =="B")
+
+strnetB <- subset(strnetB, Areax != 0, Areay !=0)
+
+strnetB <- subset(strnetB, totstr != 0)
+
+new_df <- subset(match, Player != Playeroc)
+
+new_df$code <- paste0(new_df$Player, "-", new_df$Playeroc)
+
+new_df$baby <- (apply(sapply(strsplit(as.character(new_df$code), "-"), 
+                sort), 2, paste, collapse="-"))
+
+a <- new_df %>% group_by(baby) %>% summarise(TotW = sum(weight))
+
+new_df <- new_df %>% mutate(TotW = VLOOKUP(baby ,a,baby , TotW))
+
+new_df <-new_df[!duplicated(new_df[,c('baby')]),]
+
+f <- function(k) {
+        step <- k
+        function(y) seq(floor(min(y)), ceiling(max(y)), by = step)       
+}
+
+p + 
+    geom_segment(data = new_df, aes(x = Areax, y = Areay, xend = xend, yend = yend,colour = weight),size = new_df$weight, alpha = 0.6) +
+    labs(colour="Connections") +
+    scale_colour_gradient(low = "lightgreen", high = "darkgreen",breaks = f(1)) +
+    new_scale_color() +
+    geom_point(data = strnetB, aes(x=Areax, y=Areay, colour = totstr),size = 14, shape = 19) +
+    geom_text(data = strnetB, aes(x=Areax, y=Areay, label = ply), colour = "black", size = 6) +
+    theme(legend.position="bottom") +
+    scale_size_continuous(range = c(0, 30),breaks = f(10)) +
+    scale_colour_gradient(low = "white", high = "red",breaks = f(10)) +
+    labs(colour="Passes Made") 
+```
+
+
+### Chart 1 {data-width=400}
+```{r}
+
+runnetB <- run%>%filter(keep=="Y")
+
+runnetB<- runnetB[runnetB$main!="Opp Brk", ]
+
+runnetB<- runnetB[runnetB$mainoc!="Opp Brk", ]
+
+aveposB <- runnetB %>%group_by(Player, main)%>%filter( Teamnum == "B", main %in% c("PW","Rec Op","Rec Rs","Pass Op","Pass Rs","Shot Op","Ko",
+"Ko Rec","Free Won","Free Loss","Spoil Off","Def Act","Tck Att"))
+
+
+AreaxB <- aveposB %>%
+    group_by(Player) %>%
+    summarise(AreaxB = mean(Areax,na.rm = TRUE)) 
+
+AreayB <- aveposB%>%
+    group_by(Player) %>%
+    summarise(AreayB = mean(Areay,na.rm = TRUE))
+
+avgposB <- left_join(AreaxB, AreayB, by ="Player")
+
+
+#Open play Pass & rec (links)
+linksnetB <- runnetB %>% filter(main %in%c("ko","Pass Op"))%>%select(Teamnum,Player,main,Playeroc, mainoc)
+
+linksnetB <- linksnetB %>% filter( Teamnum == "B") %>% select(Teamnum,Player,Playeroc)
+
+linksnetB<- subset(linksnetB, Player != Playeroc)
+
+linksnetB <- linksnetB %>% group_by(Teamnum,Player,Playeroc) %>% summarise(weight =n())
+
+match <-linksnetB  %>%
+    mutate(Areax = VLOOKUP(Player,avgposB,Player, AreaxB),Areay = VLOOKUP(Player,avgposB,Player, AreayB),
+xend = VLOOKUP(Playeroc,avgposB,Player, AreaxB),yend = VLOOKUP(Playeroc,avgposB,Player, AreayB))
+
+
+#Nodes - deg
+indeg <- match %>% group_by(Teamnum, Playeroc) %>% summarise(indeg=n())
+outdeg <- match %>% group_by(Teamnum, Player) %>% summarise(outdeg=n())
+
+#Nodes - count of pass out and rec in 
+instr <- linksnetB %>% group_by (Playeroc)%>% summarise(instr = sum( weight))
+outstr <- linksnetB %>% group_by (Player)%>% summarise(outstr = sum( weight))
+
+teamsheetsht <- teamsheet %>%select(-plytime,-Areax,-Areay)
+
+strnetB <- teamsheetsht %>% mutate(instr = VLOOKUP(ply,instr,Playeroc,instr),outstr = VLOOKUP(ply,outstr,Player, outstr),
+Areax = VLOOKUP(ply,avgposB,Player, AreaxB),Areay = VLOOKUP(ply,avgposB,Player, AreayB))
+
+strnetB [is.na(strnetB)] <- 0
+
+strnetB <- strnetB %>% mutate (totstr = (instr+outstr))
+
+strnetB <- strnetB %>% filter(Teamnum =="B")
+
+strnetB <- subset(strnetB, Areax != 0, Areay !=0)
+
+strnetB <- subset(strnetB, totstr != 0)
+
+new_df <- subset(match, Player != Playeroc)
+
+new_df$code <- paste0(new_df$Player, "-", new_df$Playeroc)
+
+new_df$baby <- (apply(sapply(strsplit(as.character(new_df$code), "-"), 
+                sort), 2, paste, collapse="-"))
+
+a <- new_df %>% group_by(baby) %>% summarise(TotW = sum(weight))
+
+new_df <- new_df %>% mutate(TotW = VLOOKUP(baby ,a,baby , TotW))
+
+new_df <-new_df[!duplicated(new_df[,c('baby')]),]
+
+f <- function(k) {
+        step <- k
+        function(y) seq(floor(min(y)), ceiling(max(y)), by = step)       
+}
+
+
+plystatsANet <- plystatsB %>% mutate(indeg = VLOOKUP(ply,indeg,Playeroc, indeg))
+plystatsANet <- plystatsANet %>% mutate(outdeg = VLOOKUP(ply,outdeg,Player, outdeg))
+plystatsANet <- plystatsANet %>% mutate(instr = VLOOKUP(ply,instr,Playeroc,instr))
+plystatsANet <- plystatsANet %>% mutate(outstr = VLOOKUP(ply,outstr,Player, outstr))
+
+plystatsANet <- plystatsANet %>% select (Player,indeg,outdeg,instr,outstr)
+
+plystatsANet <- plystatsANet %>% replace(is.na(.), 0)
+
+plystatsANet <- rename(plystatsANet, "In-Degree" = indeg, "Out-Degree" = outdeg,"In-Strength" = instr,"Out-Strength" = outstr)
+
+datatable(plystatsANet ,options = list(pageLength = 5,lengthMenu = c(5, 10, 15, 20),columnDefs = 
+                           list(list(className = 'dt-center', 
+                                     targets = "_all"))), caption = 'In-Degree (# of Teammates Pass Recd from)/  Out-Degree (# of Teammates Pass Made to)/ 
+Strength-In (# of Passes Recd)/  Strength-Out (# of Passes Made)',class = 'cell-border stripe', rownames = FALSE)
+
+
+```
+
+

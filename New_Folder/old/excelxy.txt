@@ -1,0 +1,20 @@
+Private Sub Image1_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    tx = X
+    ty = Y
+End Sub
+
+Private Sub Image1_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    
+    Dim rng As Range
+    Set rng = Worksheets("Sheet1").[A10000].End(xlUp).Offset(1, 0)
+    rng = X
+    rng.Offset(0, 1) = Y
+    
+End Sub
+
+
+=IF(E2=$R$9;IF(AND(F12<=$D$3);$G$5;IF(AND(F12>=$C$4;F12<=$D$4);$G$6;IF(AND(F12>=$C$5;F12<=$D$5);$G$7;IF(AND(F12>=$C$6;F12<=$D$6);$G$8)))))
+
+=IF(AND(F12<=$D$3);$G$5;IF(AND(F12>=$C$4;F12<=$D$4);$G$6;IF(AND(F12>=$C$5;F12<=$D$5);$G$7;IF(AND(F12>=$C$6;F12<=$D$6);$G$8))))
+
+=IF(E2=$R$9;COUNTIFS($E$2:E2;$R$9;$H$2:H2;$V$1);"")

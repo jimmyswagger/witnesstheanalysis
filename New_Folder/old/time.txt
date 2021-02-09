@@ -1,0 +1,22 @@
+time <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/maydubnfl20/misc.csv", header=TRUE, sep=";")
+attach (time)
+
+time <- time%>%filter(keep=="Y")
+
+time <- time %>% mutate(min=(timeoc - time))
+
+timea <- time %>%select (poss,min)
+
+timea <- timea %>%group_by(poss) %>% mutate(secs= sum(min))
+
+timea <-timea[!duplicated(timea[,c('poss')]),]
+
+timea<-timea %>% mutate(line_col = ifelse(secs >0 & secs  <9.4 ,1, ifelse(secs  >9.5 & secs  <19.4, 2,
+ifelse(secs >19.5 & secs  <29.4, 3,ifelse(secs >29.5 & secs  <39.4, 4 ,ifelse(secs >39.5 & secs  <50.4, 5 
+,ifelse(secs >49.5 & secs  <60.4, 6,ifelse(secs >59.5 & secs  <70.4, 7,ifelse(secs >70.5, 8,10)))))))))
+
+write.csv2(timea,"timea.csv")
+
+
+#for checking pass networks
+w <- passonly %>% filter(Teamnum == "B",Player == "3" , Playeroc == "3")

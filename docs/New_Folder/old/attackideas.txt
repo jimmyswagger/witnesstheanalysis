@@ -1,0 +1,97 @@
+#passshots_links - need to decide on ko pass rs etc
+#delete pass and pass tol in excel
+
+pass <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/bodeir/passingbodeir.csv", header=TRUE, sep=";")
+attach (pass)
+
+#Open Play Pass, Rec & Shot (links w/ shot)
+
+pass <- pass %>% filter (Areax >98.9)
+
+passshota <- pass %>%group_by(poss) %>% filter (main =="Shot Op"|main == "Shot Rs")
+
+#Pulls out all of the poss
+passshot <- subset(pass, poss %in% passshota$poss)
+
+passshot <- passshot %>%group_by(Team) %>% filter(subset== "Pass Op"|subset == "Rec Op"|subset == "Pass Rs"|subset == "Rec Rs"|subset=="Pass ToL"|subset=="Rs ToL"
+|subset=="Fk Loss ToL"|main =="Shot Op"|main == "Shot Op Oc"|main =="Shot Rs"|main == "Shot Rs Oc")%>%select(Team,Teamnum,Player,main)
+
+oddps <- passshot[seq(1, nrow(passshot), 2),]
+colnames(oddps) <- c("Team","Teamnum","plypass","Action")
+evenps <- passshot[seq(2, nrow(passshot), 2),]
+colnames(evenps) <- c("Teamoc","Teamnumoc","plyrec","octype")
+passshot_links <- bind_cols(oddps, evenps) 
+passshot_links
+
+write.csv2(passshot_links,"passshot_links.csv")
+
+
+linksAB <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/bodeir/linksattbodeir.csv", header=TRUE, sep=";")
+attach (linksAB)
+
+nodesteamA <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/bodeir/nodesbodeir.csv", header=TRUE, sep=";")
+attach (nodesteamA)
+
+linksA <- linksAB %>% filter( Teamnum == "A") %>% select(Teamnum,plypass, plyrec)
+
+linksA <- rename(count(linksA, plypass, plyrec), weight = n)
+
+netA <- graph_from_data_frame(d=linksA, vertices=nodesteamA, directed=T) 
+
+# Generate colors based on number of position (ie gk back mf for) type:
+colrs <- c("lightgreen", "lightgreen", "lightgreen", "lightgreen")
+V(netA)$color <- colrs[V(netA)$posn]
+
+# Compute node degrees (#links) and use that to set node size:
+deg <- degree(netA, mode="all")
+V(netA)$size <- deg*2 #size of node 
+
+nodes.coordA <- data.frame(data = nodesteamA,
+    x= Areax,
+    y=Areay)
+
+plot(netA, edge.arrow.size=.4, edge.color="lightgreen",edge.arrow.width=.4,
+      edge.width=E(netA)$weight*5, layout=as.matrix(nodes.coordA[,c("x","y")]), vertex.label.color="yellow", vertex.label = labelA, vertex.label.cex = 5)
+
+
+
+
+
+-------------------------------------------------
+pass <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/bodeir/passbodeir.csv", header=TRUE, sep=";")
+attach (pass)
+
+pass <- pass %>% filter (Areax >98.9)
+
+aveposA <- pass %>%group_by(Player, main)%>%filter( Teamnum == "A", main == "PW"|main == "Rec Op"|main == "Rec Rs"|main == "Pass Op"|main == "Pass Rs"|main == "Shot Op"|main == "Shot Rs"|
+main == "Ko Rec"|main == "Free Won"|main == "Free Loss"|main == "Spoil Off"|main == "RBW"| main == "Def Act" |main == "Tack Off")
+
+att45 <- pass %>%group_by(Player, main)%>%filter( Teamnum == "A", main == "PW"|main == "Rec Op"|main == "Rec Rs"|main == "Pass Op"|main == "Pass Rs"|main == "Shot Op"|main == "Shot Rs"|
+main == "Ko Rec"|main == "Free Won"|main == "Free Loss"|main == "Spoil Off"|main == "RBW"| main == "Def Act" |main == "Tack Off")
+
+
+AreaxA <- aveposA %>%
+    group_by(Player) %>%
+    summarise(AreaxA = mean(Areax,na.rm = TRUE)) 
+
+AreayA <- aveposA%>%
+    group_by(Player) %>%
+    summarise(AreayA = mean(Areay,na.rm = TRUE))
+
+avgposA <- left_join(AreaxA, AreayA, by ="Player")
+
+att45 <- pass %>%group_by(Player, main)%>%filter( Teamnum == "A", main == "PW"|main == "Rec Op"|main == "Rec Rs"|main == "Pass Op"|main == "Pass Rs"|main == "Shot Op"|main == "Shot Rs"|
+main == "Ko Rec"|main == "Free Won"|main == "Free Loss"|main == "Spoil Off"|main == "RBW"| main == "Def Act" |main == "Tack Off")
+
+p + geom_point(data = att45, aes(x=Areax, y=Areay, colour = Player), size = 6) +
+geom_text(data = att45, aes(x=Areax, y=Areay, label = Player), colour = "white", size = 3) +
+theme(legend.position="none") +
+geom_point(data = avgposA, aes(x=AreaxA, y=AreayA), colour = "yellow", size = 8) +
+geom_text(data = avgposA, aes(x=AreaxA, y=AreayA, label = Player), size = 4, colour = "black")
+
+
+
+
+
+
+

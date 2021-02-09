@@ -1,0 +1,13 @@
+passbd <- pass%>% group_by(Team,Action) %>%filter(Action == "Hp"|Action == "Kp"|Action == "Kp Left"|Action == "Kp Right"|Action == "Fk Pass"|Action == "Sl Pass"|Action == "Mk Kp"|Action == "Mk Hp"|Action == "Sl Kp Won To"|Action == "45 Pass"|Action == "Hp Assist"|Action == "Kp L Assist"|Action == "Kp R Assist"|Action == "Hp Key"|Action == "Kp L Key"|Action == "Kp R Key"|Action == "Mk Kp Key"|Action == "Mk Kp Key")%>%summarize(count=n())
+
+
+passbdA <- passbd%>%filter (Team == "Ballyboden")
+
+passbdA %>%
+  count(Action, wt = count) %>%
+  ggplot(aes(fill = Action, values = n)) +
+  geom_waffle(n_rows = 5, size = 0.13, colour = "white", flip = TRUE) 
+
+waffle(passbdA , rows = 8)
+
+

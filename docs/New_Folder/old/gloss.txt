@@ -1,0 +1,328 @@
+#Glossary of Terms
+
+* Possession -  
+      + Start (Ko/Possession Won) and end of possession (Shot/Turn Over Loss)
+      
+      + A possession can contain a number of phases
+
+* Phase -  
+  
+      + Start (Ko/Possession Won/Restart) and end of phase (Shot/Turn Over Loss/Restart Won)
+      
+      + If a player is dispossessed but regains possession it is counted as a new phase, similarly if the player in possession is dispossessed and a team regains possession it is counted as a new phase
+      
+
+* Restart - 
+  
+      + Freekick Pass/Shot, Sideline Pass or Mark Pass
+      
+
+* On-Ball Possession (OBP) - 
+
+      + Player has gained control of the ball
+      
+
+* Action -
+
+      + Any action (pass, tackle etc that a player makes)
+      
+
+* Positions used in networks are arbritary based on the standard GAA formation. 
+
+
+#Actions
+##Possession Won
+
+* Defending Team gained possession
+
+* Tack W - Tackle Won
+
+* Tack W - Defender disposses Attacking Player & gathers possession 
+
+* Int Op - Defender Intercepts an open play pass from Attacker
+
+* KP Int - Kick Pass intercepted
+
+* HP Int - Hand pass intercepted
+
+* Kp Brk Int - Kick Pass Break intercepted
+
+* Hp Brk Int - Hand Pass Break intercepted
+
+* Mk Kp Int -	Mark Kick Pass Break intercepted
+
+* Int Rs - Defender Intercepts a restart pass from Attacker
+
+* Kp Free Int -	Intercept resulting from a free kick pass break
+
+* Fk Brk Int - Intercept resulting from a Free kick pass break
+
+* Sl Int - Intercept resulting from a kick pass break
+
+* Sl Brk Int - Intercept resulting from a Free kick pass break
+
+* Rebnd Def -	Defending team gains possession from a rebound 
+
+* Rebnd Off -	Attacking team retains possession from a rebound
+
+* Gk Won - Goalkeeper won possession 
+
+* Short Gk - Open play shot fell short to goalkeeper
+
+* Fk Short Gk -	Restart shot fell short to goalkeeper
+
+* Ko Int -	Kickout Intercept
+
+* Ko Int - Defensive team intercepted a kickout
+
+* KoBrk Int -	Ko Intercept from a break
+
+* Ko Int Mk -	Ko Intercept resulting in a mark
+
+* LBW -	Loose Ball Won
+
+* TBW -	Defending team gains possession from a disposses
+
+* Loose RBW -	Attacking team retains possession after a disposses
+
+* Loss BW -	Defeding team gains possession after attacking team loose carry
+
+* Brk Won -	Ball won after a throw in
+
+* PW Ot -	Attacking team concedes possion 
+
+* Sl Kp Won To - Defending team gains possession from attacking team conceding a sideline
+
+* Free Won Def - Attacking team  concedes a free
+
+##Open Play Shot
+
+* Shot Op -	Open Play Shot
+
+* Shot Left -	Left footed shot 
+
+* Shot Right - Right footed shot 
+
+* Hp Shot -	Hand pass shot 
+
+* Punch - Punched shot 
+
+##Open Play Shot Outcome
+
+###Open Play Score 
+
+* Goal - Goal 
+
+* Point - Point
+
+###Open Play Miss 
+
+* Wide Left - Shot Wide Left
+
+* Wide Right - Shot Wide Right
+
+* Save - Goalkeeper saved the attampt
+
+* Blkd - Defender blocked the attempt 
+
+* Short - Attempt fell short
+
+* Post - Attempt hit the post
+
+##Restart Shot
+
+* Fk Shot Left - Left footed Free kick shot 
+
+* Fk Shot Right -	Right footed freekick shot 
+
+* Mk Shot Left - Left footed Mark shot 
+
+* Mk Shot Right - Right footed Mark shot 
+
+* 45 Shot Left - Left footed 45 shot 
+
+* 45 Shot Right - Right footed 45 shot 
+
+* Pen Shot Left - Left footed penalty shot 
+
+* Pen Shot Right - Right footed penalty shot 
+
+##Restart Shot Outcome
+
+###Restart Shot Score
+
+* Fk/45/Mark Goal -	Goal scored from Restart
+
+* Fk/45/Mark Point - Point scored from Restart
+
+###Restart Shot Miss
+
+* Fk/45/Mark Wide Left - Shot Wide Left
+
+* Fk/45/Mark Wide Right - Shot Wide Right
+
+* Fk/45/Mark Save - Goalkeeper saved the attampt
+
+* Fk/45/Mark Short - Defender blocked the attempt 
+
+* Fk/45/Mark Post -	Attempt fell short
+
+* Fk/45/Mark Pass - Attempt hit the post
+
+##Pass
+###Open Play
+
+* Pass Op -	Open Play pass
+
+* Hp - Hand pass
+
+* KpL - Kickpass Left
+
+* KpR - Kickpass Right
+
+###Restart
+
+* Mk Kp -	Mark Kick pass
+
+* Mk Hp - Mark hand pass
+
+* Pass Rs - Restart Pass
+
+* Fk Pass - Freekick pass
+
+* Sl Pass - Sideline pass
+
+##Received
+
+### Rec Op - Received Open Play
+
+* Hp Rec - Hand Pass Received
+
+* Kp Rec - Kick Pass Received
+
+* Hp Brk Rec - Handpass recevied after a break
+
+* Kp Brk Rec - Kick Pass Received after a break
+
+* Att Mk Rec - Attacking mark received
+
+### Rec Rs - Received Restart
+
+* Fk Rec - Free Kick Pass received
+
+* Sl Rec - Sideline pass received
+
+* Brk Rec - Throw in Break won
+
+* Sl Won - Sideline won (possession retained)
+
+##Kickouts 
+
+* Ko - Kickout
+
+* Ko Rec - Kick out Received
+
+* Ko Rec - Kick out received
+
+* Ko Unc Rec - Uncontested kick out received
+
+* KoBrk Rec -	Kickout received after a break
+
+* Ko Mk Won -	Kickout mark won
+
+##Turn Over Loss (ToL) - Loss of Possession
+
+###Kickout Lost
+
+* Ko Lost -	Kick out lost direct 
+
+* KoBrk Lost - Kick out lost from a break
+
+* Fk Loss Off Ko - Free conceded on kickout
+
+* Ko Lost Mk - Kick out lost resulting in an opposition mark 
+
+###Tackle Lost
+
+* Tkl ToL -	Turn over lost from a Tackle
+
+* Loss Tack -	Attacking player lost possession due to tackle
+
+###Open Play Pass lost 
+
+* Loss KP Int	- Kick pass intercepted by defending team 
+
+* Loss HP Int -	Hand pass intercepted by defending team 
+
+* Loss Kp Mk - Kick pass from a mark intercepted
+
+* UnF Int KP Loss - Unforced kick pass lost
+
+* UnF Int HP Loss - Unforced hand pass lost
+
+* Brk Hp Loss -	Hand pass lost following a break
+
+* Brk Kp Loss -	Kick pass lost following a break
+
+###Restart Pass Lost
+
+* Fk Loss ToL -	Loss KP Free
+
+* Rs ToL - Loss Kp Sl
+
+* ToL Op - Wide Op
+
+* LB ToL - Loss Ball
+
+* Fk ToL - Free Loss Off
+
+* Free kick pass lost - Loss from Free Kick	
+
+* Side line pass lost - Loss from Sideline
+
+###Other Lost
+
+* Open Play Loss - Wide from open play (non-shot)
+
+* Loss Ball - Player lost possession
+
+* Free Kick Loss Offence - Attacking team conceded a free
+
+##Frees	
+
+###Free Won
+
+* Fkws - Free won inside 45
+
+* Fkwns - Free won outside 45
+
+###Free Loss
+
+* Fkls - Free kick conceded inside 45
+
+* Fklns - Free kicked conceded outside 45
+
+##Spoil 
+
+* Player prevented Opponent from gaining Possession
+
+###Spoil Defense
+
+* Blkd Shot Def -Defender blocked shooting attempt
+
+* Tack - Defender dispossed attacking player resulting in a loose ball 
+
+* Gk Save -	Goalkeeper saved shooting attempt 
+
+* Brk Opp -	Defensive action stopping pass from reaching attacker
+
+* KoBrk Opp -	Opposition kickout broken up 
+
+* Brk Gk - Goalkeeper punched ball clear
+
+###Spoil Offense
+
+* Brk Own - Attacking player stops defending player from intercepting a pass
+
+* KoBrk Own	- Break from own teams kickout
+

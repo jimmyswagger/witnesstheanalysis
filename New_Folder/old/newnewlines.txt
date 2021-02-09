@@ -1,0 +1,737 @@
+pass <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/dubmaysf/passdubmaysf.csv", header=TRUE, sep=";")
+attach (pass)
+
+#Time - Team A
+
+#All Possessions - times
+#time (gamelog with 1 still in time column)
+pass  <- pass[pass$time!="1", ]
+
+timeA <- pass%>% filter(Teamnum == "A")%>%select(period,poss,Teamnum,Phase,Team,Zone,time,main)
+write.csv2(timeA, "1timeA.csv")
+
+
+pass <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/dubmaysf/passdubmaysf.csv", header=TRUE, sep=";")
+attach (pass)
+
+#Time - Team B
+
+#All Possessions - times
+#time (gamelog with 1 still in time column)
+pass  <- pass[pass$time!="1", ]
+
+timeA <- pass%>% filter(Teamnum == "B")%>%select(period,poss,Teamnum,Phase,Team,Zone,time,main)
+write.csv2(timeA, "1timeB.csv")
+
+
+#add line numbers in excel
+
+#Upload Atttime phases 
+pass <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/anyall.csv", header=TRUE, sep=";")
+attach (pass)
+
+#Pulls out all shots from main
+TeamAPASht <- pass %>%group_by(poss) %>% filter(Teamnum == "A",main =="Shot Op Oc"|main=="Shot Rs Oc")%>%select(period,poss,Teamnum,Phase,Team,Zone,time,main,atttime)
+
+TeamAPAShta <- subset(pass, poss %in% TeamAPASht$poss)
+
+write.csv2(TeamAPAShta, "2timeAllAshot.csv")
+
+pass <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/anyall.csv", header=TRUE, sep=";")
+attach (pass)
+
+TeamAPAScr  <- pass %>%group_by(poss) %>% filter(Teamnum == "A",Zone =="142")
+
+TeamAPASc <- subset(pass, poss %in% TeamAPAScr$poss)
+
+write.csv2(TeamAPASc, "3timeAllAscr.csv")
+
+
+#add line numbers in excel
+
+#Upload Atttime phases 
+pass <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/anyall.csv", header=TRUE, sep=";")
+attach (pass)
+
+#Pulls out all shots from main
+TeamAPASht <- pass %>%group_by(poss) %>% filter(Teamnum == "B",main =="Shot Op Oc"|main=="Shot Rs Oc")%>%select(period,poss,Teamnum,Phase,Team,Zone,time,main,atttime)
+
+TeamAPAShta <- subset(pass, poss %in% TeamAPASht$poss)
+
+write.csv2(TeamAPAShta, "2timeAllAshot.csv")
+
+pass <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/anyall.csv", header=TRUE, sep=";")
+attach (pass)
+
+TeamAPAScr  <- pass %>%group_by(poss) %>% filter(Teamnum == "B",Zone =="142")
+
+TeamAPASc <- subset(pass, poss %in% TeamAPAScr$poss)
+
+write.csv2(TeamAPASc, "3timeAllAscr.csv")
+
+
+passline <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/anyall.csv", header=TRUE, sep=";")
+attach (passline)
+
+passline <- passline[passline$A!="20", ]
+
+passPW <- passline %>%group_by(Team, Action) %>% filter(Teamnum == "A",main =="PW")
+passKo <- passline %>%group_by(Team, Action) %>% filter(Teamnum == "A",main=="Ko Rec")
+passRs <- passline %>%group_by(Team, Action) %>% filter(Teamnum == "A",main=="Pass Rs")
+passFk <- passline %>%group_by(Team, Action) %>% filter(Teamnum == "A",main=="Shot Rs")
+passOp <- passline %>%group_by(Team, Action) %>% filter(Teamnum == "A",main=="Shot Op")
+
+
+A1 <- pass %>% filter(Teamnum == "A" & poss == "A1") 
+A2 <- pass %>% filter(Teamnum == "A" & poss == "A2") 
+A3 <- pass %>% filter(Teamnum == "A" & poss == "A3") 
+A4 <- pass %>% filter(Teamnum == "A" & poss == "A4") 
+A5 <- pass %>% filter(Teamnum == "A" & poss == "A5") 
+A6 <- pass %>% filter(Teamnum == "A" & poss == "A6") 
+A7 <- pass %>% filter(Teamnum == "A" & poss == "A7") 
+A8 <- pass %>% filter(Teamnum == "A" & poss == "A8") 
+A9 <- pass %>% filter(Teamnum == "A" & poss == "A9") 
+A10 <- pass %>% filter(Teamnum == "A" & poss == "A10") 
+A11 <- pass %>% filter(Teamnum == "A" & poss == "A11") 
+A12 <- pass %>% filter(Teamnum == "A" & poss == "A12") 
+A13 <- pass %>% filter(Teamnum == "A" & poss == "A13") 
+A14 <- pass %>% filter(Teamnum == "A" & poss == "A14") 
+A15 <- pass %>% filter(Teamnum == "A" & poss == "A15") 
+A16 <- pass %>% filter(Teamnum == "A" & poss == "A16") 
+A17 <- pass %>% filter(Teamnum == "A" & poss == "A17") 
+A18 <- pass %>% filter(Teamnum == "A" & poss == "A18") 
+A19 <- pass %>% filter(Teamnum == "A" & poss == "A19") 
+A20 <- pass %>% filter(Teamnum == "A" & poss == "A20") 
+A21 <- pass %>% filter(Teamnum == "A" & poss == "A21") 
+A22 <- pass %>% filter(Teamnum == "A" & poss == "A22") 
+A23 <- pass %>% filter(Teamnum == "A" & poss == "A23") 
+A24 <- pass %>% filter(Teamnum == "A" & poss == "A24") 
+A25 <- pass %>% filter(Teamnum == "A" & poss == "A25") 
+A26 <- pass %>% filter(Teamnum == "A" & poss == "A26") 
+A27 <- pass %>% filter(Teamnum == "A" & poss == "A27") 
+A28 <- pass %>% filter(Teamnum == "A" & poss == "A28") 
+A29 <- pass %>% filter(Teamnum == "A" & poss == "A29") 
+A30 <- pass %>% filter(Teamnum == "A" & poss == "A30") 
+A31 <- pass %>% filter(Teamnum == "A" & poss == "A31") 
+A32 <- pass %>% filter(Teamnum == "A" & poss == "A32") 
+A33 <- pass %>% filter(Teamnum == "A" & poss == "A33") 
+A34 <- pass %>% filter(Teamnum == "A" & poss == "A34") 
+A35 <- pass %>% filter(Teamnum == "A" & poss == "A35") 
+A36 <- pass %>% filter(Teamnum == "A" & poss == "A36") 
+A37 <- pass %>% filter(Teamnum == "A" & poss == "A37") 
+A38 <- pass %>% filter(Teamnum == "A" & poss == "A38") 
+A39 <- pass %>% filter(Teamnum == "A" & poss == "A39") 
+A40 <- pass %>% filter(Teamnum == "A" & poss == "A40") 
+A41 <- pass %>% filter(Teamnum == "A" & poss == "A41") 
+A42 <- pass %>% filter(Teamnum == "A" & poss == "A42") 
+A43 <- pass %>% filter(Teamnum == "A" & poss == "A43") 
+A44 <- pass %>% filter(Teamnum == "A" & poss == "A44") 
+A45 <- pass %>% filter(Teamnum == "A" & poss == "A45") 
+A46 <- pass %>% filter(Teamnum == "A" & poss == "A46") 
+A47 <- pass %>% filter(Teamnum == "A" & poss == "A47") 
+A48 <- pass %>% filter(Teamnum == "A" & poss == "A48") 
+A49 <- pass %>% filter(Teamnum == "A" & poss == "A49") 
+A50 <- pass %>% filter(Teamnum == "A" & poss == "A50") 
+A51 <- pass %>% filter(Teamnum == "A" & poss == "A51") 
+A52 <- pass %>% filter(Teamnum == "A" & poss == "A52") 
+A53 <- pass %>% filter(Teamnum == "A" & poss == "A53") 
+A54 <- pass %>% filter(Teamnum == "A" & poss == "A54") 
+A55 <- pass %>% filter(Teamnum == "A" & poss == "A55") 
+A56 <- pass %>% filter(Teamnum == "A" & poss == "A56") 
+A57 <- pass %>% filter(Teamnum == "A" & poss == "A57") 
+A58 <- pass %>% filter(Teamnum == "A" & poss == "A58") 
+A59 <- pass %>% filter(Teamnum == "A" & poss == "A59") 
+A60 <- pass %>% filter(Teamnum == "A" & poss == "A60") 
+A61 <- pass %>% filter(Teamnum == "A" & poss == "A61") 
+A62 <- pass %>% filter(Teamnum == "A" & poss == "A62") 
+A63 <- pass %>% filter(Teamnum == "A" & poss == "A63") 
+A64 <- pass %>% filter(Teamnum == "A" & poss == "A64") 
+A65 <- pass %>% filter(Teamnum == "A" & poss == "A65") 
+A66 <- pass %>% filter(Teamnum == "A" & poss == "A66") 
+A67 <- pass %>% filter(Teamnum == "A" & poss == "A67") 
+A68 <- pass %>% filter(Teamnum == "A" & poss == "A68") 
+A69 <- pass %>% filter(Teamnum == "A" & poss == "A69") 
+A70 <- pass %>% filter(Teamnum == "A" & poss == "A70") 
+A71 <- pass %>% filter(Teamnum == "A" & poss == "A71") 
+A72 <- pass %>% filter(Teamnum == "A" & poss == "A72") 
+A73 <- pass %>% filter(Teamnum == "A" & poss == "A73") 
+A74 <- pass %>% filter(Teamnum == "A" & poss == "A74") 
+A75 <- pass %>% filter(Teamnum == "A" & poss == "A75") 
+A76 <- pass %>% filter(Teamnum == "A" & poss == "A76") 
+A77 <- pass %>% filter(Teamnum == "A" & poss == "A77") 
+A78 <- pass %>% filter(Teamnum == "A" & poss == "A78") 
+A79 <- pass %>% filter(Teamnum == "A" & poss == "A79") 
+A80 <- pass %>% filter(Teamnum == "A" & poss == "A80") 
+A81 <- pass %>% filter(Teamnum == "A" & poss == "A81") 
+A82 <- pass %>% filter(Teamnum == "A" & poss == "A82") 
+A83 <- pass %>% filter(Teamnum == "A" & poss == "A83") 
+A84 <- pass %>% filter(Teamnum == "A" & poss == "A84") 
+A85 <- pass %>% filter(Teamnum == "A" & poss == "A85") 
+A86 <- pass %>% filter(Teamnum == "A" & poss == "A86") 
+A87 <- pass %>% filter(Teamnum == "A" & poss == "A87") 
+A88 <- pass %>% filter(Teamnum == "A" & poss == "A88") 
+A89 <- pass %>% filter(Teamnum == "A" & poss == "A89") 
+A90 <- pass %>% filter(Teamnum == "A" & poss == "A90") 
+A91 <- pass %>% filter(Teamnum == "A" & poss == "A91") 
+A92 <- pass %>% filter(Teamnum == "A" & poss == "A92") 
+A93 <- pass %>% filter(Teamnum == "A" & poss == "A93") 
+A94 <- pass %>% filter(Teamnum == "A" & poss == "A94") 
+A95 <- pass %>% filter(Teamnum == "A" & poss == "A95") 
+A96 <- pass %>% filter(Teamnum == "A" & poss == "A96") 
+A97 <- pass %>% filter(Teamnum == "A" & poss == "A97") 
+A98 <- pass %>% filter(Teamnum == "A" & poss == "A98") 
+A99 <- pass %>% filter(Teamnum == "A" & poss == "A99") 
+A100 <- pass %>% filter(Teamnum == "A" & poss == "A100") 
+
+
+actcolpal <- c(
+  "20" = "grey",
+  "1" = "black", 
+  "2" = "blue", 
+  "3" = "red",
+  "4" = "purple",
+  "5" =  "yellow",
+  "6" = "white",
+  "7" = "orange",
+  "8" = "pink")
+
+runlinepal <- c(
+  "20" = 2,
+  "1" = 1, 
+  "2" = 1, 
+  "3" = 1,
+  "4" = 1,
+  "5" = 1,
+  "6" = 1,
+  "7" = 1,
+  "8" = 1,
+  "9" = 1,
+  "10"= 1)
+
+
+
+p + 
+geom_path(data = A1, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A2, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A3, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A4, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A5, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A6, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A7, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A8, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A9, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A10, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A11, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A12, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A13, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A14, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A15, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A16, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A17, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A18, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A19, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A20, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A21, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A22, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A23, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A24, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A25, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A26, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A27, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A28, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.8) + 
+geom_path(data = A29, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A30, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A31, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A32, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A33, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A34, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A35, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A36, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A37, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A38, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A39, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A40, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A41, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A42, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A43, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A44, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A45, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A46, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A47, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A48, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A49, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A50, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A51, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A52, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A53, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A54, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A55, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A56, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A57, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A58, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A59, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A60, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A61, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A62, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A63, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A64, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A65, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A66, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A67, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A68, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A69, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A70, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A71, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A72, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A73, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A74, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A75, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A76, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A77, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A78, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A79, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A80, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A81, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A82, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A83, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A84, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A85, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A86, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A87, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A88, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A89, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A90, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A91, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A92, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A93, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A94, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A95, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A96, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A97, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A98, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A99, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+geom_path(data = A100, aes(x=Areax, y=Areay, colour = as.factor(A) , linetype= as.factor(A)), size = 0.5) + 
+theme(legend.position="none") +
+scale_colour_manual(values = actcolpal) +
+scale_linetype_manual(values = runlinepal) +
+geom_point(data = passPW, aes(x=Areax, y=Areay, stroke = 1), size = 6, colour = "white", shape = 16) +
+geom_text(data = passPW, aes(x=Areax, y=Areay, label = possno),colour = "black") +
+geom_point(data = passRs, aes(x=Areax, y=Areay, stroke = 1), size = 6, colour = "blue", shape = 16) +
+geom_text(data = passRs, aes(x=Areax, y=Areay, label = possno),colour = "white") +
+geom_point(data = passFk, aes(x=Areax, y=Areay, stroke = 1), size = 6, colour = "Purple", shape = 16) +
+geom_text(data = passFk, aes(x=Areax, y=Areay, label = possno),colour = "white") +
+geom_point(data = passOp, aes(x=Areax, y=Areay, stroke = 1), size = 6, colour = "red", shape = 16) +
+geom_text(data = passOp, aes(x=Areax, y=Areay, label = possno),colour = "white") +
+geom_point(data = passKo, aes(x=Areax, y=Areay, stroke = 1), size = 6, colour = "black", shape = 16) +
+geom_text(data = passKo, aes(x=Areax, y=Areay, label = possno),colour = "white") 
+
+
+
+
+
+B1 <- passline %>% filter(Teamnum == "B" & poss == "B1") 
+ 
+B2 <- passline %>% filter(Teamnum == "B" & poss == "B2") 
+ 
+B3 <- passline %>% filter(Teamnum == "B" & poss == "B3") 
+ 
+B4 <- passline %>% filter(Teamnum == "B" & poss == "B4") 
+ 
+B5 <- passline %>% filter(Teamnum == "B" & poss == "B5") 
+ 
+B6 <- passline %>% filter(Teamnum == "B" & poss == "B6") 
+ 
+B7 <- passline %>% filter(Teamnum == "B" & poss == "B7") 
+ 
+B8 <- passline %>% filter(Teamnum == "B" & poss == "B8") 
+ 
+B9 <- passline %>% filter(Teamnum == "B" & poss == "B9") 
+ 
+B10 <- passline %>% filter(Teamnum == "B" & poss == "B10") 
+ 
+B11 <- passline %>% filter(Teamnum == "B" & poss == "B11") 
+ 
+B12 <- passline %>% filter(Teamnum == "B" & poss == "B12") 
+ 
+B13 <- passline %>% filter(Teamnum == "B" & poss == "B13") 
+ 
+B14 <- passline %>% filter(Teamnum == "B" & poss == "B14") 
+ 
+B15 <- passline %>% filter(Teamnum == "B" & poss == "B15") 
+ 
+B16 <- passline %>% filter(Teamnum == "B" & poss == "B16") 
+ 
+B17 <- passline %>% filter(Teamnum == "B" & poss == "B17") 
+ 
+B18 <- passline %>% filter(Teamnum == "B" & poss == "B18") 
+ 
+B19 <- passline %>% filter(Teamnum == "B" & poss == "B19") 
+ 
+B20 <- passline %>% filter(Teamnum == "B" & poss == "B20") 
+ 
+B21 <- passline %>% filter(Teamnum == "B" & poss == "B21") 
+ 
+B22 <- passline %>% filter(Teamnum == "B" & poss == "B22") 
+ 
+B23 <- passline %>% filter(Teamnum == "B" & poss == "B23") 
+ 
+B24 <- passline %>% filter(Teamnum == "B" & poss == "B24") 
+ 
+B25 <- passline %>% filter(Teamnum == "B" & poss == "B25") 
+ 
+B26 <- passline %>% filter(Teamnum == "B" & poss == "B26") 
+ 
+B27 <- passline %>% filter(Teamnum == "B" & poss == "B27") 
+ 
+B28 <- passline %>% filter(Teamnum == "B" & poss == "B28") 
+ 
+B29 <- passline %>% filter(Teamnum == "B" & poss == "B29") 
+ 
+B30 <- passline %>% filter(Teamnum == "B" & poss == "B30") 
+ 
+B31 <- passline %>% filter(Teamnum == "B" & poss == "B31") 
+ 
+B32 <- passline %>% filter(Teamnum == "B" & poss == "B32") 
+ 
+B33 <- passline %>% filter(Teamnum == "B" & poss == "B33") 
+ 
+B34 <- passline %>% filter(Teamnum == "B" & poss == "B34") 
+ 
+B35 <- passline %>% filter(Teamnum == "B" & poss == "B35") 
+ 
+B36 <- passline %>% filter(Teamnum == "B" & poss == "B36") 
+ 
+B37 <- passline %>% filter(Teamnum == "B" & poss == "B37") 
+ 
+B38 <- passline %>% filter(Teamnum == "B" & poss == "B38") 
+ 
+B39 <- passline %>% filter(Teamnum == "B" & poss == "B39") 
+ 
+B40 <- passline %>% filter(Teamnum == "B" & poss == "B40") 
+ 
+B41 <- passline %>% filter(Teamnum == "B" & poss == "B41") 
+ 
+B42 <- passline %>% filter(Teamnum == "B" & poss == "B42") 
+ 
+B43 <- passline %>% filter(Teamnum == "B" & poss == "B43") 
+ 
+B44 <- passline %>% filter(Teamnum == "B" & poss == "B44") 
+ 
+B45 <- passline %>% filter(Teamnum == "B" & poss == "B45") 
+ 
+B46 <- passline %>% filter(Teamnum == "B" & poss == "B46") 
+ 
+B47 <- passline %>% filter(Teamnum == "B" & poss == "B47") 
+ 
+B48 <- passline %>% filter(Teamnum == "B" & poss == "B48") 
+ 
+B49 <- passline %>% filter(Teamnum == "B" & poss == "B49") 
+ 
+B50 <- passline %>% filter(Teamnum == "B" & poss == "B50") 
+ 
+B51 <- passline %>% filter(Teamnum == "B" & poss == "B51") 
+ 
+B52 <- passline %>% filter(Teamnum == "B" & poss == "B52") 
+ 
+B53 <- passline %>% filter(Teamnum == "B" & poss == "B53") 
+ 
+B54 <- passline %>% filter(Teamnum == "B" & poss == "B54") 
+ 
+B55 <- passline %>% filter(Teamnum == "B" & poss == "B55") 
+ 
+B56 <- passline %>% filter(Teamnum == "B" & poss == "B56") 
+ 
+B57 <- passline %>% filter(Teamnum == "B" & poss == "B57") 
+ 
+B58 <- passline %>% filter(Teamnum == "B" & poss == "B58") 
+ 
+B59 <- passline %>% filter(Teamnum == "B" & poss == "B59") 
+ 
+B60 <- passline %>% filter(Teamnum == "B" & poss == "B60") 
+ 
+B61 <- passline %>% filter(Teamnum == "B" & poss == "B61") 
+ 
+B62 <- passline %>% filter(Teamnum == "B" & poss == "B62") 
+ 
+B63 <- passline %>% filter(Teamnum == "B" & poss == "B63") 
+ 
+B64 <- passline %>% filter(Teamnum == "B" & poss == "B64") 
+ 
+B65 <- passline %>% filter(Teamnum == "B" & poss == "B65") 
+ 
+B66 <- passline %>% filter(Teamnum == "B" & poss == "B66") 
+ 
+B67 <- passline %>% filter(Teamnum == "B" & poss == "B67") 
+ 
+B68 <- passline %>% filter(Teamnum == "B" & poss == "B68") 
+ 
+B69 <- passline %>% filter(Teamnum == "B" & poss == "B69") 
+ 
+B70 <- passline %>% filter(Teamnum == "B" & poss == "B70") 
+ 
+B71 <- passline %>% filter(Teamnum == "B" & poss == "B71") 
+ 
+B72 <- passline %>% filter(Teamnum == "B" & poss == "B72") 
+ 
+B73 <- passline %>% filter(Teamnum == "B" & poss == "B73") 
+ 
+B74 <- passline %>% filter(Teamnum == "B" & poss == "B74") 
+ 
+B75 <- passline %>% filter(Teamnum == "B" & poss == "B75") 
+ 
+B76 <- passline %>% filter(Teamnum == "B" & poss == "B76") 
+ 
+B77 <- passline %>% filter(Teamnum == "B" & poss == "B77") 
+ 
+B78 <- passline %>% filter(Teamnum == "B" & poss == "B78") 
+ 
+B79 <- passline %>% filter(Teamnum == "B" & poss == "B79") 
+ 
+B80 <- passline %>% filter(Teamnum == "B" & poss == "B80") 
+ 
+B81 <- passline %>% filter(Teamnum == "B" & poss == "B81") 
+ 
+B82 <- passline %>% filter(Teamnum == "B" & poss == "B82") 
+ 
+B83 <- passline %>% filter(Teamnum == "B" & poss == "B83") 
+ 
+B84 <- passline %>% filter(Teamnum == "B" & poss == "B84") 
+ 
+B85 <- passline %>% filter(Teamnum == "B" & poss == "B85") 
+ 
+B86 <- passline %>% filter(Teamnum == "B" & poss == "B86") 
+ 
+B87 <- passline %>% filter(Teamnum == "B" & poss == "B87") 
+ 
+B88 <- passline %>% filter(Teamnum == "B" & poss == "B88") 
+ 
+B89 <- passline %>% filter(Teamnum == "B" & poss == "B89") 
+ 
+B90 <- passline %>% filter(Teamnum == "B" & poss == "B90") 
+ 
+B91 <- passline %>% filter(Teamnum == "B" & poss == "B91") 
+ 
+B92 <- passline %>% filter(Teamnum == "B" & poss == "B92") 
+ 
+B93 <- passline %>% filter(Teamnum == "B" & poss == "B93") 
+ 
+B94 <- passline %>% filter(Teamnum == "B" & poss == "B94") 
+ 
+B95 <- passline %>% filter(Teamnum == "B" & poss == "B95") 
+ 
+B96 <- passline %>% filter(Teamnum == "B" & poss == "B96") 
+ 
+B97 <- passline %>% filter(Teamnum == "B" & poss == "B97") 
+ 
+B98 <- passline %>% filter(Teamnum == "B" & poss == "B98") 
+ 
+B99 <- passline %>% filter(Teamnum == "B" & poss == "B99") 
+ 
+B100 <- passline %>% filter(Teamnum == "B" & poss == "B100")
+
+
+geom_path(data = B1, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B2, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B3, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B4, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B5, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B6, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B7, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B8, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B9, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B10, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B11, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B12, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B13, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B14, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B15, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B16, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B17, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B18, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B19, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B20, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B21, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B22, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B23, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B24, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B25, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B26, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B27, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B28, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B29, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B30, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B31, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B32, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B33, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B34, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B35, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B36, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B37, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B38, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B39, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B40, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B41, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B42, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B43, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B44, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B45, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B46, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B47, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B48, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B49, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B50, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B51, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B52, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B53, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B54, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B55, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B56, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B57, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B58, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B59, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B60, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B61, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B62, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B63, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B64, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B65, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B66, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B67, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B68, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B69, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B70, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B71, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B72, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B73, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B74, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B75, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B76, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B77, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B78, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B79, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B80, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B81, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B82, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B83, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B84, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B85, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B86, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B87, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B88, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B89, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B90, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B91, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B92, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B93, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B94, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B95, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B96, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B97, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B98, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B99, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+geom_path(data = B100, aes(x=Areax, y=Areay, colour = as.factor(Bsht) , linetype= as.factor(Bsht)), size = 0.8) + 
+ 
+
+ 
+ 
+
+

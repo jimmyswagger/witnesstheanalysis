@@ -1,0 +1,146 @@
+create_LEAGUE_Pitch <- function(grass_colour, line_colour, background_colour, goala_colour,goalb_colour,label_colour, BasicFeatures){
+  
+  theme_blankPitch = function(size=12) { 
+    theme(
+      #axis.line=element_blank(), 
+      axis.text.x=element_blank(), 
+      axis.text.y=element_blank(), 
+      #axis.ticks.y=element_text(size=size),
+      #axis.ticks=element_blank(),
+      axis.ticks.length=unit(0, "lines"), 
+      #axis.ticks.margin=unit(0, "lines"), 
+      axis.title.x=element_blank(), 
+      axis.title.y=element_blank(), 
+      legend.key.size=unit(1.2, "lines"), 
+      legend.text=element_text(size=size), 
+      legend.title=element_text(size=size, face="bold",hjust=0),
+      # panel.border=element_blank(), 
+      panel.grid.major=element_blank(), 
+      panel.grid.minor=element_blank(), 
+      panel.spacing=element_blank(), 
+      plot.margin=unit(c(0, 0, 0, 0), "lines"), 
+      plot.title=element_text(size=size*1.2), 
+      panel.background=element_rect(fill= background_colour,colour= background_colour),
+      strip.text.x=element_text(size=size*1))}
+
+  ymin <- 0 # minimum width
+  ymax <- 68 # maximum width
+  xmin <- 0 # minimum length
+  xmax <- 120 # maximum length
+  
+  # pitch lines
+  
+  def0 <- 10
+  def10 <- 20
+  def20 <- 30
+  def30 <- 40
+  def40 <- 50
+  off50 <- 60
+  off60 <- 70
+  off70 <- 80
+  off80 <- 90
+  off90 <- 100
+  off100 <- 110
+  
+  #Goals
+  glxst <- 10
+  glyst <- 31.75
+  glxed <- 110
+  glyed <- 36.25
+
+ # hashlines
+
+  rhashy <- 10
+  rhashx0e <- 13
+  rhashx10s <- 17
+  rhashx10e <- 23
+  rhashx20s <- 27
+  rhashx20e <- 33
+  rhashx30s <- 37
+  rhashx30e <- 43
+  rhashx40s <- 47
+  rhashx40e <- 53
+  rhashx50s <- 57
+  rhashx50e <- 63
+  
+# tramlines
+  srwing <- 17
+  rhalfsp <- 34
+  ctre <- 51
+ 
+      
+ 
+  if(BasicFeatures == TRUE){
+    ## initiate the plot, set some boundries to the plot
+    np <- ggplot() + xlim(c(xmin,xmax)) + ylim(c(ymin,ymax)) +
+      # add the theme 
+      theme_blankPitch() +
+      # add halway line
+      geom_rect(aes(xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax), fill = grass_colour, colour = line_colour) + 
+      geom_segment(aes(x = def0, y = ymin, xend = def0, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) +   
+      geom_segment(aes(x = def10, y = ymin, xend = def10, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) + 
+      geom_segment(aes(x = def20, y = ymin, xend = def20, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = def30, y = ymin, xend = def30, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = def40, y = ymin, xend = def40, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = off50, y = ymin, xend = off50, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = off60, y = ymin, xend = off60, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = off70, y = ymin, xend = off70, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = off80, y = ymin, xend = off80, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = off90, y = ymin, xend = off90, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = off100, y = ymin, xend = off100, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = def0, y = rhashy, xend = rhashx0e, yend = rhashy),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = glxst, y =  glyst, xend = glxst, yend = glyed),colour = goala_colour, size = 1) +
+      geom_segment(aes(x =glxed, y =  glyst, xend =glxed, yend = glyed),colour = goalb_colour, size = 1) +
+      annotate(geom="text", x= 20, y=15, label="10",color = label_colour,size = 4) +
+      annotate(geom="text", x= 30, y=1.25, label="20",color = label_colour,size = 4) +
+      annotate(geom="text", x= 40, y=1.25, label="30",color = label_colour,size = 4) +
+      annotate(geom="text", x= 50, y=1.25, label="40",color = label_colour,size = 4) +
+      annotate(geom="text", x=60, y=1.25, label="50", color=label_colour,size = 4) +
+      annotate(geom="text", x=70, y=1.25, label="40",color = label_colour,size = 4) +
+      annotate(geom="text", x=80, y=1.25, label="30",color = label_colour,size = 4) +
+      annotate(geom="text", x=90, y=1.25, label="20",color = label_colour,size = 4) +
+      annotate(geom="text", x=100, y=1.25, label="10",color = label_colour,size = 4) +
+      annotate(geom="text", x= 60, y=4, label="www.witnesstheanalysis.com",color = label_colour,size = 6, alpha = 0.4) +
+      annotate(geom="text", x= 60, y=66, label="www.witnesstheanalysis.com",color = label_colour,size = 6, alpha = 0.4)
+    
+  }
+  
+  else{
+    ## initiate the plot, set some boundries to the plot
+     np <- ggplot() + xlim(c(xmin,xmax)) + ylim(c(ymin,ymax)) +
+      # add the theme 
+      theme_blankPitch() +
+      # add halway line
+            geom_rect(aes(xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax), fill = grass_colour, colour = line_colour) + 
+      geom_segment(aes(x = def13, y = ymin, xend = def13, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) +   
+      geom_segment(aes(x = def20, y = ymin, xend = def20, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) + 
+      geom_segment(aes(x = def45, y = ymin, xend = def45, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = def65, y = ymin, xend = def65, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = off65, y = ymin, xend = off65, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = off45, y = ymin, xend = off45, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = off20, y = ymin, xend = off20, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = off13, y = ymin, xend = off13, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) + 
+      geom_segment(aes(x = glxst, y =  glyst, xend = glxst, yend = glyed),colour = goala_colour, size = 1) +
+      geom_segment(aes(x =glxed, y =  glyst, xend =glxed, yend = glyed),colour = goalb_colour, size = 1) +
+      geom_segment(aes(x = xmin, y = srwing, xend = xmax, yend = srwing),colour = line_colour,linetype="dotted",size = 0.5) +
+      geom_segment(aes(x = xmin, y = rhalfsp, xend = xmax, yend = rhalfsp),colour = line_colour,linetype="dotted",size = 0.5) +
+      geom_segment(aes(x = xmin, y = ctre, xend = xmax, yend = ctre),colour = line_colour,linetype="dotted",size = 0.5) +
+       annotate(geom="text", x= 20, y=15, label="10",color = label_colour,size = 4) +
+      annotate(geom="text", x= 30, y=15, label="20",color = label_colour,size = 4) +
+      annotate(geom="text", x= 40, y=15, label="30",color = label_colour,size = 4) +
+      annotate(geom="text", x= 50, y=15, label="40",color = label_colour,size = 4) +
+      annotate(geom="text", x=60, y=15, label="50", color=label_colour,size = 4) +
+      annotate(geom="text", x=70, y=15, label="40",color = label_colour,size = 4) +
+      annotate(geom="text", x=80, y=1.25, label="30",color = label_colour,size = 4) +
+      annotate(geom="text", x=90, y=1.25, label="20",color = label_colour,size = 4) +
+      annotate(geom="text", x=100, y=1.25, label="10",color = label_colour,size = 4) +
+      annotate(geom="text", x= 60, y=4, label="www.witnesstheanalysis.com",color = label_colour,size = 6, alpha = 0.4) +
+      annotate(geom="text", x= 60, y=66, label="www.witnesstheanalysis.com",color = label_colour,size = 6, alpha = 0.4)
+  }
+  
+  return(np)}
+
+
+np <- create_LEAGUE_Pitch("#A2CD5A", "white", "black", "blue","red","white", BasicFeatures=TRUE)
+
+np

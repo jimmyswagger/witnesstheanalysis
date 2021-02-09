@@ -1,0 +1,91 @@
+#Run
+passR <- passR[passR$main!="Def Act", ]
+passR <- passR[passR$main!="Free Loss", ]
+passR <- passR[passR$main!="Tck Def", ]
+passR <- passR[passR$main!="Tck End", ]
+passR <- passR[passR$main!="Shot Prs", ]
+
+passR <- passR%>%select(period,possno,poss,Teamnum,Phase,Team,Player,Action,Areax,Areay,plylab,subset,Zone,time,main,Pitch_Area)
+
+passRc <- passR 
+
+#passRc <- passR %>% filter (poss =="A1"|poss == "B1"|poss == "A2")
+
+oddps <- passRc[seq(1, nrow(passRc), 1),]
+colnames(oddps) <- c("period","possno","poss","Teamnum","Phase","Team","Player","Action","Areax","Areay","plylab","subset","Zone","time","main","Pitch_Area")
+evenps <- passRc[seq(2, nrow(passRc), 1),]
+colnames(evenps) <- c("periodoc","possnooc","possoc","Teamnumoc","Phaseoc","Teamoc","Playeroc","Actionoc","Areaxoc","Areayoc","plylaboc","subsetoc","Zoneoc","timeoc","mainoc","Pitch_End")
+
+#add column to each data frame with row number
+oddps$number <- row.names(oddps)
+evenps$number <- row.names(evenps)
+
+run <- merge(oddps, evenps, by = "number", all = TRUE)
+
+run$number <- as.numeric(run$number)
+
+run  <- run %>% arrange(number)
+
+library(plyr)
+
+run  <- rename(run, c( Areaxoc = "xend", Areayoc = "yend",Zone = "zone",  Zoneoc = "zoneoc"))
+
+detach(package:plyr)
+
+run <-run %>% mutate(teamsame = ifelse(Team == Teamoc ,"Y","N"))
+run <-run %>% mutate(keep = ifelse(main =="Free Won" ,"N",ifelse(Team == "Att Mk Won","N", run$teamsame)))
+
+run <-run %>% mutate(segtypea = ifelse(Action =="Hp","Hp",ifelse(Action  == "Kp Left","Kp Left",ifelse(Action  == "Kp Right","Kp Right",
+ifelse(Action  == "Ko","Ko",ifelse(Action == "Fk Pass","Fk Pass",ifelse(Action  == "Sl Pass","Sl Pass"
+,ifelse(Action  == "Brk Own","Brk Own",ifelse(Action  == "Opp Brk","Op Brk",ifelse(Action  == "koBrk Own","KoBrk Own",ifelse(Action  == "Opp KoBrk","Opp KoBrk","Carry")))))))))))
+
+run <-run %>% mutate(segtype = ifelse(subsetoc =="Scr Op","Score",ifelse(subsetoc  == "Ms Op","Miss",ifelse(subsetoc  == "Scr Rs","Scr Rs",ifelse(subsetoc  == "Ms Rs","Ms Rs",
+ifelse(subsetoc == "Ko ToL","Ko ToL",ifelse(subsetoc  == "Pass ToL","Pass ToL",run$segtypea)))))))
+
+segtype <- c("Hp","Carry","Kp Right","Score","Ko","Ko ToL","Pass ToL","Miss","Kp Left","Fk Pass","Sl Pass","Scr Rs","Ms Rs",
+"Opp Brk","Brk Own","Opp KoBrk","KoBrk Own")
+
+seg<- c("1",	"2",	"3",	"4",	"5",	"6",	"7",	"8",	"9",	"10",	
+"10",	"11",	"12",	"13",	"14",	"15",	"16")
+
+segments <- data.frame(segtype ,seg)
+
+run  <-run  %>%
+    mutate(seg = VLOOKUP(segtype,segments, segtype, seg))
+
+run <-run %>% mutate(same = ifelse(zone == zoneoc ,"Y", "N"))
+
+run <-run %>% mutate(time_diff = (timeoc-time))
+
+run <- run %>% mutate (dist =(sqrt((xend - Areax)^2+ (yend - Areay)^2)))
+
+run <-run %>% mutate(ms = (dist/time_diff))
+
+
+
+#Shot distance 
+
+runa <- run %>% filter (main %in% c("Shot Op"))%>%select(poss,Player, Action,Areax,Areay)
+
+runShtd <-runa%>%mutate (Shot_Dist =(sqrt((144 - Areax)^2+ (49 - Areay)^2)))%>%select(poss,Player, Action,Areax,Areay, Shot_Dist)
+
+write.csv(runShtd, "runShtd.csv")
+
+#Ko Dist y Ko Rec
+
+runakod <- run %>% filter (main %in% c("Ko"))
+
+Ko_Dist <- runakod %>% mutate (Ko_Dist =(sqrt((xend - Areax)^2+ (yend - Areay)^2)))%>%select (poss, Ko_Dist,mainoc,zoneoc,Pitch_End)
+
+write.csv(Ko_Dist , "Ko_Dist.csv")
+
+#Ko Time
+
+runa <- run %>% filter (mainoc %in% c("Ko"))
+
+runa$time <- as.numeric(runa$time)
+runa$timeoc <- as.numeric(runa$timeoc)
+
+Ko_Time <- runa%>% mutate(Ko_Time = (timeoc - time))%>%select (possoc, Ko_Time)
+
+write.csv(Ko_Time, "Ko_Time.csv")

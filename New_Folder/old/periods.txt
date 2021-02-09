@@ -1,0 +1,69 @@
+lpop <- pass %>%group_by(Team,period)%>%summarize(Possession_Won =sum(main == "PW"), Kickouts = sum(main == "Ko"),Ko_Won = sum(main == "Ko Rec"),Total_Possessions = sum(Possession_Won + Kickouts),Open_Play_Shots = sum(main == "Shot Op"),Open_Play_Score = sum(subset == "Scr Op"),Fk_Shots = sum(main == "Shot Rs"),Open_Play_Score = sum(subset == "Scr Op"),Fk_Score = sum(subset == "Scr Rs"))
+
+lpop <-lpop %>%
+  tidyr::gather(variable, value, -Team)
+
+my_theme <- function(){
+  theme_light() +
+    theme(text = element_text(),  
+          panel.grid = element_blank(),
+          panel.border = element_blank(),
+          axis.title = element_blank(),
+          axis.ticks = element_blank(),
+          axis.text.x = element_blank(),
+          axis.text.y = element_text(size = 15, color = "gray10"),
+          plot.title =  element_text(size = 20, color = "black")) +
+theme(legend.position="bottom")
+  }
+
+q <- ggplot(data = lpop , aes(x = variable, y = value, colour = Team))
+
+q +geom_point(stat = "identity", aes(x = variable, y = value, colour = Team), size = 12) +
+geom_text(data =lpop ,aes(x = variable, y = value, label = value), colour = "white", size = 6) +
+  my_theme ()+
+  scale_colour_manual(values= c (teamcol)) 
+
+
+
+
+passA <- pass
+passA <- passA[passA$possno!="0", ]
+passA <- passA[passA$phaseno!="0", ]
+passA <- passA[passA$main!="Shot Op Oc", ]
+passA <- passA[passA$main!="Shot Rs Oc", ]
+passA <- passA[passA$main!="Shot Op", ]
+passA <- passA[passA$main!="Shot Rs", ]
+
+
+perA <- pass %>%group_by(Team,main,period)%>%tally%>%mutate(f = sum(n))
+pA <- ggplot(perA,aes(x=period,weight = n,fill = period)) + geom_histogram()+facet_grid(Team ~ main) + theme_light()
+pA
+
+
+perA <- pass%>%group_by(Team,main,period, , .drop=TRUE) %>% filter (main %in% c("PW", "ToL", "Ko Rec", "Ko", "Free Won", "Free Loss", "Shot Op","Shot Rs"))
+
+
+perA <- perA %>%group_by(Team,main,period)%>%tally%>%mutate(f = sum(n))
+
+pA <- ggplot(perA,aes(x=period,weight = n,fill = as.factor(period))) + 
+geom_histogram()+facet_grid(Team ~ main, scales='free') + 
+theme(strip.background = element_rect(colour="black", fill="lightgreen", size=1.5, linetype="solid"), 
+strip.text.x = element_text(size = 14, colour = "black"),
+strip.text.y = element_text(size = 14, colour = "black"),
+axis.text.x = element_text(size = 12, colour = "black"),
+axis.text.y = element_text(size = 12, colour = "black")) +
+labs (fill = "Period")
+pA
+
+perA <- pass%>%group_by(Team,main,period, , .drop=TRUE) %>% filter (main %in% c("PW", "ToL", "Ko Rec", "Ko", "Free Won", "Free Loss", "Shot Op","Shot Rs"))
+
+
+perA <- perA %>%group_by(Team,main,period)%>%tally%>%mutate(f = sum(n))
+
+pA <- ggplot(perA,aes(x=period,weight = n,fill = as.factor(period))) + 
+geom_histogram()+facet_grid(Team ~ main, scales='free') + 
+theme(strip.background = element_rect(colour="black", fill="lightgreen", size=1.5, linetype="solid"), 
+strip.text = element_text(size = 14, colour = "black"),
+axis.text = element_text(size = 12, colour = "black")) +
+labs (fill = "Period")
+pA

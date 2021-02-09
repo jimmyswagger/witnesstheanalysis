@@ -1,0 +1,64 @@
+passline <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/newplan/runnewplan.csv", header=TRUE, sep=";")
+attach (passline)
+
+passline <- passline%>% mutate(vec_col =ifelse(vec > -180 & vec < -143.9 ,1, ifelse(vec > -144 & vec < -107.9,2, ifelse(vec > -108 & vec < -71.9, 3,ifelse(vec > -72 & vec < -35.9,4,ifelse(vec > -36 & vec <0.1, 5,ifelse(vec >0.1 & vec <35.9, 6,
+ifelse(vec > 36 & vec < 71.9, 7,ifelse(vec > 72 & vec < 107.9, 8,ifelse(vec > 108 & vec < 143.9, 9,ifelse(vec > 144 & vec < 180, 10,"Draw")))))))))))
+
+runcolpal <- c(
+  "1" = "black", 
+  "2" = "orange", 
+  "3" = "white",
+  "4" = "yellow",
+  "5" =  "gold",
+  "6" = "darkred",
+  "7" = "purple",
+  "8" = "blue",
+  "9" = "darkgreen",
+  "10" = "lightblue")
+
+passline <-passline%>%filter(Teamnum == "A",keep=="Y",same == "N")
+
+passlineA <- passline%>%filter(main == "Pass Op"| seg == "0"|seg == "2",  Areax <45, xend > Areax, vec > -180, vec < 180)
+passlineB <- passline%>%filter(main == "Pass Op"| seg == "0"|seg == "2",  Areax >45,Areax <71.9, xend > Areax, vec > -180, vec < 180)
+passlineC <- passline%>%filter(main == "Pass Op"| seg == "0"|seg == "2",  Areax >72,Areax <99.9, xend > Areax, vec > -180, vec < 180)
+passlineD <- passline%>%filter(main == "Pass Op"| seg == "0"|seg == "2",  Areax >100, xend > Areax,vec > -180, vec < 180)
+
+p +  geom_segment(data = passlineA, aes(x = Areax, y = Areay, xend = xend, yend = yend, colour = as.factor(vec_col)),size = 1,arrow = arrow(length = unit(0.3,"cm")))+
+geom_segment(data = passlineB, aes(x = Areax, y = Areay, xend = xend, yend = yend, colour = as.factor(vec_col)),size = 1,arrow = arrow(length = unit(0.3,"cm"))) +
+geom_segment(data = passlineC, aes(x = Areax, y = Areay, xend = xend, yend = yend, colour = as.factor(vec_col)), size = 1,arrow = arrow(length = unit(0.3,"cm"))) +
+geom_segment(data = passlineD, aes(x = Areax, y = Areay, xend = xend, yend = yend, colour = as.factor(vec_col)), size = 1,arrow = arrow(length = unit(0.3,"cm"))) +
+theme(legend.position="none") +
+scale_colour_manual(values = runcolpal)
+
+
+passline <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/newplan/runnewplan.csv", header=TRUE, sep=";")
+attach (passline)
+
+passline <- passline%>% mutate(vec_col =ifelse(vec > -180 & vec < -143.9 ,1, ifelse(vec > -144 & vec < -107.9,2, ifelse(vec > -108 & vec < -71.9, 3,ifelse(vec > -72 & vec < -35.9,4,ifelse(vec > -36 & vec <0.1, 5,ifelse(vec >0.1 & vec <35.9, 6,
+ifelse(vec > 36 & vec < 71.9, 7,ifelse(vec > 72 & vec < 107.9, 8,ifelse(vec > 108 & vec < 143.9, 9,ifelse(vec > 144 & vec < 180, 10,"Draw")))))))))))
+
+runcolpal <- c(
+  "1" = "black", 
+  "2" = "orange", 
+  "3" = "white",
+  "4" = "yellow",
+  "5" =  "gold",
+  "6" = "darkred",
+  "7" = "purple",
+  "8" = "blue",
+  "9" = "darkgreen",
+  "10" = "lightblue")
+
+passline <-passline%>%filter(Teamnum == "B",keep=="Y",same == "N")
+
+passlineA <- passline%>%filter(main == "Pass Op"| seg == "0"|seg == "2",  Areax <45,vec > -180, vec < 180)
+passlineB <- passline%>%filter(main == "Pass Op"| seg == "0"|seg == "2",  Areax >45,Areax <71.9, vec > -180, vec < 180)
+passlineC <- passline%>%filter(main == "Pass Op"| seg == "0"|seg == "2",  Areax >72,Areax <99.9,vec > -180, vec < 180)
+passlineD <- passline%>%filter(main == "Pass Op"| seg == "0"|seg == "2",  Areax >100, vec > -180, vec < 180)
+
+p +  #geom_segment(data = passlineA, aes(x = Areax, y = Areay, xend = xend, yend = yend, colour = as.factor(vec_col)),size = 1,arrow = arrow(length = unit(0.3,"cm")))+
+#geom_segment(data = passlineB, aes(x = Areax, y = Areay, xend = xend, yend = yend, colour = as.factor(vec_col)),size = 1,arrow = arrow(length = unit(0.3,"cm"))) +
+geom_segment(data = passlineC, aes(x = Areax, y = Areay, xend = xend, yend = yend, colour = as.factor(vec_col)), size = 1,arrow = arrow(length = unit(0.3,"cm"))) +
+geom_segment(data = passlineD, aes(x = Areax, y = Areay, xend = xend, yend = yend, colour = as.factor(vec_col)), size = 1,arrow = arrow(length = unit(0.3,"cm"))) +
+theme(legend.position="none") +
+scale_colour_manual(values = runcolpal)

@@ -1,0 +1,64 @@
+TeamAtot <- pass %>% group_by(Team, Action) %>%  filter(Teamnum == "A") %>% summarize(count=n())
+TeamBtot <- pass %>% group_by(Team, Action) %>%  filter(Teamnum == "B") %>% summarize(count=n())
+
+#Score
+#Team
+score <- pass %>% group_by(Team, Action) %>% filter (Teamnum == "A", Action == "Goal" | Action == "Point") %>% 
+  summarize(count=n())
+
+#Player
+plyscore <- pass %>% group_by(Player, Action) %>% filter (Teamnum == "A", Action == "Goal" | Action == "Point") %>% 
+  summarize(count=n())
+
+kable (plyscore)
+
+#Shots
+shotA <- pass %>% group_by(Team, Action) %>% filter (Teamnum == "A", Action == "Shot Left" | Action == "Shot Right") %>% 
+  summarize(count=n())
+
+ko <- pass %>% group_by(Team, Action) %>% filter (Teamnum =="A", Action == "Ko"| Action=="Ko Rec"| Action =="Ko Lost"|Action=="KoBrk Rec"|Action=="KoBrk Lost") %>% 
+  summarize(count=n())
+head (ko)
+
+
+ko <-filter(pass, Teamnum == "A", )
+
+kable (stats1)
+
+
+passing2 <- pass %>%
+  group_by(Team, Action) %>%filter (Teamnum == "A", Action == "Hand Pass" | Action == "Kick Pass"| Action =="Rec") %>%
+   mutate(count = n())%>%select (-Areax, -Areay, - Player, - Phase)
+
+
+kable (passing)
+
+aggregate(pass, by=Action ("Rec","Hand Pass", "Kick Pass"), 
+  FUN=mean, na.rm=TRUE)
+
+aggregate(x = Action, 
+                               by = list(unique.values = values$value), 
+                               FUN = length)
+
+exposures <- aggregate(x = pass,
+                       by = Actions,
+                       FUN = length)
+
+exposures
+
+
+
+
+DT <- data.table(TeamAtot)
+DT[ , .(Totalcount = sum(count)), by = .(Action)]
+
+#more control over output 
+ stats1 <- pass %>%
+  group_by(Team, Action) %>%
+   mutate(count = n())%>%select (-Areax, -Areay, - Player, - Phase)
+
+pass %>%
+  mutate(area_S = SLSW) %>%
+  filter(Species == 'setosa' & SW > 3) %>%
+  summarise(avg = mean(area_S))
+

@@ -1,0 +1,17 @@
+plystats <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/bodeir/plystatsbodeir.csv", header=TRUE, sep=";")
+attach (plystats)
+
+
+positionA <-plystats %>% filter (Teamnum == "A") %>%select(Areax,Areay,plyname,plytime)
+
+positionA = positionA %>% 
+   unite(here, plyname, plytime, sep = " ", remove = FALSE)
+
+#positionA
+
+p + geom_point(data = positionA, aes(x=Areax, y=Areay), shape = 19, colour = "blue",size = 6) +
+  theme(plot.title = element_text( size=32, hjust=0)) +
+  geom_text_repel(data = positionA, aes(x=Areax, y=Areay, label = here), colour = "white", size = 8) +
+  theme(legend.position="none")
+
+

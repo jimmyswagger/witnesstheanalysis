@@ -1,0 +1,119 @@
+
+#Assists - Pass made Inside Opp 45 - Want to be able to count this not just show columns like flow 
+run <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/newplan/runnewplan.csv", header=TRUE, sep=";")
+attach (run)
+
+TeamAPAScrflowAst  <- run %>%group_by(Team, Action) %>% filter( main == "Shot Op")
+
+passAAst <- subset(run, poss %in% TeamAPAScrflow$poss)
+
+
+TeamAPAScrflowAst  <- run %>%group_by(Team, Action) %>% filter( subset == "Scr Op")
+
+passAAst <- subset(passAAst, poss %in% TeamAPAScrflowAst$poss)
+
+passA <-passAA %>% filter(main == "Pass Op"|main == "Pass Rs"|main == "Shot Op")
+passA <- passA %>%filter (Teamnum == "A")
+
+#write.csv(passA,"passA.csv")
+
+passAid <-passA %>%
+  group_by(possno) %>%
+ mutate(id = row_number())
+
+passAid <-passAid%>%group_by(possno,id)%>%arrange(desc(id))
+ 
+passAid <-passAid %>% group_by(possno) %>% arrange(possno)
+
+passAid <-passAid %>% group_by(possno) %>% top_n(n=2,wt = id)%>%
+  arrange(possno, (id))
+
+#passAidA <- passAid %>%filter (Areax > 99.9)%>%select(possno, Player)
+
+passAidA <- passAid %>%filter (Areax > 99.9)
+
+passAidA <-passAidA[!duplicated(passAidA[,c('possno')]),]
+
+passAidA <-passAidA %>%group_by(Player)%>%summarize(Assist =sum(main == "Pass Op"))
+
+passAidA <- passAidA[passAidA$Assist!="0", ]
+
+formattable (passAidA)
+
+
+#Ms 
+
+TeamAPAMsflow  <- run %>%group_by(Team, Action) %>% filter( main == "Shot Op")
+
+passAMs <- subset(run, poss %in% TeamAPAMsflow$poss)
+
+TeamAPAMsflow  <- run %>%group_by(Team, Action) %>% filter( subset == "Ms Op")
+
+passAA <- subset(passAMs, poss %in% TeamAPAMsflow$poss)
+
+passA <-passAA %>% filter(main == "Pass Op"|main == "Pass Rs"|main == "Shot Op")
+passA <- passA %>%filter (Teamnum == "A")
+
+#write.csv(passA,"passA.csv")
+
+passAid <-passA %>%
+  group_by(possno) %>%
+ mutate(id = row_number())
+
+passAid <-passAid%>%group_by(possno,id)%>%arrange(desc(id))
+ 
+passAid <-passAid %>% group_by(possno) %>% arrange(possno)
+
+passAid <-passAid %>% group_by(possno) %>% top_n(n=4,wt = id)%>%
+  arrange(possno, (id))
+
+passAidA <- passAid %>%select(possno, Player)
+
+passAidA <-passAidA%>%group_by (possno) %>%
+dplyr::mutate(i1 = row_number()) %>% 
+  tidyr::spread(possno, Player)%>%
+   select(-i1)
+
+passAidA <- passAidA[sapply(passAidA, function(passAidA) !any(is.na(passAidA)))]
+
+formattable (passAidA) 
+
+
+#Key Passes - Pass made Inside Opp 45 - Want to be able to count this not just show columns like flow 
+
+TeamAPAMsflowKey  <- run %>%group_by(Team, Action) %>% filter( main == "Shot Op")
+
+passAKey <- subset(run, poss %in% TeamAPAMsflowKey$poss)
+
+
+TeamAPAMsflowKey  <- run %>%group_by(Team, Action) %>% filter( subset == "Ms Op")
+
+passAA <- subset(passAKey, poss %in% TeamAPAMsflowKey$poss)
+
+passA <-passAA %>% filter(main == "Pass Op"|main == "Pass Rs"|main == "Shot Op")
+passA <- passA %>%filter (Teamnum == "A")
+
+#write.csv(passA,"passA.csv")
+
+passAid <-passA %>%
+  group_by(possno) %>%
+ mutate(id = row_number())
+
+passAid <-passAid%>%group_by(possno,id)%>%arrange(desc(id))
+ 
+passAid <-passAid %>% group_by(possno) %>% arrange(possno)
+
+passAid <-passAid %>% group_by(possno) %>% top_n(n=2,wt = id)%>%
+  arrange(possno, (id))
+
+#passAidA <- passAid %>%filter (Areax > 99.9)%>%select(possno, Player)
+
+passAidA <- passAid %>%filter (Areax > 99.9)
+
+passAidA <-passAidA[!duplicated(passAidA[,c('possno')]),]
+
+passAidA <-passAidA %>%group_by(Player)%>%summarize(Key_Pass =sum(main == "Pass Op"))
+
+passAidA <- passAidA[passAidA$Key_Pass!="0", ]
+
+formattable (passAidA) 

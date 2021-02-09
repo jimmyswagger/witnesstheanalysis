@@ -1,0 +1,59 @@
+pass <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/bodeir/passbodeir.csv", header=TRUE, sep=";")
+attach (pass)
+
+run <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/bodeir/runbodeir.csv", header=TRUE, sep=";")
+attach (run)
+
+tack <- pass%>%filter(Teamnum=="A",main == "Tack Off", period =="1")
+
+tackprs <- pass%>%filter(Teamnum=="A",Action == "Hp Prs"|Action == "Kp Left Prs"|Action == "Hp Prs", period =="1")
+
+runA <- run%>%filter(Teamnum=="A",keep=="Y", period =="1")
+
+actPW <- runA%>% filter(Teamnum == "A", main == "PW", period =="1")
+
+actToL<- runA%>% filter(Teamnum == "A", mainoc == "ToL", period =="1")
+
+actFreeWon <- runA%>% filter(Teamnum == "A", mainoc == "Free Won", period =="1")
+
+actKoRec<- runA%>% filter(Teamnum == "A", subsetoc == "Ko Rec", period =="1")
+
+actKp<- runA%>% filter(Teamnum == "A", Action == "Kp Left"|Action == "Kp Right", period =="1")
+
+passOp <- run%>%group_by(Team, Action) %>% filter(Teamnum == "A",main=="Shot Op", period =="1")
+
+passRs <- run%>%group_by(Team, Action) %>% filter(Teamnum == "A",main=="Pass Rs", period =="1")
+
+passOc <- run%>%group_by(Team, Action) %>% filter(Teamnum == "A",mainoc =="Shot Op Oc", period =="1")
+
+passRun <- run%>%group_by(Team, Action) %>% filter(Teamnum == "A",seg =="0"|seg =="2", period =="1")
+
+passKo <- run%>%group_by(Team, Action) %>% filter(Teamnum == "A",main=="Ko", period =="1")
+
+p +  geom_segment(data = runA, aes(x = Areax, y = Areay, xend = xend, yend = yend, colour = as.factor(poss)),size = .8,arrow = arrow(length = unit(0.3,"cm"))) +
+    geom_point(data = runA, aes(x = Areax, y = Areay), size = 1.5,colour = "white", shape = 15) +
+    geom_point(data = actKp, aes(x=Areax, y=Areay, stroke = 1), size = 1.5, colour = "purple", shape = 15) +
+    geom_point(data = passRun, aes(x=Areax, y=Areay, stroke = 1), size = 1.5, colour = "blue", shape = 15) +
+    geom_point(data = passKo, aes(x=Areax, y=Areay, stroke = 1), size = 1.5, colour = "black", shape = 15) +
+    theme(legend.position="none") + 
+    geom_point(data = actPW, aes(x=Areax, y=Areay), colour = "orange",size = 6, shape = 19) +
+    geom_text(data = actPW, aes(x=Areax, y=Areay,label = possno), colour = "white",size = 4) +
+    geom_point(data = passOp, aes(x=Areax, y=Areay, stroke = 1), size = 6, colour = "darkgreen", shape = 19) +
+    geom_text(data = passOp, aes(x=Areax, y=Areay,label = possno), colour = "white" ,size = 4) +
+    geom_point(data = passRs, aes(x=Areax, y=Areay, stroke = 1), size = 6, colour = "lightblue", shape = 19) +
+    geom_text(data = passRs, aes(x=Areax, y=Areay,label = possno), colour = "white" ,size = 4) +
+    geom_point(data = actToL, aes(x=xend, y=yend), colour = "red" ,size = 6, shape = 19) + 
+    geom_text(data = actToL, aes(x=xend, y=yend,label = possno), colour = "white" ,size = 4)+
+    geom_text_repel(data = actToL, aes(x=xend, y=yend, label = Actionoc), colour = "red" ,size = 4)+
+    geom_point(data = actFreeWon, aes(x=xend, y=yend), colour = "blue" ,size = 6, shape = 19) +
+    geom_text(data = actFreeWon, aes(x=xend, y=yend,label = possno), colour = "white" ,size = 4) +
+    geom_text_repel(data = actFreeWon, aes(x=xend, y=yend,label = Actionoc ), colour = "blue" ,size = 4)+
+    geom_point(data = actKoRec, aes(x=xend, y=yend), colour = "black" ,size = 6, shape = 19) +
+    geom_text(data = actKoRec, aes(x=xend, y=yend,label = possno), colour = "white" ,size = 4) +
+    geom_point(data = passOc, aes(x=xend, y=yend), colour = "yellow" ,size = 6, shape = 19) +
+    geom_text(data = passOc, aes(x=xend, y=yend,label = possno), colour = "black" ,size = 4)+
+    geom_text_repel(data = passOc, aes(x=xend, y=yend,label = Actionoc ), colour = "yellow" ,size = 4) +
+    geom_point(data = tack, aes(x=Areax, y=Areay, stroke = 2), size = 4, colour = "black", shape = 0) +
+    geom_text_repel(data = tack, aes(x=Areax, y=Areay,label = Action), colour = "black" ,size = 4) +
+    geom_point(data = tackprs, aes(x=Areax, y=Areay, stroke = 2), size = 4, colour = "pink", shape = 0) +
+    geom_text_repel(data = tackprs, aes(x=Areax, y=Areay,label = Action), colour = "pink" ,size = 4)

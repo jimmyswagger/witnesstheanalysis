@@ -1,0 +1,36 @@
+A - B Direct distance 
+
+a <- pass %>% group_by(poss) %>% filter(main %in% c ("Ko","PW", "ToL", "Shot Op Oc", "Shot Rs Op"))
+
+a <- a %>%group_by(poss) %>% select(poss,Team,Areax,Areay,main,time)
+oddps <- a[seq(1, nrow(a), 2),]
+colnames(oddps) <- c("poss","Team","Areax","Areay","main", "time")
+evenps <- a[seq(2, nrow(a), 2),]
+colnames(evenps) <- c("possoc","Teamoc","Areaxoc","Areayoc","mainoc", "timeoc")
+a <- bind_cols(oddps, evenps) 
+a <- a%>%select("Team","poss","Areax","Areay","main","time","Teamoc","possoc","Areaxoc","Areayoc","mainoc","timeoc")
+
+a
+ #then mutate with calc distance 
+
+pa <- a %>% mutate(time_diff_dir = (timeoc-time), dist_dir =(sqrt((Areaxoc - Areax)^2+ (Areayoc - Areay)^2)),ms_dir = (dist/time_diff), vec_dir = (atan2(Areayoc-Areay,Areaxoc - Areax)*180/pi))
+
+#add to sop
+---
+
+ppda per zone 
+
+
+
+
+
+---
+
+Time on Ball 
+
+ToB <- run %>% group_by(Player)%>% filter (keep == "Y",Teamnum == "A",main %in% c("Rec Op", "Rec Rs", "Ko Rec")) %>% summarise(Time_on_Ball =sum(time_diff))
+
+#can then vlookup to add to player stats 
+
+statsA <-plystatsA  %>%
+    mutate(ToB = VLOOKUP(ply,ToB,Player,Time_on_Ball))

@@ -1,0 +1,46 @@
+vel1 <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/vel1.csv", header=TRUE, sep=";")
+attach (vel1)
+
+ocol = c("1" = "white",
+"2" = "lightblue",
+"3" = "blue",
+"4" = "yellow",
+"5" = "orange",
+"6" = "red",
+"7" = "darkred")
+
+p <- np + 
+geom_point(aes(x = x, y = y,color=as.numeric(velocityband)),size = 1) +
+scale_colour_manual(values = ocol) +
+coord_equal() +
+theme_bw() +
+theme(plot.background = element_blank(),
+legend.position="bottom",
+panel.grid.major = element_blank(),
+panel.grid.minor = element_blank(),
+axis.line = element_blank(),
+axis.text.x = element_blank(),
+axis.text.y = element_blank(),
+axis.ticks = element_blank(),
+axis.title.x = element_blank(),
+axis.title.y = element_blank())
+
+anim <- p +
+  transition_states(vel1, transition_length = 2, state_length = 1) +
+  enter_fade() +
+  exit_fade()
+
+## Not run: 
+# Explicitly animate using default (same as just printing the animation)
+animate(anim)
+
+# Change duration and framerate
+animate(anim, fps = 20, duration = 15)
+
+# Make the animation pause at the end and then rewind
+animate(anim, nframes = 100, end_pause = 10, rewind = TRUE)
+
+# Use a different renderer
+animate(anim, renderer = file_renderer('~/animation/'))[1:6]
+
+## End(Not run)

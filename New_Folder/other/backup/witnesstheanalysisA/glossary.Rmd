@@ -1,0 +1,556 @@
+---
+title: "Glossary"
+output:
+  html_document:
+    toc: true
+    toc_float: true 
+    theme: cosmo
+---
+
+```{r setup, include=FALSE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE, options(knitr.kable.NA = ''))
+#Load packages
+library(flexdashboard)
+library(dplyr)
+library(deldir)
+library(ggplot2)
+library(ggrepel)
+library(ggpubr)
+library(knitr)
+library(rmarkdown)
+library(kableExtra)
+library(data.table)
+library(RColorBrewer)
+library(gridExtra)
+library(igraph)
+library(tidyverse)
+library(treemap)
+library(plotly)
+library(networkD3)
+library (curl)
+library(formattable)
+library(yaml)
+```
+
+```{r}
+glossary <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/glossary.csv", header=TRUE, sep=";", check.names = FALSE)
+attach (glossary)
+```
+
+
+#Pitch Zones
+```{r, fig.width = 16, fig.height = 10}
+create_Stats_Pitch <- function(grass_colour, line_colour, background_colour, goal_colour, BasicFeatures){
+  
+  theme_blankPitch = function(size=12) { 
+    theme(
+      #axis.line=element_blank(), 
+      axis.text.x=element_blank(), 
+      axis.text.y=element_blank(), 
+      #axis.ticks.y=element_text(size=size),
+      #   axis.ticks=element_blank(),
+      axis.ticks.length=unit(0, "lines"), 
+      #axis.ticks.margin=unit(0, "lines"), 
+      axis.title.x=element_blank(), 
+      axis.title.y=element_blank(), 
+      legend.background=element_rect(fill=background_colour, colour=NA), 
+      legend.key=element_rect(colour=background_colour,fill=background_colour), 
+      legend.key.size=unit(1.2, "lines"), 
+      legend.text=element_text(size=size), 
+      legend.title=element_text(size=size, face="bold",hjust=0),
+      strip.background = element_rect(colour = background_colour, fill = background_colour, size = .5),
+      panel.background=element_rect(fill=background_colour,colour=background_colour), 
+      #       panel.border=element_blank(), 
+      panel.grid.major=element_blank(), 
+      panel.grid.minor=element_blank(), 
+      panel.spacing=element_blank(), 
+      plot.background=element_blank(), 
+      plot.margin=unit(c(0, 0, 0, 0), "lines"), 
+      plot.title=element_text(size=size*1.2), 
+      strip.text.y=element_text(colour=background_colour,size=size,angle=270),   
+      strip.text.x=element_text(size=size*1))}
+  
+  ymin <- 0.5 # minimum width
+  ymax <- 5.5 # maximum width
+  xmin <- 0.5 # minimum length
+  xmax <- 7.5 # maximum length
+  
+  # Defining features along the length
+  defel <- 0.5
+  def14 <- 1.25
+  def21 <- 1.5
+  def45 <- 2.5
+  def65 <- 3.5
+  off65 <- 4.5
+  off45 <- 5.5
+  off21 <- 6.5
+  off14 <- 6.75
+  offel <- 7.5
+  
+  
+  
+  # Defining features along the width
+  srwing <- 1.5
+  frightwing <- 5
+  rhalfsp <- 2.5
+  ctre <- 3.5
+  lhspce <- 4.5
+  leftwing <- 5.5
+  right14d <- 2.6
+  left14d <- 3.4
+  
+  
+  # Defining features along the width
+  
+  boxEdgeOff <- 6.75  
+  boxEdgeLeft <- 2.6 
+  boxEdgeRight <- 3.4 
+  
+  # small sqaure
+  
+  sixYardDef <- 0.75
+  sixYardOff <- 7.25
+  sixYardLeft <- 2.70 
+  sixYardRight <- 3.3
+  
+  
+  
+  if(BasicFeatures == TRUE){
+    ## initiate the plot, set some boundries to the plot
+    mp <- ggplot() + xlim(c(xmin,xmax)) + ylim(c(ymin,ymax)) +
+      # add the theme 
+      theme_blankPitch() +
+      # add halway line
+      geom_rect(aes(xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax), fill = grass_colour, colour = line_colour) + 
+      geom_segment(aes(x = def14, y = ymin, xend = def14, yend = ymax),colour = "white",linetype="solid") +   
+      geom_segment(aes(x = def21, y = ymin, xend = def21, yend = ymax),colour = "white",linetype="solid") + 
+      geom_segment(aes(x = def45, y = ymin, xend = def45, yend = ymax),colour = "blue",linetype="dotted",size=1) +
+      geom_segment(aes(x = def65, y = ymin, xend = def65, yend = ymax),colour = "white",linetype="solid") +
+      geom_segment(aes(x = off65, y = ymin, xend = off65, yend = ymax),colour = "white",linetype="solid") +
+      geom_segment(aes(x = off45, y = ymin, xend = off45, yend = ymax),colour = "red",linetype="dotted",size=1) +
+      geom_segment(aes(x = off21, y = ymin, xend = off21, yend = ymax),colour = "white",linetype="solid") +
+      geom_segment(aes(x = off14, y = ymin, xend = off14, yend = ymax),colour = "white",linetype="solid") + 
+      geom_segment(aes(x = xmin, y = right14d, xend = def14, yend = right14d),colour = "white",linetype="solid") + 
+      geom_segment(aes(x = xmin, y = left14d, xend = def14, yend = left14d),colour = "white",linetype="solid") +
+      geom_segment(aes(x = 4, y = 0.5, xend = 4, yend = 5.5),colour = "white", linetype="dotted",size=1) +
+      geom_rect(aes(xmin=boxEdgeOff, xmax=xmax, ymin=boxEdgeLeft, ymax=boxEdgeRight), colour = "white", fill = grass_colour) +
+      geom_rect(aes(xmin=xmin, xmax=sixYardDef, ymin=sixYardLeft, ymax=sixYardRight), fill = grass_colour, colour = "white") +
+      geom_rect(aes(xmin=sixYardOff, xmax=xmax, ymin=sixYardLeft, ymax=sixYardRight), fill = grass_colour, colour = "white") +
+      geom_segment(aes(x = xmin, y = srwing, xend = xmax, yend = srwing),colour = line_colour,linetype="dotted") + 
+      geom_segment(aes(x = xmin, y = srwing, xend = xmax, yend = srwing),colour = line_colour,linetype="dotted") +
+      geom_segment(aes(x = xmin, y = rhalfsp, xend = xmax, yend = rhalfsp),colour = line_colour,linetype="dotted") +
+      geom_segment(aes(x = xmin, y = ctre , xend = xmax, yend = ctre),colour = line_colour,linetype="dotted") +
+      geom_segment(aes(x = xmin, y = lhspce, xend = xmax, yend = lhspce),colour = line_colour,linetype="dotted") + 
+      geom_segment(aes(x = 4, y = 2.90, xend = 4, yend = 3.10),colour = "white") +
+      geom_segment(aes(x =0.5, y = 2.75, xend = 0.5, yend = 3.25),colour = "blue", size = 2) +
+      geom_segment(aes(x =7.5, y = 2.75, xend = 7.5, yend = 3.25),colour = "red", size = 2) +
+      annotate(geom="text", x= 1.50, y=.57, label="21",color = "white") +
+      annotate(geom="text", x= 2.50, y=.57, label="45",color = "blue") +
+      annotate(geom="text", x= 3.50, y=.57, label="65",color = "white") +
+      annotate(geom="text", x= 4.50, y=.57, label="65",color = "white") +
+      annotate(geom="text", x=5.50, y=.57, label="45", color="red") +
+      annotate(geom="text", x=6.50, y=.57, label="21",color = "white") +
+      annotate(geom="text", x= 1.51, y=5.25, label="Def",color = "blue",size = 9) +
+      annotate(geom="text", x= 1.51, y=5, label="End Line to 45",color = "blue",size = 9) +
+      annotate(geom="text", x= 3.25, y=5.25, label="Mid Def",color = "black",size = 9) +
+      annotate(geom="text", x= 3.25, y=5, label="45 to Halfway",color = "black",size = 9) +
+      annotate(geom="text", x= 4.75, y=5.25, label="Mid Att",color = "black",size = 9) +
+      annotate(geom="text", x= 4.75, y=5, label="Halfway to opp 45",color = "black",size = 9) +
+      annotate(geom="text", x= 6.50, y=5.25, label="Att",color = "red",size = 9) +
+      annotate(geom="text", x= 6.50, y=5, label="45 to Opp End Line",color = "red",size = 9) +
+      annotate(geom="text", x= 4, y=1, label="wing",color = "white",size = 9) +
+      annotate(geom="text", x= 4, y=2, label="half-space",color = "white",size = 9) +
+      annotate(geom="text", x= 4, y=3, label="centre",color = "white ",size = 9) +
+      annotate("segment", x = 3.5, xend = 4.5, y = 0.75, yend = 0.75, colour = "pink", size=3, alpha=0.6, arrow=arrow())
+      
+    
+  }
+  
+  else{
+    ## initiate the plot, set some boundries to the plot
+    mp <- ggplot() + xlim(c(xmin,xmax)) + ylim(c(ymin-0.5,ymax+0.5)) +
+      # add the theme 
+      theme_blankPitch() +
+      # add the base rectangle of the pitch 
+      geom_rect(aes(xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax), fill = grass_colour, colour = line_colour) +
+      geom_rect(aes(xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax), fill = grass_colour, colour = line_colour) +
+      geom_segment(aes(x = off65, y = ymin, xend = off65, yend = ymax),colour = line_colour) +
+      geom_segment(aes(x = off45, y = ymin, xend = off45, yend = ymax),colour = "Red",linetype="dotted")
+    
+  }
+  
+  return(mp)}
+
+
+mp <- create_Stats_Pitch("#A2CD5A", "black", "#ffffff", "#000000", BasicFeatures=TRUE)
+
+mp
+```
+
+
+#Possession/Phase Make-up
+```{r, fig.width = 8, fig.height = 12}
+
+nodes = data.frame("name" = 
+ c("PW", 
+   "Ko", 
+   "Possessions",
+   "Restart",
+   "Phases",  
+   "Pass/Rec Op/Rs",
+   "Op Shot",
+   "Op Score/Miss",
+   "ToL",
+   "Restart Won",
+   "Restart Shot",
+   "Restart Pass",
+   "Rs Score/Miss"))
+links = as.data.frame(matrix(c(
+0,2,1,
+1,2,1,
+2,4,1,
+3,4,1,
+4,5,1,
+5,6,1,
+5,8,1,
+5,9,1,
+6,7,1,
+9,10,1,
+9,11,1,
+10,12,1),
+ byrow = TRUE, ncol = 3))
+names(links) = c("source", "target", "value")
+sankeyNetwork(Links = links, Nodes = nodes,
+ Source = "source", Target = "target",
+ Value = "value", NodeID = "name",
+ fontSize= 16, nodeWidth = 40)
+
+```
+
+
+#Glossary of Terms
+
+* Possession -  
+      + Start (Ko/Possession Won) and end of possession (Shot/Turn Over Loss)
+      + If a player is dispossessed but regains possession it is counted as a new possession, similarly if the player in possession is      dispossessed and a team regains possession it is counted as a new possession
+      + A possession can contain a number of phases
+
+* Phase -  
+  
+      + Start (Ko/Possession Won/Restart) and end of phase (Shot/Turn Over Loss/Restart Won)
+      
+
+* Restart - 
+  
+      + Freekick Pass/Shot, Sideline Pass or Mark Pass
+      
+
+* On-Ball Possession (OBP) - 
+
+      + Player has gained control of the ball
+      
+
+* Action -
+
+      + Any action (pass, tackle etc that a player makes)
+      
+
+* Positions used in networks are arbritary based on the standard GAA formation. 
+
+
+#Actions
+##Possession Won
+
+* Defending Team gained possession
+
+* Tack W - Tackle Won
+
+* Tack W - Defender disposses Attacking Player & gathers possession 
+
+* Int Op - Defender Intercepts an open play pass from Attacker
+
+* KP Int - Kick Pass intercepted
+
+* HP Int - Hand pass intercepted
+
+* Kp Brk Int - Kick Pass Break intercepted
+
+* Hp Brk Int - Hand Pass Break intercepted
+
+* Mk Kp Int -	Mark Kick Pass Break intercepted
+
+* Int Rs - Defender Intercepts a restart pass from Attacker
+
+* Kp Free Int -	Intercept resulting from a free kick pass break
+
+* Fk Brk Int - Intercept resulting from a Free kick pass break
+
+* Sl Int - Intercept resulting from a kick pass break
+
+* Sl Brk Int - Intercept resulting from a Free kick pass break
+
+* Rebnd Def -	Defending team gains possession from a rebound 
+
+* Rebnd Off -	Attacking team retains possession from a rebound
+
+* Gk Won - Goalkeeper won possession 
+
+* Short Gk - Open play shot fell short to goalkeeper
+
+* Fk Short Gk -	Restart shot fell short to goalkeeper
+
+* Ko Int -	Kickout Intercept
+
+* Ko Int - Defensive team intercepted a kickout
+
+* KoBrk Int -	Ko Intercept from a break
+
+* Ko Int Mk -	Ko Intercept resulting in a mark
+
+* LBW -	Loose Ball Won
+
+* TBW -	Defending team gains possession from a disposses
+
+* Loose RBW -	Attacking team retains possession after a disposses
+
+* Loss BW -	Defeding team gains possession after attacking team loose carry
+
+* Brk Won -	Ball won after a throw in
+
+* PW Ot -	Attacking team concedes possion 
+
+* Sl Kp Won To - Defending team gains possession from attacking team conceding a sideline
+
+* Free Won Def - Attacking team  concedes a free
+
+##Open Play Shot
+
+* Shot Op -	Open Play Shot
+
+* Shot Left -	Left footed shot 
+
+* Shot Right - Right footed shot 
+
+* Hp Shot -	Hand pass shot 
+
+* Punch - Punched shot 
+
+##Open Play Shot Outcome
+
+###Open Play Score 
+
+* Goal - Goal 
+
+* Point - Point
+
+###Open Play Miss 
+
+* Wide Left - Shot Wide Left
+
+* Wide Right - Shot Wide Right
+
+* Save - Goalkeeper saved the attampt
+
+* Blkd - Dender blocked the attempt 
+
+* Short - Attempt fell short
+
+* Post - Attempt hit the post
+
+##Restart Shot
+
+* Fk Shot Left - Left footed Free kick shot 
+
+* Fk Shot Right -	Right footed freekick shot 
+
+* Mk Shot Left - Left footed Mark shot 
+
+* Mk Shot Right - Right footed Mark shot 
+
+* 45 Shot Left - Left footed 45 shot 
+
+* 45 Shot Right - Right footed 45 shot 
+
+* Pen Shot Left - Left footed penalty shot 
+
+* Pen Shot Right - Right footed penalty shot 
+
+##Restart Shot Outcome
+
+###Restart Shot Score
+
+* Fk/45/Mark Goal -	Goal scored from Restart
+
+* Fk/45/Mark Point - Point scored from Restart
+
+###Restart Shot Miss
+
+* Fk/45/Mark Wide Left - Shot Wide Left
+
+* Fk/45/Mark Wide Right - Shot Wide Right
+
+* Fk/45/Mark Save - Goalkeeper saved the attampt
+
+* Fk/45/Mark Short - Defender blocked the attempt 
+
+* Fk/45/Mark Post -	Attempt fell short
+
+* Fk/45/Mark Pass - Attempt hit the post
+
+##Pass
+###Open Play
+
+* Pass Op -	Open Play pass
+
+* Hp - Hand pass
+
+* KpL - Kickpass Left
+
+* KpR - Kickpass Right
+
+###Restart
+
+* Mk Kp -	Mark Kick pass
+
+* Mk Hp - Mark hand pass
+
+* Pass Rs - Restart Pass
+
+* Fk Pass - Freekick pass
+
+* Sl Pass - Sideline pass
+
+##Received
+
+### Rec Op - Received Open Play
+
+* Hp Rec - Hand Pass Received
+
+* Kp Rec - Kick Pass Received
+
+* Hp Brk Rec - Handpass recevied after a break
+
+* Kp Brk Rec - Kick Pass Received after a break
+
+* Att Mk Rec - Attacking mark received
+
+### Rec Rs - Received Restart
+
+* Fk Rec - Free Kick Pass received
+
+* Sl Rec - Sideline pass received
+
+* Brk Rec - Throw in Break won
+
+* Sl Won - Sideline won (possession retained)
+
+##Kickouts 
+
+* Ko - Kickout
+
+* Ko Rec - Kick out Received
+
+* Ko Rec - Kick out received
+
+* Ko Unc Rec - Uncontested kick out received
+
+* KoBrk Rec -	Kickout received after a break
+
+* Ko Mk Won -	Kickout mark won
+
+##Turn Over Loss (ToL) - Loss of Possession
+
+###Kickout Lost
+
+* Ko Lost -	Kick out lost direct 
+
+* KoBrk Lost - Kick out lost from a break
+
+* Fk Loss Off Ko - Free conceded on kickout
+
+* Ko Lost Mk - Kick out lost resulting in an opposition mark 
+
+###Tackle Lost
+
+* Tkl ToL -	Turn over lost from a Tackle
+
+* Loss Tack -	Attacking player lost possession due to tackle
+
+###Open Play Pass lost 
+
+* Loss KP Int	- Kick pass intercepted by defending team 
+
+* Loss HP Int -	Hand pass intercepted by defending team 
+
+* Loss Kp Mk - Kick pass from a mark intercepted
+
+* UnF Int KP Loss - Unforced kick pass lost
+
+* UnF Int HP Loss - Unforced hand pass lost
+
+* Brk Hp Loss -	Hand pass lost following a break
+
+* Brk Kp Loss -	Kick pass lost following a break
+
+###Restart Pass Lost
+
+* Fk Loss ToL -	Loss KP Free
+
+* Rs ToL - Loss Kp Sl
+
+* ToL Op - Wide Op
+
+* LB ToL - Loss Ball
+
+* Fk ToL - Free Loss Off
+
+* Free kick pass lost - Loss from Free Kick	
+
+* Side line pass lost - Loss from Sideline
+
+###Other Lost
+
+* Open Play Loss - Wide from open play (non-shot)
+
+* Loss Ball - Player lost possession
+
+* Free Kick Loss Offence - Attacking team conceded a free
+
+##Frees	
+
+###Free Won
+
+* Fkws - Free won inside 45
+
+* Fkwns - Free won outside 45
+
+###Free Loss
+
+* Fkls - Free kick conceded inside 45
+
+* Fklns - Free kicked conceded outside 45
+
+##Spoil 
+
+* Player prevented Opponent from gaining Possession
+
+###Spoil Defense
+
+* Blkd Shot Def -	Defender blocked shooting attempt
+
+* Tack - Defender dispossed attacking player resulting in a loose ball 
+
+* Gk Save -	Goalkeeper saved shooting attempt 
+
+* Brk Opp -	Defensive action stopping pass from reaching attacker
+
+* KoBrk Opp -	Opposition kickout broken up 
+
+* Brk Gk - Goalkeeper punched ball clear
+
+###Spoil Offense
+
+* Brk Own - Attacking player stops defending player from intercepting a pass
+
+* KoBrk Own	- Break from own teams kickout
+

@@ -1,0 +1,194 @@
+runA <- pass%>%filter(Teamnum=="A")
+
+Def <- runA %>%group_by(Player, Pitch_Area)
+plystats <- runA %>%group_by(Player, Pitch_Area)%>%summarize(PW =sum(main == "PW"),Pass =sum(main == "Pass Op"),Rec =sum(main == "Rec Op"),OpShot =sum(main == "Shot Op"),
+Poss_Lost =sum(main == "ToL"),Fk_Won =sum(main == "Free Won"),Fk_Lost =sum(main == "Free Loss"),Tck =sum(main == "Tck Def"),Spoils =sum(main == "Def Act"))
+
+formattable (plystats)
+
+#may need to group things together ball won, ball use, shots, etc
+
+gen def
+marker
+sweeper
+roving mid
+carrier
+playmaker
+gen for
+shooter
+
+#### Player Stats ####
+
+## Team A ## 
+
+plystatsAA <- teamsheet%>%filter(Teamnum =="A") %>%select( Teamnum, Team, plytime, ply, name, Player,Areax,Areay)
+
+plystatsAA <- plystatsAA %>% arrange(ply)
+#plystatsA
+
+passA <- pass %>%filter (Teamnum == "A", Action != "Opp Brk")
+
+playersts <- passA %>%group_by(Player)%>%summarize(PW =sum(main == "PW"),Pass =sum(main == "Pass Op"),Rec =sum(main == "Rec Op"),
+KoRec =sum(main == "Ko Rec"), RsRec =sum(main == "Rec Rs") ,OpShot =sum(main == "Shot Op"),OpScr =sum(subset == "Scr Op"),RsShot =sum(main == "Shot Rs"),RsScr =sum(subset == "Scr Rs"), Poss_Lost =sum(main == "ToL"), Fk_Won =sum(main == "Free Won"),Fk_Lost =sum(main == "Free Loss"),
+Spoils =sum(main == "Def Act"), OBP = (PW + Rec + RsRec + KoRec), Pass_Loss = sum(subset == "Pass ToL"), Comp_Pass = (Pass - Pass_Loss))
+
+#plystatsAA <- plystatsAA[plystatsAA$ply!="9", ]
+
+statsA <- bind_cols (plystatsAA,playersts)
+
+statsA <- statsA %>% select(-Player1)
+
+statsA [is.na(statsA)] <- 0
+
+statsA <- statsA %>% mutate(totPW = sum(PW), PWp = (PW/totPW*100), totPass = sum(Pass), Passp = (Pass/totPass*100), totRec = sum(Rec), Recp = (Rec/totRec*100),  totKoRec = sum(KoRec), KoRecp = (KoRec/totKoRec*100), 
+totOpShot = sum(OpShot), OpShotp = (OpShot/totOpShot*100), totOpScr = sum(OpScr), OpScrp = (OpScr/totOpScr*100),
+totRsShot = sum(RsShot), RsShotp = (RsShot/totRsShot*100), totRsScr = sum(RsScr), RsScrp = (RsScr/totRsScr*100),
+totPoss_Lost = sum(Poss_Lost), Poss_Lostp = (Poss_Lost/totPoss_Lost*100), 
+totFk_Won = sum(Fk_Won), Fk_Wonp = (Fk_Won/totFk_Won*100), totFk_Lost = sum(Fk_Lost), Fk_Lostp = (Fk_Lost/totFk_Lost*100), totSpoils = sum(Spoils), Spoilsp = (Spoils/totSpoils*100),
+totOBP = sum(OBP), OBPp = (OBP/totOBP*100), totCP = sum(Comp_Pass), CPp = (Comp_Pass/totCP*100))
+
+statsA <- statsA %>% mutate(PWamin = (PW/plytime),Passamin = (Pass/plytime), Recamin = (Rec/plytime), KoRecamin = (KoRec/plytime), 
+OpShotamin = (OpShot/plytime),OpScramin = (OpScr/plytime),
+RsShotamin = (RsShot/plytime),RsScramin = (RsScr/plytime),
+Poss_Lostamin = (Poss_Lost/plytime), 
+Fk_Wonamin = (Fk_Won/plytime),Fk_Losttamin = (Fk_Lost/plytime),Spoilsamin = (Spoils/plytime))
+
+
+plystatsA <-statsA
+
+
+runA <- run%>%filter(Teamnum=="A",keep=="Y")
+
+AID <- runA %>%group_by(Player)%>%filter (Pitch_Area %in% c("In_Def", "Mid_Def"))
+plystatsAID <- Def %>%group_by(Player)%>%summarize(PWDef =sum(main == "PW"),PassDef =sum(main == "Pass Op"),RecDef =sum(main == "Rec Op"),OpShotDef =sum(main == "Shot Op"),
+Poss_LostDef =sum(mainoc == "ToL"),Fk_WonDef =sum(mainoc == "Free Won"),Fk_LostDef =sum(mainoc == "Free Loss"))
+
+AMD <- runA %>%group_by(Player)%>%filter (Pitch_Area %in% c("In_Def", "Mid_Def"))
+plystatsAMD <- Def %>%group_by(Player)%>%summarize(PWDef =sum(main == "PW"),PassDef =sum(main == "Pass Op"),RecDef =sum(main == "Rec Op"),OpShotDef =sum(main == "Shot Op"),
+Poss_LostDef =sum(mainoc == "ToL"),Fk_WonDef =sum(mainoc == "Free Won"),Fk_LostDef =sum(mainoc == "Free Loss"))
+
+AOD <- runA %>%group_by(Player)%>%filter (Pitch_Area %in% c("Out_Def"))
+plystatsAOD <- OD %>%group_by(Player)%>%summarize(PWOD =sum(main == "PW"),PassOD =sum(main == "Pass Op"),RecOD =sum(main == "Rec Op"),OpShotOD =sum(main == "Shot Op"),
+Poss_LostOD =sum(mainoc == "ToL"),Fk_WonOD =sum(mainoc == "Free Won"),Fk_LostOD =sum(mainoc == "Free Loss"))
+
+AOA <- runA %>%group_by(Player)%>%filter (Pitch_Area %in% c("Out_Att"))
+plystatsAOA <- OA %>%group_by(Player)%>%summarize(PWOA =sum(main == "PW"),PassOA =sum(main == "Pass Op"),RecOA =sum(main == "Rec Op"),OpShotOA =sum(main == "Shot Op"),
+Poss_LostOA =sum(mainoc == "ToL"),Fk_WonOA =sum(mainoc == "Free Won"),Fk_LostOA =sum(mainoc == "Free Loss"))
+
+AMA <- runA %>%group_by(Player)%>%filter (Pitch_Area %in% c("Mid_Att","In_Att"))
+plystatsAIA <- MIA %>%group_by(Player)%>%summarize(PWMIA =sum(main == "PW"),PassMIA =sum(main == "Pass Op"),RecMIA =sum(main == "Rec Op"),OpShotMIA =sum(main == "Shot Op"),
+Poss_LostMIA =sum(mainoc == "ToL"),Fk_WonMIA =sum(mainoc == "Free Won"),Fk_LostMIA =sum(mainoc == "Free Loss"))
+
+AIA <- runA %>%group_by(Player)%>%filter (Pitch_Area %in% c("Mid_Att","In_Att"))
+plystatsAIA <- MIA %>%group_by(Player)%>%summarize(PWMIA =sum(main == "PW"),PassMIA =sum(main == "Pass Op"),RecMIA =sum(main == "Rec Op"),OpShotMIA =sum(main == "Shot Op"),
+Poss_LostMIA =sum(mainoc == "ToL"),Fk_WonMIA =sum(mainoc == "Free Won"),Fk_LostMIA =sum(mainoc == "Free Loss"))
+
+# Create tck def
+passA <- pass %>%filter (Teamnum == "A")
+
+defDef <- passA %>%group_by(Player)%>%filter (Pitch_Area %in% c("In_Def", "Mid_Def"))
+plystatstckdefDef <- defDef %>% summarize(TckDef =sum(main == "Tck Def"), SpoilsDef =sum(main == "Def Act"))
+
+defOD <- passA %>%group_by(Player)%>%filter (Pitch_Area %in% c("Out_Def"))
+plystatstckdefOD <- defOD %>% summarize(TckOD =sum(main == "Tck Def"), SpoilsOD =sum(main == "Def Act"))
+
+defOA <- passA %>%group_by(Player)%>%filter (Pitch_Area %in% c("Out_Att"))
+plystatstckdefOA <- defOA %>% summarize(TckOA =sum(main == "Tck Def"), SpoilsOA =sum(main == "Def Act"))
+
+defMIA <- passA %>%group_by(Player)%>%filter (Pitch_Area %in% c("Mid_Att","In_Att"))
+plystatstckMIA <- defMIA %>% summarize(TckMIA =sum(main == "Tck Def"), SpoilsMIA =sum(main == "Def Act"))
+
+
+#Adding Pitch_Area Counts to Base Stats A 
+
+statsA <-statsA %>%
+    mutate(PWDef = VLOOKUP(ply, plystatsDef, Player, PWDef),PassDef = VLOOKUP(ply, plystatsDef, Player, PassDef),RecDef = VLOOKUP(ply, plystatsDef, Player, RecDef)
+,OpShotDef = VLOOKUP(ply, plystatsDef, Player, OpShotDef),Poss_LostDef = VLOOKUP(ply, plystatsDef, Player, Poss_LostDef),Fk_WonDef = VLOOKUP(ply, plystatsDef, Player, Fk_WonDef)
+,Fk_LostDef = VLOOKUP(ply, plystatsDef, Player, Fk_LostDef),TckDef = VLOOKUP(ply, plystatstckdefDef, Player, TckDef),SpoilsDef = VLOOKUP(ply, plystatstckdefDef, Player, SpoilsDef))
+
+statsA <-statsA %>%
+    mutate(PWOD = VLOOKUP(ply, plystatsOD, Player, PWOD),PassOD = VLOOKUP(ply, plystatsOD, Player, PassOD),RecOD = VLOOKUP(ply, plystatsOD, Player, RecOD)
+,OpShotOD = VLOOKUP(ply, plystatsOD, Player, OpShotOD),Poss_LostOD = VLOOKUP(ply, plystatsOD, Player, Poss_LostOD),Fk_WonOD = VLOOKUP(ply, plystatsOD, Player, Fk_WonOD)
+,Fk_LostOD = VLOOKUP(ply, plystatsOD, Player, Fk_LostOD),TckOD = VLOOKUP(ply, plystatstckdefOD, Player, TckOD),SpoilsOD = VLOOKUP(ply, plystatstckdefOD, Player, SpoilsOD))
+
+statsA <-statsA %>%
+    mutate(PWOA = VLOOKUP(ply, plystatsOA, Player, PWOA),PassOA = VLOOKUP(ply, plystatsOA, Player, PassOA),RecOA = VLOOKUP(ply, plystatsOA, Player, RecOA)
+,OpShotOA = VLOOKUP(ply, plystatsOA, Player, OpShotOA),Poss_LostOA = VLOOKUP(ply, plystatsOA, Player, Poss_LostOA),Fk_WonOA = VLOOKUP(ply, plystatsOA, Player, Fk_WonOA)
+,Fk_LostOA = VLOOKUP(ply, plystatsOA, Player, Fk_LostOA),TckOA = VLOOKUP(ply, plystatstckdefOA, Player,TckOA),SpoilsOA = VLOOKUP(ply, plystatstckdefOA, Player, SpoilsOA))
+
+
+statsA <-statsA %>%
+    mutate(PWMIA = VLOOKUP(ply, plystatsMIA, Player, PWMIA),PassMIA = VLOOKUP(ply, plystatsMIA, Player, PassMIA),RecMIA = VLOOKUP(ply, plystatsMIA, Player, RecMIA)
+,OpShotMIA = VLOOKUP(ply, plystatsMIA, Player, OpShotMIA),Poss_LostMIA = VLOOKUP(ply, plystatsMIA, Player, Poss_LostMIA),Fk_WonMIA = VLOOKUP(ply, plystatsMIA, Player, Fk_WonMIA)
+,Fk_LostMIA = VLOOKUP(ply, plystatsMIA, Player, Fk_LostMIA),TckMIA = VLOOKUP(ply,plystatstckMIA, Player,TckMIA),SpoilsMIA = VLOOKUP(ply,plystatstckMIA, Player, SpoilsMIA))
+
+
+#carries over 10
+
+#runAcarr <- runA%>%filter(seg %in% c("0","2"), dist > 9.99)
+
+runA <- run%>%filter(Teamnum=="A",keep=="Y")
+
+carrA <- runA %>%group_by(Player)%>%filter (seg %in% c("0","2"), dist > 9.99)%>%summarize(Carries = sum(segtype == "Carry"))
+carrDefA <- runA %>%group_by(Player)%>%filter (seg %in% c("0","2"), dist > 9.99,Pitch_Area %in% c("In_Def", "Mid_Def"))%>%summarize(CarriesDef = sum(segtype == "Carry"))
+carrODA <- runA %>%group_by(Player)%>%filter (seg %in% c("0","2"), dist > 9.99,Pitch_Area %in% c("Out_Def"))%>%summarize(CarriesODA = sum(segtype == "Carry"))
+carrOAA <- runA %>%group_by(Player)%>%filter (seg %in% c("0","2"), dist > 9.99,Pitch_Area %in% c("Out_Att"))%>%summarize(CarriesOAA = sum(segtype == "Carry"))
+carrMIAA <- runA %>%group_by(Player)%>%filter (seg %in% c("0","2"), dist > 9.99,Pitch_Area %in% c("Mid_Att","In_Att"))%>%summarize(CarriesMIAA = sum(segtype == "Carry"))
+
+statsA <-statsA %>%
+    mutate(CarriesDef = VLOOKUP(ply, carrDefA, Player, CarriesDef),CarriesODA = VLOOKUP(ply, carrODA, Player, CarriesODA),
+CarriesOAA = VLOOKUP(ply, carrOAA, Player, CarriesOAA),CarriesMIAA = VLOOKUP(ply, carrMIAA, Player, CarriesMIAA))
+
+
+#statsA [is.na(statsA)] <- 0
+
+statsA <-statsA %>%
+    mutate(Carries= VLOOKUP(ply, carrA, Player, Carries),CarriesDef = VLOOKUP(ply, carrDefA, Player, CarriesDef),CarriesODA = VLOOKUP(ply, carrODA, Player, CarriesODA),
+CarriesOAA = VLOOKUP(ply, carrOAA, Player, CarriesOAA),CarriesMIAA = VLOOKUP(ply, carrMIAA, Player, CarriesMIAA))
+
+#Pass Direction 
+
+runA <- run%>%filter(Teamnum=="A",keep=="Y", main %in% c("Pass Op", "Pass Rs"))
+
+passlineAllA <- runA%>% mutate(vec_col =ifelse(vec > -90 & vec < -55 ,1, ifelse(vec > -55 & vec < -25,2, ifelse(vec > -25 & vec < 25, 3,
+ifelse(vec > 25 & vec < 55,4,ifelse(vec > 55 & vec < 90,5,ifelse(vec > 90 & vec < 145,6,ifelse(vec > 145 & vec < 170,7,
+ifelse(vec > 170 & vec < -170,8,ifelse(vec > -170 & vec < -145,9,ifelse(vec > -145 & vec < -90, 10,"None")))))))))))
+
+Pass_Dir <- passlineAllA %>% mutate(Dir = ifelse(vec_col == "1" ,"swr", ifelse(vec_col == 2 ,"for",ifelse(vec_col == 3 ,"for",
+ifelse(vec_col == 4 ,"for",ifelse(vec_col == 5 ,"swl",ifelse(vec_col == 6 ,"swl",
+ifelse(vec_col == 7 ,"bw",ifelse(vec_col == 8 ,"bw",ifelse(vec_col == 9 ,"bw",ifelse(vec_col == 10 ,"swr",ifelse(vec_col == "None","None","None"))))))))))))
+
+
+Move_Dir <- Pass_Dir %>%group_by(Player)%>% summarize(For=sum(Dir == "for"),Back=sum(Dir == "bw"),SWL=sum(Dir == "swl"),SWR=sum(Dir == "swr"))
+
+#Pass_Dir
+
+statsA <-statsA %>%
+    mutate(For= VLOOKUP(ply, Move_Dir, Player, For),Back = VLOOKUP(ply, Move_Dir, Player, Back),SWL = VLOOKUP(ply, Move_Dir, Player, SWL),
+SWR = VLOOKUP(ply,Move_Dir, Player, SWR))
+
+#Run Direction 
+
+runAcar <- run%>%filter(Teamnum=="A",keep=="Y",seg %in% c("0","2"), dist > 9.99)
+
+runlineAllA <- runAcar %>% mutate(vec_col =ifelse(vec > -90 & vec < -55 ,1, ifelse(vec > -55 & vec < -25,2, ifelse(vec > -25 & vec < 25, 3,
+ifelse(vec > 25 & vec < 55,4,ifelse(vec > 55 & vec < 90,5,ifelse(vec > 90 & vec < 145,6,ifelse(vec > 145 & vec < 170,7,
+ifelse(vec > 170 & vec < -170,8,ifelse(vec > -170 & vec < -145,9,ifelse(vec > -145 & vec < -90, 10,"None")))))))))))
+
+Run_Dir <- runlineAllA %>% mutate(RunDir = ifelse(vec_col == "1" ,"swr", ifelse(vec_col == 2 ,"for",ifelse(vec_col == 3 ,"for",
+ifelse(vec_col == 4 ,"for",ifelse(vec_col == 5 ,"swl",ifelse(vec_col == 6 ,"swl",
+ifelse(vec_col == 7 ,"bw",ifelse(vec_col == 8 ,"bw",ifelse(vec_col == 9 ,"bw",ifelse(vec_col == 10 ,"swr",ifelse(vec_col == "None","None","None"))))))))))))
+
+
+Run_Dir <-Run_Dir %>%group_by(Player)%>% summarize(RunFor=sum(RunDir == "for"),RunBack=sum(RunDir == "bw"),RunSWL=sum(RunDir == "swl"),RunSWR=sum(RunDir == "swr"))
+
+statsA <-statsA %>%
+    mutate(RunFor= VLOOKUP(ply, Run_Dir, Player, RunFor),RunBack = VLOOKUP(ply,Run_Dir, Player, RunBack),RunSWL = VLOOKUP(ply,Run_Dir, Player, RunSWL),
+RunSWR = VLOOKUP(ply,Run_Dir, Player, RunSWR))
+
+statsA [is.na(statsA)] <- 0
+
+statsA
+
+
+

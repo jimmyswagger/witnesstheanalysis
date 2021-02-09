@@ -1,0 +1,27 @@
+
+passline <- pass %>% filter(Teamnum =="A",main %in% c ("PW","Pass Op","Pass Rs", "Shot Op", "Shot Rs","Ko", "Shot Op Oc", "Shot Rs Oc","ToL")) %>% ungroup()  %>% select(possno,plylab)
+
+passlineB <-passline %>%
+  group_by(possno) %>%
+ mutate(id = row_number())
+
+passlineB <-passlineB %>% spread(id, plylab)
+
+passlineB <- sapply(passlineB, as.character) # since your values are `factor`
+passlineB[is.na(passlineB)] <- ""
+
+passlineB <-as.data.frame (passlineB)
+ 
+sopa <- sop %>% filter (Teamnum =="A") %>% select (possno,secs)
+
+sopa <-sopa %>% mutate(possno = as.factor(possno))
+
+#passlineB
+
+passlineB <- passlineB %>%  mutate(Poss_Duration = VLOOKUP(possno,sopa,possno,secs))
+#passlineB
+
+
+formattable (passlineB, align = c("l", rep("c", NCOL(passlineB) - 1)))
+
+

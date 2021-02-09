@@ -1,0 +1,115 @@
+#
+library(shiny)
+library(ggplot2)
+library(ggrepel)
+library(dplyr)
+
+pass <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/dubmaysf/passdubmaysf.csv", header=TRUE, sep=";")
+attach (pass)
+
+ui <- pageWithSidebar(
+    headerPanel("witnesstheanalysis.com"),
+    sidebarPanel(
+        selectInput("teaminput","Team", 
+                    choices = list("Dublin" = "Dublin", "Mayo" = "Mayo")),
+        selectInput("player", "Player:",
+                    list("Player" = list("1", "2", "3","4","5","6","7","8","9","10","11","12","13",
+                                         "14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"))),
+        width = 2),
+    mainPanel(
+        fluidRow( 
+            column(width = 5,
+                   plotOutput("plot1")),
+            column(2,offset = 5,
+                   tableOutput("table")))
+        
+    )
+)
+
+server = function(input, output){
+
+##1.5 theme
+
+theme_blankPitch = function(size=12) { 
+    theme(
+        #axis.line=element_blank(), 
+        axis.text.x=element_blank(), 
+        axis.text.y=element_blank(), 
+        #axis.ticks.y=element_text(size=size),
+        #   axis.ticks=element_blank(),
+        axis.ticks.length=unit(0, "lines"), 
+        #axis.ticks.margin=unit(0, "lines"), 
+        axis.title.x=element_blank(), 
+        axis.title.y=element_blank(), 
+        legend.background=element_rect(fill="lightgreen", colour=NA), 
+        legend.key=element_rect(colour="lightgreen",fill="lightgreen"), 
+        legend.key.size=unit(1.2, "lines"), 
+        legend.text=element_text(size=size), 
+        legend.title=element_text(size=size, face="bold",hjust=0),
+        strip.background = element_rect(colour = "lightgreen", fill = "lightgreen", size = .5),
+        panel.background=element_rect(fill="lightgreen",colour="lightgreen"), 
+        #       panel.border=element_blank(), 
+        panel.grid.major=element_blank(), 
+        panel.grid.minor=element_blank(), 
+        panel.spacing=element_blank(), 
+        plot.background=element_blank(), 
+        plot.margin=unit(c(0, 0, 0, 0), "lines"), 
+        plot.title=element_text(size=size*1.2), 
+        strip.text.y=element_text(colour="lightgreen",size=size,angle=270),   
+        strip.text.x=element_text(size=size*1))}
+
+
+
+circleFunatt <- function(center=c(0,0), diameter=1, npoints=100, start=0, end=2)
+{
+    tt <- seq(start*pi, end*pi, length.out=npoints)
+    data.frame(x = center[1] - diameter / 2 * cos(tt), 
+               y = center[2] - diameter / 2 * sin(tt))
+}
+#### create semi circle ####
+att_circle <-  circleFunatt(c(6.5,3), 1, start=1.5, end=2.5)
+
+
+
+Dubden <- pass %>%group_by(Player, main)%>%filter(main == "PW"|main == "Rec Op"|main == "Rec Rs"|main == "Pass Op"|main == "Pass Rs"|main == "Shot Op"|main == "Shot Rs"|main == "Ko Rec"|main == "Fkwns"|main == "Fkws"|main == "Fklns"|main == "Fkls"| main == "Spoil Def" |main == "Spoil Off")
+
+
+## 2. Create a plot ##
+
+output$plot1 = renderPlot({
+   
+    ggplot(pass, aes(x = Areax, y = Areay)) +
+        geom_point(aes(color = Action
+        ), size = 2, stroke = 2) +
+        lims(x = c(0.5, 7.5), y = c(0.5, 5.5)) +
+        theme(legend.position="bottom") +
+        theme_blankPitch() + 
+        geom_segment(aes(x = 4.0, y = 2.90, xend = 4.0, yend = 3.10),colour = "white",linetype="solid",size = 0.5) +
+        geom_segment(aes(x = 2.5, y = 0.5, xend = 2.5, yend = 5.5),colour = "white",linetype="solid",size = 0.5) +
+        geom_segment(aes(x = 3.5, y = 0.5, xend = 3.5, yend = 5.5),colour = "white",linetype="solid",size = 0.5) +
+        geom_segment(aes(x = 4.5, y = 0.5, xend = 4.5, yend = 5.5),colour = "white",linetype="solid",size = 0.5) +
+        geom_segment(aes(x = 5.5, y = 0.5, xend = 5.5, yend = 5.5),colour = "white",linetype="solid",size = 0.5) +
+        geom_segment(aes(x = 6.5, y = 0.5, xend = 6.5, yend = 5.5),colour = "white",linetype="solid",size = 0.5) +
+        geom_segment(aes(x = 6.75, y = 0.5, xend = 6.75, yend = 5.5),colour = "white",linetype="solid",size = 0.5) + 
+        geom_segment(aes(x = 7.5, y = 2.6, xend = 6.75, yend = 2.6),colour = "white",linetype="solid",size = 0.5) + 
+        geom_segment(aes(x = 7.5, y = 3.4, xend = 6.75, yend = 3.4),colour = "white",linetype="solid",size = 0.5) +
+        geom_segment(aes(x=7.5, y=2.7, xend=7.25, yend=2.7),colour = "white",linetype="solid",size = 0.5) + 
+        geom_segment(aes(x=7.5, y=3.3, xend=7.25, yend=3.3),colour = "white",linetype="solid",size = 0.5) + 
+        geom_segment(aes(x=7.25, y=2.7, xend=7.25, yend=3.3),colour = "white",linetype="solid",size = 0.5) + 
+        geom_segment(aes(x =7.5, y = 2.8, xend = 7.5, yend = 3.25),colour = "red", size = 1) +
+        geom_path(data=att_circle, aes(x,y), colour = "white",size = 0.5)  
+    
+},height = 600, width = 750)
+
+}
+
+shinyApp(ui, server)
+
+
+
+  }
+  
+  return(p)}
+
+
+p <- create_Stats_Pitch("#A2CD5A", "white", "white", "blue","red", BasicFeatures=TRUE)

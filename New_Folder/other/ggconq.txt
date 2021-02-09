@@ -1,0 +1,49 @@
+knitr::include_graphics(c(conqAmap, conqBmap, out.width='50%' fig.show='hold'))
+
+out.width='50%' fig.show='hold',fig.align='center'
+
+#Table A
+
+conqA <- data.frame (pass %>%group_by(Team, Action) %>% filter(Teamnum == "A", Action == "Tack W"|Action == "KP Int"|Action == "HP Int"|Action == "Break won"|Action == "Short Gk"|Action == "Loose BW"|Action == "Ko Int"|Action == "Ko Break Int")%>%summarize(count=n()))
+func <- function(z) if (is.numeric(z)) sum(z) else ''
+sumconqA <- as.data.frame(lapply(conq, func))
+
+
+kable(rbind(cbind(' '=' ', conqA),
+            cbind(' '='Total', sumconqA)), caption = "Team A Turn Overs Won") %>%
+  kable_styling(bootstrap_options = c("striped"),position = "hover_left", full_width = F)
+
+
+
+
+#Map Team A
+
+conqA <-filter(pass, Teamnum == "A", Action == "Tack W"|Action == "KP Int"|Action == "HP Int"|Action == "Break won"|Action == "Short Gk"|Action == "Loose BW"|Action == "Ko Int"|Action == "Ko Break Int")
+
+p + geom_point(data = conqA, aes(x=Areax, y=Areay, colour = Action, shape = Action)) +
+labs(title = "Kick Outs", subtitle = "Team A") +
+geom_text_repel(data = conqA, aes(x=Areax, y=Areay, label = plylab, col = Action), size = 3) +
+theme(plot.title = element_text(hjust=0.5)) +
+theme(plot.subtitle = element_text(hjust=0.5)) 
+
+#Table B
+
+conqB <- data.frame (pass %>%group_by(Team, Action) %>% filter(Teamnum == "A", Action == "Tack W"|Action == "KP Int"|Action == "HP Int"|Action == "Break won"|Action == "Short Gk"|Action == "Loose BW"|Action == "Ko Int"|Action == "Ko Break Int")%>%summarize(count=n()))
+func <- function(z) if (is.numeric(z)) sum(z) else ''
+sumconqB <- as.data.frame(lapply(conq, func))
+
+
+kable(rbind(cbind(' '=' ', conqB),
+            cbind(' '='Total', sumconqB)), caption = "Team A Turn Overs Won") %>%
+  kable_styling(bootstrap_options = c("striped"),position = "hover_left", full_width = F)
+
+
+#Map team B
+
+conqB <-filter(pass, Teamnum == "A", Action == "Tack W"|Action == "KP Int"|Action == "HP Int"|Action == "Break won"|Action == "Short Gk"|Action == "Loose BW"|Action == "Ko Int"|Action == "Ko Break Int")
+
+p + geom_point(data = conqB, aes(x=Areax, y=Areay, colour = Action, shape = Action)) +
+labs(title = "Kick Outs", subtitle = "Team B") +
+geom_text_repel(data = conqB, aes(x=Areax, y=Areay, label = plylab, col = Action), size = 3) +
+theme(plot.title = element_text(hjust=0.5)) +
+theme(plot.subtitle = element_text(hjust=0.5)) 

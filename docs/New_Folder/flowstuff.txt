@@ -1,0 +1,165 @@
+grViz("digraph flowchart {
+      # node definitions with substituted label text
+      node [fontname = Helvetica, shape = rectangle]     
+      tab1 [label = 'Dynamical Systems']
+      tab2 [label = 'Match']
+      tab3 [label = 'Technical']
+      tab4 [label = 'Tactical']
+tab5 [label = 'Training Design']
+tab6 [label = 'LTAD']
+tab7 [label = 'Classifying Player/Team Roles']
+tab8 [label = 'Pedagogy']
+tab9 [label = 'Physiological']
+
+     
+      # edge definitions with the node IDs
+      tab1 -> tab8;
+      tab1 -> tab2;
+      tab2 -> tab3;
+      tab2 -> tab4;
+      tab5 -> tab3;
+      tab5 -> tab4;
+tab2 -> tab7;
+tab7 -> tab6;
+tab8 -> tab5;
+tab5 -> tab2;
+tab2 -> tab5;
+tab3 -> tab9;
+tab4 -> tab9;
+
+      }
+
+      [1]: 'Questionnaire sent to n=1000 participants'
+      [2]: 'Participants responded to questionnaire n=850'
+      [3]: 'Participants came to clinic for evaluation n=700'
+      [4]: 'Participants eligible for the study n=600'
+      ")
+
+grViz("digraph flowchart {
+      # node definitions with substituted label text
+      node [fontname = Helvetica, shape = rectangle] 
+tab1 [label = 'Overview']    
+      tab2 [label = 'Dynamical Systems']
+tab3 [label = 'Technical/Tactical/Physiological']
+tab4 [label = 'Training Design']
+      tab5 [label = 'Match']
+tab6 [label = 'Classifying Player/Team Roles']      
+tab7 [label = 'LTAD']
+tab8 [label = 'Pedagogy']
+
+
+
+     
+      # edge definitions with the node IDs
+      tab1 -> tab2;
+      tab2 -> tab3;
+      tab3 -> tab4;
+      tab3 -> tab5;
+      tab8 -> tab4;
+      tab5 -> tab6;
+tab6 -> tab7;
+
+      }
+
+      [1]: 'Questionnaire sent to n=1000 participants'
+      [2]: 'Participants responded to questionnaire n=850'
+      [3]: 'Participants came to clinic for evaluation n=700'
+      [4]: 'Participants eligible for the study n=600'
+      ")
+
+passAidA <- passAidA %>% group_by(Player) %>% mutate(id = row_number())
+
+passAidA$ply_id <- passAidA %>% group_indices(Player) 
+
+
+TeamAPAScrflow  <- run %>%group_by(Team, Action) %>% filter( main == "Shot Op")
+
+passAA <- subset(run, poss %in% TeamAPAScrflow$poss)
+
+passA <-passAA %>% filter(main == "Pass Op"|main == "Pass Rs"|main == "Shot Op")
+passA <- passA %>%filter (Teamnum == "A", possno == "29")
+
+#write.csv(passA,"passA.csv")
+
+passAid <-passA %>%
+  group_by(possno) %>%
+ mutate(id = row_number())
+
+passAid <-passAid%>%group_by(possno,id)%>%arrange(desc(id))
+ 
+passAid <-passAid %>% group_by(possno) %>% arrange(possno)
+
+passAid <-passAid %>% group_by(possno) %>% top_n(n=4,wt = id)%>%
+  arrange(possno, (id))
+
+passAidA <- passAid %>% group_by(Player)%>%select(possno, Player)
+
+--
+
+
+passA <-pass %>% filter(main == "Pass Op"|main == "Pass Rs")
+passA <- passA %>%filter (Teamnum == "A", possno == "26")
+
+#write.csv(passA,"passA.csv")
+
+passAid <-passA %>%
+  group_by(possno) %>%
+ mutate(id = row_number())
+
+passAid <-passAid%>%group_by(possno,id)%>%arrange(desc(id))
+ 
+passAid <-passAid %>% group_by(possno) %>% arrange(possno)
+
+passAidA <- passAid %>%select(possno, Player)
+
+passAidA <-passAidA%>%group_by (possno) %>%
+dplyr::mutate(i1 = row_number()) %>% 
+  tidyr::spread(possno, Player)%>%
+   select(-i1)
+
+#passAidA <- passAidA[sapply(passAidA, function(passAidA) !any(is.na(passAidA)))]
+
+formattable (passAidA) 
+
+
+passAidA1 <- transform(passAidA, end_line_number = c(possno[-1], NA))
+formattable (passAidA1) 
+
+
+passAidA$end_line_number <- c(passAidA$possno [-1]-1, NA)
+
+
+---
+
+
+
+passA <-pass %>% filter(main == "Pass Op"|main == "Pass Rs")
+passA <- passA %>%filter (Teamnum == "A", poss == "A26")
+
+#write.csv(passA,"passA.csv")
+
+passAid <-passA %>%
+  group_by(poss) %>%
+ mutate(id = row_number())
+
+passAid <-passAid%>%group_by(poss,id)%>%arrange(desc(id))
+ 
+passAid <-passAid %>% group_by(poss) %>% arrange(poss)
+
+passAidA <- passAid %>%select(poss, Player)
+
+passAidA <-passAidA%>%group_by (poss) %>%
+dplyr::mutate(i1 = row_number()) %>% 
+  tidyr::spread(poss, Player)%>%
+   select(-i1)
+
+#passAidA <- passAidA[sapply(passAidA, function(passAidA) !any(is.na(passAidA)))]
+
+formattable (passAidA) 
+
+
+passAidA1 <- transform(passAidA, end_line_number = c(possno[-1], NA))
+formattable (passAidA1) 
+
+
+passAidA$end_line_number <- c(passAidA$A26 [-1]-1, NA)

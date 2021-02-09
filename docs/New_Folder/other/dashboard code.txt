@@ -1,0 +1,47 @@
+Team A & Player
+
+Private Sub Play1_Click()
+With ActiveCell.Value = Text
+    Range("P2").Select
+Selection.Copy
+ActiveSheet.Range("A4000").End(xlUp).Offset(1, 0).Select
+Selection.PasteSpecial Paste:=xlPasteValues
+With ActiveCell.Value = Text
+    Range("N1").Select
+Selection.Copy
+ActiveSheet.Range("B4000").End(xlUp).Offset(1, 0).Select
+Selection.PasteSpecial Paste:=xlPasteValues
+
+End With
+End With
+
+End Sub
+
+-------------------------------------------------------------------
+
+Action
+
+With ActiveCell.Value = Text
+    Range("I").Select
+Selection.Copy
+ActiveSheet.Range("C4000").End(xlUp).Offset(1, 0).Select
+Selection.PasteSpecial Paste:=xlPasteValues
+
+End With
+
+
+
+------------------------------------------------------------------------
+pitch
+
+Private Sub PA03_Click()
+With ActiveCell.Value = Text
+    Range("S3").Select
+Selection.Copy
+ActiveSheet.Range("D4000").End(xlUp).Offset(1, 0).Select
+Selection.PasteSpecial Paste:=xlPasteValues
+
+End With
+
+End Sub
+

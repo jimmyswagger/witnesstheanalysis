@@ -1,0 +1,59 @@
+linksdubmayo <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/DubvsMayo/linksdubmayo.csv", header=TRUE, sep=";")
+attach (linksdubmayo)
+
+nodesdubmayo <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/DubvsMayo/nodesdubmayo.csv", header=TRUE, sep=";")
+attach (nodesdubmayo)
+
+nodesmayodub <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/DubvsMayo/nodesmayodub.csv", header=TRUE, sep=";")
+attach (nodesmayodub)
+--------------------------------------------------------------------------------------------------------------------------------------------------
+linksA <- linksdubmayo %>% filter( Teamnum == "A") %>% select(Teamnum,plypass, plyrec)
+
+linksA <- rename(count(linksA, plypass, plyrec), weight = n)
+
+netA <- graph_from_data_frame(d=linksA, vertices=nodesdubmayo, directed=T) 
+
+# Generate colors based on number of position (ie gk back mf for) type:
+colrs <- c("orange", "gray50", "tomato", "gold")
+V(netA)$color <- colrs[V(netA)$posn]
+
+# Compute node degrees (#links) and use that to set node size:
+deg <- degree(netA, mode="all")
+V(netA)$size <- deg*1 #size of node 
+
+nodes.coordA <- data.frame(
+    x= Areax,
+    y=Areay)
+
+plot(netA, edge.arrow.size=.4, edge.color="lightblue",edge.arrow.width=.4,
+      edge.width=E(netA)$weight*2, layout=as.matrix(nodes.coordA[,c("x","y")]), vertex.label.color="black", vertex.label = label, vertex.label.size = 3)
+
+legend(x=-3, y=-1, c("GK","Back", "MF", "For"), pch=21,
+       col="white", pt.bg=colrs, pt.cex=2, cex=.8, bty="n", ncol=3)
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+linksB <- linksdubmayo %>% filter( Teamnum == "B") %>% select(Teamnum,plypass, plyrec)
+
+linksB <- rename(count(linksB, plypass, plyrec), weight = n)
+
+netB <- graph_from_data_frame(d=linksB, vertices=nodesmayodub, directed=T) 
+
+# Generate colors based on number of position (ie gk back mf for) type:
+colrs <- c("orange", "gray50", "tomato", "gold",  "blue")
+V(netB)$color <- colrs[V(netB)$posn]
+
+# Compute node degrees (#links) and use that to set node size:
+deg <- degree(netB, mode="all")
+V(netB)$size <- deg*1 #size of node 
+
+nodes.coordB <- data.frame(
+    x= Areax,
+    y=Areay)
+
+plot(netB, edge.arrow.size=.4, edge.color="lightgreen",edge.arrow.width=.4,
+      edge.width=E(netB)$weight*2, layout=as.matrix(nodes.coordB[,c("x","y")]), vertex.label.color="black", vertex.label = label, vertex.label.size = 3)
+
+legend(x=-2, y=-.5, c("GK","Back", "MF", "For"), pch=21,
+       col="white", pt.bg=colrs, pt.cex=2, cex=.8, bty="n", ncol=3)
+
+---------------------------------------------------------------------------------------------------------------------

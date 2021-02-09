@@ -1,0 +1,71 @@
+
+#Ko Density
+komapA <-filter(pass, Teamnum == "A",subset =="Ko Rec"| subset =="Ko ToL")
+pal <- c("Ko Rec" = "blue",
+"Ko ToL"  = "red")
+
+pals <- c("Ko Rec" = 19,
+"Ko ToL"  = 4)
+
+p  +  geom_density_2d(data = komapA, aes(x=Areax, y=Areay),colour = "blue") +
+    geom_point(data = komapA, aes(x=Areax, y=Areay, shape= subset,colour = subset),size = 4,stroke = 2)+ 
+    theme_classic () +  
+    theme(axis.title.x=element_blank(),
+          axis.ticks.x=element_blank(), 
+          axis.title.y=element_blank(), 
+          axis.text.y=element_blank(), 
+          axis.ticks.y=element_blank(),
+          axis.text.x=element_blank(),
+          line = element_blank(),
+          legend.position="bottom",legend.title=element_text(size=15), 
+          legend.text=element_text(size=20)) +
+ scale_shape_manual(values= pals) +
+  scale_colour_manual(values = pal)
+  guides(color = FALSE)
+
+#Shot Density open play
+
+denpal <- c("Shot Op" = "blue",
+"Shot Rs"  = "red")
+
+denpals <- c("Shot Op" = 15,
+"Shot Rs"  = 16)
+
+Dubden <- pass %>%group_by(Player, main)%>%filter( Teamnum == "B",main == "Shot Op")
+
+p  +  geom_density_2d(data = Dubden, aes(x=Areax, y=Areay,colour = main)) +
+    geom_point(data = Dubden, aes(x=Areax, y=Areay, shape= main,colour = main),size = 4,stroke = 1)+ 
+    theme_classic () +  
+    theme(axis.title.x=element_blank(),
+          axis.ticks.x=element_blank(), 
+          axis.title.y=element_blank(), 
+          axis.text.y=element_blank(), 
+          axis.ticks.y=element_blank(),
+          axis.text.x=element_blank(),
+          line = element_blank(),
+          legend.position="bottom",legend.title=element_text(size=15), 
+          legend.text=element_text(size=20)) +
+  guides(color = FALSE) +
+scale_shape_manual(values= denpals) +
+  scale_colour_manual(values = denpal)
+
+#shot density op and rs 
+
+Dubden <- pass %>%group_by(Player, main)%>%filter( Teamnum == "A",main == "Shot Op"|main == "Shot Rs")
+
+p  +  geom_density_2d(data = Dubden, aes(x=Areax, y=Areay),colour = "blue") +
+    geom_point(data = Dubden, aes(x=Areax, y=Areay, shape= main,colour = main),size = 4,stroke = 1)+ 
+    theme_classic () +  
+    theme(axis.title.x=element_blank(),
+          axis.ticks.x=element_blank(), 
+          axis.title.y=element_blank(), 
+          axis.text.y=element_blank(), 
+          axis.ticks.y=element_blank(),
+          axis.text.x=element_blank(),
+          line = element_blank(),
+          legend.position="bottom",legend.title=element_text(size=15), 
+          legend.text=element_text(size=20)) +
+  guides(color = FALSE) +
+scale_shape_manual(values= denpals) +
+  scale_colour_manual(values = denpal)
+

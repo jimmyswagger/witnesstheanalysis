@@ -1,0 +1,145 @@
+create_Tennis_Court <- function(court_colour, line_colour, border_colour, net_colour, BasicFeatures){
+
+theme_blankPitch = function(size=12) { 
+    theme(
+      #axis.line=element_blank(), 
+      axis.text.x=element_blank(), 
+      axis.text.y=element_blank(), 
+      #axis.ticks.y=element_text(size=size),
+      #axis.ticks=element_blank(),
+      axis.ticks.length=unit(0, "lines"), 
+      #axis.ticks.margin=unit(0, "lines"), 
+      axis.title.x=element_blank(), 
+      axis.title.y=element_blank(), 
+      legend.key.size=unit(1.2, "lines"), 
+      legend.text=element_text(size=size), 
+      legend.title=element_text(size=size, face="bold",hjust=0),
+      # panel.border=element_blank(), 
+      panel.grid.major=element_blank(), 
+      panel.grid.minor=element_blank(), 
+      panel.spacing=element_blank(), 
+      plot.margin=unit(c(0, 0, 0, 0), "lines"), 
+      plot.title=element_text(size=size*1.2), 
+      panel.background=element_rect(fill= border_colour,colour= border_colour),
+      strip.text.x=element_text(size=size*1))}
+
+
+  xmin <- 0 # minimum length
+  xmax <- 20.97 # maximum length
+  ymin <- 0 # minimum width
+  ymax <- 33.77 # maximum width
+
+
+#boxa1   
+boxxmina1 <- 5
+boxxmaxa1 <- 6.37
+boxymina1 <- 16.885
+boxymaxa1 <- 28.77
+
+#boxa2 
+boxxmina2 <- 6.37
+boxxmaxa2 <- 14.6
+boxymina2 <- 22.37
+boxymaxa2 <- 28.77
+
+#boxa3 
+boxxmina3 <- 6.37
+boxxmaxa3 <- 11.485
+boxymina3 <- 16.885
+boxymaxa3 <- 23.285
+
+#boxa4 
+boxxmina4 <- 10.485
+boxxmaxa4 <- 14.6
+boxymina4 <- 16.885
+boxymaxa4 <- 23.285
+
+#boxa5
+boxxmina5 <- 14.6
+boxxmaxa5 <- 15.97
+boxymina5 <- 16.885
+boxymaxa5 <- 28.77
+
+
+#boxb1   
+boxxminb1 <- 5
+boxxmaxb1 <- 6.37
+boxyminb1 <- 5
+boxymaxb1 <- 16.885
+
+#boxb2 
+boxxminb2 <- 6.37
+boxxmaxb2 <- 14.6
+boxyminb2 <- 5
+boxymaxb2 <- 10.485
+
+#boxb3 
+boxxminb3 <- 6.37
+boxxmaxb3 <- 10.485
+boxyminb3 <- 10.485
+boxymaxb3 <- 16.885
+
+#boxb4 
+boxxminb4 <- 10.485
+boxxmaxb4 <- 14.6
+boxyminb4 <- 10.485
+boxymaxb4 <- 16.885
+
+#boxb5
+boxxminb5 <- 14.6
+boxxmaxb5 <- 15.97
+boxyminb5 <- 5
+boxymaxb5 <- 16.885
+
+netxs <- 5
+netxe <- 15.97
+netys <- 16.885 
+netye <- 16.885
+
+if(BasicFeatures == TRUE){
+np <- ggplot() + xlim(c(xmin,xmax)) + ylim(c(ymin,ymax)) +
+      # add the theme 
+      theme_blankPitch() +
+
+geom_rect(aes(xmin=boxxmina1, xmax=boxxmaxa1, ymin=boxymina1, ymax=boxymaxa1), fill = court_colour, colour = line_colour) +
+geom_rect(aes(xmin=boxxmina2, xmax=boxxmaxa2, ymin=boxymina2, ymax=boxymaxa2), fill = court_colour, colour = line_colour) +
+geom_rect(aes(xmin=boxxmina3, xmax=boxxmaxa3, ymin=boxymina3, ymax=boxymaxa3), fill = court_colour, colour = line_colour) +
+geom_rect(aes(xmin=boxxmina4, xmax=boxxmaxa4, ymin=boxymina4, ymax=boxymaxa4), fill = court_colour, colour = line_colour) +
+geom_rect(aes(xmin=boxxmina5, xmax=boxxmaxa5, ymin=boxymina5, ymax=boxymaxa5), fill = court_colour, colour = line_colour) +
+
+geom_rect(aes(xmin=boxxminb1, xmax=boxxmaxb1, ymin=boxyminb1, ymax=boxymaxb1), fill = court_colour, colour = line_colour) +
+geom_rect(aes(xmin=boxxminb2, xmax=boxxmaxb2, ymin=boxyminb2, ymax=boxymaxb2), fill = court_colour, colour = line_colour) +
+geom_rect(aes(xmin=boxxminb3, xmax=boxxmaxb3, ymin=boxyminb3, ymax=boxymaxb3), fill = court_colour, colour = line_colour) +
+geom_rect(aes(xmin=boxxminb4, xmax=boxxmaxb4, ymin=boxyminb4, ymax=boxymaxb4), fill = court_colour, colour = line_colour) +
+geom_rect(aes(xmin=boxxminb5, xmax=boxxmaxb5, ymin=boxyminb5, ymax=boxymaxb5), fill = court_colour, colour = line_colour) +
+
+geom_segment(aes(x =  netxs, y = netys, xend = netxe, yend = netye),colour = net_colour,linetype="solid",size = 0.5)
+
+ }
+  
+  else{
+npo <- ggplot() + xlim(c(xmin,xmax)) + ylim(c(ymin,ymax)) +
+      # add the theme 
+      theme_blankPitch() +
+
+geom_rect(aes(xmin=boxxmina1, xmax=boxxmaxa1, ymin=boxymina1, ymax=boxymaxa1), fill = court_colour, colour = line_colour) +
+geom_rect(aes(xmin=boxxmina2, xmax=boxxmaxa2, ymin=boxymina2, ymax=boxymaxa2), fill = court_colour, colour = line_colour) +
+geom_rect(aes(xmin=boxxmina3, xmax=boxxmaxa3, ymin=boxymina3, ymax=boxymaxa3), fill = court_colour, colour = line_colour) +
+geom_rect(aes(xmin=boxxmina4, xmax=boxxmaxa4, ymin=boxymina4, ymax=boxymaxa4), fill = court_colour, colour = line_colour) +
+geom_rect(aes(xmin=boxxmina5, xmax=boxxmaxa5, ymin=boxymina5, ymax=boxymaxa5), fill = court_colour, colour = line_colour) +
+
+geom_rect(aes(xmin=boxxminb1, xmax=boxxmaxb1, ymin=boxyminb1, ymax=boxymaxb1), fill = court_colour, colour = line_colour) +
+geom_rect(aes(xmin=boxxminb2, xmax=boxxmaxb2, ymin=boxyminb2, ymax=boxymaxb2), fill = court_colour, colour = line_colour) +
+geom_rect(aes(xmin=boxxminb3, xmax=boxxmaxb3, ymin=boxyminb3, ymax=boxymaxb3), fill = court_colour, colour = line_colour) +
+geom_rect(aes(xmin=boxxminb4, xmax=boxxmaxb4, ymin=boxyminb4, ymax=boxymaxb4), fill = court_colour, colour = line_colour) +
+geom_rect(aes(xmin=boxxminb5, xmax=boxxmaxb5, ymin=boxyminb5, ymax=boxymaxb5), fill = court_colour, colour = line_colour) +
+geom_segment(aes(x =  netxs, y = netys, xend = netxe, yend = netye),colour = net_colour,linetype="solid",size = 0.5)
+
+ }
+
+
+return(np)}
+
+np <- create_Tennis_Court ("lightblue", "white", "darkblue", "blue", BasicFeatures=TRUE)
+
+np 

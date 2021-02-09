@@ -1,0 +1,325 @@
+---
+title: "Mayo vs Kerry Networks"
+output:
+  html_document:
+    theme: cosmo
+---
+
+```{r setup, include=FALSE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE, options(knitr.kable.NA = ''))
+#Load packages
+library(flexdashboard)
+library(dplyr)
+library(deldir)
+library(ggplot2)
+library(ggrepel)
+library(ggpubr)
+library(knitr)
+library(rmarkdown)
+library(kableExtra)
+library(data.table)
+library(RColorBrewer)
+library(gridExtra)
+library(igraph)
+library(tidyverse)
+library(treemap)
+library(plotly)
+library(networkD3)
+library (curl)
+library(formattable)
+library(yaml)
+```
+
+#Shot Network
+##Mayo
+```{r, fig.width = 20, fig.height = 20}
+
+linksABps <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/mayker/passshotmayker.csv", header=TRUE, sep=";")
+attach (linksABps)
+
+nodesteamAps <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/mayker/nodesshotmayker.csv", header=TRUE, sep=";")
+attach (nodesteamAps)
+
+nodesteamBps <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/mayker/nodesshotmayker.csv", header=TRUE, sep=";")
+attach (nodesteamBps)
+
+linksAps <- linksABps %>% filter( Teamnum == "A") %>% select(Teamnum,plypass, plyrec)
+
+linksAps <- rename(count(linksAps, plypass, plyrec), weight = n)
+
+netAps <- graph_from_data_frame(d=linksAps, vertices=nodesteamAps, directed=T) 
+
+# Generate colors based on number of position (ie gk back mf for) type:
+colrs <- c("red", "red", "red", "red", "red")
+V(netAps)$color <- colrs[V(netAps)$posn]
+
+# Compute node degrees (#links) and use that to set node size:
+deg <- degree(netAps, mode="all")
+V(netAps)$size <- deg*2 #size of node 
+
+nodes.coordA <- data.frame(data = nodesteamAps,
+    x= Areax,
+    y=Areay)
+
+plot(netAps, edge.arrow.size=.4, edge.color="lightgreen",edge.arrow.width=.4,
+      edge.width=E(netAps)$weight*5, layout=as.matrix(nodes.coordA[,c("x","y")]), vertex.label.color="lightgreen", vertex.label = labelmay, vertex.label.cex = 5)
+
+```
+
+
+###In Degree (Number of Players a Player Received a Pass from)
+```{r}
+-sort(-degree(netAps, mode="in"))
+```
+
+###Out Degree (Number of Players a Player Made a Pass to)
+```{r}
+-sort(-degree(netAps, mode="out"))
+```
+
+###Strength in (Number of Passes Received by a Player)
+```{r}
+-sort(-strength(netAps, mode="in"))
+```
+
+###Strength Out (Number of Passes/Shots Made by a Player)
+```{r}
+-sort(-strength(netAps, mode="out"))
+```
+
+###Betweenness Centrality (Flow of Passes through a Player)
+```{r}
+-sort(-betweenness(netAps, directed=F, weights=NA, normalized = T))
+```
+
+###Closeness Centrality (How Well connected and central a Player is within the Teams Network)
+```{r}
+-sort(-closeness(netAps, mode="all", weights=NA, normalized=T))
+```
+
+###Entropy (The Unpredictability in who a Player Passes to/Takes shot)
+```{r}
+diversity(netAps)
+```
+
+###Global clustering coefficient (Groups of Players who pass to each other)
+```{r}
+transitivity(netAps)
+```
+###eigen_centrality (How well connected the well connected are)
+```{r}
+-sort(-eigen_centrality(netAps)$vector)
+```
+
+#Kerry
+```{r, fig.width = 20, fig.height = 20}
+
+linksABps <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/mayker/passshotmayker.csv", header=TRUE, sep=";")
+attach (linksABps)
+
+nodesteamAps <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/mayker/nodesshotmayker.csv", header=TRUE, sep=";")
+attach (nodesteamAps)
+
+nodesteamBps <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/mayker/nodesshotkermay.csv", header=TRUE, sep=";")
+attach (nodesteamBps)
+
+linksBps <- linksABps %>% filter( Teamnum == "B") %>% select(Teamnum,plypass, plyrec)
+
+linksBps <- rename(count(linksBps, plypass, plyrec), weight = n)
+
+netBps <- graph_from_data_frame(d=linksBps, vertices=nodesteamBps, directed=T) 
+
+# Generate colors based on number of position (ie gk back mf for) type:
+colrs <- c("gold", "gold", "gold","gold","gold")
+V(netBps)$color <- colrs[V(netBps)$posn]
+
+# Compute node degrees (#links) and use that to set node size:
+deg <- degree(netBps, mode="all")
+V(netBps)$size <- deg*2 #size of node 
+
+nodes.coordB <- data.frame(data = nodesteamBps,
+    x= Areax,
+    y=Areay)
+
+plot(netBps, edge.arrow.size=.4, edge.color="darkgreen",edge.arrow.width=.4,
+      edge.width=E(netBps)$weight*5, layout=as.matrix(nodes.coordB[,c("x","y")]), vertex.label.color="darkgreen",  vertex.label = labelker, vertex.label.cex = 5)
+
+```
+
+
+###In Degree
+```{r}
+-sort(-degree(netBps, mode="in"))
+```
+
+###Out Degree
+```{r}
+-sort(-degree(netBps, mode="out"))
+```
+
+###Strength in
+```{r}
+-sort(-strength(netBps, mode="in"))
+```
+
+###Strength Out
+```{r}
+-sort(-strength(netBps, mode="out"))
+```
+###Betweenness Centrality
+```{r}
+-sort(-betweenness(netBps, directed=F, weights=NA, normalized = T))
+```
+
+###Closeness Centrality
+```{r}
+-sort(-closeness(netBps, mode="all", weights=NA, normalized=T))
+```
+
+###Entropy
+```{r}
+diversity(netBps)
+```
+
+###Global clustering coefficient
+```{r}
+transitivity(netBps)
+```
+###eigen_centrality
+```{r}
+-sort(-eigen_centrality(netBps)$vector)
+```
+
+#Score Network
+##Mayo
+```{r, fig.width = 20, fig.height = 20}
+
+linksABs <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/mayker/linksscoresmayker.csv", header=TRUE, sep=";")
+attach (linksABps)
+
+nodesteamAs <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/mayker/nodesscoremayker.csv", header=TRUE, sep=";")
+attach (nodesteamAs)
+
+linksAs <- linksABs %>% filter( Teamnum == "A") %>% select(Teamnum,plypass, plyrec)
+
+linksAs <- rename(count(linksAs, plypass, plyrec), weight = n)
+
+netAs <- graph_from_data_frame(d=linksAs, vertices=nodesteamAs, directed=T) 
+
+# Generate colors based on number of position (ie gk back mf for) type:
+colrs <- c("lightgreen", "darkblue", "darkblue", "darkblue", "darkblue")
+V(netAs)$color <- colrs[V(netAs)$posn]
+
+# Compute node degrees (#links) and use that to set node size:
+deg <- degree(netAs, mode="all")
+V(netAs)$size <- deg*2 #size of node 
+
+nodes.coordA <- data.frame(data = nodesteamAs,
+    x= Areax,
+    y=Areay)
+
+plot(netAs, edge.arrow.size=.4, edge.color="red",edge.arrow.width=.4,
+      edge.width=E(netAs)$weight*5, layout=as.matrix(nodes.coordA[,c("x","y")]), vertex.label.color="red", vertex.label = labmay, vertex.label.cex = 5)
+
+```
+
+##Kerry
+```{r, fig.width = 20, fig.height = 20}
+
+linksABs <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/mayker/linksscoresmayker.csv", header=TRUE, sep=";")
+attach (linksABs)
+
+nodesteamAs <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/mayker/nodesscoremayker.csv", header=TRUE, sep=";")
+attach (nodesteamAs)
+
+nodesteamBs <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/mayker/nodesscorekermay.csv", header=TRUE, sep=";")
+attach (nodesteamBs)
+
+linksBs <- linksABs %>% filter( Teamnum == "B") %>% select(Teamnum,plypass, plyrec)
+
+linksBs <- rename(count(linksBs, plypass, plyrec), weight = n)
+
+netBs <- graph_from_data_frame(d=linksBs, vertices=nodesteamBs, directed=T) 
+
+# Generate colors based on number of position (ie gk back mf for) type:
+colrs <- c("gold", "tomato", "tomato","tomato","tomato")
+V(netBs)$color <- colrs[V(netBs)$posn]
+
+# Compute node degrees (#links) and use that to set node size:
+deg <- degree(netBs, mode="all")
+V(netBs)$size <- deg*2 #size of node 
+
+nodes.coordB <- data.frame(data = nodesteamBs,
+    x= Areax,
+    y=Areay)
+
+plot(netBs, edge.arrow.size=.4, edge.color="darkgreen",edge.arrow.width=.4,
+      edge.width=E(netBs)$weight*5, layout=as.matrix(nodes.coordB[,c("x","y")]), vertex.label.color="darkgreen",  vertex.label = labker, vertex.label.cex = 5)
+
+```
+
+
+#Kickout Network
+##Mayo
+```{r, fig.width = 20, fig.height = 20}
+
+linksABs <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/mayker/linkskomayker.csv", header=TRUE, sep=";")
+attach (linksABs)
+
+nodesteamAko <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/mayker/nodeskomayker.csv", header=TRUE, sep=";")
+attach (nodesteamAko)
+
+linksAko <- linksABs %>% filter( Teamnum == "A") %>% select(Teamnum,plypass, plyrec)
+
+linksAko <- rename(count(linksAko, plypass, plyrec), weight = n)
+
+netAko <- graph_from_data_frame(d=linksAko, vertices=nodesteamAko, directed=T) 
+
+# Generate colors based on number of position (ie gk back mf for) type:
+colrs <- c("lightgreen", "darkblue", "darkblue", "darkblue", "darkblue")
+V(netAko)$color <- colrs[V(netAko)$posn]
+
+# Compute node degrees (#links) and use that to set node size:
+deg <- degree(netAko, mode="all")
+V(netAko)$size <- deg*2 #size of node 
+
+nodes.coordA <- data.frame(data = nodesteamAko,
+    x= Areax,
+    y=Areay)
+
+plot(netAko, edge.arrow.size=.4, edge.color="red",edge.arrow.width=.4,
+      edge.width=E(netAko)$weight*5, layout=as.matrix(nodes.coordA[,c("x","y")]), vertex.label.color="red", vertex.label = labkomay, vertex.label.cex = 5)
+
+```
+
+##Kerry
+```{r, fig.width = 20, fig.height = 20}
+
+linksABs <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/mayker/linkskomayker.csv", header=TRUE, sep=";")
+attach (linksABs)
+
+nodesteamBko <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/mayker/nodeskokermay.csv", header=TRUE, sep=";")
+attach (nodesteamBko)
+
+linksBko <- linksABs %>% filter( Teamnum == "B") %>% select(Teamnum,plypass, plyrec)
+
+linksBko <- rename(count(linksBko, plypass, plyrec), weight = n)
+
+netBko <- graph_from_data_frame(d=linksBko, vertices=nodesteamBko, directed=T) 
+
+# Generate colors based on number of position (ie gk back mf for) type:
+colrs <- c("gold", "tomato", "tomato","tomato","tomato")
+V(netBko)$color <- colrs[V(netBko)$posn]
+
+# Compute node degrees (#links) and use that to set node size:
+deg <- degree(netBko, mode="all")
+V(netBko)$size <- deg*2 #size of node 
+
+nodes.coordB <- data.frame(data = nodesteamBko,
+    x= Areax,
+    y=Areay)
+
+plot(netBko, edge.arrow.size=.4, edge.color="darkgreen",edge.arrow.width=.4,
+      edge.width=E(netBko)$weight*5, layout=as.matrix(nodes.coordB[,c("x","y")]), vertex.label.color="darkgreen",  vertex.label = labkoker, vertex.label.cex = 5)
+
+```

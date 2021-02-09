@@ -1,0 +1,118 @@
+#freq of zone
+zoneA <- pass %>%group_by(Team, Zone) %>% filter(Teamnum == "A", Zone >=0, Zone <=140)%>%summarize(count=n())
+
+ggplot(zoneA, aes(x = Zone, y = count)) +   
+  geom_bar(stat = "identity", 
+           fill = "lightblue",    
+           width = 0.50) +
+theme_classic() +
+   geom_vline(xintercept=40.25, linetype="dotted", color = "black") +
+   geom_vline(xintercept=70.25, linetype="dotted", color = "black") +
+   geom_vline(xintercept=100.25, linetype="dotted", color = "black") +
+   geom_vline(xintercept=140.25, linetype="dotted", color = "black") +  
+      annotate(geom="text", x= 20, y=-0.25, label="Def",color = "black") +
+      annotate(geom="text", x= 55, y=-0.25, label="Mid Def",color = "black") +
+      annotate(geom="text", x= 85, y=-0.25, label="Mid Att",color = "black") +
+      annotate(geom="text", x= 120, y=-0.25, label="Att",color = "black") 
+
+
+zoneB <- pass %>%group_by(Team, Zone) %>% filter(Teamnum == "B", Zone >=0, Zone <=140)%>%summarize(count=n())
+
+ggplot(zoneB, aes(x = Zone, y = count)) +   
+  geom_bar(stat = "identity", 
+           fill = "lightblue",    
+           width = 0.50) +
+theme_classic() +
+   geom_vline(xintercept=40.25, linetype="dotted", color = "black") +
+   geom_vline(xintercept=70.25, linetype="dotted", color = "black") +
+   geom_vline(xintercept=100.25, linetype="dotted", color = "black") +
+   geom_vline(xintercept=140.25, linetype="dotted", color = "black") +  
+      annotate(geom="text", x= 20, y=-0.25, label="Def",color = "black") +
+      annotate(geom="text", x= 55, y=-0.25, label="Mid Def",color = "black") +
+      annotate(geom="text", x= 85, y=-0.25, label="Mid Att",color = "black") +
+      annotate(geom="text", x= 120, y=-0.25, label="Att",color = "black") 
+
+
+
+zoneent <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/muncrk/zoneentries.csv", header=TRUE, sep=";")
+attach (zoneent)
+
+zoneA <- zoneent %>%group_by(Team) %>% filter(Teamnum =="A",Zone<100.5,zoneend>100.5)%>%summarize(count=n())
+zoneA
+zoneB <- zoneent %>%group_by(Team) %>% filter(Teamnum =="B",Zone<100.5,zoneend>100.5)%>%summarize(count=n())
+zoneB
+
+zoneA <- pass %>%group_by(Team) %>% filter(Teamnum =="A",Zone<100.5,zoneend>100.5)%>%summarize(count=n())
+zoneA
+zoneB <- pass %>%group_by(Team) %>% filter(Teamnum =="B",Zone<100.5,zoneend>100.5)%>%summarize(count=n())
+zoneB
+
+
+
+----------------------------------------------------------------------------
+
+pass < - pass %>%filter(Teamnum == "A", main =="PW"|main == "Pass Op"|main == "Pass Rs"|main == "ToL"|main =="Rec Op"|main == "Rec Rs")
+area1A <- pass %>%group_by(Team, main) %>% filter(Areax <= 2.5, Teamnum == "A")%>%summarize(count=n())
+area2A <-pass %>%group_by(Team, main) %>% filter(Areax >= 2.5,Areax <=4, Teamnum == "A")%>%summarize(count=n())
+area3A <-pass %>%group_by(Team, main) %>% filter(Areax >= 4,Areax <=5.5, Teamnum == "A")%>%summarize(count=n())
+area4A <-pass %>%group_by(Team, main) %>% filter(Areax >= 5.5,Teamnum == "A")%>%summarize(count=n())
+
+my_theme <- function(){
+  theme_light() +
+    theme(text = element_text(),  
+          panel.grid = element_blank(),
+          panel.border = element_blank(),
+          axis.title = element_blank(),
+          axis.ticks = element_blank(),
+          axis.text.x = element_blank(),
+          axis.text.y = element_text(size = 15, color = "gray10"),
+          plot.title =  element_text(size = 20, color = "black"))
+  }
+
+ggplot(area1A, aes(x = main, y = count)) + 
+  geom_bar(stat = "identity", 
+           fill = "lightgreen",    
+           width = 0.50) +  
+geom_text(aes(label = count, size = 5.5, hjust = 0)) +
+  coord_flip()  +
+  my_theme() +
+theme(legend.position="none")
+
+ggplot(area2A, aes(x = main, y = count)) + 
+  geom_bar(stat = "identity", 
+           fill = "lightgreen",    
+           width = 0.50) +  
+geom_text(aes(label = count, size = 5.5, hjust = 0)) +
+  coord_flip()  +
+  my_theme() +
+theme(legend.position="none")
+
+
+ggplot(area3A, aes(x = main, y = count)) + 
+  geom_bar(stat = "identity", 
+           fill = "lightgreen",    
+           width = 0.50) +  
+geom_text(aes(label = count, size = 5.5, hjust = 0)) +
+  coord_flip()  +
+  my_theme() +
+theme(legend.position="none")
+
+
+passA < - pass %>%filter(main =="PW"|main == "Pass Op"|main == "Pass Rs"|main == "ToL"|main =="Rec Op"|main == "Rec Rs")
+area4A <-passA %>%group_by(Team, main) %>% filter(Areax >= 5.5)%>%summarize(count=n())
+
+ggplot(area4A, aes(x = main, y = count, fill = "Team")) + 
+  geom_bar(stat = "identity",    
+           width = 0.50,position = "dodge") +  
+geom_text(aes(label = count, size = 5.5, hjust = 0)) +
+  my_theme() +
+theme(legend.position="none")
+
+ggplot(area4A, aes(x = main, y = count, fill = "Team")) + 
+  geom_bar(  
+           width = 0.50,position = "dodge") +  
+geom_text(aes(label = count, size = 5.5, hjust = 0)) +
+  my_theme() +
+theme(legend.position="none")
+
+

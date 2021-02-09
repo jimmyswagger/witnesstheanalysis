@@ -1,0 +1,76 @@
+Type	Areax	Areay	xend	yend	group
+direction	1	1	2	1	1
+ko Rec	1	2	1	2	15
+hp	1	3	1	3	15
+kp	1	4	1	4	15
+PW	1	5	1	5	19
+ToL	1	6	1	6	19
+Shot 	1	7	1	7	19
+Shot Outcome	1	8	1	8	19
+
+
+
+Type <- c("Direction", "Carry", "Hand Pass", "Kick Pass","Kick Out (Received)", "Possession Won", "Possession Loss", "Shot", "Shot Outcome")
+
+AreaTx	<- c("1","1","1","1","1","3","3","3","3")
+AreaTy	<- c("0.5","1","1.5","2","2.5","1","1.5","2","2.5")
+
+Areax	<- c("2","2","2","2","2","4","4","4","4")
+Areay	<- c("0.5","1","1.5","2","2.5","1","1.5","2","2.5")
+
+xend	<- c("3","2","2","2","2","4","4","4","4")
+yend	<- c("0.5","1","1.5","2","2.5","1","1.5","2","2.5")
+
+group   <- c("1","15","15","15","19","19","19","19","19")
+
+
+legend <- data.frame(Type,Areax,Areay,AreaTx,AreaTy,xend,yend,group)
+
+
+legcolpal <- c(
+  "Direction" = "blue",
+  "Kick Out (Received)" = "black", 
+  "Hand Pass" = "white", 
+  "Kick Pass" = "purple",
+  "Carry" = "blue",
+  "Possession Won" = "orange",
+  "Possession Loss" =  "red",
+  "Shot" = "darkgreen",
+  "Shot Outcome" = "yellow")
+
+
+leglinepal <- c("Direction" = 1)
+
+legend1 <- legend%>%filter (group == "1")
+
+legend15 <- legend%>%filter (group == "15")
+
+legend19 <- legend%>%filter (group == "19")
+
+
+q <- ggplot(data = legend , aes(x = Areax, y = Areay))
+
+q + geom_segment(data = legend1 , aes(x = Areax, y = Areay, xend = xend, yend = yend, colour = as.factor(Type)),size = .8,arrow = arrow(length = unit(0.3,"cm"))) +
+geom_point(data = legend15 , aes(x = Areax, y = Areay,colour = as.factor(Type)), size = 8, shape = 15) +
+geom_point(data = legend19 , aes(x = Areax, y = Areay,colour = as.factor(Type)), size = 8, shape = 19) +
+scale_colour_manual(values = legcolpal) +
+scale_linetype_manual(values = leglinepal) +
+ geom_text (data = legend1 , aes(x = AreaTx, y = AreaTy, label = Type, size = 8)) +
+ geom_text (data = legend15 , aes(x = AreaTx, y = AreaTy, label = Type, size = 8)) +
+ geom_text (data = legend19 , aes(x = AreaTx, y = AreaTy, label = Type, size = 8)) +
+ theme(panel.background = element_rect(fill = "lightblue",
+                                colour = "lightblue",
+                                size = 0.5, linetype = "solid"),
+    legend.position="none",
+    plot.background = element_blank(),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    axis.line = element_blank(),
+    axis.text.y = element_blank(),
+    axis.ticks = element_blank(), 
+    axis.title.y = element_blank(),
+    axis.text.x = element_blank(),
+    axis.title.x = element_blank())
+
+
+

@@ -1,0 +1,5 @@
+Copy Lines Up/Down shortcut: Shift + Alt + Up/Down
+
+Ctrl+shift+m = %>%
+
+Control+alt+shift+m selects all occurrences of the variable your cursor is on.

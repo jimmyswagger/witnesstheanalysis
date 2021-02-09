@@ -1,0 +1,662 @@
+pass <- read.csv (file.choose(),sep=";",header=TRUE,check.names=FALSE)
+attach (pass)
+head (pass, n = 1)
+
+library("ggplot2", lib.loc="~/R/win-library/3.5")
+
+create_Stats_Pitch <- function(grass_colour, line_colour, background_colour, goal_colour, BasicFeatures){
+  
+  theme_blankPitch = function(size=12) { 
+    theme(
+      #axis.line=element_blank(), 
+      axis.text.x=element_blank(), 
+      axis.text.y=element_blank(), 
+      #axis.ticks.y=element_text(size=size),
+      #   axis.ticks=element_blank(),
+      axis.ticks.length=unit(0, "lines"), 
+      #axis.ticks.margin=unit(0, "lines"), 
+      axis.title.x=element_blank(), 
+      axis.title.y=element_blank(), 
+      legend.background=element_rect(fill=background_colour, colour=NA), 
+      legend.key=element_rect(colour=background_colour,fill=background_colour), 
+      legend.key.size=unit(1.2, "lines"), 
+      legend.text=element_text(size=size), 
+      legend.title=element_text(size=size, face="bold",hjust=0),
+      strip.background = element_rect(colour = background_colour, fill = background_colour, size = .5),
+      panel.background=element_rect(fill=background_colour,colour=background_colour), 
+      #       panel.border=element_blank(), 
+      panel.grid.major=element_blank(), 
+      panel.grid.minor=element_blank(), 
+      panel.spacing=element_blank(), 
+      plot.background=element_blank(), 
+      plot.margin=unit(c(0, 0, 0, 0), "lines"), 
+      plot.title=element_text(size=size*1.2), 
+      strip.text.y=element_text(colour=background_colour,size=size,angle=270),
+      strip.text.x=element_text(size=size*1))}
+  
+  ymin <- 0.5 # minimum width
+  ymax <- 5.5 # maximum width
+  xmin <- 0.5 # minimum length
+  xmax <- 7.5 # maximum length
+  
+  # Defining features along the length
+  defel <- 0.5
+  def21 <- 1.5
+  def45 <- 2.5
+  def65 <- 3.5
+  off65 <- 4.5
+  off45 <- 5.5
+  off21 <- 6.5
+  offel <- 7.5
+  
+  
+  
+  # Defining features along the width
+  srightwing <- 1.5
+  frightwing <- 5
+  righthalfspace <- 2.5
+  centre <- 3.5
+  lefthalfspace <- 4.5
+  leftwing <- 5.5
+  
+
+ if(BasicFeatures == TRUE){
+        ## initiate the plot, set some boundries to the plot
+  p <- ggplot() + xlim(c(xmin-0.5,xmax+0.5)) + ylim(c(ymin-0.5,ymax+0.5)) +
+  # add the theme 
+  theme_blankPitch() +
+  # add halway line
+  geom_rect(aes(xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax), fill = grass_colour, colour = line_colour) +
+  geom_segment(aes(x = def21, y = ymin, xend = def21, yend = ymax),colour = line_colour,linetype="dotted") + 
+  geom_segment(aes(x = def45, y = ymin, xend = def45, yend = ymax),colour = line_colour,linetype="dotted") +
+  geom_segment(aes(x = def65, y = ymin, xend = def65, yend = ymax),colour = line_colour,linetype="dotted") +
+  geom_segment(aes(x = off65, y = ymin, xend = off65, yend = ymax),colour = line_colour,linetype="dotted") +
+  geom_segment(aes(x = off45, y = ymin, xend = off45, yend = ymax),colour = line_colour,linetype="dotted") +
+  geom_segment(aes(x = off21, y = ymin, xend = off21, yend = ymax),colour = line_colour,linetype="dotted") +
+  geom_segment(aes(x = srightwing, y = xmin, xend = frightwing, yend = xmax),colour = line_colour,linetype="dotted",size = 1) 
+ }
+
+ else{
+        ## initiate the plot, set some boundries to the plot
+  p <- ggplot() + xlim(c(xmin-0.5,xmax+0.5)) + ylim(c(ymin-0.5,ymax+0.5)) +
+  # add the theme 
+  theme_blankPitch() +
+  # add the base rectangle of the pitch 
+  geom_rect(aes(xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax), fill = grass_colour, colour = line_colour) +
+  geom_rect(aes(xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax), fill = grass_colour, colour = line_colour) +
+  geom_segment(aes(x = off65, y = ymin, xend = off65, yend = ymax),colour = line_colour) +
+  geom_segment(aes(x = off45, y = ymin, xend = off45, yend = ymax),colour = "Red",linetype="dotted")
+  
+  }
+  
+  return(p)}
+
+
+p <- create_Stats_Pitch("#ffffff", "#A9A9A9", "#ffffff", "#000000", BasicFeatures=TRUE)
+p
+
+
+p <- create_Stats_Pitch("#ffffff", "#A9A9A9", "#ffffff", "#000000", BasicFeatures=FALSE)
+p  
+
+
+events <- read.csv (file.choose(),sep=";",header=TRUE,check.names=FALSE)
+dat <- events 
+
+p + geom_point(data = dat, aes(x=X, y=Y,color = Velocity))+
+scale_colour_gradientn(colours = rainbow(7)) +
+coord_equal()
+
+geom_hline(aes(yintercept=1.5) 
+-----------------------------------------------------------------------------------------------------------------
+create_Stats_Pitch <- function(grass_colour, line_colour, background_colour, goal_colour, BasicFeatures){
+  
+  theme_blankPitch = function(size=12) { 
+    theme(
+      #axis.line=element_blank(), 
+      axis.text.x=element_blank(), 
+      axis.text.y=element_blank(), 
+      #axis.ticks.y=element_text(size=size),
+      #   axis.ticks=element_blank(),
+      axis.ticks.length=unit(0, "lines"), 
+      #axis.ticks.margin=unit(0, "lines"), 
+      axis.title.x=element_blank(), 
+      axis.title.y=element_blank(), 
+      legend.background=element_rect(fill=background_colour, colour=NA), 
+      legend.key=element_rect(colour=background_colour,fill=background_colour), 
+      legend.key.size=unit(1.2, "lines"), 
+      legend.text=element_text(size=size), 
+      legend.title=element_text(size=size, face="bold",hjust=0),
+      strip.background = element_rect(colour = background_colour, fill = background_colour, size = .5),
+      panel.background=element_rect(fill=background_colour,colour=background_colour), 
+      #       panel.border=element_blank(), 
+      panel.grid.major=element_blank(), 
+      panel.grid.minor=element_blank(), 
+      panel.spacing=element_blank(), 
+      plot.background=element_blank(), 
+      plot.margin=unit(c(0, 0, 0, 0), "lines"), 
+      plot.title=element_text(size=size*1.2), 
+      strip.text.y=element_text(colour=background_colour,size=size,angle=270),   
+      strip.text.x=element_text(size=size*1))}
+  
+  ymin <- 0.5 # minimum width
+  ymax <- 5.5 # maximum width
+  xmin <- 0.5 # minimum length
+  xmax <- 7.5 # maximum length
+  
+  # Defining features along the length
+  defel <- 0.5
+  def21 <- 1.5
+  def45 <- 2.5
+  def65 <- 3.5
+  off65 <- 4.5
+  off45 <- 5.5
+  off21 <- 6.5
+  offel <- 7.5
+  
+  
+  
+  # Defining features along the width
+  srightwing <- 1.5
+  frightwing <- 5
+  righthalfspace <- 2.5
+  centre <- 3.5
+  lefthalfspace <- 4.5
+  leftwing <- 5.5
+  
+
+ if(BasicFeatures == TRUE){
+        ## initiate the plot, set some boundries to the plot
+  p <- ggplot() + xlim(c(xmin-0.5,xmax+0.5)) + ylim(c(ymin-0.5,ymax+0.5)) +
+  # add the theme 
+  theme_blankPitch() +
+  # add halway line
+  geom_rect(aes(xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax), fill = grass_colour, colour = line_colour) +
+  geom_segment(aes(x = def21, y = ymin, xend = def21, yend = ymax),colour = line_colour,linetype="dotted") + 
+  geom_segment(aes(x = def45, y = ymin, xend = def45, yend = ymax),colour = line_colour,linetype="dotted") +
+  geom_segment(aes(x = def65, y = ymin, xend = def65, yend = ymax),colour = line_colour,linetype="dotted") +
+  geom_segment(aes(x = off65, y = ymin, xend = off65, yend = ymax),colour = line_colour,linetype="dotted") +
+  geom_segment(aes(x = off45, y = ymin, xend = off45, yend = ymax),colour = line_colour,linetype="dotted") +
+  geom_segment(aes(x = off21, y = ymin, xend = off21, yend = ymax),colour = line_colour,linetype="dotted") +
+  geom_hline(aes(yintercept=1.5),colour = line_colour,linetype="dotted") +
+  geom_hline(aes(yintercept=2.5),colour = line_colour,linetype="dotted") +
+  geom_hline(aes(yintercept=3.5),colour = line_colour,linetype="dotted") +
+  geom_hline(aes(yintercept=4.5),colour = line_colour,linetype="dotted") 
+ }
+
+ else{
+        ## initiate the plot, set some boundries to the plot
+  p <- ggplot() + xlim(c(xmin-0.5,xmax+0.5)) + ylim(c(ymin-0.5,ymax+0.5)) +
+  # add the theme 
+  theme_blankPitch() +
+  # add the base rectangle of the pitch 
+  geom_rect(aes(xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax), fill = grass_colour, colour = line_colour) +
+  geom_rect(aes(xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax), fill = grass_colour, colour = line_colour) +
+  geom_segment(aes(x = off65, y = ymin, xend = off65, yend = ymax),colour = line_colour) +
+  geom_segment(aes(x = off45, y = ymin, xend = off45, yend = ymax),colour = "Red",linetype="dotted")
+  
+  }
+  
+  return(p)}
+
+
+p <- create_Stats_Pitch("#ffffff", "#A9A9A9", "#ffffff", "#000000", BasicFeatures=TRUE)
+p
+--------------------------------------------------------------------------------------------------------------------------------------
+
+dat <- pass %>% filter(Team == "Annes" & Action == "Hand Pass & Kick Pass")
+
+g <- ggplot(pass, aes(Action,Team = Annes))
+
+p + geom_point(data = shots, aes(x=Areax, y=Areay, colour = Action)) + geom_point(data = kick, aes(x=Areax, y=Areay), colour = "Red")
+
+p + geom_point(data = pass, aes(x=Areax, y=Areay, colour = Action, shape = Action))
+
+p + geom_point(data = shots, aes(x=Areax, y=Areay, colour = Action)) + geom_point(data = attpass, aes(x=Areax, y=Areay), colour = "#F1BEBE", "#DF5058")
+
+filter(pass, Team == "Dublin" & Player == "5")
+
+ddply(filter(pass, Team == "Dublin" & Player == "5"), summarize, mean_y=mean(y))
+
++ theme (ggtitle = "Team A Actions")
+
+theme(label = Team Actions)
+
+scale_color_hue(l=40, c=35) 
+geom_text(aes(x = .75, y= .75,label = "Team A"), hjust=0, vjust=0.5, size = 5, colour = "Blue") 
+
++ scale_color_hue(l=40, c=35) 
+kick <- pass %>% filter(Team == "Annes" & Action == "Shot Right" | Action == "Shot Left")
+
+p + geom_point(data = kick, aes(x=Areax, y=Areay)) + scale_colour_manual(values = c("#F1BEBE", "#DF5058"))
+
+p + geom_point(data = kick, aes(x=Areax, y=Areay, colour = kick)) +
+  theme(legend.position="none") + 
+  scale_colour_manual(values = c("#F1BEBE", "#DF5058"))
+
+
+p + geom_point(data = kick, aes(x=Areax, y=Areay), colour = "Red") + 
+geom_point(data = dat, aes(x=Areax, y=Areay), colour = "#DF5058")
+
+phases <- pass %>% filter(Team == "Annes")
+p + geom_point(data = phases, aes(x=Areax, y=Areay), colour = "Blue") +
+
+
+
+geom_text(aes(x = 2, y=68,label = phases$Team[1]), hjust=0, vjust=0.5, size = 5, colour = "#DF5058")
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+Figure1 <- ggplot(data = pass, aes(x = PlayingPosition, y = TotalDistance, fill = PlayingStandard)) +
+geom_bar(width=.7, stat="identity", position="dodge", colour="Black") +
+scale_fill_grey() +
+theme_bw() +
+ylab("Total Distance (m) \n") +
+scale_y_continuous(limits = c(0, 1000), expand = c(0, 0), breaks = seq(0, 1000, by = 250)) +
+theme(legend.position = "none",
+legend.title = element_blank(),
+axis.text.x = element_text(size = 12, colour = "black"),
+axis.text.y = element_text(size = 12, colour = "black"),
+axis.ticks.x = element_blank(),
+plot.background = element_blank(),
+plot.title = element_blank(),
+axis.title.x = element_blank(),
+axis.title.y = element_text(face = "bold", size = 14),
+axis.line.x = element_line(color = "black", size = .5),
+axis.line.y = element_line(color = "black", size = .5),
+panel.grid.major = element_blank(),
+panel.grid.minor = element_blank(),
+panel.border = element_blank())
+
+g <- ggplot(pass, aes(x =Action, y = Total))
+
+g <- ggplot(pass, aes(Action,Team = Annes))
+g + geom_bar()
+ 
+
+pass %>% group_by(Action) %>% tally()
+
+pass %>% count(Action)
+
+pass %>%
+  summarise(n = n())
+
+pass %>% summarise(n = n(), average = mean(Kick Pass), maximum = max(Kick Pass))
+
+
+action <-
+ pass %>%
+ count(Action, Team = Annes, sort = TRUE)
+action
+
+
+WeekSummaryData <- pass %>%
+group_by(Team) %>%
+summarise(Act = sum(Action),
+SD = sum(SprintDistance))
+
+
+player <-
+ pass%>%
+ count(Action, Player, sort = TRUE)
+
+player %>%
+  summarise(n = n(), average = mean(Action))
+
+
+ggplot(p, aes(x=file,y=test,color=grade)) + 
+    geom_point(pass)
+
+filter(pass, Team == "Annes")
+arrange(pass, Action)
+select(pass, Team == "Annes",Action == "Rec") 
+
+summarize(pass, total=sum(Action))
+
+Action %>% group_by(Player) %>% summarize(count=n())
+
+plot_ly(data = play, x = ~Action, y = ~Total, type = 'bar', orientation = 'h',
+color = ~ Action) %>%
+layout(title = "Actions",
+yaxis = list(title = ""),
+xaxis = list(title = "Total Distance (m)"),
+showlegend = FALSE)
+
+
+WeekSummaryData <- pass %>%
+group_by(Team) %>%
+summarise(TD = sum(Action),
+SD = sum(Player))
+
+
+pass %>%
+  filter(Team == "Annes") %>%
+  select(Player, Action, Areax, Areay)
+
+ Annes <- pass %>%
++     filter(Team == "Annes") %>%
++     select(Player, Action, Areax, Areay)
+
+
+
+ Rec <- Annes %>%
++     filter(Action == "Rec") %>%
++     select(Player, Action, Areax, Areay)
+
+
+pass %>%
+  group_by(Team) %>%
+  summarize(n())
+
+ Annes %>%
++     group_by(Action) %>%
++     summarize(n())
+
+Annes %>% + group_by(Action == "Rec") %>% + summarize(n())
+
+
+  summarize(mean_size = mean(genome_size, na.rm = TRUE))
+
+
+p + geom_point(data = oper, aes(x=Areax, y=Areay, colour = Action, shape = Action)) + ggtitle = "Team A Actions"
+
+Rec <- filter(Annes, Action == "Rec")
+
+
+ ggplot(data, aes(x=iv, y=dv, group=group,shape=group)) + 
+    geom_line() + geom_point(aes(colour=group)) +
+    scale_shape_manual(values=c(19,20,21))+
+    scale_colour_manual(values=c("blue", "red","gray"))
+
+# Create a new column, based on "Centers" data.frame
+ggplot(data = dat, aes(x = Action, fill = Action)) +
+geom_bar(colour = "black", size = 1) +
+xlab("\Action") +
+ylab("Count \n") +
+scale_y_continuous(expand = c(0,0), limits = c(0, 50)) +
+theme_classic() + 
+theme(legend.position = "none") +
+theme(axis.text.x=element_text(angle=90, hjust=1)) +
+theme(label = Team Actions)
+
+filter(pass, Action %in% c("Rec", "Kick Pass",  "Hand Pass"))
+
+filter(pass, Annes, Action == "Rec" | Action == "Kick Pass" | Action == "Hand Pass")
+
+oper <-filter(pass, Team == "Annes", Action == "Rec" | Action == "Kick Pass" | Action == "Hand Pass")
+
+p + geom_point(data = oper, aes(x=Areax, y=Areay, colour = Action, shape = Action)) + 
+geom_text(hjust = 0, nudge_x = 0.05)
+
+  geom_label_repel(data = oper, aes(x=Areax, y=Areay(label = Name)),
+                  box.padding   = 0.35, 
+                  point.padding = 0.5,
+                  segment.color = 'grey50') +
+  theme_classic()
+
+p + geom_point(data = oper, aes(x=Areax, y=Areay, colour = Action, shape = Action))
+
+# Create a new column, based on "Centers" data.frame
+ggplot(data = dat, aes(x = Action, fill = Action)) +
+geom_bar(colour = "black", size = 1) +
+xlab("\n Notational Descriptor") +
+ylab("Count \n") +
+scale_y_continuous(expand = c(0,0), limits = c(0, 50)) +
+theme_classic() +
+theme(legend.position = "none")
+
+
+pitch <- function {
+par(xpd=F)
+plot(Areax,Areay,type="n",xlab="",ylab="",ylim = c(0,5.5),xlim = c(0.5,8), xaxt='n', yaxt='n', bty='n')
+abline (v=0.5, col="black", cex=.2)
+abline (v=1.5, col="grey", lty = "dotted", cex=.2)
+abline (v=2.5, col="grey", lty = "dotted", cex=.2)
+abline (v=3.5, col="grey", lty = "dotted", cex=.2)
+abline (v=4.5, col="grey", lty = "dotted", cex=.2)
+abline (v=5.5, col="grey", lty = "dotted", cex=.2)
+abline (v=6.5, col="grey", lty = "dotted", cex=.2)
+abline (v=7.5, col="black", cex=.2)
+abline (h=0.25, col="black", cex=.2)
+abline(h=1.5, col="grey", lty = "dotted", cex=.2)
+abline(h=2.5, col="grey", lty = "dotted", cex=.2)
+abline(h=3.5, col="grey", lty = "dotted", cex=.2)
+abline(h=4.5, col="grey", lty = "dotted", cex=.2)
+abline(h=5.5, col="black", cex=.2)
+abline (v=8, col="grey", lty = "dotted", cex=.2)
+points (x=7.5,y=2.5, cex=.5)
+points (x=7.5,y=3.5, cex=.5)
+points (x=0.5,y=3.5, cex=.5)
+points (x=0.5,y=2.5, cex=.5)
+}
+
+
+pitch <- function(x, y,) {
+  par(xpd=F)
+plot(Areax,Areay,type="n",xlab="",ylab="",ylim = c(0,5.5),xlim = c(0.5,8), xaxt='n', yaxt='n', bty='n')
+abline (v=0.5, col="black", cex=.2)
+abline (v=1.5, col="grey", lty = "dotted", cex=.2)
+abline (v=2.5, col="grey", lty = "dotted", cex=.2)
+abline (v=3.5, col="grey", lty = "dotted", cex=.2)
+abline (v=4.5, col="grey", lty = "dotted", cex=.2)
+abline (v=5.5, col="grey", lty = "dotted", cex=.2)
+abline (v=6.5, col="grey", lty = "dotted", cex=.2)
+abline (v=7.5, col="black", cex=.2)
+abline (h=0.25, col="black", cex=.2)
+abline(h=1.5, col="grey", lty = "dotted", cex=.2)
+abline(h=2.5, col="grey", lty = "dotted", cex=.2)
+abline(h=3.5, col="grey", lty = "dotted", cex=.2)
+abline(h=4.5, col="grey", lty = "dotted", cex=.2)
+abline(h=5.5, col="black", cex=.2)
+abline (v=8, col="grey", lty = "dotted", cex=.2)
+points (x=7.5,y=2.5, cex=.5)
+points (x=7.5,y=3.5, cex=.5)
+points (x=0.5,y=3.5, cex=.5)
+points (x=0.5,y=2.5, cex=.5)
+}
+
+legend("bottomleft",
+       legend = c("0-21"), col = c("black"),
+       pch = c(8),
+       bty = "n",
+       pt.cex = .01,
+       cex = .6,
+       text.col = "black",
+       horiz = F ,
+      inset = c(0.02, 0.00))
+
+legend("bottomleft",
+       legend = c("21-45"), col = c("black"),
+       pch = c(8),
+       bty = "n",
+       pt.cex = .01,
+       cex = .6,
+       text.col = "black",
+       horiz = F ,
+      inset = c(0.13, 0.00))
+
+legend("bottomleft",
+       legend = c("45-65"), col = c("black"),
+       pch = c(8),
+       bty = "n",
+       pt.cex = .01,
+       cex = .6,
+       text.col = "black",
+       horiz = F ,
+      inset = c(0.3, 0.00))
+
+legend("bottomleft",
+       legend = c("65-65"), col = c("black"),
+       pch = c(8),
+       bty = "n",
+       pt.cex = .01,
+       cex = .6,
+       text.col = "black",
+       horiz = F ,
+      inset = c(0.40, 0.00))
+
+legend("bottomleft",
+       legend = c("65-45"), col = c("black"),
+       pch = c(8),
+       bty = "n",
+       pt.cex = .01,
+       cex = .6,
+       text.col = "black",
+       horiz = F ,
+      inset = c(0.55, 0.00))
+
+legend("bottomleft",
+       legend = c("45-21"), col = c("black"),
+       pch = c(8),
+       bty = "n",
+       pt.cex = .01,
+       cex = .6,
+       text.col = "black",
+       horiz = F ,
+      inset = c(0.65, 0.00))
+
+legend("bottomleft",
+       legend = c("21-0"), col = c("black"),
+       pch = c(8),
+       bty = "n",
+       pt.cex = .01,
+       cex = .6,
+       text.col = "black",
+       horiz = F ,
+      inset = c(0.75, 0.00))
+
+-------------------------------------------------------------
+
+legend("bottomleft",
+       legend = c("0-21"), col = c("black"),
+       pch = c(8),
+       bty = "n",
+       pt.cex = .01,
+       cex = .6,
+       text.col = "black",
+       horiz = F ,
+      inset = c(0.02, 0.00))
+
+legend("bottomleft",
+       legend = c("21-45"), col = c("black"),
+       pch = c(8),
+       bty = "n",
+       pt.cex = .01,
+       cex = .6,
+       text.col = "black",
+       horiz = F ,
+      inset = c(0.13, 0.00))
+
+legend("bottomleft",
+       legend = c("45-65"), col = c("black"),
+       pch = c(8),
+       bty = "n",
+       pt.cex = .01,
+       cex = .6,
+       text.col = "black",
+       horiz = F ,
+      inset = c(0.25, 0.00))
+
+legend("bottomleft",
+       legend = c("65-65"), col = c("black"),
+       pch = c(8),
+       bty = "n",
+       pt.cex = .01,
+       cex = .6,
+       text.col = "black",
+       horiz = F ,
+      inset = c(0.35, 0.00))
+
+legend("bottomleft",
+       legend = c("65-45"), col = c("black"),
+       pch = c(8),
+       bty = "n",
+       pt.cex = .01,
+       cex = .6,
+       text.col = "black",
+       horiz = F ,
+      inset = c(0.5, 0.00))
+
+legend("bottomleft",
+       legend = c("45-21"), col = c("black"),
+       pch = c(8),
+       bty = "n",
+       pt.cex = .01,
+       cex = .6,
+       text.col = "black",
+       horiz = F ,
+      inset = c(0.6, 0.00))
+
+legend("bottomleft",
+       legend = c("21-0"), col = c("black"),
+       pch = c(8),
+       bty = "n",
+       pt.cex = .01,
+       cex = .6,
+       text.col = "black",
+       horiz = F ,
+      inset = c(0.75, 0.00))
+
+points (mean(Areax [Player=="2"],mean(Areay [Player=="2"])))
+points (mean(Areax [Player=="3"],mean(Areay [Player=="3"])))
+points (mean(Areax [Player=="4"],mean(Areay [Player=="4"])))
+points (mean(Areax [Player=="5"],mean(Areay [Player=="5"])))
+points (mean(Areax [Player=="6"],mean(Areay [Player=="6"])))
+points (mean(Areax [Player=="7"],mean(Areay [Player=="7"])))
+points (mean(Areax [Player=="8"],mean(Areay [Player=="8"])))
+points (mean(Areax [Player=="9"],mean(Areay [Player=="9"])))
+points (mean(Areax [Player=="10"],mean(Areay [Player=="10"])))
+points (mean(Areax [Player=="11"],mean(Areay [Player=="11"])))
+points (mean(Areax [Player=="12"],mean(Areay [Player=="12"])))
+points (mean(Areax [Player=="13"],mean(Areay [Player=="13"])))
+points (mean(Areax [Player=="14"],mean(Areay [Player=="14"])))
+points (mean(Areax [Player=="15"],mean(Areay [Player=="15"])))
+points (mean(Areax [Player=="7"],mean(Areay [Player=="7"])))
+points (mean(Areax [Player=="7"],mean(Areay [Player=="7"])))
+
+
+counts <- table(pass$Teamnum=="A", pass$Action=="Shot Right", pass$Action=="Point")
+barplot(counts, main="Action",
+  xlab="Player", col=c("darkblue","red"),
+  legend = rownames(counts), beside=TRUE)
+
+p <- plot_ly(data= pass, x = ~Animals, y = ~SF_Zoo, type = 'bar', name = 'SF Zoo') %>%
+  add_trace(y = ~LA_Zoo, name = 'LA Zoo') %>%
+  layout(yaxis = list(title = 'Count'), barmode = 'group'
+
+p <- plot_ly(data, x = ~Animals, y = ~SF_Zoo, type = 'bar', name = 'SF Zoo') %>%
+  add_trace(y = ~LA_Zoo, name = 'LA Zoo') %>%
+  layout(yaxis = list(title = 'Count'), barmode = 'group')
+
+
+p <- plot_ly(data, x = ~Action, y = ~Annes, type = 'bar', name = 'Annes') %>%
+  add_trace(y = ~Skerries, name = 'Skerries') %>%
+  layout(yaxis = list(title = 'Count'), barmode = 'group')
+
+
+p <- plot_ly(pass, x = Action y = Annes, type = 'bar', name = 'Annes') %>%
+  add_trace(y = Skerries, name = 'Skerries') %>%
+  layout(yaxis = list(title = 'Count'), barmode = 'group')
+
+
+#select columns
+sleepData <- select(msleep, name, sleep_total)
+head(sleepData)
+
+#select rows 
+filter(pass, Teamnum == "A", Areax >= 4.5)
+
+filter(pass, Teamnum == "A", Areax >= 4.5, Action=="Tack W")
+
+
+pass %>% 
+    group_by(Player) %>%
+    summarise(total = n()) %>%
+
+
+ggplot(aes(x = Player, y = count, fill = Player)) +
+    geom_bar(stat = "Player") 
+
+qplot(Player, total, data=kickit, color= "Player", geom= "bar", xlab= "Player", ylab= "total", main= "pass by player", sub= "Team A vs B")
+
+

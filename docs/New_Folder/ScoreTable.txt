@@ -1,0 +1,200 @@
+scrs <- read.csv(file="c:/Users/donag/OneDrive/Spreadsheet fun/PA Analytics/PA Template/scrs.csv", header=TRUE, sep=";")
+attach (scrs)
+
+#Cleaning
+
+scrs[,5] = toupper(scrs[,5])
+scrs[,9] = toupper(scrs[,9])
+
+scrs$Venue[scrs$Venue==""]<-"UNKOWN"
+
+scrs$Year <- str_sub(scrs$Date, -4)
+
+#Adding Columns 
+
+scrs <-scrs%>%mutate(Win_Marg =(abs ( scrs$Team_Score - scrs$Opp_Score )))
+
+scrs <-scrs %>% mutate(Win_Team = ifelse(Team_Score > Opp_Score,as.character(scrs$Team_Name), ifelse(Team_Score < Opp_Score, as.character(scrs$Opp_Name),"DRAW")))
+
+scrs <-scrs %>% mutate(Win_NuH = ifelse(Team_Score > Opp_Score,"H", ifelse(Team_Score < Opp_Score,"A","D")))
+
+
+
+#Filter by Year - leave out for all years
+table<-scrs%>%filter(Year =="2018",Division=="1")
+table  <- table[table$Game_Round!="8", ]
+formattable (table)
+
+
+#Create a table 
+df <- table [, c(1,5, 9, 17)]
+
+df <- rename(df, c(Date = "date", Team_Name = "H",
+     Opp_Name = "A"))
+
+df$date <- as.Date(df$date, format = "%d/%m/%y")
+
+
+dfm <- melt(df, measure.vars = c("H", "A"),
+     variable_name = "loc")
+
+dfm <- rename(dfm, c(value = "team"))
+dfm <- rename(dfm, c(variable = "loc"))
+
+dfm <- dfm[order(dfm$date, dfm$team), c("date",
+     "team", "loc", "Win_NuH")]
+
+dfm$pts <- as.integer(with(dfm, ifelse((loc ==
+     "H" & Win_NuH == "H"), 2, ifelse((loc == "A" &
+     Win_NuH == "A"), 2, ifelse(Win_NuH == "D", 1, 0)))))
+
+dfm1 <- ddply(dfm, .(team), transform, cumpts = cumsum(pts))
+
+ cdate <- unique(dfm1$date)
+ cteam <- unique(dfm1$team)
+ combs <- merge(cdate, cteam, all = TRUE)
+ combs <- rename(combs, c(x = "date", y = "team"))
+
+dfm2 <- merge(combs, dfm1, by = c("date", "team"),
+     all.x = TRUE)
+ dfm2 <- dfm2[order(dfm2$team, dfm2$date), ]
+
+require(zoo)
+ dfm3 <- ddply(dfm2, .(team), transform, cumpts1 = na.locf(cumpts,
+     na.rm = FALSE))
+ dfm3 <- ddply(dfm3, .(date), transform, position = rank(-cumpts1,
+     ties.method = "min"))
+
+
+leaguetable <- function(df, fdate) {
+     dfm4a <- cast(dfm3, team ~ ., c(sum, length),
+         subset = (!is.na(Win_NuH) & date <= fdate),
+         value = "pts")
+     dfm4a <- rename(dfm4a, c(sum = "P", length = "G"))
+     dfm4b <- cast(dfm3, team ~ pts, length,
+         subset = (!is.na(Win_NuH) & date <= fdate),
+         value = "position")
+     dfm4b <- rename(dfm4b, c(`0` = "L", `1` = "D",
+         `2` = "W"))
+     dfm4b <- dfm4b[, c(1, 4, 3, 2)]
+     dfm4 <- merge(dfm4a, dfm4b)
+     dfm4$rank <- rank(-dfm4$P, ties.method = "min")
+     dfm4[order(dfm4$rank), c(7, 1:6)]
+ }
+
+leaguetable(dfm3, "2020-03-25")
+
+
+-----------------------
+
+q <- ggplot(data = All2018, aes(x = Team_Name, y = Total_Pts, fill = Team_Name))
+
+q +geom_bar(width=.7, stat = "identity", aes(x = Team_Name, y = Total_Pts, fill = Team_Name), position = "dodge") +
+ggtitle("League 2018") +
+  theme_bw() + theme (panel.grid.major = element_blank(),
+panel.grid.minor = element_blank())  +
+  xlab("Team") + ylab("Total Points") +
+theme(legend.position="none")
+
+
+lt2018 <- All%>%filter(Year=="2018",Game_Type == "League", Division == "1")
+
+ltr <- lt %>% group_by(Game_Round,Team_Name) %>% mutate(cumsum = cumsum(Win_Nu))
+ltr
+
+ltr <- lt %>% group_by(Team_Name) %>% mutate(cumsum = cumsum(Win_Nu))
+ltr
+
+lt2018 <- All%>%filter(Year=="2018",Game_Type == "League", Division == "1")
+run_tot2018 <- lt2018 %>% group_by(Team_Name) %>% mutate(cumsum = cumsum(Win_Nu))
+run_tot2018
+
+
+q <- ggplot(data = ltr, aes(x = Team_Name, y = cumsum, fill = Team_Name))
+
+q +geom_bar(width=.7, stat = "identity", aes(x = Team_Name, y = cumsum, fill = Team_Name), position = "dodge") +
+ggtitle("League 2018") +
+  theme_bw() + theme (panel.grid.major = element_blank(),
+panel.grid.minor = element_blank())  +
+  xlab("Team") + ylab("Total Points") +
+theme(legend.position="none")
+
+
+
+##Scoring Timeline
+```{r, fig.width = 16, fig.height = 10}
+wormA <-scores%>%filter(Teamnum == "A", subsetoc =="Start"|subsetoc =="Scr Op"|subsetoc =="Scr Rs")%>%select(Team, octype,xend,yend,plylabrec,timeoc,shotlab,score,direction,scorediff)
+
+wormB <-scores%>%filter(Teamnum == "B",subsetoc =="Start"|subsetoc =="Scr Op"|subsetoc =="Scr Rs")%>%select(Team, octype,xend,yend,plylabrec,timeoc,shotlab,score,direction,scorediff)
+
+wormC <-scores%>%filter(Teamnum == "A", subsetoc =="Start"|subsetoc =="Ms Op"|subsetoc =="Ms Rs")%>%select(Team, octype,xend,yend,plylabrec,timeoc,shotlab,score,direction,scorediff)
+
+wormD <-scores%>%filter(Teamnum == "B",subsetoc =="Start"|subsetoc =="Ms Op"|subsetoc == "MS Rs")%>%select(Team, octype,xend,yend,plylabrec,timeoc,shotlab,score,direction,scorediff)
+
+lt2018 <- All%>%filter(Year=="2018",Game_Type == "League", Division == "1")
+run_tot2018 <- arrange(lt2018,Game_Round)
+run_tot2018 <- run_tot2018 %>% group_by(Team_Name) %>% mutate(cumsum = cumsum(Win_Nu))
+run_tot2018
+formattable (run_tot2018)
+
+
+lt2018 <- All%>%filter(Year=="2018",Game_Type == "League", Division == "1")
+run_tot2018 <- arrange(lt2018,Game_Round)
+run_tot2018 <- run_tot2018 %>% group_by(Team_Name) %>% mutate(Run_Pts = cumsum(Win_Nu),Run_Goals = cumsum(Team_Goals),Run_Points = cumsum(Team_Points))
+run_tot2018
+
+
+run_tot2018r4 <- run_tot2018 %>% filter(Game_Round == "4")
+run_tot2018r4 <- run_tot2018r4 %>% arrange(desc(Run_Pts))
+run_tot2018r4 <- run_tot2018r4 %>% select(Game_Round, Run_Pts, Run_Goals, Run_Points)
+run_tot2018r4
+
+
+
+
+
+arrange(my_data, -Sepal.Length)
+
+ 
+ggplot(data=run_tot2018, aes(x=Game_Round, y= cumsum, group=Team_Name)) +
+    geom_step(data=run_tot2018, aes(x=Game_Round, y= cumsum, colour = Team_Name), ,size=2)
+
+run_tot2018 <- run_tot2018 %>% arrange(desc(Game_Round))
+
+ggplot(data=run_tot2018, aes(x=Game_Round, y= cumsum, group=Team_Name)) +
+    geom_line(data=run_tot2018, aes(x=Game_Round, y= cumsum, colour = Team_Name), ,size=1) +
+geom_point(data=run_tot2018, aes(x=Game_Round, y= cumsum, colour = Team_Name),size=2)
+ + 
+    geom_step(data=wormB, aes(x=timeoc, y=score), colour = "black", size=2) + 
+    geom_point(data = wormA, shape = 1, size = 4, stroke = 2, colour = "yellow") +
+    geom_point(data = wormB, shape = 1, size = 4, stroke = 2, colour = "red") +
+    geom_point(data = wormC, shape = 4, size = 3, stroke = 2, colour = "yellow") +
+    geom_point(data = wormD, shape = 4, size = 3, stroke = 2, colour = "red") +
+    theme_classic() + 
+    theme(plot.background = element_blank(),
+    legend.position="bottom",
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    axis.line.x = element_blank(),
+    axis.text.x = element_blank(),
+    axis.ticks.x = element_blank(), 
+    axis.title.x = element_blank()) +
+    geom_text_repel(data = wormA, aes(x=timeoc, y=score, label = plylabrec), size = 4, colour = "blue",  
+    segment.size  = 0.2,   hjust = 1,nudge_x = -2, nudge_y = 2) + 
+    geom_text_repel(data = wormB, aes(x=timeoc, y=score, label = plylabrec), size = 4, colour = "black",  
+    segment.size  = 0.2,   direction = "y",nudge_x = 3, nudge_y = -4) + 
+    guides(size = FALSE) +
+  theme(axis.text.y =element_text(size=16),
+        axis.title.y =element_text(size=16,face="bold"))
+
+
+```
+
+rank(run_tot2018),
+     ties.method = c("first")
+
+run_tot2018r4 <- run_tot2018 %>% filter(Game_Round == "4")
+run_tot2018r4 <- run_tot2018r4 %>% arrange(desc(Game_Round))
+run_tot2018r4
+
+

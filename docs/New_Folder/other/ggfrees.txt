@@ -1,0 +1,94 @@
+#Table A
+
+freeA <- data.frame (pass %>%group_by(Team, Action) %>% filter(Teamnum == "A", Action == "Free Won"|Action == "Free Loss"|Action == "Free Won Def"|Action == "Free Loss Off"%>%summarize(count=n()))
+funcfreeA <- function(z) if (is.numeric(z)) sum(z) else ''
+sumfreeA <- as.data.frame(lapply(freeA, funcfreeA))
+
+
+kable(rbind(cbind(' '=' ', freeA),
+            cbind(' '='Total', sumfreeA )), caption = "Frees Won & Lost") %>%
+  kable_styling(bootstrap_options = c("striped"),position = "float_left", full_width = F)
+
+#Table B
+
+freeB <- data.frame (pass %>%group_by(Team, Action) %>% filter(Teamnum == "B", Action == "Free Won"|Action == "Free Loss"|Action == "Free Won Def"|Action == "Free Loss Off"%>%summarize(count=n()))
+funcfreeB <- function(z) if (is.numeric(z)) sum(z) else ''
+sumfreeB <- as.data.frame(lapply(freeB, funcfreeB))
+
+
+kable(rbind(cbind(' '=' ', freeB),
+            cbind(' '='Total', sumfreeB )), caption = "Frees Won & Lost") %>%
+  kable_styling(bootstrap_options = c("striped"),position = "float_left", full_width = F)
+
+
+
+#Map Team A
+
+freeA <-filter(pass, (Teamnum == "A", Action == "Free Won"|Action == "Free Loss"|Action == "Free Won Def"|Action == "Free Loss Off")
+
+p + geom_point(data = freeA, aes(x=Areax, y=Areay, colour = Action, shape = Action)) +
+labs(title = "Frees Won & Lost", subtitle = "Team A") +
+geom_text_repel(data = freeA, aes(x=Areax, y=Areay, label = plylab, col = Action), size = 3) +
+theme(plot.title = element_text(hjust=0.5)) +
+theme(plot.subtitle = element_text(hjust=0.5)) +
+theme(legend.position="none") 
+
+
+
+#Map Team B
+
+freeB <-filter(pass, (Teamnum == "B", Action == "Free Won"|Action == "Free Loss"|Action == "Free Won Def"|Action == "Free Loss Off")
+
+p + geom_point(data = freeB, aes(x=Areax, y=Areay, colour = Action, shape = Action)) +
+labs(title = "Frees Won & Lost", subtitle = "Team B") +
+geom_text_repel(data = freeA, aes(x=Areax, y=Areay, label = plylab, col = Action), size = 3) +
+theme(plot.title = element_text(hjust=0.5)) +
+theme(plot.subtitle = element_text(hjust=0.5)) +
+theme(legend.position="none")
+
+
+
+pass %>%group_by(Team, Action) %>% filter(Areax >= 4.5, Teamnum == "A", Action == "Free Won")%>%summarize(count=n())
+
+p + geom_point(data = scfr, aes(x=Areax, y=Areay, colour = Action, shape = Action)) +
+labs(title = "Frees", subtitle = "Own") +
+labs(caption = "(Team A vs Team B 25/01/2018)") +
+geom_text_repel(data = scfr, aes(x=Areax, y=Areay, label = Player, col = Action), size = 3) +
+theme(plot.title = element_text(hjust=0.5)) +
+theme(plot.subtitle = element_text(hjust=0.5)) 
+
+pass %>%group_by(Team, Action) %>% filter(Teamnum == "A", Action == "Free Won")%>%summarize(count=n())
+
+fksh <- pass %>%group_by(Team, Action) %>% filter(Teamnum == "A", Action == "Free Shot Right" | Action == "Free Shot Left") %>%summarize(count=n())
+
+
+p + geom_point(data = frw , aes(x=Areax, y=Areay, colour = Action, shape = Action)) +
+    geom_point (data = fksh , aes(x=Areax, y=Areay, colour = Action, shape = Action)) 
+
++
+    geom_text_repel(data = allpassA , aes(x=xloc, y=yloc, label = plypass, col = Teamnum), size = 3) + 
+    geom_text_repel(data = allpassA , aes(x=xend, y=yend, label = plyrec, col = Teamnum), size = 3) +
+  guides(color = FALSE)
+
+pass %>%group_by(Team, Action) %>% filter(Areax >= 4.5, Teamnum == "A", Action == "Free Won")%>%summarize(count=n())
+
+p + geom_point(data = scfr, aes(x=Areax, y=Areay, colour = Action, shape = Action)) +
+labs(title = "Frees", subtitle = "Own") +
+labs(caption = "(Team A vs Team B 25/01/2018)") +
+geom_text_repel(data = scfr, aes(x=Areax, y=Areay, label = Player, col = Action), size = 3) +
+theme(plot.title = element_text(hjust=0.5)) +
+theme(plot.subtitle = element_text(hjust=0.5)) 
+
+pass %>%group_by(Team, Action) %>% filter(Teamnum == "A", Action == "Free Won")%>%summarize(count=n())
+
+fksh <- pass %>%group_by(Team, Action) %>% filter(Teamnum == "A", Action == "Free Shot Right" | Action == "Free Shot Left") %>%summarize(count=n())
+
+
+p + geom_point(data = frw , aes(x=Areax, y=Areay, colour = Action, shape = Action)) +
+    geom_point (data = fksh , aes(x=Areax, y=Areay, colour = Action, shape = Action)) 
+
++
+    geom_text_repel(data = allpassA , aes(x=xloc, y=yloc, label = plypass, col = Teamnum), size = 3) + 
+    geom_text_repel(data = allpassA , aes(x=xend, y=yend, label = plyrec, col = Teamnum), size = 3) +
+  guides(color = FALSE)
+

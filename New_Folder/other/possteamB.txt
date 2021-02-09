@@ -1,0 +1,100 @@
+B1 <- pass %>% filter(Teamnum == "B" & possno == "B1") 
+B2 <- pass %>% filter(Teamnum == "B" & possno == "B2") 
+B3 <- pass %>% filter(Teamnum == "B" & possno == "B3") 
+B4 <- pass %>% filter(Teamnum == "B" & possno == "B4") 
+B5 <- pass %>% filter(Teamnum == "B" & possno == "B5") 
+B6 <- pass %>% filter(Teamnum == "B" & possno == "B6") 
+B7 <- pass %>% filter(Teamnum == "B" & possno == "B7") 
+B8 <- pass %>% filter(Teamnum == "B" & possno == "B8") 
+B9 <- pass %>% filter(Teamnum == "B" & possno == "B9") 
+B10 <- pass %>% filter(Teamnum == "B" & possno == "B10") 
+B11 <- pass %>% filter(Teamnum == "B" & possno == "B11") 
+B12 <- pass %>% filter(Teamnum == "B" & possno == "B12") 
+B13 <- pass %>% filter(Teamnum == "B" & possno == "B13") 
+B14 <- pass %>% filter(Teamnum == "B" & possno == "B14") 
+B15 <- pass %>% filter(Teamnum == "B" & possno == "B15") 
+B16 <- pass %>% filter(Teamnum == "B" & possno == "B16") 
+B17 <- pass %>% filter(Teamnum == "B" & possno == "B17") 
+B18 <- pass %>% filter(Teamnum == "B" & possno == "B18") 
+B19 <- pass %>% filter(Teamnum == "B" & possno == "B19") 
+B20 <- pass %>% filter(Teamnum == "B" & possno == "B20") 
+B21 <- pass %>% filter(Teamnum == "B" & possno == "B21") 
+B22 <- pass %>% filter(Teamnum == "B" & possno == "B22") 
+B23 <- pass %>% filter(Teamnum == "B" & possno == "B23") 
+B24 <- pass %>% filter(Teamnum == "B" & possno == "B24") 
+B25 <- pass %>% filter(Teamnum == "B" & possno == "B25") 
+B26 <- pass %>% filter(Teamnum == "B" & possno == "B26") 
+B27 <- pass %>% filter(Teamnum == "B" & possno == "B27") 
+B28 <- pass %>% filter(Teamnum == "B" & possno == "B28") 
+B29 <- pass %>% filter(Teamnum == "B" & possno == "B29") 
+B30 <- pass %>% filter(Teamnum == "B" & possno == "B30") 
+B31 <- pass %>% filter(Teamnum == "B" & possno == "B31") 
+B32 <- pass %>% filter(Teamnum == "B" & possno == "B32") 
+B33 <- pass %>% filter(Teamnum == "B" & possno == "B33") 
+B34 <- pass %>% filter(Teamnum == "B" & possno == "B34") 
+B35 <- pass %>% filter(Teamnum == "B" & possno == "B35") 
+B36 <- pass %>% filter(Teamnum == "B" & possno == "B36") 
+B37 <- pass %>% filter(Teamnum == "B" & possno == "B37") 
+B38 <- pass %>% filter(Teamnum == "B" & possno == "B38") 
+B39 <- pass %>% filter(Teamnum == "B" & possno == "B39") 
+B40 <- pass %>% filter(Teamnum == "B" & possno == "B40") 
+B41 <- pass %>% filter(Teamnum == "B" & possno == "B41") 
+B42 <- pass %>% filter(Teamnum == "B" & possno == "B42") 
+B43 <- pass %>% filter(Teamnum == "B" & possno == "B43") 
+B44 <- pass %>% filter(Teamnum == "B" & possno == "B44") 
+B45 <- pass %>% filter(Teamnum == "B" & possno == "B45") 
+B46 <- pass %>% filter(Teamnum == "B" & possno == "B46") 
+B47 <- pass %>% filter(Teamnum == "B" & possno == "B47") 
+B48 <- pass %>% filter(Teamnum == "B" & possno == "B48") 
+B49 <- pass %>% filter(Teamnum == "B" & possno == "B49") 
+
+p + geom_path(data = B1, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B2, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B3, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B4, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B5, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B6, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B7, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B8, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B9, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B10, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B11, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B12, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B13, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B14, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B15, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B16, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B17, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B18, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B19, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B20, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B21, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B22, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B23, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B24, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B25, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B26, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B27, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B28, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B29, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B30, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B31, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B32, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B33, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B34, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B35, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B36, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B37, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B38, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B39, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B40, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B41, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B42, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B43, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B44, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B45, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B46, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B47, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B48, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") + 
+geom_path(data = B49, aes(x=Areax, y=Areay), size = 0.4, linetype="dotted", colour = "lightblue") 
+

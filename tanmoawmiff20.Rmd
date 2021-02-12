@@ -1,5 +1,5 @@
 ---
-title: "1998 All Ireland Football Final"
+title: "2020 Westmeath Intermediate Football Final"
 output:
   html_document:
     theme: cosmo
@@ -7,58 +7,65 @@ output:
     toc_float: yes
 ---
 
+
 ```{r setup, include=FALSE, message=FALSE, warning=FALSE}
 knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE, options(knitr.kable.NA = ''))
 
 #Load packages and pitch
 #install.packages('digest', repos='http://cran.us.r-project.org')
-library (digest)
-library(flexdashboard)
-library(dplyr)
-library(deldir)
-library(ggplot2)
-library(ggrepel)
-library(ggpubr)
-library(knitr)
-library(rmarkdown)
-library(kableExtra)
-library(data.table)
-library(RColorBrewer)
-library(gridExtra)
-library(igraph)
-library(tidyverse)
-library(treemap)
-library(plotly)
-library(networkD3)
-library (curl)
-library(formattable)
-library(grid)
-library(yaml)
-library (tinytex)
-library (ggforce)
-library (waffle)
-library (ggnewscale)
-library(factoextra)
-library(cluster)
-library(tidyquant)
-library(parallel)
-library(ggExtra)
-library(DT)
-library(sp)
-library(lubridate)
-library(stringr)
-library (plotly)
+suppressPackageStartupMessages(library (digest))
+suppressPackageStartupMessages(library(flexdashboard))
+suppressPackageStartupMessages(library(dplyr))
+suppressPackageStartupMessages(library(deldir))
+suppressPackageStartupMessages(library(ggplot2))
+suppressPackageStartupMessages(library(ggrepel))
+suppressPackageStartupMessages(library(ggpubr))
+suppressPackageStartupMessages(library(knitr))
+suppressPackageStartupMessages(library(rmarkdown))
+suppressPackageStartupMessages(library(kableExtra))
+suppressPackageStartupMessages(library(data.table))
+suppressPackageStartupMessages(library(RColorBrewer))
+suppressPackageStartupMessages(library(gridExtra))
+suppressPackageStartupMessages(library(igraph))
+suppressPackageStartupMessages(library(tidyverse))
+suppressPackageStartupMessages(library(treemap))
+suppressPackageStartupMessages(library(plotly))
+suppressPackageStartupMessages(library(networkD3))
+suppressPackageStartupMessages(library (curl))
+suppressPackageStartupMessages(library(formattable))
+suppressPackageStartupMessages(library(grid))
+suppressPackageStartupMessages(library(yaml))
+suppressPackageStartupMessages(library(tinytex))
+suppressPackageStartupMessages(library(ggforce))
+suppressPackageStartupMessages(library(waffle))
+suppressPackageStartupMessages(library(ggnewscale))
+suppressPackageStartupMessages(library(factoextra))
+suppressPackageStartupMessages(library(cluster))
+suppressPackageStartupMessages(library(tidyquant))
+suppressPackageStartupMessages(library(parallel))
+suppressPackageStartupMessages(library(ggExtra))
+suppressPackageStartupMessages(library(DT))
+suppressPackageStartupMessages(library(sp))
+suppressPackageStartupMessages(library(lubridate))
+suppressPackageStartupMessages(library(stringr))
+suppressPackageStartupMessages(library(plotly))
+suppressPackageStartupMessages(library(tidymodels))
+suppressPackageStartupMessages(library(tidytext))
+suppressPackageStartupMessages(library(RGraphics))
+
 
 
 ```
 
-```{r}
 
-match <- read.csv(file="c:/Users/donagh/OneDrive/Spreadsheet fun/PA Analytics/PA Template/galkilaif98/matchgalkilaif98.csv", header=TRUE, sep=";")
+```{r pass}
+
+match <- read.csv(file="c:/Users/donagh/OneDrive/Spreadsheet fun/PA Analytics/PA Template/tanmoawmiff20/matchtanmoawmiff20.csv", header=TRUE, sep=";")
 attach (match)
 
-teamsheet <- read.csv(file="c:/Users/donagh/OneDrive/Spreadsheet fun/PA Analytics/PA Template/galkilaif98/teamsheetgalkilaif98.csv", header=TRUE, sep=";")
+teamsheet <- read.csv(file="c:/Users/donagh/OneDrive/Spreadsheet fun/PA Analytics/PA Template/tanmoawmiff20/teamsheettanmoawmiff20.csv", header=TRUE, sep=";")
 attach (teamsheet)
+
 
 # make time 2 digits 
 
@@ -69,28 +76,30 @@ match <- match %>% mutate_if(is.numeric, round, digits = 2)
 match$Team<- as.character(match$Team)
 
 match <- match %>% mutate(Team =
-ifelse(Team == "Kildare" & Action == "Tck Def Ndp A", "Galway", 
-ifelse(Team == "Kildare" & Action == "Tck Dp Def A", "Galway",
-ifelse(Team == "Kildare" & Action == "Tck Prs A", "Galway",
-ifelse(Team == "Kildare" & Action == "Fk Loss Tck A", "Galway",
-ifelse(Team == "Kildare" & Action == "Tck Def Ndp GA", "Galway", 
-ifelse(Team == "Kildare" & Action == "Tck Dp Def GA", "Galway",
-ifelse(Team == "Kildare" & Action == "Tck Prs GA", "Galway",
-ifelse(Team == "Kildare" & Action == "Fk Loss Tck GA", "Galway",
-ifelse(Team == "Kildare" & Action == "KoBrk Opp A", "Galway",
-ifelse(Team == "Kildare" & Action == "Brk Opp A", "Galway",
-ifelse(Team == "Galway" & Action == "Tck Def Ndp B", "Kildare",
-ifelse(Team == "Galway" & Action == "Tck Dp Def B", "Kildare",
-ifelse(Team == "Galway" & Action == "Tck Prs B", "Kildare",
-ifelse(Team == "Galway" & Action == "Fk Loss Tck B", "Kildare",
-ifelse(Team == "Galway" & Action == "Tck Def Ndp GB", "Kildare",
-ifelse(Team == "Galway" & Action == "Tck Dp Def GB", "Kildare",
-ifelse(Team == "Galway" & Action == "Tck Prs GB", "Kildare",
-ifelse(Team == "Galway" & Action == "Fk Loss Tck GB", "Kildare",
-ifelse(Team == "Galway" & Action == "KoBrk Opp B", "Kildare",
-ifelse(Team == "Galway" & Action == "Brk Opp B", "Kildare",
+ifelse(Team == "Moate" & Action == "Tck Def Ndp", "Tang", 
+ifelse(Team == "Moate" & Action == "Tck Dp Def", "Tang",
+ifelse(Team == "Moate" & Action == "Tck Prs", "Tang",
+ifelse(Team == "Moate" & Action == "Fk Loss Tck", "Tang",
+ifelse(Team == "Moate" & Action == "Tck Def Ndp G", "Tang", 
+ifelse(Team == "Moate" & Action == "Tck Dp Def G", "Tang",
+ifelse(Team == "Moate" & Action == "Tck Prs G", "Tang",
+ifelse(Team == "Moate" & Action == "Fk Loss Tck G", "Tang",
+ifelse(Team == "Moate" & Action == "KoBrk Opp", "Tang",
+ifelse(Team == "Moate" & Action == "Brk Opp", "Tang",
+ifelse(Team == "Tang" & Action == "Tck Def Ndp", "Moate",
+ifelse(Team == "Tang" & Action == "Tck Dp Def", "Moate",
+ifelse(Team == "Tang" & Action == "Tck Prs", "Moate",
+ifelse(Team == "Tang" & Action == "Fk Loss Tck", "Moate",
+ifelse(Team == "Tang" & Action == "Tck Def Ndp G", "Moate",
+ifelse(Team == "Tang" & Action == "Tck Dp Def G", "Moate",
+ifelse(Team == "Tang" & Action == "Tck Prs G", "Moate",
+ifelse(Team == "Tang" & Action == "Fk Loss Tck G", "Moate",
+ifelse(Team == "Tang" & Action == "KoBrk Opp", "Moate",
+ifelse(Team == "Tang" & Action == "Brk Opp", "Moate",
  match$Team)))))))))))))))))))))
 
+
+#create a Sht Prs df 
 
 #create a Sht Prs df 
 
@@ -99,32 +108,33 @@ shdf <- match %>%filter(Action %in% c("Sht Prs"))
 #delete Sht Prs from match 
 
 start = 	0
-p1 = 	1099.5
-ht = 	2199
-p3 = 	3312
+p1 = 	1405
+ht = 	1918.5
+p3 = 	2842
 
-team <- c("Galway","Kildare")
 
-score <- c("1-14", "1-10")
+team <- c("Tang","Moate")
+
+score <- c("0-11", "1-10")
 
 gamescore <- data.frame(team,score)
 
 time <- c("Total Time ","First Half","Second Half")
 
-mins<- c("73", "37", "36")
+mins<- c("67", "32", "35")
 
 gametime <- data.frame(time,mins)
 
-match <- match %>% mutate(Teamnum =ifelse(Team == "Galway","A","B"))
+match <- match %>% mutate(Teamnum =ifelse(Team == "Tang","A","B"))
 
 match <- match%>% mutate(half =ifelse(time <= ht,1, ifelse(time > ht,2,"time")))
 
-match <- match %>%mutate(Areax=ifelse(Teamnum == "B" & half == 1,X,ifelse(Teamnum == "A" & half == 1,144-X
-,ifelse(Teamnum == "B" & half == 2,144-X,ifelse(Teamnum == "A" & half == 2,X,X)))))
+match <- match %>%mutate(Areax=ifelse(Teamnum == "A" & half == 1,X,ifelse(Teamnum == "B" & half == 1,144-X
+,ifelse(Teamnum == "A" & half == 2,144-X,ifelse(Teamnum == "B" & half == 2,X,X)))))
 
 
-match <-match %>%mutate(Areay=ifelse(Teamnum == "B" & half == 1,Y,ifelse(Teamnum == "A" & half == 1,88-Y
-,ifelse(Teamnum == "B" & half == 2,88-Y,ifelse(Teamnum == "A" & half == 2,Y,Y)))))
+match <-match %>%mutate(Areay=ifelse(Teamnum == "A" & half == 1,Y,ifelse(Teamnum == "B" & half == 1,88-Y
+,ifelse(Teamnum == "A" & half == 2,88-Y,ifelse(Teamnum == "B" & half == 2,Y,Y)))))
 
 
 match <- match %>% mutate(Zone =
@@ -161,20 +171,27 @@ ifelse(Areax >=124 & Areax <=144& Areay >=75 & Areay <=88,30
 ,"No_Zone")))))))))))))))))))))))))))))))
 
 
-
-
 match = match %>% 
    unite(plyid, Team, Player, sep = " ", remove = FALSE)
 
-sets <- read.csv(file="c:/Users/donagh/OneDrive/Spreadsheet fun/PA Analytics/PA Template/sets.csv", header=TRUE, sep=";")
+sets <- read.csv(file="c:/Users/donagh/OneDrive/Spreadsheet fun/PA Analytics/PA Template/tanmoawmiff20/tanmoawmiff20sets.csv", header=TRUE, sep=";")
 attach (sets)
+
 
 
 teamsheet = teamsheet %>% 
    unite(plyid, Team, ply, sep = " ", remove = FALSE)
    
 zonetext <- read.csv(file="c:/Users/donagh/OneDrive/Spreadsheet fun/PA Analytics/PA Template/zonetext.csv", header=TRUE, sep=";")
-attach (zonetext) 
+attach (zonetext)
+
+#zonetext$tx <- as.numeric(zonetext$tx)
+#zonetext$ty <- as.numeric(zonetext$tx)
+zonetext$zone<- as.character(zonetext$zone)
+
+
+match <-match %>%
+    mutate(xmid = VLOOKUP(Zone,zonetext,zone, tx), ymid = VLOOKUP(Zone,zonetext, zone, ty))
 
 match <-match %>%
     mutate(subset = VLOOKUP(Action, sets, Action, subset), main = VLOOKUP(Action, sets, Action, main),plyname = VLOOKUP(plyid,teamsheet,plyid, name))
@@ -199,7 +216,7 @@ teamcnts <- teamcnts %>% mutate(Pitch_Area =ifelse(Zone >0 & Zone  <=5 ,"In_Def"
 
 teamcnts <- teamcnts %>% mutate(Pitch_Area_No =ifelse(Zone >0 & Zone  <=5 ,"1", ifelse(Zone >= 6 & Zone  <=10 ,"2", ifelse(Zone >=11 & Zone <=15, "3",ifelse(Zone  >=16 & Zone <=20,"4",ifelse(Zone  >=21 & Zone <=25, "5",ifelse(Zone >=26 & Zone <=30, "6","Draw")))))))
 
-teamcnts <-teamcnts%>%select (period,possno,poss, phaseno, Phase, Teamnum, Team, Player, plyname,Action, Areax, Areay, plylab, subset, Zone, time, main, Pitch_Area,Pitch_Area_No)
+teamcnts <-teamcnts%>%select (period,possno,poss, phaseno, Phase, Teamnum, Team, Player, plyname,Action, Areax, Areay,xmid,ymid, plylab, subset, Zone, time, main, Pitch_Area,Pitch_Area_No)
 
 
 
@@ -232,6 +249,14 @@ pass <- pass[pass$Action!="Yellow Card", ]
 #write.csv2(pass, "tallylog.csv")
 
 
+
+
+
+```
+
+
+```{r}
+
 ## RUN ##
 
 #Run - w/ own and opp brks#
@@ -245,16 +270,16 @@ passR <- passR[passR$main!="Spoil Off", ]
 passR <- passR[passR$main!="Opp Brk", ]
 passR <- passR[passR$main!="Red Card", ]
 
-passR <- passR%>%select(period,possno,poss,phaseno,Phase,Teamnum,Team,Player,plyname,Action,Areax,Areay,plylab,subset,Zone,time,main,Pitch_Area)
+passR <- passR%>%select(period,possno,poss,phaseno,Phase,Teamnum,Team,Player,plyname,Action,Areax,Areay,xmid,ymid,plylab,subset,Zone,time,main,Pitch_Area)
 
 passRc <- passR 
 
 #passRc <- passR %>% filter (poss =="A1"|poss == "B1"|poss == "A2")
 
 oddps <- passRc[seq(1, nrow(passRc), 1),]
-colnames(oddps) <- c("period","possno","poss","phaseno","Phase","Teamnum","Team","Player","plyname","Action","Areax","Areay","plylab","subset","Zone","time","main","Pitch_Area")
+colnames(oddps) <- c("period","possno","poss","phaseno","Phase","Teamnum","Team","Player","plyname","Action","Areax","Areay","xmid","ymid","plylab","subset","Zone","time","main","Pitch_Area")
 evenps <- passRc[seq(2, nrow(passRc), 1),]
-colnames(evenps) <- c("periodoc","possnooc","possoc","phasenooc","Phaseoc","Teamnumoc","Teamoc","Playeroc","plynameoc","Actionoc","Areaxoc","Areayoc","plylaboc","subsetoc","Zoneoc","timeoc","mainoc","Pitch_End")
+colnames(evenps) <- c("periodoc","possnooc","possoc","phasenooc","Phaseoc","Teamnumoc","Teamoc","Playeroc","plynameoc","Actionoc","Areaxoc","Areayoc","xmidoc","ymidoc","plylaboc","subsetoc","Zoneoc","timeoc","mainoc","Pitch_End")
 
 #add column to each data frame with row number
 oddps$number <- row.names(oddps)
@@ -266,11 +291,9 @@ run$number <- as.numeric(run$number)
 
 run  <- run %>% arrange(number)
 
-library(plyr)
 
-run  <- rename(run, c( Areaxoc = "xend", Areayoc = "yend",Zone = "zone",  Zoneoc = "zoneoc"))
+run  <- rename(run, c( xend = "Areaxoc" , yend = "Areayoc", xmidend = "xmidoc", ymidend = "ymidoc", zone = "Zone",  zoneoc = "Zoneoc"))
 
-detach(package:plyr)
 
 # Keep
 run <-run %>% mutate(teamsame = ifelse(Team == Teamoc ,"Y","N"))
@@ -360,6 +383,12 @@ run = run %>%
 #write.csv(run, "run.csv")
 
 
+
+
+```
+
+```{r}
+
 #### PHASE SOP ####
 
 ## Base phaseSoP
@@ -370,13 +399,13 @@ phaseSoP <- pass %>%filter (main %in% c("PW", "Ko", "Pass Rs","Shot Rs", "Shot O
 phaseSoP <- phaseSoP%>%select(-plyname)
 
 oddps <- phaseSoP [seq(1, nrow(phaseSoP), 2),]
-colnames(oddps) <- c("period","possno","poss","phaseno","Phase","Teamnum","Team","Player","Action","Areax","Areay","plylab","subset","Zone","time","main","Pitch_Area")
+colnames(oddps) <- c("period","possno","poss","phaseno","Phase","Teamnum","Team","Player","Action","Areax","Areay","xmid","ymid","plylab","subset","Zone","time","main","Pitch_Area")
 evenps <- phaseSoP[seq(2, nrow(phaseSoP), 2),]
-colnames(evenps) <- c("periodoc","possnooc","possoc","phasenooc","Phaseoc","Teamnumoc","Teamoc","Playeroc","Actionoc","Areaxoc","Areayoc","plylaboc","subsetoc","Zoneoc","timeoc","mainoc", "Pitch_Areaoc")
+colnames(evenps) <- c("periodoc","possnooc","possoc","phasenooc","Phaseoc","Teamnumoc","Teamoc","Playeroc","Actionoc","Areaxoc","Areayoc","xmidoc","ymidoc","plylaboc","subsetoc","Zoneoc","timeoc","mainoc", "Pitch_Areaoc")
 
 phaseSoP <- bind_cols(oddps, evenps) 
-phaseSoP <- phaseSoP %>%select("period","possno","poss","Phase","Teamnum","Team","Player","Action","Zone","Areax","Areay","plylab","subset","main","time","Pitch_Area",
-                               "possoc","Phaseoc","Actionoc","Zoneoc","Areaxoc","Areayoc","plylaboc","subsetoc","mainoc","timeoc","Pitch_Areaoc")
+phaseSoP <- phaseSoP %>%select("period","possno","poss","Phase","Teamnum","Team","Player","Action","Zone","Areax","Areay","xmid","ymid","plylab","subset","main","time","Pitch_Area",
+                               "possoc","Phaseoc","Actionoc","Zoneoc","Areaxoc","Areayoc","xmidoc","ymidoc","plylaboc","subsetoc","mainoc","timeoc","Pitch_Areaoc")
 
 
 # Pitch_Area_st - where poss started
@@ -392,12 +421,13 @@ phaseSoP <-phaseSoP %>% mutate(Pitch_Area_Oc =ifelse(Pitch_Areaoc == "In_Def" ,"
 shotsallsop <- pass%>%group_by(Team,Phase) %>% filter(main =="Shot Op Oc"|main =="Shot Rs Oc"|main == "Shot Op"|main =="Shot Rs")%>%select(-plyname)
 
 oddps <- shotsallsop[seq(1, nrow(shotsallsop), 2),]
-colnames(oddps) <- c("period","possno","poss","phaseno","Phase","Teamnum","Team","Player","Action","Areax","Areay","plylab","subset","Zone","time","main","Pitch_Area","Pitch_Area_No")
+colnames(oddps) <- c("period","possno","poss","phaseno","Phase","Teamnum","Team","Player","Action","Areax","Areay","xmid","ymid","plylab","subset","Zone","time","main","Pitch_Area","Pitch_Area_No")
 evenps <- shotsallsop[seq(2, nrow(shotsallsop), 2),]
-colnames(evenps) <- c("periodoc","possnooc","possoc","phasenooc","Phaseoc","Teamnumoc","Teamoc","Playeroc","Actionoc","Areaxoc","Areayoc","plylaboc","subsetoc","Zoneoc","timeoc","mainoc","Pitch_Areaoc","Pitch_Area_Nooc")
+colnames(evenps) <- c("periodoc","possnooc","possoc","phasenooc","Phaseoc","Teamnumoc","Teamoc","Playeroc","Actionoc","Areaxoc","Areayoc","xmidoc","ymidoc","plylaboc","subsetoc","Zoneoc","timeoc","mainoc",
+"Pitch_Areaoc","Pitch_Area_Nooc")
 shotsallsop <- bind_cols(oddps, evenps) 
-shotsallsop <- shotsallsop%>%select("period","possno","poss","phaseno","Phase","Teamnum","Team","Player","Action","Zone","Areax","Areay","plylab","subset","Pitch_Area","Pitch_Area_No"
-                                    ,"Actionoc","Zoneoc","Areaxoc","Areayoc","plylaboc","subsetoc","timeoc")
+shotsallsop <- shotsallsop%>%select("period","possno","poss","phaseno","Phase","Teamnum","Team","Player","Action","Zone","Areax","Areay","xmid","ymid","plylab","subset","Pitch_Area","Pitch_Area_No"
+                                    ,"Actionoc","Zoneoc","Areaxoc","Areayoc","xmidoc","ymidoc","plylaboc","subsetoc","timeoc")
 
 # Shot Details
 
@@ -495,10 +525,17 @@ phasesop <-phasesop %>% mutate(Phase_Area_noend = ifelse(mainoc == "ToL",Pitch_A
 
 phasesop <- phasesop %>% mutate_if(is.numeric, round, digits = 2)
 
+#phasesop <- phasesop %>%replace(is.na(.), 0)
+
 #write.csv(phasesop, "sop2.csv")
 #write.csv2(oddps, "odsop.csv")
 #write.csv2(evenps, "evsop.csv")
 
+
+```
+
+
+```{r}
 
 #### SOP ####
 
@@ -510,11 +547,11 @@ passSoP <- pass %>%filter (main %in% c("PW", "Ko", "Shot Op Oc", "Shot Rs Oc","T
 passSoP <- passSoP%>%select(-plyname)
 
 oddps <- passSoP [seq(1, nrow(passSoP), 2),]
-colnames(oddps) <- c("period","possno","poss","phaseno","Phase","Teamnum","Team","Player","Action","Areax","Areay","plylab","subset","Zone","time","main","Pitch_Area")
+colnames(oddps) <- c("period","possno","poss","phaseno","Phase","Teamnum","Team","Player","Action","Areax","Areay","xmid","ymid","plylab","subset","Zone","time","main","Pitch_Area")
 evenps <- passSoP[seq(2, nrow(passSoP), 2),]
-colnames(evenps) <- c("periodoc","possnooc","possoc","phasenooc","Phaseoc","Teamnumoc","Teamoc","Playeroc","Actionoc","Areaxoc","Areayoc","plylaboc","subsetoc","Zoneoc","timeoc","mainoc", "Pitch_Areaoc")
+colnames(evenps) <- c("periodoc","possnooc","possoc","phasenooc","Phaseoc","Teamnumoc","Teamoc","Playeroc","Actionoc","Areaxoc","Areayoc","xmidoc","ymidoc","plylaboc","subsetoc","Zoneoc","timeoc","mainoc", "Pitch_Areaoc")
 passSoP <- bind_cols(oddps, evenps) 
-passSoP <- passSoP%>%select("period","possno","poss","Phase","Teamnum","Team","Player","Action","Zone","Areax","Areay","plylab","subset","main","time","Pitch_Area","possoc","Phaseoc","Actionoc","Zoneoc","Playeroc","Areaxoc","Areayoc","plylaboc","subsetoc","mainoc","timeoc","Pitch_Areaoc")
+passSoP <- passSoP%>%select("period","possno","poss","Phase","Teamnum","Team","Player","Action","Zone","Areax","Areay","xmid","ymid","plylab","subset","main","time","Pitch_Area","possoc","Phaseoc","Actionoc","Zoneoc","Playeroc","Areaxoc","Areayoc","xmidoc","ymidoc","plylaboc","subsetoc","mainoc","timeoc","Pitch_Areaoc")
 
 
 # Pitch_Area_st - where poss started
@@ -530,20 +567,14 @@ passSoP <- passSoP %>% mutate(Pitch_Area_Oc =ifelse(Pitch_Areaoc == "In_Def" ,"1
 shotsallsop <- pass%>%group_by(Team,poss) %>% filter(main =="Shot Op Oc"|main =="Shot Rs Oc"|main == "Shot Op"|main =="Shot Rs")%>%select(-plyname)
 
 oddps <- shotsallsop[seq(1, nrow(shotsallsop), 2),]
-colnames(oddps) <- c("period","possno","poss","phaseno","Phase","Teamnum","Team","Player","Action","Areax","Areay","plylab","subset","Zone","time","main","Pitch_Area","Pitch_Area_No")
+colnames(oddps) <- c("period","possno","poss","phaseno","Phase","Teamnum","Team","Player","Action","Areax","Areay","xmid","ymid","plylab","subset","Zone","time","main","Pitch_Area","Pitch_Area_No")
 evenps <- shotsallsop[seq(2, nrow(shotsallsop), 2),]
-colnames(evenps) <- c("periodoc","possnooc","possoc","phasenooc","Phaseoc","Teamnumoc","Teamoc","Playeroc","Actionoc","Areaxoc","Areayoc","plylaboc","subsetoc","Zoneoc","timeoc","mainoc","Pitch_Areaoc","Pitch_Area_Nooc")
+colnames(evenps) <- c("periodoc","possnooc","possoc","phasenooc","Phaseoc","Teamnumoc","Teamoc","Playeroc","Actionoc","Areaxoc","Areayoc","xmidoc","ymidoc","plylaboc","subsetoc","Zoneoc","timeoc","mainoc","Pitch_Areaoc","Pitch_Area_Nooc")
 shotsallsop <- bind_cols(oddps, evenps) 
-shotsallsop <- shotsallsop%>%select("period","possno","poss","phaseno","Phase","Teamnum","Team","Player","Action","Zone","Areax","Areay","plylab","subset","Pitch_Area","Pitch_Area_No"
-                              ,"Actionoc","Zoneoc","Areaxoc","Areayoc","plylaboc","subsetoc","timeoc")
+shotsallsop <- shotsallsop%>%select("period","possno","poss","phaseno","Phase","Teamnum","Team","Player","Action","Zone","Areax","Areay","xmid","ymid","plylab","subset","Pitch_Area","Pitch_Area_No"
+                              ,"Actionoc","Zoneoc","Areaxoc","Areayoc","xmidoc","ymidoc","plylaboc","subsetoc","timeoc")
 
 # Shot Details
-
-## Need to change these add a shot P_A 
-#,plyshot  = VLOOKUP(poss,runShtd, poss, Player),shot_type  = VLOOKUP(poss,runShtd, poss, Action)
-#,shotx  = VLOOKUP(poss,runShtd, poss,Areax),shoty  = VLOOKUP(poss,runShtd, poss,Areay), Shot_Dist  = VLOOKUP(poss,runShtd, poss,Shot_Dist),
-#Shot_vec = VLOOKUP(poss,runShtd, poss,vec)
-
 
 runShtd <-shotsallsop %>%mutate (Shot_Dist =(sqrt((144 - Areax)^2+ (44 - Areay)^2)),vec = (atan2(44-Areay,144 - Areax)*180/pi))%>%select(poss,Player, Action,Areax,Areay,Actionoc,Areaxoc,Areayoc, Shot_Dist,vec,Pitch_Area, Pitch_Area_No)
 
@@ -565,6 +596,38 @@ runa$timeoc <- as.numeric(runa$timeoc)
 
 Ko_Time <- runa%>% mutate(Ko_Time = (timeoc - time))%>%select (possoc, Ko_Time)
 
+# Tackles 
+
+tckall <- pass %>% group_by(poss) %>% filter (main %in% c("Tck Att","Free Won")) %>% summarise(count = n())
+
+tckallID <- pass %>% group_by(poss) %>% filter (main %in% c("Tck Att","Free Won"), Pitch_Area == "In_Def") %>% summarise(count = n())
+
+tckallMD <- pass %>% group_by(poss) %>% filter (main %in% c("Tck Att","Free Won"), Pitch_Area == "Mid_Def") %>% summarise(count = n())
+
+tckallOD <- pass %>% group_by(poss) %>% filter (main %in% c("Tck Att","Free Won"), Pitch_Area == "Out_Def") %>% summarise(count = n())
+
+tckallOA <- pass %>% group_by(poss) %>% filter (main %in% c("Tck Att","Free Won"), Pitch_Area == "Out_Att") %>% summarise(count = n())
+
+tckallMA <- pass %>% group_by(poss) %>% filter (main %in% c("Tck Att","Free Won"), Pitch_Area == "Mid_Att") %>% summarise(count = n())
+
+tckallIA <- pass %>% group_by(poss) %>% filter (main %in% c("Tck Att","Free Won"), Pitch_Area == "In_Att") %>% summarise(count = n())
+
+# Frees Won
+
+fkall <- pass %>% group_by(poss) %>% filter (main %in% c("Free Won")) %>% summarise(count = n())
+
+fkallID <- pass %>% group_by(poss) %>% filter (main %in% c("Free Won"), Pitch_Area == "In_Def") %>% summarise(count = n())
+
+fkallMD <- pass %>% group_by(poss) %>% filter (main %in% c("Free Won"), Pitch_Area == "Mid_Def") %>% summarise(count = n())
+
+fkallOD <- pass %>% group_by(poss) %>% filter (main %in% c("Free Won"), Pitch_Area == "Out_Def") %>% summarise(count = n())
+
+fkallOA <- pass %>% group_by(poss) %>% filter (main %in% c("Free Won"), Pitch_Area == "Out_Att") %>% summarise(count = n())
+
+fkallMA <- pass %>% group_by(poss) %>% filter (main %in% c("Free Won"), Pitch_Area == "Mid_Att") %>% summarise(count = n())
+
+fkallIA <- pass %>% group_by(poss) %>% filter (main %in% c("Free Won"), Pitch_Area == "In_Att") %>% summarise(count = n())
+
 
 # Players involved
 
@@ -574,8 +637,110 @@ teamAplyr <-dplyr::distinct(teamAplyrpossns)
 
 teamAplyr <-teamAplyr%>%group_by(poss)%>%select(Player,poss)%>%summarize(count=n())  
 
+# Players involved
+
+teamAplyrpossnsID <- pass%>%group_by(Player, poss) %>% filter(main %in% c("PW","Ko","Pass Op", "Pass Rs","Shot Op","Shot Rs"), Pitch_Area == "In_Def")%>%select(Player, poss)
+
+teamAplyrID <-dplyr::distinct(teamAplyrpossnsID) 
+
+teamAplyrID <-teamAplyrID %>%group_by(poss)%>%select(Player,poss)%>%summarize(count=n())  
+
+# Players involved
+
+teamAplyrpossnsMD <- pass%>%group_by(Player, poss) %>% filter(main %in% c("PW","Ko","Pass Op", "Pass Rs","Shot Op","Shot Rs"), Pitch_Area == "Mid_Def")%>%select(Player, poss)
+
+teamAplyrMD <-dplyr::distinct(teamAplyrpossnsMD) 
+
+teamAplyrMD <-teamAplyrMD %>%group_by(poss)%>%select(Player,poss)%>%summarize(count=n())  
+
+
+# Players involved
+
+teamAplyrpossnsOD <- pass%>%group_by(Player, poss) %>% filter(main %in% c("PW","Ko","Pass Op", "Pass Rs","Shot Op","Shot Rs"), Pitch_Area == "Out_Def")%>%select(Player, poss)
+
+teamAplyrOD <-dplyr::distinct(teamAplyrpossnsOD) 
+
+teamAplyrOD <-teamAplyrOD %>%group_by(poss)%>%select(Player,poss)%>%summarize(count=n())  
+
+
+# Players involved
+
+teamAplyrpossnsOA <- pass%>%group_by(Player, poss) %>% filter(main %in% c("PW","Ko","Pass Op", "Pass Rs","Shot Op","Shot Rs"), Pitch_Area == "Out_Att")%>%select(Player, poss)
+
+teamAplyrOA <-dplyr::distinct(teamAplyrpossnsOA) 
+
+teamAplyrOA <-teamAplyrOA %>%group_by(poss)%>%select(Player,poss)%>%summarize(count=n())  
+
+
+# Players involved
+
+teamAplyrpossnsMA <- pass%>%group_by(Player, poss) %>% filter(main %in% c("PW","Ko","Pass Op", "Pass Rs","Shot Op","Shot Rs"), Pitch_Area == "Mid_Att")%>%select(Player, poss)
+
+teamAplyrMA <-dplyr::distinct(teamAplyrpossnsMA) 
+
+teamAplyrMA <-teamAplyrMA %>%group_by(poss)%>%select(Player,poss)%>%summarize(count=n())  
+
+
+# Players involved
+
+teamAplyrpossnsIA <- pass%>%group_by(Player, poss) %>% filter(main %in% c("PW","Ko","Pass Op", "Pass Rs","Shot Op","Shot Rs"), Pitch_Area == "In_Att")%>%select(Player, poss)
+
+teamAplyrIA <-dplyr::distinct(teamAplyrpossnsIA) 
+
+teamAplyrIA <-teamAplyrIA %>%group_by(poss)%>%select(Player,poss)%>%summarize(count=n())  
+
+
 #Total passes, distance, poss duration (not used) and m.s
 totrun <- run %>% group_by(poss) %>% filter (keep =="Y") %>%   summarize (passes = sum (main %in% c("Pass Op", "Pass Rs")),tot_dist = sum(dist), dur = sum(time_diff), m_s = sum(tot_dist/dur))
+
+#Total passes, distance, poss duration (not used) and m.s
+totrunID <- run %>% group_by(poss) %>% filter (keep =="Y", Pitch_Area == "In_Def",main %in% c("Pass Op", "Pass Rs")) %>%   
+summarize (passes = sum (main %in% c("Pass Op", "Pass Rs")),tot_dist = sum(dist), dur = sum(time_diff), m_s = sum(tot_dist/dur))
+
+totrunMD <- run %>% group_by(poss) %>% filter (keep =="Y", Pitch_Area == "Mid_Def",main %in% c("Pass Op", "Pass Rs")) %>%   
+summarize (passes = sum (main %in% c("Pass Op", "Pass Rs")),tot_dist = sum(dist), dur = sum(time_diff), m_s = sum(tot_dist/dur))
+
+totrunOD <- run %>% group_by(poss) %>% filter (keep =="Y", Pitch_Area == "Out_Def",main %in% c("Pass Op", "Pass Rs")) %>%   
+summarize (passes = sum (main %in% c("Pass Op", "Pass Rs")),tot_dist = sum(dist), dur = sum(time_diff), m_s = sum(tot_dist/dur))
+
+
+totrunOA <- run %>% group_by(poss) %>% filter (keep =="Y", Pitch_Area == "Out_Att",main %in% c("Pass Op", "Pass Rs")) %>%   
+summarize (passes = sum (main %in% c("Pass Op", "Pass Rs")),tot_dist = sum(dist), dur = sum(time_diff), m_s = sum(tot_dist/dur))
+
+totrunMA <- run %>% group_by(poss) %>% filter (keep =="Y", Pitch_Area == "Mid_Att",main %in% c("Pass Op", "Pass Rs")) %>%   
+summarize (passes = sum (main %in% c("Pass Op", "Pass Rs")),tot_dist = sum(dist), dur = sum(time_diff), m_s = sum(tot_dist/dur))
+
+totrunIA <- run %>% group_by(poss) %>% filter (keep =="Y", Pitch_Area == "In_Att",main %in% c("Pass Op", "Pass Rs")) %>%   
+summarize (passes = sum (main %in% c("Pass Op", "Pass Rs")),tot_dist = sum(dist), dur = sum(time_diff), m_s = sum(tot_dist/dur))
+
+# Time to Tackle
+
+tack <-pass%>%filter (main == "Ko"| main == "PW"| main %in% c( "Tck Att", "Free Won" )|Action %in% c ("Hp Prs", "Kp Right Prs", "Kp Left Prs"))
+
+tack$main[tack$main =="Free Won"]<-"Tck Att"
+tack$main[tack$main =="Pass Op"]<-"Tck Att"
+
+#
+tack <-tack%>%group_by (poss)%>% filter(n()>1)
+
+tack <- distinct(tack, main, .keep_all = TRUE)
+
+#Open play Pass & rec (links)
+passonly <- tack %>%select(poss,possno, Teamnum,Team,Action,Areax, Areay, Zone, time, main)
+
+oddpl <- passonly[seq(1, nrow(passonly), 2),]
+colnames(oddpl) <- c("poss","possno","Teamnum","Team","Action","Areax","Areay","Zone","time","main")
+evenpl <- passonly[seq(2, nrow(passonly), 2),]
+colnames(evenpl) <- c("possoc","possnooc","Teamnumoc","Teamoc","Actionoc","Areaxoc","Areayoc","Zoneoc","timeoc","mainoc")
+tack_time <- bind_cols(oddpl, evenpl) 
+tack_time <- tack_time%>%select("poss","possno","Teamnum","Team","Action","Areax","Areay","Zone","time","main","possoc","mainoc","Areaxoc","Areayoc","Zoneoc","timeoc")
+
+#tack_time
+
+tack_time <-tack_time%>% mutate(timedif = (timeoc - time)) %>% 
+   mutate(rounded = round(timedif, 2))
+
+
 
 #Time of phases 
 phasetime  <-phasesop %>% group_by(poss) %>% summarise(phtime = sum(secs))
@@ -605,14 +770,56 @@ passSoP <- passSoP %>% mutate(Entry_45 = ifelse(Areax <99.5 & Areaxoc >99.6 ,"Y"
 
 #passSoP <- passSoP %>%select (-phaseno,-Phase, -periodoc,-possnooc, -phasenooc,-Phaseoc,-Teamnumoc,-Teamoc)
 
-passSoP  <- passSoP  %>% mutate(passno = VLOOKUP(poss,totrun, poss, passes),plyinv = VLOOKUP(poss,teamAplyr, poss, count),tot_dist = VLOOKUP(poss,totrun, poss, tot_dist),m_s = VLOOKUP(poss,totrun, poss, m_s)
-,plyshot  = VLOOKUP(poss,runShtd, poss, Player),shot_type  = VLOOKUP(poss,runShtd, poss, Action)
-,shotx  = VLOOKUP(poss,runShtd, poss,Areax),shoty  = VLOOKUP(poss,runShtd, poss,Areay), Shot_Dist  = VLOOKUP(poss,runShtd, poss,Shot_Dist)
-,Shot_vec = VLOOKUP(poss,runShtd, poss,vec),Shot_PA = VLOOKUP(poss,runShtd, poss,Pitch_Area),Shot_PAno = VLOOKUP(poss,runShtd, poss,Pitch_Area_No)
-,Ko_Time  = VLOOKUP(poss,Ko_Time, possoc, Ko_Time),Ko_Dist  = VLOOKUP(poss,KOuts, poss,Ko_Dist)
+passSoP  <- passSoP  %>% mutate(passno = VLOOKUP(poss,totrun, poss, passes),plyinv = VLOOKUP(poss,teamAplyr, poss, count),
+tot_dist = VLOOKUP(poss,totrun, poss, tot_dist),m_s = VLOOKUP(poss,totrun, poss, m_s))
+
+passSoP  <- passSoP  %>% mutate(passnoID = VLOOKUP(poss,totrunID, poss, passes),plyinvID = VLOOKUP(poss,teamAplyrID, poss, count),
+tot_distID = VLOOKUP(poss,totrunID, poss, tot_dist), durID= VLOOKUP(poss,totrunID, poss, dur) ,m_sID = VLOOKUP(poss,totrunID, poss, m_s))
+
+passSoP  <- passSoP  %>% mutate(passnoMD = VLOOKUP(poss,totrunMD, poss, passes),plyinvMD = VLOOKUP(poss,teamAplyrMD, poss, count),
+tot_distMD = VLOOKUP(poss,totrunMD, poss, tot_dist), durMD= VLOOKUP(poss,totrunMD, poss, dur),m_sMD = VLOOKUP(poss,totrunMD, poss, m_s))
+
+passSoP  <- passSoP  %>% mutate(passnoOD = VLOOKUP(poss,totrunOD, poss, passes),plyinvOD = VLOOKUP(poss,teamAplyrOD, poss, count),
+tot_distOD = VLOOKUP(poss,totrunOD, poss, tot_dist), durOD = VLOOKUP(poss,totrunOD, poss, dur),m_sOD = VLOOKUP(poss,totrunOD, poss, m_s))
+
+passSoP  <- passSoP  %>% mutate(passnoOA = VLOOKUP(poss,totrunOA, poss, passes),plyinvOA = VLOOKUP(poss,teamAplyrOA, poss, count),
+tot_distOA = VLOOKUP(poss,totrunOA, poss, tot_dist), durOA= VLOOKUP(poss,totrunOA, poss, dur),m_sOA = VLOOKUP(poss,totrunOA, poss, m_s))
+
+passSoP  <- passSoP  %>% mutate(passnoMA = VLOOKUP(poss,totrunMA, poss, passes),plyinvMA = VLOOKUP(poss,teamAplyrMA, poss, count),
+tot_distMA = VLOOKUP(poss,totrunMA, poss, tot_dist), durMA = VLOOKUP(poss,totrunMA, poss, dur),m_sMA = VLOOKUP(poss,totrunMA, poss, m_s))
+
+passSoP  <- passSoP  %>% mutate(passnoIA = VLOOKUP(poss,totrunIA, poss, passes),plyinvIA = VLOOKUP(poss,teamAplyrIA, poss, count),
+tot_distIA = VLOOKUP(poss,totrunIA, poss, tot_dist), durIA = VLOOKUP(poss,totrunIA, poss, dur),m_sIA = VLOOKUP(poss,totrunIA, poss, m_s))
+
+passSoP  <- passSoP  %>% mutate(plyshot  = VLOOKUP(poss,runShtd, poss, Player), shot_type  = VLOOKUP(poss,runShtd, poss, Action),
+shotx  = VLOOKUP(poss,runShtd, poss,Areax),shoty  = VLOOKUP(poss,runShtd, poss,Areay),
+Shot_Dist  = VLOOKUP(poss,runShtd, poss,Shot_Dist)
+,Shot_vec = VLOOKUP(poss,runShtd, poss,vec),Shot_PA = VLOOKUP(poss,runShtd, poss,Pitch_Area),Shot_PAno = VLOOKUP(poss,runShtd, poss,Pitch_Area_No))
+
+# tcks atts and fk won
+
+passSoP  <- passSoP  %>% mutate(tckAll = VLOOKUP(poss,tckall, poss, count),tckID = VLOOKUP(poss,tckallID, poss, count), tckMD = VLOOKUP(poss,tckallMD, poss, count),  tckOD = VLOOKUP(poss,tckallOD, poss, count),
+                                 tckOA = VLOOKUP(poss,tckallOA, poss, count), tckMA = VLOOKUP(poss,tckallMA, poss, count), tckIA = VLOOKUP(poss,tckallIA, poss, count))
+
+passSoP  <- passSoP  %>% mutate(fkAll = VLOOKUP(poss,fkall, poss, count),fkID = VLOOKUP(poss,fkallID, poss, count), fkMD = VLOOKUP(poss,fkallMD, poss, count),  fkOD = VLOOKUP(poss,fkallOD, poss, count),
+                                 fkOA = VLOOKUP(poss,fkallOA, poss, count), fkMA = VLOOKUP(poss,fkallMA, poss, count), fkIA = VLOOKUP(poss,fkallIA, poss, count))
+
+passSoP  <- passSoP  %>% mutate(tcktime = VLOOKUP(poss,tack_time, poss, rounded))
+
+passSoP  <- passSoP  %>% mutate(passnoIA = VLOOKUP(poss,totrunIA, poss, passes),plyinvIA = VLOOKUP(poss,teamAplyrIA, poss, count),
+tot_distIA = VLOOKUP(poss,totrunIA, poss, tot_dist),m_sIA = VLOOKUP(poss,totrunIA, poss, m_s))
+passSoP  <- passSoP  %>% mutate(plyshot  = VLOOKUP(poss,runShtd, poss, Player), shot_type  = VLOOKUP(poss,runShtd, poss, Action),
+shotx  = VLOOKUP(poss,runShtd, poss,Areax),shoty  = VLOOKUP(poss,runShtd, poss,Areay),
+Shot_Dist  = VLOOKUP(poss,runShtd, poss,Shot_Dist)
+,Shot_vec = VLOOKUP(poss,runShtd, poss,vec),Shot_PA = VLOOKUP(poss,runShtd, poss,Pitch_Area),Shot_PAno = VLOOKUP(poss,runShtd, poss,Pitch_Area_No))
+
+
+passSoP  <- passSoP  %>% mutate(Ko_Time  = VLOOKUP(poss,Ko_Time, possoc, Ko_Time),Ko_Dist  = VLOOKUP(poss,KOuts, poss,Ko_Dist)
 ,Ko_Vec  = VLOOKUP(poss,KOuts, poss,vec), Ko_Oc  = VLOOKUP(poss,KOuts, poss,mainoc),Ko_Ply = VLOOKUP(poss,KOuts, poss,Playeroc)
 ,Pitch_Area_Ko  = VLOOKUP(poss,KOuts, poss,Pitch_End)
 ,Ko_Zone_Rec  = VLOOKUP(poss,KOuts, poss,zoneoc),Ko_Zone_X = VLOOKUP(poss,KOuts, poss,xend),Ko_Zone_Y  = VLOOKUP(poss,KOuts, poss,yend))
+
+
 
 # Pitch_Area_Rec
 passSoP <-passSoP %>% mutate(Pitch_Area_Rec = ifelse(main == "Ko",Pitch_Area_Ko,Pitch_Area))
@@ -639,6 +846,8 @@ passSoP <-passSoP %>% mutate(Poss_endy = ifelse(mainoc == "ToL",Areayoc, shoty))
 passSoP <-passSoP %>% mutate(Poss_Area_end = ifelse(mainoc == "ToL",Pitch_Areaoc,Shot_PA))
 passSoP <-passSoP %>% mutate(Poss_Area_noend = ifelse(mainoc == "ToL",Pitch_Area_Oc,Shot_PAno))
 
+passSoP  <- passSoP  %>% mutate(direct = (tot_dist/oedist))
+
 passSoP <- passSoP %>% mutate_if(is.numeric, round, digits = 2)
 
 sop  <- passSoP  
@@ -649,17 +858,23 @@ sop  <- passSoP
 
 
 
+```
+
+
+```{r}
+
+
 #### Shots ####
 
 shotsall <- pass%>%group_by(Team,poss) %>% filter(main =="Shot Op Oc"|main =="Shot Rs Oc"|main == "Shot Op"|main =="Shot Rs")%>%select(-plyname)
 
 oddps <- shotsall[seq(1, nrow(shotsall), 2),]
-colnames(oddps) <- c("period","possno","poss","phaseno","Phase","Teamnum","Team","Player","Action","Areax","Areay","plylab","subset","Zone","time","main")
+colnames(oddps) <- c("period","possno","poss","phaseno","Phase","Teamnum","Team","Player","Action","Areax","Areay","xmid","ymid","plylab","subset","Zone","time","main")
 evenps <- shotsall[seq(2, nrow(shotsall), 2),]
-colnames(evenps) <- c("periodoc","possnooc","possoc","phasenooc","Phaseoc","Teamnumoc","Teamoc","Playeroc","Actionoc","Areaxoc","Areayoc","plylaboc","subsetoc","Zoneoc","timeoc","mainoc")
+colnames(evenps) <- c("periodoc","possnooc","possoc","phasenooc","Phaseoc","Teamnumoc","Teamoc","Playeroc","Actionoc","Areaxoc","Areayoc","xmidoc","ymidoc","plylaboc","subsetoc","Zoneoc","timeoc","mainoc")
 shotsall <- bind_cols(oddps, evenps) 
-shotsall <- shotsall%>%select("period","possno","poss","phaseno","Phase","Teamnum","Team","Player","Action","Zone","Areax","Areay","plylab","subset"
-,"Actionoc","Zoneoc","Areaxoc","Areayoc","plylaboc","subsetoc","timeoc")
+shotsall <- shotsall%>%select("period","possno","poss","phaseno","Phase","Teamnum","Team","Player","Action","Zone","Areax","Areay","xmid","ymid","plylab","subset"
+,"Actionoc","Zoneoc","Areaxoc","Areayoc","xmidoc","ymidoc","plylaboc","subsetoc","timeoc")
 
 scores = shotsall %>% 
    unite(Shot_lab, plylab, timeoc, sep = " ", remove = FALSE)
@@ -689,6 +904,8 @@ scored <- scored %>%group_by(Teamnum)%>% mutate(diff = (Tot_ScrA- Tot_ScrB))
 
 scored <- scored %>%group_by(Teamnum)%>% mutate(abdiff = (abs(Tot_ScrA- Tot_ScrB)))
 
+zonetext$zone<- as.numeric(zonetext$zone)
+
 scores <-scored %>%
     mutate(tx = VLOOKUP(Zone, zonetext, zone, tx),ty = VLOOKUP(Zone, zonetext, zone, ty),bx = VLOOKUP(Zone, zonetext, zone, bx),by = VLOOKUP(Zone, zonetext, zone, by))
 
@@ -700,6 +917,11 @@ scores  <- scores %>% mutate(shdf = VLOOKUP(poss,shdfposs,poss,Zone))
 #write.csv2(oddps, "oddpsscrs.csv")
 #write.csv2(evenps, "evenpsscrs.csv")
 
+
+```
+
+
+```{r}
 
 
 #### Player Stats ####
@@ -728,6 +950,22 @@ statsA <- statsA %>% select(-Players)
 
 statsA [is.na(statsA)] <- 0
 
+plyP_A <- pass%>%group_by(Player)%>% filter (Teamnum == "A",main %in% c("PW", "Pass Op","Pass Rs","Rec Op", "Rec Rs", "Shot Op", "Tck Def", "Free Won", "Free Loss"))%>%
+summarize(In_Def = sum (Pitch_Area %in% c("In_Def")),Mid_Def = sum (Pitch_Area%in% c("Mid_Def")),Out_Def = sum (Pitch_Area %in% c("Out_Def")),
+Out_Att = sum (Pitch_Area %in% c("Out_Att")),Mid_Att = sum (Pitch_Area %in% c("Mid_Att")),Mid_Att = sum (Pitch_Area %in% c("Mid_Att")),In_Att = sum (Pitch_Area %in% c("In_Att"))) 
+
+plyP_A <- rename(plyP_A, "PlayersA" = Player)
+
+statsA <- bind_cols (statsA,plyP_A)
+
+statsA <- statsA %>% select(-PlayersA)
+
+statsA [is.na(statsA)] <- 0
+
+
+statsA <- statsA %>% mutate(to_ratio = (Poss_Lost/OBP), pass_eff = ((Pass-Pass_Loss)/Pass*100), att_balls = (OpScr + Comp_Pass),
+eff_ind = ((PW + att_balls)/(10 + Poss_Lost)), Perf_Score = ((eff_ind*10)+(OBP/2)))
+
 statsA <- statsA %>% mutate(totPW = sum(PW), PWp = (PW/totPW*100), totPass = sum(Pass), Passp = (Pass/totPass*100), totRec = sum(Rec), Recp = (Rec/totRec*100),  totKoRec = sum(KoRec), KoRecp = (KoRec/totKoRec*100), 
 totOpShot = sum(OpShot), OpShotp = (OpShot/totOpShot*100), totOpScr = sum(OpScr), OpScrp = (OpScr/totOpScr*100),
 totRsShot = sum(RsShot), RsShotp = (RsShot/totRsShot*100), totRsScr = sum(RsScr), RsScrp = (RsScr/totRsScr*100),
@@ -741,15 +979,190 @@ RsShotamin = (RsShot/plytime),RsScramin = (RsScr/plytime),
 Poss_Lostamin = (Poss_Lost/plytime), 
 Fk_Wonamin = (Fk_Won/plytime),Fk_Losttamin = (Fk_Lost/plytime),Spoilsamin = (Spoils/plytime))
 
+## Pitch Area Counts ##
+
+## Comp Pass wont work for P_A because pass may not have been made in the same P_A
+
+passA<- pass %>%filter(Teamnum=="A")
+
+plystatsAID <- passA %>%group_by(Player)%>%filter (Pitch_Area %in% c("In_Def")) %>%summarize(PWAID =sum(main == "PW"),PassAID =sum(main == "Pass Op"),RecAID =sum(main == "Rec Op"),
+KoRecAID =sum(main == "Ko Rec"), RsRecAID =sum(main == "Rec Rs") ,OpShotAID =sum(main == "Shot Op"),OpScrAID =sum(subset == "Scr Op"),
+RsShotAID =sum(main == "Shot Rs"),RsScrAID =sum(subset == "Scr Rs"), Poss_LostAID =sum(main == "ToL"), Fk_WonAID =sum(main == "Free Won"),Fk_LostAID =sum(main == "Free Loss"),
+SpoilsAID =sum(main == "Def Act"), OBPAID = (PWAID + RecAID + RsRecAID + KoRecAID), Pass_LossAID = sum(subset == "Pass ToL"), Comp_PassAID = (PassAID - Pass_LossAID))
+
+plystatsAMD <- passA %>%group_by(Player)%>%filter (Pitch_Area %in% c("Mid_Def")) %>%summarize(PWAMD =sum(main == "PW"),PassAMD =sum(main == "Pass Op"),RecAMD =sum(main == "Rec Op"),
+KoRecAMD =sum(main == "Ko Rec"), RsRecAMD =sum(main == "Rec Rs") ,OpShotAMD =sum(main == "Shot Op"),OpScrAMD =sum(subset == "Scr Op"),
+RsShotAMD =sum(main == "Shot Rs"),RsScrAMD =sum(subset == "Scr Rs"), Poss_LostAMD =sum(main == "ToL"), Fk_WonAMD =sum(main == "Free Won"),Fk_LostAMD =sum(main == "Free Loss"),
+SpoilsAMD =sum(main == "Def Act"), OBPAMD = (PWAMD + RecAMD + RsRecAMD + KoRecAMD), Pass_LossAMD = sum(subset == "Pass ToL"), Comp_PassAMD = (PassAMD - Pass_LossAMD))
+
+plystatsAOD <- passA %>%group_by(Player)%>%filter (Pitch_Area %in% c("Out_Def")) %>%summarize(PWAOD =sum(main == "PW"),PassAOD =sum(main == "Pass Op"),RecAOD =sum(main == "Rec Op"),
+KoRecAOD =sum(main == "Ko Rec"), RsRecAOD =sum(main == "Rec Rs") ,OpShotAOD =sum(main == "Shot Op"),OpScrAOD =sum(subset == "Scr Op"),
+RsShotAOD =sum(main == "Shot Rs"),RsScrAOD =sum(subset == "Scr Rs"), Poss_LostAOD =sum(main == "ToL"), Fk_WonAOD =sum(main == "Free Won"),Fk_LostAOD =sum(main == "Free Loss"),
+SpoilsAOD =sum(main == "Def Act"), OBPAOD = (PWAOD + RecAOD + RsRecAOD + KoRecAOD), Pass_LossAOD = sum(subset == "Pass ToL"), Comp_PassAOD = (PassAOD - Pass_LossAOD))
+
+plystatsAOA <- passA %>%group_by(Player)%>%filter (Pitch_Area %in% c("Out_Att")) %>%summarize(PWAOA =sum(main == "PW"),PassAOA =sum(main == "Pass Op"),RecAOA =sum(main == "Rec Op"),
+KoRecAOA =sum(main == "Ko Rec"), RsRecAOA =sum(main == "Rec Rs") ,OpShotAOA =sum(main == "Shot Op"),OpScrAOA =sum(subset == "Scr Op"),
+RsShotAOA =sum(main == "Shot Rs"),RsScrAOA =sum(subset == "Scr Rs"), Poss_LostAOA =sum(main == "ToL"), Fk_WonAOA =sum(main == "Free Won"),Fk_LostAOA =sum(main == "Free Loss"),
+SpoilsAOA =sum(main == "Def Act"), OBPAOA = (PWAOA + RecAOA + RsRecAOA + KoRecAOA), Pass_LossAOA = sum(subset == "Pass ToL"), Comp_PassAOA = (PassAOA - Pass_LossAOA))
+
+plystatsAMA <- passA %>%group_by(Player)%>%filter (Pitch_Area %in% c("Mid_Att")) %>%summarize(PWAMA =sum(main == "PW"),PassAMA =sum(main == "Pass Op"),RecAMA =sum(main == "Rec Op"),
+KoRecAMA =sum(main == "Ko Rec"), RsRecAMA =sum(main == "Rec Rs") ,OpShotAMA =sum(main == "Shot Op"),OpScrAMA =sum(subset == "Scr Op"),
+RsShotAMA =sum(main == "Shot Rs"),RsScrAMA =sum(subset == "Scr Rs"), Poss_LostAMA =sum(main == "ToL"), Fk_WonAMA =sum(main == "Free Won"),Fk_LostAMA =sum(main == "Free Loss"),
+SpoilsAMA =sum(main == "Def Act"), OBPAMA = (PWAMA + RecAMA + RsRecAMA + KoRecAMA), Pass_LossAMA = sum(subset == "Pass ToL"), Comp_PassAMA = (PassAMA - Pass_LossAMA))
+
+plystatsAIA <-passA %>%group_by(Player)%>%filter (Pitch_Area %in% c("In_Att")) %>%summarize(PWAIA =sum(main == "PW"),PassAIA =sum(main == "Pass Op"),RecAIA =sum(main == "Rec Op"),
+KoRecAIA =sum(main == "Ko Rec"), RsRecAIA =sum(main == "Rec Rs") ,OpShotAIA =sum(main == "Shot Op"),OpScrAIA =sum(subset == "Scr Op"),
+RsShotAIA =sum(main == "Shot Rs"),RsScrAIA =sum(subset == "Scr Rs"), Poss_LostAIA =sum(main == "ToL"), Fk_WonAIA =sum(main == "Free Won"),Fk_LostAIA =sum(main == "Free Loss"),
+SpoilsAIA =sum(main == "Def Act"), OBPAIA = (PWAIA + RecAIA + RsRecAIA + KoRecAIA), Pass_LossAIA = sum(subset == "Pass ToL"), Comp_PassAIA = (PassAIA - Pass_LossAIA))
+
+#Adding Pitch_Area Counts to Base Stats A - VLOOKUPS 
+
+statsA <-statsA %>%
+  mutate(PWAID = VLOOKUP(ply, plystatsAID, Player, PWAID),PassAID = VLOOKUP(ply, plystatsAID, Player, PassAID),RecAID = VLOOKUP(ply, plystatsAID, Player, RecAID),
+         KoRecAID = VLOOKUP(ply, plystatsAID, Player, KoRecAID),RsRecAID = VLOOKUP(ply, plystatsAID, Player, RsRecAID),OpShotAID = VLOOKUP(ply, plystatsAID, Player, OpShotAID),
+         OpScrAID = VLOOKUP(ply, plystatsAID, Player, OpScrAID),RsShotAID = VLOOKUP(ply, plystatsAID, Player, RsShotAID),RsScrAID = VLOOKUP(ply, plystatsAID, Player,RsScrAID),
+         Poss_LostAID = VLOOKUP(ply, plystatsAID, Player, Poss_LostAID),Fk_WonAID = VLOOKUP(ply, plystatsAID, Player,Fk_WonAID),Fk_LostAID= VLOOKUP(ply, plystatsAID, Player, Fk_LostAID),
+         SpoilsAID = VLOOKUP(ply, plystatsAID, Player, SpoilsAID),OBPAID =VLOOKUP (ply, plystatsAID, Player, OBPAID), Pass_LossAID = VLOOKUP (ply, plystatsAID, Player,Pass_LossAID))
+
+statsA <-statsA %>%
+  mutate(PWAMD = VLOOKUP(ply, plystatsAMD, Player, PWAMD),PassAMD = VLOOKUP(ply, plystatsAMD, Player, PassAMD),RecAMD = VLOOKUP(ply, plystatsAMD, Player, RecAMD),
+         KoRecAMD = VLOOKUP(ply, plystatsAMD, Player, KoRecAMD),RsRecAMD = VLOOKUP(ply, plystatsAMD, Player, RsRecAMD),OpShotAMD = VLOOKUP(ply, plystatsAMD, Player, OpShotAMD),
+         OpScrAMD = VLOOKUP(ply, plystatsAMD, Player, OpScrAMD),RsShotAMD = VLOOKUP(ply, plystatsAMD, Player, RsShotAMD),RsScrAMD = VLOOKUP(ply, plystatsAMD, Player,RsScrAMD),
+         Poss_LostAMD = VLOOKUP(ply, plystatsAMD, Player, Poss_LostAMD),Fk_WonAMD = VLOOKUP(ply, plystatsAMD, Player,Fk_WonAMD),Fk_LostAMD= VLOOKUP(ply, plystatsAMD, Player, Fk_LostAMD),
+         SpoilsAMD = VLOOKUP(ply, plystatsAMD, Player, SpoilsAMD),OBPAMD =VLOOKUP (ply, plystatsAMD, Player, OBPAMD), Pass_LossAMD = VLOOKUP (ply, plystatsAMD, Player,Pass_LossAMD))
+
+statsA <-statsA %>%
+  mutate(PWAOD = VLOOKUP(ply, plystatsAOD, Player, PWAOD),PassAOD = VLOOKUP(ply, plystatsAOD, Player, PassAOD),RecAOD = VLOOKUP(ply, plystatsAOD, Player, RecAOD),
+         KoRecAOD = VLOOKUP(ply, plystatsAOD, Player, KoRecAOD),RsRecAOD = VLOOKUP(ply, plystatsAOD, Player, RsRecAOD),OpShotAOD = VLOOKUP(ply, plystatsAOD, Player, OpShotAOD),
+         OpScrAOD = VLOOKUP(ply, plystatsAOD, Player, OpScrAOD),RsShotAOD = VLOOKUP(ply, plystatsAOD, Player, RsShotAOD),RsScrAOD = VLOOKUP(ply, plystatsAOD, Player,RsScrAOD),
+         Poss_LostAOD = VLOOKUP(ply, plystatsAOD, Player, Poss_LostAOD),Fk_WonAOD = VLOOKUP(ply, plystatsAOD, Player,Fk_WonAOD),Fk_LostAOD= VLOOKUP(ply, plystatsAOD, Player, Fk_LostAOD),
+         SpoilsAOD = VLOOKUP(ply, plystatsAOD, Player, SpoilsAOD),OBPAOD =VLOOKUP (ply, plystatsAOD, Player, OBPAOD), Pass_LossAOD = VLOOKUP (ply, plystatsAOD, Player,Pass_LossAOD))
+
+statsA <-statsA %>%
+  mutate(PWAOA = VLOOKUP(ply, plystatsAOA, Player, PWAOA),PassAOA = VLOOKUP(ply, plystatsAOA, Player, PassAOA),RecAOA = VLOOKUP(ply, plystatsAOA, Player, RecAOA),
+         KoRecAOA = VLOOKUP(ply, plystatsAOA, Player, KoRecAOA),RsRecAOA = VLOOKUP(ply, plystatsAOA, Player, RsRecAOA),OpShotAOA = VLOOKUP(ply, plystatsAOA, Player, OpShotAOA),
+         OpScrAOA = VLOOKUP(ply, plystatsAOA, Player, OpScrAOA),RsShotAOA = VLOOKUP(ply, plystatsAOA, Player, RsShotAOA),RsScrAOA = VLOOKUP(ply, plystatsAOA, Player,RsScrAOA),
+         Poss_LostAOA = VLOOKUP(ply, plystatsAOA, Player, Poss_LostAOA),Fk_WonAOA = VLOOKUP(ply, plystatsAOA, Player,Fk_WonAOA),Fk_LostAOA= VLOOKUP(ply, plystatsAOA, Player, Fk_LostAOA),
+         SpoilsAOA = VLOOKUP(ply, plystatsAOA, Player, SpoilsAOA),OBPAOA =VLOOKUP (ply, plystatsAOA, Player, OBPAOA), Pass_LossAOA = VLOOKUP (ply, plystatsAOA, Player,Pass_LossAOA))
+
+statsA <-statsA %>%
+  mutate(PWAMA = VLOOKUP(ply, plystatsAMA, Player, PWAMA),PassAMA = VLOOKUP(ply, plystatsAMA, Player, PassAMA),RecAMA = VLOOKUP(ply, plystatsAMA, Player, RecAMA),
+         KoRecAMA = VLOOKUP(ply, plystatsAMA, Player, KoRecAMA),RsRecAMA = VLOOKUP(ply, plystatsAMA, Player, RsRecAMA),OpShotAMA = VLOOKUP(ply, plystatsAMA, Player, OpShotAMA),
+         OpScrAMA = VLOOKUP(ply, plystatsAMA, Player, OpScrAMA),RsShotAMA = VLOOKUP(ply, plystatsAMA, Player, RsShotAMA),RsScrAMA = VLOOKUP(ply, plystatsAMA, Player,RsScrAMA),
+         Poss_LostAMA = VLOOKUP(ply, plystatsAMA, Player, Poss_LostAMA),Fk_WonAMA = VLOOKUP(ply, plystatsAMA, Player,Fk_WonAMA),Fk_LostAMA= VLOOKUP(ply, plystatsAMA, Player, Fk_LostAMA),
+         SpoilsAMA = VLOOKUP(ply, plystatsAMA, Player, SpoilsAMA),OBPAMA =VLOOKUP (ply, plystatsAMA, Player, OBPAMA), Pass_LossAMA = VLOOKUP (ply, plystatsAMA, Player,Pass_LossAMA))
+
+statsA <-statsA %>%
+  mutate(PWAIA = VLOOKUP(ply, plystatsAIA, Player, PWAIA),PassAIA = VLOOKUP(ply, plystatsAIA, Player, PassAIA),RecAIA = VLOOKUP(ply, plystatsAIA, Player, RecAIA),
+         KoRecAIA = VLOOKUP(ply, plystatsAIA, Player, KoRecAIA),RsRecAIA = VLOOKUP(ply, plystatsAIA, Player, RsRecAIA),OpShotAIA = VLOOKUP(ply, plystatsAIA, Player, OpShotAIA),
+         OpScrAIA = VLOOKUP(ply, plystatsAIA, Player, OpScrAIA),RsShotAIA = VLOOKUP(ply, plystatsAIA, Player, RsShotAIA),RsScrAIA = VLOOKUP(ply, plystatsAIA, Player,RsScrAIA),
+         Poss_LostAIA = VLOOKUP(ply, plystatsAIA, Player, Poss_LostAIA),Fk_WonAIA = VLOOKUP(ply, plystatsAIA, Player,Fk_WonAIA),Fk_LostAIA= VLOOKUP(ply, plystatsAIA, Player, Fk_LostAIA),
+         SpoilsAIA = VLOOKUP(ply, plystatsAIA, Player, SpoilsAIA),OBPAIA =VLOOKUP (ply, plystatsAIA, Player, OBPAIA), Pass_LossAIA = VLOOKUP (ply, plystatsAIA, Player,Pass_LossAIA))
+
+statsA [is.na(statsA)] <- 0
+
+## TACKLES ##
+
+## Create Tackle Count - tck def ## 
+passATck <- pass %>%filter (Teamnum == "A")
+
+plystatsDef <- passATck %>%group_by(Player)%>% 
+  summarize(TckDefA =sum(main == "Tck Def"), SpoilsDefA =sum(main == "Def Act"), Tot_DefA = (TckDefA + SpoilsDefA ))
+
+plystatsDefAID <- passATck %>%group_by(Player)%>%filter (Pitch_Area %in% c("In_Def"))%>% 
+summarize(TckDefAID =sum(main == "Tck Def"), SpoilsDefAID =sum(main == "Def Act"), Tot_DefAID = (TckDefAID + SpoilsDefAID ))
+
+plystatsDefAMD <- passATck %>%group_by(Player)%>%filter (Pitch_Area %in% c("Mid_Def"))%>% 
+  summarize(TckDefAMD =sum(main == "Tck Def"), SpoilsDefAMD =sum(main == "Def Act"), Tot_DefAMD = (TckDefAMD + SpoilsDefAMD ))
+
+plystatsDefAOD <- passATck %>%group_by(Player)%>%filter (Pitch_Area %in% c("Out_Def"))%>% 
+  summarize(TckDefAOD =sum(main == "Tck Def"), SpoilsDefAOD =sum(main == "Def Act"), Tot_DefAOD = (TckDefAOD + SpoilsDefAOD ))
+
+plystatsDefAOA <- passATck %>%group_by(Player)%>%filter (Pitch_Area %in% c("Out_Att"))%>% 
+  summarize(TckDefAOA =sum(main == "Tck Def"), SpoilsDefAOA =sum(main == "Def Act"), Tot_DefAOA = (TckDefAOA + SpoilsDefAOA ))
+
+plystatsDefAMA <- passATck %>%group_by(Player)%>%filter (Pitch_Area %in% c("Mid_Att"))%>% 
+  summarize(TckDefAMA =sum(main == "Tck Def"), SpoilsDefAMA =sum(main == "Def Act"), Tot_DefAMA = (TckDefAMA + SpoilsDefAMA ))
+
+plystatsDefAIA <- passATck %>%group_by(Player)%>%filter (Pitch_Area %in% c("In_Att"))%>% 
+  summarize(TckDefAIA =sum(main == "Tck Def"), SpoilsDefAIA =sum(main == "Def Act"), Tot_DefAIA = (TckDefAIA + SpoilsDefAIA ))
+
+statsA <-statsA %>%
+mutate(TckDefA = VLOOKUP(ply, plystatsDef, Player, TckDefA), SpoilsDefA = VLOOKUP(ply, plystatsDef, Player, SpoilsDefA), Tot_DefA = VLOOKUP(ply, plystatsDef, Player, Tot_DefA),
+TckDefAID = VLOOKUP(ply, plystatsDefAID, Player, TckDefAID), SpoilsDefAID = VLOOKUP(ply, plystatsDefAID, Player,SpoilsDefAID), Tot_DefAID = VLOOKUP(ply, plystatsDefAID, Player, Tot_DefAID),
+TckDefAMD = VLOOKUP(ply, plystatsDefAMD, Player, TckDefAMD), SpoilsDefAMD = VLOOKUP(ply, plystatsDefAMD, Player,SpoilsDefAMD), Tot_DefAMD = VLOOKUP(ply, plystatsDefAMD, Player, Tot_DefAMD),
+TckDefAOD = VLOOKUP(ply, plystatsDefAOD, Player, TckDefAOD), SpoilsDefAOD = VLOOKUP(ply, plystatsDefAOD, Player,SpoilsDefAOD), Tot_DefAOD = VLOOKUP(ply, plystatsDefAOD, Player, Tot_DefAOD),
+TckDefAOA = VLOOKUP(ply, plystatsDefAOA, Player, TckDefAOA), SpoilsDefAOA = VLOOKUP(ply, plystatsDefAOA, Player,SpoilsDefAOA), Tot_DefAOA = VLOOKUP(ply, plystatsDefAOA, Player, Tot_DefAOA),
+TckDefAMA = VLOOKUP(ply, plystatsDefAMA, Player, TckDefAMA), SpoilsDefAMA = VLOOKUP(ply, plystatsDefAMA, Player,SpoilsDefAMA), Tot_DefAMA = VLOOKUP(ply, plystatsDefAMA, Player, Tot_DefAMA),
+TckDefAIA = VLOOKUP(ply, plystatsDefAIA, Player, TckDefAIA), SpoilsDefAIA = VLOOKUP(ply, plystatsDefAIA, Player,SpoilsDefAIA), Tot_DefAIA = VLOOKUP(ply, plystatsDefAIA, Player, Tot_DefAIA))
+
+
+## Carries ##
+
+#carries over 10 - Maybe change it to 15 or 20 
+# 10 maybe too short to count as a run 
+
+#runAcarr <- runA%>%filter(seg %in% c("0","2"), dist > 9.99)
+
+runA <- run%>%filter(Teamnum=="A",keep=="Y")
+
+carrA <- runA %>%group_by(Player)%>%filter (seg %in% c("0","2"), dist > 9.99)%>%summarize(Carries = sum(segtype == "Carry"))
+carrAID <- runA %>%group_by(Player)%>%filter (seg %in% c("0","2"), dist > 9.99,Pitch_Area %in% c("In_Def"))%>%summarize(carrAID = sum(segtype == "Carry"))
+carrAMD <- runA %>%group_by(Player)%>%filter (seg %in% c("0","2"), dist > 9.99,Pitch_Area %in% c("Mid_Def"))%>%summarize(carrAMD = sum(segtype == "Carry"))
+carrAOD <- runA %>%group_by(Player)%>%filter (seg %in% c("0","2"), dist > 9.99,Pitch_Area %in% c("Out_Def"))%>%summarize(carrAOD = sum(segtype == "Carry"))
+carrAOA <- runA %>%group_by(Player)%>%filter (seg %in% c("0","2"), dist > 9.99,Pitch_Area %in% c("Out_Att"))%>%summarize(carrAOA = sum(segtype == "Carry"))
+carrAMA <- runA %>%group_by(Player)%>%filter (seg %in% c("0","2"), dist > 9.99,Pitch_Area %in% c("Mid_Att"))%>%summarize(carrAMA = sum(segtype == "Carry"))
+carrAIA <- runA %>%group_by(Player)%>%filter (seg %in% c("0","2"), dist > 9.99,Pitch_Area %in% c("In_Att"))%>%summarize(carrAIA = sum(segtype == "Carry"))
+
+statsA <-statsA %>%
+  mutate(Carries = VLOOKUP(ply, carrA, Player, Carries),
+         CarriesAID = VLOOKUP(ply, carrAID, Player, carrAID),
+         CarriesAMD = VLOOKUP(ply, carrAMD, Player, carrAMD),
+         CarriesAOD = VLOOKUP(ply, carrAOD, Player, carrAOD),
+         CarriesAOA = VLOOKUP(ply, carrAOA, Player, carrAOA),
+         CarriesAMA = VLOOKUP(ply, carrAMA, Player, carrAMA),
+         CarriesAIA = VLOOKUP(ply, carrAIA, Player, carrAIA))
+
+statsA [is.na(statsA)] <- 0
+
+
+## Pass Direction ## 
+
+pass_dirA <- run%>%filter(Teamnum=="A",keep=="Y", main %in% c("Pass Op", "Pass Rs"))
+
+move_dirA <- pass_dirA %>%group_by(Player)%>% summarize(For=sum(RunDir == "for"),Back=sum(RunDir == "bw"),SWL=sum(RunDir == "swl"),SWR=sum(RunDir == "swr"))
+
+statsA <-statsA %>%
+mutate(For= VLOOKUP(ply, move_dirA, Player, For),Back = VLOOKUP(ply, move_dirA, Player, Back),SWL = VLOOKUP(ply, move_dirA, Player, SWL),
+SWR = VLOOKUP(ply,move_dirA, Player, SWR))
+
+statsA [is.na(statsA)] <- 0
+
+## Run Direction ## 
+
+runAcar <- run%>%filter(Teamnum=="A",keep=="Y",seg %in% c("0","2"), dist > 9.99)
+
+Run_Dir <- runAcar %>%group_by(Player)%>% summarize(RunFor=sum(RunDir == "for"),RunBack=sum(RunDir == "bw"),RunSWL=sum(RunDir == "swl"),RunSWR=sum(RunDir == "swr"))
+
+statsA <-statsA %>%
+  mutate(RunFor= VLOOKUP(ply, Run_Dir, Player, RunFor),RunBack = VLOOKUP(ply,Run_Dir, Player, RunBack),RunSWL = VLOOKUP(ply,Run_Dir, Player, RunSWL),
+         RunSWR = VLOOKUP(ply,Run_Dir, Player, RunSWR))
+
+statsA [is.na(statsA)] <- 0
 
 statsA <- statsA%>% mutate_if(is.numeric, round, digits = 2)
-
 
 plystatsA <-statsA
 
 # plystatsAA  playersts
 
 #write.csv2(plystatsA, "plystatsA.csv")
+
+
+```
+
+```{r}
+
 
 ## Team B ##
 
@@ -776,6 +1189,22 @@ statsB <- statsB %>% select(-Players)
 
 statsB [is.na(statsB)] <- 0
 
+plyP_B <- pass%>%group_by(Player)%>% filter (Teamnum == "B",main %in% c("PW", "Pass Op","Pass Rs","Rec Op", "Rec Rs", "Shot Op", "Tck Def", "Free Won", "Free Loss"))%>%
+summarize(In_Def = sum (Pitch_Area %in% c("In_Def")),Mid_Def = sum (Pitch_Area%in% c("Mid_Def")),Out_Def = sum (Pitch_Area %in% c("Out_Def")),
+Out_Att = sum (Pitch_Area %in% c("Out_Att")),Mid_Att = sum (Pitch_Area %in% c("Mid_Att")),Mid_Att = sum (Pitch_Area %in% c("Mid_Att")),In_Att = sum (Pitch_Area %in% c("In_Att"))) 
+
+plyP_B <- rename(plyP_B, "PlayersB" = Player)
+
+statsB <- bind_cols (statsB,plyP_B)
+
+statsB <- statsB %>% select(-PlayersB)
+
+statsB [is.na(statsB)] <- 0
+
+
+statsB <- statsB %>% mutate(to_ratio = (Poss_Lost/OBP), pass_eff = ((Pass-Pass_Loss)/Pass*100), att_balls = (OpScr + Comp_Pass),
+eff_ind = ((PW + att_balls)/(10 + Poss_Lost)), Perf_Score = ((eff_ind*10)+(OBP/2)))
+
 statsB <- statsB %>%  mutate(totPW = sum(PW), PWp = (PW/totPW*100), totPass = sum(Pass), Passp = (Pass/totPass*100), totRec = sum(Rec), Recp = (Rec/totRec*100),  totKoRec = sum(KoRec), KoRecp = (KoRec/totKoRec*100), 
 totOpShot = sum(OpShot), OpShotp = (OpShot/totOpShot*100), totOpScr = sum(OpScr), OpScrp = (OpScr/totOpScr*100),
 totRsShot = sum(RsShot), RsShotp = (RsShot/totRsShot*100), totRsScr = sum(RsScr), RsScrp = (RsScr/totRsScr*100),
@@ -789,6 +1218,176 @@ RsShotamin = (RsShot/plytime),RsScramin = (RsScr/plytime),
 Poss_Lostamin = (Poss_Lost/plytime), 
 Fk_Wonamin = (Fk_Won/plytime),Fk_Losttamin = (Fk_Lost/plytime),Spoilsamin = (Spoils/plytime))
 
+## Pitch Area Counts ##
+
+## Comp Pass wont work for P_A because pass may not have been made in the same P_A
+
+passB <- pass %>%filter(Teamnum=="B")
+
+plystatsBID <- passB %>%group_by(Player)%>%filter (Pitch_Area %in% c("In_Def")) %>%summarize(PWBID =sum(main == "PW"),PassBID =sum(main == "Pass Op"),RecBID =sum(main == "Rec Op"),
+KoRecBID =sum(main == "Ko Rec"), RsRecBID =sum(main == "Rec Rs") ,OpShotBID =sum(main == "Shot Op"),OpScrBID =sum(subset == "Scr Op"),
+RsShotBID =sum(main == "Shot Rs"),RsScrBID =sum(subset == "Scr Rs"), Poss_LostBID =sum(main == "ToL"), Fk_WonBID =sum(main == "Free Won"),Fk_LostBID =sum(main == "Free Loss"),
+SpoilsBID =sum(main == "Def Act"), OBPBID = (PWBID + RecBID + RsRecBID + KoRecBID), Pass_LossBID = sum(subset == "Pass ToL"), Comp_PassBID = (PassBID - Pass_LossBID))
+
+plystatsBMD <- passB %>%group_by(Player)%>%filter (Pitch_Area %in% c("Mid_Def")) %>%summarize(PWBMD =sum(main == "PW"),PassBMD =sum(main == "Pass Op"),RecBMD =sum(main == "Rec Op"),
+KoRecBMD =sum(main == "Ko Rec"), RsRecBMD =sum(main == "Rec Rs") ,OpShotBMD =sum(main == "Shot Op"),OpScrBMD =sum(subset == "Scr Op"),
+RsShotBMD =sum(main == "Shot Rs"),RsScrBMD =sum(subset == "Scr Rs"), Poss_LostBMD =sum(main == "ToL"), Fk_WonBMD =sum(main == "Free Won"),Fk_LostBMD =sum(main == "Free Loss"),
+SpoilsBMD =sum(main == "Def Act"), OBPBMD = (PWBMD + RecBMD + RsRecBMD + KoRecBMD), Pass_LossBMD = sum(subset == "Pass ToL"), Comp_PassBMD = (PassBMD - Pass_LossBMD))
+
+plystatsBOD <- passB %>%group_by(Player)%>%filter (Pitch_Area %in% c("Out_Def")) %>%summarize(PWBOD =sum(main == "PW"),PassBOD =sum(main == "Pass Op"),RecBOD =sum(main == "Rec Op"),
+KoRecBOD =sum(main == "Ko Rec"), RsRecBOD =sum(main == "Rec Rs") ,OpShotBOD =sum(main == "Shot Op"),OpScrBOD =sum(subset == "Scr Op"),
+RsShotBOD =sum(main == "Shot Rs"),RsScrBOD =sum(subset == "Scr Rs"), Poss_LostBOD =sum(main == "ToL"), Fk_WonBOD =sum(main == "Free Won"),Fk_LostBOD =sum(main == "Free Loss"),
+SpoilsBOD =sum(main == "Def Act"), OBPBOD = (PWBOD + RecBOD + RsRecBOD + KoRecBOD), Pass_LossBOD = sum(subset == "Pass ToL"), Comp_PassBOD = (PassBOD - Pass_LossBOD))
+
+plystatsBOA <- passB %>%group_by(Player)%>%filter (Pitch_Area %in% c("Out_Att")) %>%summarize(PWBOA =sum(main == "PW"),PassBOA =sum(main == "Pass Op"),RecBOA =sum(main == "Rec Op"),
+KoRecBOA =sum(main == "Ko Rec"), RsRecBOA =sum(main == "Rec Rs") ,OpShotBOA =sum(main == "Shot Op"),OpScrBOA =sum(subset == "Scr Op"),
+RsShotBOA =sum(main == "Shot Rs"),RsScrBOA =sum(subset == "Scr Rs"), Poss_LostBOA =sum(main == "ToL"), Fk_WonBOA =sum(main == "Free Won"),Fk_LostBOA =sum(main == "Free Loss"),
+SpoilsBOA =sum(main == "Def Act"), OBPBOA = (PWBOA + RecBOA + RsRecBOA + KoRecBOA), Pass_LossBOA = sum(subset == "Pass ToL"), Comp_PassBOA = (PassBOA - Pass_LossBOA))
+
+plystatsBMA <- passB %>%group_by(Player)%>%filter (Pitch_Area %in% c("Mid_Att")) %>%summarize(PWBMA =sum(main == "PW"),PassBMA =sum(main == "Pass Op"),RecBMA =sum(main == "Rec Op"),
+KoRecBMA =sum(main == "Ko Rec"), RsRecBMA =sum(main == "Rec Rs") ,OpShotBMA =sum(main == "Shot Op"),OpScrBMA =sum(subset == "Scr Op"),
+RsShotBMA =sum(main == "Shot Rs"),RsScrBMA =sum(subset == "Scr Rs"), Poss_LostBMA =sum(main == "ToL"), Fk_WonBMA =sum(main == "Free Won"),Fk_LostBMA =sum(main == "Free Loss"),
+SpoilsBMA =sum(main == "Def Act"), OBPBMA = (PWBMA + RecBMA + RsRecBMA + KoRecBMA), Pass_LossBMA = sum(subset == "Pass ToL"), Comp_PassBMA = (PassBMA - Pass_LossBMA))
+
+plystatsBIA <- passB %>%group_by(Player)%>%filter (Pitch_Area %in% c("Mid_Att")) %>%summarize(PWBIA =sum(main == "PW"),PassBIA =sum(main == "Pass Op"),RecBIA =sum(main == "Rec Op"),
+KoRecBIA =sum(main == "Ko Rec"), RsRecBIA =sum(main == "Rec Rs") ,OpShotBIA =sum(main == "Shot Op"),OpScrBIA =sum(subset == "Scr Op"),
+RsShotBIA =sum(main == "Shot Rs"),RsScrBIA =sum(subset == "Scr Rs"), Poss_LostBIA =sum(main == "ToL"), Fk_WonBIA =sum(main == "Free Won"),Fk_LostBIA =sum(main == "Free Loss"),
+SpoilsBIA =sum(main == "Def Act"), OBPBIA = (PWBIA + RecBIA + RsRecBIA + KoRecBIA), Pass_LossBIA = sum(subset == "Pass ToL"), Comp_PassBIA = (PassBIA - Pass_LossBIA))
+
+#Adding Pitch_Area Counts to Base Stats A - VLOOKUPS 
+
+statsB <-statsB %>%
+  mutate(PWBID = VLOOKUP(ply, plystatsBID, Player, PWBID),PassBID = VLOOKUP(ply, plystatsBID, Player, PassBID),RecBID = VLOOKUP(ply, plystatsBID, Player, RecBID),
+         KoRecBID = VLOOKUP(ply, plystatsBID, Player, KoRecBID),RsRecBID = VLOOKUP(ply, plystatsBID, Player, RsRecBID),OpShotBID = VLOOKUP(ply, plystatsBID, Player, OpShotBID),
+         OpScrBID = VLOOKUP(ply, plystatsBID, Player, OpScrBID),RsShotBID = VLOOKUP(ply, plystatsBID, Player, RsShotBID),RsScrBID = VLOOKUP(ply, plystatsBID, Player,RsScrBID),
+         Poss_LostBID = VLOOKUP(ply, plystatsBID, Player, Poss_LostBID),Fk_WonBID = VLOOKUP(ply, plystatsBID, Player,Fk_WonBID),Fk_LostBID= VLOOKUP(ply, plystatsBID, Player, Fk_LostBID),
+         SpoilsBID = VLOOKUP(ply, plystatsBID, Player, SpoilsBID),OBPBID =VLOOKUP (ply, plystatsBID, Player, OBPBID), Pass_LossBID = VLOOKUP (ply, plystatsBID, Player,Pass_LossBID))
+
+statsB <-statsB %>%
+  mutate(PWBMD = VLOOKUP(ply, plystatsBMD, Player, PWBMD),PassBMD = VLOOKUP(ply, plystatsBMD, Player, PassBMD),RecBMD = VLOOKUP(ply, plystatsBMD, Player, RecBMD),
+         KoRecBMD = VLOOKUP(ply, plystatsBMD, Player, KoRecBMD),RsRecBMD = VLOOKUP(ply, plystatsBMD, Player, RsRecBMD),OpShotBMD = VLOOKUP(ply, plystatsBMD, Player, OpShotBMD),
+         OpScrBMD = VLOOKUP(ply, plystatsBMD, Player, OpScrBMD),RsShotBMD = VLOOKUP(ply, plystatsBMD, Player, RsShotBMD),RsScrBMD = VLOOKUP(ply, plystatsBMD, Player,RsScrBMD),
+         Poss_LostBMD = VLOOKUP(ply, plystatsBMD, Player, Poss_LostBMD),Fk_WonBMD = VLOOKUP(ply, plystatsBMD, Player,Fk_WonBMD),Fk_LostBMD= VLOOKUP(ply, plystatsBMD, Player, Fk_LostBMD),
+         SpoilsBMD = VLOOKUP(ply, plystatsBMD, Player, SpoilsBMD),OBPBMD =VLOOKUP (ply, plystatsBMD, Player, OBPBMD), Pass_LossBMD = VLOOKUP (ply, plystatsBMD, Player,Pass_LossBMD))
+
+statsB <-statsB %>%
+  mutate(PWBOD = VLOOKUP(ply, plystatsBOD, Player, PWBOD),PassBOD = VLOOKUP(ply, plystatsBOD, Player, PassBOD),RecBOD = VLOOKUP(ply, plystatsBOD, Player, RecBOD),
+         KoRecBOD = VLOOKUP(ply, plystatsBOD, Player, KoRecBOD),RsRecBOD = VLOOKUP(ply, plystatsBOD, Player, RsRecBOD),OpShotBOD = VLOOKUP(ply, plystatsBOD, Player, OpShotBOD),
+         OpScrBOD = VLOOKUP(ply, plystatsBOD, Player, OpScrBOD),RsShotBOD = VLOOKUP(ply, plystatsBOD, Player, RsShotBOD),RsScrBOD = VLOOKUP(ply, plystatsBOD, Player,RsScrBOD),
+         Poss_LostBOD = VLOOKUP(ply, plystatsBOD, Player, Poss_LostBOD),Fk_WonBOD = VLOOKUP(ply, plystatsBOD, Player,Fk_WonBOD),Fk_LostBOD= VLOOKUP(ply, plystatsBOD, Player, Fk_LostBOD),
+         SpoilsBOD = VLOOKUP(ply, plystatsBOD, Player, SpoilsBOD),OBPBOD =VLOOKUP (ply, plystatsBOD, Player, OBPBOD), Pass_LossBOD = VLOOKUP (ply, plystatsBOD, Player,Pass_LossBOD))
+
+statsB <-statsB %>%
+  mutate(PWBOA = VLOOKUP(ply, plystatsBOA, Player, PWBOA),PassBOA = VLOOKUP(ply, plystatsBOA, Player, PassBOA),RecBOA = VLOOKUP(ply, plystatsBOA, Player, RecBOA),
+         KoRecBOA = VLOOKUP(ply, plystatsBOA, Player, KoRecBOA),RsRecBOA = VLOOKUP(ply, plystatsBOA, Player, RsRecBOA),OpShotBOA = VLOOKUP(ply, plystatsBOA, Player, OpShotBOA),
+         OpScrBOA = VLOOKUP(ply, plystatsBOA, Player, OpScrBOA),RsShotBOA = VLOOKUP(ply, plystatsBOA, Player, RsShotBOA),RsScrBOA = VLOOKUP(ply, plystatsBOA, Player,RsScrBOA),
+         Poss_LostBOA = VLOOKUP(ply, plystatsBOA, Player, Poss_LostBOA),Fk_WonBOA = VLOOKUP(ply, plystatsBOA, Player,Fk_WonBOA),Fk_LostBOA= VLOOKUP(ply, plystatsBOA, Player, Fk_LostBOA),
+         SpoilsBOA = VLOOKUP(ply, plystatsBOA, Player, SpoilsBOA),OBPBOA =VLOOKUP (ply, plystatsBOA, Player, OBPBOA), Pass_LossBOA = VLOOKUP (ply, plystatsBOA, Player,Pass_LossBOA))
+
+statsB <-statsB %>%
+  mutate(PWBMA = VLOOKUP(ply, plystatsBMA, Player, PWBMA),PassBMA = VLOOKUP(ply, plystatsBMA, Player, PassBMA),RecBMA = VLOOKUP(ply, plystatsBMA, Player, RecBMA),
+         KoRecBMA = VLOOKUP(ply, plystatsBMA, Player, KoRecBMA),RsRecBMA = VLOOKUP(ply, plystatsBMA, Player, RsRecBMA),OpShotBMA = VLOOKUP(ply, plystatsBMA, Player, OpShotBMA),
+         OpScrBMA = VLOOKUP(ply, plystatsBMA, Player, OpScrBMA),RsShotBMA = VLOOKUP(ply, plystatsBMA, Player, RsShotBMA),RsScrBMA = VLOOKUP(ply, plystatsBMA, Player,RsScrBMA),
+         Poss_LostBMA = VLOOKUP(ply, plystatsBMA, Player, Poss_LostBMA),Fk_WonBMA = VLOOKUP(ply, plystatsBMA, Player,Fk_WonBMA),Fk_LostBMA= VLOOKUP(ply, plystatsBMA, Player, Fk_LostBMA),
+         SpoilsBMA = VLOOKUP(ply, plystatsBMA, Player, SpoilsBMA),OBPBMA =VLOOKUP (ply, plystatsBMA, Player, OBPBMA), Pass_LossBMA = VLOOKUP (ply, plystatsBMA, Player,Pass_LossBMA))
+
+statsB <-statsB %>%
+  mutate(PWBIA = VLOOKUP(ply, plystatsBIA, Player, PWBIA),PassBIA = VLOOKUP(ply, plystatsBIA, Player, PassBIA),RecBIA = VLOOKUP(ply, plystatsBIA, Player, RecBIA),
+         KoRecBIA = VLOOKUP(ply, plystatsBIA, Player, KoRecBIA),RsRecBIA = VLOOKUP(ply, plystatsBIA, Player, RsRecBIA),OpShotBIA = VLOOKUP(ply, plystatsBIA, Player, OpShotBIA),
+         OpScrBIA = VLOOKUP(ply, plystatsBIA, Player, OpScrBIA),RsShotBIA = VLOOKUP(ply, plystatsBIA, Player, RsShotBIA),RsScrBIA = VLOOKUP(ply, plystatsBIA, Player,RsScrBIA),
+         Poss_LostBIA = VLOOKUP(ply, plystatsBIA, Player, Poss_LostBIA),Fk_WonBIA = VLOOKUP(ply, plystatsBIA, Player,Fk_WonBIA),Fk_LostBIA= VLOOKUP(ply, plystatsBIA, Player, Fk_LostBIA),
+         SpoilsBIA = VLOOKUP(ply, plystatsBIA, Player, SpoilsBIA),OBPBIA =VLOOKUP (ply, plystatsBIA, Player, OBPBIA), Pass_LossBIA = VLOOKUP (ply, plystatsBIA, Player,Pass_LossBIA))
+
+statsB [is.na(statsB)] <- 0
+
+## TACKLES ##
+
+## Create Tackle Count - tck def ## 
+passBTck <- pass %>%filter (Teamnum == "B")
+
+plystatsDef <- passBTck %>%group_by(Player)%>% 
+  summarize(TckDefB =sum(main == "Tck Def"), SpoilsDefB =sum(main == "Def Act"), Tot_DefB = (TckDefB + SpoilsDefB))
+
+plystatsDefBID <- passBTck %>%group_by(Player)%>%filter (Pitch_Area %in% c("In_Def"))%>% 
+  summarize(TckDefBID =sum(main == "Tck Def"), SpoilsDefBID =sum(main == "Def Act"), Tot_DefBID = (TckDefBID + SpoilsDefBID ))
+
+plystatsDefBMD <- passBTck %>%group_by(Player)%>%filter (Pitch_Area %in% c("Mid_Def"))%>% 
+  summarize(TckDefBMD =sum(main == "Tck Def"), SpoilsDefBMD =sum(main == "Def Act"), Tot_DefBMD = (TckDefBMD + SpoilsDefBMD ))
+
+plystatsDefBOD <- passBTck %>%group_by(Player)%>%filter (Pitch_Area %in% c("Out_Def"))%>% 
+  summarize(TckDefBOD =sum(main == "Tck Def"), SpoilsDefBOD =sum(main == "Def Act"), Tot_DefBOD = (TckDefBOD + SpoilsDefBOD ))
+
+plystatsDefBOA <- passBTck %>%group_by(Player)%>%filter (Pitch_Area %in% c("Out_Att"))%>% 
+  summarize(TckDefBOA =sum(main == "Tck Def"), SpoilsDefBOA =sum(main == "Def Act"), Tot_DefBOA = (TckDefBOA + SpoilsDefBOA ))
+
+plystatsDefBMA <- passBTck %>%group_by(Player)%>%filter (Pitch_Area %in% c("Mid_Att"))%>% 
+  summarize(TckDefBMA =sum(main == "Tck Def"), SpoilsDefBMA =sum(main == "Def Act"), Tot_DefBMA = (TckDefBMA + SpoilsDefBMA ))
+
+plystatsDefBIA <- passBTck %>%group_by(Player)%>%filter (Pitch_Area %in% c("In_Att"))%>% 
+  summarize(TckDefBIA =sum(main == "Tck Def"), SpoilsDefBIA =sum(main == "Def Act"), Tot_DefBIA = (TckDefBIA + SpoilsDefBIA ))
+
+statsB <-statsB %>%
+  mutate(TckDefB = VLOOKUP(ply, plystatsDef, Player, TckDefB), SpoilsDefB = VLOOKUP(ply, plystatsDef, Player, SpoilsDefB), Tot_DefB = VLOOKUP(ply, plystatsDef, Player, Tot_DefB),
+TckDefBID = VLOOKUP(ply, plystatsDefBID, Player, TckDefBID), SpoilsDefBID = VLOOKUP(ply, plystatsDefBID, Player,SpoilsDefBID), Tot_DefBID = VLOOKUP(ply, plystatsDefBID, Player, Tot_DefBID),
+TckDefBMD = VLOOKUP(ply, plystatsDefBMD, Player, TckDefBMD), SpoilsDefBMD = VLOOKUP(ply, plystatsDefBMD, Player,SpoilsDefBMD), Tot_DefBMD = VLOOKUP(ply, plystatsDefBMD, Player, Tot_DefBMD),
+TckDefBOD = VLOOKUP(ply, plystatsDefBOD, Player, TckDefBOD), SpoilsDefBOD = VLOOKUP(ply, plystatsDefBOD, Player,SpoilsDefBOD), Tot_DefBOD = VLOOKUP(ply, plystatsDefBOD, Player, Tot_DefBOD),
+TckDefBOA = VLOOKUP(ply, plystatsDefBOA, Player, TckDefBOA), SpoilsDefBOA = VLOOKUP(ply, plystatsDefBOA, Player,SpoilsDefBOA), Tot_DefBOA = VLOOKUP(ply, plystatsDefBOA, Player, Tot_DefBOA),
+TckDefBMA = VLOOKUP(ply, plystatsDefBMA, Player, TckDefBMA), SpoilsDefBMA = VLOOKUP(ply, plystatsDefBMA, Player,SpoilsDefBMA), Tot_DefBMA = VLOOKUP(ply, plystatsDefBMA, Player, Tot_DefBMA),
+TckDefBIA = VLOOKUP(ply, plystatsDefBIA, Player, TckDefBIA), SpoilsDefBIA = VLOOKUP(ply, plystatsDefBIA, Player,SpoilsDefBIA), Tot_DefBIA = VLOOKUP(ply, plystatsDefBIA, Player, Tot_DefBIA))
+
+## Carries ##
+
+#carries over 10 - Maybe change it to 15 or 20 
+# 10 maybe too short to count as a run 
+
+#runAcarr <- runA%>%filter(seg %in% c("0","2"), dist > 9.99)
+
+runB <- run%>%filter(Teamnum=="B",keep=="Y")
+
+carrB <- runB %>%group_by(Player)%>%filter (seg %in% c("0","2"), dist > 9.99)%>%summarize(Carries = sum(segtype == "Carry"))
+carrBID <- runB %>%group_by(Player)%>%filter (seg %in% c("0","2"), dist > 9.99,Pitch_Area %in% c("In_Def"))%>%summarize(carrBID = sum(segtype == "Carry"))
+carrBMD <- runB %>%group_by(Player)%>%filter (seg %in% c("0","2"), dist > 9.99,Pitch_Area %in% c("Mid_Def"))%>%summarize(carrBMD = sum(segtype == "Carry"))
+carrBOD <- runB %>%group_by(Player)%>%filter (seg %in% c("0","2"), dist > 9.99,Pitch_Area %in% c("Out_Def"))%>%summarize(carrBOD = sum(segtype == "Carry"))
+carrBOA <- runB %>%group_by(Player)%>%filter (seg %in% c("0","2"), dist > 9.99,Pitch_Area %in% c("Out_Att"))%>%summarize(carrBOA = sum(segtype == "Carry"))
+carrBMA <- runB %>%group_by(Player)%>%filter (seg %in% c("0","2"), dist > 9.99,Pitch_Area %in% c("Mid_Att"))%>%summarize(carrBMA = sum(segtype == "Carry"))
+carrBIA <- runB %>%group_by(Player)%>%filter (seg %in% c("0","2"), dist > 9.99,Pitch_Area %in% c("In_Att"))%>%summarize(carrBIA = sum(segtype == "Carry"))
+
+statsB <-statsB %>%
+  mutate(Carries = VLOOKUP(ply, carrB, Player, Carries),
+         CarriesBID = VLOOKUP(ply, carrBID, Player, carrBID),
+         CarriesBMD = VLOOKUP(ply, carrBMD, Player, carrBMD),
+         CarriesBOD = VLOOKUP(ply, carrBOD, Player, carrBOD),
+         CarriesBOA = VLOOKUP(ply, carrBOA, Player, carrBOA),
+         CarriesBMA = VLOOKUP(ply, carrBMA, Player, carrBMA),
+         CarriesBIA = VLOOKUP(ply, carrBIA, Player, carrBIA))
+
+statsB [is.na(statsB)] <- 0
+
+
+## Pass Direction ## 
+
+pass_dirB <- run%>%filter(Teamnum=="B",keep=="Y", main %in% c("Pass Op", "Pass Rs"))
+
+move_dirB <- pass_dirB %>%group_by(Player)%>% summarize(For=sum(RunDir == "for"),Back=sum(RunDir == "bw"),SWL=sum(RunDir == "swl"),SWR=sum(RunDir == "swr"))
+
+statsB <-statsB %>%
+  mutate(For= VLOOKUP(ply, move_dirB, Player, For),Back = VLOOKUP(ply, move_dirB, Player, Back),SWL = VLOOKUP(ply, move_dirB, Player, SWL),
+         SWR = VLOOKUP(ply,move_dirB, Player, SWR))
+
+statsB [is.na(statsB)] <- 0
+
+## Run Direction ## 
+
+runBcar <- run%>%filter(Teamnum=="B",keep=="Y",seg %in% c("0","2"), dist > 9.99)
+
+Run_Dir <- runBcar %>%group_by(Player)%>% summarize(RunFor=sum(RunDir == "for"),RunBack=sum(RunDir == "bw"),RunSWL=sum(RunDir == "swl"),RunSWR=sum(RunDir == "swr"))
+
+statsB <-statsB %>%
+  mutate(RunFor= VLOOKUP(ply, Run_Dir, Player, RunFor),RunBack = VLOOKUP(ply,Run_Dir, Player, RunBack),RunSWL = VLOOKUP(ply,Run_Dir, Player, RunSWL),
+         RunSWR = VLOOKUP(ply,Run_Dir, Player, RunSWR))
+
+statsB [is.na(statsB)] <- 0
+
 statsB <- statsB%>% mutate_if(is.numeric, round, digits = 2)
 
 plystatsB <-statsB
@@ -796,6 +1395,12 @@ plystatsB <-statsB
 # plystatsBB playersts
 
 #write.csv2(plystatsB, "plystatsB.csv")
+
+
+
+```
+
+```{r}
 
 #### KICK OUTS ####
 
@@ -813,8 +1418,6 @@ koeff <-koonlyA %>%
 
 #write.csv2(oddps, "oddpsko.csv")
 #write.csv2(evenps, "evenpsko.csv")
-
-
 
 
 
@@ -1198,6 +1801,7 @@ paltow <- c("Tack W"="#000000",
 "Fk Short Gk"="#800080",
 "Short Gk"="#008080",
 "Tck LB Won"="#000080",
+"Tck LB Won G"="#D2691E",
 "Free Won Def"="gold",
 "Sl Kp Won To"="darkred",
 "RBW Off"="#808080",
@@ -1211,7 +1815,8 @@ paltow <- c("Tack W"="#000000",
 "PW Kp Int Mk Po"= "#D2691E",
 "PW Sl Pass"= "#D2691E",
 "PW Fk Pass"= "#D2691E",
-"Sl Won Def Loss" = "#D2691E")
+"Sl Won Def Loss" = "#D2691E",
+"Fk Won Off Foul" = "red")
 
 ```
 
@@ -1459,6 +2064,7 @@ startcolpal <- c(
   "Fk Loss ToL"= "darksalmon",
   "Tck ToL"= "red",
   "Loss Tck"= "red",
+  "Rs ToL"= "red",
   "Sl ToL"= "red",
    "Sl Pass"= "blue")
 
@@ -1626,7 +2232,7 @@ zonedB <-bind_cols(zonedB,inzonescrB,oczonescrB)
 ```
 
 
-<font size="4">27 September 1998, Croke Park, Dublin<font>
+<font size="4">27 September 2020,TEG Cusack Park, Mullingar, Westmeath<font>
 
 ```{r, fig.width = 16, fig.height = 3}
 df <- data.frame(
@@ -1676,9 +2282,9 @@ scoresply <- merge(teamsheetscrA,teamsheetscrB, by = "number", all = TRUE)
 
 scoresply$number <- as.numeric(scoresply$number)
 
-scoresply <- rename(scoresply, "Galway" = Player.x, "Score" = score.x, "Kildare" = Player.y, "Score." = score.y )
+scoresply <- rename(scoresply, "Tang" = Player.x, "Score" = score.x, "Moate" = Player.y, "Score." = score.y )
 
-scoresply <- scoresply %>% select(Galway,Score,Kildare, Score.)
+scoresply <- scoresply %>% select(Tang,Score,Moate, Score.)
 
 
 datatable(scoresply,options = list(pageLength = 10,lengthMenu = c(5, 10, 15, 20),columnDefs = 
@@ -1689,7 +2295,7 @@ datatable(scoresply,options = list(pageLength = 10,lengthMenu = c(5, 10, 15, 20)
 
 ## Team Sheet  {.tabset .tabset-pills}
 
-### Galway
+### Tang
 
 ```{r, fig.width = 16, fig.height = 12}
 
@@ -1759,7 +2365,7 @@ cardA %>%
 ```
 
 
-### Kildare
+### Moate
 
 ```{r, fig.width = 16, fig.height = 12}
 
@@ -1877,16 +2483,16 @@ phs <- pass%>%group_by(Phase) %>%filter(main %in% c("PW","Ko","ToL", "Pass Rs","
 (Action %in% c("Ko Mk Won", "Att Mk Won","Att Mk Won Prs","Loss Kp SlW","Loss Hp SlW","Loss Ko SlW","Loss Kp 45W","Off Foul Won","Ko Fk Won Off", "Sl Won Off","Off 45 Won")))
 
 oddps <- phs[seq(1, nrow(phs), 2),]
-colnames(phs) <- c("period","possno","poss","phaseno","Phase","Teamnum","Team","Player","plyname","Action","Areax","Areay","plylab","subset","Zone","time","main","Pitch_Area")
+colnames(phs) <- c("period","possno","poss","phaseno","Phase","Teamnum","Team","Player","plyname","Action","Areax","Areay","xmid","ymid","plylab","subset","Zone","time","main","Pitch_Area")
 evenps <- phs[seq(2, nrow(phs), 2),]
-colnames(evenps) <- c("periodoc","possnooc","possoc","phasenooc","Phaseoc","Teamnumoc","Teamoc","Playeroc","plynameoc","Actionoc","Areaxoc","Areayoc","plylaboc","subsetoc","Zoneoc","timeoc","mainoc","Pitch_Areaoc")
+colnames(evenps) <- c("periodoc","possnooc","possoc","phasenooc","Phaseoc","Teamnumoc","Teamoc","Playeroc","plynameoc","Actionoc","Areaxoc","Areayoc","xmidoc","ymidoc","plylaboc","subsetoc","Zoneoc","timeoc","mainoc","Pitch_Areaoc")
 phs <- bind_cols(oddps, evenps) 
 phs <- phs%>%select (Team,poss,Phase,time,Teamoc,possoc,Phaseoc,timeoc)
 
 time <-  phs
 
 
-teamcol = c("Galway" = "blue", "Kildare" = "red")
+teamcol = c("Tang" = "blue", "Moate" = "red")
 
 teamnumcol = c("A" = "blue", "B" = "red")
 
@@ -1924,9 +2530,9 @@ q + geom_segment(data = sopa, aes(x = time, y = 0, xend = timeoc, yend = 0, colo
 geom_step(data=scoresSD, aes(x=timeoc, y=diff), colour = "white", ,size=1.5, linetype = 2,alpha = 0.4)+
   geom_text_repel(data = scoresSD, aes(x=timeoc, y=diff, label = abdiff), colour = "white",size = 6)+
   #geom_point(data = wormA, aes(x = timeoc, y = 0), shape = 20, size = 4, stroke = 2, colour = "white") +
-  geom_text_repel(data = wormA, aes(x=timeoc, y=0, label = Actionoc, colour = Team),size = 4,segment.size  = 0.5,nudge_x = 0, nudge_y = 1.2) +
+  geom_text_repel(data = wormA, aes(x=timeoc, y=0, label = subsetoc, colour = Team),size = 4,segment.size  = 0.5,nudge_x = 0, nudge_y = 1.2) +
     #geom_point(data = wormB,aes(x=timeoc, y=0), shape = 20, size = 4, stroke = 2, colour = "white") +
-geom_text_repel(data = wormB, aes(x=timeoc, y=0, label = Actionoc, colour = Team),size = 4, segment.size  = 0.5,nudge_x = 0, nudge_y = -1.2) +
+geom_text_repel(data = wormB, aes(x=timeoc, y=0, label = subsetoc, colour = Team),size = 4, segment.size  = 0.5,nudge_x = 0, nudge_y = -1.2) +
     #geom_point(data = wormC,aes(x=timeoc, y=0,  colour = Team), shape = 4, size = 4, stroke = 2, colour = "white") +
 geom_text_repel(data = wormC, aes(x=timeoc, y=0, label = subsetoc, colour = Team),size = 4, segment.size  = 0.5,nudge_x = 0, nudge_y = 0.5) +
    #geom_point(data = wormD,aes(x=timeoc, y=0), shape = 20, size = 4, stroke = 2, colour = "white") +
@@ -1936,8 +2542,8 @@ geom_text_repel(data = wormD, aes(x=timeoc, y=0, label = subsetoc, colour = Team
 my_theme () +
 scale_y_continuous(breaks=seq(-10,10,1)) +
 expand_limits (y=c (-5,8)) +
-      annotate(geom="text", x=ht, y=6.5, label="Galway", color="blue", size = 14) +
-    annotate(geom="text", x=ht, y=-6.5, label="Kildare", color="red", size = 14)+
+      annotate(geom="text", x=ht, y=6.5, label="Tang", color="blue", size = 14) +
+    annotate(geom="text", x=ht, y=-6.5, label="Moate", color="red", size = 14)+
   geom_vline(xintercept=p1, linetype="dotted", color = "black")+
   geom_vline(xintercept=ht, linetype="dotted", color = "black")+
   geom_vline(xintercept=p3, linetype="dotted", color = "black")+
@@ -1984,7 +2590,7 @@ pA
 
 ## Game Stats {.tabset .tabset-pills}
 
-### Galway
+### Tang
 
 ```{r, fig.width = 16, fig.height = 4}
 
@@ -2032,7 +2638,7 @@ ggplot(df, aes(x, y, height = h, width = w, label = info)) +
 
 ```
 
-### Kildare
+### Moate
 
 ```{r, fig.width = 16, fig.height = 4}
 
@@ -2082,7 +2688,7 @@ ggplot(df, aes(x, y, height = h, width = w, label = info)) +
 
 ## Possession Stats {.tabset .tabset-pills}
 
-### Galway
+### Tang
 
 ```{r, fig.width = 16, fig.height = 2}
 passlpop <- pass[pass$main!="Def Act", ]
@@ -2177,7 +2783,7 @@ ggplot(df, aes(x, y, height = h, width = w, label = info)) +
     scale_y_continuous(expand = c(0, 0))
 ```
 
-### Kildare
+### Moate
 
 ```{r, fig.width = 16, fig.height = 2}
 passlpop <- pass[pass$main!="Def Act", ]
@@ -2273,7 +2879,7 @@ ggplot(df, aes(x, y, height = h, width = w, label = info)) +
 ```
 
 
-### Galway Passes
+### Tang Passes
 
 ```{r, fig.width = 16, fig.height = 10}
 passcntA <- sop%>%group_by(possno, .drop=TRUE) %>% filter (Teamnum == "A")%>%select(Team,possno, passno, subsetoc,mainoc)
@@ -2294,7 +2900,7 @@ panel.grid.minor = element_blank()) + theme(legend.position="bottom", axis.text.
 
 ```
 
-### Kildare Passes
+### Moate Passes
 
 ```{r, fig.width = 16, fig.height = 10}
 passcntB <- sop%>%group_by(possno, .drop=TRUE) %>% filter (Teamnum == "B")%>%select(Team,possno, passno, subsetoc,mainoc)
@@ -2318,7 +2924,7 @@ panel.grid.minor = element_blank()) + theme(legend.position="bottom", axis.text.
 
 ## Possession Start and End {.tabset .tabset-pills}
 
-### Galway Possessions
+### Tang Possessions
 
 ```{r,  fig.width = 10, fig.height = 8}
 # shapes - squares and circle - may have scale already
@@ -2368,7 +2974,7 @@ highlight( plot , on = "plotly_hover", off = "plotly_deselect")
 
 ```
 
-### Kildare Possessions
+### Moate Possessions
 
 ```{r,  fig.width = 10, fig.height = 8}
 # shapes - squares and circle - may have scale already
@@ -2420,7 +3026,7 @@ highlight( plot , on = "plotly_hover", off = "plotly_deselect")
 
 ## Time {.tabset .tabset-pills}
 
-### Galway Poss Time
+### Tang Poss Time
 
 ```{r}
 PosstimeAb  <- sop %>% group_by(period,line_time, .drop = FALSE)%>% filter(Teamnum == "A") %>% summarise(count = n())
@@ -2435,7 +3041,7 @@ panel.grid.minor = element_blank()) + theme(legend.position="bottom")
 ```
 
 
-### Kildare Poss Time
+### Moate Poss Time
 
 ```{r}
 
@@ -2451,7 +3057,7 @@ panel.grid.minor = element_blank()) + theme(legend.position="bottom")
 
 ```
 
-### Galway Phase Time
+### Tang Phase Time
 
 ```{r}
 PosstimeAb  <- phasesop %>% group_by(period,line_time, .drop = FALSE)%>% filter(Teamnum == "A") %>% summarise(count = n())
@@ -2465,7 +3071,7 @@ ggplot(data = PosstimeAb, aes(x = period, y = count, fill = line_time)) + geom_b
 panel.grid.minor = element_blank()) + theme(legend.position="bottom") 
 ```
 
-### Kildare Phase Time
+### Moate Phase Time
 
 ```{r}
 
@@ -2484,7 +3090,7 @@ panel.grid.minor = element_blank()) + theme(legend.position="bottom")
 
 ## Shooting {.tabset .tabset-pills}
 
-### Galway
+### Tang
 
 ```{r, fig.width = 16, fig.height = 12}
 
@@ -2566,7 +3172,7 @@ ggplot(df, aes(x, y, height = h, width = w, label = info)) +
 
 ```
 
-### Kildare
+### Moate
 
 ```{r, fig.width = 16, fig.height = 12}
 
@@ -2647,7 +3253,7 @@ ggplot(df, aes(x, y, height = h, width = w, label = info)) +
 
 ```
 
-### Galway - Shot Outcome
+### Tang - Shot Outcome
 
 ```{r}
 
@@ -2693,7 +3299,7 @@ geom_text(aes(label = bar_label, size = 5.5, hjust = 0)) +
 theme(legend.position="none", plot.title =  element_text(size = 20, color = "black"),plot.subtitle =  element_text(size = 18, color = "black"))
 ```
 
-### Kildare - Shot Outcome
+### Moate - Shot Outcome
 
 ```{r}
 ASB<- pass %>%group_by(Team, Action) %>% filter(Teamnum == "B", main =="Shot Op Oc"| main == "Shot Rs Oc")
@@ -2741,7 +3347,7 @@ geom_text(aes(label = bar_label, size = 5.5, hjust = 0)) +
 
 ## More Shooting {.tabset .tabset-pills}
 
-### Galway - Open Play
+### Tang - Open Play
 
 ```{r, fig.width = 16, fig.height = 12}
 
@@ -2758,7 +3364,7 @@ shotseffA = shotseffA %>%
 p + 
 stat_chull(data = shotsA,aes(x=Areax, y=Areay),color = "blue", fill = "blue",alpha = 0.1, geom = "polygon") +
 stat_chull(data = shotsAScr,aes(x=Areax, y=Areay), fill = "green",color = "green", alpha = 0.1, geom = "polygon") +
-  geom_text(data= shotseffA, aes(x= tx, y=ty, label = shtscr),colour = "white", size = 30, alpha = 0.4) +
+  #geom_text(data= shotseffA, aes(x= tx, y=ty, label = shtscr),colour = "white", size = 30, alpha = 0.4) +
   geom_point(data = shotsA, aes(x=Areax, y=Areay, colour = as.factor(shdf), shape = Action), size = 6) + 
     scale_colour_manual(values = colshotpal, labels = c("No Prs", "Light/Late Prs", "Heavy Prs")) +
   geom_text_repel(data = shotsA, aes(x=Areax, y=Areay, label = plylaboc, colour = as.factor(shdf)), size = 6) +
@@ -2849,7 +3455,7 @@ prsA %>%
 ```
 
 
-### Kildare - Open Play
+### Moate - Open Play
 
 ```{r, fig.width = 16, fig.height = 12}
 
@@ -2954,7 +3560,7 @@ prsA %>%
 
 ```
 
-### Galway - Frees
+### Tang - Frees
 
 ```{r, fig.width = 16, fig.height = 12}
 
@@ -3045,7 +3651,7 @@ ggplot(df, aes(x, y, height = h, width = w, label = info)) +
     scale_y_continuous(expand = c(0, 0))
 ```
 
-### Kildare - Frees
+### Moate - Frees
 
 ```{r, fig.width = 16, fig.height = 12}
 
@@ -3140,7 +3746,7 @@ ggplot(df, aes(x, y, height = h, width = w, label = info)) +
 
 ## Kick Outs  {.tabset .tabset-pills}
 
-### Galway
+### Tang
 
 ```{r}
 
@@ -3256,17 +3862,17 @@ PossorigKo <-sopA %>% filter(Teamnum == "A",Pitch_Oc_Ko =="Ko Rec")
 koToLA <-filter(pass, Teamnum == "A",subset =="Ko ToL")
 
 p + geom_text(data= koeffA, aes(x= tx, y=ty, label = korectol),colour = "black", size = 28,alpha=0.4) + 
-  geom_segment(data = PossorigKo, aes(x=Ko_Zone_X, y=Ko_Zone_Y, xend = shotx, yend = Poss_endy, colour = as.factor(poss)),show.legend = FALSE,size = 1,alpha = 1,arrow = arrow(length = unit(0.8,"cm"))) +
+  geom_segment(data = PossorigKo, aes(x=Ko_Zone_X, y=Ko_Zone_Y, xend = Poss_endx, yend = Poss_endy, colour = as.factor(poss)),show.legend = FALSE,size = 1,alpha = 1,arrow = arrow(length = unit(0.8,"cm"))) +
   scale_colour_manual(values = c(color))+ 
   new_scale_color() + 
-geom_point(data = PossorigKo, aes(x=Ko_Zone_X, y=Ko_Zone_Y, colour = as.factor(subsetoc), shape = as.factor(main)), size = 8) +
-geom_text(data = PossorigKo, aes(x=Ko_Zone_X, y=Ko_Zone_Y, label = possno), col = "white", size = 4) +
-geom_point(data = PossorigKo, aes(x = Poss_endx, y = Poss_endy, colour = as.factor(subsetoc), shape = as.factor(main)), size = 7) +
-geom_text(data = PossorigKo, aes(x = Poss_endx, y = Poss_endy, label = possno), col = "white", size = 4) +
+  geom_point(data = PossorigKo, aes(x=Ko_Zone_X, y=Ko_Zone_Y, colour = as.factor(subsetoc), shape = as.factor(main)), size = 8) +
+  geom_text(data = PossorigKo, aes(x=Ko_Zone_X, y=Ko_Zone_Y, label = possno), col = "white", size = 4) +
+  geom_point(data = PossorigKo, aes(x = Poss_endx, y = Poss_endy, colour = as.factor(subsetoc), shape = as.factor(main)), size = 7) +
+  geom_text(data = PossorigKo, aes(x = Poss_endx, y = Poss_endy, label = possno), col = "white", size = 4) +
   geom_point(data = koToLA, aes(x = Areax, y = Areay), colour = "red", shape = 4, size = 7, stroke = 2) +
-theme(plot.title = element_text(hjust=0.5)) +
-theme(plot.subtitle = element_text(hjust=0.5)) +
-theme(legend.position="bottom") +
+  theme(plot.title = element_text(hjust=0.5)) +
+  theme(plot.subtitle = element_text(hjust=0.5)) +
+  theme(legend.position="bottom") +
   scale_shape_manual(values= startshape) +
   scale_colour_manual(values= startcolpal) +
   labs(colour="Outcome") +
@@ -3274,7 +3880,7 @@ theme(legend.position="bottom") +
   guides(size = FALSE) +
   guides(colour = guide_legend(override.aes = list(size = 10))) +
   labs(caption="Numbers = Possession")+
- theme(plot.caption=element_text(size=16, hjust=0.5, face="bold", color="black")) +
+  theme(plot.caption=element_text(size=16, hjust=0.5, face="bold", color="black")) +
   labs(title = "Ko Total/Rec/Scores") +
   theme(plot.title = element_text(hjust=0.5, size = 32))
 
@@ -3282,7 +3888,7 @@ theme(legend.position="bottom") +
 ```
 
 
-### Kildare
+### Moate
 
 ```{r}
 
@@ -3422,9 +4028,9 @@ theme(legend.position="bottom") +
 ```
 
 
-## Possession Won - Galway   {.tabset .tabset-pills}
+## Possession Won - Tang   {.tabset .tabset-pills}
 
-### Galway
+### Tang
 
 ```{r}
 
@@ -3633,9 +4239,9 @@ theme(legend.position="bottom") +
 
 ```
 
-## Possession Won - Kildare  {.tabset .tabset-pills}
+## Possession Won - Moate  {.tabset .tabset-pills}
 
-### Kildare
+### Moate
 
 ```{r}
 
@@ -3847,7 +4453,7 @@ theme(legend.position="bottom") +
 
 ## Inside Shooting Area {.tabset .tabset-pills}
 
-### Galway
+### Tang
 
 ```{r, fig.width = 16, fig.height = 12}
 
@@ -4006,7 +4612,7 @@ ggplot(df, aes(x, y, height = h, width = w, label = info)) +
 ```
 
 
-### Kildare
+### Moate
 
 ```{r, fig.width = 16, fig.height = 12}
 
@@ -4165,7 +4771,7 @@ ggplot(df, aes(x, y, height = h, width = w, label = info)) +
 
 ```
 
-## Tackling - Galway {.tabset .tabset-pills}
+## Tackling - Tang {.tabset .tabset-pills}
 
 ### All 
 
@@ -4175,11 +4781,11 @@ passlpopA  <- pass %>% filter (Teamnum == "A")
 #Change total tackles to sum of the other counts
 passlpopAllA  <- passlpopA %>%group_by(Team)%>%summarize(
 TackleAttempts = sum (main %in% c("Tck Def","Free Loss")), 
-Dispossess = sum(Action %in% c("Tck Dp Def A","Tck Dp Def GA")),
+Dispossess = sum(Action %in% c("Tck Dp Def","Tck Dp Def G")),
 PossessionWon = sum (Action %in% c("Tck LB Won","Tck LB Won G")),
-NonDispossess = sum(Action %in% c("Tck Def Ndp A","Tck Def Ndp GA")), 
-PassPress = sum(Action %in% c("Tck Prs A","Tck Prs GA")),
-FreeLoss = sum(Action %in% c("Fk Loss Tck A","Fk Loss Tck GA")),
+NonDispossess = sum(Action %in% c("Tck Def Ndp","Tck Def Ndp ")), 
+PassPress = sum(Action %in% c("Tck Prs","Tck Prs G")),
+FreeLoss = sum(Action %in% c("Fk Loss Tck","Fk Loss Tck G")),
 Freewon = sum(Action %in% c("Fk Won Def Tck","Fk Won Def Tck G")))
 
 passlpopAllA <-  passlpopAllA%>% select (-Team)
@@ -4236,11 +4842,11 @@ passlpopA  <- pass %>% filter (Teamnum == "A")
 #Change total tackles to sum of the other counts
 passlpopAs  <- passlpopA %>%group_by(Team)%>%summarize(
 TackleAttempts = sum (subset %in% c("Tck Def","Fkl")), 
-Dispossess = sum(Action %in% c("Tck Dp Def A")),
+Dispossess = sum(Action %in% c("Tck Dp Def")),
 PossessionWon = sum (Action %in% c("Tck LB Won")),
-NonDispossess = sum(Action %in% c("Tck Def Ndp A")), 
-PassPress = sum(Action %in% c("Tck Prs A")),
-FreeLoss = sum(Action %in% c("Fk Loss Tck A")),
+NonDispossess = sum(Action %in% c("Tck Def Ndp")), 
+PassPress = sum(Action %in% c("Tck Prs")),
+FreeLoss = sum(Action %in% c("Fk Loss Tck")),
 Freewon = sum(Action %in% c("Fk Won Def Tck")))
 
 
@@ -4299,11 +4905,11 @@ passlpopA  <- pass %>% filter (Teamnum == "A")
 #Change total tackles to sum of the other counts
 passlpopGA  <- passlpopA %>%group_by(Team)%>%summarize(
 TackleAttempts = sum (subset %in% c("Tck Def G","Fkl G")), 
-Dispossess = sum(Action %in% c("Tck Dp Def GA")),
+Dispossess = sum(Action %in% c("Tck Dp Def G")),
 PossessionWon = sum (Action %in% c("Tck LB Won G")),
-NonDispossess = sum(Action %in% c("Tck Def Ndp GA")), 
-PassPress = sum(Action %in% c("Tck Prs GA")),
-FreeLoss = sum(Action %in% c("Fk Loss Tck GA")),
+NonDispossess = sum(Action %in% c("Tck Def Ndp G")), 
+PassPress = sum(Action %in% c("Tck Prs G")),
+FreeLoss = sum(Action %in% c("Fk Loss Tck G")),
 Freewon = sum(Action %in% c("Fk Won Def Tck G")))
 
 passlpopGA <-  passlpopGA%>% select (-Team)
@@ -4446,6 +5052,9 @@ BAdefact <- BA %>% summarize (Pass, Def_Act, PPDA = (Pass/Def_Act))
 
 BAdefact <- rename(BAdefact,"# Opposition Passes" = Pass,"Tackle Attempts" = Def_Act,  "Passes per Defensive Action" = PPDA )
 
+BAdefact <- BAdefact %>% mutate_if(is.numeric, round, digits = 2)
+
+
 BAdefact  %>%
   kbl(caption = "Passes per Defensive Action",align = "c") %>%
     kable_minimal()
@@ -4454,7 +5063,7 @@ BAdefact  %>%
 ```
 
 
-## Tackling - Kildare  {.tabset .tabset-pills}
+## Tackling - Moate  {.tabset .tabset-pills}
 
 
 ### All 
@@ -4465,11 +5074,11 @@ passlpopB  <- pass %>% filter (Teamnum == "B")
 #Change total tackles to sum of the other counts
 passlpopBllB  <- passlpopB %>%group_by(Team)%>%summarize(
 TackleAttempts = sum (main %in% c("Tck Def","Free Loss")), 
-Dispossess = sum(Action %in% c("Tck Dp Def B","Tck Dp Def GB")),
+Dispossess = sum(Action %in% c("Tck Dp Def","Tck Dp Def G")),
 PossessionWon = sum (Action %in% c("Tck LB Won","Tck LB Won G")),
-NonDispossess = sum(Action %in% c("Tck Def Ndp B","Tck Def Ndp GB")), 
-PassPress = sum(Action %in% c("Tck Prs B","Tck Prs GB")),
-FreeLoss = sum(Action %in% c("Fk Loss Tck B","Fk Loss Tck GB")),
+NonDispossess = sum(Action %in% c("Tck Def Ndp","Tck Def Ndp G")), 
+PassPress = sum(Action %in% c("Tck Prs","Tck Prs G")),
+FreeLoss = sum(Action %in% c("Fk Loss Tck","Fk Loss Tck G")),
 Freewon = sum(Action %in% c("Fk Won Def Tck","Fk Won Def Tck G")))
 
 passlpopBllB <-  passlpopBllB%>% select (-Team)
@@ -4529,11 +5138,11 @@ passlpopB  <- pass %>% filter (Teamnum == "B")
 #Change total tackles to sum of the other counts
 passlpopBs  <- passlpopB %>%group_by(Team)%>%summarize(
 TackleAttempts = sum (subset %in% c("Tck Def","Fkl")), 
-Dispossess = sum(Action %in% c("Tck Dp Def B")),
+Dispossess = sum(Action %in% c("Tck Dp Def")),
 PossessionWon = sum (Action %in% c("Tck LB Won")),
-NonDispossess = sum(Action %in% c("Tck Def Ndp B")), 
-PassPress = sum(Action %in% c("Tck Prs B")),
-FreeLoss = sum(Action %in% c("Fk Loss Tck B")),
+NonDispossess = sum(Action %in% c("Tck Def Ndp")), 
+PassPress = sum(Action %in% c("Tck Prs")),
+FreeLoss = sum(Action %in% c("Fk Loss Tck")),
 Freewon = sum(Action %in% c("Fk Won Def Tck")))
 
 passlpopBs <-  passlpopBs%>% select (-Team)
@@ -4592,11 +5201,11 @@ passlpopB  <- pass %>% filter (Teamnum == "B")
 #Change total tackles to sum of the other counts
 passlpopGB  <- passlpopB %>%group_by(Team)%>%summarize(
 TackleAttempts = sum (subset %in% c("Tck Def G","Fkl G")), 
-Dispossess = sum(Action %in% c("Tck Dp Def GB")),
+Dispossess = sum(Action %in% c("Tck Dp Def G")),
 PossessionWon = sum (Action %in% c("Tck LB Won G")),
-NonDispossess = sum(Action %in% c("Tck Def Ndp GB")), 
-PassPress = sum(Action %in% c("Tck Prs GB")),
-FreeLoss = sum(Action %in% c("Fk Loss Tck GB")),
+NonDispossess = sum(Action %in% c("Tck Def Ndp G")), 
+PassPress = sum(Action %in% c("Tck Prs G")),
+FreeLoss = sum(Action %in% c("Fk Loss Tck G")),
 Freewon = sum(Action %in% c("Fk Won Def Tck G")))
 
 
@@ -4801,6 +5410,8 @@ ABdefact <- AB %>% summarize (Pass, Def_Act, PPDA = (Pass/Def_Act))
 
 ABdefact <- rename(ABdefact,"# Opposition Passes" = Pass,"Tackle Attempt" = Def_Act,  "Passes per Defensive Action" = PPDA )
 
+ABdefact <- ABdefact %>% mutate_if(is.numeric, round, digits = 2)
+
 ABdefact  %>%
   kbl(caption = "Passes per Defensive Action",align = "c") %>%
     kable_minimal()
@@ -4812,7 +5423,7 @@ ABdefact  %>%
 
 
 
-## Player Stats - Galway {.tabset .tabset-pills}
+## Player Stats - Tang {.tabset .tabset-pills}
 
 ### Pass Network
 
@@ -5154,6 +5765,8 @@ plystatsA <- plystatsA  %>%  mutate(miss = (ShtInvl - score))
 
 plystatsAinvl <- plystatsA %>% select (Player,nonshot,miss,score)
 
+plystatsAinvl$Player <- factor(plystatsAinvl$Player, levels = c(plystatsAinvl$Player))
+
 plystatsAinvlA <- plystatsAinvl %>% gather(key = Invol, value = value, nonshot:score)
 #plystatsAinvlA
 
@@ -5193,7 +5806,7 @@ datatable(showstsA ,options = list(pageLength = 5,lengthMenu = c(5, 10, 15, 20),
                                      targets = "_all"))),class = 'cell-border stripe', rownames = FALSE)
 ```
 
-## Player Stats - Kildare {.tabset .tabset-pills}
+## Player Stats - Moate {.tabset .tabset-pills}
 
 ### Pass Network
 
@@ -5533,6 +6146,8 @@ plystatsB <- plystatsB  %>%  mutate(miss = (ShtInvl - score))
 #Chart
 
 plystatsBinvl <- plystatsB %>% select (Player,nonshot,miss,score)
+
+plystatsBinvl$Player <- factor(plystatsBinvl$Player, levels = c(plystatsBinvl$Player))
 
 plystatsBinvlB <- plystatsBinvl %>% gather(key = Invol, value = value, nonshot:score)
 #plystatsAinvlA

@@ -1,0 +1,4419 @@
+---
+title: "2011 All Ireland Football Final"
+output:
+  html_document:
+    theme: cosmo
+    toc: yes
+    toc_float: yes
+---
+
+```{r setup, include=FALSE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE, options(knitr.kable.NA = ''))
+
+#Load packages and pitch
+#install.packages('digest', repos='http://cran.us.r-project.org')
+library (digest)
+library(flexdashboard)
+library(dplyr)
+library(deldir)
+library(ggplot2)
+library(ggrepel)
+library(ggpubr)
+library(knitr)
+library(rmarkdown)
+library(kableExtra)
+library(data.table)
+library(RColorBrewer)
+library(gridExtra)
+library(igraph)
+library(tidyverse)
+library(treemap)
+library(plotly)
+library(networkD3)
+library (curl)
+library(formattable)
+library(grid)
+library(yaml)
+library (tinytex)
+library (ggforce)
+library (waffle)
+library (ggnewscale)
+library(factoextra)
+library(cluster)
+library(tidyquant)
+library(parallel)
+library(ggExtra)
+library(DT)
+library(sp)
+library(lubridate)
+
+```
+
+```{r}
+
+
+match <- read.csv(file="c:/Users/donagh/OneDrive/Spreadsheet fun/PA Analytics/PA Template/dubkeraif11/matchdubkeraif11.csv", header=TRUE, sep=";")
+attach (match)
+
+teamsheet <- read.csv(file="c:/Users/donagh/OneDrive/Spreadsheet fun/PA Analytics/PA Template/dubkeraif11/teamsheetdubkeraif11.csv", header=TRUE, sep=";")
+attach (teamsheet)
+
+
+#create a Sht Prs df 
+
+shdf <- match %>%filter(Action %in% c("Sht Prs"))
+
+#delete Sht Prs from match 
+
+start = 	0
+p1 = 	1114.835
+ht = 	2229.67
+p3 = 	3347.015
+
+
+
+team <- c("Dublin","Kerry")
+
+score <- c("1-12", "1-11")
+
+gamescore <- data.frame(team,score)
+
+time <- c("Total Time ","First Half","Second Half")
+
+mins<- c("74", "37", "37")
+
+gametime <- data.frame(time,mins)
+
+match <- match %>% mutate(Teamnum =ifelse(Team == "Dublin","A","B"))
+
+match <- match%>% mutate(half =ifelse(time <= ht,1, ifelse(time > ht,2,"time")))
+
+match <- match %>%mutate(Areax=ifelse(Teamnum == "A" & half == 1,X,ifelse(Teamnum == "B" & half == 1,144-X
+,ifelse(Teamnum == "A" & half == 2,144-X,ifelse(Teamnum == "B" & half == 2,X,X)))))
+
+
+match <-match %>%mutate(Areay=ifelse(Teamnum == "A" & half == 1,Y,ifelse(Teamnum == "B" & half == 1,88-Y
+,ifelse(Teamnum == "A" & half == 2,88-Y,ifelse(Teamnum == "B" & half == 2,Y,Y)))))
+
+
+match <- match %>% mutate(Zone =
+ifelse(Areax >=0 & Areax <=19.99& Areay >=0 & Areay <=12.99,1, 
+ifelse(Areax >=0 & Areax <=19.99& Areay >=13 & Areay <=30.99,2, 
+ifelse(Areax >=0 & Areax <=19.99& Areay >=31 & Areay <=56.99,3, 
+ifelse(Areax >=0 & Areax <=19.99& Areay >=57 & Areay <=74.99,4, 
+ifelse(Areax >=0 & Areax <=19.99& Areay >=75 & Areay <=88,5, 
+ifelse(Areax >=20 & Areax <=44.99& Areay >=0 & Areay <=12.99,6, 
+ifelse(Areax >=20 & Areax <=44.99& Areay >=13 & Areay <=30.99,7, 
+ifelse(Areax >=20 & Areax <=44.99& Areay >=31 & Areay <=56.99,8, 
+ifelse(Areax >=20 & Areax <=44.99& Areay >=57 & Areay <=74.99,9, 
+ifelse(Areax >=20 & Areax <=44.99& Areay >=75 & Areay <=88,10, 
+ifelse(Areax >=45 & Areax <=71.99& Areay >=0 & Areay <=12.99,11, 
+ifelse(Areax >=45 & Areax <=71.99& Areay >=13 & Areay <=30.99,12, 
+ifelse(Areax >=45 & Areax <=71.99& Areay >=31 & Areay <=56.99,13, 
+ifelse(Areax >=45 & Areax <=71.99& Areay >=57 & Areay <=74.99,14, 
+ifelse(Areax >=45 & Areax <=71.99& Areay >=75 & Areay <=88,15, 
+ifelse(Areax >=72 & Areax <=98.99& Areay >=0 & Areay <=12.99,16, 
+ifelse(Areax >=72 & Areax <=98.99& Areay >=13 & Areay <=30.99,17, 
+ifelse(Areax >=72 & Areax <=98.99& Areay >=31 & Areay <=56.99,18, 
+ifelse(Areax >=72 & Areax <=98.99& Areay >=57 & Areay <=74.99,19, 
+ifelse(Areax >=72 & Areax <=98.99& Areay >=75 & Areay <=88,20, 
+ifelse(Areax >=99 & Areax <=123.99& Areay >=0 & Areay <=12.99,21, 
+ifelse(Areax >=99 & Areax <=123.99& Areay >=13 & Areay <=30.99,22, 
+ifelse(Areax >=99 & Areax <=123.99& Areay >=31 & Areay <=56.99,23, 
+ifelse(Areax >=99 & Areax <=123.99& Areay >=57 & Areay <=74.99,24, 
+ifelse(Areax >=99 & Areax <=123.99& Areay >=75 & Areay <=88,25, 
+ifelse(Areax >=124 & Areax <=144& Areay >=0 & Areay <=12.99,26, 
+ifelse(Areax >=124 & Areax <=144& Areay >=13 & Areay <=30.99,27, 
+ifelse(Areax >=124 & Areax <=144& Areay >=31 & Areay <=56.99,28, 
+ifelse(Areax >=124 & Areax <=144& Areay >=57 & Areay <=74.99,29, 
+ifelse(Areax >=124 & Areax <=144& Areay >=75 & Areay <=88,30
+,"No_Zone")))))))))))))))))))))))))))))))
+
+
+
+
+match = match %>% 
+   unite(plyid, Team, Player, sep = " ", remove = FALSE)
+
+sets <- read.csv(file="c:/Users/donagh/OneDrive/Spreadsheet fun/PA Analytics/PA Template/sets.csv", header=TRUE, sep=";")
+attach (sets)
+
+
+teamsheet = teamsheet %>% 
+   unite(plyid, Team, ply, sep = " ", remove = FALSE)
+   
+zonetext <- read.csv(file="c:/Users/donagh/OneDrive/Spreadsheet fun/PA Analytics/PA Template/zonetext.csv", header=TRUE, sep=";")
+attach (zonetext) 
+
+match <-match %>%
+    mutate(subset = VLOOKUP(Action, sets, Action, subset), main = VLOOKUP(Action, sets, Action, main),plyname = VLOOKUP(plyid,teamsheet,plyid, name))
+    
+match = match %>% 
+   unite(plylab, Player, Action, sep = " ", remove = FALSE)
+
+
+teamcnts <- match%>%group_by(Teamnum)%>% mutate(possno = cumsum(main %in% c("PW","Ko")|Action %in% c("45 Shot Left","45 Shot Right","45 Pass")))
+
+teamcnts <- teamcnts%>%group_by(Teamnum)%>% mutate(phaseno = cumsum(main %in% c("PW","Ko","Pass Rs","Shot Rs")))
+
+teamcnts <-teamcnts%>% unite(poss, Teamnum, possno,sep = "",  remove = FALSE)
+
+teamcnts <-teamcnts%>% unite(Phase, Teamnum, phaseno,sep = "",  remove = FALSE)
+
+teamcnts <- teamcnts%>% mutate(period =ifelse(time < p1,1, ifelse(time > p1 & time <=ht ,2, ifelse(time > ht & time <= p3,3,ifelse(time > p3,4,"Time")))))
+
+teamcnts$Zone <- as.integer(teamcnts$Zone)
+
+teamcnts <- teamcnts %>% mutate(Pitch_Area =ifelse(Zone >0 & Zone  <=5 ,"In_Def", ifelse(Zone >= 6 & Zone  <=10 ,"Mid_Def", ifelse(Zone >=11 & Zone <=15, "Out_Def",ifelse(Zone  >=16 & Zone <=20,"Out_Att",ifelse(Zone  >=21 & Zone <=25, "Mid_Att",ifelse(Zone >=26 & Zone <=30, "In_Att","Draw")))))))
+
+teamcnts <- teamcnts %>% mutate(Pitch_Area_No =ifelse(Zone >0 & Zone  <=5 ,"1", ifelse(Zone >= 6 & Zone  <=10 ,"2", ifelse(Zone >=11 & Zone <=15, "3",ifelse(Zone  >=16 & Zone <=20,"4",ifelse(Zone  >=21 & Zone <=25, "5",ifelse(Zone >=26 & Zone <=30, "6","Draw")))))))
+
+teamcnts <-teamcnts%>%select (period,possno,poss, phaseno, Phase, Teamnum, Team, Player, plyname,Action, Areax, Areay, plylab, subset, Zone, time, main, Pitch_Area,Pitch_Area_No)
+
+
+
+pass <-teamcnts
+
+pass$period <- as.integer(pass$period)
+pass$poss <- as.factor(pass$poss)
+pass$Phase <- as.factor(pass$Phase)
+pass$Teamnum <- as.factor(pass$Teamnum)
+pass$subset <- as.factor(pass$subset)
+
+
+shdfposs <- pass %>%filter(Action %in% c("Sht Prs"))
+
+
+#if zones need changing 
+shdfposs  <- shdfposs %>% mutate (diffsh = ifelse(Zone == 30,1, ifelse(Zone  == 29,2, ifelse(Zone == 28,3,shdfposs$Zone))))
+
+#shdfposs  <-shdfposs %>%mutate(shotdiff = VLOOKUP(time,shdf,time, Zone))
+
+
+pass <- pass[pass$Action!="Sht Prs", ]
+pass <- pass[pass$Action!="Red Card", ]
+pass <- pass[pass$Action!="Sub In", ]
+pass <- pass[pass$Action!="Sub Out", ]
+pass <- pass[pass$Action!="Yellow Card", ]
+
+
+#write.csv2(pass, "tallylog.csv")
+
+
+#Run - w/ own and opp brks
+passR <- pass[pass$main!="Def Act", ]
+passR <- passR[passR$main!="Free Loss", ]
+passR <- passR[passR$main!="Tck Def", ]
+passR <- passR[passR$main!="Tck End", ]
+passR <- passR[passR$main!="Sht Prs", ]
+passR <- passR[passR$main!="Spoil Off", ]
+passR <- passR[passR$main!="Opp Brk", ]
+passR <- passR[passR$main!="Red Card", ]
+
+passR <- passR%>%select(period,possno,poss,Teamnum,Phase,phaseno,Team,Player,plyname,Action,Areax,Areay,plylab,subset,Zone,time,main,Pitch_Area)
+
+passRc <- passR 
+
+#passRc <- passR %>% filter (poss =="A1"|poss == "B1"|poss == "A2")
+
+oddps <- passRc[seq(1, nrow(passRc), 1),]
+colnames(oddps) <- c("period","possno","poss","Teamnum","phaseno","Phase","Team","Player","plyname","Action","Areax","Areay","plylab","subset","Zone","time","main","Pitch_Area")
+evenps <- passRc[seq(2, nrow(passRc), 1),]
+colnames(evenps) <- c("periodoc","possnooc","possoc","Teamnumoc","phasenooc","Phaseoc","Teamoc","Playeroc","plynameoc","Actionoc","Areaxoc","Areayoc","plylaboc","subsetoc","Zoneoc","timeoc","mainoc","Pitch_End")
+
+#add column to each data frame with row number
+oddps$number <- row.names(oddps)
+evenps$number <- row.names(evenps)
+
+run <- merge(oddps, evenps, by = "number", all = TRUE)
+
+run$number <- as.numeric(run$number)
+
+run  <- run %>% arrange(number)
+
+library(plyr)
+
+run  <- rename(run, c( Areaxoc = "xend", Areayoc = "yend",Zone = "zone",  Zoneoc = "zoneoc"))
+
+detach(package:plyr)
+
+run <-run %>% mutate(teamsame = ifelse(Team == Teamoc ,"Y","N"))
+run <-run %>% mutate(keep = ifelse(main =="Free Won" ,"N",ifelse(main == "PosReg","N",ifelse(Action == "Loss Kp 45W","N",
+ifelse(Actionoc == "45 Shot Right","N",ifelse(Actionoc == "45 Shot Left","N" ,ifelse(Action == "Ko Fk Won Off","N",run$teamsame)))))))
+
+
+run <-run %>% mutate(segtypea = ifelse(Action =="Hp","Hp",ifelse(Action  =="Hp Prs","Hp Prs", ifelse(Action  == "Kp Left","Kp Left",ifelse(Action  == "Kp Right","Kp Right",
+ifelse(Action  == "Kp Left Prs","Kp Left Prs",ifelse(Action  == "Kp Right Prs","Kp Right Prs",ifelse(Action  == "Ko","Ko",ifelse(Action == "Fk Pass","Fk Pass",ifelse(Action  == "Sl Pass","Sl Pass"
+,ifelse(Action  == "Brk Own","Brk Own",ifelse(Action  == "Opp Brk","Opp Brk",ifelse(Action  == "koBrk Own","KoBrk Own",ifelse(Action  == "Opp KoBrk","Opp KoBrk",ifelse(Action  == "PW Fk Pass","Fk Pass",ifelse(Action  == "PW Sl Pass","Sl Pass","Carry"))))))))))))))))
+
+run <-run %>% mutate(segtype = ifelse(subsetoc =="Scr Op","Score",ifelse(subsetoc  == "Ms Op","Miss",ifelse(subsetoc  == "Scr Rs","Scr Rs",ifelse(subsetoc  == "Ms Rs","Ms Rs",
+ifelse(subsetoc == "Ko ToL","Ko ToL",ifelse(subsetoc  == "Pass ToL","Pass ToL",ifelse(subsetoc  == "Fk Loss ToL","Fk Loss ToL",ifelse(subsetoc  == "Rs ToL","Sl ToL",ifelse(subsetoc  == "Tck ToL","Carry Loss",run$segtypea))))))))))
+
+segtype <- c("Hp","Hp Prs","Carry","Kp Right","Kp Right Prs","Score","Miss","Ko","Ko ToL","Pass ToL","Fk Loss ToL","Sl ToL","Carry Loss","Kp Left","Kp Left Prs","Fk Pass","Sl Pass","Scr Rs","Ms Rs","Opp Brk","Brk Own","Opp KoBrk","KoBrk Own")
+
+seg<- c("1", "1", "2",	"3", "3", "4",	"5",	"6",	"7",	"8",	"9", "9","10",	
+"11","11","12","12","13",	"14",	"15",	"15",	"16",	"16")
+
+segments <- data.frame(segtype ,seg)
+
+run  <-run  %>%
+    mutate(seg = VLOOKUP(segtype,segments, segtype, seg))
+
+run <-run %>% mutate(same = ifelse(zone == zoneoc ,"Y", "N"))
+
+run <-run %>% mutate(time_diff = (timeoc-time), dist =(sqrt((xend - Areax)^2+ (yend - Areay)^2)),ms = (dist/time_diff), vec = (atan2(yend-Areay,xend - Areax)*180/pi))
+
+#create dataframe for line colours
+timedur <- run %>% group_by(poss) %>% filter (keep =="Y") %>%   summarize (dur = sum(time_diff))
+
+run  <-run  %>% mutate(timedur = VLOOKUP(poss,timedur, poss, dur))
+
+run <-run %>% mutate(linecol = ifelse(timedur >0 & timedur  <=9.99 ,1, ifelse(timedur  >=10 & timedur  <=19.99, 2,ifelse(timedur >=20 & timedur  <=29.99, 3,
+ifelse(timedur >=30 & timedur  <=39.99, 4 ,ifelse(timedur >=40 & timedur  <=49.99, 5 ,
+ifelse(timedur >=50 & timedur  <=59.99, 6,ifelse(timedur >=60 & timedur  <=69.99, 7,ifelse(timedur >=70, 8,10)))))))))
+
+run <-run %>% mutate(line_time = ifelse(linecol == 1 ,"0-9", ifelse(linecol == 2, "10-19",ifelse(linecol == 3,"20-29" ,
+ifelse(linecol == 4, "30-39" ,ifelse(linecol == 5, "40-49" ,
+ifelse(linecol == 6, "50-59",ifelse(linecol == 7, "60-69",ifelse(linecol == 8, "70+",10)))))))))
+
+#Add phase time colours
+phs_time <- run %>% group_by(phaseno) %>% filter (keep =="Y") %>% summarize (phs_time = sum(time_diff))
+
+run  <-run  %>% mutate(phs_time = VLOOKUP(phaseno,phs_time,phaseno,phs_time))
+
+run <-run %>% mutate(phasecol = ifelse(phs_time >0 & phs_time  <=9.99 ,1, ifelse(phs_time  >=10 & phs_time  <=19.99, 2,ifelse(phs_time >=20 & phs_time  <=29.99, 3,
+ifelse(phs_time >=30 & phs_time  <=39.99, 4 ,ifelse(phs_time >=40 & phs_time  <=49.99, 5 ,
+ifelse(phs_time >=50 & phs_time  <=59.99, 6,ifelse(phs_time >=60 & phs_time  <=69.99, 7,ifelse(phs_time >=70, 8,10)))))))))
+
+run <-run %>% mutate(phs_time_line = ifelse(phasecol == 1 ,"0-9", ifelse(phasecol == 2, "10-19",ifelse(phasecol == 3,"20-29" ,
+ifelse(phasecol == 4, "30-39" ,ifelse(phasecol == 5, "40-49" ,
+ifelse(phasecol == 6, "50-59",ifelse(phasecol == 7, "60-69",ifelse(phasecol == 8, "70+",10)))))))))
+
+
+#Add ms time colours
+
+run <- run%>% mutate(vec_col =ifelse(vec > -90 & vec < -55 ,1, ifelse(vec > -55 & vec < -25,2, ifelse(vec > -25 & vec < 25, 3,ifelse(vec > 25 & vec < 55,4,ifelse(vec > 55 & vec < 90,5,
+ifelse(vec > 90 & vec < 145,6,ifelse(vec > 145 & vec < 170,7,ifelse(vec > 170 & vec < -170,8,ifelse(vec > -170 & vec < -145,9,ifelse(vec > -145 & vec < -90, 10,"Draw")))))))))))
+
+run <- run %>% mutate(RunDir = ifelse(vec_col == "1" ,"swr", ifelse(vec_col == 2 ,"for",ifelse(vec_col == 3 ,"for",
+ifelse(vec_col == 4 ,"for",ifelse(vec_col == 5 ,"swl",ifelse(vec_col == 6 ,"swl",
+ifelse(vec_col == 7 ,"bw",ifelse(vec_col == 8 ,"bw",ifelse(vec_col == 9 ,"bw",ifelse(vec_col == 10 ,"swr",ifelse(vec_col == "None","None","None"))))))))))))
+
+passlinepos <- run %>%group_by (Team, phaseno) %>%
+  summarize(ms_ave_phase = mean(ms, na.rm = TRUE))
+
+run <-run  %>% mutate(ms_time = VLOOKUP(phaseno,passlinepos,phaseno,ms_ave_phase))
+
+run <-run %>% mutate(mscol = ifelse(ms_time  >0 & ms_time <= 2.99 ,1, ifelse(ms_time  >=3 & ms_time  <=5.99, 2,ifelse(ms_time >=6 & ms_time  <=8.99, 3,
+ifelse(ms_time >=9 & ms_time <=11.99, 4,ifelse(ms_time >= 12 & ms_time <=14.99, 5 ,
+ifelse(ms_time >=15.00 & ms_time <=17.99, 6,ifelse(ms_time >= 18 & ms_time <=20.99, 7,ifelse(ms_time >=21, 8,10)))))))))
+
+run <-run %>% mutate(ms_time_line = ifelse(mscol == 1 ,"0-2.99", ifelse(mscol == 2, "3-5.99",ifelse(mscol == 3,"6-8.99",
+ifelse(mscol == 4, "9-11.99" ,ifelse(mscol == 5, "12-14.99",
+ifelse(mscol == 6, "15-17.99",ifelse(mscol == 7, "18-20.99",ifelse(mscol == 8, ">21",10)))))))))
+
+run = run %>% 
+   unite(numname, Player,plyname, sep = " ", remove = FALSE)
+
+#write.csv(run, "run.csv")
+
+
+##Phasesop##
+
+#Shot Distance & Details - Check what difference shot rs makes as not showing for ko's
+
+runa <- run %>% filter (main %in% c("Shot Op"))%>%select(poss,Player, Action,Areax,Areay,vec)
+
+runShtd <-runa%>%mutate (Shot_Dist =(sqrt((144 - Areax)^2+ (49 - Areay)^2)))%>%select(poss,Player, Action,Areax,Areay, Shot_Dist,vec)
+
+#Ko Dist y Ko Rec
+
+runakod <- run %>% filter (main %in% c("Ko"))
+
+KOuts <- runakod %>% mutate (Ko_Dist =(sqrt((xend - Areax)^2+ (yend - Areay)^2)))%>%select (poss, Ko_Dist,mainoc,zoneoc,Pitch_End)
+
+#Ko Time
+
+runa <- run %>% filter (mainoc %in% c("Ko"))
+
+runa$time <- as.numeric(runa$time)
+runa$timeoc <- as.numeric(runa$timeoc)
+
+Ko_Time <- runa%>% mutate(Ko_Time = (timeoc - time))%>%select (possoc, Ko_Time)
+
+#Totals 
+totrun <- run %>% group_by(poss) %>% filter (keep =="Y") %>%   summarize (passes = sum (main %in% c("Pass Op", "Pass Rs")),tot_dist = sum(dist), dur = sum(time_diff), 
+m_s = sum(tot_dist/dur))
+
+#phasesop
+
+#pass <- pass[pass$Action!="Half Time", ]
+
+#Half Time
+
+phaseSoP <- pass %>%filter (main %in% c("PW", "Ko", "Pass Rs","Shot Rs", "Shot Op Oc", "Shot Rs Oc","ToL","Free Won","Off Foul Won","Off Sl Won","Half Time", "Full Time")|
+Action %in% c("45 Shot Right","45 Shot Left","45 Pass","Loss Kp SlW","Loss Hp SlW","Loss Ko SlW","Ko Fk Won Off", "Att Mk Won", "Ko Mk Won"))
+
+phaseSoP <- phaseSoP%>%select(-plyname)
+
+oddps <- phaseSoP [seq(1, nrow(phaseSoP), 2),]
+colnames(oddps) <- c("period","possno","poss","phaseno","Phase","Teamnum","Team","Player","Action","Areax","Areay","plylab","subset","Zone","time","main","Pitch_Area")
+evenps <- phaseSoP[seq(2, nrow(phaseSoP), 2),]
+colnames(evenps) <- c("periodoc","possnooc","possoc","phasenooc","Phaseoc","Teamnumoc","Teamoc","Playeroc","Actionoc","Areaxoc","Areayoc","plylaboc","subsetoc","Zoneoc","timeoc","mainoc", "Pitch_Areaoc")
+
+phaseSoP <- bind_cols(oddps, evenps) 
+phaseSoP <- phaseSoP %>%select("period","possno","poss","Phase","Teamnum","Team","Player","Action","Zone","Areax","Areay","plylab","subset","main","time","Pitch_Area",
+"possoc","Phaseoc","Actionoc","Zoneoc","Areaxoc","Areayoc","plylaboc","subsetoc","mainoc","timeoc","Pitch_Areaoc")
+
+phaseSoP  <-phaseSoP %>% mutate(secs =(timeoc - time))
+
+phaseSoP <- phaseSoP%>% mutate(line_col = ifelse(secs >=0 & secs  <9.49 ,1, ifelse(secs  >=9.5 & secs  <19.49, 2,ifelse(secs >=19.5 & secs  <29.49, 3,ifelse(secs >=29.5 & secs  <39.49, 4 ,ifelse(secs >=39.5 & secs  <50.49, 5 ,ifelse(secs >=49.5 & secs  <60.49, 6,ifelse(secs >=59.5 & secs  <70.49, 7,ifelse(secs >=70.5, 8,10)))))))))
+
+phaseSoP <- phaseSoP %>% mutate(line_time = ifelse(line_col  == 1 ,"0-9", ifelse(line_col  == 2, "10-19",ifelse(line_col  == 3,"20-29" ,
+ifelse(line_col== 4, "30-39" ,ifelse(line_col == 5, "40-49" ,
+ifelse(line_col  == 6, "50-59",ifelse(line_col  == 7, "60-69",ifelse(line_col  == 8, "70+",10)))))))))
+
+phaseSoP <- phaseSoP %>% mutate(Entry_45 = ifelse(Areax <99.5 & Areaxoc >99.6 ,"Y", "N"))
+
+#passSoP <- passSoP %>%select (-phaseno,-Phase, -periodoc,-possnooc, -phasenooc,-Phaseoc,-Teamnumoc,-Teamoc)
+
+phaseSoP  <- phaseSoP  %>% mutate(passno = VLOOKUP(poss,totrun, poss, passes),tot_dist = VLOOKUP(poss,totrun, poss, tot_dist),m_s = VLOOKUP(poss,totrun, poss, m_s)
+,Ko_Time  = VLOOKUP(poss,Ko_Time, possoc, Ko_Time),plyshot  = VLOOKUP(poss,runShtd, poss, Player),shot_type  = VLOOKUP(poss,runShtd, poss, Action)
+,shotx  = VLOOKUP(poss,runShtd, poss,Areax),shoty  = VLOOKUP(poss,runShtd, poss,Areay), Shot_Dist  = VLOOKUP(poss,runShtd, poss,Shot_Dist), Shot_vec = VLOOKUP(poss,runShtd, poss,vec)
+,Ko_Dist  = VLOOKUP(poss,KOuts, poss,Ko_Dist), Ko_Oc  = VLOOKUP(poss,KOuts, poss,mainoc),Pitch_Area_Ko  = VLOOKUP(poss,KOuts, poss,Pitch_End)
+,Ko_Zone_Rec  = VLOOKUP(poss,KOuts, poss,zoneoc))
+
+phasesop <-phaseSoP %>% mutate(Pitch_Area_Rec = ifelse(main == "Ko",Pitch_Area_Ko,Pitch_Area))
+
+phasesop <- phasesop %>% mutate(Pitch_Area_No =ifelse(Pitch_Area_Rec == "In_Def" ,"1", ifelse(Pitch_Area_Rec == "Mid_Def","2", ifelse(Pitch_Area_Rec == "Out_Def", "3",ifelse(Pitch_Area_Rec == "Out_Att","4",ifelse(Pitch_Area_Rec =="Mid_Att","5",ifelse(Pitch_Area_Rec == "In_Att", "6","Draw")))))))
+
+
+#write.csv(phasesop, "sop2.csv")
+#write.csv2(oddps, "odsop.csv")
+#write.csv2(evenps, "evsop.csv")
+
+##SOP##
+
+#Shot Distance & Details - Check what difference shot rs makes as not showing for ko's
+
+runa <- run %>% filter (main %in% c("Shot Op"))%>%select(poss,Player, Action,Areax,Areay,vec)
+
+runShtd <-runa%>%mutate (Shot_Dist =(sqrt((144 - Areax)^2+ (49 - Areay)^2)))%>%select(poss,Player, Action,Areax,Areay, Shot_Dist,vec)
+
+#Ko Dist y Ko Rec
+
+runakod <- run %>% filter (main %in% c("Ko"))
+
+KOuts <- runakod %>% mutate (Ko_Dist =(sqrt((xend - Areax)^2+ (yend - Areay)^2)))%>%select (poss,Playeroc, Ko_Dist,mainoc,xend,yend,zoneoc,Pitch_End)
+
+#Ko Time
+
+runa <- run %>% filter (mainoc %in% c("Ko"))
+
+runa$time <- as.numeric(runa$time)
+runa$timeoc <- as.numeric(runa$timeoc)
+
+Ko_Time <- runa%>% mutate(Ko_Time = (timeoc - time))%>%select (possoc, Ko_Time)
+
+#Totals 
+totrun <- run %>% group_by(poss) %>% filter (keep =="Y") %>%   summarize (passes = sum (main %in% c("Pass Op", "Pass Rs")),tot_dist = sum(dist), dur = sum(time_diff), m_s = sum(tot_dist/dur))
+
+#Time
+phasetime  <-phasesop %>% group_by(poss) %>% summarise(phtime = sum(secs))
+
+#phasetime$phtime <- as.integer(phasetime$phtime)
+
+#time$phtime <- as.numeric(as.character(time$phtime))
+
+#phasesop <- phasesop[phasesop$poss!="B98", ]
+
+#SoP
+
+passSoP <- pass %>%filter (main %in% c("PW", "Ko", "Shot Op Oc", "Shot Rs Oc","ToL", "Half Time", "Full Time")|Action %in% c("45 Shot Right","45 Shot Left","45 Pass","Off 45 Won"))
+
+passSoP <- passSoP%>%select(-plyname)
+
+oddps <- passSoP [seq(1, nrow(passSoP), 2),]
+colnames(oddps) <- c("period","possno","poss","phaseno","Phase","Teamnum","Team","Player","Action","Areax","Areay","plylab","subset","Zone","time","main","Pitch_Area")
+evenps <- passSoP[seq(2, nrow(passSoP), 2),]
+colnames(evenps) <- c("periodoc","possnooc","possoc","phasenooc","Phaseoc","Teamnumoc","Teamoc","Playeroc","Actionoc","Areaxoc","Areayoc","plylaboc","subsetoc","Zoneoc","timeoc","mainoc", "Pitch_Areaco")
+passSoP <- bind_cols(oddps, evenps) 
+passSoP <- passSoP%>%select("period","possno","poss","Phase","Teamnum","Team","Player","Action","Zone","Areax","Areay","plylab","subset","main","time","Pitch_Area",
+"possoc","Phaseoc","Actionoc","Zoneoc","Areaxoc","Areayoc","plylaboc","subsetoc","mainoc","timeoc","Pitch_Areaco")
+
+
+#this will become a vlookup from phase sop
+passSoP  <-passSoP %>% mutate(tot_poss_secs =(timeoc - time))
+
+passSoP  <- passSoP %>% mutate(secs = VLOOKUP(poss,phasetime, poss, phtime))
+
+passSoP <-passSoP %>% mutate(line_col = ifelse(secs >=0 & secs  <9.49 ,1, ifelse(secs  >=9.5 & secs  <19.49, 2,ifelse(secs >=19.5 & secs  <29.49, 3,ifelse(secs >=29.5 & secs  <39.49, 4 ,ifelse(secs >=39.5 & secs  <50.49, 5 ,ifelse(secs >=49.5 & secs  <60.49, 6,ifelse(secs >=59.5 & secs  <70.49, 7,ifelse(secs >=70.5, 8,10)))))))))
+
+passSoP <- passSoP %>% mutate(line_time = ifelse(line_col  == 1 ,"0-9", ifelse(line_col  == 2, "10-19",ifelse(line_col  == 3,"20-29" ,
+ifelse(line_col== 4, "30-39" ,ifelse(line_col == 5, "40-49" ,
+ifelse(line_col  == 6, "50-59",ifelse(line_col  == 7, "60-69",ifelse(line_col  == 8, "70+",10)))))))))
+
+passSoP <- passSoP %>% mutate(Entry_45 = ifelse(Areax <99.5 & Areaxoc >99.6 ,"Y", "N"))
+
+#passSoP <- passSoP %>%select (-phaseno,-Phase, -periodoc,-possnooc, -phasenooc,-Phaseoc,-Teamnumoc,-Teamoc)
+
+passSoP  <- passSoP  %>% mutate(passno = VLOOKUP(poss,totrun, poss, passes),tot_dist = VLOOKUP(poss,totrun, poss, tot_dist),m_s = VLOOKUP(poss,totrun, poss, m_s)
+,Ko_Time  = VLOOKUP(poss,Ko_Time, possoc, Ko_Time),plyshot  = VLOOKUP(poss,runShtd, poss, Player),shot_type  = VLOOKUP(poss,runShtd, poss, Action)
+,shotx  = VLOOKUP(poss,runShtd, poss,Areax),shoty  = VLOOKUP(poss,runShtd, poss,Areay), Shot_Dist  = VLOOKUP(poss,runShtd, poss,Shot_Dist), Shot_vec = VLOOKUP(poss,runShtd, poss,vec)
+,Ko_Dist  = VLOOKUP(poss,KOuts, poss,Ko_Dist), Ko_Oc  = VLOOKUP(poss,KOuts, poss,mainoc),Ko_Ply = VLOOKUP(poss,KOuts, poss,Playeroc),Pitch_Area_Ko  = VLOOKUP(poss,KOuts, poss,Pitch_End)
+,Ko_Zone_Rec  = VLOOKUP(poss,KOuts, poss,zoneoc),Ko_Zone_X = VLOOKUP(poss,KOuts, poss,xend),Ko_Zone_Y  = VLOOKUP(poss,KOuts, poss,yend))
+
+
+
+passSoP <-passSoP %>% mutate(Pitch_Area_Rec = ifelse(main == "Ko",Pitch_Area_Ko,Pitch_Area))
+
+passSoP$Ko_Oc <- as.character(passSoP$Ko_Oc)
+passSoP$main <- as.character(passSoP$main)
+
+passSoP <-passSoP %>% mutate(Pitch_Oc_Ko = ifelse(main == "Ko",	Ko_Oc,main))
+
+passSoP <- passSoP %>% mutate(Pitch_Area_No =ifelse(Pitch_Area_Rec == "In_Def" ,"1", ifelse(Pitch_Area_Rec == "Mid_Def","2", ifelse(Pitch_Area_Rec == "Out_Def", "3",ifelse(Pitch_Area_Rec == "Out_Att","4",ifelse(Pitch_Area_Rec =="Mid_Att","5",ifelse(Pitch_Area_Rec == "In_Att", "6","Draw")))))))
+
+
+sop  <- passSoP  
+
+#write.csv2(sop, "sop.csv")
+#write.csv2(oddps, "odsop.csv")
+#write.csv2(evenps, "evsop.csv")
+
+
+## Shots ##
+
+shotsall <- pass%>%group_by(Team,poss) %>% filter(main =="Shot Op Oc"|main =="Shot Rs Oc"|main == "Shot Op"|main =="Shot Rs")%>%select(-plyname)
+
+oddps <- shotsall[seq(1, nrow(shotsall), 2),]
+colnames(oddps) <- c("period","possno","poss","phaseno","Phase","Teamnum","Team","Player","Action","Areax","Areay","plylab","subset","Zone","time","main")
+evenps <- shotsall[seq(2, nrow(shotsall), 2),]
+colnames(evenps) <- c("periodoc","possnooc","possoc","phasenooc","Phaseoc","Teamnumoc","Teamoc","Playeroc","Actionoc","Areaxoc","Areayoc","plylaboc","subsetoc","Zoneoc","timeoc","mainoc")
+shotsall <- bind_cols(oddps, evenps) 
+shotsall <- shotsall%>%select("period","possno","poss","phaseno","Phase","Teamnum","Team","Player","Action","Zone","Areax","Areay","plylab","subset"
+,"Actionoc","Zoneoc","Areaxoc","Areayoc","plylaboc","subsetoc","timeoc")
+
+scores = shotsall %>% 
+   unite(Shot_lab, plylab, timeoc, sep = " ", remove = FALSE)
+
+scores <- scores%>% mutate(scoreA = ifelse(Actionoc == "Goal" & Teamnum == "A",3,ifelse(Actionoc == "Pk Goal" & Teamnum == "A",3,ifelse(Actionoc == "Mk Point" & Teamnum == "A",1,ifelse(Actionoc == "Fk Point"& Teamnum == "A",1, ifelse(Actionoc == "Point"& Teamnum == "A",1, ifelse(Actionoc == "45 Point" & Teamnum == "A",1,0)))))))
+
+scores <- scores%>% mutate(scoreB = ifelse(Actionoc == "Goal" & Teamnum == "B",3,ifelse(Actionoc == "Pk Goal" & Teamnum == "B",3,ifelse(Actionoc == "Mk Point" & Teamnum == "B",1,ifelse(Actionoc == "Fk Point"& Teamnum == "B",1, ifelse(Actionoc == "Point"& Teamnum == "B",1, ifelse(Actionoc == "45 Point" & Teamnum == "B",1,0)))))))
+
+scored <- scores  %>%group_by(Teamnum)%>% mutate(Tot_ScrA = cumsum(scoreA), Tot_ScrB = cumsum(scoreB))  
+
+scored <- as.data.frame(scored) %>% 
+  dplyr::mutate(Tot_ScrA = ifelse(Tot_ScrA == 0, NA, Tot_ScrA)) %>% 
+  tidyr::fill(Tot_ScrA, .direction = c("updown"))
+
+scored <- as.data.frame(scored) %>% 
+  dplyr::mutate(Tot_ScrB = ifelse(Tot_ScrB == 0, NA, Tot_ScrB)) %>% 
+  tidyr::fill(Tot_ScrB, .direction = c("updown"))
+
+scored$number <- row.names(scored)
+
+
+scored <- scored%>% mutate(Tot_ScrA = ifelse(scoreA == "0" & number %in% c("1","2","3","4","5","6","7","8"),0,scored$Tot_ScrA))
+
+scored <- scored%>% mutate(Tot_ScrB = ifelse(scoreB == "0" & number %in% c("1"),0,scored$Tot_ScrB))
+
+scored <- scored %>%group_by(Teamnum)%>% mutate(diff = (Tot_ScrA- Tot_ScrB))  
+
+scored <- scored %>%group_by(Teamnum)%>% mutate(abdiff = (abs(Tot_ScrA- Tot_ScrB)))
+
+scores <-scored %>%
+    mutate(tx = VLOOKUP(Zone, zonetext, zone, tx),ty = VLOOKUP(Zone, zonetext, zone, ty),bx = VLOOKUP(Zone, zonetext, zone, bx),by = VLOOKUP(Zone, zonetext, zone, by))
+
+#Add shot difficulty
+
+scores  <- scores %>% mutate(shdf = VLOOKUP(poss,shdfposs,poss,diffsh))
+
+#write.csv2(scores, "scores.csv")
+#write.csv2(oddps, "oddpsscrs.csv")
+#write.csv2(evenps, "evenpsscrs.csv")
+
+
+
+##Player Stats##
+
+#Team A
+
+plystatsAA <- teamsheet%>%filter(Teamnum =="A") %>%select( Teamnum, Team, plytime, ply, name, Player,Areax,Areay)
+
+plystatsAA <- plystatsAA %>% arrange(ply)
+#plystatsA
+
+passA <- pass %>%filter (Teamnum == "A", Action != "Opp Brk")
+
+playersts <- passA %>%group_by(Player)%>%summarize(PW =sum(main == "PW"),Pass =sum(main == "Pass Op"),Rec =sum(main == "Rec Op"),
+KoRec =sum(main == "Ko Rec"), RsRec =sum(main == "Rec Rs") ,OpShot =sum(main == "Shot Op"),OpScr =sum(subset == "Scr Op"),RsShot =sum(main == "Shot Rs"),RsScr =sum(subset == "Scr Rs"), Poss_Lost =sum(main == "ToL"), Fk_Won =sum(main == "Free Won"),Fk_Lost =sum(main == "Free Loss"),
+Spoils =sum(main == "Def Act"), OBP = (PW + Rec + RsRec + KoRec), Pass_Loss = sum(subset == "Pass ToL"), Comp_Pass = (Pass - Pass_Loss))
+
+#plystatsAA <- plystatsAA[plystatsAA$ply!="9", ]
+
+statsA <- bind_cols (plystatsAA,playersts)
+
+statsA <- statsA %>% select(-Player...9)
+
+statsA [is.na(statsA)] <- 0
+
+statsA <- statsA %>% mutate(totPW = sum(PW), PWp = (PW/totPW*100), totPass = sum(Pass), Passp = (Pass/totPass*100), totRec = sum(Rec), Recp = (Rec/totRec*100),  totKoRec = sum(KoRec), KoRecp = (KoRec/totKoRec*100), 
+totOpShot = sum(OpShot), OpShotp = (OpShot/totOpShot*100), totOpScr = sum(OpScr), OpScrp = (OpScr/totOpScr*100),
+totRsShot = sum(RsShot), RsShotp = (RsShot/totRsShot*100), totRsScr = sum(RsScr), RsScrp = (RsScr/totRsScr*100),
+totPoss_Lost = sum(Poss_Lost), Poss_Lostp = (Poss_Lost/totPoss_Lost*100), 
+totFk_Won = sum(Fk_Won), Fk_Wonp = (Fk_Won/totFk_Won*100), totFk_Lost = sum(Fk_Lost), Fk_Lostp = (Fk_Lost/totFk_Lost*100), totSpoils = sum(Spoils), Spoilsp = (Spoils/totSpoils*100),
+totOBP = sum(OBP), OBPp = (OBP/totOBP*100), totCP = sum(Comp_Pass), CPp = (Comp_Pass/totCP*100))
+
+statsA <- statsA %>% mutate(PWamin = (PW/plytime),Passamin = (Pass/plytime), Recamin = (Rec/plytime), KoRecamin = (KoRec/plytime), 
+OpShotamin = (OpShot/plytime),OpScramin = (OpScr/plytime),
+RsShotamin = (RsShot/plytime),RsScramin = (RsScr/plytime),
+Poss_Lostamin = (Poss_Lost/plytime), 
+Fk_Wonamin = (Fk_Won/plytime),Fk_Losttamin = (Fk_Lost/plytime),Spoilsamin = (Spoils/plytime))
+
+
+plystatsA <-statsA
+
+plystatsA <- plystatsA %>% rename("Player" = Player...6)
+
+#Team B
+plystatsBB <- teamsheet%>%filter(Teamnum =="B") %>%select( Teamnum, Team, plytime, ply, name, Player,Areax,Areay)
+
+plystatsBB <- plystatsBB %>% arrange(ply)
+
+#plystatsBB <- plystatsBB[plystatsBB$ply!="20", ]
+
+#plystatsB
+
+passB <- pass %>%filter (Teamnum == "B", Action != "Opp Brk")
+
+playersts <- passB %>%group_by(Player)%>%summarize(PW =sum(main == "PW"),Pass =sum(main == "Pass Op"),Rec =sum(main == "Rec Op"),
+KoRec =sum(main == "Ko Rec"), RsRec =sum(main == "Rec Rs") ,OpShot =sum(main == "Shot Op"),OpScr =sum(subset == "Scr Op"),RsShot =sum(main == "Shot Rs"),RsScr =sum(subset == "Scr Rs"), Poss_Lost =sum(main == "ToL"), Fk_Won =sum(main == "Free Won"),Fk_Lost =sum(main == "Free Loss"),
+Spoils =sum(main == "Def Act"), OBP = (PW + Rec + RsRec + KoRec), Pass_Loss = sum(subset == "Pass ToL"), Comp_Pass = (Pass - Pass_Loss))
+
+statsB <- bind_cols (plystatsBB,playersts)
+
+statsB <- statsB %>% select(-Player...9)
+
+statsB [is.na(statsB)] <- 0
+
+statsB <- statsB %>%  mutate(totPW = sum(PW), PWp = (PW/totPW*100), totPass = sum(Pass), Passp = (Pass/totPass*100), totRec = sum(Rec), Recp = (Rec/totRec*100),  totKoRec = sum(KoRec), KoRecp = (KoRec/totKoRec*100), 
+totOpShot = sum(OpShot), OpShotp = (OpShot/totOpShot*100), totOpScr = sum(OpScr), OpScrp = (OpScr/totOpScr*100),
+totRsShot = sum(RsShot), RsShotp = (RsShot/totRsShot*100), totRsScr = sum(RsScr), RsScrp = (RsScr/totRsScr*100),
+totPoss_Lost = sum(Poss_Lost), Poss_Lostp = (Poss_Lost/totPoss_Lost*100), 
+totFk_Won = sum(Fk_Won), Fk_Wonp = (Fk_Won/totFk_Won*100), totFk_Lost = sum(Fk_Lost), Fk_Lostp = (Fk_Lost/totFk_Lost*100), totSpoils = sum(Spoils), Spoilsp = (Spoils/totSpoils*100),
+totOBP = sum(OBP), OBPp = (OBP/totOBP*100), totCP = sum(Comp_Pass), CPp = (Comp_Pass/totCP*100))
+
+statsB <- statsB %>% mutate(PWamin = (PW/plytime),Passamin = (Pass/plytime), Recamin = (Rec/plytime), KoRecamin = (KoRec/plytime), 
+OpShotamin = (OpShot/plytime),OpScramin = (OpScr/plytime),
+RsShotamin = (RsShot/plytime),RsScramin = (RsScr/plytime),
+Poss_Lostamin = (Poss_Lost/plytime), 
+Fk_Wonamin = (Fk_Won/plytime),Fk_Losttamin = (Fk_Lost/plytime),Spoilsamin = (Spoils/plytime))
+
+
+plystatsB <-statsB
+
+plystatsB <- plystatsB %>% rename("Player" = Player...6)
+
+#Kick outs 
+
+koonlyA <- pass %>%group_by(Team) %>% filter(subset == "Ko"|subset == "Ko Rec"| subset == "Ko ToL")%>%select(period, Teamnum,Phase,Team,Player,plylab,subset,Zone,main)
+oddps <- koonlyA[seq(1, nrow(koonlyA), 2),]
+colnames(oddps) <- c("period","Teamnum","Phase","Team","Player","plylab","subset","Zone","main")
+evenps <- koonlyA[seq(2, nrow(koonlyA), 2),]
+colnames(evenps) <- c("periodoc","Teamnumoc","Phaseoc","Teamoc","Playeroc","plylaboc","subsetoc","Zoneoc","mainoc")
+koonlyA <- bind_cols(oddps, evenps) 
+koonlyA <- koonlyA%>%select("period","Teamnum","Phase","Team","Player","plylab","subset","Zone","main","plylaboc","subsetoc","Zoneoc","mainoc")
+
+koeff <-koonlyA %>%
+    mutate(tx = VLOOKUP(Zoneoc, zonetext, zone, tx),ty = VLOOKUP(Zoneoc, zonetext, zone, ty),bx = VLOOKUP(Zoneoc, zonetext, zone, bx),by = VLOOKUP(Zoneoc, zonetext, zone, by))
+
+
+#write.csv2(oddps, "oddpsko.csv")
+#write.csv2(evenps, "evenpsko.csv")
+
+
+
+
+
+```
+
+```{r}
+
+
+create_GAA_Pitch <- function(grass_colour, line_colour, background_colour, goala_colour,goalb_colour,label_colour,tram_colour, BasicFeatures){
+  
+  theme_blankPitch = function(size=12) { 
+    theme(
+      #axis.line=element_blank(), 
+      axis.text.x=element_blank(), 
+      axis.text.y=element_blank(), 
+      #axis.ticks.y=element_text(size=size),
+      #axis.ticks=element_blank(),
+      axis.ticks.length=unit(0, "lines"), 
+      #axis.ticks.margin=unit(0, "lines"), 
+      axis.title.x=element_blank(), 
+      axis.title.y=element_blank(), 
+      legend.key.size=unit(1.2, "lines"), 
+      legend.text=element_text(size=size), 
+      legend.title=element_text(size=size, face="bold",hjust=0),
+      # panel.border=element_blank(), 
+      panel.grid.major=element_blank(), 
+      panel.grid.minor=element_blank(), 
+      panel.spacing=element_blank(), 
+      plot.margin=unit(c(0, 0, 0, 0), "lines"), 
+      plot.title=element_text(size=size*1.2), 
+      panel.background=element_rect(fill= background_colour,colour= background_colour),
+      strip.text.x=element_text(size=size*1))}
+
+  ymin <- 0 # minimum width
+  ymax <- 88 # maximum width
+  xmin <- 0 # minimum length
+  xmax <- 144 # maximum length
+  
+  # pitch lines
+  def13 <- 13
+  def20 <- 20
+  def45 <- 45
+  def65 <- 65
+  off65 <- 79
+  off45 <- 99
+  off20 <- 124
+  off13 <- 131
+  
+  
+  # small sqaure
+  
+ #HERE
+  sixYardrd <- 37
+  sixYardld <- 51
+  
+  sixYardDefxst <- 4.5
+  sixYardOffxst <- 139.5
+
+  #13 box
+ #HERE  
+  right14d <- 34.5
+  left14d <- 53.5
+
+  #Goals
+  glxst <- 0
+  glyst <- 40.75
+  glxed <- 143.9
+  glyed <- 47.25
+
+  #halfway line
+  hwxst <- 72
+  hwyst <- 40.75
+  hwyed <- 47.25
+
+  #pen spot
+
+  pdxst <- 11
+  pdyst <- 43.5
+  pdyed <- 44.5
+  poxst <- 133
+  
+ #tramlines - hor
+  srwing <- 13
+  rhalfsp <- 31
+  ctre <- 57
+  lhalfsp <- 75
+  
+ #tramlines - vert
+
+one <- 33
+two <- 55
+hw <- 72
+four <- 89
+five <- 111
+  
+  
+      
+  circleFundef <- function(center=c(0,0), diameter=1, npoints=100, start=0, end=2)
+  {
+    tt <- seq(start*pi, end*pi, length.out=npoints)
+    data.frame(x = center[1] + diameter / 2 * cos(tt), 
+               y = center[2] + diameter / 2 * sin(tt))
+  }
+  
+  circleFunatt <- function(center=c(0,0), diameter=1, npoints=100, start=0, end=2)
+  {
+    tt <- seq(start*pi, end*pi, length.out=npoints)
+    data.frame(x = center[1] - diameter / 2 * cos(tt), 
+               y = center[2] - diameter / 2 * sin(tt))
+  }
+  #### create semi circle ####
+  def_circle <-  circleFundef(c(20,44), 26, start=1.5, end=2.5)
+  att_circle <-  circleFunatt(c(124,44), 26, start=1.5, end=2.5)
+  
+  if(BasicFeatures == TRUE){
+    ## initiate the plot, set some boundries to the plot
+    p <- ggplot() + 
+      # add the theme 
+      theme_blankPitch() +
+      # add lines goals etc
+      geom_rect(aes(xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax), fill = grass_colour, colour = line_colour) + 
+      geom_segment(aes(x = def13, y = ymin, xend = def13, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) +   
+      geom_segment(aes(x = def20, y = ymin, xend = def20, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) + 
+      geom_segment(aes(x = def45, y = ymin, xend = def45, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = def65, y = ymin, xend = def65, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = off65, y = ymin, xend = off65, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = off45, y = ymin, xend = off45, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = off20, y = ymin, xend = off20, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = off13, y = ymin, xend = off13, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) + 
+      geom_segment(aes(x = xmin, y = right14d, xend = def13, yend = right14d),colour = line_colour,linetype="solid",size = 0.5) + 
+      geom_segment(aes(x = xmin, y = left14d, xend = def13, yend = left14d),colour = line_colour,linetype="solid",size = 0.5) + 
+      geom_segment(aes(x = xmax, y = right14d, xend = off13, yend = right14d),colour = line_colour,linetype="solid",size = 0.5) + 
+      geom_segment(aes(x = xmax, y = left14d, xend = off13, yend = left14d),colour = line_colour,linetype="solid",size = 0.5) + 
+      geom_segment(aes(x = hwxst, y = hwyst, xend = hwxst, yend = hwyed),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = xmin, y = sixYardrd, xend = sixYardDefxst, yend = sixYardrd),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = xmin, y = sixYardld, xend = sixYardDefxst, yend = sixYardld),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = sixYardDefxst, y = sixYardrd, xend = sixYardDefxst, yend = sixYardld),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = xmax, y = sixYardrd, xend = sixYardOffxst, yend = sixYardrd),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = xmax, y = sixYardld, xend = sixYardOffxst, yend = sixYardld),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = sixYardOffxst, y = sixYardrd, xend = sixYardOffxst, yend = sixYardld),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = pdxst, y = pdyst, xend = pdxst, yend = pdyed),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = poxst, y = pdyst, xend = poxst, yend = pdyed),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = glxst, y =  glyst, xend = glxst, yend = glyed),colour = goala_colour, size = 1) +
+      geom_segment(aes(x =glxed, y =  glyst, xend =glxed, yend = glyed),colour = goalb_colour, size = 1) +
+      geom_path(data=def_circle, aes(x,y), colour = line_colour,size = 0.5) +
+      geom_path(data=att_circle, aes(x,y), colour = line_colour,size = 0.5) +
+      xlim(c(xmin,xmax)) + ylim(c(ymin,ymax))
+    
+  }
+  
+  else{
+    ## initiate the plot, set some boundries to the plot
+     p <- ggplot()  +
+      # add the theme 
+      theme_blankPitch() +
+      # add lines goals etc
+            geom_rect(aes(xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax), fill = grass_colour, colour = line_colour) + 
+      geom_segment(aes(x = def13, y = ymin, xend = def13, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) +   
+      geom_segment(aes(x = def20, y = ymin, xend = def20, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) + 
+      geom_segment(aes(x = def45, y = ymin, xend = def45, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = def65, y = ymin, xend = def65, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = off65, y = ymin, xend = off65, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = off45, y = ymin, xend = off45, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = off20, y = ymin, xend = off20, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = off13, y = ymin, xend = off13, yend = ymax),colour = line_colour,linetype="solid",size = 0.5) + 
+      geom_segment(aes(x = xmin, y = right14d, xend = def13, yend = right14d),colour = line_colour,linetype="solid",size = 0.5) + 
+      geom_segment(aes(x = xmin, y = left14d, xend = def13, yend = left14d),colour = line_colour,linetype="solid",size = 0.5) + 
+      geom_segment(aes(x = xmax, y = right14d, xend = off13, yend = right14d),colour = line_colour,linetype="solid",size = 0.5) + 
+      geom_segment(aes(x = xmax, y = left14d, xend = off13, yend = left14d),colour = line_colour,linetype="solid",size = 0.5) + 
+      geom_segment(aes(x = hwxst, y = hwyst, xend = hwxst, yend = hwyed),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = xmin, y = sixYardrd, xend = sixYardDefxst, yend = sixYardrd),colour = line_colour,linetype="solid",size = 0.5) + 
+      geom_segment(aes(x = xmin, y = sixYardld, xend = sixYardDefxst, yend = sixYardld),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = sixYardDefxst, y = sixYardrd, xend = sixYardDefxst, yend = sixYardld),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = xmax, y = sixYardrd, xend = sixYardOffxst, yend = sixYardrd),colour = line_colour,linetype="solid",size = 0.5) + 
+      geom_segment(aes(x = xmax, y = sixYardld, xend = sixYardOffxst, yend = sixYardld),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = sixYardOffxst, y = sixYardrd, xend = sixYardOffxst, yend = sixYardld),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = pdxst, y = pdyst, xend = pdxst, yend = pdyed),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = poxst, y = pdyst, xend = poxst, yend = pdyed),colour = line_colour,linetype="solid",size = 0.5) +
+      geom_segment(aes(x = glxst, y =  glyst, xend = glxst, yend = glyed),colour = goala_colour, size = 1) +
+      geom_segment(aes(x =glxed, y =  glyst, xend =glxed, yend = glyed),colour = goalb_colour, size = 1) +
+      geom_segment(aes(x = xmin, y = srwing, xend = xmax, yend = srwing),colour = tram_colour,linetype="dotted",size = 0.5) +
+      geom_segment(aes(x = xmin, y = rhalfsp, xend = xmax, yend = rhalfsp),colour = tram_colour,linetype="dotted",size = 0.5) +
+      geom_segment(aes(x = xmin, y = ctre, xend = xmax, yend = ctre),colour = tram_colour,linetype="dotted",size = 0.5) +
+      geom_segment(aes(x = xmin, y = lhalfsp, xend = xmax, yend = lhalfsp),colour = tram_colour,linetype="dotted",size = 0.5) +
+      geom_segment(aes(x = hwxst, y =  ymin, xend = hwxst, yend = ymax),colour = tram_colour,linetype="dotted",size = 0.5) +
+      geom_segment(aes(x = hw, y = ymin, xend = hw, yend = ymax),colour = tram_colour,linetype="dotted",size = 0.5) +
+      geom_path(data=def_circle, aes(x,y), colour = line_colour,size = 0.5) +
+      geom_path(data=att_circle, aes(x,y), colour = line_colour,size = 0.5)  +
+      xlim(c(xmin,xmax)) + ylim(c(ymin,ymax)) +
+      annotate(geom="text", x= 21.5, y=1.25, label="20",color = label_colour,size = 4) +
+      annotate(geom="text", x= 46.5, y=1.25, label="45",color = label_colour,size = 4) +
+      annotate(geom="text", x= 66.5, y=1.25, label="65",color = label_colour,size = 4) +
+      annotate(geom="text", x= 80.5, y=1.25, label="65",color = label_colour,size = 4) +
+      annotate(geom="text", x=100.5, y=1.25, label="45", color=label_colour,size = 4) +
+      annotate(geom="text", x=125.5, y=1.25, label="20",color = label_colour,size = 4) +
+      annotate(geom="text", x= 112, y=2, label="www.witnesstheanalysis.com",color = "white",size = 6, alpha = 0.4) +
+      annotate(geom="text", x= 32, y=87, label="www.witnesstheanalysis.com",color = "white",size = 6, alpha = 0.4)+
+      annotate("segment", x = 68, xend = 76, y = 2, yend = 2, colour = "pink", size=3, alpha=0.6, arrow=arrow())
+  }
+
+  
+  return(p)}
+
+
+p <- create_GAA_Pitch("gray72", "white", "lightblue", "blue","red","white","blue", BasicFeatures=FALSE)
+
+
+
+
+
+
+
+```
+
+```{r}
+
+#Run 
+
+n <- 100
+qual_col_pals = brewer.pal.info[brewer.pal.info$category == 'qual',]
+col_vector = unlist(mapply(brewer.pal, qual_col_pals$maxcolors, rownames(qual_col_pals)))
+
+#created lots of colours - colour wheel
+color = grDevices::colors()[grep('gr(a|e)y', grDevices::colors(), invert = T)]
+
+#added them to colscale
+color = grDevices::colors()[grep('gr(a|e)y', grDevices::colors(), invert = T)]
+names(color) <- levels(pass$poss)
+colScale <- scale_colour_manual(name = "poss",values = color)
+
+runcolpal <- c(
+  "PW" = "orange",
+  "Carry" = "lightgreen",
+  "Hp" = "yellow", 
+  "Tck Att Ndp" = "cornflowerblue",
+  "Kp Left" = "grey45", 
+  "Kp Right" = "orchid2",
+  "Hp Prs" = "#D2691E", 
+  "Kp Left Prs" = "#800080", 
+  "Kp Right Prs" = "#00FFFF",
+  "Pass Rs" = "lightblue",
+  "Fk Pass" = "lightblue",
+  "Ko" =  "darksalmon",
+  "Ko Rec" = "darkgreen",
+  "Ko ToL" = "darkred",
+  "Pass ToL"= "red",
+  "ToL" = "red",
+  "Fk Point" = "pink",
+  "Ms Op" = "darkred",
+  "Fk Goal"= "darkgreen",
+  "Ms Rs" = "dodgerblue3",
+  "Free Won" = "mediumblue",
+  "Point" = "#00BA38",
+  "Goal" ="black",
+  "Ko Int" ="yellow",
+  "Pk Goal"= "#FFFFFF",
+  "Pk Point"="#800000",
+  "Mk Goal"="#D92121",
+  "Sl Shot Right"="blue",
+  "45 Goal"="#FFFFFF",
+  "45 Point"="green",
+  "45 Short"="darkred",
+  "Brk Own"= "darkgreen",
+  "KoBrk Own" ="darkgreen" ,
+  "Opp Brk" = "darkgreen",
+  "Opp KoBrk" = "darkgreen",
+  "PW Sl Pass"= "#D2691E",
+  "Fk Loss ToL"= "red",
+  "Sl ToL"= "red",
+   "Sl Pass"= "blue")
+
+#change lbw
+pwcol <- c("Fk Pass"="#000000",
+"PW Fk Pass" = "#000000",
+"PW Sl Pass" = "#000000",
+"Int Op"="blue",
+"Int Rs"="purple",
+"Gk Won"="#FF6347",
+"Ko Int"="orange",
+"LBW"="black",
+"RBW Def"="grey15",
+"RBW Off"="#FF00FF",
+"Rs Pass PW" = "turquoise",
+"PW Sl Pass"="turquoise",
+"Fkwof" = "turquoise",
+"Tck LB Won" = "#D2691E")
+
+runlinepal <- c(
+  "0" = 3, #carry
+  "1" = 1, #Hp/Prs
+  "2" = 3, #carry
+  "3" = 2, #Kp Right
+  "4" = 1, #Op Score	
+  "5" = 1, #Miss
+  "6" = 1, #Ko
+  "7" = 1, #Ko ToL
+  "8" = 6, # Pass ToL
+  "9" = 3, #Fk/Sl Loss ToL 
+  "10"= 5, #Kp Left
+  "11"= 1, #Fk Pass	
+  "12"= 1, #Sl Pass
+  "13"= 1, #Scr Rs
+  "14"= 1, #Ms Rs	
+  "15"=1, # Brk
+  "16"=1) # KoBrk
+
+
+
+```
+
+```{r}
+
+#Kick Outs 
+pal <- c("Ko Rec" = "blue",
+"Ko Lost"  = "red",
+"KoBrk Rec" = "purple",
+"KoBrk Lost"  = "red",
+"Ko Mk Won"  = "black",
+"Ko Lost Mk" = "red",
+"Ko Unc Rec" = "white",
+"Ko Fk Won Off" = "lightblue",
+"Ko Fk Loss Off" = "darkred",
+"Ko MkW Po" = "darkgreen")
+
+pals <- c("Ko Rec" = 19,
+"Ko Lost"  = 4,
+"KoBrk Rec" = 19,
+"KoBrk Lost"  = 4,
+"Ko Mk Won"  = 19,
+"Ko Lost Mk" = 4,
+"Ko Unc Rec" = 19,
+"Ko Fk Won Off" = 19,
+"Ko Fk Loss Off" = 4,
+"Ko Mk W Po" = 19)
+
+perpal <- c("1" = "blue",
+"2"  = "darkgreen",
+"3" = "purple",
+"4"  = "black")
+
+runshape <- c("PW" = 15,
+              "Ko Rec" = 19)
+```
+
+```{r}
+
+#Time
+
+actcolpals <- c(
+  "20" = "grey",
+  "0-9" = "black", 
+  "10-19" = "blue", 
+  "20-29" = "red",
+  "30-39" = "purple",
+  "40-49" =  "yellow",
+  "50-59" = "darkred",
+  "60-69" = "orange",
+  "70+" = "dodgerblue3")
+
+```
+
+```{r}
+
+
+#PW
+paltow <- c("Tack W"="#000000",
+"Kp Int"="blue",
+"Hp Int"="purple",
+"Kp Brk Int"="#FF6347",
+"Hp Brk Int"="#0000FF",
+"Fk Int"="#FFFF00",
+"Fk Brk Int"="#00FFFF",
+"Mk Kp Int"="#FF00FF",
+"Sl Int"="darkblue",
+"Ti Brk Won"=" black",
+"Ko Int"="#800000",
+"KoBrk Int"="#808000",
+"PW Ko Int Mk Pass"="#D2691E",
+"PW Ko Int Mk Po"="#D2691E",
+"Fk Short Gk"="#800080",
+"Short Gk"="#008080",
+"Tck LB Won"="#000080",
+"Free Won Def"="gold",
+"Sl Kp Won To"="darkred",
+"RBW Off"="#808080",
+"Loose BW"="#000000",
+"Brk Won"="#FF0000",
+"RBW Def"="#800000",
+"Ko Fk Won Def" = "lightblue",
+"Fk Brk Int" = "lightblue",
+"Mk Kp Brk Int"="#D2691E",
+"PW Kp Int Mk Pass"= "#D2691E",
+"PW Kp Int Mk Po"= "#D2691E",
+"PW Sl Pass"= "#D2691E",
+"PW Fk Pass"= "#D2691E",
+"Sl Won Def Loss" = "#D2691E")
+
+```
+
+```{r}
+teamcol = c("Armagh" = "blue", "Tyrone" = "red")
+
+teamnumcol = c("A" = "blue", "B" = "red")
+```
+
+```{r}
+
+#Shooting 
+
+colshotvertpal <- c(
+"Goal"= "blue",
+"Point"= "black",
+"Wide Left"="purple",
+"Wide Right"="#FF6347",
+"Saved"="#FFFF00",
+"Blkd"="#00FFFF",
+"Short"="#FF00FF",
+"Post"="darkblue",
+"Fk Goal"= "#FFFFFF",
+"Fk Point"="#800000",
+"Fk Wide Left"="#808000",
+"Fk Wide Right"="#D2691E",
+"Fk Saved"="#800080",
+"Fk Short"="#008080",
+"Fk Post"="#000080",
+"45 Goal"="#FFFFFF",
+"45 Point"="darkred",
+"45 Wide Left"="#808080",
+"45 Wide Right"="#000000",
+"45 Saved"="#FF0000",
+"45 Short"="#800000",
+"45 Post"="yellow",
+"Pk Goal" ="#619CFF",
+"Pk Point"="#00BA38",
+"Pk Wide Left"="#F8766D",
+"Pk Wide Right"="#FF9326",
+"Pk Saved"="#FFFF4D",
+"Pk Post"="#21D921",
+"Mk Goal"="white",
+"Mk Point"="#D92121",
+"Sl Wide Left"="gold",
+"Mk Wide Right"="orange",
+"Mk Short"="red",
+"Mk Saved"="#2121D9",
+"Hp Point"="#2121D9",
+"Punch"="#21D921")
+
+colshotshape <- c(
+"Shot Right" = 15,
+"Shot Left" = 16,
+"45 Shot Right" = 2,
+"45 Shot Right" = 6,
+"Pk Shot Right" = 222,
+"Pk Shot Right" = 112,
+"Fk Shot Left" = 24,
+"Fk Shot Right" = 25,
+"Sl Shot Left" = 134,
+"Sl Shot Right" = 135,
+"Hp Shot" = 3,
+"Punch" = 18
+)
+
+colshotpal <- c(
+"1"= "white",
+"2"= "yellow",
+"3"="red",
+"28" = "red")
+
+
+```
+
+```{r}
+#Actions - Mainly used for ToL
+
+n <- 160
+qual_col_pals = brewer.pal.info[brewer.pal.info$category == 'qual',]
+col_vector = unlist(mapply(brewer.pal, qual_col_pals$maxcolors, rownames(qual_col_pals)))
+
+#created lots of colours - colour wheel
+colorAct = grDevices::colors()[grep('gr(a|e)y', grDevices::colors(), invert = T)]
+
+#added them to colscale
+colormain = grDevices::colors()[grep('gr(a|e)y', grDevices::colors(), invert = T)]
+names(colorAct) <- levels(pass$Action)
+colScale <- scale_colour_manual(name = "Action",values = colorAct)
+```
+
+```{r}
+runcolpals <- c(
+  "0" = "blue",
+  "1" = "dodgerblue3", 
+  "2" = "pink", 
+  "3" = "white",
+  "4" = "yellow",
+  "5" =  "darkred",
+  "6" = "purple",
+  "7" = "blue",
+  "8" = "orange",
+  "9" = "darkgreen",
+  "10" = "lightblue")
+
+
+segcolpals <- c(
+  "1" = "dodgerblue3", 
+  "2" = "pink", 
+  "3" = "white",
+  "4" = "yellow",
+  "5" =  "darkred",
+  "6" = "purple",
+  "7" = "blue",
+  "8" = "red",
+  "9" = "red",
+  "10" = "lightblue",
+  "11" = "blue",
+  "12" = "darkgreen")
+
+```
+
+```{r}
+veccol <- c(
+  "1" = "dodgerblue3", 
+  "2" =  "darkred", 
+  "3" = "white",
+  "4" = "yellow",
+  "5" =  "pink",
+   "6" = "lightblue",
+  "7" = "orange",
+  "8" = "purple",
+  "9" = "darkgreen",
+  "10" = "lightblue")
+
+veclinepal <- c(
+  "0" = 1,
+  "1" = 2, 
+  "2" = 3, 
+  "3" = 4,
+  "4" = 5,
+  "5" = 1,
+  "6" = 1,
+  "7" = 1,
+  "8" = 1,
+  "9" = 1,
+  "10"= 1,
+  "11"= 1,
+  "12"= 1,
+  "13"= 1,
+  "14"= 1,
+  "15"=1,
+  "16"=1)
+
+
+
+passnocolpals <- c(
+ "Shot Op Oc" = "darkgreen",
+ "Shot Rs Oc" = "lightblue",
+ "ToL"= "red")
+
+```
+
+```{r}
+mscolpals <- c(
+  "0" = "grey",
+  "0-2.99" = "black", 
+  "3-5.99" = "blue", 
+  "6-8.99" = "red",
+  "9-11.99" = "purple",
+  "12-14.99" =  "yellow",
+  "15-17.99" = "darkred",
+  "18-20.99" = "orange",
+  ">21" = "dodgerblue3")
+```
+
+```{r}
+runcolply <- c(
+  "PW" = "orange", 
+  "Def Act" = "#D2691E", 
+  "Pass Op" = "purple", 
+  "Pass Rs" = "lightblue",
+  "Ko" =  "gold",
+  "Ko Rec" = "green",
+  "Ko ToL" = "darkred",
+  "Pass ToL"= "red",
+  "ToL" = "red",
+  "Fk Point" = "pink",
+  "Spoil Off" = "darkred",
+  "Shot Op"= "darkgreen",
+  "Shot Rs" = "dodgerblue3",
+  "Free Won" = "blue",
+  "Rec Op" = "#00BA38",
+  "Rec Rs" = "black",
+  "Free Loss" = "#D92121",
+  "Tck Att" = "gold",
+  "Tck Def" = "dodgerblue3")
+
+```
+
+```{r}
+
+##TEAM A##
+
+# Only needed for the counts not the maps (except entry)
+# Creates for all rows 
+
+#0 point is strictly exterior to polygon
+#1 point is strictly interior to polygon
+#2 point lies on the relative interior of an edge of polygon
+#3 point is a vertex of polygon
+
+
+#looking at poss that started in in_def and see if they ended in inzone
+#creating the hull
+#Finds the shots
+
+scoresAarea <- scores %>%ungroup() %>%filter (Teamnum == "A") %>% select(Areax, Areay)
+
+#creates the hull for all shots - think about changing this to scores only
+hull <- scoresAarea %>%slice(chull(Areax, Areay))
+
+#filters end of possessions - actions only
+TeamAEnd  <- run %>%group_by(Team, Action) %>% filter(keep=="Y",Teamnum == "A")
+
+#finds which are inside 
+
+
+#creates a dataframe of oc 
+inzone <- data.frame(inzone = point.in.polygon(TeamAEnd$Areax, TeamAEnd$Areay,hull$Areax, hull$Areay, mode.checked=FALSE))
+
+#creates a df of all action - allows to create other things
+zonedA <-bind_cols(TeamAEnd,inzone)
+
+
+#filters end of possessions - actions only
+zonedB  <- zonedA %>%group_by(Team, Action) %>% filter(keep=="Y",Teamnum == "A")
+
+#finds which are inside 
+
+
+#creates a dataframe of oc 
+oczone <- data.frame(oczone = point.in.polygon(zonedB$xend,zonedB$yend,hull$Areax, hull$Areay, mode.checked=FALSE))
+
+#creates col based on oc - allows to create other things
+zonedA <-bind_cols(zonedA,oczone)
+
+#Finds the scores 
+
+scrAarea <- scores %>%ungroup() %>%filter (Teamnum == "A", subsetoc %in% c("Scr Op", "Scr Rs")) %>% select(Areax, Areay)
+
+#creates the hull for all shots - think about changing this to scores only
+hullscr <- scrAarea %>%slice(chull(Areax, Areay))
+
+#filters end of possessions - actions only
+TeamAEndscr  <- run %>%group_by(Team, Action) %>% filter(keep=="Y",Teamnum == "A")
+
+#finds which are inside 
+#point.in.polygon( TeamAEnd$Areax, TeamAEnd$Areay,hull$Areax, hull$Areay, mode.checked=FALSE)
+
+#creates a dataframe of orig 
+inzonescr <- data.frame(inzonescr = point.in.polygon(TeamAEndscr$Areax, TeamAEndscr$Areay,hullscr$Areax, hullscr$Areay, mode.checked=FALSE))
+
+#creates a df of all action - allows to create other things
+#zonedAscr <-bind_cols(TeamAEndscr,inzonescr)
+
+
+#filters end of possessions - actions only
+zonedBscr  <- run %>%group_by(Team, Action) %>% filter(keep=="Y",Teamnum == "A")
+
+#finds which are inside 
+
+#creates a dataframe of oc 
+oczonescr <- data.frame(oczonescr = point.in.polygon(zonedBscr$xend,zonedBscr$yend,hullscr$Areax, hullscr$Areay, mode.checked=FALSE))
+
+#creates col based on oc - allows to create other things
+zonedA <-bind_cols(zonedA,inzonescr,oczonescr)
+
+
+
+
+```
+
+```{r}
+
+##TEAM B##
+
+# Only needed for the counts not the maps (except entry)
+# Creates for all rows 
+
+#0 point is strictly exterior to polygon
+#1 point is strictly interior to polygon
+#2 point lies on the relative interior of an edge of polygon
+#3 point is a vertex of polygon
+
+
+#looking at poss that started in in_def and see if they ended in inzone
+#creating the hull
+#Finds the shots
+
+scoresBarea <- scores %>%ungroup() %>%filter (Teamnum == "B") %>% select(Areax, Areay)
+
+#creates the hull for all shots - think about changing this to scores only
+hullB <- scoresBarea %>%slice(chull(Areax, Areay))
+
+#filters end of possessions - actions only
+TeamBEnd  <- run %>%group_by(Team, Action) %>% filter(keep=="Y",Teamnum == "B")
+
+#finds which are inside 
+#point.in.polygon( TeamBEnd$Areax, TeamBEnd$Areay,hullB$Areax, hullB$Areay, mode.checked=FALSE)
+
+#creates a dataframe of oc 
+inzoneB <- data.frame(inzone = point.in.polygon(TeamBEnd$Areax, TeamBEnd$Areay,hullB$Areax, hullB$Areay, mode.checked=FALSE))
+
+#creates a df of all action - allows to create other things
+zonedB <-bind_cols(TeamBEnd,inzoneB)
+
+
+#filters end of possessions - actions only
+zonedBB  <- zonedB %>%group_by(Team, Action) %>% filter(keep=="Y",Teamnum == "B")
+
+#finds which are inside 
+#point.in.polygon(zonedBB$xend,zonedBB$yend,hullB$Areax, hullB$Areay, mode.checked=FALSE)
+
+#creates a dataframe of oc 
+oczone <- data.frame(oczone = point.in.polygon(zonedBB$xend,zonedBB$yend,hullB$Areax, hullB$Areay, mode.checked=FALSE))
+
+#creates col based on oc - allows to create other things
+zonedB <-bind_cols(zonedB,oczone)
+
+#Finds the scores 
+
+scrBarea <- scores %>%ungroup() %>%filter (Teamnum == "B", subsetoc %in% c("Scr Op", "Scr Rs")) %>% select(Areax, Areay)
+
+#creates the hull for all shots - think about changing this to scores only
+hullscrB <- scrBarea %>%slice(chull(Areax, Areay))
+
+#filters end of possessions - actions only
+TeamBEndscrB  <- run %>%group_by(Team, Action) %>% filter(keep=="Y",Teamnum == "B")
+
+#finds which are inside 
+#point.in.polygon( TeamBEnd$Areax, TeamBEnd$Areay,hullB$Areax, hullB$Areay, mode.checked=FALSE)
+
+#creates a dataframe of orig 
+inzonescrB <- data.frame(inzonescr = point.in.polygon(TeamBEndscrB$Areax, TeamBEndscrB$Areay,hullscrB$Areax, hullscrB$Areay, mode.checked=FALSE))
+
+
+#filters end of possessions - actions only
+zonedBscrB  <- run %>%group_by(Team, Action) %>% filter(keep=="Y",Teamnum == "B")
+
+#finds which are inside 
+#point.in.polygon(zonedB$xend,zonedB$yend,hullB$Areax, hullB$Areay, mode.checked=FALSE)
+
+#creates a dataframe of oc 
+oczonescrB <- data.frame(oczonescr = point.in.polygon(zonedBscrB$xend,zonedBscrB$yend,hullscrB$Areax, hullscrB$Areay, mode.checked=FALSE))
+
+#creates col based on oc - allows to create other things
+zonedB <-bind_cols(zonedB,inzonescrB,oczonescrB)
+```
+
+
+<font size="4">18 September 2011, Croke Park, Dublin<font>
+
+```{r, fig.width = 16, fig.height = 3}
+df <- data.frame(
+    x = rep(seq(0, 6, 6), 1),
+    y = c(rep(6.5, 2)),
+    h = rep(4.25,),
+    w = rep(5.95,2),
+    value = gamescore$score,
+    info = gamescore$team,
+    color = factor(1:2)
+)
+
+ggplot(df, aes(x, y, height = h, width = w, label = info)) +
+    geom_tile(aes(fill = color)) +
+    geom_text(data = df,
+              aes(label = info, x = x - 1.5, y = y + 1),color = "white", fontface = "bold", size = 35, hjust = 0) +
+    geom_text(data = df,
+              aes(label = value, x = x - 1, y = y - 1),color = "white", fontface = "bold", size = 30, hjust = 0) +
+    #coord_fixed() +
+    scale_fill_brewer(type = "qual",palette = "Dark2") +
+    theme_void() +
+    guides(fill = FALSE) +
+    scale_x_continuous(expand = c(0, 0)) + 
+    scale_y_continuous(expand = c(0, 0))
+
+
+``` 
+
+
+## Scorers
+
+```{r}
+
+teamsheetscrA <- teamsheet %>% filter (Teamnum == "A", score != "N")
+
+teamsheetscrA <- teamsheetscrA %>% select(Team,Player, score)
+
+teamsheetscrB <- teamsheet %>% filter (Teamnum == "B", score != "N")
+
+teamsheetscrB <- teamsheetscrB %>% select(Team,Player, score)
+
+#add column to each data frame with row number
+teamsheetscrA$number <- row.names(teamsheetscrA)
+teamsheetscrB$number <- row.names(teamsheetscrB)
+
+scoresply <- merge(teamsheetscrA,teamsheetscrB, by = "number", all = TRUE)
+
+scoresply$number <- as.numeric(scoresply$number)
+
+scoresply <- rename(scoresply, "Dublin" = Player.x, "Score" = score.x, "Kerry" = Player.y, "Score." = score.y )
+
+scoresply <- scoresply %>% select(Dublin,Score,Kerry, Score.)
+
+
+datatable(scoresply,options = list(pageLength = 10,lengthMenu = c(5, 10, 15, 20),columnDefs = 
+                           list(list(className = 'dt-center', 
+                                     targets = "_all"))),class = 'cell-border stripe', rownames = FALSE)
+```
+
+
+## Team Sheet  {.tabset .tabset-pills}
+
+### Dublin
+
+```{r, fig.width = 16, fig.height = 12}
+
+
+#Starting Line up change to single team
+
+positionA <- teamsheet %>% filter (Teamnum == "A", Sub == "N") %>%select(Areax,Areay,name, Player,plytime)
+
+positionA = positionA %>% 
+   unite(here, Player, sep = " ", remove = FALSE)
+
+#positionA
+
+p + #geom_point(data = positionA, aes(x=Areax, y=Areay), shape = 19, colour = "blue",size = 7) +
+  theme(plot.title = element_text( size=32, hjust=0)) +
+  geom_text(data = positionA, aes(x=Areax, y=Areay, label = here), colour = "blue", size = 10) +
+  theme(legend.position="none") +
+  labs(title = "Starting Line Up") +
+  theme(plot.title = element_text(hjust=0.5)) 
+```
+
+```{r}
+
+subA <- match %>% filter (Teamnum == "A", main %in% c ("Sub In", "Sub Out","Blood Sub In", "Blood Sub Out")) %>% select(Team,Player, plyname, Action, time)%>% mutate (Minute = time/60)%>% mutate_if(is.numeric, round, digits = 0) %>% select(-time)
+
+subA  = subA  %>% 
+   unite(here, Player, plyname, sep = " ", remove = FALSE)
+
+oddps <- subA[seq(1, nrow(subA), 2),]
+colnames(oddps) <- c("Team","here","Player","playname","Action","Minute")
+evenps <- subA[seq(2, nrow(subA), 2),]
+colnames(evenps) <- c("Teamoc","hereoc","Playeroc","playnameoc","Actionoc","Minuteoc")
+
+subA <- bind_cols(oddps, evenps) 
+
+subA  = subA %>% select(here,hereoc, Minute)
+
+subA  <- rename(subA, "On" = here, "Off" = hereoc )
+
+
+subA %>%
+  kbl(caption = "Substitutions") %>%
+    kable_minimal()
+
+
+```
+
+```{r}
+
+cardA <- match %>% filter (Teamnum == "A", main %in% c ("Card")) %>% select(Team,Player, plyname, Action, time)%>% mutate (Minute = time/60)%>% mutate_if(is.numeric, round, digits = 0) %>% select(-time)
+
+cardA = cardA  %>% 
+   unite(here, Player, plyname, sep = " ", remove = FALSE)
+
+
+
+cardA  = cardA %>% select(here,Action, Minute)
+
+cardA  <- rename(cardA, "Player" = here)
+
+
+cardA %>%
+  kbl(caption = "Cards") %>%
+    kable_minimal()
+
+
+```
+
+
+### Kerry
+
+```{r, fig.width = 16, fig.height = 12}
+
+
+#Starting Line up change to single team
+
+positionB <- teamsheet %>% filter (Teamnum == "B", Sub == "N") %>%select(Areax,Areay,name, Player,plytime)
+
+positionB = positionB %>% 
+   unite(here, Player, sep = " ", remove = FALSE)
+
+#positionA
+
+p + #geom_point(data = positionA, aes(x=Areax, y=Areay), shape = 19, colour = "blue",size = 7) +
+  theme(plot.title = element_text( size=32, hjust=0)) +
+  geom_text(data = positionB, aes(x=Areax, y=Areay, label = here), colour = "red", size = 10) +
+  theme(legend.position="none") +
+  labs(title = "Starting Line Up") +
+  theme(plot.title = element_text(hjust=0.5)) 
+```
+
+```{r}
+
+subB <- match %>% filter (Teamnum == "B", main %in% c ("Sub In", "Sub Out","Blood Sub In", "Blood Sub Out")) %>% select(Team,Player, plyname, Action, time)%>% mutate (Minute = time/60)%>% mutate_if(is.numeric, round, digits = 0) %>% select(-time)
+
+subB  = subB  %>% 
+   unite(here, Player, plyname, sep = " ", remove = FALSE)
+
+oddps <- subB[seq(1, nrow(subB), 2),]
+colnames(oddps) <- c("Team","here","Player","playname","Action","Minute")
+evenps <- subB[seq(2, nrow(subB), 2),]
+colnames(evenps) <- c("Teamoc","hereoc","Playeroc","playnameoc","Actionoc","Minuteoc")
+
+subB <- bind_cols(oddps, evenps) 
+
+subB  = subB %>% select(here,hereoc, Minute)
+
+subB  <- rename(subB, "On" = here, "Off" = hereoc )
+
+
+subB %>%
+  kbl(caption = "Substitutions") %>%
+    kable_minimal()
+
+
+```
+
+```{r}
+
+cardB <- match %>% filter (Teamnum == "B", main %in% c ("Card")) %>% select(Team,Player, plyname, Action, time)%>% mutate (Minute = time/60)%>% mutate_if(is.numeric, round, digits = 0) %>% select(-time)
+
+cardB = cardB  %>% 
+   unite(here, Player, plyname, sep = " ", remove = FALSE)
+
+
+
+cardB  = cardB %>% select(here,Action, Minute)
+
+cardB  <- rename(cardB, "Player" = here)
+
+
+cardB %>%
+  kbl(caption = "Cards") %>%
+    kable_minimal()
+
+
+```
+
+
+## Game Details {.tabset .tabset-pills}
+
+### Game Time 
+
+```{r, fig.width = 16, fig.height = 2}
+
+df <- data.frame(
+    x = rep(seq(0, 12, 6), 1),
+    y = c(rep(6.5, 3)),
+    h = rep(4.25,3),
+    w = rep(5.95,3),
+    value = gametime$mins,
+    info = gametime$time,
+    color = factor(1:3)
+)
+
+ggplot(df, aes(x, y, height = h, width = w, label = info)) +
+    geom_tile(aes(fill = color)) +
+    geom_text(data = df,
+              aes(label = value, x = x - 1, y = y + .5),color = "white", fontface = "bold", size = 25, hjust = 0) +
+    geom_text(data = df,
+              aes(label = info, x = x - 1.5, y = y - 1),color = "white", fontface = "bold", size = 15, hjust = 0) +
+    #coord_fixed() +
+    scale_fill_brewer(type = "qual",palette = "Dark2") +
+    theme_void() +
+    guides(fill = FALSE) +
+    scale_x_continuous(expand = c(0, 0)) + 
+    scale_y_continuous(expand = c(0, 0))
+
+
+
+
+```
+
+### Match Timeline
+
+```{r, fig.width = 16, fig.height = 9}
+
+#phs <- pass%>%group_by(Phase) %>%filter(main %in% c("PW","Ko","ToL", "Pass Rs","Shot Op Oc","Shot Rs Oc","Free Won", "Shot Rs", "Half Time","Full Time")|
+#(Action %in% c("Ko Mk Won", "Att Mk Won","Att Mk Won Prs","Loss Kp SlW","Loss Ko SlW","Loss Kp 45W","Off Foul Won","Ko Fk Won Off", "Sl Won Off","Off 45 Won")))
+
+
+#w/out half time 
+
+phs <- pass%>%group_by(Phase) %>%filter(main %in% c("PW","Ko","ToL", "Pass Rs","Shot Op Oc","Shot Rs Oc","Free Won", "Shot Rs","Half Time","Full Time")|
+(Action %in% c("Ko Mk Won", "Att Mk Won","Att Mk Won Prs","Loss Kp SlW","Loss Hp SlW","Loss Ko SlW","Loss Kp 45W","Off Foul Won","Ko Fk Won Off", "Sl Won Off","Off 45 Won")))
+
+oddps <- phs[seq(1, nrow(phs), 2),]
+colnames(phs) <- c("period","possno","poss","phaseno","Phase","Teamnum","Team","Player","plyname","Action","Areax","Areay","plylab","subset","Zone","time","main","Pitch_Area")
+evenps <- phs[seq(2, nrow(phs), 2),]
+colnames(evenps) <- c("periodoc","possnooc","possoc","phasenooc","Phaseoc","Teamnumoc","Teamoc","Playeroc","plynameoc","Actionoc","Areaxoc","Areayoc","plylaboc","subsetoc","Zoneoc","timeoc","mainoc","Pitch_Areaoc")
+phs <- bind_cols(oddps, evenps) 
+phs <- phs%>%select (Team,poss,Phase,time,Teamoc,possoc,Phaseoc,timeoc)
+
+time <-  phs
+
+
+teamcol = c("Dublin" = "blue", "Kerry" = "red")
+
+teamnumcol = c("A" = "blue", "B" = "red")
+
+
+sopa <-  time %>% select(Team,time,timeoc,Phase)
+
+wormA <-scores%>%filter(Teamnum == "A",subsetoc =="Scr Op"|subsetoc =="Scr Rs")%>%select(Teamnum,Team, Actionoc,Areaxoc,Areayoc,plylaboc,timeoc,Shot_lab,diff,subsetoc)
+wormB <-scores%>%filter(Teamnum == "B",subsetoc =="Scr Op"|subsetoc =="Scr Rs")%>%select(Teamnum,Team, Actionoc,Areaxoc,Areayoc,plylaboc,timeoc,Shot_lab,diff,subsetoc)
+wormC <-scores%>%filter(Teamnum == "A", subsetoc =="Ms Op"|subsetoc =="Ms Rs")%>%select(Teamnum,Team, Actionoc,Areaxoc,Areayoc,plylaboc,timeoc,Shot_lab,diff,subsetoc)
+wormD <-scores%>%filter(Teamnum == "B", subsetoc =="Ms Op"|subsetoc == "MS Rs")%>%select(Teamnum,Team, Actionoc,Areaxoc,Areayoc,plylaboc,timeoc,Shot_lab,diff,subsetoc)
+#cardA <- scores%>%filter(Teamnum == "A", period == "c")
+#cardB <- scores%>%filter(Teamnum == "B", period == "c")
+
+scoresSD <- scores %>% select (Teamnum, timeoc,diff,abdiff)
+
+my_theme <- function(){
+  theme_light() +
+    theme(text = element_text(),  
+          panel.grid = element_blank(),
+          panel.border = element_blank(),
+          axis.title = element_blank(),
+          axis.ticks = element_blank(),
+          axis.text.x = element_blank(),
+          axis.text.y = element_blank(),
+          #plot.title =  element_blank(),
+          panel.background = element_rect(fill = "#BFD5E3")) +
+theme(legend.position="none")
+  }
+
+q = ggplot(data = sopa, aes(x = time, y = 0, xend = timeoc, yend = 0, colour =Team))
+
+
+q + geom_segment(data = sopa, aes(x = time, y = 0, xend = timeoc, yend = 0, colour = Team),size = 6) +
+  scale_colour_manual(values = c(teamcol)) +
+geom_step(data=scoresSD, aes(x=timeoc, y=diff), colour = "white", ,size=1.5, linetype = 2,alpha = 0.4)+
+  geom_text_repel(data = scoresSD, aes(x=timeoc, y=diff, label = abdiff), colour = "white",size = 6)+
+  #geom_point(data = wormA, aes(x = timeoc, y = 0), shape = 20, size = 4, stroke = 2, colour = "white") +
+  geom_text_repel(data = wormA, aes(x=timeoc, y=0, label = subsetoc, colour = Team),size = 4,segment.size  = 0.5,nudge_x = 0, nudge_y = 1.2) +
+    #geom_point(data = wormB,aes(x=timeoc, y=0), shape = 20, size = 4, stroke = 2, colour = "white") +
+geom_text_repel(data = wormB, aes(x=timeoc, y=0, label = subsetoc, colour = Team),size = 4, segment.size  = 0.5,nudge_x = 0, nudge_y = -1.2) +
+    #geom_point(data = wormC,aes(x=timeoc, y=0,  colour = Team), shape = 4, size = 4, stroke = 2, colour = "white") +
+geom_text_repel(data = wormC, aes(x=timeoc, y=0, label = subsetoc, colour = Team),size = 4, segment.size  = 0.5,nudge_x = 0, nudge_y = 0.5) +
+   #geom_point(data = wormD,aes(x=timeoc, y=0), shape = 20, size = 4, stroke = 2, colour = "white") +
+geom_text_repel(data = wormD, aes(x=timeoc, y=0, label = subsetoc, colour = Team),size = 4, segment.size  = 0.5,nudge_x = 0, nudge_y = -0.5) +
+#geom_text_repel(data = cardA, aes(x=timeoc, y=0, label = subsetoc), colour ="black",size = 4, segment.size  = 0.5,nudge_x = 0, nudge_y = 1.5) +
+#geom_text_repel(data = cardB, aes(x=timeoc, y=0, label = subsetoc), colour ="black",size = 4, segment.size  = 0.5,nudge_x = 0, nudge_y = -1.5) +
+my_theme () +
+scale_y_continuous(breaks=seq(-10,10,1)) +
+expand_limits (y=c (-5,8)) +
+      annotate(geom="text", x=ht, y=6.5, label="Dublin", color="blue", size = 14) +
+    annotate(geom="text", x=ht, y=-6.5, label="Kerry", color="red", size = 14)+
+  geom_vline(xintercept=p1, linetype="dotted", color = "black")+
+  geom_vline(xintercept=ht, linetype="dotted", color = "black")+
+  geom_vline(xintercept=p3, linetype="dotted", color = "black")+
+  annotate(geom="text", x= p1, y=-8.75, label="Period 1",color = "black") +
+  annotate(geom="text", x= ht, y=-8.75, label="HT",color = "black") +
+  annotate(geom="text", x= p3, y=-8.75, label="Period 3",color = "black") +
+   labs(title = "Segments indicate a Phase of Play") +
+    theme(plot.title = element_text(size = 26, face = "bold",hjust = 0.5))
+  
+```
+
+```{r}
+scrs <- run %>%group_by(numname) %>%  filter(subsetoc %in% c ("Scr Op", "Scr Rs", "Ms Op", "Ms Rs"))%>% mutate (Minute = time/60)
+
+scrs <-scrs %>% mutate_if(is.numeric, round, digits = 0)
+
+scrs <-scrs %>% select(Team,numname,Action,Actionoc, Minute)
+
+#scrs <- rename(scrs, "Player" = numname, "Outcome" = Actionoc)
+
+datatable(scrs ,options = list(pageLength = 5,lengthMenu = c(5, 10, 15, 20),columnDefs = 
+                           list(list(className = 'dt-center', 
+                                     targets = "_all"))), colnames = c("Player" = 'numname',"Shot Type"= "Action", "Outcome" = 'Actionoc'),class = 'cell-border stripe', rownames = FALSE)
+```
+
+
+### Periods
+
+```{r, fig.width = 16, fig.height = 10}
+
+perA <- pass%>%group_by(Team,main,period, .drop=TRUE) %>% filter (main %in% c("PW", "ToL", "Ko Rec", "Ko", "Free Won", "Free Loss", "Shot Op","Shot Rs"))
+
+perA <- perA %>%group_by(Team,main,period)%>%tally%>%mutate(f = sum(n))
+
+pA <- ggplot(perA,aes(x=period,weight = n,fill = as.factor(period))) + 
+geom_histogram()+facet_grid(Team ~ main, scales='free') + 
+theme(strip.background = element_rect(colour="black", fill="lightgreen", size=1.5, linetype="solid"), 
+strip.text = element_text(size = 14, colour = "black"),
+axis.text = element_text(size = 12, colour = "black")) +
+labs (fill = "Period")
+pA
+```
+
+
+## Game Stats {.tabset .tabset-pills}
+
+### Dublin
+
+```{r, fig.width = 16, fig.height = 4}
+
+sopA <- sop %>% filter (Teamnum =="A")
+
+All_Poss  <- sopA %>%group_by(Team) %>%summarize(Possessions =sum(main %in% c("PW","Ko")), Total_Possession_time =sum (secs/60), Ave_Possession_time =mean(secs),  All_Shots = sum(mainoc %in% c("Shot Op Oc","Shot Rs Oc")), Shot_Perc =(All_Shots/Possessions*100), Shot_Rate_secs = sum (secs/All_Shots),Scores = sum(subsetoc %in% c("Scr Op","Scr Rs")),Scr_Perc =(Scores/All_Shots*100))
+
+All_Poss  <- All_Poss  %>%  mutate_at(vars(Total_Possession_time,Ave_Possession_time,Shot_Perc,Shot_Rate_secs,Scr_Perc), funs(round(., 0)))
+
+library(plyr)
+
+All_Poss <- rename(All_Poss, c( Total_Possession_time = "Poss Time (mins)",Ave_Possession_time = "Ave time (secs)",Scr_Perc = "Score %",All_Shots = "All Shots", Shot_Perc = "% Shots per Poss",  Shot_Rate_secs  = "Shot Rate (secs)"))
+
+detach(package:plyr)
+
+lpop <-All_Poss %>%
+  tidyr::gather(variable, value, -Team)
+
+lpop <-lpop %>% select (variable, value)
+
+df <- data.frame(
+    x = rep(seq(0, 18, 6), 2),
+    y = c(rep(6.5, 4), rep(2,4)),
+    h = rep(4.25, 8),
+    w = rep(5.95, 8),
+    value = lpop$value,
+    info = lpop$variable,
+    color = factor(1:8)
+)
+
+ggplot(df, aes(x, y, height = h, width = w, label = info)) +
+    geom_tile(aes(fill = color)) +
+    geom_text(data = df,
+              aes(label = value, x = x - 1, y = y + .5),color = "white", fontface = "bold", size = 25, hjust = 0) +
+    geom_text(data = df,
+              aes(label = info, x = x - 2, y = y - 1),color = "white", fontface = "bold", size = 10, hjust = 0) +
+    #coord_fixed() +
+    scale_fill_brewer(type = "qual",palette = "Dark2") +
+    theme_void() +
+    guides(fill = FALSE) +
+    scale_x_continuous(expand = c(0, 0)) + 
+    scale_y_continuous(expand = c(0, 0))
+
+
+
+```
+
+### Kerry
+
+```{r, fig.width = 16, fig.height = 4}
+
+sopB <- sop %>% filter (Teamnum =="B")
+
+All_Poss  <- sopB %>%group_by(Team) %>%summarize(Possessions =sum(main %in% c("PW","Ko")), Total_Possession_time =sum (secs/60), Ave_Possession_time =mean(secs),  All_Shots = sum(mainoc %in% c("Shot Op Oc","Shot Rs Oc")), Shot_Perc =(All_Shots/Possessions*100), Shot_Rate_secs = sum (secs/All_Shots),Scores = sum(subsetoc %in% c("Scr Op","Scr Rs")),Scr_Perc =(Scores/All_Shots*100))
+
+All_Poss  <- All_Poss  %>% mutate_at(vars(Total_Possession_time,Ave_Possession_time,Shot_Perc,Shot_Rate_secs,Scr_Perc), funs(round(., 0)))
+
+library(plyr)
+
+All_Poss <- rename(All_Poss, c( Total_Possession_time = "Poss Time (mins)",Ave_Possession_time = "Ave time (secs)",Scr_Perc = "Score %",All_Shots = "All Shots", Shot_Perc = "% Shots per Poss",  Shot_Rate_secs  = "Shot Rate (secs)"))
+
+detach(package:plyr)
+
+lpop <-All_Poss %>%
+  tidyr::gather(variable, value, -Team)
+
+lpop <-lpop %>% select (variable, value)
+
+df <- data.frame(
+    x = rep(seq(0, 18, 6), 2),
+    y = c(rep(6.5, 4), rep(2,4)),
+    h = rep(4.25, 8),
+    w = rep(5.95, 8),
+    value = lpop$value,
+    info = lpop$variable,
+    color = factor(1:8)
+)
+
+ggplot(df, aes(x, y, height = h, width = w, label = info)) +
+    geom_tile(aes(fill = color)) +
+    geom_text(data = df,
+              aes(label = value, x = x - 1, y = y + .5),color = "white", fontface = "bold", size = 25, hjust = 0) +
+    geom_text(data = df,
+              aes(label = info, x = x - 2, y = y - 1),color = "white", fontface = "bold", size = 10, hjust = 0) +
+    #coord_fixed() +
+    scale_fill_brewer(type = "qual",palette = "Dark2") +
+    theme_void() +
+    guides(fill = FALSE) +
+    scale_x_continuous(expand = c(0, 0)) + 
+    scale_y_continuous(expand = c(0, 0))
+
+
+
+```
+
+## Possession Stats {.tabset .tabset-pills}
+
+### Dublin
+
+```{r, fig.width = 16, fig.height = 2}
+passlpop <- pass[pass$main!="Def Act", ]
+passlpop <- passlpop[passlpop$main!="Free Loss", ]
+passlpop <- passlpop[passlpop$main!="Tck Def", ]
+passlpop <- passlpop[passlpop$main!="Tck End", ]
+passlpop <- passlpop[passlpop$main!="Sht Prs", ]
+passlpop <- passlpop[passlpop$main!="Spoil Off", ]
+passlpop <- passlpop[passlpop$main!="Opp Brk", ]
+
+
+passlpop <- passlpop %>% filter(Teamnum == "A")
+
+lpop <- passlpop %>%group_by(Team)%>%summarize(Possession_Won =sum(main == "PW"), Ko = sum(main == "Ko"),Ko_Won = sum(main == "Ko Rec"),Total_Possessions = sum(Possession_Won + Ko),Open_Play_Shots = sum(main == "Shot Op"),Open_Play_Score = sum(subset == "Scr Op"),
+Fk_Shots = sum(main == "Shot Rs"),Fk_Score = sum(subset == "Scr Rs"))
+
+library(plyr)
+
+lpop <- rename(lpop, c(Possession_Won = "Possessions Won", Ko_Won = "Ko Won",Open_Play_Shots = "OP Shots",Open_Play_Score = "Scores" ,Fk_Shots = "FK Shots",Fk_Score = "Score"))
+
+detach(package:plyr)
+
+
+
+lpop <-lpop %>%
+  tidyr::gather(variable, value, -Team)
+
+lpop <-lpop %>% select (variable, value)
+
+#lpop
+
+
+oddps <- lpop[seq(1, nrow(lpop), 1),]
+colnames(oddps) <- c("variable", "value")
+evenps <- lpop[seq(2, nrow(lpop), 1),]
+colnames(evenps) <- c("variable", "value")
+
+#add column to each data frame with row number
+oddps$number <- row.names(oddps)
+evenps$number <- row.names(evenps)
+
+lpopa <- merge(oddps, evenps, by = "number", all = TRUE)
+
+lpopa$number <- as.numeric(lpopa$number)
+
+lpopa  <- lpopa %>% arrange(number)
+
+lpopa = lpopa %>% 
+   unite(totals, value.x, value.y, sep = "/", remove = FALSE)
+
+lpopa = lpopa %>% 
+   unite(names, variable.x, variable.y, sep = "/", remove = FALSE)
+
+
+lpopa = lpopa%>% mutate(total = ifelse (number == "1", lpopa$value.x, ifelse(number == "4",lpopa$value.x,lpopa$totals)))
+
+lpopa = lpopa%>% mutate(name = ifelse (number == "1", lpopa$variable.x, ifelse(number == "4",lpopa$variable.x,lpopa$name)))
+
+
+lpopa <- lpopa[lpopa$number!="3", ]
+
+lpopa <- lpopa[lpopa$number!="4", ]
+
+lpopa <- lpopa[lpopa$number!="6", ]
+
+lpopa <- lpopa[lpopa$number!="8", ]
+
+#lpopa
+
+
+df <- data.frame(
+    x = rep(seq(0, 12, 4), 1),
+    y = c(rep(6.5, 4)),
+    h = rep(4.25, 4),
+    w = rep(3.95, 4),
+    value = lpopa$total,
+    info = lpopa$name,
+    color = factor(1:4)
+)
+
+ggplot(df, aes(x, y, height = h, width = w, label = info)) +
+    geom_tile(aes(fill = color)) +
+    geom_text(data = df,
+              aes(label = value, x = x - 1, y = y + .5),color = "white", fontface = "bold", size = 25, hjust = 0) +
+    geom_text(data = df,
+              aes(label = info, x = x - 1.5, y = y - 1),color = "white", fontface = "bold", size = 10, hjust = 0) +
+    #coord_fixed() +
+    scale_fill_brewer(type = "qual",palette = "Dark2") +
+    theme_void() +
+    guides(fill = FALSE) +
+    scale_x_continuous(expand = c(0, 0)) + 
+    scale_y_continuous(expand = c(0, 0))
+```
+
+### Kerry
+
+```{r, fig.width = 16, fig.height = 2}
+passlpop <- pass[pass$main!="Def Act", ]
+passlpop <- passlpop[passlpop$main!="Free Loss", ]
+passlpop <- passlpop[passlpop$main!="Tck Def", ]
+passlpop <- passlpop[passlpop$main!="Tck End", ]
+passlpop <- passlpop[passlpop$main!="Sht Prs", ]
+passlpop <- passlpop[passlpop$main!="Spoil Off", ]
+passlpop <- passlpop[passlpop$main!="Opp Brk", ]
+
+
+passlpop <- passlpop %>% filter(Teamnum == "B")
+
+lpop <- passlpop %>%group_by(Team)%>%summarize(Possession_Won =sum(main == "PW"), Ko = sum(main == "Ko"),Ko_Won = sum(main == "Ko Rec"),Total_Possessions = sum(Possession_Won + Ko),Open_Play_Shots = sum(main == "Shot Op"),Open_Play_Score = sum(subset == "Scr Op"),
+Fk_Shots = sum(main == "Shot Rs"),Fk_Score = sum(subset == "Scr Rs"))
+
+library(plyr)
+
+lpop <- rename(lpop, c(Possession_Won = "Possessions Won", Ko_Won = "Ko Won",Open_Play_Shots = "OP Shots",Open_Play_Score = "Scores" ,Fk_Shots = "FK Shots",Fk_Score = "Score"))
+
+detach(package:plyr)
+
+
+
+lpop <-lpop %>%
+  tidyr::gather(variable, value, -Team)
+
+lpop <-lpop %>% select (variable, value)
+
+#lpop
+
+
+oddps <- lpop[seq(1, nrow(lpop), 1),]
+colnames(oddps) <- c("variable", "value")
+evenps <- lpop[seq(2, nrow(lpop), 1),]
+colnames(evenps) <- c("variable", "value")
+
+#add column to each data frame with row number
+oddps$number <- row.names(oddps)
+evenps$number <- row.names(evenps)
+
+lpopa <- merge(oddps, evenps, by = "number", all = TRUE)
+
+lpopa$number <- as.numeric(lpopa$number)
+
+lpopa  <- lpopa %>% arrange(number)
+
+lpopa = lpopa %>% 
+   unite(totals, value.x, value.y, sep = "/", remove = FALSE)
+
+lpopa = lpopa %>% 
+   unite(names, variable.x, variable.y, sep = "/", remove = FALSE)
+
+
+lpopa = lpopa%>% mutate(total = ifelse (number == "1", lpopa$value.x, ifelse(number == "4",lpopa$value.x,lpopa$totals)))
+
+lpopa = lpopa%>% mutate(name = ifelse (number == "1", lpopa$variable.x, ifelse(number == "4",lpopa$variable.x,lpopa$name)))
+
+
+lpopa <- lpopa[lpopa$number!="3", ]
+
+lpopa <- lpopa[lpopa$number!="4", ]
+
+lpopa <- lpopa[lpopa$number!="6", ]
+
+lpopa <- lpopa[lpopa$number!="8", ]
+
+#lpopa
+
+
+df <- data.frame(
+    x = rep(seq(0, 12, 4), 1),
+    y = c(rep(6.5, 4)),
+    h = rep(4.25, 4),
+    w = rep(3.95, 4),
+    value = lpopa$total,
+    info = lpopa$name,
+    color = factor(1:4)
+)
+
+ggplot(df, aes(x, y, height = h, width = w, label = info)) +
+    geom_tile(aes(fill = color)) +
+    geom_text(data = df,
+              aes(label = value, x = x - 1, y = y + .5),color = "white", fontface = "bold", size = 25, hjust = 0) +
+    geom_text(data = df,
+              aes(label = info, x = x - 1.5, y = y - 1),color = "white", fontface = "bold", size = 10, hjust = 0) +
+    #coord_fixed() +
+    scale_fill_brewer(type = "qual",palette = "Dark2") +
+    theme_void() +
+    guides(fill = FALSE) +
+    scale_x_continuous(expand = c(0, 0)) + 
+    scale_y_continuous(expand = c(0, 0))
+```
+
+### Dublin Passes
+
+```{r, fig.width = 16, fig.height = 10}
+passcntA <- sop%>%group_by(possno, .drop=TRUE) %>% filter (Teamnum == "A")%>%select(Team,possno, passno, subsetoc,mainoc)
+
+passcntA <- passcntA[passcntA$mainoc!="Full Time", ]
+
+ggplot(data = passcntA, aes(x = possno, y = passno, fill = mainoc)) + geom_bar(position="dodge", stat="identity", width = .5) +
+  scale_fill_manual(values = passnocolpals, labels = c("OP Shot", "Fk Shot", "T/o Lost")) +
+   scale_colour_manual(values = passnocolpals, labels = c("OP Shot", "Fk Shot", "T/o Lost")) +
+  labs(fill="Ended in a") +
+  ylab("Total Passes") +
+  xlab("Possessions") +
+  geom_text(aes(label =passno, vjust = 0,colour =mainoc), size = 8,show.legend = FALSE) +
+scale_x_continuous(labels = passcntA$possno, breaks = passcntA$possno)  + 
+     theme_classic() + theme (panel.grid.major = element_blank(),
+panel.grid.minor = element_blank()) + theme(legend.position="bottom", axis.text.x = element_text(size = 12, angle = 90, vjust = 0.5, hjust=1)) +
+    guides(colour = guide_legend(override.aes = list(size = 10)))
+
+```
+
+### Kerry Passes
+
+```{r, fig.width = 16, fig.height = 10}
+passcntB <- sop%>%group_by(possno, .drop=TRUE) %>% filter (Teamnum == "B")%>%select(Team,possno, passno, subsetoc,mainoc)
+
+passcntB <- passcntB[passcntB$mainoc!="Half Time", ]
+passcntB <- passcntB[passcntB$mainoc!="Full Time", ]
+
+ggplot(data = passcntB, aes(x = possno, y = passno, fill = mainoc)) + geom_bar(position="dodge", stat="identity", width = .5) +
+    scale_fill_manual(values = passnocolpals, labels = c("OP Shot", "Fk Shot", "T/o Lost")) +
+   scale_colour_manual(values = passnocolpals, labels = c("OP Shot", "Fk Shot", "T/o Lost")) + 
+  labs(fill="Ended in a") +
+  ylab("Total Passes") +
+  xlab("Possessions") +
+ geom_text(aes(label =passno, vjust = 0,colour =mainoc), size = 8,show.legend = FALSE) +
+scale_x_continuous(labels = passcntB$possno, breaks = passcntB$possno)  + 
+     theme_classic() + theme (panel.grid.major = element_blank(),
+panel.grid.minor = element_blank()) + theme(legend.position="bottom", axis.text.x = element_text(size = 12, angle = 90, vjust = 0.5, hjust=1)) +
+    guides(colour = guide_legend(override.aes = list(size = 10)))
+
+```
+
+## Time {.tabset .tabset-pills}
+
+### Dublin Poss Time
+
+```{r}
+PosstimeAb  <- sop %>% group_by(period,line_time, .drop = FALSE)%>% filter(Teamnum == "A") %>% summarise(count = n())
+
+ggplot(data = PosstimeAb, aes(x = period, y = count, fill = line_time)) + geom_bar(position="dodge", stat="identity") +
+  labs(fill="Duration (secs)") +
+   xlab("Period") +
+  ylab("Possession") +
+  geom_text(aes(label = count, group =line_time), color = "black", position = position_dodge(width = 1), size = 8) +
+    theme_bw() + theme (panel.grid.major = element_blank(),
+panel.grid.minor = element_blank()) + theme(legend.position="bottom") 
+```
+
+### Kerry Poss Time
+
+```{r}
+
+PosstimeBb  <- sop %>% group_by(period,line_time, .drop = FALSE)%>% filter(Teamnum == "B") %>% summarise(count = n())
+
+ggplot(data = PosstimeBb, aes(x = period, y = count, fill = line_time)) + geom_bar(position="dodge", stat="identity") +
+  labs(fill="Duration (secs)") +
+  xlab("Period") +
+  ylab("Possession") +
+  geom_text(aes(label = count, group =line_time), color = "black", position = position_dodge(width = 1), size = 8) +
+    theme_bw() + theme (panel.grid.major = element_blank(),
+panel.grid.minor = element_blank()) + theme(legend.position="bottom") 
+
+```
+
+### Dublin Phase Time
+
+```{r}
+PosstimeAb  <- phasesop %>% group_by(period,line_time, .drop = FALSE)%>% filter(Teamnum == "A") %>% summarise(count = n())
+
+ggplot(data = PosstimeAb, aes(x = period, y = count, fill = line_time)) + geom_bar(position="dodge", stat="identity") +
+  labs(fill="Duration (secs)") +
+  xlab("Period") +
+  ylab("Phases") +
+  geom_text(aes(label = count, group =line_time), color = "black", position = position_dodge(width = 1), size = 8) +
+    theme_bw() + theme (panel.grid.major = element_blank(),
+panel.grid.minor = element_blank()) + theme(legend.position="bottom") 
+```
+
+### Kerry Phase Time
+
+```{r}
+
+PosstimeBb  <- phasesop %>% group_by(period,line_time, .drop = FALSE)%>% filter(Teamnum == "B") %>% summarise(count = n())
+
+ggplot(data = PosstimeBb, aes(x = period, y = count, fill = line_time)) + geom_bar(position="dodge", stat="identity") +
+  labs(fill="Duration (secs)") +
+  xlab("Period") +
+  ylab("Phases") +
+  geom_text(aes(label = count, group =line_time), color = "black", position = position_dodge(width = 1), size = 8) +
+    theme_bw() + theme (panel.grid.major = element_blank(),
+panel.grid.minor = element_blank()) + theme(legend.position="bottom") 
+
+```
+
+
+## Shooting {.tabset .tabset-pills}
+
+### Dublin
+
+```{r, fig.width = 16, fig.height = 12}
+
+shotsA <- scores %>%group_by(Team, Action) %>% filter(Teamnum == "A", subset =="Shot Op"|subset == "Shot Rs")
+
+shotsAScr <- scores %>%group_by(Team, Action) %>% filter(Teamnum == "A", subsetoc =="Scr Op"|subsetoc == "Scr Rs")
+
+shotseffA <- scores  %>%group_by(Zone,tx,ty,bx,by)%>%filter(Teamnum =="A", subset == "Shot Op"|subset == "Shot Rs") %>%summarize(Scr =sum(subsetoc == "Scr Op"|subsetoc == "Scr Rs"), Ms = sum(subsetoc == "Ms Op"|subsetoc == "Ms Rs"),Shot=(Scr + Ms))%>%select(Zone,Scr,Ms,Shot,tx,ty,bx,by)
+
+shotseffA = shotseffA %>% 
+   unite(shtscr, Scr, Shot, sep = "/", remove = FALSE)
+
+p + 
+stat_chull(data = shotsA,aes(x=Areax, y=Areay),color = "blue", fill = "blue",alpha = 0.1, geom = "polygon") +
+stat_chull(data = shotsAScr,aes(x=Areax, y=Areay), fill = "green",color = "green", alpha = 0.1, geom = "polygon") +
+  geom_text(data= shotseffA, aes(x= tx, y=ty, label = shtscr),colour = "white", size = 30, alpha = 0.4) +
+  geom_point(data = shotsA, aes(x=Areax, y=Areay, colour = Actionoc, shape = Action), size = 6) + 
+   scale_colour_manual(values = colshotvertpal) +
+  geom_text_repel(data = shotsA, aes(x=Areax, y=Areay, label = plylaboc, col = Actionoc), size = 6) +
+    scale_shape_manual(values = colshotshape) +
+    theme(legend.position="bottom", legend.title=element_text(size=15), 
+          legend.text=element_text(size=20)) +
+    theme(plot.title = element_text(hjust=0.5)) +
+    theme(plot.subtitle = element_text(hjust=0.5)) +
+  labs(colour="Shot Type") +
+    guides(color = FALSE, size = FALSE) +
+    guides(shape = guide_legend(override.aes = list(size = 10))) +
+labs(colour="Shots", caption="Blue Shading = Shot Area, Green Shading = Score Area")+
+ theme(plot.caption=element_text(size=18, hjust=0.5, face="bold", color="black")) 
+
+
+
+```
+
+```{r, fig.width = 16, fig.height = 2}
+ShotsAllA <- sop %>%group_by(Team)%>%filter(Teamnum == "A")
+
+ShotsAll <-ShotsAllA %>%group_by(Team)%>%filter(mainoc %in% c("Shot Op Oc","Shot Rs Oc")) %>%summarize(Shots = sum(mainoc %in% c("Shot Op Oc","Shot Rs Oc")), Scores = sum(subsetoc %in% c("Scr Op","Scr Rs")),Shot_Eff = (Scores/Shots *100))
+
+ShotsAll <-ShotsAll %>% mutate_at(vars(Shot_Eff), funs(round(., 1)))
+
+library(plyr)
+
+ShotsAll <- rename(ShotsAll, c( Shot_Eff = "Efficiency %"))
+
+detach(package:plyr)
+
+
+lpop <-ShotsAll %>%
+  tidyr::gather(variable, value, -Team)
+
+lpop <-lpop %>% select (variable, value)
+
+#lpop
+
+
+df <- data.frame(
+    x = rep(seq(0, 12, 6), 1),
+    y = c(rep(6.5, 3)),
+    h = rep(4.25,3),
+    w = rep(5.95,3),
+    value = lpop$value,
+    info = lpop$variable,
+    color = factor(1:3)
+)
+
+ggplot(df, aes(x, y, height = h, width = w, label = info)) +
+    geom_tile(aes(fill = color)) +
+    geom_text(data = df,
+              aes(label = value, x = x - 1, y = y + .5),color = "white", fontface = "bold", size = 25, hjust = 0) +
+    geom_text(data = df,
+              aes(label = info, x = x - 1.5, y = y - 1),color = "white", fontface = "bold", size = 10, hjust = 0) +
+    #coord_fixed() +
+    scale_fill_brewer(type = "qual",palette = "Dark2") +
+    theme_void() +
+    guides(fill = FALSE) +
+    scale_x_continuous(expand = c(0, 0)) + 
+    scale_y_continuous(expand = c(0, 0))
+
+```
+
+### Kerry
+
+```{r, fig.width = 16, fig.height = 12}
+
+shotsA <- scores %>%group_by(Team, Action) %>% filter(Teamnum == "B", subset =="Shot Op"|subset == "Shot Rs")
+
+shotsAScr <- scores %>%group_by(Team, Action) %>% filter(Teamnum == "B", subsetoc =="Scr Op"|subsetoc == "Scr Rs")
+
+shotseffA <- scores  %>%group_by(Zone,tx,ty,bx,by)%>%filter(Teamnum =="B", subset == "Shot Op"|subset == "Shot Rs") %>%summarize(Scr =sum(subsetoc == "Scr Op"|subsetoc == "Scr Rs"), Ms = sum(subsetoc == "Ms Op"|subsetoc == "Ms Rs"),Shot=(Scr + Ms))%>%select(Zone,Scr,Ms,Shot,tx,ty,bx,by)
+
+shotseffA = shotseffA %>% 
+   unite(shtscr, Scr, Shot, sep = "/", remove = FALSE)
+
+p + 
+stat_chull(data = shotsA,aes(x=Areax, y=Areay),color = "blue", fill = "blue",alpha = 0.1, geom = "polygon") +
+stat_chull(data = shotsAScr,aes(x=Areax, y=Areay), fill = "green",color = "green", alpha = 0.1, geom = "polygon") +
+  geom_text(data= shotseffA, aes(x= tx, y=ty, label = shtscr),colour = "white", size = 30, alpha = 0.4) +
+  geom_point(data = shotsA, aes(x=Areax, y=Areay, colour = Actionoc, shape = Action), size = 6) + 
+   scale_colour_manual(values = colshotvertpal) +
+  geom_text_repel(data = shotsA, aes(x=Areax, y=Areay, label = plylaboc, col = Actionoc), size = 6) +
+    scale_shape_manual(values = colshotshape) +
+    theme(legend.position="bottom", legend.title=element_text(size=15), 
+          legend.text=element_text(size=20)) +
+    theme(plot.title = element_text(hjust=0.5)) +
+    theme(plot.subtitle = element_text(hjust=0.5)) +
+  labs(colour="Shot Type") +
+    guides(color = FALSE, size = FALSE) +
+    guides(shape = guide_legend(override.aes = list(size = 10)))+
+labs(colour="Shots", caption="Blue Shading = Shot Area, Green Shading = Score Area")+
+ theme(plot.caption=element_text(size=18, hjust=0.5, face="bold", color="black")) 
+
+
+```
+
+```{r, fig.width = 16, fig.height = 2}
+ShotsAllB <- sop %>%group_by(Team)%>%filter(Teamnum == "B")
+
+ShotsAll <-ShotsAllB %>%group_by(Team)%>%filter(mainoc %in% c("Shot Op Oc","Shot Rs Oc")) %>%summarize(Shots = sum(mainoc %in% c("Shot Op Oc","Shot Rs Oc")), Scores = sum(subsetoc %in% c("Scr Op","Scr Rs")),Shot_Eff = (Scores/Shots *100))
+
+ShotsAll <-ShotsAll %>% mutate_at(vars(Shot_Eff), funs(round(., 1)))
+
+library(plyr)
+
+ShotsAll <- rename(ShotsAll, c( Shot_Eff = "Efficiency %"))
+
+detach(package:plyr)
+
+
+lpop <-ShotsAll %>%
+  tidyr::gather(variable, value, -Team)
+
+lpop <-lpop %>% select (variable, value)
+
+#lpop
+
+
+df <- data.frame(
+    x = rep(seq(0, 12, 6), 1),
+    y = c(rep(6.5, 3)),
+    h = rep(4.25,3),
+    w = rep(5.95,3),
+    value = lpop$value,
+    info = lpop$variable,
+    color = factor(1:3)
+)
+
+ggplot(df, aes(x, y, height = h, width = w, label = info)) +
+    geom_tile(aes(fill = color)) +
+    geom_text(data = df,
+              aes(label = value, x = x - 1, y = y + .5),color = "white", fontface = "bold", size = 25, hjust = 0) +
+    geom_text(data = df,
+              aes(label = info, x = x - 1.5, y = y - 1),color = "white", fontface = "bold", size = 10, hjust = 0) +
+    #coord_fixed() +
+    scale_fill_brewer(type = "qual",palette = "Dark2") +
+    theme_void() +
+    guides(fill = FALSE) +
+    scale_x_continuous(expand = c(0, 0)) + 
+    scale_y_continuous(expand = c(0, 0))
+
+```
+
+### Dublin - Shot Outcome
+
+```{r}
+
+ASA <- pass %>%group_by(Team, Action) %>% filter(Teamnum == "A", main =="Shot Op Oc"| main == "Shot Rs Oc")
+ASA <- ASA %>%group_by(Team, Action) %>% filter(Teamnum == "A", main =="Shot Op Oc"| main == "Shot Rs Oc")%>%summarize(count=n())
+
+my_theme <- function(){
+  theme_light() +
+    theme(text = element_text(),  
+          panel.grid = element_blank(),
+          panel.border = element_blank(),
+          axis.title = element_blank(),
+          axis.ticks = element_blank(),
+          axis.text.x = element_blank(),
+          axis.text.y = element_text(size = 15, color = "gray10"),
+          plot.title =  element_text(size = 20, color = "black"))
+  }
+
+final_data <- ASA %>% 
+  # Calculate -- and format -- the percentage for each channel
+  mutate(bar_percentage = sprintf("%.1f%%", 100*(count / sum(.$count)))) %>% 
+  # Combine that percentage with the actual value
+  mutate(bar_label = paste0(format(count, big.mark = ","), ", ", bar_percentage)) %>% 
+  # Remove the "just the percentage" column
+  select(-bar_percentage)
+
+
+total_ASA <- paste0("All Shots: ",
+                      format(sum(final_data$count), big.mark = ","))
+
+
+ggplot(final_data, aes(x = Action, y = count)) +
+ggtitle("All Shots",  # Add the title and subtitle
+          subtitle = total_ASA) +   
+  geom_bar(stat = "identity", 
+           fill = "lightgreen",    
+           width = 0.50) +  
+geom_text(aes(label = bar_label, size = 5.5, hjust = 0)) +
+  coord_flip() +
+  scale_y_continuous(expand = c(0, 0),
+                     limits = c(0, max(final_data$count) * 1.3)) +
+  my_theme() +
+theme(legend.position="none", plot.title =  element_text(size = 20, color = "black"),plot.subtitle =  element_text(size = 18, color = "black"))
+```
+
+### Kerry - Shot Outcome
+
+```{r}
+ASB<- pass %>%group_by(Team, Action) %>% filter(Teamnum == "B", main =="Shot Op Oc"| main == "Shot Rs Oc")
+ASB<- ASB %>%group_by(Team, Action) %>% filter(Teamnum == "B", main =="Shot Op Oc"| main == "Shot Rs Oc")%>%summarize(count=n())
+
+my_theme <- function(){
+  theme_light() +
+    theme(text = element_text(),  
+          panel.grid = element_blank(),
+          panel.border = element_blank(),
+          axis.title = element_blank(),
+          axis.ticks = element_blank(),
+          axis.text.x = element_blank(),
+          axis.text.y = element_text(size = 15, color = "gray10"),
+          plot.title =  element_text(size = 20, color = "black"))
+  }
+
+final_data <- ASB%>% 
+  # Calculate -- and format -- the percentage for each channel
+  mutate(bar_percentage = sprintf("%.1f%%", 100*(count / sum(.$count)))) %>% 
+  # Combine that percentage with the actual value
+  mutate(bar_label = paste0(format(count, big.mark = ","), ", ", bar_percentage)) %>% 
+  # Remove the "just the percentage" column
+  select(-bar_percentage)
+
+
+total_ASB<- paste0("All Shots: ",
+                      format(sum(final_data$count), big.mark = ","))
+
+
+ggplot(final_data, aes(x = Action, y = count)) +
+ggtitle("All Shots",  # Add the title and subtitle
+          subtitle = total_ASB)+   
+  geom_bar(stat = "identity", 
+           fill = "lightgreen",    
+           width = 0.50) +  
+geom_text(aes(label = bar_label, size = 5.5, hjust = 0)) +
+  coord_flip() +
+  scale_y_continuous(expand = c(0, 0),
+                     limits = c(0, max(final_data$count) * 1.3)) +
+  my_theme() + theme(legend.position="none", plot.title =  element_text(size = 20, color = "black"),plot.subtitle =  element_text(size = 18, color = "black"))
+
+```
+
+
+## More Shooting {.tabset .tabset-pills}
+
+### Dublin - Open Play
+
+```{r, fig.width = 16, fig.height = 12}
+
+
+shotsA <- scores %>%group_by(Team, Action) %>% filter(Teamnum == "A", subset =="Shot Op")
+
+shotsAScr <- scores %>%group_by(Team, Action) %>% filter(Teamnum == "A", subsetoc =="Scr Op")
+
+shotseffA <- scores  %>%group_by(Zone,tx,ty,bx,by)%>%filter(Teamnum =="A", subset == "Shot Op") %>%summarize(Scr =sum(subsetoc == "Scr Op"), Ms = sum(subsetoc == "Ms Op"),Shot=(Scr))%>%select(Zone,Scr,Ms,Shot,tx,ty,bx,by)
+
+shotseffA = shotseffA %>% 
+   unite(shtscr, Scr, Shot, sep = "/", remove = FALSE)
+
+p + 
+stat_chull(data = shotsA,aes(x=Areax, y=Areay),color = "blue", fill = "blue",alpha = 0.1, geom = "polygon") +
+stat_chull(data = shotsAScr,aes(x=Areax, y=Areay), fill = "green",color = "green", alpha = 0.1, geom = "polygon") +
+  geom_text(data= shotseffA, aes(x= tx, y=ty, label = shtscr),colour = "white", size = 30, alpha = 0.4) +
+  geom_point(data = shotsA, aes(x=Areax, y=Areay, colour = as.factor(shdf), shape = Action), size = 6) + 
+    scale_colour_manual(values = colshotpal, labels = c("No Prs", "Light/Late Prs", "Heavy Prs")) +
+  geom_text_repel(data = shotsA, aes(x=Areax, y=Areay, label = plylaboc, colour = as.factor(shdf)), size = 6) +
+    scale_shape_manual(values = colshotshape) +
+    theme(legend.position="bottom", legend.title=element_text(size=15), 
+          legend.text=element_text(size=20)) +
+    theme(plot.title = element_text(hjust=0.5)) +
+    theme(plot.subtitle = element_text(hjust=0.5)) +
+  labs(colour="Shot Type") +
+    guides(size = FALSE) +
+    guides(shape = guide_legend(override.aes = list(size = 10)))+
+labs(colour="Shots", caption="Blue Shading = Shot Area, Green Shading = Score Area")+
+ theme(plot.caption=element_text(size=18, hjust=0.5, face="bold", color="black")) 
+
+```
+
+```{r, fig.width = 16, fig.height = 2}
+
+ShotsAllA <- sop %>%group_by(Team)%>%filter(Teamnum == "A")
+
+ShotsAll <-ShotsAllA %>%group_by(Team)%>%filter(mainoc %in% c("Shot Op Oc")) %>%summarize(Shots = sum(mainoc %in% c("Shot Op Oc")), Scores = sum(subsetoc %in% c("Scr Op")),Shot_Eff = (Scores/Shots *100))
+
+ShotsAll <-ShotsAll %>% mutate_at(vars(Shot_Eff), funs(round(., 1)))
+
+library(plyr)
+
+ShotsAll <- rename(ShotsAll, c( Shot_Eff = "Efficiency %"))
+
+detach(package:plyr)
+
+
+lpop <-ShotsAll %>%
+  tidyr::gather(variable, value, -Team)
+
+lpop <-lpop %>% select (variable, value)
+
+#lpop
+
+
+df <- data.frame(
+    x = rep(seq(0, 12, 6), 1),
+    y = c(rep(6.5, 3)),
+    h = rep(4.25,3),
+    w = rep(5.95,3),
+    value = lpop$value,
+    info = lpop$variable,
+    color = factor(1:3)
+)
+
+ggplot(df, aes(x, y, height = h, width = w, label = info)) +
+    geom_tile(aes(fill = color)) +
+    geom_text(data = df,
+              aes(label = value, x = x - 1, y = y + .5),color = "white", fontface = "bold", size = 25, hjust = 0) +
+    geom_text(data = df,
+              aes(label = info, x = x - 1.5, y = y - 1),color = "white", fontface = "bold", size = 10, hjust = 0) +
+    #coord_fixed() +
+    scale_fill_brewer(type = "qual",palette = "Dark2") +
+    theme_void() +
+    guides(fill = FALSE) +
+    scale_x_continuous(expand = c(0, 0)) + 
+    scale_y_continuous(expand = c(0, 0))
+
+
+```
+
+### Kerry - Open Play
+
+```{r, fig.width = 16, fig.height = 12}
+
+shotsA <- scores %>%group_by(Team, Action) %>% filter(Teamnum == "B", subset =="Shot Op")
+
+shotsAScr <- scores %>%group_by(Team, Action) %>% filter(Teamnum == "B", subsetoc =="Scr Op")
+
+shotseffA <- scores  %>%group_by(Zone,tx,ty,bx,by)%>%filter(Teamnum =="B", subset == "Shot Op") %>%summarize(Scr =sum(subsetoc == "Scr Op"|subsetoc == "Scr Rs"), Ms = sum(subsetoc == "Ms Op"|subsetoc == "Ms Rs"),Shot=(Scr + Ms))%>%select(Zone,Scr,Ms,Shot,tx,ty,bx,by)
+
+shotseffA = shotseffA %>% 
+   unite(shtscr, Scr, Shot, sep = "/", remove = FALSE)
+
+p + 
+stat_chull(data = shotsA,aes(x=Areax, y=Areay),color = "blue", fill = "blue",alpha = 0.1, geom = "polygon") +
+stat_chull(data = shotsAScr,aes(x=Areax, y=Areay), fill = "green",color = "green", alpha = 0.1, geom = "polygon") +
+  geom_text(data= shotseffA, aes(x= tx, y=ty, label = shtscr),colour = "white", size = 30, alpha = 0.4) +
+  geom_point(data = shotsA, aes(x=Areax, y=Areay, colour = as.factor(shdf), shape = Action), size = 6) + 
+    scale_colour_manual(values = colshotpal, labels = c("No Prs", "Light/Late Prs", "Heavy Prs")) +
+  geom_text_repel(data = shotsA, aes(x=Areax, y=Areay, label = plylaboc, colour = as.factor(shdf)), size = 6) +
+    scale_shape_manual(values = colshotshape) +
+    theme(legend.position="bottom", legend.title=element_text(size=15), 
+          legend.text=element_text(size=20)) +
+    theme(plot.title = element_text(hjust=0.5)) +
+    theme(plot.subtitle = element_text(hjust=0.5)) +
+  labs(colour="Shot Type") +
+    guides(size = FALSE) +
+    guides(shape = guide_legend(override.aes = list(size = 10)))+
+labs(colour="Shots", caption="Blue Shading = Shot Area, Green Shading = Score Area")+
+ theme(plot.caption=element_text(size=18, hjust=0.5, face="bold", color="black")) 
+
+
+```
+
+```{r, fig.width = 16, fig.height = 2}
+ShotsAllB <- sop %>%group_by(Team)%>%filter(Teamnum == "B")
+
+ShotsAll <-ShotsAllB %>%group_by(Team)%>%filter(mainoc %in% c("Shot Op Oc")) %>%summarize(Shots = sum(mainoc %in% c("Shot Op Oc")), Scores = sum(subsetoc %in% c("Scr Op")),Shot_Eff = (Scores/Shots *100))
+
+ShotsAll <-ShotsAll %>% mutate_at(vars(Shot_Eff), funs(round(., 1)))
+
+library(plyr)
+
+ShotsAll <- rename(ShotsAll, c( Shot_Eff = "Efficiency %"))
+
+detach(package:plyr)
+
+
+lpop <-ShotsAll %>%
+  tidyr::gather(variable, value, -Team)
+
+lpop <-lpop %>% select (variable, value)
+
+#lpop
+
+
+df <- data.frame(
+    x = rep(seq(0, 12, 6), 1),
+    y = c(rep(6.5, 3)),
+    h = rep(4.25,3),
+    w = rep(5.95,3),
+    value = lpop$value,
+    info = lpop$variable,
+    color = factor(1:3)
+)
+
+ggplot(df, aes(x, y, height = h, width = w, label = info)) +
+    geom_tile(aes(fill = color)) +
+    geom_text(data = df,
+              aes(label = value, x = x - 1, y = y + .5),color = "white", fontface = "bold", size = 25, hjust = 0) +
+    geom_text(data = df,
+              aes(label = info, x = x - 1.5, y = y - 1),color = "white", fontface = "bold", size = 10, hjust = 0) +
+    #coord_fixed() +
+    scale_fill_brewer(type = "qual",palette = "Dark2") +
+    theme_void() +
+    guides(fill = FALSE) +
+    scale_x_continuous(expand = c(0, 0)) + 
+    scale_y_continuous(expand = c(0, 0))
+
+```
+
+### Dublin - Frees
+
+```{r, fig.width = 16, fig.height = 12}
+
+shotsA <- scores %>%group_by(Team, Action) %>% filter(Teamnum == "A", subset == "Shot Op"| subset == "Shot Rs")
+
+shotsAScr <- scores %>%group_by(Team, Action) %>% filter(Teamnum == "A",subsetoc %in% c ("Scr Rs", "Ms Rs"))
+
+freeAmap <-  pass %>%group_by(Team, Action) %>% filter(Teamnum == "A", main =="Free Won"| Action == "PW Fk Pass")
+
+freeAmap <-freeAmap %>%
+    mutate(tx = VLOOKUP(Zone, zonetext, zone, tx),ty = VLOOKUP(Zone, zonetext, zone, ty),bx = VLOOKUP(Zone, zonetext, zone, bx),by = VLOOKUP(Zone, zonetext, zone, by))
+
+freeAcnt <- freeAmap %>%group_by(Zone,tx,ty,bx,by)%>%filter(Teamnum =="A") %>%summarize(FW =sum(main =="Free Won"))%>%select(Zone,FW,tx,ty,bx,by)
+
+
+
+p +  stat_chull(data = shotsA,aes(x=Areax, y=Areay),color = "blue", fill = "blue",alpha = 0.1, geom = "polygon") +
+    stat_chull(data = shotsAScr,aes(x=Areax, y=Areay), fill = "green",color = "green", alpha = 0.1, geom = "polygon") +
+  #geom_text(data= freeAcnt, aes(x= tx, y=ty, label = FW),colour = "white", size = 30,alpha=0.4) +
+  #geom_point(data = freeAmap, aes(x=Areax, y=Areay, colour = main),alpha = 0.5, shape = 19, size = 6)  +
+  theme(legend.position="bottom") + 
+  labs(colour="Fk Won") +
+  scale_colour_manual(values = colorAct) +
+  new_scale_color() + 
+  geom_point(data = shotsAScr, aes(x=Areax, y=Areay, colour = Actionoc, shape = Action), size = 6) + 
+   scale_colour_manual(values = colshotvertpal) +
+  geom_text_repel(data = shotsAScr, aes(x=Areax, y=Areay, label = plylaboc, col = Actionoc), size = 6) +
+    scale_shape_manual(values = colshotshape) +
+    theme(legend.position="bottom", legend.title=element_text(size=15), 
+          legend.text=element_text(size=20)) +
+    theme(plot.title = element_text(hjust=0.5)) +
+    theme(plot.subtitle = element_text(hjust=0.5)) +
+     labs(colour="Shot Type") +
+    guides(color = FALSE, size = FALSE) +
+    guides(shape = guide_legend(override.aes = list(size = 10))) +
+labs(colour="Shots", caption="Blue Shading = Shot Area, Green Shading = Score Area")+
+ theme(plot.caption=element_text(size=18, hjust=0.5, face="bold", color="black")) 
+
+
+
+```
+
+```{r, fig.width = 16, fig.height = 2}
+
+ShotsAllA <- sop %>%group_by(Team)%>%filter(Teamnum == "A")
+
+ShotsAll <-ShotsAllA %>%group_by(Team)%>%filter(mainoc %in% c("Shot Rs Oc")) %>%summarize(Shots = sum(mainoc %in% c("Shot Rs Oc")), 
+Scores = sum(subsetoc %in% c("Scr Rs")),Shot_Eff = (Scores/Shots *100))
+
+ShotsAll <-ShotsAll %>% mutate_at(vars(Shot_Eff), funs(round(., 1)))
+
+library(plyr)
+
+ShotsAll <- rename(ShotsAll, c( Shot_Eff = "Efficiency %"))
+
+detach(package:plyr)
+
+
+lpop <-ShotsAll %>%
+  tidyr::gather(variable, value, -Team)
+
+lpop <-lpop %>% select (variable, value)
+
+#lpop
+
+
+df <- data.frame(
+    x = rep(seq(0, 12, 6), 1),
+    y = c(rep(6.5, 3)),
+    h = rep(4.25,3),
+    w = rep(5.95,3),
+    value = lpop$value,
+    info = lpop$variable,
+    color = factor(1:3)
+)
+
+ggplot(df, aes(x, y, height = h, width = w, label = info)) +
+    geom_tile(aes(fill = color)) +
+    geom_text(data = df,
+              aes(label = value, x = x - 1, y = y + .5),color = "white", fontface = "bold", size = 25, hjust = 0) +
+    geom_text(data = df,
+              aes(label = info, x = x - 1.5, y = y - 1),color = "white", fontface = "bold", size = 10, hjust = 0) +
+    #coord_fixed() +
+    scale_fill_brewer(type = "qual",palette = "Dark2") +
+    theme_void() +
+    guides(fill = FALSE) +
+    scale_x_continuous(expand = c(0, 0)) + 
+    scale_y_continuous(expand = c(0, 0))
+```
+
+### Kerry - Frees
+
+```{r, fig.width = 16, fig.height = 12}
+
+shotsA <- scores %>%group_by(Team, Action) %>% filter(Teamnum == "B", subset == "Shot Op"| subset == "Shot Rs")
+
+shotsAScr <- scores %>%group_by(Team, Action) %>% filter(Teamnum == "B",subsetoc %in% c ("Scr Rs", "Ms Rs"))
+
+freeAmap <-  pass %>%group_by(Team, Action) %>% filter(Teamnum == "B", main =="Free Won"| Action == "PW Fk Pass")
+
+
+freeAmap <-freeAmap %>%
+    mutate(tx = VLOOKUP(Zone, zonetext, zone, tx),ty = VLOOKUP(Zone, zonetext, zone, ty),bx = VLOOKUP(Zone, zonetext, zone, bx),by = VLOOKUP(Zone, zonetext, zone, by))
+
+freeAcnt <- freeAmap %>%group_by(Zone,tx,ty,bx,by)%>%filter(Teamnum =="B") %>%summarize(FW =sum(main =="Free Won"))%>%select(Zone,FW,tx,ty,bx,by)
+
+
+
+p +  stat_chull(data = shotsA,aes(x=Areax, y=Areay),color = "blue", fill = "blue",alpha = 0.1, geom = "polygon") +
+    stat_chull(data = shotsAScr,aes(x=Areax, y=Areay), fill = "green",color = "green", alpha = 0.1, geom = "polygon") +
+   #geom_text(data= freeAcnt, aes(x= tx, y=ty, label = FW),colour = "white", size = 30,alpha=0.4) +
+  #geom_point(data = freeAmap, aes(x=Areax, y=Areay, colour = main),alpha = 0.5, shape = 19, size = 6)  +
+  theme(legend.position="bottom") + 
+  labs(colour="Fk Won") +
+  scale_colour_manual(values = colorAct) +
+  new_scale_color() + 
+  geom_point(data = shotsAScr, aes(x=Areax, y=Areay, colour = Actionoc, shape = Action), size = 6) + 
+   scale_colour_manual(values = colshotvertpal) +
+  geom_text_repel(data = shotsAScr, aes(x=Areax, y=Areay, label = plylaboc, col = Actionoc), size = 6) +
+    scale_shape_manual(values = colshotshape) +
+    theme(legend.position="bottom", legend.title=element_text(size=15), 
+          legend.text=element_text(size=20)) +
+    theme(plot.title = element_text(hjust=0.5)) +
+    theme(plot.subtitle = element_text(hjust=0.5)) +
+     labs(colour="Shot Type") +
+    guides(color = FALSE, size = FALSE) +
+    guides(shape = guide_legend(override.aes = list(size = 10))) +
+labs(colour="Shots", caption="Blue Shading = Shot Area, Green Shading = Score Area")+
+ theme(plot.caption=element_text(size=18, hjust=0.5, face="bold", color="black")) 
+
+
+
+```
+
+```{r, fig.width = 16, fig.height = 2}
+
+ShotsAllA <- sop %>%group_by(Team)%>%filter(Teamnum == "B")
+
+ShotsAll <-ShotsAllA %>%group_by(Team)%>%filter(mainoc %in% c("Shot Rs Oc")) %>%summarize(Shots = sum(mainoc %in% c("Shot Rs Oc")), 
+Scores = sum(subsetoc %in% c("Scr Rs")),Shot_Eff = (Scores/Shots *100))
+
+ShotsAll <-ShotsAll %>% mutate_at(vars(Shot_Eff), funs(round(., 1)))
+
+library(plyr)
+
+ShotsAll <- rename(ShotsAll, c( Shot_Eff = "Efficiency %"))
+
+detach(package:plyr)
+
+
+lpop <-ShotsAll %>%
+  tidyr::gather(variable, value, -Team)
+
+lpop <-lpop %>% select (variable, value)
+
+#lpop
+
+
+df <- data.frame(
+    x = rep(seq(0, 12, 6), 1),
+    y = c(rep(6.5, 3)),
+    h = rep(4.25,3),
+    w = rep(5.95,3),
+    value = lpop$value,
+    info = lpop$variable,
+    color = factor(1:3)
+)
+
+ggplot(df, aes(x, y, height = h, width = w, label = info)) +
+    geom_tile(aes(fill = color)) +
+    geom_text(data = df,
+              aes(label = value, x = x - 1, y = y + .5),color = "white", fontface = "bold", size = 25, hjust = 0) +
+    geom_text(data = df,
+              aes(label = info, x = x - 1.5, y = y - 1),color = "white", fontface = "bold", size = 10, hjust = 0) +
+    #coord_fixed() +
+    scale_fill_brewer(type = "qual",palette = "Dark2") +
+    theme_void() +
+    guides(fill = FALSE) +
+    scale_x_continuous(expand = c(0, 0)) + 
+    scale_y_continuous(expand = c(0, 0))
+```
+
+
+## Start of Possession  {.tabset .tabset-pills}
+
+### Dublin - Start of Possession 
+
+```{r, fig.width = 16, fig.height = 12}
+
+
+PossorigKo <-filter(sop, Teamnum == "A",Pitch_Oc_Ko =="Ko Rec")
+PossorigPW <-filter(sop, Teamnum == "A",Pitch_Oc_Ko =="PW")
+
+p +
+geom_point(data = PossorigKo, aes(x=Ko_Zone_X, y=Ko_Zone_Y, colour = as.factor(subsetoc), shape = as.factor(main)), size = 10) +
+geom_text(data = PossorigKo, aes(x=Ko_Zone_X, y=Ko_Zone_Y, label = Ko_Ply), col = "white", size = 6) +
+#geom_text(data = PossorigKo, aes(x=Ko_Zone_X, y=Ko_Zone_Y, label = Player), col = "white", size = 6) +
+geom_point(data = PossorigPW, aes(x=Areax, y=Areay, colour = as.factor(subsetoc), shape = as.factor(main)), size = 10) +
+geom_text(data = PossorigPW, aes(x=Areax, y=Areay, label = Player), col = "white", size = 6) +
+#geom_text(data = PossorigPW, aes(x=Areax, y=Areay, label = Player), col = "white", size = 6) +
+theme(plot.title = element_text(hjust=0.5)) +
+theme(plot.subtitle = element_text(hjust=0.5)) +
+theme(legend.position="bottom") +
+  #scale_shape_manual(values= runshape) +
+  #scale_colour_manual(values= perpal) +
+  labs(colour="Outcome") +
+  labs(shape = "Action") +
+  guides(size = FALSE) +
+  guides(colour = guide_legend(override.aes = list(size = 10))) +
+  labs(caption="Numbers = Possession")+
+ theme(plot.caption=element_text(size=16, hjust=0.5, face="bold", color="black")) 
+
+```
+
+### Kerry - Start of Possession 
+
+```{r, fig.width = 16, fig.height = 12}
+
+#need an xy for ko oc 
+
+PossorigKo <-filter(sop, Teamnum == "B",Pitch_Oc_Ko =="Ko Rec")
+PossorigPW <-filter(sop, Teamnum == "B",Pitch_Oc_Ko =="PW")
+
+p +
+geom_point(data = PossorigKo, aes(x=Ko_Zone_X, y=Ko_Zone_Y, colour = as.factor(subsetoc), shape = as.factor(main)), size = 10) +
+geom_text(data = PossorigKo, aes(x=Ko_Zone_X, y=Ko_Zone_Y, label =Ko_Ply), col = "white", size = 6) +
+geom_point(data = PossorigPW, aes(x=Areax, y=Areay, colour = as.factor(subsetoc), shape = as.factor(main)), size = 10) +
+geom_text(data = PossorigPW, aes(x=Areax, y=Areay, label = Player), col = "white", size = 6) +
+theme(plot.title = element_text(hjust=0.5)) +
+theme(plot.subtitle = element_text(hjust=0.5)) +
+theme(legend.position="bottom") +
+  #scale_shape_manual(values= runshape) +
+  #scale_colour_manual(values= perpal) +
+  labs(colour="Outcome") +
+  labs(shape = "Action") +
+  guides(size = FALSE) +
+  guides(colour = guide_legend(override.aes = list(size = 10))) +
+  labs(caption="Numbers = Possession") +
+ theme(plot.caption=element_text(size=16, hjust=0.5, face="bold", color="black")) 
+
+
+```
+
+## Kick Outs  {.tabset .tabset-pills}
+
+### Dublin
+
+```{r}
+
+koA <- sop %>% filter (Teamnum == "A")
+
+KoA <- koA %>%group_by(Team) %>% filter (main == "Ko")%>%summarize(Poss_Ko =sum(main %in% c("Ko")), Poss_time =sum (secs/60), Shots = sum(mainoc %in% c("Shot Op Oc","Shot Rs Oc")),
+Shot_PP =(Shots/Poss_Ko*100), Shot_time = sum(secs/Shots), Scores = sum(subsetoc %in% c("Scr Op","Scr Rs")), Ko_Time = mean (Ko_Time))
+
+KoA  <- KoA  %>% mutate_at(vars(Poss_time, Shot_PP ,Shot_time ,Ko_Time), funs(round(., 0)))
+
+KoA <- rename(KoA, "Kickouts" = Poss_Ko, "Total Time (min)" = Poss_time, "% Shots per Ko" = Shot_PP , "Shot Rate (secs)" = Shot_time , "Time to Ko (secs)" =  Ko_Time )
+
+KoA <- KoA %>% select (-Team)
+
+KoA %>%
+  kbl(align = "c") %>%
+    kable_minimal()
+```
+
+```{r, fig.width = 16, fig.height = 12}
+
+komapA <-filter(pass, Teamnum == "A",subset =="Ko Rec"| subset =="Ko ToL")
+
+komapARec <-filter(pass, Teamnum == "A",subset =="Ko Rec")
+
+koeffA <- koeff %>%group_by(Zoneoc,tx,ty,bx,by)%>%filter(Teamnum =="A") %>%summarize(Ko_Rec =sum(subsetoc == "Ko Rec"), Ko_Lost = sum(subsetoc == "Ko ToL"),Ko =(Ko_Rec  + Ko_Lost))%>%select(Ko_Rec,Ko_Lost,Ko,tx,ty,bx,by,Zoneoc)
+
+koeffA = koeffA %>% 
+   unite(korectol, Ko_Rec, Ko, sep = "/", remove = FALSE)
+
+KoaveA <- sop %>% filter (Teamnum == "A",main== "Ko")
+KoaveAb <- KoaveA %>% group_by(Pitch_Area_Ko) %>% summarise(AreaxocKo = mean(Areaxoc,na.rm = TRUE), AreayocKo = mean(Areayoc,na.rm = TRUE))
+
+p + 
+geom_text(data= koeffA, aes(x= tx, y=ty, label = korectol),colour = "white", size = 30,alpha=0.4) + 
+geom_point(data = komapA, aes(x=Areax, y=Areay, colour = as.factor(period), shape = as.factor(Action)), size = 6, stroke = 2)+
+geom_text_repel(data = komapA, aes(x=Areax, y=Areay, label = plylab, col = as.factor(period)),show.legend = FALSE, size = 6) +
+theme(plot.title = element_text(hjust=0.5)) +
+theme(plot.subtitle = element_text(hjust=0.5)) +
+theme(legend.position="bottom")+
+  scale_shape_manual(values= pals) +
+  scale_colour_manual(values= perpal) +
+  labs(colour="Period") +
+   guides(shape = FALSE, size = FALSE) +
+  guides(colour = guide_legend(override.aes = list(size = 10)))+
+stat_chull(data = komapA,aes(x=Areax, y=Areay),color = "blue", fill = "blue", alpha = 0.1, geom = "polygon") +
+stat_chull(data = komapARec,aes(x=Areax, y=Areay), fill = "green",color = "green", alpha = 0.1, geom = "polygon") +
+new_scale_color() + 
+geom_segment(data = KoaveAb, aes(x = AreaxocKo, y = 0, xend = AreaxocKo, yend = 88, colour = Pitch_Area_Ko, size = 1))+
+labs(colour="Average Possession End From Ko Received Pitch Area") +
+theme(legend.position="bottom") +
+   guides(color = FALSE, size = FALSE) +
+    guides(color = guide_legend(override.aes = list(size = 10))) 
+
+
+
+```
+
+### Kerry
+
+```{r}
+
+koB <- sop %>% filter (Teamnum == "B")
+
+KoB <- koB %>%group_by(Team) %>% filter (main == "Ko")%>%summarize(Poss_Ko =sum(main %in% c("Ko")), Poss_time =sum (secs/60), Shots = sum(mainoc %in% c("Shot Op Oc","Shot Rs Oc")),
+Shot_PP =(Shots/Poss_Ko*100), Shot_time = sum(secs/Shots), Scores = sum(subsetoc %in% c("Scr Op","Scr Rs")), Ko_Time = mean (Ko_Time))
+
+KoB  <- KoB  %>% mutate_at(vars(Poss_time, Shot_PP ,Shot_time ,Ko_Time), funs(round(., 0)))
+
+KoB <- rename(KoB, "Kickouts" = Poss_Ko, "Total Time (min)" = Poss_time, "% Shots per Ko" = Shot_PP , "Shot Rate (secs)" = Shot_time , "Time to Ko (secs)" =  Ko_Time )
+
+KoB <- KoB %>% select (-Team)
+
+KoB %>%
+  kbl( align = "c") %>%
+    kable_minimal()
+```
+
+```{r, fig.width = 16, fig.height = 12}
+
+komapA <-filter(pass, Teamnum == "B",subset =="Ko Rec"| subset =="Ko ToL")
+
+komapARec <-filter(pass, Teamnum == "B",subset =="Ko Rec")
+
+koeffA <- koeff %>%group_by(Zoneoc,tx,ty,bx,by)%>%filter(Teamnum =="B") %>%summarize(Ko_Rec =sum(subsetoc == "Ko Rec"), Ko_Lost = sum(subsetoc == "Ko ToL"),Ko =(Ko_Rec  + Ko_Lost))%>%select(Ko_Rec,Ko_Lost,Ko,tx,ty,bx,by,Zoneoc)
+
+koeffA = koeffA %>% 
+   unite(korectol, Ko_Rec, Ko, sep = "/", remove = FALSE)
+
+KoaveA <- sop %>% filter (Teamnum == "B",main== "Ko")
+KoaveAb <- KoaveA %>% group_by(Pitch_Area_Ko) %>% summarise(AreaxocKo = mean(Areaxoc,na.rm = TRUE), AreayocKo = mean(Areayoc,na.rm = TRUE))
+
+p + 
+geom_text(data= koeffA, aes(x= tx, y=ty, label = korectol),colour = "white", size = 30,alpha=0.4) + 
+geom_point(data = komapA, aes(x=Areax, y=Areay, colour = as.factor(period), shape = as.factor(Action)), size = 6, stroke = 2)+
+geom_text_repel(data = komapA, aes(x=Areax, y=Areay, label = plylab, col = as.factor(period)),show.legend = FALSE, size = 6) +
+theme(plot.title = element_text(hjust=0.5)) +
+theme(plot.subtitle = element_text(hjust=0.5)) +
+theme(legend.position="bottom")+
+  scale_shape_manual(values= pals) +
+  scale_colour_manual(values= perpal) +
+  labs(colour="Period") +
+   guides(shape = FALSE, size = FALSE) +
+  guides(colour = guide_legend(override.aes = list(size = 10)))+
+stat_chull(data = komapA,aes(x=Areax, y=Areay),color = "blue", fill = "blue", alpha = 0.1, geom = "polygon") +
+stat_chull(data = komapARec,aes(x=Areax, y=Areay), fill = "green",color = "green", alpha = 0.1, geom = "polygon") +
+new_scale_color() + 
+geom_segment(data = KoaveAb, aes(x = AreaxocKo, y = 0, xend = AreaxocKo, yend = 88, colour = Pitch_Area_Ko, size = 1))+
+labs(colour="Average Possession End From Ko Received Pitch Area") +
+theme(legend.position="bottom") +
+   guides(color = FALSE, size = FALSE) +
+    guides(color = guide_legend(override.aes = list(size = 10))) 
+
+
+
+```
+
+
+## Possession Won  {.tabset .tabset-pills}
+
+### Dublin
+
+```{r}
+
+PWA <- sop %>% filter (Teamnum == "A")
+
+PWA <- PWA %>%group_by(Team) %>% filter (main == "PW")%>%summarize(Poss_PW =sum(main %in% c("PW")), Poss_time =sum (secs/60), 
+Shots = sum(mainoc %in% c("Shot Op Oc","Shot Rs Oc")),Shot_PP =(Shots/Poss_PW*100), Shot_time = sum(secs/Shots), Scores = sum(subsetoc %in% c("Scr Op","Scr Rs")))
+
+PWA  <- PWA  %>% mutate_at(vars(Poss_time, Shot_PP ,Shot_time), funs(round(., 0)))
+
+PWA <- rename(PWA, "Possession Won" = Poss_PW, "Total Time (min)" = Poss_time, "% Shots per PW" = Shot_PP , "Shot Rate (secs)" = Shot_time )
+
+PWA <- PWA %>% select (-Team)
+
+PWA %>%
+  kbl(align = "c") %>%
+    kable_minimal()
+```
+
+```{r, fig.width = 16, fig.height = 12}
+
+#Dots
+conqmapA <- filter(pass, Teamnum == "A", main =="PW")
+    
+conqmapAcnt <- pass %>% group_by (Pitch_Area) %>%  filter(Teamnum == "A", main =="PW") %>% summarise (count = n ()) 
+
+shade = data.frame(Pitch_Area = c ("In_Def","Mid_Def", "Out_Def", "Out_Att","Mid_Att", "In-Att"),x1=c(0,20,45,72,100,124), x2=c(20,45,72,100,124,144), y1=c(0,0,0,0,0,0), y2=c(88,88,88,88,88,88))
+
+shade <-shade %>%
+    mutate(count = VLOOKUP(Pitch_Area,conqmapAcnt,Pitch_Area,count))
+
+shade$count[is.na(shade$count)] <- 0
+
+
+conqmapA <-conqmapA %>%
+    mutate(tx = VLOOKUP(Zone, zonetext, zone, tx),ty = VLOOKUP(Zone, zonetext, zone, ty),bx = VLOOKUP(Zone, zonetext, zone, bx),by = VLOOKUP(Zone, zonetext, zone, by))
+
+conqmapAcnt <- conqmapA %>%group_by(Zone,tx,ty,bx,by)%>%filter(Teamnum =="A") %>%summarize(PW_Won =sum(main =="PW"))%>%select(Zone,PW_Won,tx,ty,bx,by)
+
+#shots
+a <- sop %>% filter(Teamnum == "A",main == "PW", mainoc %in% c("Shot Op Oc", "Shot Rs oc"))
+
+koeffBa <-  run %>%group_by(zone)%>%filter(Teamnum =="A") %>%summarize(PW =sum(main == "PW")) %>% select(zone,PW)
+
+koeffBa  <- koeffBa  %>% filter(PW != 0)
+
+koeffB <-koeffBa %>%
+    mutate(tx = VLOOKUP(zone, zonetext, zone, tx),ty = VLOOKUP(zone, zonetext, zone, ty),bx = VLOOKUP(zone, zonetext, zone, bx),by = VLOOKUP(zone, zonetext,zone, by))
+
+a <-  a %>%group_by(Zone)%>%filter(Teamnum =="A") %>%summarize(Shot =sum(mainoc %in% c("Shot Op Oc", "Shot Rs oc"))) %>% select(Zone,Shot)
+
+koa<-a %>%
+    mutate(tx = VLOOKUP(Zone, zonetext, zone, tx),ty = VLOOKUP(Zone, zonetext, zone, ty),bx = VLOOKUP(Zone, zonetext, zone, bx),by = VLOOKUP(Zone, zonetext,zone, by))
+
+#scores
+scra <- sop %>% filter(Teamnum == "A",main == "PW", subsetoc %in% c( "Scr Op", "Scr Rs"))
+
+koeffBascr <-  run %>%group_by(zone)%>%filter(Teamnum =="A") %>%summarize(PW =sum(main == "PW")) %>% select(zone,PW)
+
+koeffBascr  <- koeffBascr  %>% filter(PW != 0)
+
+koeffBscr <-koeffBascr %>%
+    mutate(tx = VLOOKUP(zone, zonetext, zone, tx),ty = VLOOKUP(zone, zonetext, zone, ty),bx = VLOOKUP(zone, zonetext, zone, bx),by = VLOOKUP(zone, zonetext,zone, by))
+
+scra <-  scra %>%group_by(Zone)%>%filter(Teamnum =="A") %>%summarize(Scr =sum(subsetoc %in% c( "Scr Op", "Scr Rs"))) %>% select(Zone,Scr)
+
+koascr<-scra %>%
+    mutate(tx = VLOOKUP(Zone, zonetext, zone, tx),ty = VLOOKUP(Zone, zonetext, zone, ty),bx = VLOOKUP(Zone, zonetext, zone, bx),by = VLOOKUP(Zone, zonetext,zone, by))
+
+
+#
+koB <-koeffB %>%
+    mutate(Shot = VLOOKUP(zone, koa, Zone, Shot),Score = VLOOKUP(zone, koascr, Zone, Scr))
+
+koB <-koB%>% replace(is.na(.), 0)
+ 
+koB = koB %>% 
+   unite(a,PW, Shot, Score, sep = "/", remove = FALSE)
+
+p + geom_rect(data=shade, 
+            mapping=aes(xmin=x1, xmax=x2, ymin=y1, ymax=y2, fill=as.numeric(count), alpha=0.2),show.legend = FALSE) +
+scale_fill_gradient(low="white",high="darkgreen") + 
+  geom_text(data= koB, aes(x= tx, y=ty, label = a),colour = "white", size = 20,alpha=0.4) +
+geom_point(data = conqmapA, aes(x=Areax, y=Areay, colour = Action, shape = main), size = 6) +
+theme(legend.position="bottom") + 
+scale_colour_manual(values = paltow)+
+labs(title = "PW Total/Shots/Scores") +
+  theme(plot.title = element_text(hjust=0.5, size = 32))
+
+```
+
+### Kerry
+
+```{r}
+
+PWB <- sop %>% filter (Teamnum == "B")
+
+PWB <- PWB %>%group_by(Team) %>% filter (main == "PW")%>%summarize(Poss_PW =sum(main %in% c("PW")), Poss_time =sum (secs/60), 
+Shots = sum(mainoc %in% c("Shot Op Oc","Shot Rs Oc")),Shot_PP =(Shots/Poss_PW*100), Shot_time = sum(secs/Shots), Scores = sum(subsetoc %in% c("Scr Op","Scr Rs")))
+
+PWB  <- PWB  %>% mutate_at(vars(Poss_time, Shot_PP ,Shot_time), funs(round(., 0)))
+
+PWB <- rename(PWB, "Possession Won" = Poss_PW, "Total Time (min)" = Poss_time, "% Shots per PW" = Shot_PP , "Shot Rate (secs)" = Shot_time )
+
+PWB <- PWB %>% select (-Team)
+
+PWB %>%
+  kbl(align = "c") %>%
+    kable_minimal()
+```
+
+```{r, fig.width = 16, fig.height = 12}
+
+#Dots
+conqmapA <- filter(pass, Teamnum == "B", main =="PW")
+
+conqmapAcnt <- pass %>% group_by (Pitch_Area) %>%  filter(Teamnum == "B", main =="PW") %>% summarise (count = n ()) 
+
+shade = data.frame(Pitch_Area = c ("In_Def","Mid_Def", "Out_Def", "Out_Att","Mid_Att", "In-Att"),x1=c(0,20,45,72,100,124), x2=c(20,45,72,100,124,144), y1=c(0,0,0,0,0,0), y2=c(88,88,88,88,88,88))
+
+shade <-shade %>%
+    mutate(count = VLOOKUP(Pitch_Area,conqmapAcnt,Pitch_Area,count))
+
+shade$count[is.na(shade$count)] <- 0
+
+conqmapA <-conqmapA %>%
+    mutate(tx = VLOOKUP(Zone, zonetext, zone, tx),ty = VLOOKUP(Zone, zonetext, zone, ty),bx = VLOOKUP(Zone, zonetext, zone, bx),by = VLOOKUP(Zone, zonetext, zone, by))
+
+conqmapAcnt <- conqmapA %>%group_by(Zone,tx,ty,bx,by)%>%filter(Teamnum =="B") %>%summarize(PW_Won =sum(main =="PW"))%>%select(Zone,PW_Won,tx,ty,bx,by)
+
+#shots
+a <- sop %>% filter(Teamnum == "B",main == "PW", mainoc %in% c("Shot Op Oc", "Shot Rs oc"))
+
+koeffBa <-  run %>%group_by(zone)%>%filter(Teamnum =="B") %>%summarize(PW =sum(main == "PW")) %>% select(zone,PW)
+
+koeffBa  <- koeffBa  %>% filter(PW != 0)
+
+koeffB <-koeffBa %>%
+    mutate(tx = VLOOKUP(zone, zonetext, zone, tx),ty = VLOOKUP(zone, zonetext, zone, ty),bx = VLOOKUP(zone, zonetext, zone, bx),by = VLOOKUP(zone, zonetext,zone, by))
+
+a <-  a %>%group_by(Zone)%>%filter(Teamnum =="B") %>%summarize(Shot =sum(mainoc %in% c("Shot Op Oc", "Shot Rs oc"))) %>% select(Zone,Shot)
+
+koa<-a %>%
+    mutate(tx = VLOOKUP(Zone, zonetext, zone, tx),ty = VLOOKUP(Zone, zonetext, zone, ty),bx = VLOOKUP(Zone, zonetext, zone, bx),by = VLOOKUP(Zone, zonetext,zone, by))
+
+#scores
+scra <- sop %>% filter(Teamnum == "B",main == "PW",subsetoc %in% c( "Scr Op", "Scr Rs"))
+
+koeffBascr <-  run %>%group_by(zone)%>%filter(Teamnum =="B") %>%summarize(PW =sum(main == "PW")) %>% select(zone,PW)
+
+koeffBascr  <- koeffBascr  %>% filter(PW != 0)
+
+koeffBscr <-koeffBascr %>%
+    mutate(tx = VLOOKUP(zone, zonetext, zone, tx),ty = VLOOKUP(zone, zonetext, zone, ty),bx = VLOOKUP(zone, zonetext, zone, bx),by = VLOOKUP(zone, zonetext,zone, by))
+
+scra <-  scra %>%group_by(Zone)%>%filter(Teamnum =="B") %>%summarize(Scr =sum(subsetoc %in% c( "Scr Op", "Scr Rs"))) %>% select(Zone,Scr)
+
+koascr<-scra %>%
+    mutate(tx = VLOOKUP(Zone, zonetext, zone, tx),ty = VLOOKUP(Zone, zonetext, zone, ty),bx = VLOOKUP(Zone, zonetext, zone, bx),by = VLOOKUP(Zone, zonetext,zone, by))
+
+
+#
+koB <-koeffB %>%
+    mutate(Shot = VLOOKUP(zone, koa, Zone, Shot),Score = VLOOKUP(zone, koascr, Zone, Scr))
+
+koB <-koB%>% replace(is.na(.), 0)
+ 
+koB = koB %>% 
+   unite(a,PW, Shot, Score, sep = "/", remove = FALSE)
+
+p + geom_rect(data=shade, 
+            mapping=aes(xmin=x1, xmax=x2, ymin=y1, ymax=y2, fill=as.numeric(count), alpha=0.2),show.legend = FALSE) +
+scale_fill_gradient(low="white",high="darkgreen") + 
+  geom_text(data= koB, aes(x= tx, y=ty, label = a),colour = "white", size = 20,alpha=0.4) +
+geom_point(data = conqmapA, aes(x=Areax, y=Areay, colour = Action, shape = main), size = 6) +
+theme(legend.position="bottom") + 
+scale_colour_manual(values = paltow)+
+labs(title = "PW Total/Shots/Scores") +
+  theme(plot.title = element_text(hjust=0.5, size = 32))
+
+```
+
+## Inside Shooting Area {.tabset .tabset-pills}
+
+### Dublin
+
+```{r, fig.width = 16, fig.height = 12}
+
+
+#Create shots surface area - All
+
+scoresAll  <- scores %>%group_by(Team, Action) %>% filter(Teamnum == "A", subsetoc== "Scr Op"|subsetoc== "Ms Op"|subsetoc== "Scr Rs"|subsetoc== "Ms Rs")
+
+# Create PoP - ToL
+
+actmain <- zonedA%>% filter(main %in% c ("Ko Rec"), inzone %in% c("1","2","3"))
+actscr <- zonedA %>% filter (Actionoc %in% c("Goal", "Point",  "Fk Point", "Fk Goal",  "Pk Point", "Pk Goal",  "Mk Point", "Mk Goal", "45 Point" ), inzone %in% c("1","2","3"))
+actms <- zonedA %>% filter (subsetoc %in% c("Ms Op", "Ms Rs"), inzone %in% c("1","2","3"))
+actPW <- zonedA %>% filter(main %in% c ("PW"), inzone %in% c("1","2","3"))
+
+actmainoc <- zonedA %>% filter (mainoc %in% c("ToL","Free Won"),oczone %in% c("1","2","3"))
+
+
+#'code names' for other colours
+p + 
+stat_chull(data = scoresAll,aes(x=Areax, y=Areay), fill = "blue",color = "blue", alpha = 0.1, geom = "polygon",show.legend = FALSE) +
+new_scale_color() + 
+geom_point(data = actmainoc, aes(x=xend, y=yend, colour  = as.factor(mainoc)),size = 8, shape = 17) +
+geom_text(data = actmainoc, aes(x=xend, y=yend,label = possno), size = 4,colour = "white") +
+geom_point(data = actmain, aes(x=Areax, y=Areay, colour  = as.factor(main)),size = 8, shape = 19) +
+geom_text(data = actmain, aes(x = Areax, y = Areay,label = possno), size = 4,colour = "white") +
+scale_colour_manual(values= c (runcolpal)) +
+labs(colour="Actions")+
+new_scale_color() + 
+geom_point(data = actPW, aes(x=Areax, y=Areay, colour  = as.factor(subset)),size = 8, shape = 19) +
+geom_text(data = actPW, aes(x = Areax, y = Areay,label = possno), size = 4,colour = "white") +
+scale_colour_manual(values= c (pwcol)) +
+labs(colour="Possession Won")+
+new_scale_color() + 
+geom_point(data = actms, aes(x=Areax, y=Areay, colour  = as.factor(subsetoc)),size = 8, shape = 19) +
+geom_text(data = actms, aes(x = Areax, y = Areay,label = possno), size = 4,colour = "white") +
+geom_point(data = actscr, aes(x=Areax, y=Areay, colour  = as.factor(Actionoc)),size = 8, shape = 19) +
+geom_text(data = actscr, aes(x = Areax, y = Areay,label = possno), size = 4,colour = "white") +
+scale_colour_manual(values= c (runcolpal)) +
+labs(caption="Numbers = Possession, Blue Shading = Shot Area", colour="Shot Outcome")+
+theme(legend.position="bottom") +
+ theme(plot.caption=element_text(size=16, hjust=0.5, face="bold", color="black")) 
+
+
+```
+
+```{r, fig.width = 16, fig.height = 2}
+
+# pull out poss start with "PW","Ko Rec"),zone < 10) #
+
+passlpop <- run 
+
+passlpop <- passlpop[passlpop$main!="Def Act", ]
+passlpop <- passlpop[passlpop$main!="Free Loss", ]
+passlpop <- passlpop[passlpop$main!="Tck Def", ]
+passlpop <- passlpop[passlpop$main!="Tck End", ]
+passlpop <- passlpop[passlpop$main!="Sht Prs", ]
+passlpop <- passlpop[passlpop$main!="Spoil Off", ]
+passlpop <- passlpop[passlpop$main!="Opp Brk", ]
+
+
+passlpop <- passlpop %>% filter(Teamnum == "A")
+
+#cnts for possessions starting with "PW","Ko Rec"),zone < 10) - all outcomes #
+
+lpop <- passlpop %>%group_by(Team)%>%summarize(Possession_Won =sum(main == "PW"),Ko_Won = sum(main == "Ko Rec"),Total_Possessions = sum(Possession_Won + Ko_Won),Open_Play_Shots = sum(main == "Shot Op"),Open_Play_Score = sum(subset == "Scr Op"),
+Fk_Shots = sum(main == "Shot Rs"),Fk_Score = sum(subset == "Scr Rs"),Shot_Perc =(Open_Play_Score/Open_Play_Shots*100))
+
+##Shot/scr Area##
+
+# pull out poss start with "PW","Ko Rec"),zone < 10) #
+
+TeamAPAScrZA  <- zonedA %>%group_by(Team, Action) %>% filter(Teamnum == "A")
+
+#pull full poss#
+
+runAPAScrZA <- subset(zonedA, poss %in% TeamAPAScrZA$poss)
+
+# from that id all that ended in zdeatt #
+
+TeamAPAZA  <- runAPAScrZA %>%group_by(Team, Action) %>% filter(Teamnum == "A", 
+mainoc == "ToL"|subsetoc== "Scr Op"|subsetoc== "Ms Op"|subsetoc== "Scr Rs"|subsetoc== "Ms Rs",inzone %in% c("1","3")| oczone %in% c("1","3"))
+
+# pull those out that'll end in shot/scr zone #
+
+runAPAScr <- subset(runAPAScrZA, poss %in% TeamAPAZA$poss)
+
+runAPAScr <- runAPAScr[runAPAScr$Action!="Ko", ]
+
+# Create counts #
+
+zonedAA <- runAPAScr%>% filter (keep == "Y")
+
+ZdeAA10 <- zonedAA %>% group_by (Team) %>%filter (Teamnum == "A") %>%
+summarize(PossessionsNo =sum(main %in% c("PW","Ko Rec")),
+Fkentry = COUNT_IFS(oczone,mainoc %in% c("Free Won"), oczone %in% c("1","2","3")),
+inentry = COUNT_IFS(inzone,main %in% c("Shot Op","Shot Rs"), inzone %in% c("1","2","3")),
+Passes = COUNT_IFS(oczone,main %in% c("Pass Op"),inzone %in% c("1","2","3")), 
+Lost = COUNT_IFS(oczone,mainoc %in% c("ToL"), oczone %in% c("1","2","3")),
+PW = COUNT_IFS(inzone,main %in% c("PW"),inzone %in% c("1","2","3")), 
+entry = (inentry + Lost), 
+Fkentryscr = COUNT_IFS(oczonescr,mainoc %in% c("Free Won"), oczonescr %in% c("1","2","3")),
+inentryscr = COUNT_IFS(inzonescr,main %in% c("Shot Op","Shot Rs"), inzonescr %in% c("1","2","3")),
+Lostscr = COUNT_IFS(oczonescr,mainoc %in% c("ToL"), oczonescr %in% c("1","2","3")), 
+entryscr = (inentryscr + Lostscr), 
+scoresscr = COUNT_IFS(inzonescr,subsetoc %in% c("Scr Op", "Scr Rs"), inzonescr %in% c("1","2","3"))) %>% select (Team,PossessionsNo, entry, PW, Fkentry, inentry, Lost, scoresscr ) 
+
+# Bind #
+ccinAll <- bind_cols(lpop,ZdeAA10)
+
+#select cols#
+
+ccinAllin <-  ccinAll %>% select(inentry,PW, Fkentry,scoresscr, Lost)
+
+# rename #
+
+ccinAllin <- rename(ccinAllin, "Shots" = inentry ,"Fk Won" = Fkentry, "Total Lost" = Lost , "Scores" = scoresscr)
+
+
+# create data frames # 
+
+lpop <-ccinAllin %>%
+  tidyr::gather(variable, value)
+
+lpop <-lpop %>% select (variable, value)
+
+
+
+df <- data.frame(
+    x = rep(seq(0, 12, 3), 1),
+    y = c(rep(6.5, 5)),
+    h = rep(4.25, 5),
+    w = rep(2.95, 5),
+    value = lpop$value,
+    info = lpop$variable,
+    color = factor(1:5)
+)
+
+ggplot(df, aes(x, y, height = h, width = w, label = info)) +
+    geom_tile(aes(fill = color)) +
+    geom_text(data = df,
+              aes(label = value, x = x - 1, y = y + .5),color = "white", fontface = "bold", size = 25, hjust = 0) +
+    geom_text(data = df,
+              aes(label = info, x = x - 1, y = y - 1),color = "white", fontface = "bold", size = 10, hjust = 0) +
+    #coord_fixed() +
+    scale_fill_brewer(type = "qual",palette = "Dark2") +
+    theme_void() +
+    guides(fill = FALSE) +
+    scale_x_continuous(expand = c(0, 0)) + 
+    scale_y_continuous(expand = c(0, 0)) +
+  #labs(title = "Inside Shooting Area (blue shading)") +
+  theme(plot.title = element_text(hjust=0.5, size = 30)) 
+
+
+
+```
+
+
+### Kerry
+
+```{r, fig.width = 16, fig.height = 12}
+
+
+#Create shots surface area - All
+
+scoresAll  <- scores %>%group_by(Team, Action) %>% filter(Teamnum == "B", subsetoc== "Scr Op"|subsetoc== "Ms Op"|subsetoc== "Scr Rs"|subsetoc== "Ms Rs")
+
+# Create PoP - ToL
+
+actmain <- zonedB%>% filter(main %in% c ("Ko Rec"), inzone %in% c("1","2","3"))
+actscr <- zonedB %>% filter (Actionoc %in% c("Goal", "Point",  "Fk Point", "Fk Goal",  "Pk Point", "Pk Goal",  "Mk Point", "Mk Goal", "45 Point" ), inzone %in% c("1","2","3"))
+actms <- zonedB %>% filter (subsetoc %in% c("Ms Op", "Ms Rs"), inzone %in% c("1","2","3"))
+actPW <- zonedB %>% filter(main %in% c ("PW"), inzone %in% c("1","2","3"))
+
+actmainoc <- zonedB %>% filter (mainoc %in% c("ToL","Free Won"),oczone %in% c("1","2","3"))
+
+
+#'code names' for other colours
+p + 
+stat_chull(data = scoresAll,aes(x=Areax, y=Areay), fill = "blue",color = "blue", alpha = 0.1, geom = "polygon",show.legend = FALSE) +
+new_scale_color() + 
+geom_point(data = actmainoc, aes(x=xend, y=yend, colour  = as.factor(mainoc)),size = 8, shape = 17) +
+geom_text(data = actmainoc, aes(x=xend, y=yend,label = possno), size = 4,colour = "white") +
+geom_point(data = actmain, aes(x=Areax, y=Areay, colour  = as.factor(main)),size = 8, shape = 19) +
+geom_text(data = actmain, aes(x = Areax, y = Areay,label = possno), size = 4,colour = "white") +
+scale_colour_manual(values= c (runcolpal)) +
+labs(colour="Actions")+
+new_scale_color() + 
+geom_point(data = actPW, aes(x=Areax, y=Areay, colour  = as.factor(subset)),size = 8, shape = 19) +
+geom_text(data = actPW, aes(x = Areax, y = Areay,label = possno), size = 4,colour = "white") +
+scale_colour_manual(values= c (pwcol)) +
+labs(colour="Possession Won")+
+new_scale_color() + 
+geom_point(data = actms, aes(x=Areax, y=Areay, colour  = as.factor(subsetoc)),size = 8, shape = 19) +
+geom_text(data = actms, aes(x = Areax, y = Areay,label = possno), size = 4,colour = "white") +
+geom_point(data = actscr, aes(x=Areax, y=Areay, colour  = as.factor(Actionoc)),size = 8, shape = 19) +
+geom_text(data = actscr, aes(x = Areax, y = Areay,label = possno), size = 4,colour = "white") +
+scale_colour_manual(values= c (runcolpal)) +
+labs(caption="Numbers = Possession, Blue Shading = Shot Area")+
+theme(legend.position="bottom") +
+ theme(plot.caption=element_text(size=16, hjust=0.5, face="bold", color="black")) 
+
+
+```
+
+```{r, fig.width = 16, fig.height = 2}
+
+# pull out poss start with "PW","Ko Rec"),zone < 10)
+passlpop <- run
+
+passlpop <- passlpop[passlpop$main!="Def Act", ]
+passlpop <- passlpop[passlpop$main!="Free Loss", ]
+passlpop <- passlpop[passlpop$main!="Tck Def", ]
+passlpop <- passlpop[passlpop$main!="Tck End", ]
+passlpop <- passlpop[passlpop$main!="Sht Prs", ]
+passlpop <- passlpop[passlpop$main!="Spoil Off", ]
+passlpop <- passlpop[passlpop$main!="Opp Brk", ]
+
+
+passlpop <- passlpop %>% filter(Teamnum == "B")
+
+#cnts for possessions starting with "PW","Ko Rec"),zone < 10) - all outcomes 
+
+lpop <- passlpop %>%group_by(Team)%>%summarize(Possession_Won =sum(main == "PW"),Ko_Won = sum(main == "Ko Rec"),Total_Possessions = sum(Possession_Won + Ko_Won),Open_Play_Shots = sum(main == "Shot Op"),Open_Play_Score = sum(subset == "Scr Op"),
+Fk_Shots = sum(main == "Shot Rs"),Fk_Score = sum(subset == "Scr Rs"),Shot_Perc =(Open_Play_Score/Open_Play_Shots*100))
+
+##Shot/scr Area##
+
+# pull out poss start with "PW","Ko Rec"),zone < 10) 
+
+TeamAPAScrZA  <- zonedB %>%group_by(Team, Action) %>% filter(Teamnum == "B")
+
+#pull full poss
+
+runAPAScrZA <- subset(zonedB, poss %in% TeamAPAScrZA$poss)
+
+# from that id all that ended in zdeatt
+
+TeamAPAZA  <- runAPAScrZA %>%group_by(Team, Action) %>% filter(Teamnum == "B", 
+mainoc == "ToL"|subsetoc== "Scr Op"|subsetoc== "Ms Op"|subsetoc== "Scr Rs"|subsetoc== "Ms Rs",inzone %in% c("1","2","3")| oczone %in% c("1","2","3"))
+
+# pull those out that'll end in shot/scr zone 
+
+runAPAScr <- subset(runAPAScrZA, poss %in% TeamAPAZA$poss)
+
+runAPAScr <- runAPAScr[runAPAScr$Action!="Ko", ]
+
+
+zonedBB <- runAPAScr%>% filter (keep == "Y")
+
+ZdeAA10 <- zonedBB %>% group_by (Team) %>%filter (Teamnum == "B") %>%
+summarize(PossessionsNo =sum(main %in% c("PW","Ko Rec")),
+Fkentry = COUNT_IFS(oczone,mainoc %in% c("Free Won"), oczone %in% c("1","2","3")),
+inentry = COUNT_IFS(inzone,main %in% c("Shot Op","Shot Rs"), inzone %in% c("1","2","3")),
+Passes = COUNT_IFS(oczone,main %in% c("Pass Op"),inzone %in% c("1","2","3")), 
+Lost = COUNT_IFS(oczone,mainoc %in% c("ToL"), oczone %in% c("1","2","3")),
+PW = COUNT_IFS(inzone,main %in% c("PW"),inzone %in% c("1","2","3")), 
+entry = (inentry + Lost), 
+Fkentryscr = COUNT_IFS(oczonescr,mainoc %in% c("Free Won"), oczonescr %in% c("1","2","3")),
+inentryscr = COUNT_IFS(inzonescr,main %in% c("Shot Op","Shot Rs"), inzonescr %in% c("1","2","3")),
+Lostscr = COUNT_IFS(oczonescr,mainoc %in% c("ToL"), oczonescr %in% c("1","2","3")), 
+entryscr = (inentryscr + Lostscr), 
+scoresscr = COUNT_IFS(inzonescr,subsetoc %in% c("Scr Op", "Scr Rs"), inzonescr %in% c("1","2","3"))) %>% select (Team,PossessionsNo, entry, PW, Fkentry, inentry, Lost, scoresscr ) 
+
+
+
+ccinAll <- bind_cols(lpop,ZdeAA10)
+
+#ccin45
+
+
+
+ccinAllin <-  ccinAll %>% select(inentry,PW, Fkentry,scoresscr, Lost)
+
+
+ccinAllin <- rename(ccinAllin, "Shots" = inentry ,"Fk Won" = Fkentry, "Total Lost" = Lost , "Scores" = scoresscr)
+
+
+#In 
+
+lpop <-ccinAllin %>%
+  tidyr::gather(variable, value)
+
+lpop <-lpop %>% select (variable, value)
+
+
+
+df <- data.frame(
+    x = rep(seq(0, 12, 3), 1),
+    y = c(rep(6.5, 5)),
+    h = rep(4.25, 5),
+    w = rep(2.95, 5),
+    value = lpop$value,
+    info = lpop$variable,
+    color = factor(1:5)
+)
+
+ggplot(df, aes(x, y, height = h, width = w, label = info)) +
+    geom_tile(aes(fill = color)) +
+    geom_text(data = df,
+              aes(label = value, x = x - 1, y = y + .5),color = "white", fontface = "bold", size = 25, hjust = 0) +
+    geom_text(data = df,
+              aes(label = info, x = x - 1, y = y - 1),color = "white", fontface = "bold", size = 10, hjust = 0) +
+    #coord_fixed() +
+    scale_fill_brewer(type = "qual",palette = "Dark2") +
+    theme_void() +
+    guides(fill = FALSE) +
+    scale_x_continuous(expand = c(0, 0)) + 
+    scale_y_continuous(expand = c(0, 0)) +
+  #labs(title = "Inside Shooting Area (blue shading)") +
+  theme(plot.title = element_text(hjust=0.5, size = 30)) 
+
+
+
+
+```
+
+## Tackling {.tabset .tabset-pills}
+
+
+```{r}
+
+#passppda <- passppda[passppda$main!="Free Loss", ]
+passppda <- pass[pass$main!="Tck End", ]
+passppda <- passppda[passppda$main!="Def Act", ]
+passppda <- passppda[passppda$main!="Shot Prs", ]
+passppda <- passppda[passppda$main!="Spoil Off", ]
+passppda <- passppda[passppda$main!="Opp Brk", ]
+
+Adef <- passppda%>%group_by(Team)%>%filter(Teamnum == "A") 
+Adef <- Adef %>%group_by(Team)%>%filter(Teamnum == "A") %>%summarize(Tack = sum(main== "Tck Def"),FkL = sum(main == "Free Loss"), Def_Act = (Tack  + FkL))
+
+Bpass <- passppda %>%group_by(Team)%>%filter(Teamnum == "B")
+Bpass <- Bpass %>%group_by(Team)%>%filter(Teamnum == "B") %>%summarize(Pass =sum(main == "Pass Op"))
+
+BA <- bind_cols(Bpass,Adef)
+
+BAdefact <- BA %>% summarize (Pass, Def_Act, PPDA = (Pass/Def_Act))
+
+BAdefact <- rename(BAdefact,"# Opposition Passes" = Pass,"Tackle Attempts" = Def_Act,  "Passes per Defensive Action" = PPDA )
+
+BAdefact  %>%
+  kbl(caption = "Passes per Defensive Action",align = "c") %>%
+    kable_minimal()
+
+
+```
+
+```{r, fig.width = 16, fig.height = 12}
+
+#Needs more than def act??
+
+#defactA <- pass %>% group_by (main,Pitch_Area) %>%filter(Teamnum == "A",subset %in% c("Spoil Def")| main %in% c ("Tck Def")| main %in% c ("Free Loss"))
+
+actA <- pass %>% group_by (Pitch_Area) %>%filter(Teamnum == "A",main %in% c ("Tck Def")| main %in% c ("Free Loss")) %>% summarise (count = n ())
+
+
+actAcnt  <- pass %>% group_by (Zone) %>%filter(Teamnum == "A",main %in% c ("Tck Def","Free Loss")) %>% summarise (count = n ())
+
+actAcnt <-actAcnt %>%
+    mutate(tx = VLOOKUP(Zone, zonetext, zone, tx),ty = VLOOKUP(Zone, zonetext, zone, ty),bx = VLOOKUP(Zone, zonetext, zone, bx),by = VLOOKUP(Zone, zonetext, zone, by))
+
+
+shade = data.frame(Pitch_Area = c ("In_Def","Mid_Def", "Out_Def", "Out_Att","Mid_Att", "In-Att"),x1=c(0,20,45,72,100,124), x2=c(20,45,72,100,124,144), y1=c(0,0,0,0,0,0), y2=c(88,88,88,88,88,88))
+
+shade <-shade %>%
+    mutate(count = VLOOKUP(Pitch_Area,actA,Pitch_Area,count))
+
+shade$count[is.na(shade$count)] <- 0
+
+
+p +   
+  theme(legend.position="none") +
+geom_rect(data=shade, 
+            mapping=aes(xmin=x1, xmax=x2, ymin=y1, ymax=y2, fill=as.numeric(count), alpha=0.2),show.legend = FALSE) +
+scale_fill_gradient(low="white",high="red") + 
+  geom_text(data= actAcnt, aes(x= tx, y=ty, label = count),colour = "white", size = 30,alpha=0.4) 
+  
+
+```
+
+```{r}
+
+#passppda <- passppda[passppda$main!="Free Loss", ]
+passppda <- pass[pass$main!="Tck End", ]
+passppda <- passppda[passppda$main!="Def Act", ]
+passppda <- passppda[passppda$main!="Shot Prs", ]
+passppda <- passppda[passppda$main!="Spoil Off", ]
+passppda <- passppda[passppda$main!="Opp Brk", ]
+
+
+Bdef <- passppda %>%group_by(Team)%>%filter(Teamnum == "B") 
+Bdef <- Bdef %>%group_by(Team)%>%filter(Teamnum == "B") %>%summarize(Tack = sum(main== "Tck Def"),FkL = sum(main == "Free Loss"), Def_Act = (Tack  + FkL))
+
+Apass <- passppda %>%group_by(Team)%>%filter(Teamnum == "A")
+Apass <- Apass %>%group_by(Team)%>%filter(Teamnum == "A") %>%summarize(Pass =sum(main == "Pass Op"))
+
+AB <- bind_cols(Apass,Bdef)
+
+ABdefact <- AB %>% summarize(Pass, Def_Act, PPDA = (Pass/Def_Act))
+
+
+ABdefact <- AB %>% summarize (Pass, Def_Act, PPDA = (Pass/Def_Act))
+
+ABdefact <- rename(ABdefact,"# Opposition Passes" = Pass,"Tackle Attempt" = Def_Act,  "Passes per Defensive Action" = PPDA )
+
+ABdefact  %>%
+  kbl(caption = "Passes per Defensive Action",align = "c") %>%
+    kable_minimal()
+
+
+
+
+```
+
+```{r, fig.width = 16, fig.height = 12}
+
+#Needs more than def act??
+
+#defactA <- pass %>% group_by (main,Pitch_Area) %>%filter(Teamnum == "A",subset %in% c("Spoil Def")| main %in% c ("Tck Def")| main %in% c ("Free Loss"))
+
+actA <- pass %>% group_by (Pitch_Area) %>%filter(Teamnum == "B",main %in% c ("Tck Def")| main %in% c ("Free Loss")) %>% summarise (count = n ())
+
+
+actAcnt  <- pass %>% group_by (Zone) %>%filter(Teamnum == "B",main %in% c ("Tck Def","Free Loss")) %>% summarise (count = n ())
+
+actAcnt <-actAcnt %>%
+    mutate(tx = VLOOKUP(Zone, zonetext, zone, tx),ty = VLOOKUP(Zone, zonetext, zone, ty),bx = VLOOKUP(Zone, zonetext, zone, bx),by = VLOOKUP(Zone, zonetext, zone, by))
+
+
+shade = data.frame(Pitch_Area = c ("In_Def","Mid_Def", "Out_Def", "Out_Att","Mid_Att", "In-Att"),x1=c(0,20,45,72,100,124), x2=c(20,45,72,100,124,144), y1=c(0,0,0,0,0,0), y2=c(88,88,88,88,88,88))
+
+shade <-shade %>%
+    mutate(count = VLOOKUP(Pitch_Area,actA,Pitch_Area,count))
+
+shade$count[is.na(shade$count)] <- 0
+
+
+p  +  
+  theme(legend.position="none") +
+geom_rect(data=shade, 
+            mapping=aes(xmin=x1, xmax=x2, ymin=y1, ymax=y2, fill=as.numeric(count), alpha=0.2),show.legend = FALSE) +
+scale_fill_gradient(low="white",high="red")  + 
+  geom_text(data= actAcnt, aes(x= tx, y=ty, label = count),colour = "white", size = 30,alpha=0.4)
+  
+
+```
+
+
+### Dublin - Outcomes
+
+```{r, fig.width = 16, fig.height = 4}
+
+passlpopA  <- pass %>% filter (Teamnum == "A")
+
+#Change total tackles to sum of the other counts
+passlpop  <- passlpopA %>%group_by(Team)%>%summarize(TackleAttempts = sum (main %in% c("Tck Def","Free Loss")), Dispossess = sum(Action %in% c("Tck Dp Def")),
+PossessionWon = sum (Action %in% c("Tck LB Won")),NonDispossess = sum(Action %in% c("Tck Def Ndp")), PassPress = sum(Action %in% c("Tck Prs")), FreeLoss = sum(main %in% c("Free Loss")))
+
+library(plyr)
+
+passlpop   <- rename(passlpop  , c( TackleAttempts = "Tackle Attempts",PossessionWon = "Poss Won",NonDispossess = "Non-Dispossess",PassPress = "Pressured", FreeLoss = "Free Loss"))
+
+detach(package:plyr)
+
+lpop <-passlpop%>%
+  tidyr::gather(variable, value, -Team)
+
+lpop <-lpop %>% select (variable, value)
+
+#lpop
+
+
+
+df <- data.frame(
+    x = rep(seq(2, 15, 6.5), 2),
+    y = c(rep(6.5, 3), rep(2,3)),
+    h = rep(4.25, 6),
+    w = rep(6.25, 6),
+    value = lpop$value,
+    info = lpop$variable,
+    color = factor(1:6)
+)
+
+ggplot(df, aes(x, y, height = h, width = w, label = info)) +
+    geom_tile(aes(fill = color)) +
+    geom_text(data = df,
+              aes(label = value, x = x - 1, y = y + .5),color = "white", fontface = "bold", size = 25, hjust = 0) +
+    geom_text(data = df,
+              aes(label = info, x = x - 1.5, y = y - 1),color = "white", fontface = "bold", size = 10, hjust = 0) +
+    #coord_fixed() +
+    scale_fill_brewer(type = "qual",palette = "Dark2") +
+    theme_void() +
+    guides(fill = FALSE) 
+
+```
+
+### Kerry - Outcomes
+
+```{r, fig.width = 16, fig.height = 4}
+
+passlpopA  <- pass %>% filter (Teamnum == "B")
+
+#Change total tackles to sum of the other counts
+passlpop  <- passlpopA %>%group_by(Team)%>%summarize(TackleAttempts = sum (main %in% c("Tck Def","Free Loss")), Dispossess = sum(Action %in% c("Tck Dp Def")),
+PossessionWon = sum (Action %in% c("Tck LB Won")),NonDispossess = sum(Action %in% c("Tck Def Ndp")), PassPress = sum(Action %in% c("Tck Prs")), FreeLoss = sum(main %in% c("Free Loss")))
+
+library(plyr)
+
+passlpop   <- rename(passlpop  , c( TackleAttempts = "Tackle Attempts",PossessionWon = "Poss Won",NonDispossess = "Non-Dispossess",PassPress = "Pressured", FreeLoss = "Free Loss"))
+
+detach(package:plyr)
+
+lpop <-passlpop%>%
+  tidyr::gather(variable, value, -Team)
+
+lpop <-lpop %>% select (variable, value)
+
+#lpop
+
+df <- data.frame(
+    x = rep(seq(2, 15, 6.5), 2),
+    y = c(rep(6.5, 3), rep(2,3)),
+    h = rep(4.25, 6),
+    w = rep(6.25, 6),
+    value = lpop$value,
+    info = lpop$variable,
+    color = factor(1:6)
+)
+
+ggplot(df, aes(x, y, height = h, width = w, label = info)) +
+    geom_tile(aes(fill = color)) +
+    geom_text(data = df,
+              aes(label = value, x = x - 1, y = y + .5),color = "white", fontface = "bold", size = 25, hjust = 0) +
+    geom_text(data = df,
+              aes(label = info, x = x - 1.5, y = y - 1),color = "white", fontface = "bold", size = 10, hjust = 0) +
+    #coord_fixed() +
+    scale_fill_brewer(type = "qual",palette = "Dark2") +
+    theme_void() +
+    guides(fill = FALSE) 
+
+
+```
+
+
+## Player Stats - Dublin {.tabset .tabset-pills}
+
+### Pass Network
+
+```{r,fig.width = 16, fig.height = 12}
+
+#change col names to Pass, Recd etc
+
+runnetA <- run%>%filter(keep=="Y")
+
+runnetA<- runnetA[runnetA$main!="Opp Brk", ]
+
+runnetA<- runnetA[runnetA$mainoc!="Opp Brk", ]
+
+aveposA <- runnetA %>%group_by(Player, main)%>%filter( Teamnum == "A", main %in% c("Pass Op","Pass Rs","Shot Op"))
+
+
+AreaxA <- aveposA %>%
+    group_by(Player) %>%
+    summarise(AreaxA = mean(Areax,na.rm = TRUE)) 
+
+AreayA <- aveposA%>%
+    group_by(Player) %>%
+    summarise(AreayA = mean(Areay,na.rm = TRUE))
+
+avgposA <- left_join(AreaxA, AreayA, by ="Player")
+
+
+#Open play Pass & rec (links)
+#linksnetA <- runnetA %>% filter(main %in%c("Ko","Pass Op"))%>%select(Teamnum,Player,main,Playeroc, mainoc)
+
+linksnetA <- runnetA %>% filter(main %in%c("Pass Op"))%>%select(Teamnum,Player,main,Playeroc, mainoc)
+
+linksnetA <- linksnetA %>% filter( Teamnum == "A") %>% select(Teamnum,Player,Playeroc)
+
+linksnetA<- subset(linksnetA, Player != Playeroc)
+
+linksnetA <- linksnetA %>% group_by(Teamnum,Player,Playeroc) %>% summarise(weight =n())
+
+match <-linksnetA  %>%
+    mutate(Areax = VLOOKUP(Player,avgposA,Player, AreaxA),Areay = VLOOKUP(Player,avgposA,Player, AreayA),
+xend = VLOOKUP(Playeroc,avgposA,Player, AreaxA),yend = VLOOKUP(Playeroc,avgposA,Player, AreayA))
+
+
+#Nodes - deg
+indeg <- match %>% group_by(Teamnum, Playeroc) %>% summarise(indeg=n())
+outdeg <- match %>% group_by(Teamnum, Player) %>% summarise(outdeg=n())
+
+#Nodes - count of pass out and rec in 
+instr <- linksnetA %>% group_by (Playeroc)%>% summarise(instr = sum( weight))
+outstr <- linksnetA %>% group_by (Player)%>% summarise(outstr = sum( weight))
+
+teamsheetsht <- teamsheet %>%select(-plytime,-Areax,-Areay)
+
+strnetA <- teamsheetsht %>% mutate(instr = VLOOKUP(ply,instr,Playeroc,instr),outstr = VLOOKUP(ply,outstr,Player, outstr),
+Areax = VLOOKUP(ply,avgposA,Player, AreaxA),Areay = VLOOKUP(ply,avgposA,Player, AreayA))
+
+strnetA [is.na(strnetA)] <- 0
+
+strnetA <- strnetA %>% mutate (totstr = (outstr))
+
+strnetA <- strnetA %>% filter(Teamnum =="A")
+
+strnetA <- subset(strnetA, Areax != 0, Areay !=0)
+
+strnetA <- subset(strnetA, totstr != 0)
+
+new_df <- subset(match, Player != Playeroc)
+
+new_df$code <- paste0(new_df$Player, "-", new_df$Playeroc)
+
+new_df$baby <- (apply(sapply(strsplit(as.character(new_df$code), "-"), 
+                sort), 2, paste, collapse="-"))
+
+a <- new_df %>% group_by(baby) %>% summarise(TotW = sum(weight))
+
+new_df <- new_df %>% mutate(TotW = VLOOKUP(baby ,a,baby , TotW))
+
+new_df <-new_df[!duplicated(new_df[,c('baby')]),]
+
+f <- function(k) {
+        step <- k
+        function(y) seq(floor(min(y)), ceiling(max(y)), by = step)       
+}
+
+p + 
+    geom_segment(data = new_df, aes(x = Areax, y = Areay, xend = xend, yend = yend,colour = weight),size = new_df$weight, alpha = 0.6) +
+    labs(colour="Connections") +
+    scale_colour_gradient(low = "lightgreen", high = "darkgreen",breaks = f(1)) +
+    new_scale_color() +
+    geom_point(data = strnetA, aes(x=Areax, y=Areay, colour = totstr),size = 14, shape = 19) +
+    geom_text(data = strnetA, aes(x=Areax, y=Areay, label = ply), colour = "white", size = 6) +
+    theme(legend.position="bottom") +
+    scale_size_continuous(range = c(0, 30),breaks = f(10)) +
+    scale_colour_gradient(low = "lightblue", high = "darkblue",breaks = f(10)) +
+    labs(colour="Passes Made") 
+
+
+```
+
+### Network Stats 
+
+```{r,fig.width = 16, fig.height = 12}
+
+#change col names to Pass, Recd etc
+
+runnetA <- run%>%filter(keep=="Y")
+
+runnetA<- runnetA[runnetA$main!="Opp Brk", ]
+
+runnetA<- runnetA[runnetA$mainoc!="Opp Brk", ]
+
+aveposA <- runnetA %>%group_by(Player, main)%>%filter( Teamnum == "A", main %in% c("PW","Rec Op","Rec Rs","Pass Op","Pass Rs","Shot Op","Ko",
+"Ko Rec","Free Won","Free Loss","Spoil Off","Def Act","Tck Att"))
+
+
+AreaxA <- aveposA %>%
+    group_by(Player) %>%
+    summarise(AreaxA = mean(Areax,na.rm = TRUE)) 
+
+AreayA <- aveposA%>%
+    group_by(Player) %>%
+    summarise(AreayA = mean(Areay,na.rm = TRUE))
+
+avgposA <- left_join(AreaxA, AreayA, by ="Player")
+
+
+#Open play Pass & rec (links)
+linksnetA <- runnetA %>% filter(main %in%c("Ko","Pass Op"))%>%select(Teamnum,Player,main,Playeroc, mainoc)
+
+linksnetA <- linksnetA %>% filter( Teamnum == "A") %>% select(Teamnum,Player,Playeroc)
+
+linksnetA<- subset(linksnetA, Player != Playeroc)
+
+linksnetA <- linksnetA %>% group_by(Teamnum,Player,Playeroc) %>% summarise(weight =n())
+
+match <-linksnetA  %>%
+    mutate(Areax = VLOOKUP(Player,avgposA,Player, AreaxA),Areay = VLOOKUP(Player,avgposA,Player, AreayA),
+xend = VLOOKUP(Playeroc,avgposA,Player, AreaxA),yend = VLOOKUP(Playeroc,avgposA,Player, AreayA))
+
+
+#Nodes - deg
+indeg <- match %>% group_by(Teamnum, Playeroc) %>% summarise(indeg=n())
+outdeg <- match %>% group_by(Teamnum, Player) %>% summarise(outdeg=n())
+
+#Nodes - count of pass out and rec in 
+instr <- linksnetA %>% group_by (Playeroc)%>% summarise(instr = sum( weight))
+outstr <- linksnetA %>% group_by (Player)%>% summarise(outstr = sum( weight))
+
+teamsheetsht <- teamsheet %>%select(-plytime,-Areax,-Areay)
+
+strnetA <- teamsheetsht %>% mutate(instr = VLOOKUP(ply,instr,Playeroc,instr),outstr = VLOOKUP(ply,outstr,Player, outstr),
+Areax = VLOOKUP(ply,avgposA,Player, AreaxA),Areay = VLOOKUP(ply,avgposA,Player, AreayA))
+
+strnetA [is.na(strnetA)] <- 0
+
+strnetA <- strnetA %>% mutate (totstr = (instr+outstr))
+
+strnetA <- strnetA %>% filter(Teamnum =="A")
+
+strnetA <- subset(strnetA, Areax != 0, Areay !=0)
+
+strnetA <- subset(strnetA, totstr != 0)
+
+new_df <- subset(match, Player != Playeroc)
+
+new_df$code <- paste0(new_df$Player, "-", new_df$Playeroc)
+
+new_df$baby <- (apply(sapply(strsplit(as.character(new_df$code), "-"), 
+                sort), 2, paste, collapse="-"))
+
+a <- new_df %>% group_by(baby) %>% summarise(TotW = sum(weight))
+
+new_df <- new_df %>% mutate(TotW = VLOOKUP(baby ,a,baby , TotW))
+
+new_df <-new_df[!duplicated(new_df[,c('baby')]),]
+
+f <- function(k) {
+        step <- k
+        function(y) seq(floor(min(y)), ceiling(max(y)), by = step)       
+}
+
+
+plystatsANet <- plystatsA %>% mutate(indeg = VLOOKUP(ply,indeg,Playeroc, indeg))
+plystatsANet <- plystatsANet %>% mutate(outdeg = VLOOKUP(ply,outdeg,Player, outdeg))
+plystatsANet <- plystatsANet %>% mutate(instr = VLOOKUP(ply,instr,Playeroc,instr))
+plystatsANet <- plystatsANet %>% mutate(outstr = VLOOKUP(ply,outstr,Player, outstr))
+
+plystatsANet <- plystatsANet %>% select (Player,indeg,outdeg,instr,outstr)
+
+plystatsANet <- plystatsANet %>% replace(is.na(.), 0)
+
+plystatsANet <- rename(plystatsANet, "In-Degree" = indeg, "Out-Degree" = outdeg,"In-Strength" = instr,"Out-Strength" = outstr)
+
+datatable(plystatsANet ,options = list(pageLength = 5,lengthMenu = c(5, 10, 15, 20),columnDefs = 
+                           list(list(className = 'dt-center', 
+                                     targets = "_all"))), caption = 'In-Degree (# of Teammates Pass Recd from)/  Out-Degree (# of Teammates Pass Made to)/ 
+Strength-In (# of Passes Recd)/  Strength-Out (# of Passes Made)',class = 'cell-border stripe', rownames = FALSE)
+
+```
+
+### Player Possessions
+
+```{r,  fig.width = 16, fig.height = 12}
+#Add ToB to Playerstats
+
+ToBA <- run %>% group_by(Team,Player)%>% filter (keep == "Y",Teamnum == "A",main %in% c("Rec Op", "Rec Rs", "Ko Rec", "PW")) %>% summarise(Time_on_Ball =sum(time_diff))
+
+ToBA  = ToBA  %>% 
+   unite(plyid, Team, Player, sep = " ", remove = FALSE)
+
+ToBA <- ToBA %>%  mutate(plyname = VLOOKUP(plyid,teamsheet,plyid, Player))
+
+
+
+plystatsA <- plystatsA %>%  mutate(ToB = VLOOKUP(ply,ToBA,Player,Time_on_Ball))
+
+plystatsA <-plystatsA %>% mutate_if(is.numeric, round, digits = 0)
+
+
+plytree <- plystatsA 
+
+plytreeA = plytree %>% 
+   unite(combined, Player, OBP,ToB, sep = " ", remove = FALSE)
+
+treemap(dtf = plytreeA,
+        index=c("combined"),
+        vSize="OBP",
+        vColor="OBP",
+        palette="Spectral",
+        type="value",
+        border.col=c("grey70", "grey90"),
+        fontsize.title = 36,
+        algorithm="pivotSize",
+        title ="On Ball Possessions & Time on Ball (secs)",
+        title.legend="Possessions",
+        fontsize.labels= 25)
+
+```
+
+### Player Involvement
+
+```{r}
+#Add Involment to Playerstats
+passA <- pass%>%filter(Teamnum == "A")
+
+passA <- passA[passA$main!="Spoil Off", ]
+passA <- passA[passA$main!="Def Act", ]
+passA <- passA[passA$main!="Tck Def", ]
+passA <- passA[passA$main!="Free Loss", ]
+passA <- passA[passA$main!="Tck End", ]
+passA <- passA[passA$main!="Tck Att", ]
+passA <- passA[passA$main!="Tck Att Ndp", ]
+passA <- passA[passA$main!="Opp Brk", ]
+
+passA = passA %>% 
+   unite(plynumname, Player, plyname, sep = " ", remove = FALSE)
+
+teamAplyrpossns <- passA%>%group_by(Player, poss) %>% filter(Teamnum == "A", main == "PW"| main == "Ko Rec"| main == "Rec Op"| 
+main == "Rec Rs"|main == "Pass Rs"|main == "Ko"|main == "Shot Rs")%>%select(Player, poss)
+
+teamAplyr <-dplyr::distinct(teamAplyrpossns) 
+
+teamAplyr <-teamAplyr%>%group_by(Player)%>%select(Player,poss)%>%summarize(count=n())  
+
+plystatsA <- plystatsA %>%  mutate(TotInvl = VLOOKUP(ply,teamAplyr,Player,count))
+
+
+passA <- pass%>%filter(Teamnum == "A")
+
+passA <- passA[passA$main!="Spoil Off", ]
+passA <- passA[passA$main!="Def Act", ]
+passA <- passA[passA$main!="Tck Def", ]
+passA <- passA[passA$main!="Free Loss", ]
+passA <- passA[passA$main!="Tck End", ]
+passA <- passA[passA$main!="Tck Att", ]
+passA <- passA[passA$main!="Tck Att Ndp", ]
+passA <- passA[passA$main!="Opp Brk", ]
+
+passA = passA %>% 
+   unite(plynumname, Player, plyname, sep = " ", remove = FALSE)
+
+#id poss with shots
+pashscr <- passA%>%group_by(Team, Action) %>% filter(main  == "Shot Op Oc"|main =="Shot Rs Oc")
+
+#Pulls out all of the poss
+teamsht <- subset(passA,poss%in%pashscr$poss)
+ 
+teamAsht<- teamsht%>%group_by(poss) %>% filter(Teamnum == "A")%>%select(Player,poss)
+
+teamAshtA <-dplyr::distinct(teamAsht)
+
+teamAshtA<- teamAshtA %>%group_by(Player)%>%select(Player,poss)%>%summarize(count=n()) 
+
+plystatsA <- plystatsA %>%  mutate(ShtInvl = VLOOKUP(ply,teamAshtA,Player,count))
+
+passA <- pass%>%filter(Teamnum == "A")
+
+passA <- passA[passA$main!="Spoil Off", ]
+passA <- passA[passA$main!="Def Act", ]
+passA <- passA[passA$main!="Tack Def", ]
+passA <- passA[passA$main!="Free Loss", ]
+passA <- passA[passA$main!="Tack Def Ndp", ]
+passA <- passA[passA$main!="Sht Prs", ]
+passA <- passA[passA$main!="Opp Brk", ]
+
+
+passA = passA %>% 
+   unite(plynumname, Player, plyname, sep = " ", remove = FALSE)
+
+#id poss with shots
+pashscr <- passA%>%group_by(Team, Action) %>% filter(subset  == "Scr Op"|subset =="Scr Rs")
+
+#Pulls out all of the poss
+teamscr <- subset(passA,poss%in%pashscr$poss)
+
+#6Player Score Link - By vop
+plyrscrinv <- teamscr%>%group_by(Player, poss) %>% filter(main == "PW"| main == "Ko Rec"| main == "Rec Op"| main == "Rec Rs"|main == "Pass Rs"|main == "Ko"|main == "Shot Rs")%>%select(Player, poss)
+
+teamAscrA <-dplyr::distinct(plyrscrinv)
+
+teamAscrA<- teamAscrA %>%group_by(Player)%>%select(Player,poss)%>%summarize(count=n()) 
+
+plystatsA <- plystatsA %>%  mutate(score = VLOOKUP(ply,teamAscrA,Player,count))
+
+plystatsA  <- plystatsA %>% replace(is.na(.), 0)
+
+plystatsA <- plystatsA  %>%  mutate(nonshot= (TotInvl - ShtInvl)) 
+
+plystatsA <- plystatsA  %>%  mutate(miss = (ShtInvl - score)) 
+
+#plystatsA 
+
+#Chart
+
+plystatsAinvl <- plystatsA %>% select (Player,nonshot,miss,score)
+
+plystatsAinvlA <- plystatsAinvl %>% gather(key = Invol, value = value, nonshot:score)
+#plystatsAinvlA
+
+#add column to each data frame with row number
+plystatsAinvlA$number <- row.names(plystatsAinvlA)
+
+plystatsAinvlA$number <- as.numeric(plystatsAinvlA$number)
+
+plystatsAinvlA  <- plystatsAinvlA %>% arrange(number)
+
+plystatsAinvlA  <- plystatsAinvlA %>% replace(is.na(.), 0)
+
+q <- ggplot(data = plystatsAinvlA, aes(x = Player, y = value, fill = Invol))
+
+q +geom_bar(width=.7, stat = "identity", aes(x = Player, y = value, fill = Invol)) +
+  xlab("Player") + ylab("Possessions") +
+  labs(fill="Possession Involvement") +
+  theme_bw() + theme (panel.grid.major = element_blank(),
+panel.grid.minor = element_blank()) +
+geom_text(aes(label = value, group =Invol), color = "black",position = position_stack(vjust = 0.5))  +
+ theme(legend.position="bottom", axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+
+```
+
+### Player Stats
+
+```{r}
+
+#colnames = c("Player" = 'numname', "Outcome" = 'Actionoc')
+
+showstsA <- plystatsA %>%group_by(Player)%>%select(Player,PW,KoRec,Rec,Pass,Pass_Loss,Comp_Pass,OpShot,OpScr,Poss_Lost,
+Fk_Won,Fk_Lost)
+
+datatable(showstsA ,options = list(pageLength = 5,lengthMenu = c(5, 10, 15, 20),columnDefs = 
+                           list(list(className = 'dt-center', 
+                                     targets = "_all"))),class = 'cell-border stripe', rownames = FALSE)
+```
+
+## Player Stats - Kerry {.tabset .tabset-pills}
+
+### Pass Network
+
+```{r,fig.width = 16, fig.height = 12}
+
+runnetB <- run%>%filter(keep=="Y")
+
+runnetB<- runnetB[runnetB$main!="Opp Brk", ]
+
+runnetB<- runnetB[runnetB$mainoc!="Opp Brk", ]
+
+aveposB <- runnetB %>%group_by(Player, main)%>%filter( Teamnum == "B", main %in% c("Pass Op","Pass Rs","Shot Op"))
+
+
+AreaxB <- aveposB %>%
+    group_by(Player) %>%
+    summarise(AreaxB = mean(Areax,na.rm = TRUE)) 
+
+AreayB <- aveposB%>%
+    group_by(Player) %>%
+    summarise(AreayB = mean(Areay,na.rm = TRUE))
+
+avgposB <- left_join(AreaxB, AreayB, by ="Player")
+
+
+#Open play Pass & rec (links)
+linksnetB <- runnetB %>% filter(main %in%c("ko","Pass Op"))%>%select(Teamnum,Player,main,Playeroc, mainoc)
+
+linksnetB <- linksnetB %>% filter( Teamnum == "B") %>% select(Teamnum,Player,Playeroc)
+
+linksnetB<- subset(linksnetB, Player != Playeroc)
+
+linksnetB <- linksnetB %>% group_by(Teamnum,Player,Playeroc) %>% summarise(weight =n())
+
+match <-linksnetB  %>%
+    mutate(Areax = VLOOKUP(Player,avgposB,Player, AreaxB),Areay = VLOOKUP(Player,avgposB,Player, AreayB),
+xend = VLOOKUP(Playeroc,avgposB,Player, AreaxB),yend = VLOOKUP(Playeroc,avgposB,Player, AreayB))
+
+
+#Nodes - deg
+indeg <- match %>% group_by(Teamnum, Playeroc) %>% summarise(indeg=n())
+outdeg <- match %>% group_by(Teamnum, Player) %>% summarise(outdeg=n())
+
+#Nodes - count of pass out and rec in 
+instr <- linksnetB %>% group_by (Playeroc)%>% summarise(instr = sum( weight))
+outstr <- linksnetB %>% group_by (Player)%>% summarise(outstr = sum( weight))
+
+teamsheetsht <- teamsheet %>%select(-plytime,-Areax,-Areay)
+
+strnetB <- teamsheetsht %>% mutate(instr = VLOOKUP(ply,instr,Playeroc,instr),outstr = VLOOKUP(ply,outstr,Player, outstr),
+Areax = VLOOKUP(ply,avgposB,Player, AreaxB),Areay = VLOOKUP(ply,avgposB,Player, AreayB))
+
+strnetB [is.na(strnetB)] <- 0
+
+strnetB <- strnetB %>% mutate (totstr = (instr+outstr))
+
+strnetB <- strnetB %>% filter(Teamnum =="B")
+
+strnetB <- subset(strnetB, Areax != 0, Areay !=0)
+
+strnetB <- subset(strnetB, totstr != 0)
+
+new_df <- subset(match, Player != Playeroc)
+
+new_df$code <- paste0(new_df$Player, "-", new_df$Playeroc)
+
+new_df$baby <- (apply(sapply(strsplit(as.character(new_df$code), "-"), 
+                sort), 2, paste, collapse="-"))
+
+a <- new_df %>% group_by(baby) %>% summarise(TotW = sum(weight))
+
+new_df <- new_df %>% mutate(TotW = VLOOKUP(baby ,a,baby , TotW))
+
+new_df <-new_df[!duplicated(new_df[,c('baby')]),]
+
+f <- function(k) {
+        step <- k
+        function(y) seq(floor(min(y)), ceiling(max(y)), by = step)       
+}
+
+p + 
+    geom_segment(data = new_df, aes(x = Areax, y = Areay, xend = xend, yend = yend,colour = weight),size = new_df$weight, alpha = 0.6) +
+    labs(colour="Connections") +
+    scale_colour_gradient(low = "lightgreen", high = "darkgreen",breaks = f(1)) +
+    new_scale_color() +
+    geom_point(data = strnetB, aes(x=Areax, y=Areay, colour = totstr),size = 14, shape = 19) +
+    geom_text(data = strnetB, aes(x=Areax, y=Areay, label = ply), colour = "black", size = 6) +
+    theme(legend.position="bottom") +
+    scale_size_continuous(range = c(0, 30),breaks = f(10)) +
+    scale_colour_gradient(low = "white", high = "red",breaks = f(10)) +
+    labs(colour="Passes Made") 
+```
+
+### Network Stats 
+
+```{r,fig.width = 16, fig.height = 12}
+
+runnetB <- run%>%filter(keep=="Y")
+
+runnetB<- runnetB[runnetB$main!="Opp Brk", ]
+
+runnetB<- runnetB[runnetB$mainoc!="Opp Brk", ]
+
+aveposB <- runnetB %>%group_by(Player, main)%>%filter( Teamnum == "B", main %in% c("PW","Rec Op","Rec Rs","Pass Op","Pass Rs","Shot Op","Ko",
+"Ko Rec","Free Won","Free Loss","Spoil Off","Def Act","Tck Att"))
+
+
+AreaxB <- aveposB %>%
+    group_by(Player) %>%
+    summarise(AreaxB = mean(Areax,na.rm = TRUE)) 
+
+AreayB <- aveposB%>%
+    group_by(Player) %>%
+    summarise(AreayB = mean(Areay,na.rm = TRUE))
+
+avgposB <- left_join(AreaxB, AreayB, by ="Player")
+
+
+#Open play Pass & rec (links)
+linksnetB <- runnetB %>% filter(main %in%c("ko","Pass Op"))%>%select(Teamnum,Player,main,Playeroc, mainoc)
+
+linksnetB <- linksnetB %>% filter( Teamnum == "B") %>% select(Teamnum,Player,Playeroc)
+
+linksnetB<- subset(linksnetB, Player != Playeroc)
+
+linksnetB <- linksnetB %>% group_by(Teamnum,Player,Playeroc) %>% summarise(weight =n())
+
+match <-linksnetB  %>%
+    mutate(Areax = VLOOKUP(Player,avgposB,Player, AreaxB),Areay = VLOOKUP(Player,avgposB,Player, AreayB),
+xend = VLOOKUP(Playeroc,avgposB,Player, AreaxB),yend = VLOOKUP(Playeroc,avgposB,Player, AreayB))
+
+
+#Nodes - deg
+indeg <- match %>% group_by(Teamnum, Playeroc) %>% summarise(indeg=n())
+outdeg <- match %>% group_by(Teamnum, Player) %>% summarise(outdeg=n())
+
+#Nodes - count of pass out and rec in 
+instr <- linksnetB %>% group_by (Playeroc)%>% summarise(instr = sum( weight))
+outstr <- linksnetB %>% group_by (Player)%>% summarise(outstr = sum( weight))
+
+teamsheetsht <- teamsheet %>%select(-plytime,-Areax,-Areay)
+
+strnetB <- teamsheetsht %>% mutate(instr = VLOOKUP(ply,instr,Playeroc,instr),outstr = VLOOKUP(ply,outstr,Player, outstr),
+Areax = VLOOKUP(ply,avgposB,Player, AreaxB),Areay = VLOOKUP(ply,avgposB,Player, AreayB))
+
+strnetB [is.na(strnetB)] <- 0
+
+strnetB <- strnetB %>% mutate (totstr = (instr+outstr))
+
+strnetB <- strnetB %>% filter(Teamnum =="B")
+
+strnetB <- subset(strnetB, Areax != 0, Areay !=0)
+
+strnetB <- subset(strnetB, totstr != 0)
+
+new_df <- subset(match, Player != Playeroc)
+
+new_df$code <- paste0(new_df$Player, "-", new_df$Playeroc)
+
+new_df$baby <- (apply(sapply(strsplit(as.character(new_df$code), "-"), 
+                sort), 2, paste, collapse="-"))
+
+a <- new_df %>% group_by(baby) %>% summarise(TotW = sum(weight))
+
+new_df <- new_df %>% mutate(TotW = VLOOKUP(baby ,a,baby , TotW))
+
+new_df <-new_df[!duplicated(new_df[,c('baby')]),]
+
+f <- function(k) {
+        step <- k
+        function(y) seq(floor(min(y)), ceiling(max(y)), by = step)       
+}
+
+
+plystatsANet <- plystatsB %>% mutate(indeg = VLOOKUP(ply,indeg,Playeroc, indeg))
+plystatsANet <- plystatsANet %>% mutate(outdeg = VLOOKUP(ply,outdeg,Player, outdeg))
+plystatsANet <- plystatsANet %>% mutate(instr = VLOOKUP(ply,instr,Playeroc,instr))
+plystatsANet <- plystatsANet %>% mutate(outstr = VLOOKUP(ply,outstr,Player, outstr))
+
+plystatsANet <- plystatsANet %>% select (Player,indeg,outdeg,instr,outstr)
+
+plystatsANet <- plystatsANet %>% replace(is.na(.), 0)
+
+plystatsANet <- rename(plystatsANet, "In-Degree" = indeg, "Out-Degree" = outdeg,"In-Strength" = instr,"Out-Strength" = outstr)
+
+datatable(plystatsANet ,options = list(pageLength = 5,lengthMenu = c(5, 10, 15, 20),columnDefs = 
+                           list(list(className = 'dt-center', 
+                                     targets = "_all"))), caption = 'In-Degree (# of Teammates Pass Recd from)/  Out-Degree (# of Teammates Pass Made to)/ 
+Strength-In (# of Passes Recd)/  Strength-Out (# of Passes Made)',class = 'cell-border stripe', rownames = FALSE)
+
+
+```
+
+### Player Possessions
+
+```{r,  fig.width = 16, fig.height = 12}
+#Add ToB to Playerstats
+
+ToBA <- run %>% group_by(Team,Player)%>% filter (keep == "Y",Teamnum == "B",main %in% c("Rec Op", "Rec Rs", "Ko Rec", "PW")) %>% summarise(Time_on_Ball =sum(time_diff))
+
+ToBA  = ToBA  %>% 
+   unite(plyid, Team, Player, sep = " ", remove = FALSE)
+
+ToBA <- ToBA %>%  mutate(plyname = VLOOKUP(plyid,teamsheet,plyid, Player))
+
+plystatsB <- plystatsB %>%  mutate(ToB = VLOOKUP(ply,ToBA,Player,Time_on_Ball))
+
+plystatsB <-plystatsB %>% mutate_if(is.numeric, round, digits = 0)
+
+
+plytree <- plystatsB 
+
+plytreeA = plytree %>% 
+   unite(combined, Player, OBP,ToB, sep = " ", remove = FALSE)
+
+treemap(dtf = plytreeA,
+        index=c("combined"),
+        vSize="OBP",
+        vColor="OBP",
+        palette="Spectral",
+        type="value",
+        border.col=c("grey70", "grey90"),
+        fontsize.title = 36,
+        algorithm="pivotSize",
+        title ="On Ball Possessions & Time on Ball (secs)",
+        title.legend="Possessions",
+        fontsize.labels= 25)
+
+```
+
+### Player Involvement
+
+```{r}
+passB <- pass%>%filter(Teamnum == "B")
+
+passB <- passB[passB$main!="Spoil Off", ]
+passB <- passB[passB$main!="Def Act", ]
+passB <- passB[passB$main!="Tck Def", ]
+passB <- passB[passB$main!="Free Loss", ]
+passB <- passB[passB$main!="Tck End", ]
+passB <- passB[passB$main!="Tck Att", ]
+passB <- passB[passB$main!="Tck Att Ndp", ]
+passB <- passB[passB$main!="Opp Brk", ]
+
+
+passB = passB %>% 
+   unite(plynumname, Player, plyname, sep = " ", remove = FALSE)
+
+
+teamBplyrpossns <- passB%>%group_by(Player, poss) %>% filter(Teamnum == "B", main == "PW"| main == "Ko Rec"| main == "Rec Op"| main == "Rec Rs"|main == "Pass Rs"|main == "Ko"|main == "Shot Rs")%>%select(Player, poss)
+
+teamBplyr <-dplyr::distinct(teamBplyrpossns) 
+
+teamBplyr <-teamBplyr%>%group_by(Player)%>%select(Player,poss)%>%summarize(count=n()) 
+
+#teamBplyr  <- teamBplyr %>% replace(is.na(.), 0)
+
+plystatsB <- plystatsB %>%  mutate(TotInvl = VLOOKUP(ply,teamBplyr,Player,count))
+
+
+passB <- pass%>%filter(Teamnum == "B")
+
+passB <- passB[passB$main!="Spoil Off", ]
+passB <- passB[passB$main!="Def Act", ]
+passB <- passB[passB$main!="Tck Def", ]
+passB <- passB[passB$main!="Free Loss", ]
+passB <- passB[passB$main!="Tck End", ]
+passB <- passB[passB$main!="Tck Att", ]
+passB <- passB[passB$main!="Tck Att Ndp", ]
+passB <- passB[passB$main!="Opp Brk", ]
+
+passB = passB %>% 
+   unite(plynumname, Player, plyname, sep = " ", remove = FALSE)
+
+#id poss with shots
+pashscr <- passB%>%group_by(Team, Action) %>% filter(main  == "Shot Op Oc"|main =="Shot Rs Oc")
+
+#Pulls out all of the poss
+teamsht <- subset(passB,poss%in%pashscr$poss)
+
+
+teamBsht<- teamsht%>%group_by(poss) %>% filter(Teamnum == "B")%>%select(Player,poss)
+
+
+teamBshtB <-dplyr::distinct(teamBsht)
+
+
+teamBshtB<- teamBshtB %>%group_by(Player)%>%select(Player,poss)%>%summarize(count=n()) 
+
+#teamBshtB  <- teamBshtB %>% replace(is.na(.), 0)
+
+plystatsB <- plystatsB %>%  mutate(ShtInvl = VLOOKUP(ply,teamBshtB,Player,count))
+
+passB <- pass%>%filter(Teamnum == "B")
+
+passB <- passB[passB$main!="Spoil Off", ]
+passB <- passB[passB$main!="Def Act", ]
+passB <- passB[passB$main!="Tck Def", ]
+passB <- passB[passB$main!="Free Loss", ]
+passB <- passB[passB$main!="Tck End", ]
+passB <- passB[passB$main!="Tck Att", ]
+passB <- passB[passB$main!="Tck Att Ndp", ]
+passB <- passB[passB$main!="Opp Brk", ]
+
+passB = passB %>% 
+   unite(plynumname, Player, plyname, sep = " ", remove = FALSE)
+
+#id poss with shots
+pashscrB <- passB%>%group_by(Team, Action) %>% filter(subset  == "Scr Op"|subset =="Scr Rs")
+
+#Pulls out all of the poss
+teamscrB <- subset(passB,poss%in%pashscrB$poss)
+
+#6Player Score Link - By vop
+plyrscrinv <- teamscrB%>%group_by(Player, poss) %>% filter(main == "PW"| main == "Ko Rec"| main == "Rec Op"| main == "Rec Rs"|main == "Pass Rs"|main == "Ko"|main == "Shot Rs")%>%select(Player, poss)
+
+teamBscrB <-dplyr::distinct(plyrscrinv)
+
+teamBscrB <- teamBscrB %>%group_by(Player)%>%select(Player,poss)%>%summarize(count=n()) 
+
+#teamBscrB <-teamBscrB %>% replace(is.na(.), 0)
+
+plystatsB <- plystatsB %>%  mutate(score = VLOOKUP(ply,teamBscrB,Player,count))
+
+plystatsB  <- plystatsB %>% replace(is.na(.), 0)
+
+plystatsB <- plystatsB  %>%  mutate(nonshot= (TotInvl - ShtInvl)) 
+
+plystatsB <- plystatsB  %>%  mutate(miss = (ShtInvl - score)) 
+
+#plystatsA 
+
+#Chart
+
+plystatsBinvl <- plystatsB %>% select (Player,nonshot,miss,score)
+
+plystatsBinvlB <- plystatsBinvl %>% gather(key = Invol, value = value, nonshot:score)
+#plystatsAinvlA
+
+#add column to each data frame with row number
+plystatsBinvlB$number <- row.names(plystatsBinvlB)
+
+plystatsBinvlB$number <- as.numeric(plystatsBinvlB$number)
+
+plystatsBinvlB  <- plystatsBinvlB %>% arrange(number)
+
+plystatsBinvlB  <- plystatsBinvlB %>% replace(is.na(.), 0)
+
+q <- ggplot(data = plystatsBinvlB, aes(x = Player, y = value, fill = Invol))
+
+q +geom_bar(width=.7, stat = "identity", aes(x = Player, y = value, fill = Invol)) +
+  xlab("Player") + ylab("Possessions") +
+  labs(fill="Possession Involvement") +
+  theme_bw() + theme (panel.grid.major = element_blank(),
+panel.grid.minor = element_blank()) +
+geom_text(aes(label = value, group =Invol), color = "black",position = position_stack(vjust = 0.5))  +
+ theme(legend.position="bottom", axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+
+```
+
+### Player Stats
+
+```{r}
+showstsA <- plystatsB %>%group_by(Player)%>%select(Player,PW,KoRec,Rec,Pass,Pass_Loss,Comp_Pass,OpShot,OpScr,Poss_Lost,
+Fk_Won,Fk_Lost)
+
+datatable(showstsA ,options = list(pageLength = 5,lengthMenu = c(5, 10, 15, 20),columnDefs = 
+                           list(list(className = 'dt-center', 
+                                     targets = "_all"))),class = 'cell-border stripe', rownames = FALSE)
+```
+
+
+
+## Analysis App
+
+<font size="4"> [Match data collected with the Match Tracker Application for Windows](https://witnesstheanalysis.wordpress.com/2020/07/10/a-match-tracker-application-for-windows-version-3/) </font> 

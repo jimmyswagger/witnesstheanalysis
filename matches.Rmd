@@ -92,6 +92,11 @@ output: html_document
 
 <font size="3">[Dublin vs Kerry](https://witnesstheanalysis.com/dubkeraifr19.html)</font> 
 
+### 2020
+
+**2020**
+
+<font size="3">[Dublin vs Mayo](https://witnesstheanalysis.com/dubmayaif20.html)
 
 ## 2020 {.tabset .tabset-fade .tabset-pills}
 

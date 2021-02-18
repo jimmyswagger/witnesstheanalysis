@@ -1,0 +1,6389 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Dublin (1.15) vs Monaghan (1.15)</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Witness the Analysis</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Home
+  </a>
+</li>
+<li>
+  <a href="matches.html">
+    <span class="fa fa-volleyball-ball"></span>
+     
+    Matches
+  </a>
+</li>
+<li>
+  <a href="https://witnesstheanalysis.shinyapps.io/Results/">
+    <span class="fas fa fas fa-book"></span>
+     
+    Results
+  </a>
+</li>
+<li>
+  <a href="https://witnesstheanalysis.wordpress.com/2020/07/10/a-match-tracker-application-for-windows-version-3/">
+    <span class="fas fa fas fa-pen"></span>
+     
+    Analysis App
+  </a>
+</li>
+<li>
+  <a href="Trackers.html">
+    <span class="fas fa fas fa-desktop"></span>
+     
+    Shiny Apps
+  </a>
+</li>
+<li>
+  <a href="https://github.com/witnesstheanalysis/witnesstheanalysis">
+    <span class="fa fa-github fa-lg"></span>
+     
+    Codes
+  </a>
+</li>
+<li>
+  <a href="contact.html">
+    <span class="fa fa-envelope fa-lg"></span>
+     
+    Contact
+  </a>
+</li>
+<li>
+  <a href="https://twitter.com/WtAnalysis">
+    <span class="fa fa-twitter fa-lg"></span>
+     
+    Twitter
+  </a>
+</li>
+<li>
+  <a href="https://witnesstheanalysis.wordpress.com">
+    <span class="fa fa-wordpress fa-lg"></span>
+     
+    Blog
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Dublin (1.15) vs Monaghan (1.15)</h1>
+
+</div>
+
+
+<p>National Football League Division 1</p>
+<p>Round 3</p>
+<p>Croke Park</p>
+<p>08/02/2020</p>
+<p>Total Game Time: 81 mins</p>
+<p>1st Half: 37 mins</p>
+<p>2nd Half: 44 mins</p>
+<div id="overview" class="section level1">
+<h1>Overview</h1>
+</div>
+<div id="summary" class="section level1">
+<h1>Summary</h1>
+<div id="starting-line-up-number-player-playing-time-total-match-time" class="section level2">
+<h2>Starting Line Up (Number, Player, Playing time = Total Match Time)</h2>
+<div id="dublin" class="section level3">
+<h3>Dublin</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-12-1.png" width="1536" /></p>
+</div>
+<div id="monaghan" class="section level3">
+<h3>Monaghan</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-13-1.png" width="1536" /></p>
+</div>
+</div>
+<div id="scorers" class="section level2">
+<h2>Scorers</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Dublin</th>
+<th>Monaghan</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>David Byrne (0-1)</td>
+<td>Conor Boyle (0-1)</td>
+</tr>
+<tr class="even">
+<td>James McCarthy (0-1)</td>
+<td>Michael Bannigan (0-2)</td>
+</tr>
+<tr class="odd">
+<td>Ciarán Kilkenny (0-1)</td>
+<td>Niall Kearns (0-1)</td>
+</tr>
+<tr class="even">
+<td>Niall Scully (0-1)</td>
+<td>Ryan McAnespie (0-2, 0-1 mark)</td>
+</tr>
+<tr class="odd">
+<td>Dan O’Brien (0-1)</td>
+<td>Conor McCarthy (0-1)</td>
+</tr>
+<tr class="even">
+<td>Dean Rock (0-6. 0-4 frees)</td>
+<td>Dessie Ward (0-1)</td>
+</tr>
+<tr class="odd">
+<td>Sean Bugler (0-3)</td>
+<td>Conor McManus (1-4, 0-2 frees, 0-1 mark)</td>
+</tr>
+<tr class="even">
+<td>Colm Basquel (0-1)</td>
+<td>R Beggan (0-2, 1 45 , 1 Free)</td>
+</tr>
+<tr class="odd">
+<td>Kevin McManamon (1-0)</td>
+<td>.</td>
+</tr>
+</tbody>
+</table>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:left;">
+Team
+</th>
+<th style="text-align:center;">
+Possessions
+</th>
+<th style="text-align:center;">
+Possession Time (mins)
+</th>
+<th style="text-align:center;">
+45 Entry
+</th>
+<th style="text-align:center;">
+Shots
+</th>
+<th style="text-align:center;">
+% Shots per Possession
+</th>
+<th style="text-align:center;">
+Shot Rate (secs)
+</th>
+<th style="text-align:center;">
+Scores
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Dublin
+</td>
+<td style="text-align:center;">
+55
+</td>
+<td style="text-align:center;">
+25.00000
+</td>
+<td style="text-align:center;">
+37
+</td>
+<td style="text-align:center;">
+29
+</td>
+<td style="text-align:center;">
+52.72727
+</td>
+<td style="text-align:center;">
+51.72414
+</td>
+<td style="text-align:center;">
+16
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Monaghan
+</td>
+<td style="text-align:center;">
+54
+</td>
+<td style="text-align:center;">
+20.03333
+</td>
+<td style="text-align:center;">
+35
+</td>
+<td style="text-align:center;">
+32
+</td>
+<td style="text-align:center;">
+59.25926
+</td>
+<td style="text-align:center;">
+37.56250
+</td>
+<td style="text-align:center;">
+16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="positioning-possessions" class="section level1">
+<h1>Positioning &amp; Possessions</h1>
+<div id="average-position-by-action" class="section level2">
+<h2>Average Position by Action</h2>
+<div id="dublin-1" class="section level3">
+<h3>Dublin</h3>
+</div>
+</div>
+<div id="game" class="section level2">
+<h2>Game</h2>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-16-1.png" width="1536" /></p>
+</div>
+<div id="period" class="section level2">
+<h2>Period</h2>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-17-1.png" width="50%" /><img src="dubmonanfl20_files/figure-html/unnamed-chunk-17-2.png" width="50%" /><img src="dubmonanfl20_files/figure-html/unnamed-chunk-17-3.png" width="50%" /><img src="dubmonanfl20_files/figure-html/unnamed-chunk-17-4.png" width="50%" /></p>
+<div id="monaghan-1" class="section level3">
+<h3>Monaghan</h3>
+</div>
+</div>
+<div id="game-1" class="section level2">
+<h2>Game</h2>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-18-1.png" width="1536" /></p>
+</div>
+<div id="period-1" class="section level2">
+<h2>Period</h2>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-19-1.png" width="50%" /><img src="dubmonanfl20_files/figure-html/unnamed-chunk-19-2.png" width="50%" /><img src="dubmonanfl20_files/figure-html/unnamed-chunk-19-3.png" width="50%" /><img src="dubmonanfl20_files/figure-html/unnamed-chunk-19-4.png" width="50%" /></p>
+</div>
+<div id="path-of-possession" class="section level2">
+<h2>Path of Possession</h2>
+<p>*Superscript = Possession Number</p>
+<p>*Number inside point = Player</p>
+<p>*Dashed line = Carry</p>
+<div id="dublin---game" class="section level3">
+<h3>Dublin - Game</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-20-1.png" width="1536" /></p>
+</div>
+<div id="dublin---period-1" class="section level3">
+<h3>Dublin - Period 1</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-21-1.png" width="1536" /></p>
+</div>
+<div id="dublin---period-2" class="section level3">
+<h3>Dublin - Period 2</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-22-1.png" width="1536" /></p>
+</div>
+<div id="dublin---period-3" class="section level3">
+<h3>Dublin - Period 3</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-23-1.png" width="1536" /></p>
+</div>
+<div id="dublin---period-4" class="section level3">
+<h3>Dublin - Period 4</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-24-1.png" width="1536" /></p>
+</div>
+<div id="monaghan---game" class="section level3">
+<h3>Monaghan - Game</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-25-1.png" width="1536" /></p>
+</div>
+<div id="monaghan-period---1" class="section level3">
+<h3>Monaghan Period - 1</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-26-1.png" width="1536" /></p>
+</div>
+<div id="monaghan-period---2" class="section level3">
+<h3>Monaghan Period - 2</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-27-1.png" width="1536" /></p>
+</div>
+<div id="monaghan-period---3" class="section level3">
+<h3>Monaghan Period - 3</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-28-1.png" width="1536" /></p>
+</div>
+<div id="monaghan-period---4" class="section level3">
+<h3>Monaghan Period - 4</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-29-1.png" width="1536" /></p>
+</div>
+</div>
+<div id="forward-ball-movement-between-zones" class="section level2">
+<h2>Forward Ball Movement Between Zones</h2>
+<div id="dublin-2" class="section level3">
+<h3>Dublin</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-30-1.png" width="1536" /></p>
+</div>
+<div id="monaghan-2" class="section level3">
+<h3>Monaghan</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-31-1.png" width="1536" /></p>
+</div>
+</div>
+<div id="ball-movement-between-zones-inside-45" class="section level2">
+<h2>Ball Movement Between Zones Inside 45</h2>
+<div id="dublin-3" class="section level3">
+<h3>Dublin</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-32-1.png" width="1536" /></p>
+</div>
+<div id="monaghan-3" class="section level3">
+<h3>Monaghan</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-33-1.png" width="1536" /></p>
+</div>
+</div>
+<div id="entries" class="section level2">
+<h2>45 Entries</h2>
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:left;">
+Team
+</th>
+<th style="text-align:center;">
+Entry_45
+</th>
+<th style="text-align:center;">
+Shots
+</th>
+<th style="text-align:center;">
+Shot_Perc
+</th>
+<th style="text-align:center;">
+Scores
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Dublin
+</td>
+<td style="text-align:center;">
+37
+</td>
+<td style="text-align:center;">
+29
+</td>
+<td style="text-align:center;">
+78.37838
+</td>
+<td style="text-align:center;">
+16
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Monaghan
+</td>
+<td style="text-align:center;">
+35
+</td>
+<td style="text-align:center;">
+32
+</td>
+<td style="text-align:center;">
+91.42857
+</td>
+<td style="text-align:center;">
+16
+</td>
+</tr>
+</tbody>
+</table>
+<div id="dublin-4" class="section level3">
+<h3>Dublin</h3>
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:left;">
+Team
+</th>
+<th style="text-align:center;">
+count…2
+</th>
+<th style="text-align:center;">
+count…3
+</th>
+<th style="text-align:center;">
+count…4
+</th>
+<th style="text-align:center;">
+count…5
+</th>
+<th style="text-align:center;">
+count…6
+</th>
+<th style="text-align:center;">
+count…7
+</th>
+<th style="text-align:center;">
+count…8
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Dublin</span>
+</td>
+<td style="text-align:center;">
+41
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #c7edd8">6</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d6f3e3">2</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b0e4c7">12</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #71ca97">29</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d2f2e0">3</span>
+</td>
+</tr>
+</tbody>
+</table>
+<p>34 + 1 entry resulted from an attacking free being awarded inside 45 before ball entered</p>
+</div>
+<div id="dublin---game-1" class="section level3">
+<h3>Dublin - Game</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-36-1.png" width="1536" /></p>
+</div>
+<div id="monaghan-4" class="section level3">
+<h3>Monaghan</h3>
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:left;">
+Team
+</th>
+<th style="text-align:center;">
+count…2
+</th>
+<th style="text-align:center;">
+count…3
+</th>
+<th style="text-align:center;">
+count…4
+</th>
+<th style="text-align:center;">
+count…5
+</th>
+<th style="text-align:center;">
+count…6
+</th>
+<th style="text-align:center;">
+count…7
+</th>
+<th style="text-align:center;">
+count…8
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+37
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #cdf0dc">3</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d3f2e0">2</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b7e7cc">7</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #71ca97">20</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #c2ebd4">5</span>
+</td>
+</tr>
+</tbody>
+</table>
+<p>33 + 1 moved into 45 by referee</p>
+</div>
+<div id="monaghan---game-1" class="section level3">
+<h3>Monaghan - Game</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-38-1.png" width="1536" /></p>
+</div>
+</div>
+<div id="zones-frequency-total-actions-within-a-zone" class="section level2">
+<h2>Zones Frequency (Total Actions within a Zone)</h2>
+<div id="dublin-5" class="section level3">
+<h3>Dublin</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
+</div>
+<div id="monaghan-5" class="section level3">
+<h3>Monaghan</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
+</div>
+</div>
+</div>
+<div id="time" class="section level1">
+<h1>Time</h1>
+<div id="pitch-area-origin-type-ko---start-area-where-received" class="section level2">
+<h2>Pitch Area Origin &amp; Type (Ko - Start Area = where received)</h2>
+<div id="dublin-6" class="section level3">
+<h3>Dublin</h3>
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:left;">
+Team
+</th>
+<th style="text-align:center;">
+Start Area
+</th>
+<th style="text-align:center;">
+PW
+</th>
+<th style="text-align:center;">
+Ko
+</th>
+<th style="text-align:center;">
+Average Time (secs)
+</th>
+<th style="text-align:center;">
+Total Time (secs)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Dublin</span>
+</td>
+<td style="text-align:center;">
+In_Att
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #cef0dd">2</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+1.50000
+</td>
+<td style="text-align:center;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Dublin</span>
+</td>
+<td style="text-align:center;">
+In_Def
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #afe3c5">6</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+41.00000
+</td>
+<td style="text-align:center;">
+246
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Dublin</span>
+</td>
+<td style="text-align:center;">
+Mid_Att
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b7e6cb">5</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+14.80000
+</td>
+<td style="text-align:center;">
+74
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Dublin</span>
+</td>
+<td style="text-align:center;">
+Mid_Def
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b7e6cb">5</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #71ca97">14</span>
+</td>
+<td style="text-align:center;">
+28.75000
+</td>
+<td style="text-align:center;">
+575
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Dublin</span>
+</td>
+<td style="text-align:center;">
+Out_Att
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #beead1">4</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #cef0dd">2</span>
+</td>
+<td style="text-align:center;">
+19.44444
+</td>
+<td style="text-align:center;">
+175
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Dublin</span>
+</td>
+<td style="text-align:center;">
+Out_Def
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #a7e0c0">7</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #beead1">4</span>
+</td>
+<td style="text-align:center;">
+32.84615
+</td>
+<td style="text-align:center;">
+427
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="monaghan-6" class="section level3">
+<h3>Monaghan</h3>
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:left;">
+Team
+</th>
+<th style="text-align:center;">
+Start Area
+</th>
+<th style="text-align:center;">
+PW
+</th>
+<th style="text-align:center;">
+Ko
+</th>
+<th style="text-align:center;">
+Average Time (secs)
+</th>
+<th style="text-align:center;">
+Total Time (secs)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+100
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+3.000000
+</td>
+<td style="text-align:center;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+In_Att
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #c0ead2">3</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+10.000000
+</td>
+<td style="text-align:center;">
+30
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+In_Def
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #71ca97">11</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+34.818182
+</td>
+<td style="text-align:center;">
+383
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+Mid_Att
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #caeeda">2</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+4.500000
+</td>
+<td style="text-align:center;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+Mid_Def
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #71ca97">11</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d4f2e1">1</span>
+</td>
+<td style="text-align:center;">
+31.538462
+</td>
+<td style="text-align:center;">
+410
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+Out_Att
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #c0ead2">3</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #caeeda">2</span>
+</td>
+<td style="text-align:center;">
+9.266667
+</td>
+<td style="text-align:center;">
+139
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+Out_Def
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ace2c3">5</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d4f2e1">1</span>
+</td>
+<td style="text-align:center;">
+22.500000
+</td>
+<td style="text-align:center;">
+225
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="possession-duration" class="section level2">
+<h2>Possession Duration</h2>
+<div id="dublin-7" class="section level3">
+<h3>Dublin</h3>
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:left;">
+Team
+</th>
+<th style="text-align:center;">
+Start Area
+</th>
+<th style="text-align:center;">
+0-9
+</th>
+<th style="text-align:center;">
+10-19
+</th>
+<th style="text-align:center;">
+20-29
+</th>
+<th style="text-align:center;">
+30-39
+</th>
+<th style="text-align:center;">
+40-49
+</th>
+<th style="text-align:center;">
+50-59
+</th>
+<th style="text-align:center;">
+60-69
+</th>
+<th style="text-align:center;">
+70+
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Dublin</span>
+</td>
+<td style="text-align:center;">
+In_Att
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b2e5c8">2</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Dublin</span>
+</td>
+<td style="text-align:center;">
+In_Def
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b2e5c8">2</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b2e5c8">2</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b2e5c8">2</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Dublin</span>
+</td>
+<td style="text-align:center;">
+Mid_Att
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b2e5c8">2</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b2e5c8">2</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #c8eed8">1</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Dublin</span>
+</td>
+<td style="text-align:center;">
+Mid_Def
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b2e5c8">2</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #9cdcb7">3</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #86d3a7">4</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #71ca97">5</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #c8eed8">1</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b2e5c8">2</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b2e5c8">2</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Dublin</span>
+</td>
+<td style="text-align:center;">
+Out_Att
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b2e5c8">2</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #9cdcb7">3</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #9cdcb7">3</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #c8eed8">1</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Dublin</span>
+</td>
+<td style="text-align:center;">
+Out_Def
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #9cdcb7">3</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b2e5c8">2</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b2e5c8">2</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #c8eed8">1</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #c8eed8">1</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b2e5c8">2</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b2e5c8">2</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="monaghan-7" class="section level3">
+<h3>Monaghan</h3>
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:left;">
+Team
+</th>
+<th style="text-align:center;">
+Start Area
+</th>
+<th style="text-align:center;">
+0-9
+</th>
+<th style="text-align:center;">
+10-19
+</th>
+<th style="text-align:center;">
+20-29
+</th>
+<th style="text-align:center;">
+30-39
+</th>
+<th style="text-align:center;">
+40-49
+</th>
+<th style="text-align:center;">
+50-59
+</th>
+<th style="text-align:center;">
+60-69
+</th>
+<th style="text-align:center;">
+70+
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+100
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #c5edd6">2</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+In_Att
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d1f2df">1</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #c5edd6">2</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+In_Def
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d1f2df">1</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d1f2df">1</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #a1debb">5</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #c5edd6">2</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #c5edd6">2</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+Mid_Att
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #c5edd6">2</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+Mid_Def
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #c5edd6">2</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #c5edd6">2</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9e8cd">3</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #c5edd6">2</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d1f2df">1</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d1f2df">1</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #c5edd6">2</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+Out_Att
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #71ca97">9</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #a1debb">5</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d1f2df">1</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+Out_Def
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9e8cd">3</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d1f2df">1</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d1f2df">1</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d1f2df">1</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9e8cd">3</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="shot-originoutcome-time" class="section level2">
+<h2>Shot Origin,Outcome &amp; Time</h2>
+<div id="dublin-8" class="section level3">
+<h3>Dublin</h3>
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:left;">
+Team
+</th>
+<th style="text-align:center;">
+Start Area
+</th>
+<th style="text-align:center;">
+Shot Outcome
+</th>
+<th style="text-align:center;">
+0-9
+</th>
+<th style="text-align:center;">
+10-19
+</th>
+<th style="text-align:center;">
+20-29
+</th>
+<th style="text-align:center;">
+30-39
+</th>
+<th style="text-align:center;">
+40-49
+</th>
+<th style="text-align:center;">
+50-59
+</th>
+<th style="text-align:center;">
+60-69
+</th>
+<th style="text-align:center;">
+70+
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Dublin</span>
+</td>
+<td style="text-align:center;">
+In_Att
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px">Scr Op</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #95d9b2">2 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Dublin</span>
+</td>
+<td style="text-align:center;">
+In_Def
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px">Scr Op</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9e8cd">1 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9e8cd">1 </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Dublin</span>
+</td>
+<td style="text-align:center;">
+In_Def
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px">Scr Rs</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9e8cd">1 </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Dublin</span>
+</td>
+<td style="text-align:center;">
+Mid_Att
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px">Ms Op </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #95d9b2">2 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Dublin</span>
+</td>
+<td style="text-align:center;">
+Mid_Att
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px">Scr Rs</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9e8cd">1 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9e8cd">1 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Dublin</span>
+</td>
+<td style="text-align:center;">
+Mid_Def
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px">Ms Op </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9e8cd">1 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #71ca97">3 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9e8cd">1 </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Dublin</span>
+</td>
+<td style="text-align:center;">
+Mid_Def
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px">Ms Rs </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9e8cd">1 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Dublin</span>
+</td>
+<td style="text-align:center;">
+Mid_Def
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px">Scr Op</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #71ca97">3 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9e8cd">1 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Dublin</span>
+</td>
+<td style="text-align:center;">
+Out_Att
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px">Scr Op</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9e8cd">1 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #95d9b2">2 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Dublin</span>
+</td>
+<td style="text-align:center;">
+Out_Att
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px">Scr Rs</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9e8cd">1 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Dublin</span>
+</td>
+<td style="text-align:center;">
+Out_Def
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px">Ms Op </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9e8cd">1 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9e8cd">1 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9e8cd">1 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9e8cd">1 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9e8cd">1 </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Dublin</span>
+</td>
+<td style="text-align:center;">
+Out_Def
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px">Scr Op</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9e8cd">1 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="monaghan-8" class="section level3">
+<h3>Monaghan</h3>
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:left;">
+Team
+</th>
+<th style="text-align:center;">
+Start Area
+</th>
+<th style="text-align:center;">
+Shot Outcome
+</th>
+<th style="text-align:center;">
+0-9
+</th>
+<th style="text-align:center;">
+10-19
+</th>
+<th style="text-align:center;">
+20-29
+</th>
+<th style="text-align:center;">
+30-39
+</th>
+<th style="text-align:center;">
+40-49
+</th>
+<th style="text-align:center;">
+50-59
+</th>
+<th style="text-align:center;">
+60-69
+</th>
+<th style="text-align:center;">
+70+
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+100
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px">Ms Rs </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9e8cd">1 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+100
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px">Scr Rs</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9e8cd">1 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+In_Att
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px">Ms Op </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9e8cd">1 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+In_Att
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px">Scr Op</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9e8cd">1 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9e8cd">1 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+In_Def
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px">Ms Op </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9e8cd">1 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #71ca97">3 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9e8cd">1 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+In_Def
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px">Scr Op</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9e8cd">1 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9e8cd">1 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9e8cd">1 </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+In_Def
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px">Scr Rs</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9e8cd">1 </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+Mid_Att
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px">Scr Op</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9e8cd">1 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+Mid_Att
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px">Scr Rs</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9e8cd">1 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+Mid_Def
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px">Ms Op </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9e8cd">1 </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+Mid_Def
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px">Ms Rs </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9e8cd">1 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+Mid_Def
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px">Scr Op</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9e8cd">1 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+Mid_Def
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px">Scr Rs</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9e8cd">1 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+Out_Att
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px">Ms Op </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9e8cd">1 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #71ca97">3 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+Out_Att
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px">Scr Op</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #95d9b2">2 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+Out_Att
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px">Scr Rs</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9e8cd">1 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+Out_Def
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px">Ms Op </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9e8cd">1 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+Out_Def
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px">Ms Rs </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #95d9b2">2 </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+Out_Def
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px">Scr Rs</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9e8cd">1 </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9e8cd">1 </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="duration-of-shot-possessions" class="section level2">
+<h2>Duration of Shot Possessions</h2>
+<div id="dublin-9" class="section level3">
+<h3>Dublin</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-47-1.png" width="1536" /></p>
+</div>
+<div id="monaghan-9" class="section level3">
+<h3>Monaghan</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-48-1.png" width="1536" /></p>
+</div>
+</div>
+<div id="duration-of-score-possessions" class="section level2">
+<h2>Duration of Score Possessions</h2>
+<div id="dublin-10" class="section level3">
+<h3>Dublin</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-49-1.png" width="1536" /></p>
+</div>
+<div id="monaghan-10" class="section level3">
+<h3>Monaghan</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-50-1.png" width="1536" /></p>
+</div>
+</div>
+</div>
+<div id="kick-outs" class="section level1">
+<h1>Kick Outs</h1>
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:left;">
+Team
+</th>
+<th style="text-align:center;">
+Kickouts
+</th>
+<th style="text-align:center;">
+Total Time (min)
+</th>
+<th style="text-align:center;">
+Shots
+</th>
+<th style="text-align:center;">
+% Shots per Ko
+</th>
+<th style="text-align:center;">
+Shot Rate (secs)
+</th>
+<th style="text-align:center;">
+Scores
+</th>
+<th style="text-align:center;">
+Time to Ko
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Dublin
+</td>
+<td style="text-align:center;">
+26
+</td>
+<td style="text-align:center;">
+13.433333
+</td>
+<td style="text-align:center;">
+12
+</td>
+<td style="text-align:center;">
+46.15385
+</td>
+<td style="text-align:center;">
+67.16667
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+17.61538
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Monaghan
+</td>
+<td style="text-align:center;">
+19
+</td>
+<td style="text-align:center;">
+4.833333
+</td>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+42.10526
+</td>
+<td style="text-align:center;">
+36.25000
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+31.10526
+</td>
+</tr>
+</tbody>
+</table>
+<div id="kick-outs---dublin" class="section level2">
+<h2>Kick Outs - Dublin</h2>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-52-1.png" width="1536" /></p>
+<div id="pop-starting-from-kick-out---shots" class="section level3">
+<h3>Pop Starting from Kick Out - Shots</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-53-1.png" width="1536" /></p>
+</div>
+<div id="pop-starting-from-kick-out---turn-over-lost" class="section level3">
+<h3>Pop Starting from Kick Out - Turn Over lost</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-54-1.png" width="1536" /></p>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
+</div>
+</div>
+<div id="kick-outs---monaghan" class="section level2">
+<h2>Kick Outs - Monaghan</h2>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-56-1.png" width="1536" /></p>
+<div id="pop-starting-from-kick-out---shots-1" class="section level3">
+<h3>Pop Starting from Kick Out - Shots</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-57-1.png" width="1536" /></p>
+</div>
+<div id="pop-starting-from-kick-out---turn-over-lost-1" class="section level3">
+<h3>Pop Starting from Kick Out - Turn Over Lost</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-58-1.png" width="1536" /></p>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-59-1.png" width="672" /></p>
+</div>
+</div>
+</div>
+<div id="possession-won" class="section level1">
+<h1>Possession Won</h1>
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:left;">
+Team
+</th>
+<th style="text-align:center;">
+Possession Won
+</th>
+<th style="text-align:center;">
+Possession Time (mins)
+</th>
+<th style="text-align:center;">
+Shots
+</th>
+<th style="text-align:center;">
+% Shots per Possession
+</th>
+<th style="text-align:center;">
+Shot Rate (secs)
+</th>
+<th style="text-align:center;">
+Scores
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Dublin
+</td>
+<td style="text-align:center;">
+29
+</td>
+<td style="text-align:center;">
+11.56667
+</td>
+<td style="text-align:center;">
+17
+</td>
+<td style="text-align:center;">
+58.62069
+</td>
+<td style="text-align:center;">
+40.82353
+</td>
+<td style="text-align:center;">
+11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Monaghan
+</td>
+<td style="text-align:center;">
+35
+</td>
+<td style="text-align:center;">
+15.10000
+</td>
+<td style="text-align:center;">
+22
+</td>
+<td style="text-align:center;">
+62.85714
+</td>
+<td style="text-align:center;">
+41.18182
+</td>
+<td style="text-align:center;">
+11
+</td>
+</tr>
+</tbody>
+</table>
+<div id="possession-won---dublin" class="section level2">
+<h2>Possession Won - Dublin</h2>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-61-1.png" width="672" /></p>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-62-1.png" width="1536" /></p>
+<div id="pop-starting-from-possession-won---shots" class="section level3">
+<h3>Pop Starting from Possession Won - Shots</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-63-1.png" width="1536" /></p>
+</div>
+<div id="pop-starting-from-possession-won---turn-over-lost" class="section level3">
+<h3>Pop Starting from Possession Won - Turn Over Lost</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-64-1.png" width="1536" /></p>
+</div>
+</div>
+<div id="possession-won---monaghan" class="section level2">
+<h2>Possession Won - Monaghan</h2>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-65-1.png" width="672" /></p>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-66-1.png" width="1536" /></p>
+<div id="pop-starting-from-possession-won---shots-1" class="section level3">
+<h3>Pop Starting from Possession Won - Shots</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-67-1.png" width="1536" /></p>
+</div>
+<div id="pop-starting-from-possession-won---turn-over-lost-1" class="section level3">
+<h3>Pop Starting from Possession Won - Turn Over Lost</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-68-1.png" width="1536" /></p>
+</div>
+</div>
+<div id="passes-per-defensive-action" class="section level2">
+<h2>Passes per Defensive Action</h2>
+<div id="dublin-11" class="section level3">
+<h3>Dublin</h3>
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:left;">
+# Opposition Passes
+</th>
+<th style="text-align:center;">
+Tackle Attempt (Def Act)
+</th>
+<th style="text-align:center;">
+Passes per Defensive Action
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+231
+</td>
+<td style="text-align:center;">
+75
+</td>
+<td style="text-align:center;">
+3.08
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="monaghan-11" class="section level3">
+<h3>Monaghan</h3>
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:left;">
+# Opposition Passes
+</th>
+<th style="text-align:center;">
+Tackle Attempt (Def Act)
+</th>
+<th style="text-align:center;">
+Passes per Defensive Action
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+316
+</td>
+<td style="text-align:center;">
+75
+</td>
+<td style="text-align:center;">
+4.213333
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="tackle-attempts-and-defensive-spoils" class="section level2">
+<h2>Tackle Attempts and Defensive Spoils</h2>
+<p>*Tackle Attempt (Tck Def) = Any contact made by defender on player in possession</p>
+<p>*Spoil Def = Defending player creates a break from opposition pass</p>
+<div id="dublin-12" class="section level3">
+<h3>Dublin</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-71-1.png" width="1536" /></p>
+</div>
+</div>
+<div id="tackle-attempts-tck-def-and-defensive-spoils" class="section level2">
+<h2>Tackle Attempts (Tck Def) and Defensive Spoils</h2>
+<div id="monaghan-12" class="section level3">
+<h3>Monaghan</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-72-1.png" width="1536" /></p>
+</div>
+</div>
+<div id="frees-loss" class="section level2">
+<h2>Frees Loss</h2>
+<div id="dublin-13" class="section level3">
+<h3>Dublin</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-73-1.png" width="672" /></p>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-74-1.png" width="1536" /></p>
+</div>
+<div id="monaghan-13" class="section level3">
+<h3>Monaghan</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-75-1.png" width="672" /></p>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-76-1.png" width="1536" /></p>
+</div>
+</div>
+<div id="possession-lost" class="section level2">
+<h2>Possession Lost</h2>
+<div id="dublin-14" class="section level3">
+<h3>Dublin</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-77-1.png" width="1536" /></p>
+</div>
+<div id="monaghan-14" class="section level3">
+<h3>Monaghan</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-78-1.png" width="1536" /></p>
+</div>
+</div>
+</div>
+<div id="shooting" class="section level1">
+<h1>Shooting</h1>
+<div id="all-shots---location-outcome" class="section level2">
+<h2>All Shots - Location &amp; Outcome</h2>
+<div id="dublin-15" class="section level3">
+<h3>Dublin</h3>
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:left;">
+Team
+</th>
+<th style="text-align:center;">
+Shots
+</th>
+<th style="text-align:center;">
+Scores
+</th>
+<th style="text-align:center;">
+% Scoring Efficiency
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Dublin
+</td>
+<td style="text-align:center;">
+29
+</td>
+<td style="text-align:center;">
+16
+</td>
+<td style="text-align:center;">
+55.17241
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-80-1.png" width="672" /></p>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-81-1.png" width="1536" /></p>
+</div>
+</div>
+<div id="open-play-shots---location-outcome" class="section level2">
+<h2>Open Play Shots - Location &amp; Outcome</h2>
+<div id="dublin-16" class="section level3">
+<h3>Dublin</h3>
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:left;">
+Team
+</th>
+<th style="text-align:center;">
+Shots
+</th>
+<th style="text-align:center;">
+Scores
+</th>
+<th style="text-align:center;">
+% Scoring Efficiency
+</th>
+<th style="text-align:center;">
+Average Shot Distance
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Dublin
+</td>
+<td style="text-align:center;">
+24
+</td>
+<td style="text-align:center;">
+12
+</td>
+<td style="text-align:center;">
+50
+</td>
+<td style="text-align:center;">
+45.57879
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-83-1.png" width="672" /></p>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-84-1.png" width="1536" /></p>
+</div>
+<div id="shot-pressure---dublin" class="section level3">
+<h3>Shot Pressure - Dublin</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-85-1.png" width="1536" /></p>
+</div>
+</div>
+<div id="frees-won" class="section level2">
+<h2>Frees Won</h2>
+<div id="dublin-17" class="section level3">
+<h3>Dublin</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-86-1.png" width="672" /></p>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-87-1.png" width="1536" /></p>
+</div>
+</div>
+<div id="free-kick-shots---location-outcome" class="section level2">
+<h2>Free Kick Shots - Location &amp; Outcome</h2>
+<div id="dublin-18" class="section level3">
+<h3>Dublin</h3>
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:left;">
+Team
+</th>
+<th style="text-align:center;">
+Shots
+</th>
+<th style="text-align:center;">
+Scores
+</th>
+<th style="text-align:center;">
+% Scoring Efficiency
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Dublin
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+80
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-89-1.png" width="672" /></p>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-90-1.png" width="1536" /></p>
+</div>
+</div>
+<div id="all-shots---location-outcome-1" class="section level2">
+<h2>All Shots - Location &amp; Outcome</h2>
+<div id="monaghan-15" class="section level3">
+<h3>Monaghan</h3>
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:left;">
+Team
+</th>
+<th style="text-align:center;">
+Shots
+</th>
+<th style="text-align:center;">
+Scores
+</th>
+<th style="text-align:center;">
+% Scoring Efficiency
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Monaghan
+</td>
+<td style="text-align:center;">
+32
+</td>
+<td style="text-align:center;">
+16
+</td>
+<td style="text-align:center;">
+50
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-92-1.png" width="672" /></p>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-93-1.png" width="1536" /></p>
+</div>
+</div>
+<div id="open-play-shots---location-outcome-1" class="section level2">
+<h2>Open Play Shots - Location &amp; Outcome</h2>
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:left;">
+Team
+</th>
+<th style="text-align:center;">
+Shots
+</th>
+<th style="text-align:center;">
+Scores
+</th>
+<th style="text-align:center;">
+% Scoring Efficiency
+</th>
+<th style="text-align:center;">
+Average Shot Distance
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Monaghan
+</td>
+<td style="text-align:center;">
+21
+</td>
+<td style="text-align:center;">
+9
+</td>
+<td style="text-align:center;">
+42.85714
+</td>
+<td style="text-align:center;">
+27.40373
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-95-1.png" width="672" /></p>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-96-1.png" width="1536" /></p>
+<div id="shot-pressure---monaghan" class="section level3">
+<h3>Shot Pressure - Monaghan</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-97-1.png" width="1536" /></p>
+</div>
+</div>
+<div id="frees-won-1" class="section level2">
+<h2>Frees Won</h2>
+<div id="monaghan-16" class="section level3">
+<h3>Monaghan</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-98-1.png" width="672" /></p>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-99-1.png" width="1536" /></p>
+</div>
+</div>
+<div id="free-kick-shots---location-outcome-1" class="section level2">
+<h2>Free Kick Shots - Location &amp; Outcome</h2>
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:left;">
+Team
+</th>
+<th style="text-align:center;">
+Shots
+</th>
+<th style="text-align:center;">
+Scores
+</th>
+<th style="text-align:center;">
+% Scoring Efficiency
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Monaghan
+</td>
+<td style="text-align:center;">
+11
+</td>
+<td style="text-align:center;">
+7
+</td>
+<td style="text-align:center;">
+63.63636
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-101-1.png" width="672" /></p>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-102-1.png" width="1536" /></p>
+</div>
+</div>
+<div id="passing" class="section level1">
+<h1>Passing</h1>
+<div id="pass-breakdown" class="section level2">
+<h2>Pass Breakdown</h2>
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:left;">
+Team
+</th>
+<th style="text-align:center;">
+Action
+</th>
+<th style="text-align:center;">
+count
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Dublin
+</td>
+<td style="text-align:center;">
+Fk Pass
+</td>
+<td style="text-align:center;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Dublin
+</td>
+<td style="text-align:center;">
+Hp
+</td>
+<td style="text-align:center;">
+248
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Dublin
+</td>
+<td style="text-align:center;">
+Kp Left
+</td>
+<td style="text-align:center;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Dublin
+</td>
+<td style="text-align:center;">
+Kp Right
+</td>
+<td style="text-align:center;">
+50
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Monaghan
+</td>
+<td style="text-align:center;">
+Fk Pass
+</td>
+<td style="text-align:center;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Monaghan
+</td>
+<td style="text-align:center;">
+Hp
+</td>
+<td style="text-align:center;">
+180
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Monaghan
+</td>
+<td style="text-align:center;">
+Kp Left
+</td>
+<td style="text-align:center;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Monaghan
+</td>
+<td style="text-align:center;">
+Kp Right
+</td>
+<td style="text-align:center;">
+31
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-103-1.png" width="1536" /></p>
+<div id="dublin-19" class="section level3">
+<h3>Dublin</h3>
+<p>*Carries over 10mts</p>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-104-1.png" width="1536" /></p>
+</div>
+</div>
+<div id="passes-only" class="section level2">
+<h2>Passes Only</h2>
+<div id="dublin-20" class="section level3">
+<h3>Dublin</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-105-1.png" width="1536" /></p>
+</div>
+</div>
+<div id="carries-only" class="section level2">
+<h2>Carries Only</h2>
+<p>*Carries over 10mts</p>
+<div id="dublin-21" class="section level3">
+<h3>Dublin</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-106-1.png" width="1536" /></p>
+</div>
+<div id="monaghan-17" class="section level3">
+<h3>Monaghan</h3>
+<p>*Carries over 10mts <img src="dubmonanfl20_files/figure-html/unnamed-chunk-107-1.png" width="1536" /></p>
+</div>
+</div>
+<div id="passes-only-1" class="section level2">
+<h2>Passes Only</h2>
+<div id="monaghan-18" class="section level3">
+<h3>Monaghan</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-108-1.png" width="1536" /></p>
+</div>
+</div>
+<div id="carries-only-1" class="section level2">
+<h2>Carries Only</h2>
+<p>*Carries over 10mts</p>
+<div id="monaghan-19" class="section level3">
+<h3>Monaghan</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-109-1.png" width="1536" /></p>
+</div>
+</div>
+</div>
+<div id="player-stats" class="section level1">
+<h1>Player Stats</h1>
+<div id="player-on-ball-possession-number-player-total" class="section level2">
+<h2>Player On Ball Possession (Number, Player, Total)</h2>
+<div id="dublin-22" class="section level3">
+<h3>Dublin</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-110-1.png" width="1536" /></p>
+</div>
+<div id="monaghan-20" class="section level3">
+<h3>Monaghan</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-111-1.png" width="1536" /></p>
+</div>
+</div>
+<div id="player-possession-involvement" class="section level2">
+<h2>Player Possession Involvement</h2>
+<div id="dublin-23" class="section level3">
+<h3>Dublin</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-112-1.png" width="672" /></p>
+</div>
+<div id="monaghan-21" class="section level3">
+<h3>Monaghan</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-113-1.png" width="672" /></p>
+</div>
+</div>
+<div id="player-shot-involvement" class="section level2">
+<h2>Player Shot Involvement</h2>
+<div id="dublin-24" class="section level3">
+<h3>Dublin</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-114-1.png" width="672" /></p>
+</div>
+<div id="monaghan-22" class="section level3">
+<h3>Monaghan</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-115-1.png" width="672" /></p>
+</div>
+</div>
+<div id="player-score-involvement" class="section level2">
+<h2>Player Score Involvement</h2>
+<div id="dublin-25" class="section level3">
+<h3>Dublin</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-116-1.png" width="672" /></p>
+</div>
+<div id="monaghan-23" class="section level3">
+<h3>Monaghan</h3>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-117-1.png" width="672" /></p>
+</div>
+</div>
+<div id="of-player-involvement-in-team-actions" class="section level2">
+<h2>% of Player Involvement in Team Actions</h2>
+<div id="dublin-26" class="section level3">
+<h3>Dublin</h3>
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:left;">
+Player
+</th>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+name
+</th>
+<th style="text-align:center;">
+On Ball%
+</th>
+<th style="text-align:center;">
+Possession Won%
+</th>
+<th style="text-align:center;">
+Passes Received%
+</th>
+<th style="text-align:center;">
+Ko Received%
+</th>
+<th style="text-align:center;">
+Comp. Pass%
+</th>
+<th style="text-align:center;">
+Total Shot%
+</th>
+<th style="text-align:center;">
+Total Scr%
+</th>
+<th style="text-align:center;">
+Turnover Lost%
+</th>
+<th style="text-align:center;">
+Fk Won%
+</th>
+<th style="text-align:center;">
+Fk Loss%
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:center;">
+<span style="color: grey; font-weight: bold">Dublin</span>
+</td>
+<td style="text-align:center;">
+E Comerford
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">1% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">17%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">1% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:center;">
+<span style="color: grey; font-weight: bold">Dublin</span>
+</td>
+<td style="text-align:center;">
+M Fitzsimons
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">4% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">9% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">4% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">10%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">5% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">17%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">10%</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:center;">
+<span style="color: grey; font-weight: bold">Dublin</span>
+</td>
+<td style="text-align:center;">
+D Byrne
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">6% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">4% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">6% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">5% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">7% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">4% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">14%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">17%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:center;">
+<span style="color: grey; font-weight: bold">Dublin</span>
+</td>
+<td style="text-align:center;">
+E Murchan
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">6% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">9% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">6% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">15%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">7% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">10%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:center;">
+<span style="color: grey; font-weight: bold">Dublin</span>
+</td>
+<td style="text-align:center;">
+J McCarthy
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">6% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">4% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">6% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">25%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">6% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">4% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">14%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">20%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">10%</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:center;">
+<span style="color: grey; font-weight: bold">Dublin</span>
+</td>
+<td style="text-align:center;">
+B Howard
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">11%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">9% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">11%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">12%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">4% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">10%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:center;">
+<span style="color: grey; font-weight: bold">Dublin</span>
+</td>
+<td style="text-align:center;">
+J Small
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">8% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">4% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">9% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">15%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">9% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">4% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:center;">
+<span style="color: grey; font-weight: bold">Dublin</span>
+</td>
+<td style="text-align:center;">
+B Fenton
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">7% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">9% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">7% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">7% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">4% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">10%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">20%</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+9
+</td>
+<td style="text-align:center;">
+<span style="color: grey; font-weight: bold">Dublin</span>
+</td>
+<td style="text-align:center;">
+C Kilkenny
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">7% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">7% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">6% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">17%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">14%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">17%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:center;">
+<span style="color: grey; font-weight: bold">Dublin</span>
+</td>
+<td style="text-align:center;">
+N Scully
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">12%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">4% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">12%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">10%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">12%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">8% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">14%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">17%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">20%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">20%</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+20
+</td>
+<td style="text-align:center;">
+<span style="color: grey; font-weight: bold">Dublin</span>
+</td>
+<td style="text-align:center;">
+L Flatman
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">3% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">9% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">3% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">5% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">4% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">10%</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+23
+</td>
+<td style="text-align:center;">
+<span style="color: grey; font-weight: bold">Dublin</span>
+</td>
+<td style="text-align:center;">
+D Mullin
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">1% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">1% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">2% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">10%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:center;">
+<span style="color: grey; font-weight: bold">Dublin</span>
+</td>
+<td style="text-align:center;">
+D O’Brien
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">9% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">4% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">9% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">5% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">8% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">13%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">14%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">17%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">10%</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+14
+</td>
+<td style="text-align:center;">
+<span style="color: grey; font-weight: bold">Dublin</span>
+</td>
+<td style="text-align:center;">
+P Andrews
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">1% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">1% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">1% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">4% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+15
+</td>
+<td style="text-align:center;">
+<span style="color: grey; font-weight: bold">Dublin</span>
+</td>
+<td style="text-align:center;">
+D Rock
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">3% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">4% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">3% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">3% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">8% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">29%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">10%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">10%</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+19
+</td>
+<td style="text-align:center;">
+<span style="color: grey; font-weight: bold">Dublin</span>
+</td>
+<td style="text-align:center;">
+A Byrne
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">4% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">4% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">4% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">4% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">10%</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+11
+</td>
+<td style="text-align:center;">
+<span style="color: grey; font-weight: bold">Dublin</span>
+</td>
+<td style="text-align:center;">
+P Mannion
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">2% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">2% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">2% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">17%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+18
+</td>
+<td style="text-align:center;">
+<span style="color: grey; font-weight: bold">Dublin</span>
+</td>
+<td style="text-align:center;">
+S Bugler
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">3% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">9% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">3% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">5% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">3% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">13%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">43%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+17
+</td>
+<td style="text-align:center;">
+<span style="color: grey; font-weight: bold">Dublin</span>
+</td>
+<td style="text-align:center;">
+C Basquel
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">2% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">2% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">2% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">4% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">14%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">10%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+12
+</td>
+<td style="text-align:center;">
+<span style="color: grey; font-weight: bold">Dublin</span>
+</td>
+<td style="text-align:center;">
+K McManamon
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">3% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">4% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">3% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">5% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">3% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">8% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">14%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="monaghan-24" class="section level3">
+<h3>Monaghan</h3>
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:left;">
+Player
+</th>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+name
+</th>
+<th style="text-align:center;">
+On Ball%
+</th>
+<th style="text-align:center;">
+Possession Won%
+</th>
+<th style="text-align:center;">
+Passes Received%
+</th>
+<th style="text-align:center;">
+Ko Received%
+</th>
+<th style="text-align:center;">
+Comp. Pass%
+</th>
+<th style="text-align:center;">
+Total Shot%
+</th>
+<th style="text-align:center;">
+Total Scr%
+</th>
+<th style="text-align:center;">
+Turnover Lost%
+</th>
+<th style="text-align:center;">
+Fk Won%
+</th>
+<th style="text-align:center;">
+Fk Loss%
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:center;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+R Beggan
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">7% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">19%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">6% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">9% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:center;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+D Wylie
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">7% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">5% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">7% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">8% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">11%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">13%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">17%</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:center;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+C Boyle
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">5% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">10%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">5% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">5% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">5% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">11%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">11%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">13%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:center;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+K Duffy
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">4% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">5% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">3% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">4% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">5% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">8% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:center;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+K O’Connell
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">7% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">10%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">6% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">30%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">6% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">25%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">8% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:center;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+R Wylie
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">7% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">5% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">7% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">10%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">7% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">11%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">13%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">8% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:center;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+M Bannigan
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">4% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">5% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">4% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">10%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">4% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">10%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">22%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">11%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">13%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">8% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:center;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+D Hughes
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">4% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">5% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">3% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">20%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">3% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">5% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">13%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+9
+</td>
+<td style="text-align:center;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+N Kearns
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">8% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">14%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">8% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">8% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">5% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">11%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">22%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">25%</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:center;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+R McAnespie
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">8% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">9% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">20%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">8% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">14%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">11%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">13%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+11
+</td>
+<td style="text-align:center;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+C McCarthy
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">4% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">14%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">3% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">4% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">5% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">11%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+12
+</td>
+<td style="text-align:center;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+D Ward
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">6% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">7% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">7% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">14%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">11%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">11%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+13
+</td>
+<td style="text-align:center;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+D Malone
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">9% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">5% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">9% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">10%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">5% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">8% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+26
+</td>
+<td style="text-align:center;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+K Hughes
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">10%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">11%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">10%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">10%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+15
+</td>
+<td style="text-align:center;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+C McManus
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">4% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">4% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">1% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">24%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">22%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">8% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+20
+</td>
+<td style="text-align:center;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+A Mulligan
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">4% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">5% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">4% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">4% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">22%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">8% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+19
+</td>
+<td style="text-align:center;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+S Carey
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">1% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">1% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">10%</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">1% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+14
+</td>
+<td style="text-align:center;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+C McGuinnes
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+17
+</td>
+<td style="text-align:center;">
+<span style="color: grey; font-weight: bold">Monaghan</span>
+</td>
+<td style="text-align:center;">
+P Keenan
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">1% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">1% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">1% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">0% </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="pass-flow-last-3-passes-before-a-shot-last-row-shot-taker" class="section level2">
+<h2>Pass flow (Last 3 passes before a shot (Last row = Shot taker))</h2>
+<div id="dublin-27" class="section level3">
+<h3>Dublin</h3>
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:left;">
+2
+</th>
+<th style="text-align:center;">
+6
+</th>
+<th style="text-align:center;">
+7
+</th>
+<th style="text-align:center;">
+9
+</th>
+<th style="text-align:center;">
+15
+</th>
+<th style="text-align:center;">
+17
+</th>
+<th style="text-align:center;">
+18
+</th>
+<th style="text-align:center;">
+19
+</th>
+<th style="text-align:center;">
+24
+</th>
+<th style="text-align:center;">
+25
+</th>
+<th style="text-align:center;">
+29
+</th>
+<th style="text-align:center;">
+31
+</th>
+<th style="text-align:center;">
+32
+</th>
+<th style="text-align:center;">
+37
+</th>
+<th style="text-align:center;">
+42
+</th>
+<th style="text-align:center;">
+45
+</th>
+<th style="text-align:center;">
+47
+</th>
+<th style="text-align:center;">
+48
+</th>
+<th style="text-align:center;">
+50
+</th>
+<th style="text-align:center;">
+53
+</th>
+<th style="text-align:center;">
+55
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:center;">
+14
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:center;">
+24
+</td>
+<td style="text-align:center;">
+20
+</td>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+9
+</td>
+<td style="text-align:center;">
+20
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+11
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+9
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+12
+</td>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+11
+</td>
+<td style="text-align:center;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:center;">
+23
+</td>
+<td style="text-align:center;">
+7
+</td>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+9
+</td>
+<td style="text-align:center;">
+24
+</td>
+<td style="text-align:center;">
+24
+</td>
+<td style="text-align:center;">
+19
+</td>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:center;">
+9
+</td>
+<td style="text-align:center;">
+24
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+11
+</td>
+<td style="text-align:center;">
+12
+</td>
+<td style="text-align:center;">
+18
+</td>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+12
+</td>
+<td style="text-align:center;">
+18
+</td>
+<td style="text-align:center;">
+17
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+23
+</td>
+<td style="text-align:center;">
+24
+</td>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:center;">
+24
+</td>
+<td style="text-align:center;">
+15
+</td>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:center;">
+7
+</td>
+<td style="text-align:center;">
+24
+</td>
+<td style="text-align:center;">
+7
+</td>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+24
+</td>
+<td style="text-align:center;">
+15
+</td>
+<td style="text-align:center;">
+24
+</td>
+<td style="text-align:center;">
+15
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:center;">
+12
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+12
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:center;">
+14
+</td>
+<td style="text-align:center;">
+24
+</td>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+9
+</td>
+<td style="text-align:center;">
+24
+</td>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+19
+</td>
+<td style="text-align:center;">
+24
+</td>
+<td style="text-align:center;">
+15
+</td>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:center;">
+9
+</td>
+<td style="text-align:center;">
+15
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+18
+</td>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+17
+</td>
+<td style="text-align:center;">
+12
+</td>
+<td style="text-align:center;">
+18
+</td>
+<td style="text-align:center;">
+9
+</td>
+<td style="text-align:center;">
+3
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="monaghan-25" class="section level3">
+<h3>Monaghan</h3>
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:left;">
+1
+</th>
+<th style="text-align:center;">
+6
+</th>
+<th style="text-align:center;">
+8
+</th>
+<th style="text-align:center;">
+9
+</th>
+<th style="text-align:center;">
+10
+</th>
+<th style="text-align:center;">
+12
+</th>
+<th style="text-align:center;">
+14
+</th>
+<th style="text-align:center;">
+19
+</th>
+<th style="text-align:center;">
+22
+</th>
+<th style="text-align:center;">
+24
+</th>
+<th style="text-align:center;">
+26
+</th>
+<th style="text-align:center;">
+28
+</th>
+<th style="text-align:center;">
+38
+</th>
+<th style="text-align:center;">
+49
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+9
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+12
+</td>
+<td style="text-align:center;">
+12
+</td>
+<td style="text-align:center;">
+12
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+12
+</td>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+13
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+13
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+9
+</td>
+<td style="text-align:center;">
+13
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+26
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+26
+</td>
+<td style="text-align:center;">
+26
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+12
+</td>
+<td style="text-align:center;">
+15
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:center;">
+26
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+9
+</td>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:center;">
+11
+</td>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+26
+</td>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:center;">
+14
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+15
+</td>
+<td style="text-align:center;">
+7
+</td>
+<td style="text-align:center;">
+15
+</td>
+<td style="text-align:center;">
+12
+</td>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+13
+</td>
+<td style="text-align:center;">
+12
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+15
+</td>
+<td style="text-align:center;">
+12
+</td>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+15
+</td>
+<td style="text-align:center;">
+3
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="assists-pass-inside-opposition-45-that-lead-to-a-score" class="section level3">
+<h3>Assists (Pass inside opposition 45 that lead to a score)</h3>
+</div>
+<div id="dublin-28" class="section level3">
+<h3>Dublin</h3>
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:left;">
+Player
+</th>
+<th style="text-align:center;">
+Assist
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">3</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">1</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">10</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">1</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">12</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">1</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">15</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #71ca97">2</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">24</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">1</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="monaghan-26" class="section level3">
+<h3>Monaghan</h3>
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:left;">
+Player
+</th>
+<th style="text-align:center;">
+Assist
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">2</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">1</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">3</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #71ca97">2</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">5</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">1</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">6</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #71ca97">2</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">8</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">1</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">9</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">1</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">10</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">1</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">11</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #71ca97">2</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">13</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">1</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">14</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">1</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">26</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #71ca97">2</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="key-pass-pass-inside-opposition-45-that-lead-to-an-unsuccesful-shot" class="section level3">
+<h3>Key Pass (Pass inside opposition 45 that lead to an unsuccesful shot)</h3>
+</div>
+<div id="dublin-29" class="section level3">
+<h3>Dublin</h3>
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:left;">
+Player
+</th>
+<th style="text-align:center;">
+Key_Pass
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">4</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">1</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">6</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">1</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">7</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">1</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">12</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">1</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">15</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">1</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">23</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">1</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">24</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #71ca97">4</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="monaghan-27" class="section level3">
+<h3>Monaghan</h3>
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:left;">
+Player
+</th>
+<th style="text-align:center;">
+Key_Pass
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">2</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">1</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">3</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #71ca97">2</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">5</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">1</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">6</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #71ca97">2</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">10</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">1</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">11</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #71ca97">2</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="color: grey; font-weight: bold">13</span>
+</td>
+<td style="text-align:center;">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #def7e9">1</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="posessions-per-playing-time" class="section level2">
+<h2>Posessions Per Playing Time</h2>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-126-1.png" width="672" /></p>
+</div>
+<div id="player-involvement-and-shot-efficiency" class="section level2">
+<h2>Player % involvement and shot efficiency</h2>
+</div>
+<div id="open-play-shots-vs-playing-time" class="section level2">
+<h2>Open Play Shots vs Playing Time</h2>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-128-1.png" width="672" /></p>
+</div>
+<div id="open-play-scores-vs-playing-time" class="section level2">
+<h2>Open Play Scores vs Playing Time</h2>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-129-1.png" width="672" /></p>
+</div>
+<div id="open-play-shots-vs-open-play-score" class="section level2">
+<h2>Open Play Shots vs Open Play Score</h2>
+<p><img src="dubmonanfl20_files/figure-html/unnamed-chunk-130-1.png" width="672" /></p>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

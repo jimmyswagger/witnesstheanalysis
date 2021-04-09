@@ -3855,6 +3855,8 @@ datatable(plyscr,options = list(pageLength = 5,lengthMenu = c(5, 10, 15, 20),col
 ```{r}
 scrAtot <- pass %>% group_by(plynum) %>% filter (Teamnum == "A", Action %in% c ("Goal", "Point","Fk Goal", "Fk Point","Mk Goal","Mk Point", "Pk Goal", "Pk Point")) %>% count (Action)
 
+scrAtot <- rename(scrAtot, "Player" = plynum, "Outcome" = Action,  "Total" = n)
+
 
 scrAtot  %>%
   kbl(caption = "Player Score Type - Cuala", align = "c") %>%
@@ -3866,6 +3868,8 @@ scrAtot  %>%
 
 ```{r}
 scrBtot <- pass %>% group_by(plynum) %>% filter (Teamnum == "B", Action %in% c ("Goal", "Point","Fk Goal", "Fk Point","Mk Goal","Mk Point", "Pk Goal", "Pk Point")) %>% count (Action)
+
+scrBtot <- rename(scrBtot, "Player" = plynum, "Outcome" = Action,  "Total" = n)
 
 scrBtot  %>%
   kbl(caption = "Player Score Type - Brigids", align = "c") %>%

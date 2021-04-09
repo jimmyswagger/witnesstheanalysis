@@ -1,0 +1,2929 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Foxrock Cabinteely vs Crokes</title>
+
+<script src="site_libs/jquery-1.12.4/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script src="site_libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
+<link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="site_libs/datatables-binding-0.16/datatables.js"></script>
+<link href="site_libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="site_libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="site_libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+<link href="site_libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Witness the Analysis</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Home
+  </a>
+</li>
+<li>
+  <a href="matches.html">
+    <span class="fa fa-volleyball-ball"></span>
+     
+    Matches
+  </a>
+</li>
+<li>
+  <a href="https://witnesstheanalysis.shinyapps.io/Results/">
+    <span class="fas fa fas fa-book"></span>
+     
+    Results
+  </a>
+</li>
+<li>
+  <a href="https://witnesstheanalysis.wordpress.com/2020/07/10/a-match-tracker-application-for-windows-version-3/">
+    <span class="fas fa fas fa-pen"></span>
+     
+    Analysis App
+  </a>
+</li>
+<li>
+  <a href="Trackers.html">
+    <span class="fas fa fas fa-desktop"></span>
+     
+    Shiny Apps
+  </a>
+</li>
+<li>
+  <a href="https://github.com/witnesstheanalysis/witnesstheanalysis">
+    <span class="fa fa-github fa-lg"></span>
+     
+    Codes
+  </a>
+</li>
+<li>
+  <a href="contact.html">
+    <span class="fa fa-envelope fa-lg"></span>
+     
+    Contact
+  </a>
+</li>
+<li>
+  <a href="https://twitter.com/WtAnalysis">
+    <span class="fa fa-twitter fa-lg"></span>
+     
+    Twitter
+  </a>
+</li>
+<li>
+  <a href="https://witnesstheanalysis.wordpress.com">
+    <span class="fa fa-wordpress fa-lg"></span>
+     
+    Blog
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Foxrock Cabinteely vs Crokes</h1>
+
+</div>
+
+
+<p><font size="4">Dublin Senior Ladies Football Championship Final<font></p>
+<p><font size="4">12/09/2020, Swords, Dublin<font></p>
+<p><img src="fcbcrkdublscf20_files/figure-html/unnamed-chunk-22-1.png" width="1536" /></p>
+<p><img src="fcbcrkdublscf20_files/figure-html/unnamed-chunk-23-1.png" width="1536" /></p>
+<div id="quick-game-stats" class="section level1">
+<h1>Quick Game Stats</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+All Possessions
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Possessions
+</th>
+<th style="text-align:center;">
+Poss Time (mins)
+</th>
+<th style="text-align:center;">
+Ave time (secs)
+</th>
+<th style="text-align:center;">
+All Shots
+</th>
+<th style="text-align:center;">
+% Shots per Poss
+</th>
+<th style="text-align:center;">
+Shot Rate (secs)
+</th>
+<th style="text-align:center;">
+Scores
+</th>
+<th style="text-align:center;">
+Score %
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Crokes
+</td>
+<td style="text-align:center;">
+56
+</td>
+<td style="text-align:center;">
+21
+</td>
+<td style="text-align:center;">
+22
+</td>
+<td style="text-align:center;">
+30
+</td>
+<td style="text-align:center;">
+54
+</td>
+<td style="text-align:center;">
+41
+</td>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+33
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Foxrock
+</td>
+<td style="text-align:center;">
+57
+</td>
+<td style="text-align:center;">
+19
+</td>
+<td style="text-align:center;">
+20
+</td>
+<td style="text-align:center;">
+23
+</td>
+<td style="text-align:center;">
+40
+</td>
+<td style="text-align:center;">
+50
+</td>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+43
+</td>
+</tr>
+</tbody>
+</table>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Team Scores
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Possessions Won
+</th>
+<th style="text-align:center;">
+Ko
+</th>
+<th style="text-align:center;">
+Ko Won
+</th>
+<th style="text-align:center;">
+Forty_Fives
+</th>
+<th style="text-align:center;">
+OP Shots
+</th>
+<th style="text-align:center;">
+Op Scores
+</th>
+<th style="text-align:center;">
+Op Score %
+</th>
+<th style="text-align:center;">
+Rs Shots
+</th>
+<th style="text-align:center;">
+Rs Scores
+</th>
+<th style="text-align:center;">
+Rs Score %
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Crokes
+</td>
+<td style="text-align:center;">
+37
+</td>
+<td style="text-align:center;">
+18
+</td>
+<td style="text-align:center;">
+14
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+25
+</td>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+32.00
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+40.00
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Foxrock
+</td>
+<td style="text-align:center;">
+35
+</td>
+<td style="text-align:center;">
+21
+</td>
+<td style="text-align:center;">
+19
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+17
+</td>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:center;">
+35.29
+</td>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+66.67
+</td>
+</tr>
+</tbody>
+</table>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Tackles
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Tackle Attempts
+</th>
+<th style="text-align:center;">
+Poss Won
+</th>
+<th style="text-align:center;">
+Pressured
+</th>
+<th style="text-align:center;">
+Free Loss
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Crokes
+</td>
+<td style="text-align:center;">
+87
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+19
+</td>
+<td style="text-align:center;">
+17
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Foxrock
+</td>
+<td style="text-align:center;">
+91
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+9
+</td>
+<td style="text-align:center;">
+18
+</td>
+</tr>
+</tbody>
+</table>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Team Possession Won
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Possession Won
+</th>
+<th style="text-align:center;">
+Total Time (min)
+</th>
+<th style="text-align:center;">
+Shots
+</th>
+<th style="text-align:center;">
+% Shots per PW
+</th>
+<th style="text-align:center;">
+Shot Rate (secs)
+</th>
+<th style="text-align:center;">
+Scores
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Crokes
+</td>
+<td style="text-align:center;">
+37
+</td>
+<td style="text-align:center;">
+13.44
+</td>
+<td style="text-align:center;">
+21
+</td>
+<td style="text-align:center;">
+56.76
+</td>
+<td style="text-align:center;">
+38.40
+</td>
+<td style="text-align:center;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Foxrock
+</td>
+<td style="text-align:center;">
+35
+</td>
+<td style="text-align:center;">
+11.05
+</td>
+<td style="text-align:center;">
+14
+</td>
+<td style="text-align:center;">
+40.00
+</td>
+<td style="text-align:center;">
+47.34
+</td>
+<td style="text-align:center;">
+7
+</td>
+</tr>
+</tbody>
+</table>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Kick Outs
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Kickouts
+</th>
+<th style="text-align:center;">
+Ko Won
+</th>
+<th style="text-align:center;">
+% Ko Won
+</th>
+<th style="text-align:center;">
+Shots
+</th>
+<th style="text-align:center;">
+Scores
+</th>
+<th style="text-align:center;">
+Time to Ko (secs)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Crokes
+</td>
+<td style="text-align:center;">
+18
+</td>
+<td style="text-align:center;">
+14
+</td>
+<td style="text-align:center;">
+77.78
+</td>
+<td style="text-align:center;">
+9
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+19.85
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Foxrock
+</td>
+<td style="text-align:center;">
+21
+</td>
+<td style="text-align:center;">
+19
+</td>
+<td style="text-align:center;">
+90.48
+</td>
+<td style="text-align:center;">
+9
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+19.59
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="scorers" class="section level1">
+<h1>Scorers</h1>
+<div id="htmlwidget-22bf459376dd0aad97f4" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-22bf459376dd0aad97f4">{"x":{"filter":"none","data":[["Foxrock","Crokes","Crokes","Foxrock","Crokes","Crokes","Foxrock","Crokes","Crokes","Foxrock","Foxrock","Foxrock","Foxrock","Crokes","Crokes","Crokes","Foxrock","Foxrock","Foxrock","Crokes"],["Shot Right","Shot Right","Hp Shot","Fk Shot Right","Shot Right","Shot Right","Shot Left","Shot Right","Shot Right","Pk Shot Right","Fk Shot Left","Fk Shot Left","Shot Right","Shot Right","Fk Shot Right","Shot Right","Shot Right","Shot Left","Shot Right","Fk Shot Right"],["14 Ai Murphy","13 J Buckley","14 M Davren","15 J Egan","8 L Magee","13 J Buckley","11 A Connelly","13 J Buckley","10 L Kane","14 Ai Murphy","11 A Connelly","11 A Connelly","15 J Egan","13 J Buckley","11 E Rutledge","13 J Buckley","15 J Egan","18 F Foxrock18","14 Ai Murphy","11 E Rutledge"],["Point","Goal","Point","Fk Point","Point","Point","Goal","Goal","Point","Pk Goal","Fk Point","Fk Point","Goal","Point","Fk Point","Point","Point","Point","Point","Fk Point"],[0,1,5,9,15,22,23,23,25,29,31,33,35,42,43,52,59,60,61,64]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>Team<\/th>\n      <th>Shot Type<\/th>\n      <th>Player<\/th>\n      <th>Outcome<\/th>\n      <th>Minute<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="player-score-type---foxrock" class="section level2">
+<h2>Player Score Type - Foxrock</h2>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Player Score Type - Foxrock
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+plynum
+</th>
+<th style="text-align:center;">
+Action
+</th>
+<th style="text-align:center;">
+n
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+11 A Connelly
+</td>
+<td style="text-align:center;">
+Fk Point
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+11 A Connelly
+</td>
+<td style="text-align:center;">
+Goal
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+14 Ai Murphy
+</td>
+<td style="text-align:center;">
+Pk Goal
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+14 Ai Murphy
+</td>
+<td style="text-align:center;">
+Point
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+15 J Egan
+</td>
+<td style="text-align:center;">
+Fk Point
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+15 J Egan
+</td>
+<td style="text-align:center;">
+Goal
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+15 J Egan
+</td>
+<td style="text-align:center;">
+Point
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+18 F Foxrock18
+</td>
+<td style="text-align:center;">
+Point
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="player-score-type---crokes" class="section level2">
+<h2>Player Score Type - Crokes</h2>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Player Score Type - Crokes
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+plynum
+</th>
+<th style="text-align:center;">
+Action
+</th>
+<th style="text-align:center;">
+n
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+10 L Kane
+</td>
+<td style="text-align:center;">
+Point
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+11 E Rutledge
+</td>
+<td style="text-align:center;">
+Fk Point
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+13 J Buckley
+</td>
+<td style="text-align:center;">
+Goal
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+13 J Buckley
+</td>
+<td style="text-align:center;">
+Point
+</td>
+<td style="text-align:center;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+14 M Davren
+</td>
+<td style="text-align:center;">
+Point
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+8 L Magee
+</td>
+<td style="text-align:center;">
+Point
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="team-sheet" class="section level1">
+<h1>Team Sheet</h1>
+<div id="foxrock" class="section level2">
+<h2>Foxrock</h2>
+<div id="htmlwidget-a3eb8fb3a84ba7c106a6" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a3eb8fb3a84ba7c106a6">{"x":{"filter":"none","data":[["Foxrock","Foxrock","Foxrock","Foxrock","Foxrock","Foxrock","Foxrock","Foxrock","Foxrock","Foxrock","Foxrock","Foxrock","Foxrock","Foxrock","Foxrock","Foxrock","Foxrock","Foxrock"],["1 A Tarpy","2 A Murrey","3 N Collins","4 S Quinn","5 C O Riordan","6 T O Sullivan","7 L Fusciardi","8 S Goldrick","9 F Claffey","10 S Loughrane","11 A Connelly","12 N Ryan","13 An Murphy","14 Ai Murphy","15 J Egan","18 F Foxrock18","21 F Foxrock21","19 F Foxrock19"]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>Team<\/th>\n      <th>Player<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="crokes" class="section level2">
+<h2>Crokes</h2>
+<div id="htmlwidget-5b609a5d21b76f17ca01" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5b609a5d21b76f17ca01">{"x":{"filter":"none","data":[["Crokes","Crokes","Crokes","Crokes","Crokes","Crokes","Crokes","Crokes","Crokes","Crokes","Crokes","Crokes","Crokes","Crokes","Crokes","Crokes","Crokes"],["1 R Fleming","2 H Power","3 E Sweeny","4 P Green","5 M O Gorman","6 M Lambe","7 A Kane","8 L Magee","9 C Sultan","10 L Kane","11 E Rutledge","12 M Jennings ","13 J Buckley","14 M Davren","15 A Conroy","20 K Crokes20","23 K Crokes23"]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>Team<\/th>\n      <th>Player<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div id="worm" class="section level1">
+<h1>Worm</h1>
+<p><img src="fcbcrkdublscf20_files/figure-html/unnamed-chunk-34-1.png" width="1536" /></p>
+</div>
+<div id="periods" class="section level1">
+<h1>Periods</h1>
+<p><img src="fcbcrkdublscf20_files/figure-html/unnamed-chunk-35-1.png" width="1536" /></p>
+</div>
+<div id="shooting---foxrock" class="section level1">
+<h1>Shooting - Foxrock</h1>
+<p><img src="fcbcrkdublscf20_files/figure-html/unnamed-chunk-36-1.png" width="1536" /></p>
+<p><img src="fcbcrkdublscf20_files/figure-html/unnamed-chunk-37-1.png" width="1536" /></p>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Shot Outcome
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Blkd
+</th>
+<th style="text-align:center;">
+Fk Point
+</th>
+<th style="text-align:center;">
+Fk Short
+</th>
+<th style="text-align:center;">
+Fk Wide Right
+</th>
+<th style="text-align:center;">
+Goal
+</th>
+<th style="text-align:center;">
+Pk Goal
+</th>
+<th style="text-align:center;">
+Point
+</th>
+<th style="text-align:center;">
+Post
+</th>
+<th style="text-align:center;">
+Short
+</th>
+<th style="text-align:center;">
+Wide Left
+</th>
+<th style="text-align:center;">
+Wide Right
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Foxrock
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="shooting---crokes" class="section level1">
+<h1>Shooting - Crokes</h1>
+<p><img src="fcbcrkdublscf20_files/figure-html/unnamed-chunk-39-1.png" width="1536" /></p>
+<p><img src="fcbcrkdublscf20_files/figure-html/unnamed-chunk-40-1.png" width="1536" /></p>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Shot Outcome
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Blkd
+</th>
+<th style="text-align:center;">
+Fk Point
+</th>
+<th style="text-align:center;">
+Fk Post
+</th>
+<th style="text-align:center;">
+Fk Short
+</th>
+<th style="text-align:center;">
+Fk Wide Right
+</th>
+<th style="text-align:center;">
+Goal
+</th>
+<th style="text-align:center;">
+Point
+</th>
+<th style="text-align:center;">
+Post
+</th>
+<th style="text-align:center;">
+Short
+</th>
+<th style="text-align:center;">
+Wide Left
+</th>
+<th style="text-align:center;">
+Wide Right
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Crokes
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+6
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="open-play-shooting---foxrock" class="section level1">
+<h1>Open Play Shooting - Foxrock</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Open Play Shots - Foxrock
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Shots
+</th>
+<th style="text-align:center;">
+Scores
+</th>
+<th style="text-align:center;">
+Efficiency %
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Foxrock
+</td>
+<td style="text-align:center;">
+17
+</td>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:center;">
+35.3
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="fcbcrkdublscf20_files/figure-html/unnamed-chunk-43-1.png" width="1536" /></p>
+<table class="table" style="width: auto !important; ">
+<caption>
+Shot Pressure - Foxrock
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Shot Outcome
+</th>
+<th style="text-align:left;">
+Pressure
+</th>
+<th style="text-align:center;">
+count
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Miss
+</td>
+<td style="text-align:left;">
+None
+</td>
+<td style="text-align:center;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Miss
+</td>
+<td style="text-align:left;">
+Light/Late
+</td>
+<td style="text-align:center;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Miss
+</td>
+<td style="text-align:left;">
+Heavy
+</td>
+<td style="text-align:center;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Score
+</td>
+<td style="text-align:left;">
+None
+</td>
+<td style="text-align:center;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Score
+</td>
+<td style="text-align:left;">
+Light/Late
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Score
+</td>
+<td style="text-align:left;">
+Heavy
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+</tbody>
+</table>
+<div id="player-open-play-shooting-stats---foxrock" class="section level2">
+<h2>Player Open Play Shooting Stats - Foxrock</h2>
+<div id="htmlwidget-0ef80098a7bccea2e4eb" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-0ef80098a7bccea2e4eb">{"x":{"filter":"none","caption":"<caption>Player Shooting Stats - Foxrock<\/caption>","data":[["1 A Tarpy","2 A Murrey","3 N Collins","4 S Quinn","5 C O Riordan","6 T O Sullivan","7 L Fusciardi","8 S Goldrick","9 F Claffey","10 S Loughrane","11 A Connelly","12 N Ryan","13 An Murphy","14 Ai Murphy","15 J Egan","18 F Foxrock18","19 F Foxrock19","21 F Foxrock21"],[0,0,0,0,0,0,0,0,0,2,1,0,0,0,0,1,0,0],[0,0,0,0,1,0,0,1,0,3,0,1,2,2,3,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,1,0,0],[0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0],[0,0,0,0,1,0,0,1,0,1,0,0,2,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0],[0,0,0,0,1,0,0,1,0,5,1,1,2,2,3,1,0,0],[0,0,0,0,0,0,0,0,0,0,1,0,0,2,2,1,0,0]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>plynum<\/th>\n      <th>Slef<\/th>\n      <th>Srig<\/th>\n      <th>Hndps<\/th>\n      <th>Punch<\/th>\n      <th>Goal<\/th>\n      <th>Point<\/th>\n      <th>WR<\/th>\n      <th>WL<\/th>\n      <th>Sve<\/th>\n      <th>blkd<\/th>\n      <th>OpShot<\/th>\n      <th>OpScr<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div id="open-play-shooting---crokes" class="section level1">
+<h1>Open Play Shooting - Crokes</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Open Play Shots - Crokes
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Shots
+</th>
+<th style="text-align:center;">
+Scores
+</th>
+<th style="text-align:center;">
+Efficiency %
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Crokes
+</td>
+<td style="text-align:center;">
+25
+</td>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+32
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="fcbcrkdublscf20_files/figure-html/unnamed-chunk-47-1.png" width="1536" /></p>
+<table class="table" style="width: auto !important; ">
+<caption>
+Shot Pressure - Crokes
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Shot Outcome
+</th>
+<th style="text-align:left;">
+Pressure
+</th>
+<th style="text-align:center;">
+count
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Miss
+</td>
+<td style="text-align:left;">
+None
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Miss
+</td>
+<td style="text-align:left;">
+Light/Late
+</td>
+<td style="text-align:center;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Miss
+</td>
+<td style="text-align:left;">
+Heavy
+</td>
+<td style="text-align:center;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Score
+</td>
+<td style="text-align:left;">
+None
+</td>
+<td style="text-align:center;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Score
+</td>
+<td style="text-align:left;">
+Light/Late
+</td>
+<td style="text-align:center;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Score
+</td>
+<td style="text-align:left;">
+Heavy
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+</tbody>
+</table>
+<div id="player-open-play-shooting-stats---crokes" class="section level2">
+<h2>Player Open Play Shooting Stats - Crokes</h2>
+<div id="htmlwidget-b213fb7443b966c4d96b" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b213fb7443b966c4d96b">{"x":{"filter":"none","caption":"<caption>Player Shooting Stats - Crokes<\/caption>","data":[["1 R Fleming","2 H Power","3 E Sweeny","4 P Green","5 M O Gorman","6 M Lambe","7 A Kane","8 L Magee","9 C Sultan","10 L Kane","11 E Rutledge","12 M Jennings ","13 J Buckley","14 M Davren","15 A Conroy","20 K Crokes20","23 K Crokes23"],[0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0],[0,0,0,0,0,0,1,2,0,4,2,1,7,2,2,0,0],[0,0,0,0,0,0,0,0,0,1,1,0,0,1,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0],[0,0,0,0,0,0,0,1,0,1,0,0,3,1,0,0,0],[0,0,0,0,0,0,0,1,0,2,1,1,0,1,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,1,2,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0],[0,0,0,0,0,0,1,2,0,5,3,1,7,4,2,0,0],[0,0,0,0,0,0,0,1,0,1,0,0,5,1,0,0,0]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>plynum<\/th>\n      <th>Slef<\/th>\n      <th>Srig<\/th>\n      <th>Hndps<\/th>\n      <th>Punch<\/th>\n      <th>Goal<\/th>\n      <th>Point<\/th>\n      <th>WR<\/th>\n      <th>WL<\/th>\n      <th>Sve<\/th>\n      <th>blkd<\/th>\n      <th>OpShot<\/th>\n      <th>OpScr<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div id="frees-and-attacking-marks-won" class="section level1">
+<h1>Frees and Attacking Marks Won</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Frees and Attacking Marks Won
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Att Mark Won
+</th>
+<th style="text-align:center;">
+Mark Shots
+</th>
+<th style="text-align:center;">
+Mk Scores
+</th>
+<th style="text-align:center;">
+Mark Efficiency %
+</th>
+<th style="text-align:center;">
+Frees Won
+</th>
+<th style="text-align:center;">
+Fk Shots
+</th>
+<th style="text-align:center;">
+Fk Scores
+</th>
+<th style="text-align:center;">
+Fk Shot Efficiency %
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Foxrock
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+18
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+60
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="all-place-ball-shots---foxrock" class="section level1">
+<h1>All Place Ball Shots - Foxrock</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+All Place Ball Shots - Foxrock
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Fk Point
+</th>
+<th style="text-align:center;">
+Fk Short
+</th>
+<th style="text-align:center;">
+Fk Wide Right
+</th>
+<th style="text-align:center;">
+Pk Goal
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Foxrock
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="fcbcrkdublscf20_files/figure-html/unnamed-chunk-52-1.png" width="1536" /></p>
+</div>
+<div id="frees-and-attacking-marks-won---crokes" class="section level1">
+<h1>Frees and Attacking Marks Won - Crokes</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Frees and Attacking Marks Won
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Att Mark Won
+</th>
+<th style="text-align:center;">
+Mark Shots
+</th>
+<th style="text-align:center;">
+Mk Scores
+</th>
+<th style="text-align:center;">
+Mark Efficiency %
+</th>
+<th style="text-align:center;">
+Frees Won
+</th>
+<th style="text-align:center;">
+Fk Shots
+</th>
+<th style="text-align:center;">
+Fk Scores
+</th>
+<th style="text-align:center;">
+Fk Shot Efficiency %
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Crokes
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+18
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+40
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="all-place-ball-shots---crokes" class="section level1">
+<h1>All Place Ball Shots - Crokes</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+All Place Ball Shots - Crokes
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Fk Point
+</th>
+<th style="text-align:center;">
+Fk Post
+</th>
+<th style="text-align:center;">
+Fk Short
+</th>
+<th style="text-align:center;">
+Fk Wide Right
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Crokes
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="fcbcrkdublscf20_files/figure-html/unnamed-chunk-55-1.png" width="1536" /></p>
+</div>
+<div id="kick-outs---foxrock" class="section level1">
+<h1>Kick Outs - Foxrock</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Outcome from Kick Outs - Foxrock
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Ko
+</th>
+<th style="text-align:center;">
+Fk Loss ToL
+</th>
+<th style="text-align:center;">
+Ko ToL
+</th>
+<th style="text-align:center;">
+Ms Op
+</th>
+<th style="text-align:center;">
+Ms Rs
+</th>
+<th style="text-align:center;">
+Pass ToL
+</th>
+<th style="text-align:center;">
+Scr Op
+</th>
+<th style="text-align:center;">
+Tck ToL
+</th>
+<th style="text-align:center;">
+ToL
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+21
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="fcbcrkdublscf20_files/figure-html/unnamed-chunk-57-1.png" width="1536" /></p>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Kick Outs - Foxrock
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Kickouts
+</th>
+<th style="text-align:center;">
+Ko Won
+</th>
+<th style="text-align:center;">
+% Ko Won
+</th>
+<th style="text-align:center;">
+Shots
+</th>
+<th style="text-align:center;">
+Scores
+</th>
+<th style="text-align:center;">
+Time to Ko (secs)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Foxrock
+</td>
+<td style="text-align:center;">
+21
+</td>
+<td style="text-align:center;">
+19
+</td>
+<td style="text-align:center;">
+90.48
+</td>
+<td style="text-align:center;">
+9
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+19.59
+</td>
+</tr>
+</tbody>
+</table>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Kick Out Outcomes by Type
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Defence Setup
+</th>
+<th style="text-align:center;">
+Outcome
+</th>
+<th style="text-align:center;">
+Total
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Ko Lat Press
+</td>
+<td style="text-align:center;">
+Pass ToL
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ko Press
+</td>
+<td style="text-align:center;">
+Fk Loss ToL
+</td>
+<td style="text-align:center;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ko Press
+</td>
+<td style="text-align:center;">
+Ko ToL
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ko Press
+</td>
+<td style="text-align:center;">
+Ms Op
+</td>
+<td style="text-align:center;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ko Press
+</td>
+<td style="text-align:center;">
+Ms Rs
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ko Press
+</td>
+<td style="text-align:center;">
+Pass ToL
+</td>
+<td style="text-align:center;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ko Press
+</td>
+<td style="text-align:center;">
+Scr Op
+</td>
+<td style="text-align:center;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ko Press
+</td>
+<td style="text-align:center;">
+Tck ToL
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ko Press
+</td>
+<td style="text-align:center;">
+ToL
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ko Unc Press
+</td>
+<td style="text-align:center;">
+Pass ToL
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+</tbody>
+</table>
+<div id="player-kick-outs-stats---foxrock" class="section level2">
+<h2>Player Kick Outs Stats - Foxrock</h2>
+<div id="htmlwidget-99a6a25bb5caed116f5b" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-99a6a25bb5caed116f5b">{"x":{"filter":"none","caption":"<caption>Player Kick Outs Stats - Foxrock<\/caption>","data":[["1 A Tarpy","2 A Murrey","3 N Collins","4 S Quinn","5 C O Riordan","6 T O Sullivan","7 L Fusciardi","8 S Goldrick","9 F Claffey","10 S Loughrane","11 A Connelly","12 N Ryan","13 An Murphy","14 Ai Murphy","15 J Egan","18 F Foxrock18","19 F Foxrock19","21 F Foxrock21"],[0,0,2,0,3,0,4,2,1,5,0,0,0,1,1,0,0,0],[0,0,1,0,3,0,4,2,1,4,0,0,0,1,0,0,0,0],[0,0,1,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>plynum<\/th>\n      <th>Total<\/th>\n      <th>Ko Rec<\/th>\n      <th>Ko Brk Rec<\/th>\n      <th>Mark Won<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<p><img src="fcbcrkdublscf20_files/figure-html/unnamed-chunk-61-1.png" width="1536" /></p>
+</div>
+</div>
+<div id="kick-outs---crokes" class="section level1">
+<h1>Kick Outs - Crokes</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Outcome from Kick Outs - Crokes
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Ko
+</th>
+<th style="text-align:center;">
+Fk Loss ToL
+</th>
+<th style="text-align:center;">
+Ko ToL
+</th>
+<th style="text-align:center;">
+Ms Op
+</th>
+<th style="text-align:center;">
+Pass ToL
+</th>
+<th style="text-align:center;">
+Scr Op
+</th>
+<th style="text-align:center;">
+Tck ToL
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+18
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+7
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+3
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="fcbcrkdublscf20_files/figure-html/unnamed-chunk-63-1.png" width="1536" /></p>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Kick Outs - Crokes
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Kickouts
+</th>
+<th style="text-align:center;">
+Ko Won
+</th>
+<th style="text-align:center;">
+% Ko Won
+</th>
+<th style="text-align:center;">
+Shots
+</th>
+<th style="text-align:center;">
+Scores
+</th>
+<th style="text-align:center;">
+Time to Ko (secs)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Crokes
+</td>
+<td style="text-align:center;">
+18
+</td>
+<td style="text-align:center;">
+14
+</td>
+<td style="text-align:center;">
+77.78
+</td>
+<td style="text-align:center;">
+9
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+19.85
+</td>
+</tr>
+</tbody>
+</table>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Kick Out Outcomes by Type
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Defence Setup
+</th>
+<th style="text-align:center;">
+Outcome
+</th>
+<th style="text-align:center;">
+Total
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Ko Lat Press
+</td>
+<td style="text-align:center;">
+Ms Op
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ko Lat Press
+</td>
+<td style="text-align:center;">
+Pass ToL
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ko Press
+</td>
+<td style="text-align:center;">
+Fk Loss ToL
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ko Press
+</td>
+<td style="text-align:center;">
+Ko ToL
+</td>
+<td style="text-align:center;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ko Press
+</td>
+<td style="text-align:center;">
+Ms Op
+</td>
+<td style="text-align:center;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ko Press
+</td>
+<td style="text-align:center;">
+Scr Op
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ko Press
+</td>
+<td style="text-align:center;">
+Tck ToL
+</td>
+<td style="text-align:center;">
+3
+</td>
+</tr>
+</tbody>
+</table>
+<div id="player-kick-out-stats---crokes" class="section level2">
+<h2>Player Kick Out Stats - Crokes</h2>
+<div id="htmlwidget-1c0ebab79d36c1c11541" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1c0ebab79d36c1c11541">{"x":{"filter":"none","caption":"<caption>Player Kick Out Stats - Crokes<\/caption>","data":[["1 R Fleming","2 H Power","3 E Sweeny","4 P Green","5 M O Gorman","6 M Lambe","7 A Kane","8 L Magee","9 C Sultan","10 L Kane","11 E Rutledge","12 M Jennings ","13 J Buckley","14 M Davren","15 A Conroy","20 K Crokes20","23 K Crokes23"],[0,1,1,2,0,1,1,2,2,2,1,0,0,0,0,1,0],[0,1,1,2,0,1,1,2,2,2,1,0,0,0,0,1,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>plynum<\/th>\n      <th>Total<\/th>\n      <th>Ko Rec<\/th>\n      <th>Ko Brk Rec<\/th>\n      <th>Mark Won<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<p><img src="fcbcrkdublscf20_files/figure-html/unnamed-chunk-67-1.png" width="1536" /></p>
+</div>
+</div>
+<div id="possession-won---foxrock" class="section level1">
+<h1>Possession Won - Foxrock</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<thead>
+<tr>
+<th style="text-align:center;">
+PW
+</th>
+<th style="text-align:center;">
+Fk Loss ToL
+</th>
+<th style="text-align:center;">
+Ms Op
+</th>
+<th style="text-align:center;">
+Ms Rs
+</th>
+<th style="text-align:center;">
+Pass ToL
+</th>
+<th style="text-align:center;">
+Scr Op
+</th>
+<th style="text-align:center;">
+Scr Rs
+</th>
+<th style="text-align:center;">
+ToL
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+33
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+14
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="fcbcrkdublscf20_files/figure-html/unnamed-chunk-69-1.png" width="1536" /></p>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Team Possession Won - Foxrock
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Possession Won
+</th>
+<th style="text-align:center;">
+Total Time (min)
+</th>
+<th style="text-align:center;">
+Shots
+</th>
+<th style="text-align:center;">
+% Shots per PW
+</th>
+<th style="text-align:center;">
+Shot Rate (secs)
+</th>
+<th style="text-align:center;">
+Scores
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+35
+</td>
+<td style="text-align:center;">
+11
+</td>
+<td style="text-align:center;">
+14
+</td>
+<td style="text-align:center;">
+40
+</td>
+<td style="text-align:center;">
+47
+</td>
+<td style="text-align:center;">
+7
+</td>
+</tr>
+</tbody>
+</table>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Possession Won by Type
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+PW Type
+</th>
+<th style="text-align:center;">
+Count
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Fk Int
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Hp Brk Int
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Hp Int
+</td>
+<td style="text-align:center;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ko Int
+</td>
+<td style="text-align:center;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Kp Brk Int
+</td>
+<td style="text-align:center;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Kp Int
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Prs Won
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+PW
+</td>
+<td style="text-align:center;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+PW Pass
+</td>
+<td style="text-align:center;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Tck Won
+</td>
+<td style="text-align:center;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ti Won
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+</tbody>
+</table>
+<div id="player-possession-won-stats---foxrock" class="section level2">
+<h2>Player Possession Won Stats - Foxrock</h2>
+<div id="htmlwidget-022528f08bb3b27a492e" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-022528f08bb3b27a492e">{"x":{"filter":"none","caption":"<caption>Player Possession Won Stats - Foxrock<\/caption>","data":[["1 A Tarpy","2 A Murrey","3 N Collins","4 S Quinn","5 C O Riordan","6 T O Sullivan","7 L Fusciardi","8 S Goldrick","9 F Claffey","10 S Loughrane","11 A Connelly","12 N Ryan","13 An Murphy","14 Ai Murphy","15 J Egan","18 F Foxrock18","19 F Foxrock19","21 F Foxrock21"],[4,3,0,1,2,4,1,4,4,2,0,2,0,0,1,0,0,2],[0,2,0,0,1,4,0,0,2,1,0,0,0,0,1,0,0,1],[0,0,0,0,1,0,0,0,1,1,0,0,0,0,0,0,0,0],[0,1,0,1,0,0,0,2,0,0,0,0,0,0,0,0,0,1],[4,0,0,0,0,0,1,2,1,0,0,2,0,0,0,0,0,0]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>plynum<\/th>\n      <th>Total<\/th>\n      <th>Intercept<\/th>\n      <th>Ko Int<\/th>\n      <th>Tck Won<\/th>\n      <th>Other<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<p><img src="fcbcrkdublscf20_files/figure-html/unnamed-chunk-73-1.png" width="1536" /></p>
+</div>
+</div>
+<div id="possession-won---crokes" class="section level1">
+<h1>Possession Won - Crokes</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<thead>
+<tr>
+<th style="text-align:center;">
+PW
+</th>
+<th style="text-align:center;">
+Fk Loss ToL
+</th>
+<th style="text-align:center;">
+Ms Op
+</th>
+<th style="text-align:center;">
+Ms Rs
+</th>
+<th style="text-align:center;">
+Off 45 Won
+</th>
+<th style="text-align:center;">
+Pass ToL
+</th>
+<th style="text-align:center;">
+Scr Op
+</th>
+<th style="text-align:center;">
+Scr Rs
+</th>
+<th style="text-align:center;">
+Tck ToL
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+37
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+12
+</td>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="fcbcrkdublscf20_files/figure-html/unnamed-chunk-75-1.png" width="1536" /></p>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Team Possession Won
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Possession Won
+</th>
+<th style="text-align:center;">
+Total Time (min)
+</th>
+<th style="text-align:center;">
+Shots
+</th>
+<th style="text-align:center;">
+% Shots per PW
+</th>
+<th style="text-align:center;">
+Shot Rate (secs)
+</th>
+<th style="text-align:center;">
+Scores
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+37
+</td>
+<td style="text-align:center;">
+13
+</td>
+<td style="text-align:center;">
+21
+</td>
+<td style="text-align:center;">
+57
+</td>
+<td style="text-align:center;">
+38
+</td>
+<td style="text-align:center;">
+8
+</td>
+</tr>
+</tbody>
+</table>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Possession Won by Type
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+PW Type
+</th>
+<th style="text-align:center;">
+Count
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Fk Brk Int
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Hp Brk Int
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Hp Int
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Kp Int
+</td>
+<td style="text-align:center;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Prs Won
+</td>
+<td style="text-align:center;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+PW
+</td>
+<td style="text-align:center;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+PW Pass
+</td>
+<td style="text-align:center;">
+12
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Tck Won
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ti Won
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+</tbody>
+</table>
+<div id="player-possession-won-stats---crokes" class="section level2">
+<h2>Player Possession Won Stats - Crokes</h2>
+<div id="htmlwidget-a2a4b44a9fea3d1f57e2" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a2a4b44a9fea3d1f57e2">{"x":{"filter":"none","caption":"<caption>Player Possession Won Stats - Crokes<\/caption>","data":[["1 R Fleming","2 H Power","3 E Sweeny","4 P Green","5 M O Gorman","6 M Lambe","7 A Kane","8 L Magee","9 C Sultan","10 L Kane","11 E Rutledge","12 M Jennings ","13 J Buckley","14 M Davren","15 A Conroy","20 K Crokes20","23 K Crokes23"],[2,2,3,2,1,4,3,1,1,2,1,1,1,0,0,0,1],[1,0,2,2,1,3,2,1,0,2,1,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0],[1,1,1,0,0,1,1,0,0,0,0,1,1,0,0,0,1]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>plynum<\/th>\n      <th>Total<\/th>\n      <th>Intercept<\/th>\n      <th>Ko Int<\/th>\n      <th>Tck Won<\/th>\n      <th>Other<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<p><img src="fcbcrkdublscf20_files/figure-html/unnamed-chunk-79-1.png" width="1536" /></p>
+</div>
+</div>
+<div id="tackling---foxrock" class="section level1">
+<h1>Tackling - Foxrock</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Passes per Defensive Action - Foxrock
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+# Opposition Passes
+</th>
+<th style="text-align:center;">
+Tackle Attempts
+</th>
+<th style="text-align:center;">
+Passes per Defensive Action
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+204
+</td>
+<td style="text-align:center;">
+91
+</td>
+<td style="text-align:center;">
+2.24
+</td>
+</tr>
+</tbody>
+</table>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Team Tackles - Foxrock
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Tackle Attempts
+</th>
+<th style="text-align:center;">
+Poss Won
+</th>
+<th style="text-align:center;">
+Pressured
+</th>
+<th style="text-align:center;">
+Free Loss
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+91
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+9
+</td>
+<td style="text-align:center;">
+18
+</td>
+</tr>
+</tbody>
+</table>
+<div id="player-tackle-stats---foxrock" class="section level2">
+<h2>Player Tackle Stats - Foxrock</h2>
+<div id="htmlwidget-d85789a2fbf4dd4e7f7a" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d85789a2fbf4dd4e7f7a">{"x":{"filter":"none","caption":"<caption>Player Tackle Stats - Foxrock<\/caption>","data":[["1 A Tarpy","2 A Murrey","3 N Collins","4 S Quinn","5 C O Riordan","6 T O Sullivan","7 L Fusciardi","8 S Goldrick","9 F Claffey","10 S Loughrane","11 A Connelly","12 N Ryan","13 An Murphy","14 Ai Murphy","15 J Egan","18 F Foxrock18","19 F Foxrock19","21 F Foxrock21"],[0,6,8,5,10,6,8,13,7,0,3,5,2,5,5,3,3,2],[0,6,5,4,9,6,8,7,7,0,1,3,0,1,2,2,1,1],[0,0,1,0,0,0,0,2,0,0,1,2,0,1,2,0,0,0],[0,0,2,1,1,0,0,3,0,0,1,0,2,3,1,1,2,1]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>player <\/th>\n      <th>Total Attempts<\/th>\n      <th>Tackle<\/th>\n      <th>Pressured<\/th>\n      <th>Free Loss<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div id="tackling---crokes" class="section level1">
+<h1>Tackling - Crokes</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Passes per Defensive Action - Crokes
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+# Opposition Passes
+</th>
+<th style="text-align:center;">
+Tackle Attempts
+</th>
+<th style="text-align:center;">
+Passes per Defensive Action
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+196
+</td>
+<td style="text-align:center;">
+87
+</td>
+<td style="text-align:center;">
+2.25
+</td>
+</tr>
+</tbody>
+</table>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Team Tackles - Crokes
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Tackle Attempts
+</th>
+<th style="text-align:center;">
+Poss Won
+</th>
+<th style="text-align:center;">
+Pressured
+</th>
+<th style="text-align:center;">
+Free Loss
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+87
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+19
+</td>
+<td style="text-align:center;">
+17
+</td>
+</tr>
+</tbody>
+</table>
+<div id="player-tackle-stats---crokes" class="section level2">
+<h2>Player Tackle Stats - Crokes</h2>
+<div id="htmlwidget-a5aee51851bf15622fde" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a5aee51851bf15622fde">{"x":{"filter":"none","caption":"<caption>Player Tackle Stats - Crokes<\/caption>","data":[["1 R Fleming","2 H Power","3 E Sweeny","4 P Green","5 M O Gorman","6 M Lambe","7 A Kane","8 L Magee","9 C Sultan","10 L Kane","11 E Rutledge","12 M Jennings ","13 J Buckley","14 M Davren","15 A Conroy","20 K Crokes20","23 K Crokes23"],[0,3,9,6,5,12,8,11,9,7,5,2,3,2,1,2,2],[0,2,5,2,5,9,6,5,4,3,4,1,3,1,0,1,0],[0,0,2,2,0,2,1,2,3,3,0,0,0,0,1,1,2],[0,1,2,2,0,1,1,4,2,1,1,1,0,1,0,0,0]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>player<\/th>\n      <th>Total Attempts<\/th>\n      <th>Tackle<\/th>\n      <th>Pressured<\/th>\n      <th>Free Loss<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="breaks-and-defensive-pressure---foxrock" class="section level2">
+<h2>Breaks and Defensive Pressure - Foxrock</h2>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Breaks and Defensive Pressure - Foxrock
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Total
+</th>
+<th style="text-align:center;">
+Breaks
+</th>
+<th style="text-align:center;">
+Pressured
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+23
+</td>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+15
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="all-breaks-and-defensive-pressure---foxrock" class="section level2">
+<h2>All Breaks and Defensive Pressure - Foxrock</h2>
+<div id="htmlwidget-ace3ced5cbf0a0c5bce0" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ace3ced5cbf0a0c5bce0">{"x":{"filter":"none","caption":"<caption>All Breaks and Defensive Pressure - Foxrock<\/caption>","data":[["1 A Tarpy","2 A Murrey","3 N Collins","4 S Quinn","5 C O Riordan","6 T O Sullivan","7 L Fusciardi","8 S Goldrick","9 F Claffey","10 S Loughrane","11 A Connelly","12 N Ryan","13 An Murphy","14 Ai Murphy","15 J Egan","18 F Foxrock18","19 F Foxrock19","21 F Foxrock21"],[0,7,1,3,2,1,1,1,0,0,2,0,1,0,0,0,0,4],[0,0,1,0,2,1,0,1,0,0,1,0,0,0,0,0,0,2],[0,7,0,3,0,0,1,0,0,0,1,0,1,0,0,0,0,2]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>player<\/th>\n      <th>Total<\/th>\n      <th>Breaks<\/th>\n      <th>Pressured<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="breaks-and-defensive-pressure---crokes" class="section level2">
+<h2>Breaks and Defensive Pressure - Crokes</h2>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Breaks and Defensive Pressure - Crokes
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Total
+</th>
+<th style="text-align:center;">
+Breaks
+</th>
+<th style="text-align:center;">
+Pressured
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+29
+</td>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:center;">
+23
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="all-breaks-and-defensive-pressure---crokes" class="section level2">
+<h2>All Breaks and Defensive Pressure - Crokes</h2>
+<div id="htmlwidget-a889637ea1706b549433" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a889637ea1706b549433">{"x":{"filter":"none","caption":"<caption>All Breaks and Defensive Pressure - Crokes<\/caption>","data":[["1 R Fleming","2 H Power","3 E Sweeny","4 P Green","5 M O Gorman","6 M Lambe","7 A Kane","8 L Magee","9 C Sultan","10 L Kane","11 E Rutledge","12 M Jennings ","13 J Buckley","14 M Davren","15 A Conroy","20 K Crokes20","23 K Crokes23"],[0,4,2,4,1,4,2,2,1,3,1,1,0,2,0,1,1],[0,1,0,1,0,1,1,0,0,0,1,1,0,0,0,0,0],[0,3,2,3,1,3,1,2,1,3,0,0,0,2,0,1,1]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>player<\/th>\n      <th>Total<\/th>\n      <th>Breaks<\/th>\n      <th>Pressured<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div id="ball-movement" class="section level1">
+<h1>Ball Movement</h1>
+<p><img src="fcbcrkdublscf20_files/figure-html/unnamed-chunk-90-1.png" width="1536" /></p>
+<div id="pass-network---foxrock" class="section level2">
+<h2>Pass Network - Foxrock</h2>
+<div id="htmlwidget-e1978d4ff5ad40f77b07" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e1978d4ff5ad40f77b07">{"x":{"filter":"none","caption":"<caption>Pass Network - Foxrock<\/caption>","data":[["1 A Tarpy","2 A Murrey","3 N Collins","4 S Quinn","5 C O Riordan","6 T O Sullivan","7 L Fusciardi","8 S Goldrick","9 F Claffey","10 S Loughrane","11 A Connelly","12 N Ryan","13 An Murphy","14 Ai Murphy","15 J Egan","18 F Foxrock18","19 F Foxrock19","21 F Foxrock21"],[0,5,6,0,7,2,11,12,11,11,11,7,7,9,10,4,1,1],[9,7,7,1,9,4,9,7,9,8,13,6,5,7,8,2,1,3],[0,7,8,0,11,3,17,21,14,29,22,11,14,17,16,4,1,1],[24,10,8,1,10,6,15,19,16,21,20,12,10,9,8,3,1,3]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>Player<\/th>\n      <th>In-Degree<\/th>\n      <th>Out-Degree<\/th>\n      <th>In-Strength<\/th>\n      <th>Out-Strength<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<p><img src="fcbcrkdublscf20_files/figure-html/unnamed-chunk-92-1.png" width="1536" /></p>
+</div>
+<div id="pass-network---crokes" class="section level2">
+<h2>Pass Network - Crokes</h2>
+<div id="htmlwidget-355f52bd5be6a8853c01" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-355f52bd5be6a8853c01">{"x":{"filter":"none","caption":"<caption>Pass Network - Crokes<\/caption>","data":[["1 R Fleming","2 H Power","3 E Sweeny","4 P Green","5 M O Gorman","6 M Lambe","7 A Kane","8 L Magee","9 C Sultan","10 L Kane","11 E Rutledge","12 M Jennings ","13 J Buckley","14 M Davren","15 A Conroy","20 K Crokes20","23 K Crokes23"],[0,3,5,6,7,6,9,5,13,9,9,9,7,9,3,3,7],[2,6,7,5,6,8,8,5,11,8,8,8,6,9,3,3,7],[0,3,12,7,10,6,12,12,25,19,20,14,15,14,7,3,10],[2,6,13,8,11,10,14,10,30,14,20,12,9,14,3,4,9]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>Player<\/th>\n      <th>In-Degree<\/th>\n      <th>Out-Degree<\/th>\n      <th>In-Strength<\/th>\n      <th>Out-Strength<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div id="possession-phase-duration" class="section level1">
+<h1>Possession &amp; Phase Duration</h1>
+<p><img src="fcbcrkdublscf20_files/figure-html/unnamed-chunk-94-1.png" width="1536" /></p>
+<p><img src="fcbcrkdublscf20_files/figure-html/unnamed-chunk-95-1.png" width="1536" /></p>
+<p><img src="fcbcrkdublscf20_files/figure-html/unnamed-chunk-96-1.png" width="1536" /></p>
+<p><img src="fcbcrkdublscf20_files/figure-html/unnamed-chunk-97-1.png" width="1536" /></p>
+</div>
+<div id="passes-per-possession" class="section level1">
+<h1>Passes per Possession</h1>
+<p><img src="fcbcrkdublscf20_files/figure-html/unnamed-chunk-98-1.png" width="1536" /></p>
+<p><img src="fcbcrkdublscf20_files/figure-html/unnamed-chunk-99-1.png" width="1536" /></p>
+</div>
+<div id="player-possession-involvement" class="section level1">
+<h1>Player Possession Involvement</h1>
+<p><img src="fcbcrkdublscf20_files/figure-html/unnamed-chunk-100-1.png" width="1536" /></p>
+<p><img src="fcbcrkdublscf20_files/figure-html/unnamed-chunk-101-1.png" width="1536" /></p>
+</div>
+<div id="player-passing-stats---foxrock" class="section level1">
+<h1>Player Passing Stats - Foxrock</h1>
+<div id="htmlwidget-fbbcb594b4b0e92335c1" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-fbbcb594b4b0e92335c1">{"x":{"filter":"none","caption":"<caption>Player Passing Stats - Foxrock<\/caption>","data":[["1 A Tarpy","2 A Murrey","3 N Collins","4 S Quinn","5 C O Riordan","6 T O Sullivan","7 L Fusciardi","8 S Goldrick","9 F Claffey","10 S Loughrane","11 A Connelly","12 N Ryan","13 An Murphy","14 Ai Murphy","15 J Egan","18 F Foxrock18","19 F Foxrock19","21 F Foxrock21"],[6,10,8,1,12,6,16,22,16,24,21,12,12,11,12,3,1,3],[2,10,7,1,9,5,13,15,16,16,16,12,11,9,10,2,1,1],[0,0,0,0,0,0,1,0,0,2,1,0,0,0,0,0,0,0],[0,7,6,0,8,3,12,19,13,24,22,10,14,15,14,4,1,1],[0,0,2,0,3,0,4,2,1,5,0,0,0,1,1,0,0,0],[1,1,1,0,1,0,0,3,1,1,1,2,2,2,2,0,0,0],[6,12,9,1,16,7,17,28,19,32,23,15,16,18,18,4,1,3],[1,0,0,0,1,0,1,3,0,3,1,1,2,1,5,0,0,0],[5,10,8,1,11,6,15,19,16,21,20,11,10,10,7,3,1,3]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>Player<\/th>\n      <th>Passes<\/th>\n      <th>Hp<\/th>\n      <th>Kp<\/th>\n      <th>Rec.x<\/th>\n      <th>KoRec<\/th>\n      <th>RsRec<\/th>\n      <th>OBP<\/th>\n      <th>Pass Loss<\/th>\n      <th>Comp Pass<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="player-passing-stats---crokes" class="section level1">
+<h1>Player Passing Stats - Crokes</h1>
+<div id="htmlwidget-83f978acb745bec3232a" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-83f978acb745bec3232a">{"x":{"filter":"none","caption":"<caption>Player Passing Stats - Crokes<\/caption>","data":[["1 R Fleming","2 H Power","3 E Sweeny","4 P Green","5 M O Gorman","6 M Lambe","7 A Kane","8 L Magee","9 C Sultan","10 L Kane","11 E Rutledge","12 M Jennings ","13 J Buckley","14 M Davren","15 A Conroy","20 K Crokes20","23 K Crokes23"],[2,6,16,10,11,10,14,10,34,14,22,14,11,14,3,4,9],[2,4,14,9,8,8,7,7,28,13,16,11,10,13,3,3,7],[0,2,2,1,3,2,7,3,6,1,6,3,1,1,0,1,2],[0,3,14,8,10,6,12,12,26,19,20,14,14,14,6,3,10],[0,1,1,2,0,1,1,2,2,2,1,0,0,0,0,1,0],[0,0,0,1,0,1,1,1,5,0,3,1,2,7,0,0,0],[2,8,19,13,11,15,21,17,35,23,25,16,17,21,6,4,11],[0,0,2,1,0,1,0,0,4,0,2,2,2,0,0,0,0],[2,6,14,9,11,9,14,10,30,14,20,12,9,14,3,4,9]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>Player<\/th>\n      <th>Passes<\/th>\n      <th>Hp<\/th>\n      <th>Kp<\/th>\n      <th>Rec<\/th>\n      <th>KoRec<\/th>\n      <th>RsRec<\/th>\n      <th>OBP<\/th>\n      <th>Pass Loss<\/th>\n      <th>Comp Pass<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -115,9 +115,9 @@ output: html_document
 
 <font size="3">[Foxrock Cabinteely vs Crokes](https://witnesstheanalysis.com/fcbcrkdublscf20.html)</font>
 
-**Round 1 Dublin Senior Football Championship**
+**Dublin Senior 1 Football Championship Final**
 
-<font size="3">[St Judes vs Na Fianna](https://witnesstheanalysis.com/judnafdsfc20.html)</font>
+<font size="3">[Ballymun vs Ballyboden](https://witnesstheanalysis.com/bkibsedubscf20.html)</font>
 
 **Dublin Senior 2 Football Championship Final**
 
@@ -135,9 +135,9 @@ output: html_document
 
 <font size="3">[Shelmalier vs Adamstown](https://witnesstheanalysis.com/sheadawexlscf20.html)</font>
 
-**Dublin Senior 1 Football Championship Final**
+**Round 1 Dublin Senior Football Championship**
 
-<font size="3">[Ballymun vs Ballyboden](https://witnesstheanalysis.com/bkibsedubscf20.html)</font>
+<font size="3">[St Judes vs Na Fianna](https://witnesstheanalysis.com/judnafdsfc20.html)</font>
 
 **Westmeath Inter Football Final**
 

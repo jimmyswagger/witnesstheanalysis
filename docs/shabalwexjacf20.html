@@ -1,0 +1,2868 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Shamrocks vs Ballyhogue</title>
+
+<script src="site_libs/jquery-1.12.4/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script src="site_libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
+<link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="site_libs/datatables-binding-0.16/datatables.js"></script>
+<link href="site_libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="site_libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="site_libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+<link href="site_libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Witness the Analysis</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Home
+  </a>
+</li>
+<li>
+  <a href="matches.html">
+    <span class="fa fa-volleyball-ball"></span>
+     
+    Matches
+  </a>
+</li>
+<li>
+  <a href="https://witnesstheanalysis.shinyapps.io/Results/">
+    <span class="fas fa fas fa-book"></span>
+     
+    Results
+  </a>
+</li>
+<li>
+  <a href="https://witnesstheanalysis.wordpress.com/2020/07/10/a-match-tracker-application-for-windows-version-3/">
+    <span class="fas fa fas fa-pen"></span>
+     
+    Analysis App
+  </a>
+</li>
+<li>
+  <a href="Trackers.html">
+    <span class="fas fa fas fa-desktop"></span>
+     
+    Shiny Apps
+  </a>
+</li>
+<li>
+  <a href="https://github.com/witnesstheanalysis/witnesstheanalysis">
+    <span class="fa fa-github fa-lg"></span>
+     
+    Codes
+  </a>
+</li>
+<li>
+  <a href="contact.html">
+    <span class="fa fa-envelope fa-lg"></span>
+     
+    Contact
+  </a>
+</li>
+<li>
+  <a href="https://twitter.com/WtAnalysis">
+    <span class="fa fa-twitter fa-lg"></span>
+     
+    Twitter
+  </a>
+</li>
+<li>
+  <a href="https://witnesstheanalysis.wordpress.com">
+    <span class="fa fa-wordpress fa-lg"></span>
+     
+    Blog
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Shamrocks vs Ballyhogue</h1>
+
+</div>
+
+
+<p><font size="4">Wexford Junior A Football Championship Final 2020<font></p>
+<p><font size="4">03/10/2020, Bellefield, Wexford<font></p>
+<p><img src="shabalwexjacf20_files/figure-html/unnamed-chunk-22-1.png" width="1536" /></p>
+<p><img src="shabalwexjacf20_files/figure-html/unnamed-chunk-23-1.png" width="1536" /></p>
+<div id="quick-game-stats" class="section level1">
+<h1>Quick Game Stats</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+All Possessions
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Possessions
+</th>
+<th style="text-align:center;">
+Poss Time (mins)
+</th>
+<th style="text-align:center;">
+Ave time (secs)
+</th>
+<th style="text-align:center;">
+All Shots
+</th>
+<th style="text-align:center;">
+% Shots per Poss
+</th>
+<th style="text-align:center;">
+Shot Rate (secs)
+</th>
+<th style="text-align:center;">
+Scores
+</th>
+<th style="text-align:center;">
+Score %
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Ballyhogue
+</td>
+<td style="text-align:center;">
+58
+</td>
+<td style="text-align:center;">
+16
+</td>
+<td style="text-align:center;">
+16
+</td>
+<td style="text-align:center;">
+24
+</td>
+<td style="text-align:center;">
+41
+</td>
+<td style="text-align:center;">
+40
+</td>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+42
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Shamrocks
+</td>
+<td style="text-align:center;">
+62
+</td>
+<td style="text-align:center;">
+15
+</td>
+<td style="text-align:center;">
+14
+</td>
+<td style="text-align:center;">
+25
+</td>
+<td style="text-align:center;">
+40
+</td>
+<td style="text-align:center;">
+36
+</td>
+<td style="text-align:center;">
+12
+</td>
+<td style="text-align:center;">
+48
+</td>
+</tr>
+</tbody>
+</table>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Team Scores
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Possessions Won
+</th>
+<th style="text-align:center;">
+Ko
+</th>
+<th style="text-align:center;">
+Ko Won
+</th>
+<th style="text-align:center;">
+Forty_Fives
+</th>
+<th style="text-align:center;">
+OP Shots
+</th>
+<th style="text-align:center;">
+Op Scores
+</th>
+<th style="text-align:center;">
+Op Score %
+</th>
+<th style="text-align:center;">
+Rs Shots
+</th>
+<th style="text-align:center;">
+Rs Scores
+</th>
+<th style="text-align:center;">
+Rs Score %
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Ballyhogue
+</td>
+<td style="text-align:center;">
+43
+</td>
+<td style="text-align:center;">
+15
+</td>
+<td style="text-align:center;">
+11
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+16
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+25.00
+</td>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:center;">
+75.00
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Shamrocks
+</td>
+<td style="text-align:center;">
+42
+</td>
+<td style="text-align:center;">
+20
+</td>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+22
+</td>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+45.45
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+66.67
+</td>
+</tr>
+</tbody>
+</table>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Tackles
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Tackle Attempts
+</th>
+<th style="text-align:center;">
+Poss Won
+</th>
+<th style="text-align:center;">
+Pressured
+</th>
+<th style="text-align:center;">
+Free Loss
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Ballyhogue
+</td>
+<td style="text-align:center;">
+41
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Shamrocks
+</td>
+<td style="text-align:center;">
+54
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+18
+</td>
+</tr>
+</tbody>
+</table>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Team Possession Won
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Possession Won
+</th>
+<th style="text-align:center;">
+Total Time (min)
+</th>
+<th style="text-align:center;">
+Shots
+</th>
+<th style="text-align:center;">
+% Shots per PW
+</th>
+<th style="text-align:center;">
+Shot Rate (secs)
+</th>
+<th style="text-align:center;">
+Scores
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Ballyhogue
+</td>
+<td style="text-align:center;">
+43
+</td>
+<td style="text-align:center;">
+11.33
+</td>
+<td style="text-align:center;">
+20
+</td>
+<td style="text-align:center;">
+46.51
+</td>
+<td style="text-align:center;">
+33.99
+</td>
+<td style="text-align:center;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Shamrocks
+</td>
+<td style="text-align:center;">
+42
+</td>
+<td style="text-align:center;">
+11.22
+</td>
+<td style="text-align:center;">
+20
+</td>
+<td style="text-align:center;">
+47.62
+</td>
+<td style="text-align:center;">
+33.65
+</td>
+<td style="text-align:center;">
+11
+</td>
+</tr>
+</tbody>
+</table>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Kick Outs
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Kickouts
+</th>
+<th style="text-align:center;">
+Ko Won
+</th>
+<th style="text-align:center;">
+% Ko Won
+</th>
+<th style="text-align:center;">
+Shots
+</th>
+<th style="text-align:center;">
+Scores
+</th>
+<th style="text-align:center;">
+Time to Ko (secs)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Ballyhogue
+</td>
+<td style="text-align:center;">
+15
+</td>
+<td style="text-align:center;">
+11
+</td>
+<td style="text-align:center;">
+73.33
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+21.63
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Shamrocks
+</td>
+<td style="text-align:center;">
+20
+</td>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+50.00
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+24.56
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="scorers" class="section level1">
+<h1>Scorers</h1>
+<div id="htmlwidget-75a5e4c22cea1dc23137" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-75a5e4c22cea1dc23137">{"x":{"filter":"none","data":[["Shamrocks","Ballyhogue","Shamrocks","Shamrocks","Ballyhogue","Shamrocks","Shamrocks","Shamrocks","Ballyhogue","Ballyhogue","Ballyhogue","Ballyhogue","Ballyhogue","Shamrocks","Shamrocks","Shamrocks","Shamrocks","Ballyhogue","Shamrocks","Ballyhogue","Ballyhogue","Shamrocks"],["Shot Left","Shot Left","Fk Shot Left","Shot Right","Shot Right","Shot Left","Shot Right","Shot Right","Fk Shot Left","Shot Right","Fk Shot Right","Fk Shot Left","Fk Shot Left","Fk Shot Left","Shot Left","Shot Left","Shot Right","Fk Shot Right","Shot Left","Fk Shot Right","Shot Right","Shot Right"],["8 S Sham8","14 B Bally14","11 S Sham11","10 S Sham10","11 B Bally11","11 S Sham11","9 S Sham9","14 S Sham14","14 B Bally14","15 B Bally15","15 B Bally15","14 B Bally14","14 B Bally14","11 S Sham11","11 S Sham11","13 S Sham13","3 S Sham3","22 B Bally22","11 S Sham11","22 B Bally22","2 B Bally2","22 S Sham22"],["Goal","Point","Fk Point","Point","Point","Point","Point","Goal","Fk Point","Point","Fk Point","Fk Point","Fk Point","Fk Point","Goal","Goal","Point","Fk Point","Point","Fk Point","Point","Goal"],[4,5,8,10,12,16,17,18,23,26,32,35,38,42,45,45,48,50,53,54,55,60]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>Team<\/th>\n      <th>Shot Type<\/th>\n      <th>Player<\/th>\n      <th>Outcome<\/th>\n      <th>Minute<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="player-score-type---shamrocks" class="section level2">
+<h2>Player Score Type - Shamrocks</h2>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Player Score Type - Shamrocks
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+plynum
+</th>
+<th style="text-align:center;">
+Action
+</th>
+<th style="text-align:center;">
+n
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+10 S Sham10
+</td>
+<td style="text-align:center;">
+Point
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+11 S Sham11
+</td>
+<td style="text-align:center;">
+Fk Point
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+11 S Sham11
+</td>
+<td style="text-align:center;">
+Goal
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+11 S Sham11
+</td>
+<td style="text-align:center;">
+Point
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+13 S Sham13
+</td>
+<td style="text-align:center;">
+Goal
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+14 S Sham14
+</td>
+<td style="text-align:center;">
+Goal
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+22 S Sham22
+</td>
+<td style="text-align:center;">
+Goal
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+3 S Sham3
+</td>
+<td style="text-align:center;">
+Point
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+8 S Sham8
+</td>
+<td style="text-align:center;">
+Goal
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+9 S Sham9
+</td>
+<td style="text-align:center;">
+Point
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="player-score-type---ballyhogue" class="section level2">
+<h2>Player Score Type - Ballyhogue</h2>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Player Score Type - Ballyhogue
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+plynum
+</th>
+<th style="text-align:center;">
+Action
+</th>
+<th style="text-align:center;">
+n
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+11 B Bally11
+</td>
+<td style="text-align:center;">
+Point
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+14 B Bally14
+</td>
+<td style="text-align:center;">
+Fk Point
+</td>
+<td style="text-align:center;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+14 B Bally14
+</td>
+<td style="text-align:center;">
+Point
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+15 B Bally15
+</td>
+<td style="text-align:center;">
+Fk Point
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+15 B Bally15
+</td>
+<td style="text-align:center;">
+Point
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2 B Bally2
+</td>
+<td style="text-align:center;">
+Point
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+22 B Bally22
+</td>
+<td style="text-align:center;">
+Fk Point
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="team-sheet" class="section level1">
+<h1>Team Sheet</h1>
+<div id="shamrocks" class="section level2">
+<h2>Shamrocks</h2>
+<div id="htmlwidget-cd0ce7c22bdf76b60352" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-cd0ce7c22bdf76b60352">{"x":{"filter":"none","data":[["Shamrocks","Shamrocks","Shamrocks","Shamrocks","Shamrocks","Shamrocks","Shamrocks","Shamrocks","Shamrocks","Shamrocks","Shamrocks","Shamrocks","Shamrocks","Shamrocks","Shamrocks","Shamrocks","Shamrocks"],["1 S Sham1","2 S Sham2","3 S Sham3","25 S Sham25","5 S Sham5","6 S Sham6","7 S Sham7","8 S Sham8","9 S Sham9","10 S Sham10","11 S Sham11","12 S Sham12","13 S Sham13","14 S Sham14","19 S Sham19","22 S Sham22","4 S Sham4"]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>Team<\/th>\n      <th>Player<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="ballyhogue" class="section level2">
+<h2>Ballyhogue</h2>
+<div id="htmlwidget-489f32938cd900a10937" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-489f32938cd900a10937">{"x":{"filter":"none","data":[["Ballyhogue","Ballyhogue","Ballyhogue","Ballyhogue","Ballyhogue","Ballyhogue","Ballyhogue","Ballyhogue","Ballyhogue","Ballyhogue","Ballyhogue","Ballyhogue","Ballyhogue","Ballyhogue","Ballyhogue","Ballyhogue","Ballyhogue","Ballyhogue","Ballyhogue","Ballyhogue"],["1 B Bally1","2 B Bally2","3 B Bally3","4 B Bally4","5 B Bally5","6 B Bally6","7 B Bally7","8 B Bally8","9 B Bally9","10 B Bally10","11 B Bally11","12 B Bally12","13 B Bally13","14 B Bally14","15 B Bally15","17 B Bally17","19 B Bally19","22 B Bally22","24 B Bally24","26 B Bally26"]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>Team<\/th>\n      <th>Player<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div id="worm" class="section level1">
+<h1>Worm</h1>
+<p><img src="shabalwexjacf20_files/figure-html/unnamed-chunk-34-1.png" width="1536" /></p>
+</div>
+<div id="periods" class="section level1">
+<h1>Periods</h1>
+<p><img src="shabalwexjacf20_files/figure-html/unnamed-chunk-35-1.png" width="1536" /></p>
+</div>
+<div id="shooting---shamrocks" class="section level1">
+<h1>Shooting - Shamrocks</h1>
+<p><img src="shabalwexjacf20_files/figure-html/unnamed-chunk-36-1.png" width="1536" /></p>
+<p><img src="shabalwexjacf20_files/figure-html/unnamed-chunk-37-1.png" width="1536" /></p>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Shot Outcome
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Blkd
+</th>
+<th style="text-align:center;">
+Fk Point
+</th>
+<th style="text-align:center;">
+Goal
+</th>
+<th style="text-align:center;">
+Point
+</th>
+<th style="text-align:center;">
+Post
+</th>
+<th style="text-align:center;">
+Saved
+</th>
+<th style="text-align:center;">
+Short
+</th>
+<th style="text-align:center;">
+Wide Left
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Shamrocks
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+3
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="shooting---ballyhogue" class="section level1">
+<h1>Shooting - Ballyhogue</h1>
+<p><img src="shabalwexjacf20_files/figure-html/unnamed-chunk-39-1.png" width="1536" /></p>
+<p><img src="shabalwexjacf20_files/figure-html/unnamed-chunk-40-1.png" width="1536" /></p>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Shot Outcome
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Blkd
+</th>
+<th style="text-align:center;">
+Fk Point
+</th>
+<th style="text-align:center;">
+Fk Short
+</th>
+<th style="text-align:center;">
+Fk Wide Left
+</th>
+<th style="text-align:center;">
+Point
+</th>
+<th style="text-align:center;">
+Short
+</th>
+<th style="text-align:center;">
+Wide Left
+</th>
+<th style="text-align:center;">
+Wide Right
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Ballyhogue
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+4
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="open-play-shooting---shamrocks" class="section level1">
+<h1>Open Play Shooting - Shamrocks</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Open Play Shots - Shamrocks
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Shots
+</th>
+<th style="text-align:center;">
+Scores
+</th>
+<th style="text-align:center;">
+Efficiency %
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Shamrocks
+</td>
+<td style="text-align:center;">
+23
+</td>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+43.5
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="shabalwexjacf20_files/figure-html/unnamed-chunk-43-1.png" width="1536" /></p>
+<table class="table" style="width: auto !important; ">
+<caption>
+Shot Pressure - Shamrocks
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Shot Outcome
+</th>
+<th style="text-align:left;">
+Pressure
+</th>
+<th style="text-align:center;">
+count
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Miss
+</td>
+<td style="text-align:left;">
+None
+</td>
+<td style="text-align:center;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Miss
+</td>
+<td style="text-align:left;">
+Light/Late
+</td>
+<td style="text-align:center;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Miss
+</td>
+<td style="text-align:left;">
+Heavy
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Score
+</td>
+<td style="text-align:left;">
+None
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Score
+</td>
+<td style="text-align:left;">
+Light/Late
+</td>
+<td style="text-align:center;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Score
+</td>
+<td style="text-align:left;">
+Heavy
+</td>
+<td style="text-align:center;">
+3
+</td>
+</tr>
+</tbody>
+</table>
+<div id="player-open-play-shooting-stats---shamrocks" class="section level2">
+<h2>Player Open Play Shooting Stats - Shamrocks</h2>
+<div id="htmlwidget-050dbbe35126c402c82a" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-050dbbe35126c402c82a">{"x":{"filter":"none","caption":"<caption>Player Shooting Stats - Shamrocks<\/caption>","data":[["1 S Sham1","2 S Sham2","3 S Sham3","4 S Sham4","5 S Sham5","6 S Sham6","7 S Sham7","8 S Sham8","9 S Sham9","10 S Sham10","11 S Sham11","12 S Sham12","13 S Sham13","14 S Sham14","19 S Sham19","22 S Sham22","25 S Sham25"],[0,0,0,0,0,1,0,1,0,0,5,0,1,2,0,0,0],[0,1,1,0,0,0,0,1,2,1,0,0,3,1,1,1,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,1,0,0,1,0,1,1,0,1,0],[0,0,1,0,0,0,0,0,1,1,2,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,1,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0],[0,0,0,0,0,0,0,1,0,0,1,0,0,0,1,0,0],[0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0],[0,1,1,0,0,1,0,2,2,1,5,0,4,3,1,1,0],[0,0,1,0,0,0,0,1,1,1,3,0,1,1,0,1,0]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>plynum<\/th>\n      <th>Slef<\/th>\n      <th>Srig<\/th>\n      <th>Hndps<\/th>\n      <th>Punch<\/th>\n      <th>Goal<\/th>\n      <th>Point<\/th>\n      <th>WR<\/th>\n      <th>WL<\/th>\n      <th>Sve<\/th>\n      <th>blkd<\/th>\n      <th>OpShot<\/th>\n      <th>OpScr<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div id="open-play-shooting---ballyhogue" class="section level1">
+<h1>Open Play Shooting - Ballyhogue</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Open Play Shots - Ballyhogue
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Shots
+</th>
+<th style="text-align:center;">
+Scores
+</th>
+<th style="text-align:center;">
+Efficiency %
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Ballyhogue
+</td>
+<td style="text-align:center;">
+16
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+25
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="shabalwexjacf20_files/figure-html/unnamed-chunk-47-1.png" width="1536" /></p>
+<table class="table" style="width: auto !important; ">
+<caption>
+Shot Pressure - Ballyhogue
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Shot Outcome
+</th>
+<th style="text-align:left;">
+Pressure
+</th>
+<th style="text-align:center;">
+count
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Miss
+</td>
+<td style="text-align:left;">
+None
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Miss
+</td>
+<td style="text-align:left;">
+Light/Late
+</td>
+<td style="text-align:center;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Miss
+</td>
+<td style="text-align:left;">
+Heavy
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Score
+</td>
+<td style="text-align:left;">
+None
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Score
+</td>
+<td style="text-align:left;">
+Light/Late
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Score
+</td>
+<td style="text-align:left;">
+Heavy
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+</tbody>
+</table>
+<div id="player-open-play-shooting-stats---ballyhogue" class="section level2">
+<h2>Player Open Play Shooting Stats - Ballyhogue</h2>
+<div id="htmlwidget-3609a9b9eaab218e0073" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3609a9b9eaab218e0073">{"x":{"filter":"none","caption":"<caption>Player Shooting Stats - Ballyhogue<\/caption>","data":[["1 B Bally1","2 B Bally2","3 B Bally3","4 B Bally4","5 B Bally5","6 B Bally6","7 B Bally7","8 B Bally8","9 B Bally9","10 B Bally10","11 B Bally11","12 B Bally12","13 B Bally13","14 B Bally14","15 B Bally15","17 B Bally17","19 B Bally19","22 B Bally22","24 B Bally24","26 B Bally26"],[0,0,0,0,0,0,1,0,0,0,0,0,1,4,2,0,0,0,0,0],[0,1,1,0,0,0,0,0,0,0,4,0,0,0,2,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,1,0,0,0,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0],[0,0,1,0,0,0,1,0,0,0,1,0,0,1,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,1,0,0,2,2,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0],[0,1,1,0,0,0,1,0,0,0,4,0,1,4,4,0,0,0,0,0],[0,1,0,0,0,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>plynum<\/th>\n      <th>Slef<\/th>\n      <th>Srig<\/th>\n      <th>Hndps<\/th>\n      <th>Punch<\/th>\n      <th>Goal<\/th>\n      <th>Point<\/th>\n      <th>WR<\/th>\n      <th>WL<\/th>\n      <th>Sve<\/th>\n      <th>blkd<\/th>\n      <th>OpShot<\/th>\n      <th>OpScr<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div id="frees-and-attacking-marks-won" class="section level1">
+<h1>Frees and Attacking Marks Won</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Frees and Attacking Marks Won
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Att Mark Won
+</th>
+<th style="text-align:center;">
+Mark Shots
+</th>
+<th style="text-align:center;">
+Mk Scores
+</th>
+<th style="text-align:center;">
+Mark Efficiency %
+</th>
+<th style="text-align:center;">
+Frees Won
+</th>
+<th style="text-align:center;">
+Fk Shots
+</th>
+<th style="text-align:center;">
+Fk Scores
+</th>
+<th style="text-align:center;">
+Fk Shot Efficiency %
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Shamrocks
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+100
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="all-place-ball-shots---shamrocks" class="section level1">
+<h1>All Place Ball Shots - Shamrocks</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+All Place Ball Shots - Shamrocks
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Fk Point
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Shamrocks
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="shabalwexjacf20_files/figure-html/unnamed-chunk-52-1.png" width="1536" /></p>
+</div>
+<div id="frees-and-attacking-marks-won---ballyhogue" class="section level1">
+<h1>Frees and Attacking Marks Won - Ballyhogue</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Frees and Attacking Marks Won
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Att Mark Won
+</th>
+<th style="text-align:center;">
+Mark Shots
+</th>
+<th style="text-align:center;">
+Mk Scores
+</th>
+<th style="text-align:center;">
+Mark Efficiency %
+</th>
+<th style="text-align:center;">
+Frees Won
+</th>
+<th style="text-align:center;">
+Fk Shots
+</th>
+<th style="text-align:center;">
+Fk Scores
+</th>
+<th style="text-align:center;">
+Fk Shot Efficiency %
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Ballyhogue
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+18
+</td>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:center;">
+75
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="all-place-ball-shots---ballyhogue" class="section level1">
+<h1>All Place Ball Shots - Ballyhogue</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+All Place Ball Shots - Ballyhogue
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Fk Point
+</th>
+<th style="text-align:center;">
+Fk Short
+</th>
+<th style="text-align:center;">
+Fk Wide Left
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Ballyhogue
+</td>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="shabalwexjacf20_files/figure-html/unnamed-chunk-55-1.png" width="1536" /></p>
+</div>
+<div id="kick-outs---shamrocks" class="section level1">
+<h1>Kick Outs - Shamrocks</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Outcome from Kick Outs - Shamrocks
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Ko
+</th>
+<th style="text-align:center;">
+Fk Loss ToL
+</th>
+<th style="text-align:center;">
+Ko ToL
+</th>
+<th style="text-align:center;">
+Ms Op
+</th>
+<th style="text-align:center;">
+Pass ToL
+</th>
+<th style="text-align:center;">
+Scr Rs
+</th>
+<th style="text-align:center;">
+Tck ToL
+</th>
+<th style="text-align:center;">
+ToL
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+20
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="shabalwexjacf20_files/figure-html/unnamed-chunk-57-1.png" width="1536" /></p>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Kick Outs - Shamrocks
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Kickouts
+</th>
+<th style="text-align:center;">
+Ko Won
+</th>
+<th style="text-align:center;">
+% Ko Won
+</th>
+<th style="text-align:center;">
+Shots
+</th>
+<th style="text-align:center;">
+Scores
+</th>
+<th style="text-align:center;">
+Time to Ko (secs)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Shamrocks
+</td>
+<td style="text-align:center;">
+20
+</td>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+50
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+24.56
+</td>
+</tr>
+</tbody>
+</table>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Kick Out Outcomes by Type
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Defence Setup
+</th>
+<th style="text-align:center;">
+Outcome
+</th>
+<th style="text-align:center;">
+Total
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Ko Lat Press
+</td>
+<td style="text-align:center;">
+Ko ToL
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ko Press
+</td>
+<td style="text-align:center;">
+Fk Loss ToL
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ko Press
+</td>
+<td style="text-align:center;">
+Ko ToL
+</td>
+<td style="text-align:center;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ko Press
+</td>
+<td style="text-align:center;">
+Ms Op
+</td>
+<td style="text-align:center;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ko Press
+</td>
+<td style="text-align:center;">
+Pass ToL
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ko Press
+</td>
+<td style="text-align:center;">
+Scr Rs
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ko Press
+</td>
+<td style="text-align:center;">
+Tck ToL
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ko Press
+</td>
+<td style="text-align:center;">
+ToL
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+</tbody>
+</table>
+<div id="player-kick-outs-stats---shamrocks" class="section level2">
+<h2>Player Kick Outs Stats - Shamrocks</h2>
+<div id="htmlwidget-dd4cdb1739f343a0aa2a" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-dd4cdb1739f343a0aa2a">{"x":{"filter":"none","caption":"<caption>Player Kick Outs Stats - Shamrocks<\/caption>","data":[["1 S Sham1","2 S Sham2","3 S Sham3","4 S Sham4","5 S Sham5","6 S Sham6","7 S Sham7","8 S Sham8","9 S Sham9","10 S Sham10","11 S Sham11","12 S Sham12","13 S Sham13","14 S Sham14","19 S Sham19","22 S Sham22","25 S Sham25"],[0,0,0,0,0,3,2,2,1,1,1,0,0,0,0,0,0],[0,0,0,0,0,3,2,2,1,0,1,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>plynum<\/th>\n      <th>Total<\/th>\n      <th>Ko Rec<\/th>\n      <th>Ko Brk Rec<\/th>\n      <th>Mark Won<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<p><img src="shabalwexjacf20_files/figure-html/unnamed-chunk-61-1.png" width="1536" /></p>
+</div>
+</div>
+<div id="kick-outs---ballyhogue" class="section level1">
+<h1>Kick Outs - Ballyhogue</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Outcome from Kick Outs - Ballyhogue
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Ko
+</th>
+<th style="text-align:center;">
+Fk Loss ToL
+</th>
+<th style="text-align:center;">
+Ko ToL
+</th>
+<th style="text-align:center;">
+Ms Op
+</th>
+<th style="text-align:center;">
+Pass ToL
+</th>
+<th style="text-align:center;">
+Scr Op
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+15
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="shabalwexjacf20_files/figure-html/unnamed-chunk-63-1.png" width="1536" /></p>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Kick Outs - Ballyhogue
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Kickouts
+</th>
+<th style="text-align:center;">
+Ko Won
+</th>
+<th style="text-align:center;">
+% Ko Won
+</th>
+<th style="text-align:center;">
+Shots
+</th>
+<th style="text-align:center;">
+Scores
+</th>
+<th style="text-align:center;">
+Time to Ko (secs)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Ballyhogue
+</td>
+<td style="text-align:center;">
+15
+</td>
+<td style="text-align:center;">
+11
+</td>
+<td style="text-align:center;">
+73.33
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+21.63
+</td>
+</tr>
+</tbody>
+</table>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Kick Out Outcomes by Type
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Defence Setup
+</th>
+<th style="text-align:center;">
+Outcome
+</th>
+<th style="text-align:center;">
+Total
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Ko Lat Press
+</td>
+<td style="text-align:center;">
+Ko ToL
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ko Lat Press
+</td>
+<td style="text-align:center;">
+Scr Op
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ko Press
+</td>
+<td style="text-align:center;">
+Fk Loss ToL
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ko Press
+</td>
+<td style="text-align:center;">
+Ko ToL
+</td>
+<td style="text-align:center;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ko Press
+</td>
+<td style="text-align:center;">
+Ms Op
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ko Press
+</td>
+<td style="text-align:center;">
+Pass ToL
+</td>
+<td style="text-align:center;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ko Press
+</td>
+<td style="text-align:center;">
+Scr Op
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+</tbody>
+</table>
+<div id="player-kick-out-stats---ballyhogue" class="section level2">
+<h2>Player Kick Out Stats - Ballyhogue</h2>
+<div id="htmlwidget-6e55beb3a9c5277a4ab6" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6e55beb3a9c5277a4ab6">{"x":{"filter":"none","caption":"<caption>Player Kick Out Stats - Ballyhogue<\/caption>","data":[["1 B Bally1","2 B Bally2","3 B Bally3","4 B Bally4","5 B Bally5","6 B Bally6","7 B Bally7","8 B Bally8","9 B Bally9","10 B Bally10","11 B Bally11","12 B Bally12","13 B Bally13","14 B Bally14","15 B Bally15","17 B Bally17","19 B Bally19","22 B Bally22","24 B Bally24","26 B Bally26"],[0,1,0,0,4,0,1,1,0,2,0,0,0,0,0,0,0,0,1,1],[0,1,0,0,2,0,1,1,0,2,0,0,0,0,0,0,0,0,1,1],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>plynum<\/th>\n      <th>Total<\/th>\n      <th>Ko Rec<\/th>\n      <th>Ko Brk Rec<\/th>\n      <th>Mark Won<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<p><img src="shabalwexjacf20_files/figure-html/unnamed-chunk-67-1.png" width="1536" /></p>
+</div>
+</div>
+<div id="possession-won---shamrocks" class="section level1">
+<h1>Possession Won - Shamrocks</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<thead>
+<tr>
+<th style="text-align:center;">
+PW
+</th>
+<th style="text-align:center;">
+Fk Loss ToL
+</th>
+<th style="text-align:center;">
+Ms Op
+</th>
+<th style="text-align:center;">
+Pass ToL
+</th>
+<th style="text-align:center;">
+Scr Op
+</th>
+<th style="text-align:center;">
+Scr Rs
+</th>
+<th style="text-align:center;">
+Tck ToL
+</th>
+<th style="text-align:center;">
+ToL
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+41
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+9
+</td>
+<td style="text-align:center;">
+15
+</td>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="shabalwexjacf20_files/figure-html/unnamed-chunk-69-1.png" width="1536" /></p>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Team Possession Won - Shamrocks
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Possession Won
+</th>
+<th style="text-align:center;">
+Total Time (min)
+</th>
+<th style="text-align:center;">
+Shots
+</th>
+<th style="text-align:center;">
+% Shots per PW
+</th>
+<th style="text-align:center;">
+Shot Rate (secs)
+</th>
+<th style="text-align:center;">
+Scores
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+42
+</td>
+<td style="text-align:center;">
+11
+</td>
+<td style="text-align:center;">
+20
+</td>
+<td style="text-align:center;">
+48
+</td>
+<td style="text-align:center;">
+34
+</td>
+<td style="text-align:center;">
+11
+</td>
+</tr>
+</tbody>
+</table>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Possession Won by Type
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+PW Type
+</th>
+<th style="text-align:center;">
+Count
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Fk Brk Int
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Hp Brk Int
+</td>
+<td style="text-align:center;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Hp Int
+</td>
+<td style="text-align:center;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ko Int
+</td>
+<td style="text-align:center;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Kp Brk Int
+</td>
+<td style="text-align:center;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Kp Int
+</td>
+<td style="text-align:center;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+PW
+</td>
+<td style="text-align:center;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+PW Pass
+</td>
+<td style="text-align:center;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+PWP Brk Int
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Tck Won
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ti Won
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+</tbody>
+</table>
+<div id="player-possession-won-stats---shamrocks" class="section level2">
+<h2>Player Possession Won Stats - Shamrocks</h2>
+<div id="htmlwidget-d67dc32b9ca3fde22d41" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d67dc32b9ca3fde22d41">{"x":{"filter":"none","caption":"<caption>Player Possession Won Stats - Shamrocks<\/caption>","data":[["1 S Sham1","2 S Sham2","3 S Sham3","4 S Sham4","5 S Sham5","6 S Sham6","7 S Sham7","8 S Sham8","9 S Sham9","10 S Sham10","11 S Sham11","12 S Sham12","13 S Sham13","14 S Sham14","19 S Sham19","22 S Sham22","25 S Sham25"],[3,3,3,0,3,3,3,3,3,3,3,2,2,1,0,1,0],[2,1,3,0,3,2,2,1,1,0,2,2,0,1,0,0,0],[0,0,0,0,0,1,0,0,0,2,0,0,0,0,0,0,0],[0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0],[1,1,0,0,0,0,1,2,2,0,1,0,2,0,0,1,0]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>plynum<\/th>\n      <th>Total<\/th>\n      <th>Intercept<\/th>\n      <th>Ko Int<\/th>\n      <th>Tck Won<\/th>\n      <th>Other<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<p><img src="shabalwexjacf20_files/figure-html/unnamed-chunk-73-1.png" width="1536" /></p>
+</div>
+</div>
+<div id="possession-won---ballyhogue" class="section level1">
+<h1>Possession Won - Ballyhogue</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<thead>
+<tr>
+<th style="text-align:center;">
+PW
+</th>
+<th style="text-align:center;">
+Fk Loss ToL
+</th>
+<th style="text-align:center;">
+Ms Op
+</th>
+<th style="text-align:center;">
+Ms Rs
+</th>
+<th style="text-align:center;">
+Pass ToL
+</th>
+<th style="text-align:center;">
+Scr Op
+</th>
+<th style="text-align:center;">
+Scr Rs
+</th>
+<th style="text-align:center;">
+Tck ToL
+</th>
+<th style="text-align:center;">
+ToL
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+43
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+17
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="shabalwexjacf20_files/figure-html/unnamed-chunk-75-1.png" width="1536" /></p>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Team Possession Won
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Possession Won
+</th>
+<th style="text-align:center;">
+Total Time (min)
+</th>
+<th style="text-align:center;">
+Shots
+</th>
+<th style="text-align:center;">
+% Shots per PW
+</th>
+<th style="text-align:center;">
+Shot Rate (secs)
+</th>
+<th style="text-align:center;">
+Scores
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+43
+</td>
+<td style="text-align:center;">
+11
+</td>
+<td style="text-align:center;">
+20
+</td>
+<td style="text-align:center;">
+47
+</td>
+<td style="text-align:center;">
+34
+</td>
+<td style="text-align:center;">
+8
+</td>
+</tr>
+</tbody>
+</table>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Possession Won by Type
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+PW Type
+</th>
+<th style="text-align:center;">
+Count
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Fk Won Off Foul
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Hp Int
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ko Int
+</td>
+<td style="text-align:center;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Kp Brk Int
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Kp Int
+</td>
+<td style="text-align:center;">
+11
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+PW
+</td>
+<td style="text-align:center;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+PW Pass
+</td>
+<td style="text-align:center;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Tck Won
+</td>
+<td style="text-align:center;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ti Won
+</td>
+<td style="text-align:center;">
+3
+</td>
+</tr>
+</tbody>
+</table>
+<div id="player-possession-won-stats---ballyhogue" class="section level2">
+<h2>Player Possession Won Stats - Ballyhogue</h2>
+<div id="htmlwidget-f873abf39095d1ad5e13" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f873abf39095d1ad5e13">{"x":{"filter":"none","caption":"<caption>Player Possession Won Stats - Ballyhogue<\/caption>","data":[["1 B Bally1","2 B Bally2","3 B Bally3","4 B Bally4","5 B Bally5","6 B Bally6","7 B Bally7","8 B Bally8","9 B Bally9","10 B Bally10","11 B Bally11","12 B Bally12","13 B Bally13","14 B Bally14","15 B Bally15","17 B Bally17","19 B Bally19","22 B Bally22","24 B Bally24","26 B Bally26"],[3,4,2,1,1,1,0,1,4,1,3,3,2,1,2,1,1,2,4,1],[1,3,1,0,0,0,0,1,1,1,1,2,1,0,0,1,0,1,1,0],[0,0,0,0,0,1,0,0,0,0,1,1,1,0,1,0,0,1,0,1],[0,0,0,0,1,0,0,0,1,0,1,0,0,0,0,0,1,0,1,0],[2,1,1,1,0,0,0,0,2,0,0,0,0,1,1,0,0,0,2,0]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>plynum<\/th>\n      <th>Total<\/th>\n      <th>Intercept<\/th>\n      <th>Ko Int<\/th>\n      <th>Tck Won<\/th>\n      <th>Other<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<p><img src="shabalwexjacf20_files/figure-html/unnamed-chunk-79-1.png" width="1536" /></p>
+</div>
+</div>
+<div id="tackling---shamrocks" class="section level1">
+<h1>Tackling - Shamrocks</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Passes per Defensive Action - Shamrocks
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+# Opposition Passes
+</th>
+<th style="text-align:center;">
+Tackle Attempts
+</th>
+<th style="text-align:center;">
+Passes per Defensive Action
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+168
+</td>
+<td style="text-align:center;">
+54
+</td>
+<td style="text-align:center;">
+3.11
+</td>
+</tr>
+</tbody>
+</table>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Team Tackles - Shamrocks
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Tackle Attempts
+</th>
+<th style="text-align:center;">
+Poss Won
+</th>
+<th style="text-align:center;">
+Pressured
+</th>
+<th style="text-align:center;">
+Free Loss
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+54
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+18
+</td>
+</tr>
+</tbody>
+</table>
+<div id="player-tackle-stats---shamrocks" class="section level2">
+<h2>Player Tackle Stats - Shamrocks</h2>
+<div id="htmlwidget-68e5bdd9996d9a3a59f2" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-68e5bdd9996d9a3a59f2">{"x":{"filter":"none","caption":"<caption>Player Tackle Stats - Shamrocks<\/caption>","data":[["1 S Sham1","2 S Sham2","3 S Sham3","4 S Sham4","5 S Sham5","6 S Sham6","7 S Sham7","8 S Sham8","9 S Sham9","10 S Sham10","11 S Sham11","12 S Sham12","13 S Sham13","14 S Sham14","19 S Sham19","22 S Sham22","25 S Sham25"],[0,6,2,2,8,1,3,1,3,3,2,8,6,2,3,0,4],[0,3,2,1,3,0,1,1,2,2,1,6,4,2,1,0,1],[0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,2],[0,3,0,1,5,1,1,0,1,1,0,1,1,0,2,0,1]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>player <\/th>\n      <th>Total Attempts<\/th>\n      <th>Tackle<\/th>\n      <th>Pressured<\/th>\n      <th>Free Loss<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div id="tackling---ballyhogue" class="section level1">
+<h1>Tackling - Ballyhogue</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Passes per Defensive Action - Ballyhogue
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+# Opposition Passes
+</th>
+<th style="text-align:center;">
+Tackle Attempts
+</th>
+<th style="text-align:center;">
+Passes per Defensive Action
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+143
+</td>
+<td style="text-align:center;">
+41
+</td>
+<td style="text-align:center;">
+3.49
+</td>
+</tr>
+</tbody>
+</table>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Team Tackles - Ballyhogue
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Tackle Attempts
+</th>
+<th style="text-align:center;">
+Poss Won
+</th>
+<th style="text-align:center;">
+Pressured
+</th>
+<th style="text-align:center;">
+Free Loss
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+41
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+8
+</td>
+</tr>
+</tbody>
+</table>
+<div id="player-tackle-stats---ballyhogue" class="section level2">
+<h2>Player Tackle Stats - Ballyhogue</h2>
+<div id="htmlwidget-1df433372299c5133f53" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1df433372299c5133f53">{"x":{"filter":"none","caption":"<caption>Player Tackle Stats - Ballyhogue<\/caption>","data":[["1 B Bally1","2 B Bally2","3 B Bally3","4 B Bally4","5 B Bally5","6 B Bally6","7 B Bally7","8 B Bally8","9 B Bally9","10 B Bally10","11 B Bally11","12 B Bally12","13 B Bally13","14 B Bally14","15 B Bally15","17 B Bally17","19 B Bally19","22 B Bally22","24 B Bally24","26 B Bally26"],[0,2,4,0,3,2,2,2,8,0,4,5,2,1,0,1,4,0,1,0],[0,2,3,0,2,1,2,1,5,0,3,5,2,0,0,0,2,0,0,0],[0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,2,0,1,0],[0,0,1,0,0,1,0,1,3,0,1,0,0,0,0,1,0,0,0,0]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>player<\/th>\n      <th>Total Attempts<\/th>\n      <th>Tackle<\/th>\n      <th>Pressured<\/th>\n      <th>Free Loss<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="breaks-and-defensive-pressure---shamrocks" class="section level2">
+<h2>Breaks and Defensive Pressure - Shamrocks</h2>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Breaks and Defensive Pressure - Shamrocks
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Total
+</th>
+<th style="text-align:center;">
+Breaks
+</th>
+<th style="text-align:center;">
+Pressured
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+23
+</td>
+<td style="text-align:center;">
+12
+</td>
+<td style="text-align:center;">
+11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="all-breaks-and-defensive-pressure---shamrocks" class="section level2">
+<h2>All Breaks and Defensive Pressure - Shamrocks</h2>
+<div id="htmlwidget-ac284f962d137bca477e" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ac284f962d137bca477e">{"x":{"filter":"none","caption":"<caption>All Breaks and Defensive Pressure - Shamrocks<\/caption>","data":[["1 S Sham1","2 S Sham2","3 S Sham3","4 S Sham4","5 S Sham5","6 S Sham6","7 S Sham7","8 S Sham8","9 S Sham9","10 S Sham10","11 S Sham11","12 S Sham12","13 S Sham13","14 S Sham14","19 S Sham19","22 S Sham22","25 S Sham25"],[0,3,3,0,4,1,0,2,1,2,2,0,2,0,1,0,2],[0,1,2,0,1,1,0,2,0,2,1,0,0,0,1,0,1],[0,2,1,0,3,0,0,0,1,0,1,0,2,0,0,0,1]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>player<\/th>\n      <th>Total<\/th>\n      <th>Breaks<\/th>\n      <th>Pressured<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="breaks-and-defensive-pressure---ballyhogue" class="section level2">
+<h2>Breaks and Defensive Pressure - Ballyhogue</h2>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Breaks and Defensive Pressure - Ballyhogue
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Total
+</th>
+<th style="text-align:center;">
+Breaks
+</th>
+<th style="text-align:center;">
+Pressured
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+16
+</td>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+6
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="all-breaks-and-defensive-pressure---ballyhogue" class="section level2">
+<h2>All Breaks and Defensive Pressure - Ballyhogue</h2>
+<div id="htmlwidget-7a60f280a7adf9452021" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-7a60f280a7adf9452021">{"x":{"filter":"none","caption":"<caption>All Breaks and Defensive Pressure - Ballyhogue<\/caption>","data":[["1 B Bally1","2 B Bally2","3 B Bally3","4 B Bally4","5 B Bally5","6 B Bally6","7 B Bally7","8 B Bally8","9 B Bally9","10 B Bally10","11 B Bally11","12 B Bally12","13 B Bally13","14 B Bally14","15 B Bally15","17 B Bally17","19 B Bally19","22 B Bally22","24 B Bally24","26 B Bally26"],[0,1,0,0,6,3,0,2,1,0,2,0,0,0,0,0,0,0,1,0],[0,1,0,0,4,2,0,2,0,0,1,0,0,0,0,0,0,0,0,0],[0,0,0,0,2,1,0,0,1,0,1,0,0,0,0,0,0,0,1,0]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>player<\/th>\n      <th>Total<\/th>\n      <th>Breaks<\/th>\n      <th>Pressured<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div id="ball-movement" class="section level1">
+<h1>Ball Movement</h1>
+<p><img src="shabalwexjacf20_files/figure-html/unnamed-chunk-90-1.png" width="1536" /></p>
+<div id="pass-network---shamrocks" class="section level2">
+<h2>Pass Network - Shamrocks</h2>
+<div id="htmlwidget-508d6c73d79b0a974750" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-508d6c73d79b0a974750">{"x":{"filter":"none","caption":"<caption>Pass Network - Shamrocks<\/caption>","data":[["1 S Sham1","2 S Sham2","3 S Sham3","4 S Sham4","5 S Sham5","6 S Sham6","7 S Sham7","8 S Sham8","9 S Sham9","10 S Sham10","11 S Sham11","12 S Sham12","13 S Sham13","14 S Sham14","19 S Sham19","22 S Sham22","25 S Sham25"],[2,6,7,0,7,7,5,5,9,9,9,11,6,4,2,2,4],[10,5,6,0,8,7,8,4,8,9,9,10,2,1,1,2,5],[2,6,8,0,11,10,7,8,12,11,18,20,7,4,3,2,6],[16,6,7,0,13,8,9,6,13,12,13,21,2,1,1,2,5]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>Player<\/th>\n      <th>In-Degree<\/th>\n      <th>Out-Degree<\/th>\n      <th>In-Strength<\/th>\n      <th>Out-Strength<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<p><img src="shabalwexjacf20_files/figure-html/unnamed-chunk-92-1.png" width="1536" /></p>
+</div>
+<div id="pass-network---ballyhogue" class="section level2">
+<h2>Pass Network - Ballyhogue</h2>
+<div id="htmlwidget-1ca86ec3cde8400830c1" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1ca86ec3cde8400830c1">{"x":{"filter":"none","caption":"<caption>Pass Network - Ballyhogue<\/caption>","data":[["1 B Bally1","2 B Bally2","3 B Bally3","4 B Bally4","5 B Bally5","6 B Bally6","7 B Bally7","8 B Bally8","9 B Bally9","10 B Bally10","11 B Bally11","12 B Bally12","13 B Bally13","14 B Bally14","15 B Bally15","17 B Bally17","19 B Bally19","22 B Bally22","24 B Bally24","26 B Bally26"],[0,8,4,0,5,6,8,7,7,9,9,8,8,4,6,1,2,2,5,1],[2,9,3,0,5,5,7,7,6,8,9,12,7,2,3,1,2,4,7,1],[0,15,4,0,6,7,13,8,8,14,16,15,11,6,10,1,3,2,8,1],[2,16,5,0,6,8,10,9,8,12,12,19,13,2,4,1,2,4,13,2]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>Player<\/th>\n      <th>In-Degree<\/th>\n      <th>Out-Degree<\/th>\n      <th>In-Strength<\/th>\n      <th>Out-Strength<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div id="possession-phase-duration" class="section level1">
+<h1>Possession &amp; Phase Duration</h1>
+<p><img src="shabalwexjacf20_files/figure-html/unnamed-chunk-94-1.png" width="1536" /></p>
+<p><img src="shabalwexjacf20_files/figure-html/unnamed-chunk-95-1.png" width="1536" /></p>
+<p><img src="shabalwexjacf20_files/figure-html/unnamed-chunk-96-1.png" width="1536" /></p>
+<p><img src="shabalwexjacf20_files/figure-html/unnamed-chunk-97-1.png" width="1536" /></p>
+</div>
+<div id="passes-per-possession" class="section level1">
+<h1>Passes per Possession</h1>
+<p><img src="shabalwexjacf20_files/figure-html/unnamed-chunk-98-1.png" width="1536" /></p>
+<p><img src="shabalwexjacf20_files/figure-html/unnamed-chunk-99-1.png" width="1536" /></p>
+</div>
+<div id="player-possession-involvement" class="section level1">
+<h1>Player Possession Involvement</h1>
+<p><img src="shabalwexjacf20_files/figure-html/unnamed-chunk-100-1.png" width="1536" /></p>
+<p><img src="shabalwexjacf20_files/figure-html/unnamed-chunk-101-1.png" width="1536" /></p>
+</div>
+<div id="player-passing-stats---shamrocks" class="section level1">
+<h1>Player Passing Stats - Shamrocks</h1>
+<div id="htmlwidget-aa03b012407b3e61c451" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-aa03b012407b3e61c451">{"x":{"filter":"none","caption":"<caption>Player Passing Stats - Shamrocks<\/caption>","data":[["1 S Sham1","2 S Sham2","3 S Sham3","4 S Sham4","5 S Sham5","6 S Sham6","7 S Sham7","8 S Sham8","9 S Sham9","10 S Sham10","11 S Sham11","12 S Sham12","13 S Sham13","14 S Sham14","19 S Sham19","22 S Sham22","25 S Sham25"],[6,7,9,0,14,10,10,7,15,15,15,22,4,1,1,2,5],[4,6,4,0,13,6,8,5,13,9,12,16,3,1,0,2,5],[0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0],[2,7,8,0,11,7,5,6,11,11,17,20,7,4,3,2,5],[0,0,0,0,0,3,2,2,1,1,1,0,0,0,0,0,0],[1,0,0,0,1,0,1,3,3,2,0,0,0,0,0,0,0],[7,10,12,0,15,13,12,14,19,17,21,24,9,5,3,3,5],[1,1,2,0,1,2,1,0,2,2,2,1,2,0,0,0,0],[5,6,7,0,13,8,9,7,13,13,13,21,2,1,1,2,5]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>Player<\/th>\n      <th>Passes<\/th>\n      <th>Hp<\/th>\n      <th>Kp<\/th>\n      <th>Rec.x<\/th>\n      <th>KoRec<\/th>\n      <th>RsRec<\/th>\n      <th>OBP<\/th>\n      <th>Pass Loss<\/th>\n      <th>Comp Pass<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="player-passing-stats---ballyhogue" class="section level1">
+<h1>Player Passing Stats - Ballyhogue</h1>
+<div id="htmlwidget-06a2aca4d03b0faaa9f1" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-06a2aca4d03b0faaa9f1">{"x":{"filter":"none","caption":"<caption>Player Passing Stats - Ballyhogue<\/caption>","data":[["1 B Bally1","2 B Bally2","3 B Bally3","4 B Bally4","5 B Bally5","6 B Bally6","7 B Bally7","8 B Bally8","9 B Bally9","10 B Bally10","11 B Bally11","12 B Bally12","13 B Bally13","14 B Bally14","15 B Bally15","17 B Bally17","19 B Bally19","22 B Bally22","24 B Bally24","26 B Bally26"],[4,16,5,0,8,9,12,9,11,15,13,19,13,2,7,2,2,4,14,3],[2,15,5,0,7,8,11,9,3,11,5,19,12,2,3,1,1,3,11,1],[2,1,0,0,1,1,1,0,8,4,8,0,1,0,4,1,1,1,3,2],[0,14,4,0,5,7,13,8,8,14,16,15,12,6,10,2,3,2,8,1],[0,1,0,0,4,0,1,1,0,2,0,0,0,0,0,0,0,0,1,1],[1,3,1,0,0,1,0,0,0,0,0,2,1,1,2,0,0,1,1,1],[4,23,8,1,10,9,14,10,13,17,19,22,15,8,14,3,4,5,14,4],[2,2,0,0,2,1,1,0,3,3,1,0,0,0,3,0,0,2,1,1],[2,14,5,0,6,8,11,9,8,12,12,19,13,2,4,2,2,2,13,2]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>Player<\/th>\n      <th>Passes<\/th>\n      <th>Hp<\/th>\n      <th>Kp<\/th>\n      <th>Rec<\/th>\n      <th>KoRec<\/th>\n      <th>RsRec<\/th>\n      <th>OBP<\/th>\n      <th>Pass Loss<\/th>\n      <th>Comp Pass<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

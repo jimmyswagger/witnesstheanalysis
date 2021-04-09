@@ -62,6 +62,7 @@ options(dplyr.summarise.inform = FALSE)
 
 
 ```{r}
+
 ## Load Match and Team sheet ## 
 
 match <- read.csv(file="c:/Users/donagh/OneDrive/Spreadsheet fun/PA Analytics/PA Template/balkilmayicf20/matchbalkilmayicf20.csv", header=TRUE, sep=";")
@@ -218,7 +219,7 @@ match$Action)))))))
   ifelse(Action == "Rec" & lag (Action == "Sl Brk Opp"), "Kp Brk Rec",
   ifelse(Action == "Rec" & lag (Action == "Mk Brk Opp"), "Hp Brk Rec",
   ifelse(Action == "Rec" & lag (Action == "PWP Brk Opp"), "Kp Brk Rec",
-  ifelse(Action == "ToL" & lag (Action == "Fk Brk Opp"), "FK Brk ToL",
+  ifelse(Action == "ToL" & lag (Action == "Fk Brk Opp"), "Fk Brk ToL",
   ifelse(Action == "ToL" & lag (Action == "Sl Brk Opp"), "Sl Brk ToL",
   ifelse(Action == "ToL" & lag (Action == "Mk Brk Opp"), "Mk Brk ToL",
   ifelse(Action == "ToL" & lag (Action == "PWP Brk Opp"), "PWP Brk ToL",
@@ -373,6 +374,7 @@ mutate(subset = VLOOKUP(Action, sets, Action, subset), main = VLOOKUP(Action, se
 ## make time 2 digits ##
 
 match <- match %>% mutate_if(is.numeric, round, digits = 2)
+
 
 ## Match Times ##
 
@@ -1550,7 +1552,7 @@ summarize (passes = sum (main %in% c("Pass Op", "Pass Rs")),tot_dist = sum(dist)
 
 # Time to Tackle
 
-tack <-pass%>%filter (main == "Ko"| main == "PW"| main %in% c( "Tck Att", "Free Won" )|Action %in% c ("Hp Prs", "Kp Prs"))
+tack <-pass%>%filter (main == "Ko"| main == "PW"| main %in% c( "Tck Att", "Free Won" )|Action %in% c ("Hp Prs", "Kp Prs", "45 Pass"))
 
 tack$main[tack$main =="Free Won"]<-"Tck Att"
 tack$main[tack$main =="Pass Op"]<-"Tck Att"
@@ -1790,7 +1792,7 @@ scored <- as.data.frame(scored) %>%
 scored$number <- row.names(scored)
 
 
-scored <- scored%>% mutate(Tot_ScrA = ifelse(scoreA == "0" & number %in% c("1","2","3","4","5","6","7","8"),0,scored$Tot_ScrA))
+scored <- scored%>% mutate(Tot_ScrA = ifelse(scoreA == "0" & number %in% c("1"),0,scored$Tot_ScrA))
 
 scored <- scored%>% mutate(Tot_ScrB = ifelse(scoreB == "0" & number %in% c("1"),0,scored$Tot_ScrB))
 
@@ -3076,11 +3078,11 @@ pal <- c("Ko Rec" = "blue",
 "Ko Mk Won High"  = "orange",
 "Ko Lost Mk" = "red",
 "Ko Lost Mk High" = "red",
-"Ko Unc Rec" = "yellow",
+"Ko Sl Won" = "yellow",
 "Ko Unc Rec High" = "white",
 "Ko Unc Rec NoPrs" = "white",
 "Ko Fk Won Off" = "lightblue",
-"Ko Fk Loss Off High" = "darkred",
+"Ko Fk Loss Off" = "darkred",
 "Ko Mk Won Po" = "darkgreen",
 "Ko MkW Po High" = "darkgreen",
 "Ko Target" = "pink",
@@ -3650,7 +3652,6 @@ zonedB <-bind_cols(zonedB,inzonescrB,oczonescrB)
 
 <font size="4">15/12/2020, MacHale Park, Mayo<font>
 
-
 ```{r, fig.width = 16, fig.height = 2}
 df <- data.frame(
     x = rep(seq(0, 6, 6), 1),
@@ -3747,12 +3748,12 @@ passlpop <- passlpop[passlpop$main!="Opp Brk", ]
 
 passlpop <- passlpop
 
-lpop <- passlpop %>%group_by(Team)%>%summarize(Possession_Won =sum(main == "PW"), Ko = sum(main == "Ko"),Ko_Won = sum(main == "Ko Rec"),Open_Play_Shots = sum(main == "Shot Op"),Open_Play_Score = sum(subset == "Scr Op"), PWp = (Open_Play_Score/Open_Play_Shots*100),
+lpop <- passlpop %>%group_by(Team)%>%summarize(Possession_Won =sum(main == "PW"), Ko = sum(main == "Ko"),Ko_Won = sum(main == "Ko Rec"), Forty_Fives = sum(Action %in% c("45 Shot Left","45 Shot Right","45 Pass")) ,Open_Play_Shots = sum(main == "Shot Op"),Open_Play_Score = sum(subset == "Scr Op"), PWp = (Open_Play_Score/Open_Play_Shots*100),
 Fk_Shots = sum(main == "Shot Rs"),Fk_Score = sum(subset == "Scr Rs"), Pp = (Fk_Score/Fk_Shots*100))
 
 
 
-lpopA <- rename(lpop,  "Possessions Won" = Possession_Won, "Ko Won" = Ko_Won, "OP Shots" = Open_Play_Shots ,  "Op Scores" = Open_Play_Score ,  "FK Shots" = Fk_Shots , "Fk Scores" = Fk_Score, "Op Score %" = PWp, "Fk Score %" = Pp)
+lpopA <- rename(lpop,  "Possessions Won" = Possession_Won, "Ko Won" = Ko_Won, "OP Shots" = Open_Play_Shots ,  "Op Scores" = Open_Play_Score ,  "Rs Shots" = Fk_Shots , "Rs Scores" = Fk_Score, "Op Score %" = PWp, "Rs Score %" = Pp)
 
 
 
@@ -3771,7 +3772,7 @@ passlpopA  <- pass
 passlpopAllA  <- passlpopA %>%group_by(Team)%>%summarize(
 TackleAttempts = sum (main %in% c("Tck Def","Free Loss")), 
 PossessionWon = sum (Action %in% c("Tck Won")),
-PassPress = sum(Action %in% c("Tck Prs","Tck Prs G")),
+PassPress = sum(subset %in% c("Tck Prs","Tck Prs G")),
 FreeLoss = sum(Action %in% c("Fk Loss")))
 
 tcklpopAllAply <- rename(passlpopAllA, "Tackle Attempts" = TackleAttempts , "Poss Won" = PossessionWon , "Pressured" = PassPress, 
@@ -3831,11 +3832,14 @@ kable_minimal()
 
 scores <- scores %>% mutate (minute = timeoc/60) 
 
-scores <- scores %>% mutate_if(is.numeric, round, digits = 0)
+scores <- scores %>% mutate_if(is.numeric, round, digits = 0) 
   
 plyscr <-  scores %>% filter (subsetoc %in% c ( "Scr Op", "Scr Rs")) %>% ungroup()
 
 plyscr <- plyscr %>% select (7,9,19,21,45)
+
+
+plyscr <- rename(plyscr,  "Shot Type" = Action, "Player" = plynum, "Outcome" = Actionoc,  "Minute" = minute)
 
 #kable (plyscr) %>%kable_minimal()
 
@@ -3843,6 +3847,33 @@ plyscr <- plyscr %>% select (7,9,19,21,45)
 datatable(plyscr,options = list(pageLength = 5,lengthMenu = c(5, 10, 15, 20),columnDefs = 
                            list(list(className = 'dt-center', 
                                      targets = "_all"))),class = 'cell-border stripe', rownames = FALSE)
+
+```
+
+## Player Score Type - Balla
+
+```{r}
+scrAtot <- pass %>% group_by(plynum) %>% filter (Teamnum == "A", Action %in% c ("Goal", "Point","Fk Goal", "Fk Point","Mk Goal","Mk Point", "Pk Goal", "Pk Point")) %>% count (Action)
+
+scrAtot <- rename(scrAtot, "Player" = plynum, "Outcome" = Action,  "Total" = n)
+
+
+scrAtot  %>%
+  kbl(caption = "Player Score Type - Balla", align = "c") %>%
+  kable_minimal()
+
+```
+
+## Player Score Type - Kiltimagh
+
+```{r}
+scrBtot <- pass %>% group_by(plynum) %>% filter (Teamnum == "B", Action %in% c ("Goal", "Point","Fk Goal", "Fk Point","Mk Goal","Mk Point", "Pk Goal", "Pk Point")) %>% count (Action)
+
+scrBtot <- rename(scrBtot, "Player" = plynum, "Outcome" = Action,  "Total" = n)
+
+scrBtot  %>%
+  kbl(caption = "Player Score Type - Kiltimagh", align = "c") %>%
+  kable_minimal()
 
 ```
 
@@ -3938,7 +3969,7 @@ labs (fill = "Period") + theme(legend.position="bottom")
 
 
 
-#  Shooting 
+#  Shooting - Balla
 
 ```{r, fig.width = 16, fig.height = 2}
 ShotsAllA <- sop %>%group_by(Team)%>%filter(Teamnum == "A")
@@ -4029,60 +4060,9 @@ ASB  %>%
 
 ```
 
-## Player Shooting Stats - Balla
-
-```{r}
-
-passA <- pass %>%filter (Teamnum == "A")
 
 
-playerstsA <- passA %>%group_by(Player,plynum)%>%summarize(Slef =sum(Action == "Shot Left"),Srig =sum(Action == "Shot Right"),Hndps =sum(Action %in% c ( "Hp Shot")),Punch = sum (Action %in% c("Punch")),
-Goal = sum (Action %in% c("Goal")),Point = sum (Action %in% c("Point")),WR =sum (Action %in% c("Wide Right")),
-WL =sum (Action %in% c("Wide Left")),Sve = sum (Action %in% c("Saved")),blkd= sum (Action %in% c("Blkd")),
-OpShot =sum(main == "Shot Op"),OpScr =sum(subset == "Scr Op"))
-
-playerstsA  <- playerstsA  %>%ungroup() %>% select(-Player)
-
-#playerstsA  %>%
-  #kbl(caption = "Player Shooting Stats - Balla",align = "c") %>%
-    #kable_minimal()
-
-
-datatable(playerstsA,options = list(pageLength = 5,lengthMenu = c(5, 10, 15, 20),columnDefs = 
-                           list(list(className = 'dt-center', 
-                                     targets = "_all"))),caption = 'Player Shooting Stats - Balla',class = 'cell-border stripe', rownames = FALSE)
-
-```
-
-
-```{r, fig.width = 16, fig.height = 12}
-
-shotsA <- scores %>%group_by(Team, Action) %>% filter(Teamnum == "B", subset =="Shot Op"|subset == "Shot Rs")
-
-shotsAScr <- scores %>%group_by(Team, Action) %>% filter(Teamnum == "B", subsetoc =="Scr Op"|subsetoc == "Scr Rs")
-
-shotseffA <- scores  %>%group_by(Zonethy,tx,ty,bx,by)%>%filter(Teamnum =="B", subset == "Shot Op"|subset == "Shot Rs") %>%summarize(Scr =sum(subsetoc == "Scr Op"|subsetoc == "Scr Rs"), Ms = sum(subsetoc == "Ms Op"|subsetoc == "Ms Rs"),Shot=(Scr + Ms))%>%select(Zonethy,Scr,Ms,Shot,tx,ty,bx,by)
-
-shotseffA = shotseffA %>% 
-   unite(shtscr, Scr, Shot, sep = "/", remove = FALSE)
-
-pthy + 
-  geom_text(data= shotseffA, aes(x= tx, y=ty, label = shtscr),colour = "white", size = 28, alpha = 0.4) +
-  geom_point(data = shotsA, aes(x=Areax, y=Areay, colour = Actionoc, shape = Action), size = 6) + 
-  scale_colour_manual(values = colshotvertpal) +
-  geom_text_repel(data = shotsA, aes(x=Areax, y=Areay, label = Player, col = Actionoc), size = 8) +
-  scale_shape_manual(values = colshotshape) +
-  guides(size = FALSE) +
-  labs(shape ="Shot Type", colour = "Outcome",title = "All Shots - Kiltimagh") +
-  theme(plot.title=element_text(size=32, hjust=0.5, face="bold", color="black")) +
-  theme(legend.box="vertical", legend.margin=margin()) +
-  guides(shape = guide_legend(override.aes = list(size = 10)),colour = guide_legend(override.aes = list(size = 10))) +
-  theme(legend.position="bottom", legend.title=element_text(size=20),legend.text=element_text(size=20))
-
-
-
-
-```
+# Shooting - Kiltimagh
 
 ```{r, fig.width = 16, fig.height = 2}
 ShotsAllB <- sop %>%group_by(Team)%>%filter(Teamnum == "B")
@@ -4131,6 +4111,34 @@ ggplot(df, aes(x, y, height = h, width = w, label = info)) +
 
 ```
 
+```{r, fig.width = 16, fig.height = 12}
+
+shotsA <- scores %>%group_by(Team, Action) %>% filter(Teamnum == "B", subset =="Shot Op"|subset == "Shot Rs")
+
+shotsAScr <- scores %>%group_by(Team, Action) %>% filter(Teamnum == "B", subsetoc =="Scr Op"|subsetoc == "Scr Rs")
+
+shotseffA <- scores  %>%group_by(Zonethy,tx,ty,bx,by)%>%filter(Teamnum =="B", subset == "Shot Op"|subset == "Shot Rs") %>%summarize(Scr =sum(subsetoc == "Scr Op"|subsetoc == "Scr Rs"), Ms = sum(subsetoc == "Ms Op"|subsetoc == "Ms Rs"),Shot=(Scr + Ms))%>%select(Zonethy,Scr,Ms,Shot,tx,ty,bx,by)
+
+shotseffA = shotseffA %>% 
+   unite(shtscr, Scr, Shot, sep = "/", remove = FALSE)
+
+pthy + 
+  geom_text(data= shotseffA, aes(x= tx, y=ty, label = shtscr),colour = "white", size = 28, alpha = 0.4) +
+  geom_point(data = shotsA, aes(x=Areax, y=Areay, colour = Actionoc, shape = Action), size = 6) + 
+  scale_colour_manual(values = colshotvertpal) +
+  geom_text_repel(data = shotsA, aes(x=Areax, y=Areay, label = Player, col = Actionoc), size = 8) +
+  scale_shape_manual(values = colshotshape) +
+  guides(size = FALSE) +
+  labs(shape ="Shot Type", colour = "Outcome",title = "All Shots - Kiltimagh") +
+  theme(plot.title=element_text(size=32, hjust=0.5, face="bold", color="black")) +
+  theme(legend.box="vertical", legend.margin=margin()) +
+  guides(shape = guide_legend(override.aes = list(size = 10)),colour = guide_legend(override.aes = list(size = 10))) +
+  theme(legend.position="bottom", legend.title=element_text(size=20),legend.text=element_text(size=20))
+
+
+
+
+```
 
 ```{r}
 ASB<- pass %>%group_by(Team, Action) %>% filter(Teamnum == "B", main =="Shot Op Oc"| main == "Shot Rs Oc")
@@ -4145,31 +4153,9 @@ ASB  %>%
 
 ```
 
-## Player Shooting Stats - Kiltimagh
-
-```{r}
-
-passB <- pass %>%filter (Teamnum == "B")
 
 
-playerstsB <- passB %>%group_by(Player,plynum)%>%summarize(Slef =sum(Action == "Shot Left"),Srig =sum(Action == "Shot Right"),Hndps =sum(Action %in% c ( "Hp Shot")),Punch = sum (Action %in% c("Punch")),
-Goal = sum (Action %in% c("Goal")),Point = sum (Action %in% c("Point")),WR =sum (Action %in% c("Wide Right")),
-WL =sum (Action %in% c("Wide Left")),Sve = sum (Action %in% c("Saved")),blkd= sum (Action %in% c("Blkd")),
-OpShot =sum(main == "Shot Op"),OpScr =sum(subset == "Scr Op"))
-
-playerstsB  <- playerstsB  %>%ungroup() %>% select(-Player)
-
-#playerstsB  %>%
-  #kbl(caption = "Player Shooting Stats - Kiltimagh",align = "c") %>%
-    #kable_minimal()
-
-datatable(playerstsB,options = list(pageLength = 5,lengthMenu = c(5, 10, 15, 20),columnDefs = 
-                           list(list(className = 'dt-center', 
-                                     targets = "_all"))),caption = 'Player Shooting Stats - Kiltimagh',class = 'cell-border stripe', rownames = FALSE)
-```
-
-
-# Open Play 
+# Open Play Shooting - Balla 
 
 ```{r, fig.width = 16, fig.height = 2}
 
@@ -4254,6 +4240,34 @@ prsA %>%
 ```
 
 
+## Player Open Play Shooting Stats - Balla
+
+```{r}
+
+passA <- pass %>%filter (Teamnum == "A")
+
+
+playerstsA <- passA %>%group_by(Player,plynum)%>%summarize(Slef =sum(Action == "Shot Left"),Srig =sum(Action == "Shot Right"),Hndps =sum(Action %in% c ( "Hp Shot")),Punch = sum (Action %in% c("Punch")),
+Goal = sum (Action %in% c("Goal")),Point = sum (Action %in% c("Point")),WR =sum (Action %in% c("Wide Right")),
+WL =sum (Action %in% c("Wide Left")),Sve = sum (Action %in% c("Saved")),blkd= sum (Action %in% c("Blkd")),
+OpShot =sum(main == "Shot Op"),OpScr =sum(subset == "Scr Op"))
+
+playerstsA  <- playerstsA  %>%ungroup() %>% select(-Player)
+
+#playerstsA  %>%
+  #kbl(caption = "Player Shooting Stats - Balla",align = "c") %>%
+    #kable_minimal()
+
+
+datatable(playerstsA,options = list(pageLength = 5,lengthMenu = c(5, 10, 15, 20),columnDefs = 
+                           list(list(className = 'dt-center', 
+                                     targets = "_all"))),caption = 'Player Shooting Stats - Balla',class = 'cell-border stripe', rownames = FALSE)
+
+```
+
+
+# Open Play Shooting - Kiltimagh
+
 ```{r, fig.width = 16, fig.height = 2}
 ShotsAllB <- sop %>%group_by(Team)%>%filter(Teamnum == "B")
 
@@ -4289,7 +4303,7 @@ shotseffA = shotseffA %>%
 pthy + 
   geom_text(data= shotseffA, aes(x= tx, y=ty, label = shtscr),colour = "white", size = 30, alpha = 0.4) +
   geom_point(data = shotsA, aes(x=Areax, y=Areay, colour = as.factor(shdf), shape = Action), size = 6) + 
-    #scale_colour_manual(values = colshotpal, labels = c("None", "Light/Late", "Heavy")) +
+    scale_colour_manual(values = colshotpal, labels = c("None", "Light/Late", "Heavy")) +
   geom_text_repel(data = shotsA, aes(x=Areax, y=Areay, label = plylaboc, colour = as.factor(shdf)), size = 6) +
     scale_shape_manual(values = colshotshape) +
     guides(size = FALSE) +
@@ -4331,6 +4345,29 @@ prsB %>%
 
 
 
+```
+
+## Player Open Play Shooting Stats - Kiltimagh
+
+```{r}
+
+passB <- pass %>%filter (Teamnum == "B")
+
+
+playerstsB <- passB %>%group_by(Player,plynum)%>%summarize(Slef =sum(Action == "Shot Left"),Srig =sum(Action == "Shot Right"),Hndps =sum(Action %in% c ( "Hp Shot")),Punch = sum (Action %in% c("Punch")),
+Goal = sum (Action %in% c("Goal")),Point = sum (Action %in% c("Point")),WR =sum (Action %in% c("Wide Right")),
+WL =sum (Action %in% c("Wide Left")),Sve = sum (Action %in% c("Saved")),blkd= sum (Action %in% c("Blkd")),
+OpShot =sum(main == "Shot Op"),OpScr =sum(subset == "Scr Op"))
+
+playerstsB  <- playerstsB  %>%ungroup() %>% select(-Player)
+
+#playerstsB  %>%
+  #kbl(caption = "Player Shooting Stats - Kiltimagh",align = "c") %>%
+    #kable_minimal()
+
+datatable(playerstsB,options = list(pageLength = 5,lengthMenu = c(5, 10, 15, 20),columnDefs = 
+                           list(list(className = 'dt-center', 
+                                     targets = "_all"))),caption = 'Player Shooting Stats - Kiltimagh',class = 'cell-border stripe', rownames = FALSE)
 ```
 
 # Frees and Attacking Marks Won 
@@ -4515,7 +4552,7 @@ theme(plot.title=element_text(size=20, hjust=0.5, face="bold", color="black")) +
 ```
 
 
-# Kick Outs  
+# Kick Outs - Balla  
 
 ```{r}
 ## Counts ##
@@ -4686,7 +4723,7 @@ pthy + theme(legend.position="bottom") +
 
 ```
 
-
+# Kick Outs - Kiltimagh
 
 ```{r}
 ## Counts ##
@@ -4857,7 +4894,7 @@ pthy + theme(legend.position="bottom") +
 ```
 
 
-# Possession Won 
+# Possession Won - Balla
 
 ```{r,fig.width = 16, fig.height = 12}
 
@@ -5010,7 +5047,6 @@ datatable(pwplyA,options = list(pageLength = 5,lengthMenu = c(5, 10, 15, 20),col
 ```
 
 
-
 ```{r, fig.width = 16, fig.height = 12}
 
 sopa <- sop %>%group_by(Team, Action) %>% filter(Teamnum == "A",Pitch_Oc_Ko == "PW")
@@ -5042,7 +5078,7 @@ pthy + theme(legend.position="bottom") +
 
 ```
 
-
+# Possession Won - Kiltimagh
 
 ```{r,fig.width = 16, fig.height = 12}
 
@@ -5224,7 +5260,7 @@ pthy + theme(legend.position="bottom") +
 
 ```
 
-# Tackling
+# Tackling - Balla
 
 
 ```{r}
@@ -5252,7 +5288,7 @@ BAdefact <- BAdefact %>% mutate_if(is.numeric, round, digits = 2)
 
 
 BAdefact  %>%
-  kbl(caption = "Passes per Defensive Action",align = "c") %>%
+  kbl(caption = "Passes per Defensive Action - Balla",align = "c") %>%
     kable_minimal()
 
 
@@ -5269,7 +5305,7 @@ passlpopA  <- pass %>% filter (Teamnum == "A")
 passlpopAllA  <- passlpopA %>%group_by(Team)%>%summarize(
 TackleAttempts = sum (main %in% c("Tck Def","Free Loss")), 
 PossessionWon = sum (Action %in% c("Tck Won")),
-PassPress = sum(Action %in% c("Tck Prs","Tck Prs G")),
+PassPress = sum(subset %in% c("Tck Prs","Tck Prs G")),
 FreeLoss = sum(Action %in% c("Fk Loss","Fk Loss G")))
 
 passlpopAllA <-  passlpopAllA%>% select (-Team)
@@ -5286,6 +5322,8 @@ tcklpopAllAply  %>%
 
 ```
 
+## Player Tackle Stats - Balla
+
 ```{r}
 
 
@@ -5295,13 +5333,13 @@ passlpopAply  <- pass %>% filter (Teamnum == "A")
 #Change total tackles to sum of the other counts
 passlpopAllAply  <- passlpopAply %>%group_by(Player,plynum)%>%summarize(
   TackleAttempts = sum (main %in% c("Tck Def","Free Loss")), 
-  #PossessionWon = sum (Action %in% c("Tck Won")),
-  PassPress = sum(Action %in% c("Tck Prs","Tck Prs G")),
+  Tackle = sum (Action %in% c("Tck Def","Tck Def G")),
+   PassPress = sum(subset %in% c("Tck Prs","Tck Prs G")),
   FreeLoss = sum(Action %in% c("Fk Loss","Fk Loss G")))
 
 #passlpopAllA <-  passlpopAllA%>% select (-Team)
 
-passlpopAllAply <- rename(passlpopAllAply, "player " = plynum, "Tackle Attempts" = TackleAttempts , "Pressured" = PassPress, 
+passlpopAllAply <- rename(passlpopAllAply, "player " = plynum, "Total Attempts" = TackleAttempts , "Pressured" = PassPress, 
   "Free Loss" = FreeLoss)
 
 #passlpopAllAply  <- passlpopAllAply %>% arrange(Player)
@@ -5321,6 +5359,8 @@ datatable(tcklpopAllAply,options = list(pageLength = 5,lengthMenu = c(5, 10, 15,
 
 ```
 
+
+# Tackling - Kiltimagh
 
 ```{r}
 
@@ -5347,7 +5387,7 @@ BAdefact <- BAdefact %>% mutate_if(is.numeric, round, digits = 2)
 
 
 BAdefact  %>%
-  kbl(caption = "Passes per Defensive Action",align = "c") %>%
+  kbl(caption = "Passes per Defensive Action - Kiltimagh",align = "c") %>%
     kable_minimal()
 
 
@@ -5365,7 +5405,7 @@ passlpopA  <- pass %>% filter (Teamnum == "B")
 passlpopAllA  <- passlpopA %>%group_by(Team)%>%summarize(
 TackleAttempts = sum (main %in% c("Tck Def","Free Loss")), 
 PossessionWon = sum (Action %in% c("Tck Won")),
-PassPress = sum(Action %in% c("Tck Prs","Tck Prs G")),
+PassPress = sum(subset %in% c("Tck Prs","Tck Prs G")),
 FreeLoss = sum(Action %in% c("Fk Loss","Fk Loss G")))
 
 passlpopAllA <-  passlpopAllA%>% select (-Team)
@@ -5392,13 +5432,13 @@ passlpopAply  <- pass %>% filter (Teamnum == "B")
 #Change total tackles to sum of the other counts
 passlpopAllAply  <- passlpopAply %>%group_by(Player,plynum)%>%summarize(
   TackleAttempts = sum (main %in% c("Tck Def","Free Loss")), 
-  #PossessionWon = sum (Action %in% c("Tck Won")),
-  PassPress = sum(Action %in% c("Tck Prs","Tck Prs G")),
+  Tackle = sum (Action %in% c("Tck Def","Tck Def G")),
+  PassPress = sum(subset %in% c("Tck Prs","Tck Prs G")),
   FreeLoss = sum(Action %in% c("Fk Loss","Fk Loss G")))
 
 #passlpopAllA <-  passlpopAllA%>% select (-Team)
 
-passlpopAllAply <- rename(passlpopAllAply,"player" = plynum, "Tackle Attempts" = TackleAttempts ,  "Pressured" = PassPress, 
+passlpopAllAply <- rename(passlpopAllAply,"player" = plynum, "Total Attempts" = TackleAttempts ,  "Pressured" = PassPress, 
                        "Free Loss" = FreeLoss)
 
 #passlpopAllAply  <- passlpopAllAply %>% arrange(Player)
@@ -5417,7 +5457,7 @@ datatable(tcklpopAllBply,options = list(pageLength = 5,lengthMenu = c(5, 10, 15,
 ```
 
 
-# Breaks and Defensive Pressure 
+## Breaks and Defensive Pressure - Balla 
 
 
 ```{r}
@@ -5436,7 +5476,7 @@ passlpopAllA  <- passlpopA %>%group_by(Team)%>%summarize(
 brklpopAllA <-  passlpopAllA%>% select (-Team)
 
 brklpopAllA  %>%
-kbl(caption = "Breaks and Defensive Pressure", align = "c") %>%
+kbl(caption = "Breaks and Defensive Pressure - Balla", align = "c") %>%
 kable_minimal()
 
 
@@ -5472,7 +5512,7 @@ datatable(brkplyA,options = list(pageLength = 5,lengthMenu = c(5, 10, 15, 20),co
 
 ```
 
-
+## Breaks and Defensive Pressure - Kiltimagh
 
 
 ```{r}
@@ -5743,9 +5783,6 @@ datatable(plystatsANet,options = list(pageLength = 5,lengthMenu = c(5, 10, 15, 2
 
 
 ```
-
-
-
 
 ```{r,fig.width = 16, fig.height = 12}
 
@@ -6381,7 +6418,7 @@ panel.grid.minor = element_blank()) +
 geom_text(aes(label = value, group =Invol), color = "black",position = position_stack(vjust = 0.5), size = 10)  +
  theme(legend.position="bottom", axis.text.x = element_text(size = 20, angle = 90, vjust = 0.5, hjust=1)) +
       scale_y_continuous(breaks=c(5,10,15, 20, 25,30)) +
-    labs(title = "Player Possession Involvement - Balla") + theme(plot.title=element_text(size=32, hjust=0.5, face="bold", color="black"))
+    labs(title = "Player Possession Involvement - Kiltimagh") + theme(plot.title=element_text(size=32, hjust=0.5, face="bold", color="black"))
 
 
 

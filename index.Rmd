@@ -12,3 +12,58 @@ Also as this is very much a work in progress I will be adding bits as I go along
 
 There are of course the odd mistakes here and there.
 
+<font size="5">Abbreviations and Terms</font>  
+
+Ko -	Kick Out
+
+Rec -	Received	
+
+PW -	Possession Won	
+
+ToL -	Turn over Loss	
+
+Brk - Break (Can be Own or Opponents depending on which team is in possession - Spoil)	
+
+Sl -	Side Line	
+
+Int -	Intercept	
+
+Hp -	Hand pass	
+
+Kp -	Kick Pass	
+
+Fk -	Free Kick	
+
+Op -	Open Play	
+
+Rs -	Restart - Kick out, Free Kick etc	
+
+Mk -	Mark
+
+Prs	- Pressure	
+
+Tck	- Tackle	
+
+Ti -	Throw In	
+
+Po -	Play on	- Player won a mark but played on
+
+Blkd -Blocked	
+
+Pk - Penalty	
+
+Att	- Attacking team	
+
+Def	- Defending team	
+
+Ko Press - Defending team pressed player to player (usually inside opponents 45)	
+
+Ko Lat Press - Defending team left an attacker unmarked but pressed once they received the ko	
+
+Ko Unc Press - Defending team concended possession from the ko and retreated with no press
+
+Pass Prs - Pass was made while being tackled by defence	
+
+Rec Prs - Pass was received while there was contact from defence	
+
+

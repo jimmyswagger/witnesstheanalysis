@@ -98,6 +98,15 @@ output: html_document
 
 <font size="3">[Dublin vs Mayo](https://witnesstheanalysis.com/dubmayaif20.html)</font>
 
+
+## 2021 {.tabset .tabset-fade .tabset-pills}
+
+### County 
+
+**NFL Division 1 South**
+
+<font size="3">[Kerry vs Galway](https://witnesstheanalysis.com/kergalnfl1s21.html)</font>
+
 ## 2020 {.tabset .tabset-fade .tabset-pills}
 
 

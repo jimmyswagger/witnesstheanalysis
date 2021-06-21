@@ -5709,8 +5709,8 @@ passcntA <- sop%>%group_by(possno, .drop=TRUE) %>% filter (Teamnum == "B")%>%sel
 
 
  ggplot(data = passcntA, aes(x = possno, y = passno, fill = mainoc)) + geom_bar(position="dodge", stat="identity", width = .5) +
-  scale_fill_manual(values = passnocolpals, labels = c("Full Time","OP Shot", "Fk Shot", "T/o Lost")) +
-   scale_colour_manual(values = passnocolpals, labels = c("Full Time","OP Shot", "Fk Shot", "T/o Lost")) +
+  scale_fill_manual(values = passnocolpals, labels = c("OP Shot", "Fk Shot", "T/o Lost")) +
+   scale_colour_manual(values = passnocolpals, labels = c("OP Shot", "Fk Shot", "T/o Lost")) +
   labs(fill="Ended in a") +
   ylab("Total Passes") +
   xlab("Possessions - Mayo") +

@@ -1245,7 +1245,7 @@ phaseSoP  <-phaseSoP %>% mutate(secs =(timeoc - time))
 
 
 #create duration groups
-phaseSoP <-phaseSoP %>% mutate(line_col = ifelse(secs >=0 & secs  <9.49 ,1, ifelse(secs  >=9.5 & secs  <19.49, 2,ifelse(secs >=19.5 & secs  <29.49, 3,ifelse(secs >=29.5 & secs  <39.49, 4 ,ifelse(secs >=39.5 & secs  <50.49, 5 ,ifelse(secs >=49.5 & secs  <60.49, 6,ifelse(secs >=59.5 & secs  <70.49, 7,ifelse(secs >=70.5, 8,10)))))))))
+phaseSoP <-phaseSoP %>% mutate(line_col = ifelse(secs >=0 & secs  <9.491 ,1, ifelse(secs  >=9.5 & secs  <19.491, 2,ifelse(secs >=19.5 & secs  <29.491, 3,ifelse(secs >=29.5 & secs  <39.491, 4 ,ifelse(secs >=39.5 & secs  <50.491, 5 ,ifelse(secs >=49.5 & secs  <60.491, 6,ifelse(secs >=59.5 & secs  <70.491, 7,ifelse(secs >=70.5, 8,10)))))))))
 
 #name duration groups
 phaseSoP <- phaseSoP %>% mutate(line_time = ifelse(line_col  == 1 ,"0-9", ifelse(line_col  == 2, "10-19",ifelse(line_col  == 3,"20-29" ,
@@ -1634,7 +1634,7 @@ passSoP  <- passSoP %>% mutate(secs = VLOOKUP(poss,phasetime, poss, phtime))
 
 
 #create duration groups
-passSoP <-passSoP %>% mutate(line_col = ifelse(secs >=0 & secs  <9.49 ,1, ifelse(secs  >=9.5 & secs  <19.49, 2,ifelse(secs >=19.5 & secs  <29.49, 3,ifelse(secs >=29.5 & secs  <39.49, 4 ,ifelse(secs >=39.5 & secs  <50.49, 5 ,ifelse(secs >=49.5 & secs  <60.49, 6,ifelse(secs >=59.5 & secs  <70.49, 7,ifelse(secs >=70.5, 8,10)))))))))
+passSoP <-passSoP %>% mutate(line_col = ifelse(secs >=0 & secs  <9.491 ,1, ifelse(secs  >=9.5 & secs  <19.491, 2,ifelse(secs >=19.5 & secs  <29.491, 3,ifelse(secs >=29.5 & secs  <39.491, 4 ,ifelse(secs >=39.5 & secs  <50.491, 5 ,ifelse(secs >=49.5 & secs  <60.491, 6,ifelse(secs >=59.5 & secs  <70.491, 7,ifelse(secs >=70.5, 8,10)))))))))
 
 #name duration groups
 passSoP <- passSoP %>% mutate(line_time = ifelse(line_col  == 1 ,"0-9", ifelse(line_col  == 2, "10-19",ifelse(line_col  == 3,"20-29" ,
@@ -3743,6 +3743,8 @@ df <- data.frame(
 
 ```
 
+* Time includes water breaks 
+
 # Quick Game Stats 
 
 ```{r}
@@ -4753,10 +4755,78 @@ pthy + theme(legend.position="bottom") +
    theme(plot.title = element_text(hjust=0.5, size = 32)) 
  
 
+```
 
 
+
+```{r, fig.width = 16, fig.height = 10}
+
+Posstime  <- sop %>% filter(Teamnum == "A", main == "Ko") 
+
+PosstimeAb  <- Posstime %>% group_by(Action,line_time, .drop = FALSE) %>% summarise(count = n())
+
+ggplot(data = PosstimeAb, aes(x = Action, y = count, fill = line_time)) + geom_bar(position="dodge", stat="identity") +
+  labs(fill="Duration (secs)") +
+  xlab("Ko Type") +
+  ylab("Possession") +
+  geom_text(aes(label = count, group =line_time), color = "white", position = position_dodge(width = 1), size = 8) +
+  theme_bw() + theme (panel.grid.major = element_blank(),
+                      panel.grid.minor = element_blank()) + theme(legend.position="bottom",panel.background = element_rect(fill = "grey47")) +
+  scale_fill_manual(values= actcolpals) +
+  theme(legend.box="vertical", legend.margin=margin()) +
+  guides(shape = guide_legend(override.aes = list(size = 10)),colour = guide_legend(override.aes = list(size = 10))) +
+  theme(axis.text.x = element_text( size = 20), axis.text.y = element_text( size = 20), 
+        axis.title.x = element_text( size = 20), axis.title.y = element_text( size = 20),
+        legend.position="bottom", legend.title=element_text(size=20),legend.text=element_text(size=20)) +
+  labs( title = "Possession Duration from Kick Outs - Armagh") + theme(plot.title=element_text(size=32, hjust=0.5, face="bold", color="black"))
 
 ```
+
+* Duration (secs) = Total Playing time of possession excluding breaks in play
+
+```{r, fig.width = 16, fig.height = 10}
+
+passcntA <- sop%>%group_by(possno, .drop=TRUE) %>% filter (Teamnum == "A", main == "Ko")%>%select(Team,possno, passno, subsetoc,mainoc)
+
+#passcntA <- passcntA[passcntA$mainoc!="Half Time", ]
+#passcntA <- passcntA[passcntA$mainoc!="Full Time", ]
+
+
+ggplot(data = passcntA, aes(x = possno, y = passno, fill = mainoc)) + geom_bar(position="dodge", stat="identity", width = .5) +
+  scale_fill_manual(values = passnocolpals, labels = c("OP Shot", "Fk Shot", "T/o Lost")) +
+  scale_colour_manual(values = passnocolpals, labels = c("OP Shot", "Fk Shot", "T/o Lost")) +
+  labs(fill="Ended in a") +
+  ylab("Total Passes") +
+  xlab("Possession") +
+  geom_text(aes(label =passno, vjust = 0,colour =mainoc), size = 8,show.legend = FALSE) +
+  scale_x_continuous(labels = passcntA$possno, breaks = passcntA$possno)  + 
+  theme_classic() + theme (panel.grid.major = element_blank(),
+                           panel.grid.minor = element_blank()) + theme(legend.position="bottom", axis.text.x = element_text(size = 15, angle = 90, vjust = 0.5, hjust=1)) +
+  guides(colour = guide_legend(override.aes = list(size = 15))) +
+  scale_y_continuous(breaks=c(5,10,15, 20, 25,30)) +
+  labs(title = "Passes per Possession from Kick Outs - Armagh") + theme(plot.title=element_text(size=32, hjust=0.5, face="bold", color="black"))
+
+```
+
+```{r}
+
+
+sopbdkoA <- sop %>% filter (Teamnum == "A", main == "Ko") %>% ungroup()%>% select(2,18,113,24,40,42,41,46,50:53,93)
+
+
+sopbdkoA <- rename(sopbdkoA, "Type" = subset, "Pitch Area Rec" = Pitch_Area_Ko,  "Outcome" = Actionoc,"No of Phases" = phno,  "Tot Time" = tot_poss_secs, 
+"Tcks" = tckAll)
+
+datatable(sopbdkoA,options = list(pageLength = 5,lengthMenu = c(5, 10, 15, 20),columnDefs = 
+                           list(list(className = 'dt-center', 
+                                     targets = "_all"))),class = 'cell-border stripe', rownames = FALSE)
+
+```
+
+* Tot Time = total time of possession including breaks in Play 
+
+* Secs = Total Playing time of possession
+
 
 # Kick Outs - Donegal
 
@@ -4894,6 +4964,79 @@ pthy + theme(legend.position="bottom") +
 
 
 ```
+
+
+```{r, fig.width = 16, fig.height = 10}
+
+Posstime  <- sop %>% filter(Teamnum == "B", main == "Ko") 
+
+PosstimeAb  <- Posstime %>% group_by(Action,line_time, .drop = FALSE) %>% summarise(count = n())
+
+ggplot(data = PosstimeAb, aes(x = Action, y = count, fill = line_time)) + geom_bar(position="dodge", stat="identity") +
+  labs(fill="Duration (secs)") +
+  xlab("Ko Type") +
+  ylab("Possession") +
+  geom_text(aes(label = count, group =line_time), color = "white", position = position_dodge(width = 1), size = 8) +
+  theme_bw() + theme (panel.grid.major = element_blank(),
+                      panel.grid.minor = element_blank()) + theme(legend.position="bottom",panel.background = element_rect(fill = "grey47")) +
+  scale_fill_manual(values= actcolpals) +
+  theme(legend.box="vertical", legend.margin=margin()) +
+  guides(shape = guide_legend(override.aes = list(size = 10)),colour = guide_legend(override.aes = list(size = 10))) +
+  theme(axis.text.x = element_text( size = 20), axis.text.y = element_text( size = 20), 
+        axis.title.x = element_text( size = 20), axis.title.y = element_text( size = 20),
+        legend.position="bottom", legend.title=element_text(size=20),legend.text=element_text(size=20)) +
+  labs( title = "Possession Duration from Kick Outs - Donegal") + theme(plot.title=element_text(size=32, hjust=0.5, face="bold", color="black"))
+
+```
+
+* Duration (secs) = Total Playing time of possession excluding breaks in play
+
+```{r, fig.width = 16, fig.height = 10}
+
+passcntA <- sop%>%group_by(possno, .drop=TRUE) %>% filter (Teamnum == "B", main == "Ko")%>%select(Team,possno, passno, subsetoc,mainoc)
+
+#passcntA <- passcntA[passcntA$mainoc!="Half Time", ]
+#passcntA <- passcntA[passcntA$mainoc!="Full Time", ]
+
+
+ggplot(data = passcntA, aes(x = possno, y = passno, fill = mainoc)) + geom_bar(position="dodge", stat="identity", width = .5) +
+  scale_fill_manual(values = passnocolpals, labels = c("Full Time","OP Shot", "Fk Shot", "T/o Lost")) +
+  scale_colour_manual(values = passnocolpals, labels = c("Full Time","OP Shot", "Fk Shot", "T/o Lost")) +
+  labs(fill="Ended in a") +
+  ylab("Total Passes") +
+  xlab("Possession") +
+  geom_text(aes(label =passno, vjust = 0,colour =mainoc), size = 8,show.legend = FALSE) +
+  scale_x_continuous(labels = passcntA$possno, breaks = passcntA$possno)  + 
+  theme_classic() + theme (panel.grid.major = element_blank(),
+                           panel.grid.minor = element_blank()) + theme(legend.position="bottom", axis.text.x = element_text(size = 15, angle = 90, vjust = 0.5, hjust=1)) +
+  guides(colour = guide_legend(override.aes = list(size = 15))) +
+  scale_y_continuous(breaks=c(5,10,15, 20, 25,30)) +
+  labs(title = "Passes per Possession from Kick Outs - Donegal") + theme(plot.title=element_text(size=32, hjust=0.5, face="bold", color="black"))
+
+```
+
+
+```{r}
+
+
+sopbdkoB <- sop %>% filter (Teamnum == "B", main == "Ko") %>% ungroup()%>% select(2,18,113,24,40,42,41,46,50:53,93)
+
+
+sopbdkoB <- rename(sopbdkoB, "Type" = subset, "Pitch Area Rec" = Pitch_Area_Ko,  "Outcome" = Actionoc,"No of Phases" = phno,  "Tot Time" = tot_poss_secs, 
+"Tcks" = tckAll)
+
+
+datatable(sopbdkoB,options = list(pageLength = 5,lengthMenu = c(5, 10, 15, 20),columnDefs = 
+                           list(list(className = 'dt-center', 
+                                     targets = "_all"))),class = 'cell-border stripe', rownames = FALSE)
+
+```
+
+
+
+* Tot Time = total time of possession including breaks in Play 
+
+* Secs = Total Playing time of possession excluding breaks in Play
 
 
 # Possession Won - Armagh
@@ -5035,11 +5178,75 @@ pthy + theme(legend.position="bottom") +
     theme(legend.position="bottom") +
    theme(plot.title = element_text(hjust=0.5, size = 32)) 
  
+```
 
 
+```{r, fig.width = 16, fig.height = 10}
 
+Posstime  <- sop %>% filter(Teamnum == "A", main == "PW") 
+
+PosstimeAb  <- Posstime %>% group_by(Action,line_time, .drop = FALSE) %>% summarise(count = n())
+
+ggplot(data = PosstimeAb, aes(x = Action, y = count, fill = line_time)) + geom_bar(position="dodge", stat="identity") +
+  labs(fill="Duration (secs)") +
+  xlab("PW Type") +
+  ylab("Possession") +
+  geom_text(aes(label = count, group =line_time), color = "white", position = position_dodge(width = 1), size = 8) +
+  theme_bw() + theme (panel.grid.major = element_blank(),
+                      panel.grid.minor = element_blank()) + theme(legend.position="bottom",panel.background = element_rect(fill = "grey47")) +
+  scale_fill_manual(values= actcolpals) +
+  theme(legend.box="vertical", legend.margin=margin()) +
+  guides(shape = guide_legend(override.aes = list(size = 10)),colour = guide_legend(override.aes = list(size = 10))) +
+  theme(axis.text.x = element_text( size = 20), axis.text.y = element_text( size = 20), 
+        axis.title.x = element_text( size = 20), axis.title.y = element_text( size = 20),
+        legend.position="bottom", legend.title=element_text(size=20),legend.text=element_text(size=20)) +
+  labs( title = "Possession Duration from Possession Won - Armagh") + theme(plot.title=element_text(size=32, hjust=0.5, face="bold", color="black"))
 
 ```
+
+* Duration (secs) = Total Playing time of possession excluding breaks in play
+
+```{r, fig.width = 16, fig.height = 10}
+
+passcntA <- sop%>%group_by(possno, .drop=TRUE) %>% filter (Teamnum == "A", main == "PW")%>%select(Team,possno, passno, subsetoc,mainoc)
+
+#passcntA <- passcntA[passcntA$mainoc!="Half Time", ]
+#passcntA <- passcntA[passcntA$mainoc!="Full Time", ]
+
+
+ggplot(data = passcntA, aes(x = possno, y = passno, fill = mainoc)) + geom_bar(position="dodge", stat="identity", width = .5) +
+  scale_fill_manual(values = passnocolpals, labels = c("OP Shot", "Fk Shot", "T/o Lost")) +
+  scale_colour_manual(values = passnocolpals, labels = c("OP Shot", "Fk Shot", "T/o Lost")) +
+  labs(fill="Ended in a") +
+  ylab("Total Passes") +
+  xlab("Possession") +
+  geom_text(aes(label =passno, vjust = 0,colour =mainoc), size = 8,show.legend = FALSE) +
+  scale_x_continuous(labels = passcntA$possno, breaks = passcntA$possno)  + 
+  theme_classic() + theme (panel.grid.major = element_blank(),
+                           panel.grid.minor = element_blank()) + theme(legend.position="bottom", axis.text.x = element_text(size = 15, angle = 90, vjust = 0.5, hjust=1)) +
+  guides(colour = guide_legend(override.aes = list(size = 15))) +
+  scale_y_continuous(breaks=c(5,10,15, 20, 25,30)) +
+  labs(title = "Passes per Possession from Possession Won - Armagh") + theme(plot.title=element_text(size=32, hjust=0.5, face="bold", color="black"))
+
+```
+
+```{r}
+
+
+sopbdpwA <- sop %>% filter (Teamnum == "A", main == "PW") %>% ungroup()%>%  select(2,18,21,24,40,42,41,46,50:53,93)
+
+sopbdpwA <- rename(sopbdpwA, "Type" = subset, "Start Area" = Pitch_Area,  "Outcome" = Actionoc,"No of Phases" = phno,  "Tot Time" = tot_poss_secs, 
+"Tcks" = tckAll)
+
+datatable(sopbdpwA,options = list(pageLength = 5,lengthMenu = c(5, 10, 15, 20),columnDefs = 
+                           list(list(className = 'dt-center', 
+                                     targets = "_all"))),class = 'cell-border stripe', rownames = FALSE)
+
+```
+
+* Tot Time = total time of possession including breaks in Play 
+
+* Secs = Total Playing time of possession excluding breaks in Play
 
 # Possession Won - Donegal
 
@@ -5179,12 +5386,76 @@ pthy + theme(legend.position="bottom") +
     theme(legend.position="bottom") +
    theme(plot.title = element_text(hjust=0.5, size = 32)) 
  
- 
-
-
 
 
 ```
+
+```{r, fig.width = 16, fig.height = 10}
+
+Posstime  <- sop %>% filter(Teamnum == "B", main == "PW") 
+
+PosstimeAb  <- Posstime %>% group_by(Action,line_time, .drop = FALSE) %>% summarise(count = n())
+
+ggplot(data = PosstimeAb, aes(x = Action, y = count, fill = line_time)) + geom_bar(position="dodge", stat="identity") +
+  labs(fill="Duration (secs)") +
+  xlab("PW Type") +
+  ylab("Possession") +
+  geom_text(aes(label = count, group =line_time), color = "white", position = position_dodge(width = 1), size = 8) +
+  theme_bw() + theme (panel.grid.major = element_blank(),
+                      panel.grid.minor = element_blank()) + theme(legend.position="bottom",panel.background = element_rect(fill = "grey47")) +
+  scale_fill_manual(values= actcolpals) +
+  theme(legend.box="vertical", legend.margin=margin()) +
+  guides(shape = guide_legend(override.aes = list(size = 10)),colour = guide_legend(override.aes = list(size = 10))) +
+  theme(axis.text.x = element_text( size = 20), axis.text.y = element_text( size = 20), 
+        axis.title.x = element_text( size = 20), axis.title.y = element_text( size = 20),
+        legend.position="bottom", legend.title=element_text(size=20),legend.text=element_text(size=20)) +
+  labs( title = "Possession Duration from Possession Won - Donegal") + theme(plot.title=element_text(size=32, hjust=0.5, face="bold", color="black"))
+
+```
+
+* Duration (secs) = Total Playing time of possession excluding breaks in play
+
+```{r, fig.width = 16, fig.height = 10}
+
+passcntA <- sop%>%group_by(possno, .drop=TRUE) %>% filter (Teamnum == "B", main == "PW")%>%select(Team,possno, passno, subsetoc,mainoc)
+
+#passcntA <- passcntA[passcntA$mainoc!="Half Time", ]
+#passcntA <- passcntA[passcntA$mainoc!="Full Time", ]
+
+
+ggplot(data = passcntA, aes(x = possno, y = passno, fill = mainoc)) + geom_bar(position="dodge", stat="identity", width = .5) +
+  scale_fill_manual(values = passnocolpals, labels = c("Full Time","OP Shot", "Fk Shot", "T/o Lost")) +
+  scale_colour_manual(values = passnocolpals, labels = c("Full Time","OP Shot", "Fk Shot", "T/o Lost")) +
+  labs(fill="Ended in a") +
+  ylab("Total Passes") +
+  xlab("Possession") +
+  geom_text(aes(label =passno, vjust = 0,colour =mainoc), size = 8,show.legend = FALSE) +
+  scale_x_continuous(labels = passcntA$possno, breaks = passcntA$possno)  + 
+  theme_classic() + theme (panel.grid.major = element_blank(),
+                           panel.grid.minor = element_blank()) + theme(legend.position="bottom", axis.text.x = element_text(size = 15, angle = 90, vjust = 0.5, hjust=1)) +
+  guides(colour = guide_legend(override.aes = list(size = 15))) +
+  scale_y_continuous(breaks=c(5,10,15, 20, 25,30)) +
+  labs(title = "Passes per Possession from Possession Won - Donegal") + theme(plot.title=element_text(size=32, hjust=0.5, face="bold", color="black"))
+
+```
+
+```{r}
+
+
+sopbdBpw <- sop %>% filter (Teamnum == "B", main == "PW") %>% ungroup()%>%  select(2,18,21,24,40,42,41,46,50:53,93)
+
+sopbdBpw <- rename(sopbdBpw, "Type" = subset, "Start Area" = Pitch_Area,  "Outcome" = Actionoc,"No of Phases" = phno,  "Tot Time" = tot_poss_secs, 
+"Tcks" = tckAll)
+
+datatable(sopbdBpw,options = list(pageLength = 5,lengthMenu = c(5, 10, 15, 20),columnDefs = 
+                           list(list(className = 'dt-center', 
+                                     targets = "_all"))),class = 'cell-border stripe', rownames = FALSE)
+
+```
+
+* Tot Time = total time of possession including breaks in Play 
+
+* Secs = Total Playing time of possession excluding breaks in Play 
 
 # Tackling - Armagh
 
@@ -5311,11 +5582,6 @@ tcklpopAllBply  %>%
 ```
 
 
-
-
-
-
-
 # Possession & Phase Duration
 
 ```{r, fig.width = 16, fig.height = 10}
@@ -5338,6 +5604,7 @@ panel.grid.minor = element_blank()) + theme(legend.position="bottom",panel.backg
 
 ```
 
+* Duration (secs) = Total Playing time of possession excluding breaks in play
 
 
 ```{r, fig.width = 16, fig.height = 10}
@@ -5361,7 +5628,7 @@ panel.grid.minor = element_blank()) + theme(legend.position="bottom",panel.backg
 
 ```
 
-
+* Duration (secs) = Total Playing time of possession excluding breaks in play
 
 ```{r, fig.width = 16, fig.height = 10}
 PhasetimeAb  <- phasesop %>% group_by(period,line_time, .drop = FALSE)%>% filter(Teamnum == "A") %>% summarise(count = n())
@@ -5381,7 +5648,6 @@ panel.grid.minor = element_blank()) + theme(legend.position="bottom",panel.backg
        legend.position="bottom", legend.title=element_text(size=20),legend.text=element_text(size=20)) +
  labs( title = "Phase Duration - Armagh") + theme(plot.title=element_text(size=32, hjust=0.5, face="bold", color="black"))
 ```
-
 
 
 ```{r, fig.width = 16, fig.height = 10}

@@ -3939,15 +3939,21 @@ Dublin
 --------
 
 
-21 S McGrath for 7 O Nolan	(17.41 1st Half)
+17 C Basquel for 15 C Costello (50)
 
-23 L Collins for 12	C O Connor (ht)
+21 T Lahiff for 4 J Cooper (52)
 
-10 N McEvoy for 19	N Hetherton	(16.06 2nd Half)
+19 S Bugler for 12 N Scully (62)
 
-17 L McGinley for 2 H Leahy	(15.32 2nd Half)
+7 S McMahon for 24 E Murchan (67)
 
-18 M Davoren 11 L Davey	(9.28 2nd Half)
+23 P McMahon for 7 S McMahon (70+6)
+
+22 R McDaid for 10 J Small (80)
+
+20 A Byrne for 9 B Howard (82)
+
+15 C Costello for 10 P Small (85)
 
 
 ## Mayo
@@ -3970,13 +3976,25 @@ datatable(tmshtB,options = list(pageLength = 5,lengthMenu = c(5, 10, 15, 20),col
 Mayo 
 ----------
 
-18	R Durcan	3	C McManamon	(11.34 2nd Half)
+19 E Hession for 12 D McHale (27)
 
-25	M McHale	11	F McHale	(10.50 2nd Half)
+26 J Carr for 14 A O Shea (49)
 
-20	C Needham	6	T O Connor	(8.02 2nd Half)
+23 B Walsh for 4 M Plunkett (49)
 
-27	A Dowling	12	G Kelly	(3.59 2nd Half)
+24 J Flynn for 7 E McLaughlin (57)
+
+21 C O Shea for 10 C Loftus (65) 
+
+25 D Coen for 6 S Coen (70+6)
+
+10 C Loftus for 11 K McLoughlin (80)
+
+22 J Durcan for 26 J Carr (85)
+
+18 B Harrison for 9 D O Connor (87)
+
+14 A O'Shea for 25 D Coen (90)
 
 
 # Worm

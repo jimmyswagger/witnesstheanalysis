@@ -1,5 +1,5 @@
 ---
-title: "Kerry vs Tyrone - Normal Time"
+title: "Kerry vs Tyrone - Extra Time"
 output: html_document
 ---
 
@@ -3684,7 +3684,7 @@ zonedB <-bind_cols(zonedB,inzonescrB,oczonescrB)
 
 <font size="4">All Ireland Semi Final<font>
 
-<font size="4">14/08/2021, Croke Park, Kerry<font>
+<font size="4">28/08/2021, Croke Park, Dublin<font>
 
 <font size="6">Full Time Score: Kerry 0-22, Tyrone 3-14<font>
 

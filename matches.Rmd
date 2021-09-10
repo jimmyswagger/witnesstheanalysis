@@ -101,6 +101,15 @@ output: html_document
 
 ## 2021 {.tabset .tabset-fade .tabset-pills}
 
+### Championship
+
+**All Ireland Semi Finals**
+
+<font size="3">Kerry vs Tyrone [Normal Time](https://witnesstheanalysis.com/kertyraisf21nt.html)</font> | <font size="3">[Extra Time](https://witnesstheanalysis.com/kertyraisf21et.html)</font> 
+
+<font size="3">Dublin vs Mayo [Normal Time](https://witnesstheanalysis.com/dubmayaisf21nt.html)</font> | <font size="3">[Extra Time](https://witnesstheanalysis.com/dubmayaisf21et.html)</font> 
+
+
 ### NFL - County 
 
 **NFL Division 1 South**

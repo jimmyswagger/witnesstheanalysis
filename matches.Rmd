@@ -103,6 +103,10 @@ output: html_document
 
 ### Championship
 
+**All Ireland Final**
+
+<font size="3">[Mayo vs Tyrone](https://witnesstheanalysis.com/maytyraif21.html)</font> 
+
 **All Ireland Semi Finals**
 
 <font size="3">Kerry vs Tyrone [Normal Time](https://witnesstheanalysis.com/kertyraisf21nt.html)</font> | <font size="3">[Extra Time](https://witnesstheanalysis.com/kertyraisf21et.html)</font> 

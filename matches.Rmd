@@ -130,6 +130,12 @@ output: html_document
 
 <font size="3">[Dublin vs Mayo](https://witnesstheanalysis.com/dubmayllsf21.html)</font>
 
+### Club 
+
+**Dublin Senior Ladies Football Championship Final**
+
+<font size="3">[Foxrock vs Na Fianna](https://witnesstheanalysis.com/foxnafdublsfc21.html)</font>
+
 
 ## 2020 {.tabset .tabset-fade .tabset-pills}
 

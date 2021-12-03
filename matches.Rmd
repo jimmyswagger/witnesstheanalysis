@@ -136,6 +136,10 @@ output: html_document
 
 <font size="3">[Foxrock vs Na Fianna](https://witnesstheanalysis.com/foxnafdublsfc21.html)</font>
 
+**Clare Minor Football Championship Final**
+
+<font size="3">[Ennistymon vs Kilrush/Kilimer](https://witnesstheanalysis.com/ennkilclamcf21.html)</font>
+
 
 ## 2020 {.tabset .tabset-fade .tabset-pills}
 

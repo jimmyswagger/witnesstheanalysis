@@ -1,0 +1,2187 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Ennistymon vs Kilrush/Kilimer</title>
+
+<script src="site_libs/jquery-1.12.4/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script src="site_libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
+<link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="site_libs/datatables-binding-0.16/datatables.js"></script>
+<link href="site_libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="site_libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="site_libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+<link href="site_libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Witness the Analysis</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Home
+  </a>
+</li>
+<li>
+  <a href="matches.html">
+    <span class="fa fa-volleyball-ball"></span>
+     
+    Matches
+  </a>
+</li>
+<li>
+  <a href="https://witnesstheanalysis.shinyapps.io/Results/">
+    <span class="fas fa fas fa-book"></span>
+     
+    Results
+  </a>
+</li>
+<li>
+  <a href="https://witnesstheanalysis.wordpress.com/2020/07/10/a-match-tracker-application-for-windows-version-3/">
+    <span class="fas fa fas fa-pen"></span>
+     
+    Analysis App
+  </a>
+</li>
+<li>
+  <a href="Trackers.html">
+    <span class="fas fa fas fa-desktop"></span>
+     
+    Shiny Apps
+  </a>
+</li>
+<li>
+  <a href="https://github.com/witnesstheanalysis/witnesstheanalysis">
+    <span class="fa fa-github fa-lg"></span>
+     
+    Codes
+  </a>
+</li>
+<li>
+  <a href="contact.html">
+    <span class="fa fa-envelope fa-lg"></span>
+     
+    Contact
+  </a>
+</li>
+<li>
+  <a href="https://twitter.com/WtAnalysis">
+    <span class="fa fa-twitter fa-lg"></span>
+     
+    Twitter
+  </a>
+</li>
+<li>
+  <a href="https://witnesstheanalysis.wordpress.com">
+    <span class="fa fa-wordpress fa-lg"></span>
+     
+    Blog
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Ennistymon vs Kilrush/Kilimer</h1>
+
+</div>
+
+
+<p><font size="4">Clare Minor Final<font></p>
+<p><font size="4"> 27th November 2021, Milltown Malbay, Clare<font></p>
+<p><img src="ennkilclamcf21_files/figure-html/unnamed-chunk-22-1.png" width="1536" /></p>
+<p><img src="ennkilclamcf21_files/figure-html/unnamed-chunk-23-1.png" width="1536" /></p>
+<ul>
+<li>Includes water breaks</li>
+</ul>
+<div id="quick-game-stats" class="section level1">
+<h1>Quick Game Stats</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+All Possessions
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Possessions
+</th>
+<th style="text-align:center;">
+Poss Time (mins)
+</th>
+<th style="text-align:center;">
+Ave time (secs)
+</th>
+<th style="text-align:center;">
+All Shots
+</th>
+<th style="text-align:center;">
+% Shots per Poss
+</th>
+<th style="text-align:center;">
+Shot Rate (secs)
+</th>
+<th style="text-align:center;">
+Scores
+</th>
+<th style="text-align:center;">
+Score %
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Ennistymon
+</td>
+<td style="text-align:center;">
+42
+</td>
+<td style="text-align:center;">
+24
+</td>
+<td style="text-align:center;">
+34
+</td>
+<td style="text-align:center;">
+14
+</td>
+<td style="text-align:center;">
+33
+</td>
+<td style="text-align:center;">
+103
+</td>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+57
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Kilrush
+</td>
+<td style="text-align:center;">
+44
+</td>
+<td style="text-align:center;">
+17
+</td>
+<td style="text-align:center;">
+23
+</td>
+<td style="text-align:center;">
+14
+</td>
+<td style="text-align:center;">
+32
+</td>
+<td style="text-align:center;">
+72
+</td>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:center;">
+43
+</td>
+</tr>
+</tbody>
+</table>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Team Scores
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Possessions Won
+</th>
+<th style="text-align:center;">
+Ko
+</th>
+<th style="text-align:center;">
+Ko Won
+</th>
+<th style="text-align:center;">
+Forty_Fives
+</th>
+<th style="text-align:center;">
+OP Shots
+</th>
+<th style="text-align:center;">
+Op Scores
+</th>
+<th style="text-align:center;">
+Op Score %
+</th>
+<th style="text-align:center;">
+Rs Shots
+</th>
+<th style="text-align:center;">
+Rs Scores
+</th>
+<th style="text-align:center;">
+Rs Score %
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Ennistymon
+</td>
+<td style="text-align:center;">
+34
+</td>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+50.00
+</td>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+66.67
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Kilrush
+</td>
+<td style="text-align:center;">
+32
+</td>
+<td style="text-align:center;">
+12
+</td>
+<td style="text-align:center;">
+11
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+11
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+45.45
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+33.33
+</td>
+</tr>
+</tbody>
+</table>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Team Possession Won
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Possession Won
+</th>
+<th style="text-align:center;">
+Total Time (min)
+</th>
+<th style="text-align:center;">
+Shots
+</th>
+<th style="text-align:center;">
+% Shots per PW
+</th>
+<th style="text-align:center;">
+Shot Rate (secs)
+</th>
+<th style="text-align:center;">
+Scores
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Ennistymon
+</td>
+<td style="text-align:center;">
+34
+</td>
+<td style="text-align:center;">
+19.82
+</td>
+<td style="text-align:center;">
+14
+</td>
+<td style="text-align:center;">
+41.18
+</td>
+<td style="text-align:center;">
+84.96
+</td>
+<td style="text-align:center;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Kilrush
+</td>
+<td style="text-align:center;">
+32
+</td>
+<td style="text-align:center;">
+11.32
+</td>
+<td style="text-align:center;">
+9
+</td>
+<td style="text-align:center;">
+28.12
+</td>
+<td style="text-align:center;">
+75.46
+</td>
+<td style="text-align:center;">
+4
+</td>
+</tr>
+</tbody>
+</table>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Kick Outs
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Kickouts
+</th>
+<th style="text-align:center;">
+Ko Won
+</th>
+<th style="text-align:center;">
+% Ko Won
+</th>
+<th style="text-align:center;">
+Shots
+</th>
+<th style="text-align:center;">
+Scores
+</th>
+<th style="text-align:center;">
+Time to Ko (secs)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Ennistymon
+</td>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+50.00
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+36.23
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Kilrush
+</td>
+<td style="text-align:center;">
+12
+</td>
+<td style="text-align:center;">
+11
+</td>
+<td style="text-align:center;">
+91.67
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+46.35
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="scorers" class="section level1">
+<h1>Scorers</h1>
+<div id="htmlwidget-9d76696fb184060ca784" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9d76696fb184060ca784">{"x":{"filter":"none","data":[["Ennistymon","Ennistymon","Kilrush","Ennistymon","Kilrush","Kilrush","Ennistymon","Kilrush","Kilrush","Ennistymon","Ennistymon","Ennistymon","Ennistymon","Kilrush"],["Fk Shot Right","Shot Right","Shot Right","Shot Right","Shot Right","Shot Right","Fk Shot Left","Shot Right","Shot Right","Shot Right","Fk Shot Right","Fk Shot Right","Shot Right","Fk Shot Right"],["8 Fk Shot Right","5 Shot Right","11 Shot Right","14 Shot Right","5 Shot Right","9 Shot Right","13 Fk Shot Left","7 Shot Right","14 Shot Right","14 Shot Right","8 Fk Shot Right","14 Fk Shot Right","8 Shot Right","14 Fk Shot Right"],["Shot Rs","Shot Op","Shot Op","Shot Op","Shot Op","Shot Op","Shot Rs","Shot Op","Shot Op","Shot Op","Shot Rs","Shot Rs","Shot Op","Shot Rs"],[null,2,3,3,1,2,null,1,2,2,null,null,2,null]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>Team<\/th>\n      <th>Action<\/th>\n      <th>plylab<\/th>\n      <th>subset<\/th>\n      <th>shdf<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="player-score-type---ennistymon" class="section level2">
+<h2>Player Score Type - Ennistymon</h2>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Player Score Type - Ennistymon
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Player
+</th>
+<th style="text-align:center;">
+Outcome
+</th>
+<th style="text-align:center;">
+Total
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+13 13 Ennistymon
+</td>
+<td style="text-align:center;">
+Fk Point
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+14 14 Ennistymon
+</td>
+<td style="text-align:center;">
+Fk Point
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+14 14 Ennistymon
+</td>
+<td style="text-align:center;">
+Point
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+5 5 Ennistymon
+</td>
+<td style="text-align:center;">
+Point
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+8 8 Ennistymon
+</td>
+<td style="text-align:center;">
+Fk Point
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+8 8 Ennistymon
+</td>
+<td style="text-align:center;">
+Point
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="player-score-type---kilrush" class="section level2">
+<h2>Player Score Type - Kilrush</h2>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Player Score Type - Kilrush
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Player
+</th>
+<th style="text-align:center;">
+Outcome
+</th>
+<th style="text-align:center;">
+Total
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+11 11 Kilrush
+</td>
+<td style="text-align:center;">
+Point
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+14 14 Kilrush
+</td>
+<td style="text-align:center;">
+Point
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+15 15 Kilrush
+</td>
+<td style="text-align:center;">
+Fk Point
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+5 5 Kilrush
+</td>
+<td style="text-align:center;">
+Point
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+7 7 Kilrush
+</td>
+<td style="text-align:center;">
+Point
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+9 9 Kilrush
+</td>
+<td style="text-align:center;">
+Point
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="team-sheet" class="section level1">
+<h1>Team Sheet</h1>
+<div id="ennistymon" class="section level2">
+<h2>Ennistymon</h2>
+<div id="htmlwidget-60090ee832bdb5084bec" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-60090ee832bdb5084bec">{"x":{"filter":"none","data":[["Ennistymon","Ennistymon","Ennistymon","Ennistymon","Ennistymon","Ennistymon","Ennistymon","Ennistymon","Ennistymon","Ennistymon","Ennistymon","Ennistymon","Ennistymon","Ennistymon","Ennistymon"],["1 1 Ennistymon","2 2 Ennistymon","3 3 Ennistymon","4 4 Ennistymon","5 5 Ennistymon","6 6 Ennistymon","7 7 Ennistymon","8 8 Ennistymon","9 9 Ennistymon","10 10 Ennistymon","11 11 Ennistymon","12 12 Ennistymon","13 13 Ennistymon","14 14 Ennistymon","15 15 Ennistymon"]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>Team<\/th>\n      <th>Player<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="kilrush" class="section level2">
+<h2>Kilrush</h2>
+<div id="htmlwidget-a172c44a5278a29777b0" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a172c44a5278a29777b0">{"x":{"filter":"none","data":[["Kilrush","Kilrush","Kilrush","Kilrush","Kilrush","Kilrush","Kilrush","Kilrush","Kilrush","Kilrush","Kilrush","Kilrush","Kilrush","Kilrush","Kilrush","Kilrush","Kilrush"],["1 1 Kilrush","2 2 Kilrush","3 3 Kilrush","4 4 Kilrush","5 5 Kilrush","6 6 Kilrush","7 7 Kilrush","8 8 Kilrush","9 9 Kilrush","10 10 Kilrush","11 11 Kilrush","12 12 Kilrush","13 13 Kilrush","14 14 Kilrush","15 15 Kilrush","17 17 Kilrush","20 18 Kilrush"]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>Team<\/th>\n      <th>Player<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div id="worm" class="section level1">
+<h1>Worm</h1>
+<p><img src="ennkilclamcf21_files/figure-html/unnamed-chunk-33-1.png" width="1536" /></p>
+</div>
+<div id="periods" class="section level1">
+<h1>Periods</h1>
+<p><img src="ennkilclamcf21_files/figure-html/unnamed-chunk-34-1.png" width="1536" /></p>
+</div>
+<div id="shooting---ennistymon" class="section level1">
+<h1>Shooting - Ennistymon</h1>
+<p><img src="ennkilclamcf21_files/figure-html/unnamed-chunk-35-1.png" width="1536" /></p>
+<p><img src="ennkilclamcf21_files/figure-html/unnamed-chunk-36-1.png" width="1536" /></p>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Shot Outcome
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Fk Point
+</th>
+<th style="text-align:center;">
+Fk Short
+</th>
+<th style="text-align:center;">
+Fk Wide Right
+</th>
+<th style="text-align:center;">
+Point
+</th>
+<th style="text-align:center;">
+Short
+</th>
+<th style="text-align:center;">
+Wide Left
+</th>
+<th style="text-align:center;">
+Wide Right
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Ennistymon
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="shooting---kilrush" class="section level1">
+<h1>Shooting - Kilrush</h1>
+<p><img src="ennkilclamcf21_files/figure-html/unnamed-chunk-38-1.png" width="1536" /></p>
+<p><img src="ennkilclamcf21_files/figure-html/unnamed-chunk-39-1.png" width="1536" /></p>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Shot Outcome
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Fk Point
+</th>
+<th style="text-align:center;">
+Fk Short
+</th>
+<th style="text-align:center;">
+Fk Wide Left
+</th>
+<th style="text-align:center;">
+Point
+</th>
+<th style="text-align:center;">
+Post
+</th>
+<th style="text-align:center;">
+Short
+</th>
+<th style="text-align:center;">
+Wide Right
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Kilrush
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="open-play-shooting---ennistymon" class="section level1">
+<h1>Open Play Shooting - Ennistymon</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Open Play Shots - Ennistymon
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Shots
+</th>
+<th style="text-align:center;">
+Scores
+</th>
+<th style="text-align:center;">
+Efficiency %
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Ennistymon
+</td>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+50
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="ennkilclamcf21_files/figure-html/unnamed-chunk-42-1.png" width="1536" /></p>
+<table class="table" style="width: auto !important; ">
+<caption>
+Shot Pressure - Ennistymon
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Shot Outcome
+</th>
+<th style="text-align:left;">
+Pressure
+</th>
+<th style="text-align:center;">
+count
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Miss
+</td>
+<td style="text-align:left;">
+None
+</td>
+<td style="text-align:center;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Miss
+</td>
+<td style="text-align:left;">
+Light/Late
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Score
+</td>
+<td style="text-align:left;">
+Light/Late
+</td>
+<td style="text-align:center;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Score
+</td>
+<td style="text-align:left;">
+Heavy
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+</tbody>
+</table>
+<div id="player-open-play-shooting-stats---ennistymon" class="section level2">
+<h2>Player Open Play Shooting Stats - Ennistymon</h2>
+<div id="htmlwidget-de0613fcf9c6eeae5540" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-de0613fcf9c6eeae5540">{"x":{"filter":"none","caption":"<caption>Player Shooting Stats - Ennistymon<\/caption>","data":[["1 1 Ennistymon","2 2 Ennistymon","3 3 Ennistymon","4 4 Ennistymon","5 5 Ennistymon","6 6 Ennistymon","7 7 Ennistymon","8 8 Ennistymon","9 9 Ennistymon","10 10 Ennistymon","11 11 Ennistymon","12 12 Ennistymon","13 13 Ennistymon","14 14 Ennistymon","15 15 Ennistymon","20 NA"],[0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,1,0,0,2,1,0,0,0,0,3,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,1,0,0,1,0,0,0,0,0,2,0,0],[0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0],[0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,1,1,0,2,1,0,0,0,0,3,0,0],[0,0,0,0,1,0,0,1,0,0,0,0,0,2,0,0]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>plynum<\/th>\n      <th>Slef<\/th>\n      <th>Srig<\/th>\n      <th>Hndps<\/th>\n      <th>Punch<\/th>\n      <th>Goal<\/th>\n      <th>Point<\/th>\n      <th>WR<\/th>\n      <th>WL<\/th>\n      <th>Sve<\/th>\n      <th>blkd<\/th>\n      <th>OpShot<\/th>\n      <th>OpScr<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div id="open-play-shooting---kilrush" class="section level1">
+<h1>Open Play Shooting - Kilrush</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Open Play Shots - Kilrush
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Shots
+</th>
+<th style="text-align:center;">
+Scores
+</th>
+<th style="text-align:center;">
+Efficiency %
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Kilrush
+</td>
+<td style="text-align:center;">
+11
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+45.5
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="ennkilclamcf21_files/figure-html/unnamed-chunk-46-1.png" width="1536" /></p>
+<table class="table" style="width: auto !important; ">
+<caption>
+Shot Pressure - Kilrush
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Shot Outcome
+</th>
+<th style="text-align:left;">
+Pressure
+</th>
+<th style="text-align:center;">
+count
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Miss
+</td>
+<td style="text-align:left;">
+None
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Miss
+</td>
+<td style="text-align:left;">
+Light/Late
+</td>
+<td style="text-align:center;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Score
+</td>
+<td style="text-align:left;">
+None
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Score
+</td>
+<td style="text-align:left;">
+Light/Late
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Score
+</td>
+<td style="text-align:left;">
+Heavy
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+</tbody>
+</table>
+<div id="player-open-play-shooting-stats---kilrush" class="section level2">
+<h2>Player Open Play Shooting Stats - Kilrush</h2>
+<div id="htmlwidget-98f9de73932bfd48f6c0" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-98f9de73932bfd48f6c0">{"x":{"filter":"none","caption":"<caption>Player Shooting Stats - Kilrush<\/caption>","data":[["1 1 Kilrush","2 2 Kilrush","3 3 Kilrush","4 4 Kilrush","5 5 Kilrush","6 6 Kilrush","7 7 Kilrush","8 8 Kilrush","9 9 Kilrush","10 10 Kilrush","11 11 Kilrush","12 12 Kilrush","13 13 Kilrush","14 14 Kilrush","15 15 Kilrush","17 17 Kilrush"],[0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0],[0,0,0,0,1,0,2,1,1,0,2,2,0,1,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,1,0,1,0,1,0,1,0,0,1,0,0],[0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,1,0,2,2,1,0,2,2,0,1,0,0],[0,0,0,0,1,0,1,0,1,0,1,0,0,1,0,0]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>plynum<\/th>\n      <th>Slef<\/th>\n      <th>Srig<\/th>\n      <th>Hndps<\/th>\n      <th>Punch<\/th>\n      <th>Goal<\/th>\n      <th>Point<\/th>\n      <th>WR<\/th>\n      <th>WL<\/th>\n      <th>Sve<\/th>\n      <th>blkd<\/th>\n      <th>OpShot<\/th>\n      <th>OpScr<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div id="frees-and-attacking-marks-won" class="section level1">
+<h1>Frees and Attacking Marks Won</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Frees and Attacking Marks Won
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Att Mark Won
+</th>
+<th style="text-align:center;">
+Mark Shots
+</th>
+<th style="text-align:center;">
+Mk Scores
+</th>
+<th style="text-align:center;">
+Mark Efficiency %
+</th>
+<th style="text-align:center;">
+Frees Won
+</th>
+<th style="text-align:center;">
+Fk Shots
+</th>
+<th style="text-align:center;">
+Fk Scores
+</th>
+<th style="text-align:center;">
+Fk Shot Efficiency %
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Ennistymon
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+17
+</td>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+66.67
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="all-place-ball-shots---ennistymon" class="section level1">
+<h1>All Place Ball Shots - Ennistymon</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+All Place Ball Shots - Ennistymon
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Fk Point
+</th>
+<th style="text-align:center;">
+Fk Short
+</th>
+<th style="text-align:center;">
+Fk Wide Right
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Ennistymon
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="ennkilclamcf21_files/figure-html/unnamed-chunk-51-1.png" width="1536" /></p>
+</div>
+<div id="frees-and-attacking-marks-won---kilrush" class="section level1">
+<h1>Frees and Attacking Marks Won - Kilrush</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Frees and Attacking Marks Won
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Att Mark Won
+</th>
+<th style="text-align:center;">
+Mark Shots
+</th>
+<th style="text-align:center;">
+Mk Scores
+</th>
+<th style="text-align:center;">
+Mark Efficiency %
+</th>
+<th style="text-align:center;">
+Frees Won
+</th>
+<th style="text-align:center;">
+Fk Shots
+</th>
+<th style="text-align:center;">
+Fk Scores
+</th>
+<th style="text-align:center;">
+Fk Shot Efficiency %
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Kilrush
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+18
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+33.33
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="all-place-ball-shots---kilrush" class="section level1">
+<h1>All Place Ball Shots - Kilrush</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+All Place Ball Shots - Kilrush
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Fk Point
+</th>
+<th style="text-align:center;">
+Fk Short
+</th>
+<th style="text-align:center;">
+Fk Wide Left
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Kilrush
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="ennkilclamcf21_files/figure-html/unnamed-chunk-54-1.png" width="1536" /></p>
+</div>
+<div id="kick-outs---ennistymon" class="section level1">
+<h1>Kick Outs - Ennistymon</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Outcome from Kick Outs - Ennistymon
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Ko
+</th>
+<th style="text-align:center;">
+Ko ToL
+</th>
+<th style="text-align:center;">
+ToL
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="ennkilclamcf21_files/figure-html/unnamed-chunk-56-1.png" width="1536" /></p>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Kick Outs - Ennistymon
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Kickouts
+</th>
+<th style="text-align:center;">
+Ko Won
+</th>
+<th style="text-align:center;">
+% Ko Won
+</th>
+<th style="text-align:center;">
+Shots
+</th>
+<th style="text-align:center;">
+Scores
+</th>
+<th style="text-align:center;">
+Time to Ko (secs)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Ennistymon
+</td>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+50
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+36.23
+</td>
+</tr>
+</tbody>
+</table>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Kick Out Outcomes by Type
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Defence Setup
+</th>
+<th style="text-align:center;">
+Outcome
+</th>
+<th style="text-align:center;">
+Total
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Ko Press
+</td>
+<td style="text-align:center;">
+Ko ToL
+</td>
+<td style="text-align:center;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ko Press
+</td>
+<td style="text-align:center;">
+ToL
+</td>
+<td style="text-align:center;">
+4
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="ennkilclamcf21_files/figure-html/unnamed-chunk-59-1.png" width="1536" /></p>
+<p><img src="ennkilclamcf21_files/figure-html/unnamed-chunk-60-1.png" width="1536" /></p>
+<ul>
+<li>Duration (secs) = Total Playing time of possession excluding breaks in play</li>
+</ul>
+<div id="htmlwidget-b74a7608cc54478128cd" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b74a7608cc54478128cd">{"x":{"filter":"none","data":[[5,6,13,16,20,22,27,42],["Ko","Ko","Ko","Ko","Ko","Ko","Ko","Ko"],["Out_Def","Out_Def","Out_Def","Out_Def","Out_Def","Out_Def","Mid_Def","Out_Def"],["Ko ToL","ToL","Ko ToL","ToL","Ko ToL","ToL","ToL","Ko ToL"],[4.39,91.76,3.31,59.06,4.16,31.48,120.77,5.61],[4.39,91.76,3.31,46.64,4.16,31.48,58.3,5.61],[1,1,1,2,1,1,2,1]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>possno<\/th>\n      <th>Type<\/th>\n      <th>Pitch Area Rec<\/th>\n      <th>Outcome<\/th>\n      <th>Tot Time<\/th>\n      <th>secs<\/th>\n      <th>No of Phases<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<ul>
+<li><p>Tot Time = total time of possession including breaks in Play</p></li>
+<li><p>Secs = Total Playing time of possession</p></li>
+</ul>
+</div>
+<div id="kick-outs---kilrush" class="section level1">
+<h1>Kick Outs - Kilrush</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Outcome from Kick Outs - Kilrush
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Ko
+</th>
+<th style="text-align:center;">
+Ko ToL
+</th>
+<th style="text-align:center;">
+Ms Op
+</th>
+<th style="text-align:center;">
+Ms Rs
+</th>
+<th style="text-align:center;">
+Scr Op
+</th>
+<th style="text-align:center;">
+ToL
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+12
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+6
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="ennkilclamcf21_files/figure-html/unnamed-chunk-63-1.png" width="1536" /></p>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Kick Outs - Kilrush
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Kickouts
+</th>
+<th style="text-align:center;">
+Ko Won
+</th>
+<th style="text-align:center;">
+% Ko Won
+</th>
+<th style="text-align:center;">
+Shots
+</th>
+<th style="text-align:center;">
+Scores
+</th>
+<th style="text-align:center;">
+Time to Ko (secs)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Kilrush
+</td>
+<td style="text-align:center;">
+12
+</td>
+<td style="text-align:center;">
+11
+</td>
+<td style="text-align:center;">
+91.67
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+46.35
+</td>
+</tr>
+</tbody>
+</table>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Kick Out Outcomes by Type
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Defence Setup
+</th>
+<th style="text-align:center;">
+Outcome
+</th>
+<th style="text-align:center;">
+Total
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Ko Lat Press
+</td>
+<td style="text-align:center;">
+Scr Op
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ko Lat Press
+</td>
+<td style="text-align:center;">
+ToL
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ko Press
+</td>
+<td style="text-align:center;">
+Ko ToL
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ko Press
+</td>
+<td style="text-align:center;">
+Ms Op
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ko Press
+</td>
+<td style="text-align:center;">
+Ms Rs
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ko Press
+</td>
+<td style="text-align:center;">
+Scr Op
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ko Press
+</td>
+<td style="text-align:center;">
+ToL
+</td>
+<td style="text-align:center;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ko Unc Press
+</td>
+<td style="text-align:center;">
+ToL
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="ennkilclamcf21_files/figure-html/unnamed-chunk-66-1.png" width="1536" /></p>
+<p><img src="ennkilclamcf21_files/figure-html/unnamed-chunk-67-1.png" width="1536" /></p>
+<ul>
+<li>Duration (secs) = Total Playing time of possession excluding breaks in play</li>
+</ul>
+<div id="htmlwidget-3cfd28f7e8634986ee2d" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3cfd28f7e8634986ee2d">{"x":{"filter":"none","data":[[4,5,13,16,22,28,33,34,35,39,40,41],["Ko","Ko","Ko","Ko","Ko","Ko","Ko","Ko","Ko","Ko","Ko","Ko"],["Out_Def","Out_Def","Out_Att","Out_Def","Mid_Def","Mid_Def","Out_Def","Mid_Def","Out_Def","Out_Def","Out_Def","Mid_Def"],["ToL","Wide Right","Point","Wide Right","Point","ToL","ToL","ToL","ToL","Ko ToL","ToL","Fk Short"],[28.37,31.94,19.82,56.72,46.58,44.56,25.25,22.19,30.66,2.92,48.1,78.44],[28.37,23.22,19.82,48.04,46.58,41.7,20.93,22.19,30.66,2.92,19.48,30.56],[1,2,1,3,1,2,2,1,1,1,2,3]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>possno<\/th>\n      <th>Type<\/th>\n      <th>Pitch Area Rec<\/th>\n      <th>Outcome<\/th>\n      <th>Tot Time<\/th>\n      <th>secs<\/th>\n      <th>No of Phases<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<ul>
+<li><p>Tot Time = total time of possession including breaks in Play</p></li>
+<li><p>Secs = Total Playing time of possession excluding breaks in Play</p></li>
+</ul>
+</div>
+<div id="possession-won---ennistymon" class="section level1">
+<h1>Possession Won - Ennistymon</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<thead>
+<tr>
+<th style="text-align:center;">
+PW
+</th>
+<th style="text-align:center;">
+Fk Loss ToL
+</th>
+<th style="text-align:center;">
+Ms Op
+</th>
+<th style="text-align:center;">
+Ms Rs
+</th>
+<th style="text-align:center;">
+Scr Op
+</th>
+<th style="text-align:center;">
+Scr Rs
+</th>
+<th style="text-align:center;">
+ToL
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+34
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+18
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="ennkilclamcf21_files/figure-html/unnamed-chunk-70-1.png" width="1536" /></p>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Team Possession Won - Ennistymon
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Possession Won
+</th>
+<th style="text-align:center;">
+Total Time (min)
+</th>
+<th style="text-align:center;">
+Shots
+</th>
+<th style="text-align:center;">
+% Shots per PW
+</th>
+<th style="text-align:center;">
+Shot Rate (secs)
+</th>
+<th style="text-align:center;">
+Scores
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+34
+</td>
+<td style="text-align:center;">
+20
+</td>
+<td style="text-align:center;">
+14
+</td>
+<td style="text-align:center;">
+41
+</td>
+<td style="text-align:center;">
+85
+</td>
+<td style="text-align:center;">
+8
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="ennkilclamcf21_files/figure-html/unnamed-chunk-72-1.png" width="1536" /></p>
+<p><img src="ennkilclamcf21_files/figure-html/unnamed-chunk-73-1.png" width="1536" /></p>
+<ul>
+<li>Duration (secs) = Total Playing time of possession excluding breaks in play</li>
+</ul>
+<div id="htmlwidget-10519b2d9a5b454a21ec" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-10519b2d9a5b454a21ec">{"x":{"filter":"none","data":[[1,2,3,4,7,8,9,10,11,12,14,15,17,18,19,21,23,24,25,26,28,29,30,31,32,33,34,35,36,37,38,39,40,41],["PW","PW","PW","PW","PW","Rs Pass PW","PW","PW","PW","PW","PW","PW","Rs Pass PW","PW","PW","Rs Pass PW","PW","PW","PW","PW","Rs Pass PW","PW","PW","PW","Rs Pass PW","PW","PW","Rs Pass PW","PW","PW","PW","PW","PW","PW"],["Out_Def","Out_Att","Mid_Def","Mid_Def","Out_Def","Mid_Def","Mid_Def","In_Def","In_Def","Out_Att","In_Def","Out_Def","Out_Att","Out_Att","In_Def","In_Def","Out_Def","Out_Def","Mid_Def","Mid_Def","Out_Att","Out_Def","Mid_Def","Mid_Def","Out_Att","In_Att","Mid_Def","Out_Def","Mid_Def","Mid_Def","Out_Def","Out_Att","In_Def","In_Def"],["ToL","ToL","Fk Point","Point","Fk Loss Off","ToL","ToL","ToL","ToL","Point","Fk Loss Off","Fk Wide Right","ToL","ToL","ToL","Fk Point","ToL","ToL","Fk Short","Point","ToL","ToL","ToL","Wide Right","Short","Fk Point","Wide Left","ToL","ToL","ToL","Fk Point","Wide Right","Point","ToL"],[42.9,9.73,69.97,79.38,76.65,35.02,16.95,13.7,80.3,27.81,76.16,69.16,34.21,13.63,33.44,84.36,13.97,9.69,58.3,23.63,21.49,3.8,24.13,49.54,27.23,32.7,44.66,82.94,46.98,9.88,160.35,6.87,80.81,5.81],[42.9,7.02,34.64,79.38,62.39,35.02,16.95,13.7,80.3,25,76.16,27,34.21,13.63,30.59,54.88,7.37,9.69,30.38,23.63,21.49,3.8,24.13,49.54,27.23,2.09,40.07,77.3,36.98,9.88,98.6,6.87,80.81,5.81],[1,2,2,1,2,1,1,1,1,2,1,2,1,1,2,2,2,1,3,1,1,1,1,1,1,2,2,2,2,1,3,1,1,1]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>possno<\/th>\n      <th>Type<\/th>\n      <th>Start Area<\/th>\n      <th>Outcome<\/th>\n      <th>Tot Time<\/th>\n      <th>secs<\/th>\n      <th>No of Phases<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<ul>
+<li><p>Tot Time = total time of possession including breaks in Play</p></li>
+<li><p>Secs = Total Playing time of possession excluding breaks in Play</p></li>
+</ul>
+</div>
+<div id="possession-won---kilrush" class="section level1">
+<h1>Possession Won - Kilrush</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<thead>
+<tr>
+<th style="text-align:center;">
+PW
+</th>
+<th style="text-align:center;">
+Fk Loss ToL
+</th>
+<th style="text-align:center;">
+Ms Op
+</th>
+<th style="text-align:center;">
+Ms Rs
+</th>
+<th style="text-align:center;">
+Scr Op
+</th>
+<th style="text-align:center;">
+Scr Rs
+</th>
+<th style="text-align:center;">
+ToL
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+32
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+19
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="ennkilclamcf21_files/figure-html/unnamed-chunk-76-1.png" width="1536" /></p>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Team Possession Won
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Possession Won
+</th>
+<th style="text-align:center;">
+Total Time (min)
+</th>
+<th style="text-align:center;">
+Shots
+</th>
+<th style="text-align:center;">
+% Shots per PW
+</th>
+<th style="text-align:center;">
+Shot Rate (secs)
+</th>
+<th style="text-align:center;">
+Scores
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+32
+</td>
+<td style="text-align:center;">
+11
+</td>
+<td style="text-align:center;">
+9
+</td>
+<td style="text-align:center;">
+28
+</td>
+<td style="text-align:center;">
+75
+</td>
+<td style="text-align:center;">
+4
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="ennkilclamcf21_files/figure-html/unnamed-chunk-78-1.png" width="1536" /></p>
+<p><img src="ennkilclamcf21_files/figure-html/unnamed-chunk-79-1.png" width="1536" /></p>
+<ul>
+<li>Duration (secs) = Total Playing time of possession excluding breaks in play</li>
+</ul>
+<div id="htmlwidget-afae485d822c0ecf3132" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-afae485d822c0ecf3132">{"x":{"filter":"none","data":[[1,2,3,6,7,8,9,10,11,12,14,15,17,18,19,20,21,23,24,25,26,27,29,30,31,32,36,37,38,42,43,44],["Ti Won","PW","PW","PW","PW","Rs Pass PW","PW","PW","PW","PW","PW","Rs Pass PW","PW","PW","PW","PW","Rs Pass PW","Ti Won","PW","PW","PW","PW","PW","PW","PW","PW","PW","PW","PW","PW","Rs Pass PW","PW"],["Out_Att","Mid_Def","Mid_Def","Out_Att","Mid_Def","Out_Def","Mid_Def","Out_Def","Out_Att","Mid_Def","Out_Att","Mid_Def","Mid_Def","Mid_Def","Mid_Def","Out_Att","Out_Att","Out_Att","Mid_Def","Out_Att","Out_Def","In_Def","Mid_Def","In_Def","Out_Def","Out_Def","Out_Def","Out_Def","Out_Att","In_Att","Mid_Att","Out_Att"],["ToL","ToL","ToL","Point","ToL","Fk Loss Off","ToL","Short","Short","ToL","Short","Fk Loss Off","Fk Loss Off","ToL","Post","Point","ToL","Point","ToL","ToL","ToL","ToL","Fk Loss Off","ToL","ToL","ToL","ToL","ToL","ToL","ToL","Fk Point","Fk Wide Left"],[12.52,7.41,101.36,35.82,6.65,10.63,24.1,19.86,8.95,15.28,18.26,14.27,14.58,9.49,30.96,14.86,20.63,43.4,57.67,8.38,29.61,122.67,6,29.65,17.86,10.43,17.39,50.07,6.78,4.66,37.3,101.44],[8.5,7.41,79.08,35.82,6.65,10.63,24.1,19.86,8.95,9.99,18.26,14.27,14.58,9.49,30.96,14.86,20.63,36,57.67,8.38,24.83,64.03,6,29.65,17.86,10.43,17.39,6.43,6.78,4.66,12.92,42.09],[2,1,3,1,1,1,1,1,1,2,1,1,1,1,1,1,1,2,1,1,2,3,1,1,1,1,1,2,1,1,2,3],[1,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,1,2,0,0,0,0,0,1,0,0,0,1],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[1,0,2,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,1,2,0,0,0,0,0,1,0,0,1,2]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>possno<\/th>\n      <th>Type<\/th>\n      <th>Start Area<\/th>\n      <th>Outcome<\/th>\n      <th>Tot Time<\/th>\n      <th>secs<\/th>\n      <th>No of Phases<\/th>\n      <th>passno<\/th>\n      <th>Hp<\/th>\n      <th>Hp_Prs<\/th>\n      <th>Kp<\/th>\n      <th>Kp_prs<\/th>\n      <th>tckAll<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<ul>
+<li><p>Tot Time = total time of possession including breaks in Play</p></li>
+<li><p>Secs = Total Playing time of possession excluding breaks in Play</p></li>
+</ul>
+</div>
+<div id="possession-phase-duration" class="section level1">
+<h1>Possession &amp; Phase Duration</h1>
+<p><img src="ennkilclamcf21_files/figure-html/unnamed-chunk-81-1.png" width="1536" /></p>
+<ul>
+<li>Duration (secs) = Total Playing time of possession excluding breaks in play</li>
+</ul>
+<p><img src="ennkilclamcf21_files/figure-html/unnamed-chunk-82-1.png" width="1536" /></p>
+<ul>
+<li>Duration (secs) = Total Playing time of possession excluding breaks in play</li>
+</ul>
+<p><img src="ennkilclamcf21_files/figure-html/unnamed-chunk-83-1.png" width="1536" /></p>
+<p><img src="ennkilclamcf21_files/figure-html/unnamed-chunk-84-1.png" width="1536" /></p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

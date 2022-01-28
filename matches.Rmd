@@ -140,6 +140,10 @@ output: html_document
 
 <font size="3">[Ennistymon vs Kilrush/Kilimer](https://witnesstheanalysis.com/ennkilclamcf21.html)</font>
 
+**Donegal Senior Football Championship Final**
+
+<font size="3">[St Eunans vs Naomh Conaill](https://witnesstheanalysis.com/euncondonscf21.html)</font>
+
 
 ## 2020 {.tabset .tabset-fade .tabset-pills}
 

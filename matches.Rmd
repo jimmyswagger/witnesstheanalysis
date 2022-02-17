@@ -144,6 +144,10 @@ output: html_document
 
 <font size="3">[St Eunans vs Naomh Conaill](https://witnesstheanalysis.com/euncondonscf21.html)</font>
 
+**Dublin Senior Football Championship Final**
+
+<font size="3">[Kilmacud Crokes vs St Judes](https://witnesstheanalysis.com/kiljuddubscf21.html)</font>
+
 
 ## 2020 {.tabset .tabset-fade .tabset-pills}
 

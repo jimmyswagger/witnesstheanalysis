@@ -1,0 +1,2177 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Crokes vs Judes</title>
+
+<script src="site_libs/jquery-1.12.4/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script src="site_libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
+<link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="site_libs/datatables-binding-0.16/datatables.js"></script>
+<link href="site_libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="site_libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="site_libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+<link href="site_libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Witness the Analysis</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Home
+  </a>
+</li>
+<li>
+  <a href="matches.html">
+    <span class="fa fa-volleyball-ball"></span>
+     
+    Matches
+  </a>
+</li>
+<li>
+  <a href="https://witnesstheanalysis.shinyapps.io/Results/">
+    <span class="fas fa fas fa-book"></span>
+     
+    Results
+  </a>
+</li>
+<li>
+  <a href="https://witnesstheanalysis.wordpress.com/2020/07/10/a-match-tracker-application-for-windows-version-3/">
+    <span class="fas fa fas fa-pen"></span>
+     
+    Analysis App
+  </a>
+</li>
+<li>
+  <a href="Trackers.html">
+    <span class="fas fa fas fa-desktop"></span>
+     
+    Shiny Apps
+  </a>
+</li>
+<li>
+  <a href="https://github.com/witnesstheanalysis/witnesstheanalysis">
+    <span class="fa fa-github fa-lg"></span>
+     
+    Codes
+  </a>
+</li>
+<li>
+  <a href="contact.html">
+    <span class="fa fa-envelope fa-lg"></span>
+     
+    Contact
+  </a>
+</li>
+<li>
+  <a href="https://twitter.com/WtAnalysis">
+    <span class="fa fa-twitter fa-lg"></span>
+     
+    Twitter
+  </a>
+</li>
+<li>
+  <a href="https://witnesstheanalysis.wordpress.com">
+    <span class="fa fa-wordpress fa-lg"></span>
+     
+    Blog
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Crokes vs Judes</h1>
+
+</div>
+
+
+<p><font size="4">Dublin Senior Final<font></p>
+<p><font size="4"> 21st November 2021, Parnell Park, Dublin<font></p>
+<p><img src="kiljuddubscf21_files/figure-html/unnamed-chunk-22-1.png" width="1536" /></p>
+<p><img src="kiljuddubscf21_files/figure-html/unnamed-chunk-23-1.png" width="1536" /></p>
+<ul>
+<li>Includes water breaks</li>
+</ul>
+<div id="quick-game-stats" class="section level1">
+<h1>Quick Game Stats</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+All Possessions
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Possessions
+</th>
+<th style="text-align:center;">
+Poss Time (mins)
+</th>
+<th style="text-align:center;">
+Ave time (secs)
+</th>
+<th style="text-align:center;">
+All Shots
+</th>
+<th style="text-align:center;">
+% Shots per Poss
+</th>
+<th style="text-align:center;">
+Shot Rate (secs)
+</th>
+<th style="text-align:center;">
+Scores
+</th>
+<th style="text-align:center;">
+Score %
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Crokes
+</td>
+<td style="text-align:center;">
+41
+</td>
+<td style="text-align:center;">
+22
+</td>
+<td style="text-align:center;">
+32
+</td>
+<td style="text-align:center;">
+18
+</td>
+<td style="text-align:center;">
+44
+</td>
+<td style="text-align:center;">
+72
+</td>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+44
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Judes
+</td>
+<td style="text-align:center;">
+41
+</td>
+<td style="text-align:center;">
+25
+</td>
+<td style="text-align:center;">
+36
+</td>
+<td style="text-align:center;">
+15
+</td>
+<td style="text-align:center;">
+37
+</td>
+<td style="text-align:center;">
+99
+</td>
+<td style="text-align:center;">
+7
+</td>
+<td style="text-align:center;">
+47
+</td>
+</tr>
+</tbody>
+</table>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Team Scores
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Possessions Won
+</th>
+<th style="text-align:center;">
+Ko
+</th>
+<th style="text-align:center;">
+Ko Won
+</th>
+<th style="text-align:center;">
+Forty_Fives
+</th>
+<th style="text-align:center;">
+OP Shots
+</th>
+<th style="text-align:center;">
+Op Scores
+</th>
+<th style="text-align:center;">
+Op Score %
+</th>
+<th style="text-align:center;">
+Rs Shots
+</th>
+<th style="text-align:center;">
+Rs Scores
+</th>
+<th style="text-align:center;">
+Rs Score %
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Crokes
+</td>
+<td style="text-align:center;">
+31
+</td>
+<td style="text-align:center;">
+9
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+14
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+35.71
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+75.00
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Judes
+</td>
+<td style="text-align:center;">
+27
+</td>
+<td style="text-align:center;">
+13
+</td>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+12
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+41.67
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+66.67
+</td>
+</tr>
+</tbody>
+</table>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Team Possession Won
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Possession Won
+</th>
+<th style="text-align:center;">
+Total Time (min)
+</th>
+<th style="text-align:center;">
+Shots
+</th>
+<th style="text-align:center;">
+% Shots per PW
+</th>
+<th style="text-align:center;">
+Shot Rate (secs)
+</th>
+<th style="text-align:center;">
+Scores
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Crokes
+</td>
+<td style="text-align:center;">
+31
+</td>
+<td style="text-align:center;">
+16.14
+</td>
+<td style="text-align:center;">
+15
+</td>
+<td style="text-align:center;">
+48.39
+</td>
+<td style="text-align:center;">
+64.56
+</td>
+<td style="text-align:center;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Judes
+</td>
+<td style="text-align:center;">
+27
+</td>
+<td style="text-align:center;">
+18.18
+</td>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+37.04
+</td>
+<td style="text-align:center;">
+109.07
+</td>
+<td style="text-align:center;">
+4
+</td>
+</tr>
+</tbody>
+</table>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Kick Outs
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Kickouts
+</th>
+<th style="text-align:center;">
+Ko Won
+</th>
+<th style="text-align:center;">
+% Ko Won
+</th>
+<th style="text-align:center;">
+Shots
+</th>
+<th style="text-align:center;">
+Scores
+</th>
+<th style="text-align:center;">
+Time to Ko (secs)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Crokes
+</td>
+<td style="text-align:center;">
+9
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+55.56
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+17.44
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Judes
+</td>
+<td style="text-align:center;">
+13
+</td>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+76.92
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+33.80
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="scorers" class="section level1">
+<h1>Scorers</h1>
+<div id="htmlwidget-62b7337eed8d086965a5" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-62b7337eed8d086965a5">{"x":{"filter":"none","data":[["Judes","Crokes","Judes","Judes","Judes","Crokes","Judes","Crokes","Crokes","Crokes","Crokes","Judes","Judes","Crokes","Crokes"],["Shot Right","Shot Left","Shot Right","Shot Right","Shot Right","Fk Shot Right","Shot Right","Fk Shot Left","Shot Right","Fk Shot Left","Shot Right","Fk Shot Right","45 Shot Left","Shot Right","Shot Left"],["15 Shot Right","13 Shot Left","12 Shot Right","14 Shot Right","15 Shot Right","1 Fk Shot Right","14 Shot Right","13 Fk Shot Left","13 Shot Right","13 Fk Shot Left","5 Shot Right","14 Fk Shot Right","17 45 Shot Left","17 Shot Right","21 Shot Left"],["Shot Op","Shot Op","Shot Op","Shot Op","Shot Op","Shot Rs","Shot Op","Shot Rs","Shot Op","Shot Rs","Shot Op","Shot Rs","Shot Rs","Shot Op","Shot Op"],[2,2,2,2,2,null,2,null,2,null,2,null,null,1,3]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>Team<\/th>\n      <th>Action<\/th>\n      <th>plylab<\/th>\n      <th>subset<\/th>\n      <th>shdf<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="player-score-type---crokes" class="section level2">
+<h2>Player Score Type - Crokes</h2>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Player Score Type - Crokes
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Player
+</th>
+<th style="text-align:center;">
+Outcome
+</th>
+<th style="text-align:center;">
+Total
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+1 C Ferris
+</td>
+<td style="text-align:center;">
+Fk Point
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+13 P Mannion
+</td>
+<td style="text-align:center;">
+Fk Point
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+13 P Mannion
+</td>
+<td style="text-align:center;">
+Point
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+17 A Jones
+</td>
+<td style="text-align:center;">
+Point
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+21 C Pearson
+</td>
+<td style="text-align:center;">
+Point
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+5 C O Connor
+</td>
+<td style="text-align:center;">
+Goal
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="player-score-type---judes" class="section level2">
+<h2>Player Score Type - Judes</h2>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Player Score Type - Judes
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Player
+</th>
+<th style="text-align:center;">
+Outcome
+</th>
+<th style="text-align:center;">
+Total
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+12 D Kavanagh
+</td>
+<td style="text-align:center;">
+Point
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+14 D Mannix
+</td>
+<td style="text-align:center;">
+Fk Point
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+14 D Mannix
+</td>
+<td style="text-align:center;">
+Point
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+15 A Connolly
+</td>
+<td style="text-align:center;">
+Goal
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+15 A Connolly
+</td>
+<td style="text-align:center;">
+Point
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="team-sheet" class="section level1">
+<h1>Team Sheet</h1>
+<div id="crokes" class="section level2">
+<h2>Crokes</h2>
+<div id="htmlwidget-1ac909eee5438ecefc61" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1ac909eee5438ecefc61">{"x":{"filter":"none","data":[["Crokes","Crokes","Crokes","Crokes","Crokes","Crokes","Crokes","Crokes","Crokes","Crokes","Crokes","Crokes","Crokes","Crokes","Crokes","Crokes","Crokes","Crokes","Crokes"],["1 C Ferris","2 M Mullin","3 A McGowan","4 C O Shea","23 R McGowan","6 R O Carroll","7 D O Brien","8 B Shovlin","9 C Dias","10 T Fox","11 S Cunningham","12 S Horan","13 P Mannion","14 D Mullin","15 H Kenny","17 A Jones","25 C Casey","5 C O Connor","21 C Pearson"]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>Team<\/th>\n      <th>Player<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="judes" class="section level2">
+<h2>Judes</h2>
+<div id="htmlwidget-483eed8bb6f0722d7bec" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-483eed8bb6f0722d7bec">{"x":{"filter":"none","data":[["Judes","Judes","Judes","Judes","Judes","Judes","Judes","Judes","Judes","Judes","Judes","Judes","Judes","Judes","Judes","Judes","Judes","Judes","Judes"],["1 P Copeland","2 O Manning","3 J McGuire","4 A Hassett","5 T Lahiff","6 M Sweeny","7 C Guckian","8 C Murphy","9 P Spillane","10 D Sheehy","11 K McManamon","12 D Kavanagh","13 N Coakley","14 D Mannix","15 A Connolly","20 D McLoughlin","23 R Joyce","22 R Martina","17 B Coakley"]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>Team<\/th>\n      <th>Player<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div id="worm" class="section level1">
+<h1>Worm</h1>
+<p><img src="kiljuddubscf21_files/figure-html/unnamed-chunk-33-1.png" width="1536" /></p>
+</div>
+<div id="periods" class="section level1">
+<h1>Periods</h1>
+<p><img src="kiljuddubscf21_files/figure-html/unnamed-chunk-34-1.png" width="1536" /></p>
+</div>
+<div id="shooting---crokes" class="section level1">
+<h1>Shooting - Crokes</h1>
+<p><img src="kiljuddubscf21_files/figure-html/unnamed-chunk-35-1.png" width="1536" /></p>
+<p><img src="kiljuddubscf21_files/figure-html/unnamed-chunk-36-1.png" width="1536" /></p>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Shot Outcome
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+45 Short
+</th>
+<th style="text-align:center;">
+Fk Point
+</th>
+<th style="text-align:center;">
+Goal
+</th>
+<th style="text-align:center;">
+Point
+</th>
+<th style="text-align:center;">
+Saved
+</th>
+<th style="text-align:center;">
+Short
+</th>
+<th style="text-align:center;">
+Wide Left
+</th>
+<th style="text-align:center;">
+Wide Right
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Crokes
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="shooting---judes" class="section level1">
+<h1>Shooting - Judes</h1>
+<p><img src="kiljuddubscf21_files/figure-html/unnamed-chunk-38-1.png" width="1536" /></p>
+<p><img src="kiljuddubscf21_files/figure-html/unnamed-chunk-39-1.png" width="1536" /></p>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Shot Outcome
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+45 Point
+</th>
+<th style="text-align:center;">
+Blkd
+</th>
+<th style="text-align:center;">
+Fk Point
+</th>
+<th style="text-align:center;">
+Fk Post
+</th>
+<th style="text-align:center;">
+Goal
+</th>
+<th style="text-align:center;">
+Point
+</th>
+<th style="text-align:center;">
+Saved
+</th>
+<th style="text-align:center;">
+Short
+</th>
+<th style="text-align:center;">
+Wide Left
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Judes
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="open-play-shooting---crokes" class="section level1">
+<h1>Open Play Shooting - Crokes</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Open Play Shots - Crokes
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Shots
+</th>
+<th style="text-align:center;">
+Scores
+</th>
+<th style="text-align:center;">
+Efficiency %
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Crokes
+</td>
+<td style="text-align:center;">
+14
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+35.7
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="kiljuddubscf21_files/figure-html/unnamed-chunk-42-1.png" width="1536" /></p>
+<table class="table" style="width: auto !important; ">
+<caption>
+Shot Pressure - Crokes
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Shot Outcome
+</th>
+<th style="text-align:left;">
+Pressure
+</th>
+<th style="text-align:center;">
+count
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Miss
+</td>
+<td style="text-align:left;">
+None
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Miss
+</td>
+<td style="text-align:left;">
+Light/Late
+</td>
+<td style="text-align:center;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Score
+</td>
+<td style="text-align:left;">
+None
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Score
+</td>
+<td style="text-align:left;">
+Light/Late
+</td>
+<td style="text-align:center;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Score
+</td>
+<td style="text-align:left;">
+Heavy
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+</tbody>
+</table>
+<div id="player-open-play-shooting-stats---crokes" class="section level2">
+<h2>Player Open Play Shooting Stats - Crokes</h2>
+<div id="htmlwidget-367c9db7f9060b5c0485" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-367c9db7f9060b5c0485">{"x":{"filter":"none","caption":"<caption>Player Shooting Stats - Crokes<\/caption>","data":[["1 C Ferris","3 A McGowan","4 C O Shea","5 C O Connor","6 R O Carroll","7 D O Brien","8 B Shovlin","9 C Dias","10 T Fox","11 S Cunningham","12 S Horan","13 P Mannion","14 D Mullin","17 A Jones","21 C Pearson","23 R McGowan","25 C Casey"],[0,0,0,0,0,0,0,0,0,0,0,3,0,0,1,0,0],[0,0,0,1,0,1,0,0,2,1,1,1,2,1,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,2,0,1,1,0,0],[0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0],[0,0,0,0,0,1,0,0,0,1,0,1,1,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,1,0,1,0,0,2,1,1,4,2,1,1,0,0],[0,0,0,1,0,0,0,0,0,0,0,2,0,1,1,0,0]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>plynum<\/th>\n      <th>Slef<\/th>\n      <th>Srig<\/th>\n      <th>Hndps<\/th>\n      <th>Punch<\/th>\n      <th>Goal<\/th>\n      <th>Point<\/th>\n      <th>WR<\/th>\n      <th>WL<\/th>\n      <th>Sve<\/th>\n      <th>blkd<\/th>\n      <th>OpShot<\/th>\n      <th>OpScr<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div id="open-play-shooting---judes" class="section level1">
+<h1>Open Play Shooting - Judes</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Open Play Shots - Judes
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Shots
+</th>
+<th style="text-align:center;">
+Scores
+</th>
+<th style="text-align:center;">
+Efficiency %
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Judes
+</td>
+<td style="text-align:center;">
+12
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+41.7
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="kiljuddubscf21_files/figure-html/unnamed-chunk-46-1.png" width="1536" /></p>
+<table class="table" style="width: auto !important; ">
+<caption>
+Shot Pressure - Judes
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Shot Outcome
+</th>
+<th style="text-align:left;">
+Pressure
+</th>
+<th style="text-align:center;">
+count
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Miss
+</td>
+<td style="text-align:left;">
+None
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Miss
+</td>
+<td style="text-align:left;">
+Light/Late
+</td>
+<td style="text-align:center;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Miss
+</td>
+<td style="text-align:left;">
+Heavy
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Score
+</td>
+<td style="text-align:left;">
+Light/Late
+</td>
+<td style="text-align:center;">
+5
+</td>
+</tr>
+</tbody>
+</table>
+<div id="player-open-play-shooting-stats---judes" class="section level2">
+<h2>Player Open Play Shooting Stats - Judes</h2>
+<div id="htmlwidget-4228ac6c67f2640004bb" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4228ac6c67f2640004bb">{"x":{"filter":"none","caption":"<caption>Player Shooting Stats - Judes<\/caption>","data":[["1 P Copeland","2 O Manning","3 J McGuire","5 T Lahiff","6 M Sweeny","7 C Guckian","8 C Murphy","9 P Spillane","10 D Sheehy","11 K McManamon","12 D Kavanagh","13 N Coakley","14 D Mannix","15 A Connolly","17 B Coakley","22 R Martina","23 R Joyce","25 NA"],[0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,2,0,0,1,1,0,3,3,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,1,0,2,1,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0],[0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,2,1,0,1,1,0,3,4,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,1,0,2,2,0,0,0,0]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>plynum<\/th>\n      <th>Slef<\/th>\n      <th>Srig<\/th>\n      <th>Hndps<\/th>\n      <th>Punch<\/th>\n      <th>Goal<\/th>\n      <th>Point<\/th>\n      <th>WR<\/th>\n      <th>WL<\/th>\n      <th>Sve<\/th>\n      <th>blkd<\/th>\n      <th>OpShot<\/th>\n      <th>OpScr<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div id="frees-and-attacking-marks-won" class="section level1">
+<h1>Frees and Attacking Marks Won</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Frees and Attacking Marks Won
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Att Mark Won
+</th>
+<th style="text-align:center;">
+Mark Shots
+</th>
+<th style="text-align:center;">
+Mk Scores
+</th>
+<th style="text-align:center;">
+Mark Efficiency %
+</th>
+<th style="text-align:center;">
+Frees Won
+</th>
+<th style="text-align:center;">
+Fk Shots
+</th>
+<th style="text-align:center;">
+Fk Scores
+</th>
+<th style="text-align:center;">
+Fk Shot Efficiency %
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Crokes
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+100
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="all-place-ball-shots---crokes" class="section level1">
+<h1>All Place Ball Shots - Crokes</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+All Place Ball Shots - Crokes
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+45 Short
+</th>
+<th style="text-align:center;">
+Fk Point
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Crokes
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+3
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="kiljuddubscf21_files/figure-html/unnamed-chunk-51-1.png" width="1536" /></p>
+</div>
+<div id="frees-and-attacking-marks-won---judes" class="section level1">
+<h1>Frees and Attacking Marks Won - Judes</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Frees and Attacking Marks Won
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Att Mark Won
+</th>
+<th style="text-align:center;">
+Mark Shots
+</th>
+<th style="text-align:center;">
+Mk Scores
+</th>
+<th style="text-align:center;">
+Mark Efficiency %
+</th>
+<th style="text-align:center;">
+Frees Won
+</th>
+<th style="text-align:center;">
+Fk Shots
+</th>
+<th style="text-align:center;">
+Fk Scores
+</th>
+<th style="text-align:center;">
+Fk Shot Efficiency %
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Judes
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+50
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="all-place-ball-shots---judes" class="section level1">
+<h1>All Place Ball Shots - Judes</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+All Place Ball Shots - Judes
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+45 Point
+</th>
+<th style="text-align:center;">
+Fk Point
+</th>
+<th style="text-align:center;">
+Fk Post
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Judes
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="kiljuddubscf21_files/figure-html/unnamed-chunk-54-1.png" width="1536" /></p>
+</div>
+<div id="kick-outs---crokes" class="section level1">
+<h1>Kick Outs - Crokes</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Outcome from Kick Outs - Crokes
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Ko
+</th>
+<th style="text-align:center;">
+Ko ToL
+</th>
+<th style="text-align:center;">
+Ms Op
+</th>
+<th style="text-align:center;">
+ToL
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+9
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+3
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="kiljuddubscf21_files/figure-html/unnamed-chunk-56-1.png" width="1536" /></p>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Kick Outs - Crokes
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Kickouts
+</th>
+<th style="text-align:center;">
+Ko Won
+</th>
+<th style="text-align:center;">
+% Ko Won
+</th>
+<th style="text-align:center;">
+Shots
+</th>
+<th style="text-align:center;">
+Scores
+</th>
+<th style="text-align:center;">
+Time to Ko (secs)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Crokes
+</td>
+<td style="text-align:center;">
+9
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+55.56
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+17.44
+</td>
+</tr>
+</tbody>
+</table>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Kick Out Outcomes by Type
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Defence Setup
+</th>
+<th style="text-align:center;">
+Outcome
+</th>
+<th style="text-align:center;">
+Total
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Ko Press
+</td>
+<td style="text-align:center;">
+Ko ToL
+</td>
+<td style="text-align:center;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ko Press
+</td>
+<td style="text-align:center;">
+Ms Op
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ko Press
+</td>
+<td style="text-align:center;">
+ToL
+</td>
+<td style="text-align:center;">
+3
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="kiljuddubscf21_files/figure-html/unnamed-chunk-59-1.png" width="1536" /></p>
+<p><img src="kiljuddubscf21_files/figure-html/unnamed-chunk-60-1.png" width="1536" /></p>
+<ul>
+<li>Duration (secs) = Total Playing time of possession excluding breaks in play</li>
+</ul>
+<div id="htmlwidget-a8fbaa572b5c233baf1d" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a8fbaa572b5c233baf1d">{"x":{"filter":"none","data":[[12,13,14,20,22,23,26,37,38],["Ko","Ko","Ko","Ko","Ko","Ko","Ko","Ko","Ko"],["Out_Def","Mid_Def","Out_Def","Out_Def","Out_Att","Out_Def","Mid_Def","Out_Def","Mid_Def"],["Ko ToL","ToL","Ko ToL","ToL","Ko ToL","ToL","Short","Ko ToL","Wide Left"],[3.65,49.75,3.54,22.89,4.84,24.95,83.15,4.07,156.85],[3.65,49.75,3.54,22.89,4.84,24.95,83.15,4.07,126.06],[1,1,1,1,1,1,1,1,2]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>possno<\/th>\n      <th>Type<\/th>\n      <th>Pitch Area Rec<\/th>\n      <th>Outcome<\/th>\n      <th>Tot Time<\/th>\n      <th>secs<\/th>\n      <th>No of Phases<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<ul>
+<li><p>Tot Time = total time of possession including breaks in Play</p></li>
+<li><p>Secs = Total Playing time of possession</p></li>
+</ul>
+</div>
+<div id="kick-outs---judes" class="section level1">
+<h1>Kick Outs - Judes</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Outcome from Kick Outs - Judes
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Ko
+</th>
+<th style="text-align:center;">
+Fk Loss ToL
+</th>
+<th style="text-align:center;">
+Ko ToL
+</th>
+<th style="text-align:center;">
+Ms Op
+</th>
+<th style="text-align:center;">
+Scr Op
+</th>
+<th style="text-align:center;">
+ToL
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+13
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+4
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="kiljuddubscf21_files/figure-html/unnamed-chunk-63-1.png" width="1536" /></p>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Kick Outs - Judes
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Team
+</th>
+<th style="text-align:center;">
+Kickouts
+</th>
+<th style="text-align:center;">
+Ko Won
+</th>
+<th style="text-align:center;">
+% Ko Won
+</th>
+<th style="text-align:center;">
+Shots
+</th>
+<th style="text-align:center;">
+Scores
+</th>
+<th style="text-align:center;">
+Time to Ko (secs)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Judes
+</td>
+<td style="text-align:center;">
+13
+</td>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+76.92
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+33.8
+</td>
+</tr>
+</tbody>
+</table>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Kick Out Outcomes by Type
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Defence Setup
+</th>
+<th style="text-align:center;">
+Outcome
+</th>
+<th style="text-align:center;">
+Total
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Ko Press
+</td>
+<td style="text-align:center;">
+Fk Loss ToL
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ko Press
+</td>
+<td style="text-align:center;">
+Ko ToL
+</td>
+<td style="text-align:center;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ko Press
+</td>
+<td style="text-align:center;">
+Ms Op
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ko Press
+</td>
+<td style="text-align:center;">
+Scr Op
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ko Press
+</td>
+<td style="text-align:center;">
+ToL
+</td>
+<td style="text-align:center;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ko Unc Press
+</td>
+<td style="text-align:center;">
+ToL
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="kiljuddubscf21_files/figure-html/unnamed-chunk-66-1.png" width="1536" /></p>
+<p><img src="kiljuddubscf21_files/figure-html/unnamed-chunk-67-1.png" width="1536" /></p>
+<ul>
+<li>Duration (secs) = Total Playing time of possession excluding breaks in play</li>
+</ul>
+<div id="htmlwidget-cf8723b9d3c2009d616a" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-cf8723b9d3c2009d616a">{"x":{"filter":"none","data":[[7,16,17,20,27,29,30,32,34,35,39,40,41],["Ko","Ko","Ko","Ko","Ko","Ko","Ko","Ko","Ko","Ko","Ko","Ko","Ko"],["Mid_Def","Out_Def","Out_Def","Out_Def","Out_Def","Out_Def","Out_Att","Out_Def","Out_Def","Out_Def","Out_Def","Out_Def","Out_Att"],["ToL","Short","ToL","Point","Point","Ko ToL","ToL","Blkd","Fk Loss Off","Ko ToL","Ko ToL","Fk Loss Off","ToL"],[78.55,32.49,50.39,17.9,81.56,3.63,22.26,21.86,12.13,4.2,7.13,61.22,26.86],[78.55,32.49,50.39,17.9,70.21,3.63,18.11,19.34,8.68,4.2,7.13,61.22,20.37],[1,1,1,1,2,1,2,2,2,1,1,2,2]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>possno<\/th>\n      <th>Type<\/th>\n      <th>Pitch Area Rec<\/th>\n      <th>Outcome<\/th>\n      <th>Tot Time<\/th>\n      <th>secs<\/th>\n      <th>No of Phases<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<ul>
+<li><p>Tot Time = total time of possession including breaks in Play</p></li>
+<li><p>Secs = Total Playing time of possession excluding breaks in Play</p></li>
+</ul>
+</div>
+<div id="possession-won---crokes" class="section level1">
+<h1>Possession Won - Crokes</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<thead>
+<tr>
+<th style="text-align:center;">
+PW
+</th>
+<th style="text-align:center;">
+Fk Loss ToL
+</th>
+<th style="text-align:center;">
+Ms Op
+</th>
+<th style="text-align:center;">
+Scr Op
+</th>
+<th style="text-align:center;">
+Scr Rs
+</th>
+<th style="text-align:center;">
+ToL
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+30
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+7
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+13
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="kiljuddubscf21_files/figure-html/unnamed-chunk-70-1.png" width="1536" /></p>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Team Possession Won - Crokes
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Possession Won
+</th>
+<th style="text-align:center;">
+Total Time (min)
+</th>
+<th style="text-align:center;">
+Shots
+</th>
+<th style="text-align:center;">
+% Shots per PW
+</th>
+<th style="text-align:center;">
+Shot Rate (secs)
+</th>
+<th style="text-align:center;">
+Scores
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+31
+</td>
+<td style="text-align:center;">
+16
+</td>
+<td style="text-align:center;">
+15
+</td>
+<td style="text-align:center;">
+48
+</td>
+<td style="text-align:center;">
+65
+</td>
+<td style="text-align:center;">
+8
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="kiljuddubscf21_files/figure-html/unnamed-chunk-72-1.png" width="1536" /></p>
+<p><img src="kiljuddubscf21_files/figure-html/unnamed-chunk-73-1.png" width="1536" /></p>
+<ul>
+<li>Duration (secs) = Total Playing time of possession excluding breaks in play</li>
+</ul>
+<div id="htmlwidget-140471d4fc22e85f5fee" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-140471d4fc22e85f5fee">{"x":{"filter":"none","data":[[1,2,3,4,5,6,7,8,9,10,11,15,16,17,18,19,21,24,25,27,28,30,31,32,33,34,35,36,39,40,41],["PW","PW","PW","Rs Pass PW","PW","PW","PW","PW","PW","Rs Pass PW","Rs Pass PW","Rs Pass PW","PW","PW","PW","PW","PW","Rs Pass PW","PW","PW","PW","PW","PW","PW","PW","PW","Rs Pass PW","PW","PW","Rs Pass PW","PW"],["Mid_Def","Out_Att","Mid_Def","Mid_Def","Out_Def","In_Def","In_Def","Out_Att","Mid_Def","In_Def","In_Def","Mid_Def","In_Def","Mid_Def","Mid_Def","Mid_Def","In_Def","Mid_Def","Out_Def","Mid_Att","Out_Att","In_Att","Mid_Def","Out_Def","In_Def","In_Def","Out_Att","Out_Att","Out_Att","Mid_Def","Out_Att"],["ToL","Saved","ToL","ToL","ToL","Wide Left","ToL","ToL","Short","ToL","ToL","Point","Wide Left","ToL","ToL","Wide Right","ToL","ToL","Fk Point","Fk Point","Saved","Wide Left","Fk Loss Off","Point","ToL","Fk Point","Goal","Fk Loss Off","Point","Point","Full Time"],[15.19,7.35,52.03,18.46,87.38,45.92,26.48,3.76,27.11,23.34,3.25,60.17,41.77,18.58,8.2,80.35,12.67,26.7,108.99,63.08,8.67,12.02,205.62,34.85,17.32,66.61,14.7,66.89,68.83,86.5,16.76],[15.19,7.35,52.03,18.46,82.21,45.92,26.48,3.76,27.11,23.34,3.25,60.17,41.77,18.58,8.2,34.2,12.67,26.7,21.24,3.56,8.67,12.02,88.57,28.92,17.32,27.02,14.7,66.89,68.83,86.5,16.76],[1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,3,1,1,2,2,1,1,2,2,1,3,1,1,1,1,1]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>possno<\/th>\n      <th>Type<\/th>\n      <th>Start Area<\/th>\n      <th>Outcome<\/th>\n      <th>Tot Time<\/th>\n      <th>secs<\/th>\n      <th>No of Phases<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<ul>
+<li><p>Tot Time = total time of possession including breaks in Play</p></li>
+<li><p>Secs = Total Playing time of possession excluding breaks in Play</p></li>
+</ul>
+</div>
+<div id="possession-won---judes" class="section level1">
+<h1>Possession Won - Judes</h1>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<thead>
+<tr>
+<th style="text-align:center;">
+PW
+</th>
+<th style="text-align:center;">
+Fk Loss ToL
+</th>
+<th style="text-align:center;">
+Ms Op
+</th>
+<th style="text-align:center;">
+Ms Rs
+</th>
+<th style="text-align:center;">
+Scr Op
+</th>
+<th style="text-align:center;">
+Scr Rs
+</th>
+<th style="text-align:center;">
+ToL
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+26
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+13
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="kiljuddubscf21_files/figure-html/unnamed-chunk-76-1.png" width="1536" /></p>
+<table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>
+Team Possession Won
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Possession Won
+</th>
+<th style="text-align:center;">
+Total Time (min)
+</th>
+<th style="text-align:center;">
+Shots
+</th>
+<th style="text-align:center;">
+% Shots per PW
+</th>
+<th style="text-align:center;">
+Shot Rate (secs)
+</th>
+<th style="text-align:center;">
+Scores
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+27
+</td>
+<td style="text-align:center;">
+18
+</td>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+37
+</td>
+<td style="text-align:center;">
+109
+</td>
+<td style="text-align:center;">
+4
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="kiljuddubscf21_files/figure-html/unnamed-chunk-78-1.png" width="1536" /></p>
+<p><img src="kiljuddubscf21_files/figure-html/unnamed-chunk-79-1.png" width="1536" /></p>
+<ul>
+<li>Duration (secs) = Total Playing time of possession excluding breaks in play</li>
+</ul>
+<div id="htmlwidget-7e4781a27af3182f8dde" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-7e4781a27af3182f8dde">{"x":{"filter":"none","data":[[1,2,3,4,5,6,8,9,10,11,12,13,14,15,18,19,21,22,23,24,25,26,28,31,33,36,37],["Ti Won","PW","PW","PW","PW","PW","PW","PW","PW","PW","PW","PW","PW","PW","PW","PW","PW","Ti Won","PW","PW","PW","Rs Pass PW","PW","Rs Pass PW","PW","Rs Pass PW","PW"],["Out_Att","Out_Def","Mid_Def","Mid_Def","Mid_Def","Mid_Def","Mid_Def","Mid_Def","In_Def","Mid_Def","Mid_Att","Out_Att","Out_Def","Out_Att","Mid_Def","Out_Def","In_Def","Out_Def","Out_Def","Out_Def","Mid_Def","Out_Att","In_Def","Mid_Def","Out_Att","Mid_Def","Out_Att"],["ToL","ToL","Blkd","Fk Loss Off","ToL","ToL","ToL","ToL","Fk Loss Off","Saved","Wide Left","Wide Left","Goal","ToL","ToL","ToL","Half Time","ToL","Point","Point","Fk Loss Off","ToL","ToL","ToL","Short","Fk Point","Fk Post"],[16.06,82.95,136.16,25.87,12.6,69.36,3.62,79.52,275.63,60.07,4.64,18.95,16.82,59.58,44.74,21.59,32.81,11.81,14.68,59.79,30.03,56.43,5.33,25.1,11.73,59.36,98.46],[16.06,58.99,38.43,25.87,12.6,69.36,3.62,79.52,275.63,54.14,4.64,18.95,16.82,59.58,44.74,21.59,32.81,11.81,14.68,59.79,30.03,56.43,5.33,25.1,11.73,15.79,26.69],[1,2,3,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2],[0,1,2,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>possno<\/th>\n      <th>Type<\/th>\n      <th>Start Area<\/th>\n      <th>Outcome<\/th>\n      <th>Tot Time<\/th>\n      <th>secs<\/th>\n      <th>No of Phases<\/th>\n      <th>passno<\/th>\n      <th>Hp<\/th>\n      <th>Hp_Prs<\/th>\n      <th>Kp<\/th>\n      <th>Kp_prs<\/th>\n      <th>tckAll<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-center","targets":"_all"}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<ul>
+<li><p>Tot Time = total time of possession including breaks in Play</p></li>
+<li><p>Secs = Total Playing time of possession excluding breaks in Play</p></li>
+</ul>
+</div>
+<div id="possession-phase-duration" class="section level1">
+<h1>Possession &amp; Phase Duration</h1>
+<p><img src="kiljuddubscf21_files/figure-html/unnamed-chunk-81-1.png" width="1536" /></p>
+<ul>
+<li>Duration (secs) = Total Playing time of possession excluding breaks in play</li>
+</ul>
+<p><img src="kiljuddubscf21_files/figure-html/unnamed-chunk-82-1.png" width="1536" /></p>
+<ul>
+<li>Duration (secs) = Total Playing time of possession excluding breaks in play</li>
+</ul>
+<p><img src="kiljuddubscf21_files/figure-html/unnamed-chunk-83-1.png" width="1536" /></p>
+<p><img src="kiljuddubscf21_files/figure-html/unnamed-chunk-84-1.png" width="1536" /></p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
